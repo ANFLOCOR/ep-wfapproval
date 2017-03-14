@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<XMLDefinition Generator="Iron Speed Designer" Version="12.1" Type="USERVIEW">
+  <ColumnDefinition>
+    <Column InternalName="0" Priority="1" ColumnNum="0">
+      <columnName>SSU_UserName</columnName>
+      <columnUIName Source="User">%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>15</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault Source="User">
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>notrim,</columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
+      <columnRequired>Y</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText Source="User">N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+      <InternalName>0</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>N</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <columnVirtualPK Source="User">N</columnVirtualPK>
+    </Column>
+    <Column InternalName="1" Priority="2" ColumnNum="1">
+      <columnName>SSU_FullName</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>varchar</columnDBType>
+      <columnLengthSet>50</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="2" Priority="3" ColumnNum="2">
+      <columnName>SSU_Password</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Password</columnType>
+      <columnDBType>varchar</columnDBType>
+      <columnLengthSet>50</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="3" Priority="4" ColumnNum="3">
+      <columnName>SSU_EmpID</columnName>
+      <columnUIName Source="User">%ISD_DEFAULT%</columnUIName>
+      <columnType>Number</columnType>
+      <columnDBType>int</columnDBType>
+      <columnLengthSet>10.0</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault Source="User">
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText Source="User">N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+      <InternalName>3</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>N</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <columnVirtualPK Source="User">N</columnVirtualPK>
+    </Column>
+    <Column InternalName="4" Priority="5" ColumnNum="4">
+      <columnName>SSU_SSC_CompanyID</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Number</columnType>
+      <columnDBType>smallint</columnDBType>
+      <columnLengthSet>5.0</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="5" Priority="6" ColumnNum="5">
+      <columnName>SSU_IsActive</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Boolean</columnType>
+      <columnDBType>bit</columnDBType>
+      <columnLengthSet>
+      </columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="6" Priority="7" ColumnNum="6">
+      <columnName>SSU_DateCreated</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Date</columnType>
+      <columnDBType>datetime</columnDBType>
+      <columnLengthSet>
+      </columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>notrim</columnFunction>
+      <columnFormat>g</columnFormat>
+      <columnDBFormat>g</columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="7" Priority="8" ColumnNum="7">
+      <columnName>SSU_DateModified</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Date</columnType>
+      <columnDBType>datetime</columnDBType>
+      <columnLengthSet>
+      </columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>notrim</columnFunction>
+      <columnFormat>g</columnFormat>
+      <columnDBFormat>g</columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="8" Priority="9" ColumnNum="8">
+      <columnName>SSU_RowID</columnName>
+      <columnUIName Source="User">%ISD_DEFAULT%</columnUIName>
+      <columnType>Number</columnType>
+      <columnDBType>int</columnDBType>
+      <columnLengthSet>10.0</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault Source="User">
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
+      <columnRequired>Y</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText Source="User">N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+      <InternalName>8</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>N</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <columnVirtualPK Source="User">N</columnVirtualPK>
+    </Column>
+    <Column InternalName="9" Priority="10" ColumnNum="9">
+      <columnName>SSU_GPUsername</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>varchar</columnDBType>
+      <columnLengthSet>20</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="10" Priority="11" ColumnNum="10">
+      <columnName>SSU_Designation</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>varchar</columnDBType>
+      <columnLengthSet>250</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="11" Priority="12" ColumnNum="11">
+      <columnName>SSUE_Email</columnName>
+      <columnUIName Source="User">%ISD_DEFAULT%</columnUIName>
+      <columnType>Email</columnType>
+      <columnDBType>varchar</columnDBType>
+      <columnLengthSet>50</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault Source="User">
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText Source="User">N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+      <InternalName>11</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>N</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <columnVirtualPK Source="User">N</columnVirtualPK>
+    </Column>
+  </ColumnDefinition>
+  <TableName>sel_SysSetupUsers_Email</TableName>
+  <Version>
+  </Version>
+  <Owner>dbo</Owner>
+  <TableAliasName>sel_SysSetupUsers_Email_</TableAliasName>
+  <ConnectionName>DatabaseWASS</ConnectionName>
+  <PagingMethod>RowNum</PagingMethod>
+  <canCreateRecords Source="Database">N</canCreateRecords>
+  <canEditRecords Source="Database">N</canEditRecords>
+  <canDeleteRecords Source="Database">N</canDeleteRecords>
+  <canViewRecords Source="Database">N</canViewRecords>
+  <AppShortName>ePortalWFApproval</AppShortName>
+  <FolderName>sel_SysSetupUsers_Email</FolderName>
+  <MenuName>System Setup Users Email</MenuName>
+  <QSPath>../sel_SysSetupUsers_Email/Sel-SysSetupUsers-Email-QuickSelector.aspx</QSPath>
+  <TableCodeName>Sel_SysSetupUsers_Email</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalSel_SysSetupUsers_Email</TableStoredProcPrefix>
+  <IsUserTable>Y</IsUserTable>
+  <UserUserIDField>SSU_RowID</UserUserIDField>
+  <UserUserNameField>SSU_UserName</UserUserNameField>
+  <UserPassword>SSU_Password</UserPassword>
+  <UserEmailField>
+  </UserEmailField>
+</XMLDefinition>

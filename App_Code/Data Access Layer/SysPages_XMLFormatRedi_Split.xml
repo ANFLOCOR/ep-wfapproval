@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<XMLDefinition Generator="Iron Speed Designer" Version="12.1" Type="VIEW">
+  <ColumnDefinition>
+    <Column InternalName="0" Priority="1" ColumnNum="0">
+      <columnName>SSR_App_ID</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Number</columnType>
+      <columnDBType>int</columnDBType>
+      <columnLengthSet>10.0</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="1" Priority="2" ColumnNum="1">
+      <columnName>MenuItem</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>nvarchar</columnDBType>
+      <columnLengthSet>1000</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>N</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="2" Priority="3" ColumnNum="2">
+      <columnName>SSR_RoleID</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Number</columnType>
+      <columnDBType>int</columnDBType>
+      <columnLengthSet>10.0</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>Y</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+  </ColumnDefinition>
+  <TableName>SysPages_XMLFormatRedi_Split</TableName>
+  <Version>
+  </Version>
+  <Owner>dbo</Owner>
+  <TableAliasName>SysPages_XMLFormatRedi_Split_</TableAliasName>
+  <ConnectionName>DatabaseWASS</ConnectionName>
+  <InUse>N</InUse>
+  <PagingMethod>RowNum</PagingMethod>
+  <canCreateRecords Source="Database">N</canCreateRecords>
+  <canEditRecords Source="Database">N</canEditRecords>
+  <canDeleteRecords Source="Database">N</canDeleteRecords>
+  <canViewRecords Source="Database">N</canViewRecords>
+  <AppShortName>ePortalWFApproval</AppShortName>
+  <FolderName>SysPages_XMLFormatRedi_Split</FolderName>
+  <MenuName>System Pages XMLFormat Redi Split</MenuName>
+  <QSPath>../SysPages_XMLFormatRedi_Split/SysPages-XMLFormatRedi-Split-QuickSelector.aspx</QSPath>
+  <TableCodeName>SysPages_XMLFormatRedi_Split</TableCodeName>
+</XMLDefinition>

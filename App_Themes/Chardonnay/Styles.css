@@ -1,0 +1,197 @@
+﻿/**********************************************************************
+ * Styles.css                                                         *
+ *                                                                    *
+ * This file is initially empty and you can add any additional styles *
+ * or modify any of the styles defined in BaseStyles.css              *
+ * This file will never be overwritten.                               *
+ *                                                                    *
+ * For example, if you want to override just the top padding for a    *
+ * menu, you can simply add the following lines:                      *
+ *                                                                    *
+ * .menus {                                                           *
+ * 	padding-top: 20px;                                            *
+ * 	}                                                             *
+ *                                                                    *
+ * This will keep all the other styles of the "menus" style as-is,    *
+ * but modify the top padding to be 20px.                             *
+ *                                                                    *
+ * You can also, add a new style by just specifying it.               *
+ *                                                                    *
+ * .menus {                                                           *
+ * 	padding-top: 20px;                                            *
+ * 	text-align: center;                                           *
+ * 	}                                                             *
+ * 	                                                              *
+ * In the above case, we added the text-align style.  This style was  *
+ * not specified in the original declaration of the menus style.      *
+ *                                                                    *
+ **********************************************************************/
+
+.Bread { /*  #b4e8e9*/
+	background-color: #f0faff;
+	/*background-image: url(../../Images/bread_back.gif);*/
+	background-position: top center;
+	background-repeat: repeat-x;
+	color: #7c7c7c;	
+	font-family: Tahoma, Geneva, ms sans serif;
+	font-size: 6px;
+	padding-bottom: 4px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 4px;
+	text-transform: uppercase;
+	}
+	}
+
+.Filter_Input, .fili { /* filter drop-down list */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	margin-bottom: 4px;
+	margin-left: 2px;
+	margin-right: 2px;
+	}
+	
+.watermark { /* watermark */
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	vertical-align: top;
+	}
+	
+.field_label, .fl { /* field label on top */
+	color: #444444;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding-top: 4px;
+	padding-right: 4px;
+	padding-bottom: 0px;
+	padding-left: 4px;
+	text-align: left;
+	vertical-align: middle;
+	white-space: nowrap;	
+	}
+
+.field_label_on_side, .fls { /* field label on side */
+	color: #444444;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	font-weight: normal; 
+	padding-top: 4px;
+	padding-right: 2px;
+	padding-bottom: 8px;
+	padding-left: 4px;
+	text-align: right;
+	vertical-align: top;
+	white-space: nowrap;	
+	}
+
+a.button_link,
+.bC a.button_link,
+.buttonPadding a.button_link,
+.dBody a.button_link,
+.galleryttc a.button_link,
+.popupTableCellValue a.button_link,
+.tableCellValue a.button_link,
+.thc a.button_link,
+.tic a.button_link,
+.ttc a.button_link { /* link text of buttons */ 
+	color: #444444;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 12px;
+	font-weight: bold;
+	padding-left: 4px;
+	padding-right: 4px;
+	text-align: center;
+	text-decoration: none;
+	width: 100%;
+	}
+	
+/**********************************************************************
+ * Table Rows Styles                                                  *
+ **********************************************************************/ 
+.header_cell,
+.header_cell_scrolling,
+.thc,
+.thcs,
+.thcnb,
+.thcwb { /* column header container (above select checkbox) */
+	background-color: #fafafa;	
+	border-left: 1px solid #f0f2ea;		
+	border-bottom: 1px solid #f0f2ea;
+	color: #777777;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding-bottom: 5px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 5px;
+	text-align: left;
+	vertical-align: top;
+	}
+
+.tableCellValue { /* table cell field value text */	
+	border-left: 1px solid #f0f2ea;		
+	border-bottom: 1px solid #f0f2ea;
+	color: #555555;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 13px;
+	padding-bottom: 4px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 8px;
+	vertical-align: top;
+	}
+
+.tableCellLabel {/* table cell field label text */
+	border-right: 1px solid #f0f2ea;		
+	border-top: 1px solid #f0f2ea;
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 13px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 2px;
+	padding-top: 8px;
+	text-align: right;
+	vertical-align: top;
+	white-space: nowrap;	
+	}
+
+.tableCellValue2 { /* table cell field value text */	
+	border-left: 1px solid #f0f2ea;		
+	border-bottom: 1px solid #f0f2ea;
+	color: #555555;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 13px;
+	padding-bottom: 4px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 8px;
+	vertical-align: top;
+	}
+
+.tableCellLabel2 {/* table cell field label text */		
+	border-left: 1px solid #f0f2ea;		
+	border-bottom: 1px solid #f0f2ea;
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 13px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 2px;
+	padding-top: 8px;
+	text-align: right;
+	vertical-align: top;
+	white-space: nowrap;	
+	}
+
+.tableRowButtonsCellHorizontal { /* table row buttons horizontal orientation */
+	border-right: 1px solid #f0f2ea;		
+	border-top: 1px solid #f0f2ea;
+	vertical-align: top;
+	white-space: nowrap;
+	width: 16px;
+	}
+

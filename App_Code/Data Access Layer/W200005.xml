@@ -1,0 +1,929 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<XMLDefinition Generator="Iron Speed Designer" Version="12.1" Type="GENERIC">
+  <ColumnDefinition>
+    <Column InternalName="0" Priority="1" ColumnNum="0">
+      <columnName>RPTNGYR</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Number</columnType>
+      <columnDBType>smallint</columnDBType>
+      <columnLengthSet>5.0</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_INT    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_INT AS 0      </columnDBDefault>
+      <columnIndex>Y</columnIndex>
+      <columnUnique>Y</columnUnique>
+      <columnFunction>notrim</columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>Y</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>Y</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="1" Priority="2" ColumnNum="1">
+      <columnName>CMPNYNAM</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>65</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="2" Priority="3" ColumnNum="2">
+      <columnName>Location_Address</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>23</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="3" Priority="4" ColumnNum="3">
+      <columnName>Delivery_Address</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>23</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="4" Priority="5" ColumnNum="4">
+      <columnName>CITY</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>35</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="5" Priority="6" ColumnNum="5">
+      <columnName>STATECD</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>3</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="6" Priority="7" ColumnNum="6">
+      <columnName>ZIPCODE</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>USA Zip Code</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>11</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="7" Priority="8" ColumnNum="7">
+      <columnName>Foreign_Address</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Number</columnType>
+      <columnDBType>tinyint</columnDBType>
+      <columnLengthSet>3.0</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_INT    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_INT AS 0      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="8" Priority="9" ColumnNum="8">
+      <columnName>Foreign_StateProvince</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>23</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="9" Priority="10" ColumnNum="9">
+      <columnName>Foreign_Postal_Code</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>15</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="10" Priority="11" ColumnNum="10">
+      <columnName>CCode</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>7</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="11" Priority="12" ColumnNum="11">
+      <columnName>Submitter_Name</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>57</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="12" Priority="13" ColumnNum="12">
+      <columnName>Submitter_Location_Addre</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>23</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="13" Priority="14" ColumnNum="13">
+      <columnName>Submitter_Delivery_Addre</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>23</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="14" Priority="15" ColumnNum="14">
+      <columnName>Submitter_City</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>23</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="15" Priority="16" ColumnNum="15">
+      <columnName>Submitter_State_Code</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>3</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="16" Priority="17" ColumnNum="16">
+      <columnName>Submitter_Zip_Code</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>USA Zip Code</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>11</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="17" Priority="18" ColumnNum="17">
+      <columnName>Submitter_Foreign_Addres</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Number</columnType>
+      <columnDBType>tinyint</columnDBType>
+      <columnLengthSet>3.0</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_INT    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_INT AS 0      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="18" Priority="19" ColumnNum="18">
+      <columnName>Submitter_Foreign_StateP</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>23</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="19" Priority="20" ColumnNum="19">
+      <columnName>Submitter_Foreign_Postal</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>15</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="20" Priority="21" ColumnNum="20">
+      <columnName>Submitter_Country_Code</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>3</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="21" Priority="22" ColumnNum="21">
+      <columnName>Submitter_EIN</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>9</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="22" Priority="23" ColumnNum="22">
+      <columnName>Method_of_Notification</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Number</columnType>
+      <columnDBType>smallint</columnDBType>
+      <columnLengthSet>5.0</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_INT    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_INT AS 0      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="23" Priority="24" ColumnNum="23">
+      <columnName>Preparer_Code</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Number</columnType>
+      <columnDBType>smallint</columnDBType>
+      <columnLengthSet>5.0</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_INT    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_INT AS 0      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="24" Priority="25" ColumnNum="24">
+      <columnName>CNTCPRSN</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>61</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="25" Priority="26" ColumnNum="25">
+      <columnName>PHONNAME</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>21</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="26" Priority="27" ColumnNum="26">
+      <columnName>FAXNUMBR</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>21</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="27" Priority="28" ColumnNum="27">
+      <columnName>EMail</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Email</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>255</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="28" Priority="29" ColumnNum="28">
+      <columnName>MMREFPIN</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>String</columnType>
+      <columnDBType>char</columnDBType>
+      <columnLengthSet>17</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault> /****** Object:  Default dbo.GPS_CHAR    Script Date: 8/28/96 5:56:05 PM ******/ create default dbo.GPS_CHAR AS ''      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive Source="Database">N</columnCaseSensitive>
+      <columnCollation>SQL_Latin1_General_CP1_CI_AS</columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+    <Column InternalName="29" Priority="30" ColumnNum="29">
+      <columnName>DEX_ROW_ID</columnName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnType>Number</columnType>
+      <columnDBType>int</columnDBType>
+      <columnLengthSet>10.0</columnLengthSet>
+      <columnDefault>
+      </columnDefault>
+      <columnDBDefault>
+      </columnDBDefault>
+      <columnIndex>N</columnIndex>
+      <columnUnique>N</columnUnique>
+      <columnFunction>
+      </columnFunction>
+      <columnDBFormat>
+      </columnDBFormat>
+      <columnPK>N</columnPK>
+      <columnPermanent>N</columnPermanent>
+      <columnComputed>Y</columnComputed>
+      <columnIdentity>Y</columnIdentity>
+      <columnReadOnly>Y</columnReadOnly>
+      <columnRequired>N</columnRequired>
+      <columnNotNull>Y</columnNotNull>
+      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCollation>
+      </columnCollation>
+      <columnFullText>N</columnFullText>
+      <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
+      <columnTableAliasName>
+      </columnTableAliasName>
+      <applyLabelText>Y</applyLabelText>
+    </Column>
+  </ColumnDefinition>
+  <TableName>W200005</TableName>
+  <Version>
+  </Version>
+  <Owner>dbo</Owner>
+  <TableAliasName>W200005_</TableAliasName>
+  <ConnectionName>DatabaseDYNAMICS</ConnectionName>
+  <InUse>N</InUse>
+  <PagingMethod>RowNum</PagingMethod>
+  <canCreateRecords Source="Database">Y</canCreateRecords>
+  <canEditRecords Source="Database">Y</canEditRecords>
+  <canDeleteRecords Source="Database">Y</canDeleteRecords>
+  <canViewRecords Source="Database">Y</canViewRecords>
+  <ConcurrencyMethod>BinaryChecksum</ConcurrencyMethod>
+  <AppShortName>ePortalWFApproval</AppShortName>
+  <FolderName>W200005</FolderName>
+  <MenuName>W200005</MenuName>
+  <QSPath>../W200005/W200005-QuickSelector.aspx</QSPath>
+  <TableCodeName>W200005</TableCodeName>
+</XMLDefinition>
