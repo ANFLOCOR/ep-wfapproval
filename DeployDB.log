@@ -39,7 +39,7 @@ BEGIN
         )
 
 END
-JESSY
+JESSY GWAPO
 
 ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.sel_WStep_WStep_Detail' is not updatable because the modification affects multiple base tables.
 
