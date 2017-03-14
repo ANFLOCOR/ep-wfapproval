@@ -23848,7 +23848,7 @@
     <converter />
   </option>
   <option name="Directory" readonly="False" feature="" displayorder="-1">
-    <value>D:\CLUMBANA\CRUMBANA\On-DevT\DEV\ANFLOSOUTH-DB\ePortal Workflow Approval Files\Apps\ep-wfapproval(dev)\ePortalWFApproval</value>
+    <value>D:\Git ep-WFApproval\ep-wfapproval</value>
     <datatype>System.String</datatype>
     <defaultvalue />
     <displayname />
