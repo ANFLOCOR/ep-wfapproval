@@ -487,7 +487,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>sel_WPO_Activity_WPOP10100_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -498,4 +497,5 @@
   <MenuName>WPO Activity WPOP 101001</MenuName>
   <QSPath>../sel_WPO_Activity_WPOP101001/Sel-WPO-Activity-WPOP10100-QuickSelector1.aspx</QSPath>
   <TableCodeName>Sel_WPO_Activity_WPOP101001</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalSel_WPO_Activity_WPOP101001</TableStoredProcPrefix>
 </XMLDefinition>
