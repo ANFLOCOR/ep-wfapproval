@@ -240,109 +240,67 @@
     </Column>
     <Column InternalName="5" Priority="6" ColumnNum="5">
       <columnName>WPO_Date_Assign</columnName>
-      <columnUIName Source="User">%ISD_DEFAULT%</columnUIName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
       <columnType>Date</columnType>
       <columnDBType>smalldatetime</columnDBType>
       <columnLengthSet>
       </columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault Source="User">
+      <columnDBDefault>
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
-      <columnFormat Source="User">g</columnFormat>
-      <columnDBFormat>d</columnDBFormat>
+      <columnFunction>notrim</columnFunction>
+      <columnFormat>g</columnFormat>
+      <columnDBFormat>g</columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed Source="User">N</columnComputed>
-      <columnIdentity Source="User">N</columnIdentity>
-      <columnReadOnly Source="User">N</columnReadOnly>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="User">N</columnCaseSensitive>
+      <columnCaseSensitive>N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText Source="User">N</columnFullText>
+      <columnFullText>N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
-      <InternalName>5</InternalName>
-      <columnTableClassName>
-      </columnTableClassName>
-      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
-      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
-      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
-      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
-      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
-      <applyDefaultValue>N</applyDefaultValue>
-      <applyDFKA>N</applyDFKA>
-      <readingRecordFormula>
-      </readingRecordFormula>
-      <insertingRecordFormula>
-      </insertingRecordFormula>
-      <updatingRecordFormula>
-      </updatingRecordFormula>
-      <insertingFormula>
-      </insertingFormula>
-      <updatingFormula>
-      </updatingFormula>
     </Column>
     <Column InternalName="6" Priority="7" ColumnNum="6">
       <columnName>WPO_Date_Action</columnName>
-      <columnUIName Source="User">%ISD_DEFAULT%</columnUIName>
+      <columnUIName>%ISD_DEFAULT%</columnUIName>
       <columnType>Date</columnType>
       <columnDBType>smalldatetime</columnDBType>
       <columnLengthSet>
       </columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault Source="User">
+      <columnDBDefault>
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
-      <columnFormat Source="User">g</columnFormat>
-      <columnDBFormat>d</columnDBFormat>
+      <columnFunction>notrim</columnFunction>
+      <columnFormat>g</columnFormat>
+      <columnDBFormat>g</columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed Source="User">N</columnComputed>
-      <columnIdentity Source="User">N</columnIdentity>
-      <columnReadOnly Source="User">N</columnReadOnly>
+      <columnComputed>N</columnComputed>
+      <columnIdentity>N</columnIdentity>
+      <columnReadOnly>N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="User">N</columnCaseSensitive>
+      <columnCaseSensitive>N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText Source="User">N</columnFullText>
+      <columnFullText>N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
-      <InternalName>6</InternalName>
-      <columnTableClassName>
-      </columnTableClassName>
-      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
-      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
-      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
-      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
-      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
-      <applyDefaultValue>N</applyDefaultValue>
-      <applyDFKA>N</applyDFKA>
-      <readingRecordFormula>
-      </readingRecordFormula>
-      <insertingRecordFormula>
-      </insertingRecordFormula>
-      <updatingRecordFormula>
-      </updatingRecordFormula>
-      <insertingFormula>
-      </insertingFormula>
-      <updatingFormula>
-      </updatingFormula>
     </Column>
     <Column InternalName="7" Priority="8" ColumnNum="7">
       <columnName>WPO_Remark</columnName>
@@ -690,9 +648,10 @@
   <Owner>dbo</Owner>
   <TableAliasName>sel_WPO_Activity_WPOP10100_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <canCreateRecords Source="User">N</canCreateRecords>
-  <canEditRecords Source="User">N</canEditRecords>
-  <canDeleteRecords Source="User">N</canDeleteRecords>
+  <PagingMethod>RowNum</PagingMethod>
+  <canCreateRecords Source="User">Y</canCreateRecords>
+  <canEditRecords Source="User">Y</canEditRecords>
+  <canDeleteRecords Source="User">Y</canDeleteRecords>
   <canViewRecords Source="Database">Y</canViewRecords>
   <AppShortName>ePortalWFApproval</AppShortName>
   <FolderName>sel_WPO_Activity_WPOP10100</FolderName>

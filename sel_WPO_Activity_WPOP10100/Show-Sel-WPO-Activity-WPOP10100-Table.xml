@@ -3433,6 +3433,10 @@
       <FieldValueStyle>DropDownList</FieldValueStyle>
       <PassthroughAttributes>
         <Attribute>
+          <Name>AutoPostBack</Name>
+          <Value>True</Value>
+        </Attribute>
+        <Attribute>
           <Name>CssClass</Name>
           <Value>Filter_Input</Value>
         </Attribute>
@@ -3446,7 +3450,7 @@
         </Attribute>
         <Attribute>
           <Name>InternalUse:ApplyInitializeFormula</Name>
-          <Value>True</Value>
+          <Value>false</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:InitializeFormula</Name>
@@ -4148,6 +4152,10 @@
       <Type>FieldFilter</Type>
       <FieldValueStyle>DropDownList</FieldValueStyle>
       <PassthroughAttributes>
+        <Attribute>
+          <Name>AutoPostBack</Name>
+          <Value>True</Value>
+        </Attribute>
         <Attribute>
           <Name>CssClass</Name>
           <Value>Filter_Input</Value>
@@ -5171,7 +5179,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;thc&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;fls&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -5183,7 +5191,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;thc&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;fls&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;

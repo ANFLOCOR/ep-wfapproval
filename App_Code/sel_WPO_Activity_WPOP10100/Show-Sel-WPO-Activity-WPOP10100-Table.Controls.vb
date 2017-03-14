@@ -47,6 +47,39 @@ Public Class Sel_WPO_Activity_WPOP10100TableControlRow
         ' SaveData, GetUIData, and Validate methods.
         
 
+        Public Overrides Sub DataBind()
+            DbUtils.StartTransaction()
+
+            MyBase.DataBind()
+
+            If Me.DataSource Is Nothing Then
+                Return
+            End If
+
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing AndAlso _
+                (Me.CheckSum Is Nothing OrElse Me.CheckSum.Trim = "") Then
+                Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
+            End If
+
+            Me.IsNewRecord = True
+            If Me.DataSource.IsCreated Then
+                Me.IsNewRecord = False
+
+                Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
+            End If
+
+            Dim shouldResetControl As Boolean = False
+
+            If Me.WPO_Is_Done.Text = "Yes" Then
+                Me.ImageButton3.Visible = True
+                Me.ImageButton.Visible = False
+            Else
+                Me.ImageButton.Visible = True
+                Me.ImageButton3.Visible = False
+            End If
+
+            DbUtils.EndTransaction()
+        End Sub
 
 		Public Overrides Sub ImageButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
 
@@ -149,29 +182,6 @@ Public Class Sel_WPO_Activity_WPOP10100TableControl
     ' The Sel_WPO_Activity_WPOP10100TableControlRow class offers another place where you can customize
     ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
 
-
-		Public Overrides Function CreateWhereClause() As WhereClause
-            DbUtils.StartTransaction()
-
-            Sel_WPO_Activity_WPOP10100View.Instance.InnerFilter = Nothing
-            Dim wc As WhereClause = New WhereClause()
-
-            If IsValueSelected(Me.WPO_StatusFilter) Then
-                wc.iAND(Sel_WPO_Activity_WPOP10100View.WPO_Status, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.WPO_StatusFilter, Me.GetFromSession(Me.WPO_StatusFilter)), False, False)
-            End If
-
-            If IsValueSelected(Me.WPOP_C_IDFilter) Then
-                wc.iAND(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.WPOP_C_IDFilter, Me.GetFromSession(Me.WPOP_C_IDFilter)), False, False)
-            End If
-
-            wc.iAND(Sel_WPO_Activity_WPOP10100View.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserID1").ToString(), False, False)
-            wc.iAND(Sel_WPO_Activity_WPOP10100View.WPO_Is_Done, BaseFilter.ComparisonOperator.EqualsTo, "No", False, False)
-
-            Return wc
-
-            DbUtils.EndTransaction()
-        End Function
-
 		Public Overrides Sub DataBind()
             MyBase.DataBind()
 
@@ -214,6 +224,79 @@ Public Class Sel_WPO_Activity_WPOP10100TableControl
             End If
 
         End Sub
+
+
+        Protected Overrides Sub PopulateWPO_StatusFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
+
+            'Setup the WHERE clause.
+            Dim wc As WhereClause = Me.CreateWhereClause_WPO_StatusFilter()
+            Dim orderBy As OrderBy = New OrderBy(False, True)
+            orderBy.Add(WPO_ApprovalStatusTable.WPO_STAT_DESC, OrderByItem.OrderDir.Asc)
+
+            wc.iAND(WPO_ApprovalStatusTable.WPO_STAT_CD, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, "4")
+            wc.iOR(WPO_ApprovalStatusTable.WPO_STAT_CD, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, "6")
+            wc.iOR(WPO_ApprovalStatusTable.WPO_STAT_CD, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, "7")
+            'wc.iOR(WPO_ApprovalStatusTable.WPO_STAT_CD, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, "14")
+
+
+            Me.WPO_StatusFilter.Items.Clear()
+            Dim itemValue As WPO_ApprovalStatusRecord
+            For Each itemValue In WPO_ApprovalStatusTable.GetRecords(wc, orderBy, 0, maxItems)
+                ' Create the item and add to the list.
+                Dim cvalue As String = Nothing
+                Dim fvalue As String = Nothing
+
+                If itemValue.WPO_STAT_CDSpecified Then
+                    cvalue = itemValue.WPO_STAT_CD.ToString()
+                    fvalue = itemValue.Format(WPO_ApprovalStatusTable.WPO_STAT_DESC)
+                End If
+
+                Dim item As ListItem = New ListItem(fvalue, cvalue)
+                If Me.WPO_StatusFilter.Items.IndexOf(item) < 0 Then
+                    Me.WPO_StatusFilter.Items.Add(item)
+                End If
+            Next
+
+            ' Add the All item.
+            Me.WPO_StatusFilter.Items.Insert(0, New ListItem(Page.GetResourceValue("All", "EPORTAL"), "--ANY--"))
+
+            ' Set the selected value.
+            'SetSelectedValue(Me.WPO_StatusFilter, selectedValue)
+            'me.WPO_StatusFilter.SelectedIndex = 2
+
+            If selectedValue Is Nothing Or selectedValue = "" Then
+                Me.WPO_StatusFilter.SelectedIndex = 2
+            Else
+                SetSelectedValue(Me.WPO_StatusFilter, selectedValue)
+            End If
+
+
+        End Sub
+
+
+        Public Overrides Function CreateWhereClause() As WhereClause
+            DbUtils.StartTransaction()
+
+            Sel_WPO_Activity_WPOP10100View.Instance.InnerFilter = Nothing
+            Dim wc As WhereClause = New WhereClause()
+
+            If IsValueSelected(Me.WPO_StatusFilter) Then
+                wc.iAND(Sel_WPO_Activity_WPOP10100View.WPO_Status, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.WPO_StatusFilter, Me.GetFromSession(Me.WPO_StatusFilter)), False, False)
+            End If
+
+            If IsValueSelected(Me.WPOP_C_IDFilter) Then
+                wc.iAND(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.WPOP_C_IDFilter, Me.GetFromSession(Me.WPOP_C_IDFilter)), False, False)
+            End If
+
+            wc.iAND(Sel_WPO_Activity_WPOP10100View.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserID1").ToString(), False, False)
+            wc.iAND(Sel_WPO_Activity_WPOP10100View.WPO_Is_Done, BaseFilter.ComparisonOperator.EqualsTo, "No", False, False)
+
+            Return wc
+
+            DbUtils.EndTransaction()
+        End Function
+
+
 End Class
 
   
@@ -326,7 +409,66 @@ Public Class WPO_PRNo_QWFTableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
-        
+
+        Public Overrides Sub DataBind()
+            MyBase.DataBind()
+
+            If Me.DataSource Is Nothing Then
+                Return
+            End If
+
+            If Me.DataSource.WPRD_ID.ToString = "0" Then
+                Me.ImageButton1.Visible = False
+            Else
+                Me.ImageButton1.Visible = True
+            End If
+
+        End Sub
+
+        Public Overrides Sub ImageButton1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+
+            DbUtils.StartTransaction()
+
+            Dim url As String = "../WPR_Doc/Show-WPR-Doc-WPO-SubmitPage.aspx?WPR_Doc=" & Me.WPRD_ID.Text '{PRNoRow:FV:WPRD_ID}"
+            'Dim url As String = "../WPR_Doc/Show-WPR-Doc-WPO1.aspx?WPR_Doc=" & Me.WPRD_ID.Text '{WPO_PRNo_QWFTableControlRow:FV:WPRD_ID}"
+
+            If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+
+            Dim shouldRedirect As Boolean = True
+            Dim target As String = ""
+
+            Try
+
+                ' Enclose all database retrieval/update code within a Transaction boundary
+
+                url = Me.ModifyRedirectUrl(url, "", True)
+                url = Me.Page.ModifyRedirectUrl(url, "", True)
+
+            Catch ex As Exception
+
+                ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+            Finally
+                DbUtils.EndTransaction()
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
+
+            End If
+        End Sub
 
 End Class
 Public Class WPO_Doc_AttachTableControl
@@ -361,9 +503,9 @@ Public Class WPO_Doc_AttachTableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
-        
 
-End Class
+
+    End Class
 Public Class WPO_CARNo_QWFTableControl
         Inherits BaseWPO_CARNo_QWFTableControl
 
@@ -398,7 +540,66 @@ Public Class WPO_CARNo_QWFTableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
-        
+
+        Public Overrides Sub DataBind()
+            MyBase.DataBind()
+
+            If Me.DataSource Is Nothing Then
+                Return
+            End If
+
+            If Me.DataSource.WCD_ID.ToString = "0" Then
+                Me.ImageButton2.Visible = False
+            Else
+                Me.ImageButton2.Visible = True
+            End If
+
+        End Sub
+
+        Public Overrides Sub ImageButton2_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+
+            DbUtils.StartTransaction()
+
+            Dim url As String = "../WCAR_Doc/Show-WCAR-Doc.aspx?WCAR_Doc=" & Me.WCD_ID.Text '{WPO_CARNo_QDetailsTableControlRow:FV:WCD_ID}"
+            'Dim url As String = "../WCAR_Doc/Show-WCAR-Doc-WPO.aspx?WCAR_Doc=" & Me.WCD_ID.Text '{WPO_CARNo_QWFTableControlRow:FV:WCD_ID}"
+
+            If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+
+            Dim shouldRedirect As Boolean = True
+            Dim target As String = ""
+
+            Try
+
+                ' Enclose all database retrieval/update code within a Transaction boundary
+
+                url = Me.ModifyRedirectUrl(url, "", True)
+                url = Me.Page.ModifyRedirectUrl(url, "", True)
+
+            Catch ex As Exception
+
+                ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+            Finally
+                DbUtils.EndTransaction()
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
+
+            End If
+        End Sub
 
 End Class
 Public Class View_WCPO_Canvass1TableControl
@@ -436,6 +637,51 @@ Public Class View_WCPO_Canvass1TableControlRow
         ' SaveData, GetUIData, and Validate methods.
         
 
+
+        Public Overrides Sub ImageButton4_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+
+            DbUtils.StartTransaction()
+
+            Dim url As String = "../WCanvass_Internal/Show-WCanvass-Internal-WPO-Submit.aspx?WCanvass_Internal=" & Me.WCI_ID.Text '{View_WCPO_Canvass1TableControlRow:FV:WCI_ID}"
+            'Dim url As String = "../WCanvass_Internal/Show-WCanvass-Internal-WPO1.aspx?WCanvass_Internal=" & Me.WCI_ID.Text '{View_WCPO_Canvass1TableControlRow:FV:WCI_ID}"
+
+            If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+
+            Dim shouldRedirect As Boolean = True
+            Dim target As String = ""
+
+            Try
+
+                ' Enclose all database retrieval/update code within a Transaction boundary
+
+                url = Me.ModifyRedirectUrl(url, "", True)
+                url = Me.Page.ModifyRedirectUrl(url, "", True)
+
+            Catch ex As Exception
+
+                ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+            Finally
+                DbUtils.EndTransaction()
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
+
+            End If
+        End Sub
 End Class
 #End Region
 
@@ -477,6 +723,15 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControlRow
             ' It is better to make changes to functions called by LoadData such as
             ' CreateWhereClause, rather than making changes here.
     
+            ' The RecordUniqueId is set the first time a record is loaded, and is
+            ' used during a PostBack to load the record.
+          
+            If Me.RecordUniqueId IsNot Nothing AndAlso Me.RecordUniqueId.Trim <> "" Then
+                Me.DataSource = Sel_WPO_Activity_WPOP10100View.GetRecord(Me.RecordUniqueId, True)
+          
+                Return
+            End If
+        
             ' Since this is a row in the table, the data for this row is loaded by the 
             ' LoadData method of the BaseSel_WPO_Activity_WPOP10100TableControl when the data for the entire
             ' table is loaded.
@@ -506,6 +761,12 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControlRow
    
             'LoadData for DataSource for chart and report if they exist
           
+            ' Store the checksum. The checksum is used to
+            ' ensure the record was not changed by another user.
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing
+                Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
+            End If
+            
       
       
             ' Call the Set methods for each controls on the panel
@@ -545,6 +806,10 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControlRow
             
             If Me.DataSource.IsCreated Then
                 Me.IsNewRecord = False
+                
+                If Me.DataSource.GetID IsNot Nothing Then
+                    Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
+                End If
                 
             End If
             
@@ -772,9 +1037,20 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControlRow
                 				
                 ' If the WPO_Status is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WPO_Activity_WPOP10100View.WPO_Status)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = ""
+                Dim _isExpandableNonCompositeForeignKey As Boolean = Sel_WPO_Activity_WPOP10100View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP10100View.WPO_Status)
+                If _isExpandableNonCompositeForeignKey AndAlso Sel_WPO_Activity_WPOP10100View.WPO_Status.IsApplyDisplayAs Then
+                                  
+                       formattedValue = Sel_WPO_Activity_WPOP10100View.GetDFKA(Me.DataSource.WPO_Status.ToString(),Sel_WPO_Activity_WPOP10100View.WPO_Status, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(Sel_WPO_Activity_WPOP10100View.WPO_Status)
+                       End If
+                Else
+                       formattedValue = Me.DataSource.WPO_Status.ToString()
+                End If
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPO_Status.Text = formattedValue
                 
@@ -818,9 +1094,20 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControlRow
                 				
                 ' If the WPO_WDT_ID is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = ""
+                Dim _isExpandableNonCompositeForeignKey As Boolean = Sel_WPO_Activity_WPOP10100View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID)
+                If _isExpandableNonCompositeForeignKey AndAlso Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID.IsApplyDisplayAs Then
+                                  
+                       formattedValue = Sel_WPO_Activity_WPOP10100View.GetDFKA(Me.DataSource.WPO_WDT_ID.ToString(),Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID)
+                       End If
+                Else
+                       formattedValue = Me.DataSource.WPO_WDT_ID.ToString()
+                End If
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPO_WDT_ID.Text = formattedValue
                 
@@ -864,9 +1151,20 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControlRow
                 				
                 ' If the WPOP_C_ID is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = ""
+                Dim _isExpandableNonCompositeForeignKey As Boolean = Sel_WPO_Activity_WPOP10100View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID)
+                If _isExpandableNonCompositeForeignKey AndAlso Sel_WPO_Activity_WPOP10100View.WPOP_C_ID.IsApplyDisplayAs Then
+                                  
+                       formattedValue = Sel_WPO_Activity_WPOP10100View.GetDFKA(Me.DataSource.WPOP_C_ID.ToString(),Sel_WPO_Activity_WPOP10100View.WPOP_C_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID)
+                       End If
+                Else
+                       formattedValue = Me.DataSource.WPOP_C_ID.ToString()
+                End If
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPOP_C_ID.Text = formattedValue
                 
@@ -1053,6 +1351,13 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControlRow
             ' that fields that are not displayed are also properly initialized.
             Me.LoadData()
         
+            ' The checksum is used to ensure the record was not changed by another user.
+            If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
+                If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
+                    Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "ePortalWFApproval"))
+                End If
+            End If
+        
               
             ' 2. Perform any custom validation.
             Me.Validate()
@@ -1084,6 +1389,7 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControlRow
             Me.DataChanged = True
             Me.ResetData = True
             
+            Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
           
         Dim recView_WCPO_Canvass1TableControl as View_WCPO_Canvass1TableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "View_WCPO_Canvass1TableControl"), View_WCPO_Canvass1TableControl)
@@ -1196,6 +1502,15 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControlRow
 
         Public Overridable Sub Delete()
         
+            If Me.IsNewRecord() Then
+                Return
+            End If
+
+            Dim pkValue As KeyValue = KeyValue.XmlToKey(Me.RecordUniqueId)
+          Sel_WPO_Activity_WPOP10100View.DeleteRecord(pkValue)
+          
+            DirectCast(GetParentControlObject(Me, "Sel_WPO_Activity_WPOP10100TableControl"), Sel_WPO_Activity_WPOP10100TableControl).DataChanged = True
+            DirectCast(GetParentControlObject(Me, "Sel_WPO_Activity_WPOP10100TableControl"), Sel_WPO_Activity_WPOP10100TableControl).ResetData = True
         End Sub
 
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
@@ -1439,6 +1754,15 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControlRow
             End Set
         End Property   
 
+        
+        Public Property RecordUniqueId() As String
+            Get
+                Return CType(Me.ViewState("BaseSel_WPO_Activity_WPOP10100TableControlRow_Rec"), String)
+            End Get
+            Set(ByVal value As String)
+                Me.ViewState("BaseSel_WPO_Activity_WPOP10100TableControlRow_Rec") = value
+            End Set
+        End Property
             
         Public Property DataSource() As Sel_WPO_Activity_WPOP10100Record
             Get
@@ -1659,6 +1983,12 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControlRow
                 Return Me.DataSource
             End If
             
+            If Not Me.RecordUniqueId Is Nothing Then
+                
+                Return Sel_WPO_Activity_WPOP10100View.GetRecord(Me.RecordUniqueId, True)
+                
+            End If
+            
             ' Localization.
             
             Throw New Exception(Page.GetResourceValue("Err:RetrieveRec", "ePortalWFApproval"))
@@ -1693,10 +2023,6 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
                 Dim initialVal As String = ""
                 If  Me.InSession(Me.WPO_StatusFilter) 				
                     initialVal = Me.GetFromSession(Me.WPO_StatusFilter)
-                
-                Else
-                    
-                    initialVal = EvaluateFormula("URL(""WPO_Status"")")
                 
               End If
               
@@ -2000,7 +2326,10 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
             End If
             
             'LoadData for DataSource for chart and report if they exist
-               
+          
+          ' Improve performance by prefetching display as records.
+          Me.PreFetchForeignKeyValues()
+             
             ' Setup the pagination controls.
             BindPaginationControls()
 
@@ -2026,6 +2355,8 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
               recControl.PreviousUIData = Me.UIData(index)
             End If
             recControl.DataBind()
+          
+            recControl.Visible = Not Me.InDeletedRecordIds(recControl)
           
             index += 1
           Next
@@ -2117,6 +2448,19 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
     End Sub
 
     
+          Public Sub PreFetchForeignKeyValues()
+          If (IsNothing(Me.DataSource))
+            Return
+          End If
+          
+            Me.Page.PregetDfkaRecords(Sel_WPO_Activity_WPOP10100View.WPO_Status, Me.DataSource)
+          
+            Me.Page.PregetDfkaRecords(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID, Me.DataSource)
+          
+            Me.Page.PregetDfkaRecords(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID, Me.DataSource)
+          
+          End Sub
+        
       
         Public Overridable Sub RegisterPostback()
         
@@ -2278,8 +2622,13 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
             Dim recCtl As Sel_WPO_Activity_WPOP10100TableControlRow
             For Each recCtl In Me.GetRecordControls()
         
-                If recCtl.Visible Then
-                    recCtl.SaveData()
+                If Me.InDeletedRecordIds(recCtl) Then
+                    ' Delete any pending deletes. 
+                    recCtl.Delete()
+                Else
+                    If recCtl.Visible Then
+                        recCtl.SaveData()
+                    End If
                 End If
           
             Next
@@ -2298,6 +2647,9 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
                 recCtl.IsNewRecord = False
             Next
     
+      
+            ' Set DeletedRecordsIds to Nothing since we have deleted all pending deletes.
+            Me.DeletedRecordIds = Nothing
       
         End Sub
 
@@ -2668,6 +3020,36 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
         End Sub
 
         
+        Public Sub AddToDeletedRecordIds(ByVal rec As Sel_WPO_Activity_WPOP10100TableControlRow)
+            If rec.IsNewRecord() Then
+                Return
+            End If
+
+            If Not Me.DeletedRecordIds Is Nothing AndAlso Me.DeletedRecordIds.Trim <> "" Then
+                Me.DeletedRecordIds &= ","
+            End If
+
+            Me.DeletedRecordIds &= "[" & rec.RecordUniqueId & "]"
+        End Sub
+
+        Protected Overridable Function InDeletedRecordIds(ByVal rec As Sel_WPO_Activity_WPOP10100TableControlRow) As Boolean
+            If Me.DeletedRecordIds Is Nothing OrElse Me.DeletedRecordIds.Trim = "" Then
+                Return False
+            End If
+
+            Return Me.DeletedRecordIds.IndexOf("[" & rec.RecordUniqueId & "]") >= 0
+        End Function
+
+        Private _DeletedRecordIds As String
+        Public Property DeletedRecordIds() As String
+            Get
+                Return Me._DeletedRecordIds
+            End Get
+            Set(ByVal value As String)
+                Me._DeletedRecordIds = value
+            End Set
+        End Property
+        
       
         ' Create Set, WhereClause, and Populate Methods
         
@@ -2809,60 +3191,87 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
             ' Add the All item.
             Me.WPO_StatusFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
                               
-            
-            
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(Sel_WPO_Activity_WPOP10100View.WPO_Status, OrderByItem.OrderDir.Asc)                
-            
+
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(WPO_ApprovalStatusTable.WPO_STAT_DESC, OrderByItem.OrderDir.Asc)
+
+            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+
             	
 
-            Dim values(-1) As String
-            If wc.RunQuery Then
+            Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
             
-                values = Sel_WPO_Activity_WPOP10100View.GetValues(Sel_WPO_Activity_WPOP10100View.WPO_Status, wc, orderBy, maxItems)
+
+            Dim itemValues() As WPO_ApprovalStatusRecord = Nothing
             
-            End If
-            
-                  
-            Dim cvalue As String
-            
-            Dim listDuplicates As New ArrayList()
-            For Each cvalue In values
-                ' Create the item and add to the list.
-                Dim fvalue As String
-                If ( Sel_WPO_Activity_WPOP10100View.WPO_Status.IsColumnValueTypeBoolean()) Then
-                    fvalue = cvalue
-                Else
-                    fvalue = Sel_WPO_Activity_WPOP10100View.WPO_Status.Format(cvalue)
-                End If
+            If wc.RunQuery
+                Dim counter As Integer = 0
+                Dim pageNum As Integer = 0
+                Dim evaluator As New FormulaEvaluator
+                Dim listDuplicates As New ArrayList()
 
-                If (IsNothing(fvalue)) Then
-                    fvalue = ""
-                End If
-
-                fvalue = fvalue.Trim()
-
-                If ( fvalue.Length > 50 ) Then
-                    fvalue = fvalue.Substring(0, 50) & "..."
-                End If
-
-                Dim dupItem As ListItem = Me.WPO_StatusFilter.Items.FindByText(fvalue)
                 
-                If Not IsNothing(dupItem) Then
-                    listDuplicates.Add(fvalue)
-                    If Not String.IsNullOrEmpty(dupItem.Value) Then
-                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
-                    End If
-                End If
+                
+                Do
+                    
+                    itemValues = WPO_ApprovalStatusTable.GetRecords(wc, orderBy, pageNum, maxItems)
+                                    
+                    For each itemValue As WPO_ApprovalStatusRecord In itemValues
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.WPO_STAT_CDSpecified Then
+                            cvalue = itemValue.WPO_STAT_CD.ToString()
 
-                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
-                Me.WPO_StatusFilter.Items.Add(newItem)
+                            If counter < maxItems AndAlso Me.WPO_StatusFilter.Items.FindByValue(cvalue) Is Nothing  Then
+                            
+                                Dim _isExpandableNonCompositeForeignKey As Boolean = Sel_WPO_Activity_WPOP10100View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP10100View.WPO_Status)
+                                If _isExpandableNonCompositeForeignKey AndAlso Sel_WPO_Activity_WPOP10100View.WPO_Status.IsApplyDisplayAs Then
+                                    fvalue = Sel_WPO_Activity_WPOP10100View.GetDFKA(itemValue, Sel_WPO_Activity_WPOP10100View.WPO_Status)
+                                End If
+                                If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                                    fvalue = itemValue.Format(WPO_ApprovalStatusTable.WPO_STAT_CD)
+                                End If
+                                    
+                                If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
-                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
-                End If
-            Next
-                                  
+                                If (IsNothing(fvalue)) Then
+                                   fvalue = ""
+                                End If
+
+                                fvalue = fvalue.Trim()
+
+                                If ( fvalue.Length > 50 ) Then
+                                   fvalue = fvalue.Substring(0, 50) & "..."
+                                End If
+
+                                Dim dupItem As ListItem = Me.WPO_StatusFilter.Items.FindByText(fvalue)
+                
+                                If Not IsNothing(dupItem) Then
+                                    listDuplicates.Add(fvalue)
+                                    If Not String.IsNullOrEmpty(dupItem.Value) Then
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
+                                    End If
+                                End If
+
+                                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
+                                Me.WPO_StatusFilter.Items.Add(newItem)
+
+                                If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
+                                End If
+
+                                counter += 1			  
+                            End If
+                        End If
+                    Next
+                    pageNum += 1
+                Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
+            End If			
+            
+
+
+                               
 
             Try    
                 
@@ -2895,60 +3304,87 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
             ' Add the All item.
             Me.WPOP_C_IDFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
                               
-            
-            
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID, OrderByItem.OrderDir.Asc)                
-            
+
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(Sel_WF_DYNAMICS_CompanyView.Company_ID, OrderByItem.OrderDir.Asc)
+
+            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+
             	
 
-            Dim values(-1) As String
-            If wc.RunQuery Then
+            Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
             
-                values = Sel_WPO_Activity_WPOP10100View.GetValues(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID, wc, orderBy, maxItems)
+
+            Dim itemValues() As Sel_WF_DYNAMICS_CompanyRecord = Nothing
             
-            End If
-            
-                  
-            Dim cvalue As String
-            
-            Dim listDuplicates As New ArrayList()
-            For Each cvalue In values
-                ' Create the item and add to the list.
-                Dim fvalue As String
-                If ( Sel_WPO_Activity_WPOP10100View.WPOP_C_ID.IsColumnValueTypeBoolean()) Then
-                    fvalue = cvalue
-                Else
-                    fvalue = Sel_WPO_Activity_WPOP10100View.WPOP_C_ID.Format(cvalue)
-                End If
+            If wc.RunQuery
+                Dim counter As Integer = 0
+                Dim pageNum As Integer = 0
+                Dim evaluator As New FormulaEvaluator
+                Dim listDuplicates As New ArrayList()
 
-                If (IsNothing(fvalue)) Then
-                    fvalue = ""
-                End If
-
-                fvalue = fvalue.Trim()
-
-                If ( fvalue.Length > 50 ) Then
-                    fvalue = fvalue.Substring(0, 50) & "..."
-                End If
-
-                Dim dupItem As ListItem = Me.WPOP_C_IDFilter.Items.FindByText(fvalue)
                 
-                If Not IsNothing(dupItem) Then
-                    listDuplicates.Add(fvalue)
-                    If Not String.IsNullOrEmpty(dupItem.Value) Then
-                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
-                    End If
-                End If
+                
+                Do
+                    
+                    itemValues = Sel_WF_DYNAMICS_CompanyView.GetRecords(wc, orderBy, pageNum, maxItems)
+                                    
+                    For each itemValue As Sel_WF_DYNAMICS_CompanyRecord In itemValues
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.Company_IDSpecified Then
+                            cvalue = itemValue.Company_ID.ToString()
 
-                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
-                Me.WPOP_C_IDFilter.Items.Add(newItem)
+                            If counter < maxItems AndAlso Me.WPOP_C_IDFilter.Items.FindByValue(cvalue) Is Nothing  Then
+                            
+                                Dim _isExpandableNonCompositeForeignKey As Boolean = Sel_WPO_Activity_WPOP10100View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID)
+                                If _isExpandableNonCompositeForeignKey AndAlso Sel_WPO_Activity_WPOP10100View.WPOP_C_ID.IsApplyDisplayAs Then
+                                    fvalue = Sel_WPO_Activity_WPOP10100View.GetDFKA(itemValue, Sel_WPO_Activity_WPOP10100View.WPOP_C_ID)
+                                End If
+                                If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                                    fvalue = itemValue.Format(Sel_WF_DYNAMICS_CompanyView.Company_ID)
+                                End If
+                                    
+                                If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
-                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
-                End If
-            Next
-                                  
+                                If (IsNothing(fvalue)) Then
+                                   fvalue = ""
+                                End If
+
+                                fvalue = fvalue.Trim()
+
+                                If ( fvalue.Length > 50 ) Then
+                                   fvalue = fvalue.Substring(0, 50) & "..."
+                                End If
+
+                                Dim dupItem As ListItem = Me.WPOP_C_IDFilter.Items.FindByText(fvalue)
+                
+                                If Not IsNothing(dupItem) Then
+                                    listDuplicates.Add(fvalue)
+                                    If Not String.IsNullOrEmpty(dupItem.Value) Then
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
+                                    End If
+                                End If
+
+                                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
+                                Me.WPOP_C_IDFilter.Items.Add(newItem)
+
+                                If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
+                                End If
+
+                                counter += 1			  
+                            End If
+                        End If
+                    Next
+                    pageNum += 1
+                Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
+            End If			
+            
+
+
+                               
 
             Try    
                 
@@ -3073,6 +3509,8 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
             Me.SaveToSession(Me, "Page_Index", Me.PageIndex.ToString())
             Me.SaveToSession(Me, "Page_Size", Me.PageSize.ToString())
         
+            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)  
+        
         End Sub
         
         Protected  Sub SaveControlsToSession_Ajax()
@@ -3102,6 +3540,8 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
     Me.RemoveFromSession(Me, "Page_Index")
     Me.RemoveFromSession(Me, "Page_Size")
     
+            Me.RemoveFromSession(Me, "DeletedRecordIds")  
+            
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
@@ -3151,6 +3591,8 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
     
             ' Load view state for pagination control.
         
+            Me.DeletedRecordIds = CType(Me.ViewState("DeletedRecordIds"), String)
+        
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
@@ -3162,6 +3604,8 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
             Me.ViewState("Page_Index") = Me.PageIndex
             Me.ViewState("Page_Size") = Me.PageSize
             
+            Me.ViewState("DeletedRecordIds") = Me.DeletedRecordIds
+        
     
             ' Load view state for pagination control.
           
@@ -3509,12 +3953,12 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
                 ' The 3rd parameter represents the text format of the column detail
                 ' The 4th parameter represents the horizontal alignment of the column detail
                 ' The 5th parameter represents the relative width of the column   			
-                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID.Name, ReportEnum.Align.Right, "${WPO_WDT_ID}", ReportEnum.Align.Right, 15)
-                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_Status.Name, ReportEnum.Align.Right, "${WPO_Status}", ReportEnum.Align.Right, 15)
+                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID.Name, ReportEnum.Align.Left, "${WPO_WDT_ID}", ReportEnum.Align.Left, 19)
+                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_Status.Name, ReportEnum.Align.Left, "${WPO_Status}", ReportEnum.Align.Left, 22)
                  report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_Date_Assign.Name, ReportEnum.Align.Left, "${WPO_Date_Assign}", ReportEnum.Align.Left, 20)
                  report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_Is_Done.Name, ReportEnum.Align.Left, "${WPO_Is_Done}", ReportEnum.Align.Left, 15)
                  report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_PONum.Name, ReportEnum.Align.Left, "${WPO_PONum}", ReportEnum.Align.Left, 20)
-                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID.Name, ReportEnum.Align.Right, "${WPOP_C_ID}", ReportEnum.Align.Right, 15)
+                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID.Name, ReportEnum.Align.Left, "${WPOP_C_ID}", ReportEnum.Align.Left, 24)
                  report.AddColumn(Sel_WPO_Activity_WPOP10100View.TOTAL.Name, ReportEnum.Align.Right, "${TOTAL}", ReportEnum.Align.Right, 20)
 
           
@@ -3544,12 +3988,48 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
                             ' The 2nd parameters represent the data value
                             ' The 3rd parameters represent the default alignment of column using the data
                             ' The 4th parameters represent the maximum length of the data value being shown
-                                                         report.AddData("${WPO_WDT_ID}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID), ReportEnum.Align.Right, 300)
-                             report.AddData("${WPO_Status}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_Status), ReportEnum.Align.Right, 300)
+                                                         If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_WDT_ID) Then
+                                 report.AddData("${WPO_WDT_ID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = Sel_WPO_Activity_WPOP10100View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID)
+                                 _DFKA = Sel_WPO_Activity_WPOP10100View.GetDFKA(record.WPO_WDT_ID.ToString(), Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_WDT_ID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_WDT_ID}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_Status) Then
+                                 report.AddData("${WPO_Status}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = Sel_WPO_Activity_WPOP10100View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP10100View.WPO_Status)
+                                 _DFKA = Sel_WPO_Activity_WPOP10100View.GetDFKA(record.WPO_Status.ToString(), Sel_WPO_Activity_WPOP10100View.WPO_Status,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  Sel_WPO_Activity_WPOP10100View.WPO_Status.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_Status}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_Status}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_Status), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
                              report.AddData("${WPO_Date_Assign}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_Date_Assign), ReportEnum.Align.Left, 300)
                              report.AddData("${WPO_Is_Done}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_Is_Done), ReportEnum.Align.Left, 300)
                              report.AddData("${WPO_PONum}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_PONum), ReportEnum.Align.Left, 300)
-                             report.AddData("${WPOP_C_ID}", record.Format(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID), ReportEnum.Align.Right, 300)
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPOP_C_ID) Then
+                                 report.AddData("${WPOP_C_ID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = Sel_WPO_Activity_WPOP10100View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID)
+                                 _DFKA = Sel_WPO_Activity_WPOP10100View.GetDFKA(record.WPOP_C_ID.ToString(), Sel_WPO_Activity_WPOP10100View.WPOP_C_ID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  Sel_WPO_Activity_WPOP10100View.WPOP_C_ID.IsApplyDisplayAs Then
+                                     report.AddData("${WPOP_C_ID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPOP_C_ID}", record.Format(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
                              report.AddData("${TOTAL}", record.Format(Sel_WPO_Activity_WPOP10100View.TOTAL), ReportEnum.Align.Right, 300)
 
                             report.WriteRow 
@@ -3585,6 +4065,8 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
             Dim Sel_WPO_Activity_WPOP10100TableControlObj as Sel_WPO_Activity_WPOP10100TableControl = DirectCast(Me.Page.FindControlRecursively("Sel_WPO_Activity_WPOP10100TableControl"), Sel_WPO_Activity_WPOP10100TableControl)
             Sel_WPO_Activity_WPOP10100TableControlObj.ResetData = True
                         
+            Sel_WPO_Activity_WPOP10100TableControlObj.RemoveFromSession(Sel_WPO_Activity_WPOP10100TableControlObj, "DeletedRecordIds")
+            Sel_WPO_Activity_WPOP10100TableControlObj.DeletedRecordIds = Nothing
             
             Catch ex As Exception
             
@@ -3656,12 +4138,12 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
                 ' The 3rd parameter represents the text format of the column detail
                 ' The 4th parameter represents the horizontal alignment of the column detail
                 ' The 5th parameter represents the relative width of the column
-                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID.Name, ReportEnum.Align.Right, "${WPO_WDT_ID}", ReportEnum.Align.Right, 15)
-                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_Status.Name, ReportEnum.Align.Right, "${WPO_Status}", ReportEnum.Align.Right, 15)
+                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID.Name, ReportEnum.Align.Left, "${WPO_WDT_ID}", ReportEnum.Align.Left, 19)
+                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_Status.Name, ReportEnum.Align.Left, "${WPO_Status}", ReportEnum.Align.Left, 22)
                  report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_Date_Assign.Name, ReportEnum.Align.Left, "${WPO_Date_Assign}", ReportEnum.Align.Left, 20)
                  report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_Is_Done.Name, ReportEnum.Align.Left, "${WPO_Is_Done}", ReportEnum.Align.Left, 15)
                  report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPO_PONum.Name, ReportEnum.Align.Left, "${WPO_PONum}", ReportEnum.Align.Left, 20)
-                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID.Name, ReportEnum.Align.Right, "${WPOP_C_ID}", ReportEnum.Align.Right, 15)
+                 report.AddColumn(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID.Name, ReportEnum.Align.Left, "${WPOP_C_ID}", ReportEnum.Align.Left, 24)
                  report.AddColumn(Sel_WPO_Activity_WPOP10100View.TOTAL.Name, ReportEnum.Align.Right, "${TOTAL}", ReportEnum.Align.Right, 20)
 
               Dim whereClause As WhereClause = CreateWhereClause
@@ -3689,12 +4171,48 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
                             ' The 2nd parameters represent the data value
                             ' The 3rd parameters represent the default alignment of column using the data
                             ' The 4th parameters represent the maximum length of the data value being shown
-                             report.AddData("${WPO_WDT_ID}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID), ReportEnum.Align.Right, 300)
-                             report.AddData("${WPO_Status}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_Status), ReportEnum.Align.Right, 300)
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_WDT_ID) Then
+                                 report.AddData("${WPO_WDT_ID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = Sel_WPO_Activity_WPOP10100View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID)
+                                 _DFKA = Sel_WPO_Activity_WPOP10100View.GetDFKA(record.WPO_WDT_ID.ToString(), Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_WDT_ID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_WDT_ID}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_WDT_ID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_Status) Then
+                                 report.AddData("${WPO_Status}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = Sel_WPO_Activity_WPOP10100View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP10100View.WPO_Status)
+                                 _DFKA = Sel_WPO_Activity_WPOP10100View.GetDFKA(record.WPO_Status.ToString(), Sel_WPO_Activity_WPOP10100View.WPO_Status,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  Sel_WPO_Activity_WPOP10100View.WPO_Status.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_Status}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_Status}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_Status), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
                              report.AddData("${WPO_Date_Assign}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_Date_Assign), ReportEnum.Align.Left, 300)
                              report.AddData("${WPO_Is_Done}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_Is_Done), ReportEnum.Align.Left, 300)
                              report.AddData("${WPO_PONum}", record.Format(Sel_WPO_Activity_WPOP10100View.WPO_PONum), ReportEnum.Align.Left, 300)
-                             report.AddData("${WPOP_C_ID}", record.Format(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID), ReportEnum.Align.Right, 300)
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPOP_C_ID) Then
+                                 report.AddData("${WPOP_C_ID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = Sel_WPO_Activity_WPOP10100View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID)
+                                 _DFKA = Sel_WPO_Activity_WPOP10100View.GetDFKA(record.WPOP_C_ID.ToString(), Sel_WPO_Activity_WPOP10100View.WPOP_C_ID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  Sel_WPO_Activity_WPOP10100View.WPOP_C_ID.IsApplyDisplayAs Then
+                                     report.AddData("${WPOP_C_ID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPOP_C_ID}", record.Format(Sel_WPO_Activity_WPOP10100View.WPOP_C_ID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
                              report.AddData("${TOTAL}", record.Format(Sel_WPO_Activity_WPOP10100View.TOTAL), ReportEnum.Align.Right, 300)
 
                             report.WriteRow
@@ -4010,20 +4528,52 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
 #Region "Helper Functions"
         
         Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, Nothing, bEncrypt)
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
-    
+      
+      
         Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return EvaluateExpressions(url, arg, Nothing, bEncrypt,includeSession)
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me,includeSession)
         End Function
         
         Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, Nothing, bEncrypt)
+            Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
+            If (needToProcess) Then
+                Dim recCtl As Sel_WPO_Activity_WPOP10100TableControlRow = Me.GetSelectedRecordControl()
+                If recCtl Is Nothing AndAlso url.IndexOf("{") >= 0 Then
+                    ' Localization.
+                    Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
+                End If
+                Dim rec As Sel_WPO_Activity_WPOP10100Record = Nothing     
+                If recCtl IsNot Nothing Then
+                    rec = recCtl.GetRecord()
+                End If
+                Return EvaluateExpressions(url, arg, rec, bEncrypt)
+            End If
+            Return url
         End Function
         
-        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean,ByVal includeSession As Boolean) As String
-            Return EvaluateExpressions(url, arg, Nothing, bEncrypt, includeSession)
+        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
+            Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
+            If (needToProcess) Then
+                Dim recCtl As Sel_WPO_Activity_WPOP10100TableControlRow = Me.GetSelectedRecordControl()
+                If recCtl Is Nothing AndAlso url.IndexOf("{") >= 0 Then
+                    ' Localization.
+                    Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
+                End If
+                Dim rec As Sel_WPO_Activity_WPOP10100Record = Nothing     
+                If recCtl IsNot Nothing Then
+                    rec = recCtl.GetRecord()
+                End If
+                If includeSession then
+                    Return EvaluateExpressions(url, arg, rec, bEncrypt)
+                Else
+                    Return EvaluateExpressions(url, arg, rec, bEncrypt,False)
+                End If
+            End If
+            Return url
         End Function
+        
           
         Public Overridable Function GetSelectedRecordControl() As Sel_WPO_Activity_WPOP10100TableControlRow
             Return Nothing
@@ -4048,16 +4598,20 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
                 If deferDeletion Then
                     If Not recCtl.IsNewRecord Then
                 
-                        ' Localization.
-                        Throw New Exception(Page.GetResourceValue("Err:CannotDelRecs", "ePortalWFApproval"))
+                        Me.AddToDeletedRecordIds(recCtl)
                   
                     End If
                     recCtl.Visible = False
                 
                 Else
                 
-                    ' Localization.
-                    Throw New Exception(Page.GetResourceValue("Err:CannotDelRecs", "ePortalWFApproval"))
+                    recCtl.Delete()
+                    
+                    ' Setting the DataChanged to True results in the page being refreshed with
+                    ' the most recent data from the database.  This happens in PreRender event
+                    ' based on the current sort, search and filter criteria.
+                    Me.DataChanged = True
+                    Me.ResetData = True
                   
                 End If
             Next
@@ -4197,9 +4751,20 @@ Public Class BaseView_WCPO_Canvass1TableControlRow
                 				
                 ' If the Buyer is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(View_WCPO_Canvass1View.Buyer)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = ""
+                Dim _isExpandableNonCompositeForeignKey As Boolean = View_WCPO_Canvass1View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(View_WCPO_Canvass1View.Buyer)
+                If _isExpandableNonCompositeForeignKey AndAlso View_WCPO_Canvass1View.Buyer.IsApplyDisplayAs Then
+                                  
+                       formattedValue = View_WCPO_Canvass1View.GetDFKA(Me.DataSource.Buyer.ToString(),View_WCPO_Canvass1View.Buyer, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(View_WCPO_Canvass1View.Buyer)
+                       End If
+                Else
+                       formattedValue = Me.DataSource.Buyer.ToString()
+                End If
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.Buyer.Text = formattedValue
                 
@@ -4288,9 +4853,20 @@ Public Class BaseView_WCPO_Canvass1TableControlRow
                 				
                 ' If the Classification is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(View_WCPO_Canvass1View.Classification)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = ""
+                Dim _isExpandableNonCompositeForeignKey As Boolean = View_WCPO_Canvass1View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(View_WCPO_Canvass1View.Classification)
+                If _isExpandableNonCompositeForeignKey AndAlso View_WCPO_Canvass1View.Classification.IsApplyDisplayAs Then
+                                  
+                       formattedValue = View_WCPO_Canvass1View.GetDFKA(Me.DataSource.Classification.ToString(),View_WCPO_Canvass1View.Classification, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(View_WCPO_Canvass1View.Classification)
+                       End If
+                Else
+                       formattedValue = Me.DataSource.Classification.ToString()
+                End If
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.Classification.Text = formattedValue
                 
@@ -4334,9 +4910,20 @@ Public Class BaseView_WCPO_Canvass1TableControlRow
                 				
                 ' If the PRID is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(View_WCPO_Canvass1View.PRID)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = ""
+                Dim _isExpandableNonCompositeForeignKey As Boolean = View_WCPO_Canvass1View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(View_WCPO_Canvass1View.PRID)
+                If _isExpandableNonCompositeForeignKey AndAlso View_WCPO_Canvass1View.PRID.IsApplyDisplayAs Then
+                                  
+                       formattedValue = View_WCPO_Canvass1View.GetDFKA(Me.DataSource.PRID.ToString(),View_WCPO_Canvass1View.PRID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(View_WCPO_Canvass1View.PRID)
+                       End If
+                Else
+                       formattedValue = Me.DataSource.PRID.ToString()
+                End If
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.PRID.Text = formattedValue
                 
@@ -5287,7 +5874,10 @@ Public Class BaseView_WCPO_Canvass1TableControl
             End If
             
             'LoadData for DataSource for chart and report if they exist
-               
+          
+          ' Improve performance by prefetching display as records.
+          Me.PreFetchForeignKeyValues()
+             
             ' Setup the pagination controls.
             BindPaginationControls()
 
@@ -5348,6 +5938,19 @@ Public Class BaseView_WCPO_Canvass1TableControl
     End Sub
 
     
+          Public Sub PreFetchForeignKeyValues()
+          If (IsNothing(Me.DataSource))
+            Return
+          End If
+          
+            Me.Page.PregetDfkaRecords(View_WCPO_Canvass1View.Buyer, Me.DataSource)
+          
+            Me.Page.PregetDfkaRecords(View_WCPO_Canvass1View.Classification, Me.DataSource)
+          
+            Me.Page.PregetDfkaRecords(View_WCPO_Canvass1View.PRID, Me.DataSource)
+          
+          End Sub
+        
       
         Public Overridable Sub RegisterPostback()
         
@@ -6222,6 +6825,15 @@ Public Class BaseWPO_CARNo_QWFTableControlRow
             ' It is better to make changes to functions called by LoadData such as
             ' CreateWhereClause, rather than making changes here.
     
+            ' The RecordUniqueId is set the first time a record is loaded, and is
+            ' used during a PostBack to load the record.
+          
+            If Me.RecordUniqueId IsNot Nothing AndAlso Me.RecordUniqueId.Trim <> "" Then
+                Me.DataSource = WPO_CARNo_QWFView.GetRecord(Me.RecordUniqueId, True)
+          
+                Return
+            End If
+        
             ' Since this is a row in the table, the data for this row is loaded by the 
             ' LoadData method of the BaseWPO_CARNo_QWFTableControl when the data for the entire
             ' table is loaded.
@@ -6251,6 +6863,12 @@ Public Class BaseWPO_CARNo_QWFTableControlRow
    
             'LoadData for DataSource for chart and report if they exist
           
+            ' Store the checksum. The checksum is used to
+            ' ensure the record was not changed by another user.
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing
+                Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
+            End If
+            
       
       
             ' Call the Set methods for each controls on the panel
@@ -6271,6 +6889,10 @@ Public Class BaseWPO_CARNo_QWFTableControlRow
             
             If Me.DataSource.IsCreated Then
                 Me.IsNewRecord = False
+                
+                If Me.DataSource.GetID IsNot Nothing Then
+                    Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
+                End If
                 
             End If
             
@@ -6354,19 +6976,46 @@ Public Class BaseWPO_CARNo_QWFTableControlRow
                               
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 If Not formattedValue is Nothing Then
+                    Dim popupThreshold as Integer = CType(300, Integer)
                               
-                    Dim maxLength as Integer = Len(formattedValue)                   
+                    Dim maxLength as Integer = Len(formattedValue)
+                    Dim originalLength As Integer = maxLength
                     If (maxLength >= CType(300, Integer)) Then
                         ' Truncate based on FieldMaxLength on Properties.
                         maxLength = CType(300, Integer)
                         'First strip of all html tags:
                         formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)                       
+                                      
+                    End If
+                                
+                    ' For fields values larger than the PopupTheshold on Properties, display a popup.
+                    If originalLength >= popupThreshold Then
+                      
+                        Dim name As String = HttpUtility.HtmlEncode(WPO_CARNo_QWFView.Comment.Name)
+
+                        If Not HttpUtility.HtmlEncode("%ISD_DEFAULT%").Equals("%ISD_DEFAULT%") Then
+                           name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
+                        End If
+
                         
-                    End If                    
-                    If maxLength = CType(300, Integer) Then
-                        formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,Math.Min(maxLength, Len(formattedValue))))
-                        formattedValue = formattedValue & "..."
-                            
+
+                        formattedValue= "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
+                            & "onmouseover='SaveMousePosition(event); delayRolloverPopup(""PageMethods.GetRecordFieldValue(\""ePortalWFApproval.Business.WPO_CARNo_QWFView, App_Code\"",\""" _
+                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\","\\\\") & "\"", \""Comment\"", \""Comment2\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
+                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" &  NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
+                      
+                        If (maxLength = CType(300, Integer)) Then
+                            formattedValue = formattedValue & "..." & "</a>"
+                        Else
+                            formattedValue = formattedValue & "</a>"
+                        
+                        End If
+                    Else
+                        If maxLength = CType(300, Integer) Then
+                            formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,MaxLength))
+                            formattedValue = formattedValue & "..."
+                        
+                        End If
                     End If
                 End If  
                 
@@ -6412,9 +7061,20 @@ Public Class BaseWPO_CARNo_QWFTableControlRow
                 				
                 ' If the PRNum is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WPO_CARNo_QWFView.PRNum)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = ""
+                Dim _isExpandableNonCompositeForeignKey As Boolean = WPO_CARNo_QWFView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WPO_CARNo_QWFView.PRNum)
+                If _isExpandableNonCompositeForeignKey AndAlso WPO_CARNo_QWFView.PRNum.IsApplyDisplayAs Then
+                                  
+                       formattedValue = WPO_CARNo_QWFView.GetDFKA(Me.DataSource.PRNum.ToString(),WPO_CARNo_QWFView.PRNum, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WPO_CARNo_QWFView.PRNum)
+                       End If
+                Else
+                       formattedValue = Me.DataSource.PRNum.ToString()
+                End If
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.PRNum.Text = formattedValue
                 
@@ -6554,24 +7214,52 @@ Public Class BaseWPO_CARNo_QWFTableControlRow
                 Dim formattedValue As String = Me.DataSource.Format(WPO_CARNo_QWFView.WCD_Project_Title)
                               
                 If Not formattedValue is Nothing Then
+                    Dim popupThreshold as Integer = CType(300, Integer)
                               
-                    Dim maxLength as Integer = Len(formattedValue)                   
+                    Dim maxLength as Integer = Len(formattedValue)
+                    Dim originalLength As Integer = maxLength
                     If (maxLength >= CType(300, Integer)) Then
                         ' Truncate based on FieldMaxLength on Properties.
                         maxLength = CType(300, Integer)
                         'First strip of all html tags:
                         formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)                       
-                        
+                                      
                         formattedValue = HttpUtility.HtmlEncode(formattedValue)
                           
-                    End If                    
-                    If maxLength = CType(300, Integer) Then
-                        formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,Math.Min(maxLength, Len(formattedValue))))
-                        formattedValue = formattedValue & "..."
-                            
-                    Else
+                    End If
+                                
+                    ' For fields values larger than the PopupTheshold on Properties, display a popup.
+                    If originalLength >= popupThreshold Then
+                      
+                        Dim name As String = HttpUtility.HtmlEncode(WPO_CARNo_QWFView.WCD_Project_Title.Name)
+
+                        If Not HttpUtility.HtmlEncode("%ISD_DEFAULT%").Equals("%ISD_DEFAULT%") Then
+                           name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
+                        End If
+
                         
-                        formattedValue = "<table border=""0"" cellpadding=""0"" cellspacing=""0""><tr><td>" & formattedValue & "</td></tr></table>"
+
+                        formattedValue= "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
+                            & "onmouseover='SaveMousePosition(event); delayRolloverPopup(""PageMethods.GetRecordFieldValue(\""ePortalWFApproval.Business.WPO_CARNo_QWFView, App_Code\"",\""" _
+                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\","\\\\") & "\"", \""WCD_Project_Title\"", \""WCD_Project_Title\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
+                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" &  NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
+                      
+                        If (maxLength = CType(300, Integer)) Then
+                            formattedValue = formattedValue & "..." & "</a>"
+                        Else
+                            formattedValue = formattedValue & "</a>"
+                        
+                            formattedValue = "<table border=""0"" cellpadding=""0"" cellspacing=""0""><tr><td>" & formattedValue & "</td></tr></table>"
+                        End If
+                    Else
+                        If maxLength = CType(300, Integer) Then
+                            formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,MaxLength))
+                            formattedValue = formattedValue & "..."
+                        
+                        Else
+                        
+                            formattedValue = "<table border=""0"" cellpadding=""0"" cellspacing=""0""><tr><td>" & formattedValue & "</td></tr></table>"
+                        End If
                     End If
                 End If  
                 
@@ -6704,6 +7392,13 @@ Public Class BaseWPO_CARNo_QWFTableControlRow
             ' that fields that are not displayed are also properly initialized.
             Me.LoadData()
         
+            ' The checksum is used to ensure the record was not changed by another user.
+            If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
+                If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
+                    Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "ePortalWFApproval"))
+                End If
+            End If
+        
               
             ' 2. Perform any custom validation.
             Me.Validate()
@@ -6735,6 +7430,7 @@ Public Class BaseWPO_CARNo_QWFTableControlRow
             Me.DataChanged = True
             Me.ResetData = True
             
+            Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
           
         End Sub
@@ -6824,6 +7520,15 @@ Public Class BaseWPO_CARNo_QWFTableControlRow
 
         Public Overridable Sub Delete()
         
+            If Me.IsNewRecord() Then
+                Return
+            End If
+
+            Dim pkValue As KeyValue = KeyValue.XmlToKey(Me.RecordUniqueId)
+          WPO_CARNo_QWFView.DeleteRecord(pkValue)
+          
+            DirectCast(GetParentControlObject(Me, "WPO_CARNo_QWFTableControl"), WPO_CARNo_QWFTableControl).DataChanged = True
+            DirectCast(GetParentControlObject(Me, "WPO_CARNo_QWFTableControl"), WPO_CARNo_QWFTableControl).ResetData = True
         End Sub
 
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
@@ -6962,6 +7667,15 @@ Public Class BaseWPO_CARNo_QWFTableControlRow
             End Set
         End Property   
 
+        
+        Public Property RecordUniqueId() As String
+            Get
+                Return CType(Me.ViewState("BaseWPO_CARNo_QWFTableControlRow_Rec"), String)
+            End Get
+            Set(ByVal value As String)
+                Me.ViewState("BaseWPO_CARNo_QWFTableControlRow_Rec") = value
+            End Set
+        End Property
             
         Public Property DataSource() As WPO_CARNo_QWFRecord
             Get
@@ -7126,6 +7840,12 @@ Public Class BaseWPO_CARNo_QWFTableControlRow
         Public Overridable Function GetRecord() As WPO_CARNo_QWFRecord
             If Not Me.DataSource Is Nothing Then
                 Return Me.DataSource
+            End If
+            
+            If Not Me.RecordUniqueId Is Nothing Then
+                
+                Return WPO_CARNo_QWFView.GetRecord(Me.RecordUniqueId, True)
+                
             End If
             
             ' Localization.
@@ -7391,7 +8111,10 @@ Public Class BaseWPO_CARNo_QWFTableControl
             End If
             
             'LoadData for DataSource for chart and report if they exist
-               
+          
+          ' Improve performance by prefetching display as records.
+          Me.PreFetchForeignKeyValues()
+             
             ' Setup the pagination controls.
             BindPaginationControls()
 
@@ -7417,6 +8140,8 @@ Public Class BaseWPO_CARNo_QWFTableControl
               recControl.PreviousUIData = Me.UIData(index)
             End If
             recControl.DataBind()
+          
+            recControl.Visible = Not Me.InDeletedRecordIds(recControl)
           
             index += 1
           Next
@@ -7450,6 +8175,15 @@ Public Class BaseWPO_CARNo_QWFTableControl
     End Sub
 
     
+          Public Sub PreFetchForeignKeyValues()
+          If (IsNothing(Me.DataSource))
+            Return
+          End If
+          
+            Me.Page.PregetDfkaRecords(WPO_CARNo_QWFView.PRNum, Me.DataSource)
+          
+          End Sub
+        
       
         Public Overridable Sub RegisterPostback()
         
@@ -7572,8 +8306,13 @@ Public Class BaseWPO_CARNo_QWFTableControl
             Dim recCtl As WPO_CARNo_QWFTableControlRow
             For Each recCtl In Me.GetRecordControls()
         
-                If recCtl.Visible Then
-                    recCtl.SaveData()
+                If Me.InDeletedRecordIds(recCtl) Then
+                    ' Delete any pending deletes. 
+                    recCtl.Delete()
+                Else
+                    If recCtl.Visible Then
+                        recCtl.SaveData()
+                    End If
                 End If
           
             Next
@@ -7592,6 +8331,9 @@ Public Class BaseWPO_CARNo_QWFTableControl
                 recCtl.IsNewRecord = False
             Next
     
+      
+            ' Set DeletedRecordsIds to Nothing since we have deleted all pending deletes.
+            Me.DeletedRecordIds = Nothing
       
         End Sub
 
@@ -7890,6 +8632,36 @@ Public Class BaseWPO_CARNo_QWFTableControl
         End Sub
 
         
+        Public Sub AddToDeletedRecordIds(ByVal rec As WPO_CARNo_QWFTableControlRow)
+            If rec.IsNewRecord() Then
+                Return
+            End If
+
+            If Not Me.DeletedRecordIds Is Nothing AndAlso Me.DeletedRecordIds.Trim <> "" Then
+                Me.DeletedRecordIds &= ","
+            End If
+
+            Me.DeletedRecordIds &= "[" & rec.RecordUniqueId & "]"
+        End Sub
+
+        Protected Overridable Function InDeletedRecordIds(ByVal rec As WPO_CARNo_QWFTableControlRow) As Boolean
+            If Me.DeletedRecordIds Is Nothing OrElse Me.DeletedRecordIds.Trim = "" Then
+                Return False
+            End If
+
+            Return Me.DeletedRecordIds.IndexOf("[" & rec.RecordUniqueId & "]") >= 0
+        End Function
+
+        Private _DeletedRecordIds As String
+        Public Property DeletedRecordIds() As String
+            Get
+                Return Me._DeletedRecordIds
+            End Get
+            Set(ByVal value As String)
+                Me._DeletedRecordIds = value
+            End Set
+        End Property
+        
       
         ' Create Set, WhereClause, and Populate Methods
         
@@ -7971,6 +8743,8 @@ Public Class BaseWPO_CARNo_QWFTableControl
             Me.SaveToSession(Me, "Page_Index", Me.PageIndex.ToString())
             Me.SaveToSession(Me, "Page_Size", Me.PageSize.ToString())
         
+            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)  
+        
         End Sub
         
         Protected  Sub SaveControlsToSession_Ajax()
@@ -7994,6 +8768,8 @@ Public Class BaseWPO_CARNo_QWFTableControl
     Me.RemoveFromSession(Me, "Page_Index")
     Me.RemoveFromSession(Me, "Page_Size")
     
+            Me.RemoveFromSession(Me, "DeletedRecordIds")  
+            
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
@@ -8043,6 +8819,8 @@ Public Class BaseWPO_CARNo_QWFTableControl
     
             ' Load view state for pagination control.
         
+            Me.DeletedRecordIds = CType(Me.ViewState("DeletedRecordIds"), String)
+        
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
@@ -8054,6 +8832,8 @@ Public Class BaseWPO_CARNo_QWFTableControl
             Me.ViewState("Page_Index") = Me.PageIndex
             Me.ViewState("Page_Size") = Me.PageSize
             
+            Me.ViewState("DeletedRecordIds") = Me.DeletedRecordIds
+        
     
             ' Load view state for pagination control.
           
@@ -8179,20 +8959,52 @@ Public Class BaseWPO_CARNo_QWFTableControl
 #Region "Helper Functions"
         
         Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, Nothing, bEncrypt)
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
-    
+      
+      
         Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return EvaluateExpressions(url, arg, Nothing, bEncrypt,includeSession)
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me,includeSession)
         End Function
         
         Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, Nothing, bEncrypt)
+            Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
+            If (needToProcess) Then
+                Dim recCtl As WPO_CARNo_QWFTableControlRow = Me.GetSelectedRecordControl()
+                If recCtl Is Nothing AndAlso url.IndexOf("{") >= 0 Then
+                    ' Localization.
+                    Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
+                End If
+                Dim rec As WPO_CARNo_QWFRecord = Nothing     
+                If recCtl IsNot Nothing Then
+                    rec = recCtl.GetRecord()
+                End If
+                Return EvaluateExpressions(url, arg, rec, bEncrypt)
+            End If
+            Return url
         End Function
         
-        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean,ByVal includeSession As Boolean) As String
-            Return EvaluateExpressions(url, arg, Nothing, bEncrypt, includeSession)
+        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
+            Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
+            If (needToProcess) Then
+                Dim recCtl As WPO_CARNo_QWFTableControlRow = Me.GetSelectedRecordControl()
+                If recCtl Is Nothing AndAlso url.IndexOf("{") >= 0 Then
+                    ' Localization.
+                    Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
+                End If
+                Dim rec As WPO_CARNo_QWFRecord = Nothing     
+                If recCtl IsNot Nothing Then
+                    rec = recCtl.GetRecord()
+                End If
+                If includeSession then
+                    Return EvaluateExpressions(url, arg, rec, bEncrypt)
+                Else
+                    Return EvaluateExpressions(url, arg, rec, bEncrypt,False)
+                End If
+            End If
+            Return url
         End Function
+        
           
         Public Overridable Function GetSelectedRecordControl() As WPO_CARNo_QWFTableControlRow
             Return Nothing
@@ -8217,16 +9029,20 @@ Public Class BaseWPO_CARNo_QWFTableControl
                 If deferDeletion Then
                     If Not recCtl.IsNewRecord Then
                 
-                        ' Localization.
-                        Throw New Exception(Page.GetResourceValue("Err:CannotDelRecs", "ePortalWFApproval"))
+                        Me.AddToDeletedRecordIds(recCtl)
                   
                     End If
                     recCtl.Visible = False
                 
                 Else
                 
-                    ' Localization.
-                    Throw New Exception(Page.GetResourceValue("Err:CannotDelRecs", "ePortalWFApproval"))
+                    recCtl.Delete()
+                    
+                    ' Setting the DataChanged to True results in the page being refreshed with
+                    ' the most recent data from the database.  This happens in PreRender event
+                    ' based on the current sort, search and filter criteria.
+                    Me.DataChanged = True
+                    Me.ResetData = True
                   
                 End If
             Next
@@ -10229,6 +11045,15 @@ Public Class BaseWPO_PRNo_QWFTableControlRow
             ' It is better to make changes to functions called by LoadData such as
             ' CreateWhereClause, rather than making changes here.
     
+            ' The RecordUniqueId is set the first time a record is loaded, and is
+            ' used during a PostBack to load the record.
+          
+            If Me.RecordUniqueId IsNot Nothing AndAlso Me.RecordUniqueId.Trim <> "" Then
+                Me.DataSource = WPO_PRNo_QWFView.GetRecord(Me.RecordUniqueId, True)
+          
+                Return
+            End If
+        
             ' Since this is a row in the table, the data for this row is loaded by the 
             ' LoadData method of the BaseWPO_PRNo_QWFTableControl when the data for the entire
             ' table is loaded.
@@ -10258,6 +11083,12 @@ Public Class BaseWPO_PRNo_QWFTableControlRow
    
             'LoadData for DataSource for chart and report if they exist
           
+            ' Store the checksum. The checksum is used to
+            ' ensure the record was not changed by another user.
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing
+                Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
+            End If
+            
       
       
             ' Call the Set methods for each controls on the panel
@@ -10278,6 +11109,10 @@ Public Class BaseWPO_PRNo_QWFTableControlRow
             
             If Me.DataSource.IsCreated Then
                 Me.IsNewRecord = False
+                
+                If Me.DataSource.GetID IsNot Nothing Then
+                    Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
+                End If
                 
             End If
             
@@ -10315,19 +11150,46 @@ Public Class BaseWPO_PRNo_QWFTableControlRow
                               
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 If Not formattedValue is Nothing Then
+                    Dim popupThreshold as Integer = CType(300, Integer)
                               
-                    Dim maxLength as Integer = Len(formattedValue)                   
+                    Dim maxLength as Integer = Len(formattedValue)
+                    Dim originalLength As Integer = maxLength
                     If (maxLength >= CType(300, Integer)) Then
                         ' Truncate based on FieldMaxLength on Properties.
                         maxLength = CType(300, Integer)
                         'First strip of all html tags:
                         formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)                       
+                                      
+                    End If
+                                
+                    ' For fields values larger than the PopupTheshold on Properties, display a popup.
+                    If originalLength >= popupThreshold Then
+                      
+                        Dim name As String = HttpUtility.HtmlEncode(WPO_PRNo_QWFView.Comment.Name)
+
+                        If Not HttpUtility.HtmlEncode("%ISD_DEFAULT%").Equals("%ISD_DEFAULT%") Then
+                           name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
+                        End If
+
                         
-                    End If                    
-                    If maxLength = CType(300, Integer) Then
-                        formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,Math.Min(maxLength, Len(formattedValue))))
-                        formattedValue = formattedValue & "..."
-                            
+
+                        formattedValue= "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
+                            & "onmouseover='SaveMousePosition(event); delayRolloverPopup(""PageMethods.GetRecordFieldValue(\""ePortalWFApproval.Business.WPO_PRNo_QWFView, App_Code\"",\""" _
+                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\","\\\\") & "\"", \""Comment\"", \""Comment\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
+                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" &  NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
+                      
+                        If (maxLength = CType(300, Integer)) Then
+                            formattedValue = formattedValue & "..." & "</a>"
+                        Else
+                            formattedValue = formattedValue & "</a>"
+                        
+                        End If
+                    Else
+                        If maxLength = CType(300, Integer) Then
+                            formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,MaxLength))
+                            formattedValue = formattedValue & "..."
+                        
+                        End If
                     End If
                 End If  
                 
@@ -10373,9 +11235,20 @@ Public Class BaseWPO_PRNo_QWFTableControlRow
                 				
                 ' If the PONo is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WPO_PRNo_QWFView.PONo)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = ""
+                Dim _isExpandableNonCompositeForeignKey As Boolean = WPO_PRNo_QWFView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WPO_PRNo_QWFView.PONo)
+                If _isExpandableNonCompositeForeignKey AndAlso WPO_PRNo_QWFView.PONo.IsApplyDisplayAs Then
+                                  
+                       formattedValue = WPO_PRNo_QWFView.GetDFKA(Me.DataSource.PONo.ToString(),WPO_PRNo_QWFView.PONo, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WPO_PRNo_QWFView.PONo)
+                       End If
+                Else
+                       formattedValue = Me.DataSource.PONo.ToString()
+                End If
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.PONo.Text = formattedValue
                 
@@ -10725,6 +11598,13 @@ Public Class BaseWPO_PRNo_QWFTableControlRow
             ' that fields that are not displayed are also properly initialized.
             Me.LoadData()
         
+            ' The checksum is used to ensure the record was not changed by another user.
+            If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
+                If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
+                    Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "ePortalWFApproval"))
+                End If
+            End If
+        
               
             ' 2. Perform any custom validation.
             Me.Validate()
@@ -10756,6 +11636,7 @@ Public Class BaseWPO_PRNo_QWFTableControlRow
             Me.DataChanged = True
             Me.ResetData = True
             
+            Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
           
         End Sub
@@ -10850,6 +11731,15 @@ Public Class BaseWPO_PRNo_QWFTableControlRow
 
         Public Overridable Sub Delete()
         
+            If Me.IsNewRecord() Then
+                Return
+            End If
+
+            Dim pkValue As KeyValue = KeyValue.XmlToKey(Me.RecordUniqueId)
+          WPO_PRNo_QWFView.DeleteRecord(pkValue)
+          
+            DirectCast(GetParentControlObject(Me, "WPO_PRNo_QWFTableControl"), WPO_PRNo_QWFTableControl).DataChanged = True
+            DirectCast(GetParentControlObject(Me, "WPO_PRNo_QWFTableControl"), WPO_PRNo_QWFTableControl).ResetData = True
         End Sub
 
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
@@ -10988,6 +11878,15 @@ Public Class BaseWPO_PRNo_QWFTableControlRow
             End Set
         End Property   
 
+        
+        Public Property RecordUniqueId() As String
+            Get
+                Return CType(Me.ViewState("BaseWPO_PRNo_QWFTableControlRow_Rec"), String)
+            End Get
+            Set(ByVal value As String)
+                Me.ViewState("BaseWPO_PRNo_QWFTableControlRow_Rec") = value
+            End Set
+        End Property
             
         Public Property DataSource() As WPO_PRNo_QWFRecord
             Get
@@ -11152,6 +12051,12 @@ Public Class BaseWPO_PRNo_QWFTableControlRow
         Public Overridable Function GetRecord() As WPO_PRNo_QWFRecord
             If Not Me.DataSource Is Nothing Then
                 Return Me.DataSource
+            End If
+            
+            If Not Me.RecordUniqueId Is Nothing Then
+                
+                Return WPO_PRNo_QWFView.GetRecord(Me.RecordUniqueId, True)
+                
             End If
             
             ' Localization.
@@ -11419,7 +12324,10 @@ Public Class BaseWPO_PRNo_QWFTableControl
             End If
             
             'LoadData for DataSource for chart and report if they exist
-               
+          
+          ' Improve performance by prefetching display as records.
+          Me.PreFetchForeignKeyValues()
+             
             ' Setup the pagination controls.
             BindPaginationControls()
 
@@ -11445,6 +12353,8 @@ Public Class BaseWPO_PRNo_QWFTableControl
               recControl.PreviousUIData = Me.UIData(index)
             End If
             recControl.DataBind()
+          
+            recControl.Visible = Not Me.InDeletedRecordIds(recControl)
           
             index += 1
           Next
@@ -11479,6 +12389,15 @@ Public Class BaseWPO_PRNo_QWFTableControl
     End Sub
 
     
+          Public Sub PreFetchForeignKeyValues()
+          If (IsNothing(Me.DataSource))
+            Return
+          End If
+          
+            Me.Page.PregetDfkaRecords(WPO_PRNo_QWFView.PONo, Me.DataSource)
+          
+          End Sub
+        
       
         Public Overridable Sub RegisterPostback()
         
@@ -11603,8 +12522,13 @@ Public Class BaseWPO_PRNo_QWFTableControl
             Dim recCtl As WPO_PRNo_QWFTableControlRow
             For Each recCtl In Me.GetRecordControls()
         
-                If recCtl.Visible Then
-                    recCtl.SaveData()
+                If Me.InDeletedRecordIds(recCtl) Then
+                    ' Delete any pending deletes. 
+                    recCtl.Delete()
+                Else
+                    If recCtl.Visible Then
+                        recCtl.SaveData()
+                    End If
                 End If
           
             Next
@@ -11623,6 +12547,9 @@ Public Class BaseWPO_PRNo_QWFTableControl
                 recCtl.IsNewRecord = False
             Next
     
+      
+            ' Set DeletedRecordsIds to Nothing since we have deleted all pending deletes.
+            Me.DeletedRecordIds = Nothing
       
         End Sub
 
@@ -11924,6 +12851,36 @@ Public Class BaseWPO_PRNo_QWFTableControl
         End Sub
 
         
+        Public Sub AddToDeletedRecordIds(ByVal rec As WPO_PRNo_QWFTableControlRow)
+            If rec.IsNewRecord() Then
+                Return
+            End If
+
+            If Not Me.DeletedRecordIds Is Nothing AndAlso Me.DeletedRecordIds.Trim <> "" Then
+                Me.DeletedRecordIds &= ","
+            End If
+
+            Me.DeletedRecordIds &= "[" & rec.RecordUniqueId & "]"
+        End Sub
+
+        Protected Overridable Function InDeletedRecordIds(ByVal rec As WPO_PRNo_QWFTableControlRow) As Boolean
+            If Me.DeletedRecordIds Is Nothing OrElse Me.DeletedRecordIds.Trim = "" Then
+                Return False
+            End If
+
+            Return Me.DeletedRecordIds.IndexOf("[" & rec.RecordUniqueId & "]") >= 0
+        End Function
+
+        Private _DeletedRecordIds As String
+        Public Property DeletedRecordIds() As String
+            Get
+                Return Me._DeletedRecordIds
+            End Get
+            Set(ByVal value As String)
+                Me._DeletedRecordIds = value
+            End Set
+        End Property
+        
       
         ' Create Set, WhereClause, and Populate Methods
         
@@ -12027,6 +12984,8 @@ Public Class BaseWPO_PRNo_QWFTableControl
             Me.SaveToSession(Me, "Page_Index", Me.PageIndex.ToString())
             Me.SaveToSession(Me, "Page_Size", Me.PageSize.ToString())
         
+            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)  
+        
         End Sub
         
         Protected  Sub SaveControlsToSession_Ajax()
@@ -12050,6 +13009,8 @@ Public Class BaseWPO_PRNo_QWFTableControl
     Me.RemoveFromSession(Me, "Page_Index")
     Me.RemoveFromSession(Me, "Page_Size")
     
+            Me.RemoveFromSession(Me, "DeletedRecordIds")  
+            
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
@@ -12099,6 +13060,8 @@ Public Class BaseWPO_PRNo_QWFTableControl
     
             ' Load view state for pagination control.
         
+            Me.DeletedRecordIds = CType(Me.ViewState("DeletedRecordIds"), String)
+        
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
@@ -12110,6 +13073,8 @@ Public Class BaseWPO_PRNo_QWFTableControl
             Me.ViewState("Page_Index") = Me.PageIndex
             Me.ViewState("Page_Size") = Me.PageSize
             
+            Me.ViewState("DeletedRecordIds") = Me.DeletedRecordIds
+        
     
             ' Load view state for pagination control.
           
@@ -12241,20 +13206,52 @@ Public Class BaseWPO_PRNo_QWFTableControl
 #Region "Helper Functions"
         
         Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, Nothing, bEncrypt)
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
-    
+      
+      
         Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return EvaluateExpressions(url, arg, Nothing, bEncrypt,includeSession)
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me,includeSession)
         End Function
         
         Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, Nothing, bEncrypt)
+            Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
+            If (needToProcess) Then
+                Dim recCtl As WPO_PRNo_QWFTableControlRow = Me.GetSelectedRecordControl()
+                If recCtl Is Nothing AndAlso url.IndexOf("{") >= 0 Then
+                    ' Localization.
+                    Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
+                End If
+                Dim rec As WPO_PRNo_QWFRecord = Nothing     
+                If recCtl IsNot Nothing Then
+                    rec = recCtl.GetRecord()
+                End If
+                Return EvaluateExpressions(url, arg, rec, bEncrypt)
+            End If
+            Return url
         End Function
         
-        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean,ByVal includeSession As Boolean) As String
-            Return EvaluateExpressions(url, arg, Nothing, bEncrypt, includeSession)
+        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
+            Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
+            If (needToProcess) Then
+                Dim recCtl As WPO_PRNo_QWFTableControlRow = Me.GetSelectedRecordControl()
+                If recCtl Is Nothing AndAlso url.IndexOf("{") >= 0 Then
+                    ' Localization.
+                    Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
+                End If
+                Dim rec As WPO_PRNo_QWFRecord = Nothing     
+                If recCtl IsNot Nothing Then
+                    rec = recCtl.GetRecord()
+                End If
+                If includeSession then
+                    Return EvaluateExpressions(url, arg, rec, bEncrypt)
+                Else
+                    Return EvaluateExpressions(url, arg, rec, bEncrypt,False)
+                End If
+            End If
+            Return url
         End Function
+        
           
         Public Overridable Function GetSelectedRecordControl() As WPO_PRNo_QWFTableControlRow
             Return Nothing
@@ -12279,16 +13276,20 @@ Public Class BaseWPO_PRNo_QWFTableControl
                 If deferDeletion Then
                     If Not recCtl.IsNewRecord Then
                 
-                        ' Localization.
-                        Throw New Exception(Page.GetResourceValue("Err:CannotDelRecs", "ePortalWFApproval"))
+                        Me.AddToDeletedRecordIds(recCtl)
                   
                     End If
                     recCtl.Visible = False
                 
                 Else
                 
-                    ' Localization.
-                    Throw New Exception(Page.GetResourceValue("Err:CannotDelRecs", "ePortalWFApproval"))
+                    recCtl.Delete()
+                    
+                    ' Setting the DataChanged to True results in the page being refreshed with
+                    ' the most recent data from the database.  This happens in PreRender event
+                    ' based on the current sort, search and filter criteria.
+                    Me.DataChanged = True
+                    Me.ResetData = True
                   
                 End If
             Next

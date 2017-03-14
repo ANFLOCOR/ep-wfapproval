@@ -4351,6 +4351,8 @@ Public Class BaseSel_Approver_Pending_TasksTableControl
                         
               AddHandler Me.SouthRedirectorButtonPODoc.Button.Click, AddressOf SouthRedirectorButtonPODoc_Click
                         
+              AddHandler Me.SouthRedirectorButtonReCAR.Button.Click, AddressOf SouthRedirectorButtonReCAR_Click
+                        
               AddHandler Me.SouthRedirectorButtonRePO.Button.Click, AddressOf SouthRedirectorButtonRePO_Click
                                 
         
@@ -4600,11 +4602,14 @@ Public Class BaseSel_Approver_Pending_TasksTableControl
                 
                 
                 
+                
                 SetSel_Approver_Pending_TasksRefreshButton()
               
                 SetSouthRedirectorButtonCARDoc()
               
                 SetSouthRedirectorButtonPODoc()
+              
+                SetSouthRedirectorButtonReCAR()
               
                 SetSouthRedirectorButtonRePO()
               
@@ -5359,6 +5364,11 @@ Public Class BaseSel_Approver_Pending_TasksTableControl
    
         End Sub
             
+        Public Overridable Sub SetSouthRedirectorButtonReCAR()                
+              
+   
+        End Sub
+            
         Public Overridable Sub SetSouthRedirectorButtonRePO()                
               
    
@@ -5564,6 +5574,51 @@ Public Class BaseSel_Approver_Pending_TasksTableControl
             ' redirected to the URL.
             
               
+                  Dim url As String = "../sel_WPO_Activity_WPOP10100/Show-Sel-WPO-Activity-WPOP10100-Table.aspx"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
+            Catch ex As Exception
+            
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+                DbUtils.EndTransaction
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
+        End Sub
+        
+        ' event handler for Button
+        Public Overridable Sub SouthRedirectorButtonReCAR_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
                   Dim url As String = "../WCAR_Activity/Show-WCAR-Activity-Table.aspx"
                   
                   If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
@@ -5602,19 +5657,46 @@ Public Class BaseSel_Approver_Pending_TasksTableControl
         ' event handler for Button
         Public Overridable Sub SouthRedirectorButtonRePO_Click(ByVal sender As Object, ByVal args As EventArgs)
               
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
+                  Dim url As String = "../selWFReassign/Show-SelWFReassign-Table.aspx"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
     Try
     
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
             
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
                 Me.Page.ErrorOnPage = True
     
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
     
             Finally
-    
+                DbUtils.EndTransaction
             End Try
-    
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
         End Sub
         
       
@@ -5788,6 +5870,12 @@ Public Class BaseSel_Approver_Pending_TasksTableControl
         Public ReadOnly Property SouthRedirectorButtonPODoc() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SouthRedirectorButtonPODoc"), ePortalWFApproval.UI.IThemeButton)
+          End Get
+          End Property
+        
+        Public ReadOnly Property SouthRedirectorButtonReCAR() As ePortalWFApproval.UI.IThemeButton
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SouthRedirectorButtonReCAR"), ePortalWFApproval.UI.IThemeButton)
           End Get
           End Property
         
