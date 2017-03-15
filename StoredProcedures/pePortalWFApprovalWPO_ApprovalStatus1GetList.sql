@@ -1,4 +1,4 @@
-﻿if exists (select * from sysobjects where id = object_id(N'pePortalWFApprovalSel_WPO_WFTask1GetList') and sysstat & 0xf = 4) drop procedure pePortalWFApprovalSel_WPO_WFTask1GetList 
+﻿if exists (select * from sysobjects where id = object_id(N'pePortalWFApprovalWPO_ApprovalStatus1GetList') and sysstat & 0xf = 4) drop procedure pePortalWFApprovalWPO_ApprovalStatus1GetList 
 GO
 
 SET ANSI_NULLS ON
@@ -6,7 +6,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
--- Returns a query resultset from table [dbo].[sel_WPO_WFTask]
+-- Returns a query resultset from table [dbo].[WPO_ApprovalStatus]
 -- given the search criteria and sorting condition.
 -- It will return a subset of the data based
 -- on the current page number and batch size.  Table joins can
@@ -18,7 +18,7 @@ GO
 -- If nothing matches the search condition, it will return:
 --    1) count is 0 ;
 --    2) empty resultset.
-CREATE PROCEDURE pePortalWFApprovalSel_WPO_WFTask1GetList
+CREATE PROCEDURE pePortalWFApprovalWPO_ApprovalStatus1GetList
         @p_join_str nvarchar(max),
         @p_where_str nvarchar(max),
         @p_sort_str nvarchar(max),
@@ -48,7 +48,7 @@ BEGIN
     SET NOCOUNT ON
 
     -- Set up the from string as the base table
-    SET @l_from_str = '[dbo].[sel_WPO_WFTask] sel_WPO_WFTask_'
+    SET @l_from_str = '[dbo].[WPO_ApprovalStatus] WPO_ApprovalStatus_'
 
     -- Set up the join string
     SET @l_join_str = @p_join_str
@@ -79,7 +79,7 @@ BEGIN
         IF @p_sort_str IS NOT NULL
             SET @l_sort_str = 'ORDER BY ' + @p_sort_str
         ELSE
-            SET @l_sort_str = N'ORDER BY sel_WPO_WFTask_.[PONUMBER],sel_WPO_WFTask_.[CompanyID] asc '
+            SET @l_sort_str = N'ORDER BY WPO_ApprovalStatus_.[WPO_STAT_CD] asc '
 
         -- Calculate the rows to be included in the list
         SET @l_end_gen_row_num = @p_page_number * @p_batch_size;
@@ -89,20 +89,20 @@ BEGIN
         SET @l_temp_table = 'DECLARE @IS_TEMP_T_GETLIST TABLE
         (
         IS_ROWNUM_COL int identity(1,1),
-                [PONUMBER] char(17) COLLATE Latin1_General_BIN,    [CompanyID] int
+                [WPO_STAT_CD] int
         ); '
 
         -- Copy column data into table variable
         SET @l_temp_insert = 
             'INSERT INTO @IS_TEMP_T_GETLIST ('
         SET @l_temp_cols = 
-            N'[PONUMBER],[CompanyID]'
+            N'[WPO_STAT_CD]'
         SET @l_temp_select = 
             ') ' + 
             'SELECT ' + 
             'TOP ' + convert(varchar, @l_end_gen_row_num) + ' '
         SET @l_temp_colsWithAlias = 
-            N'sel_WPO_WFTask_.[PONUMBER],sel_WPO_WFTask_.[CompanyID]'
+            N'WPO_ApprovalStatus_.[WPO_STAT_CD]'
         SET @l_temp_from = 
             ' FROM ' + @l_from_str + ' ' + @l_join_str + ' ' + 
             @l_where_str + ' ' + 
@@ -111,32 +111,18 @@ BEGIN
         -- Construct the main query
         SET @l_query_select = 'SELECT '
         SET @l_query_cols = 
-            N'sel_WPO_WFTask_.[PONUMBER],
-            sel_WPO_WFTask_.[POSTATUS],
-            sel_WPO_WFTask_.[DOCDATE],
-            sel_WPO_WFTask_.[TOTAL],
-            sel_WPO_WFTask_.[VENDORID],
-            sel_WPO_WFTask_.[VENDNAME],
-            sel_WPO_WFTask_.[BUYERID],
-            sel_WPO_WFTask_.[Workflow_Approval_Status],
-            sel_WPO_WFTask_.[CompanyID],
-            sel_WPO_WFTask_.[COMMENTS],
-            sel_WPO_WFTask_.[SUBTOTAL],
-            sel_WPO_WFTask_.[TRDISAMT],
-            sel_WPO_WFTask_.[FRTAMNT],
-            sel_WPO_WFTask_.[MSCCHAMT],
-            sel_WPO_WFTask_.[TAXAMNT],
-            sel_WPO_WFTask_.[isINC],
-            CAST(BINARY_CHECKSUM(sel_WPO_WFTask_.[PONUMBER],sel_WPO_WFTask_.[POSTATUS],sel_WPO_WFTask_.[DOCDATE],sel_WPO_WFTask_.[TOTAL],sel_WPO_WFTask_.[VENDORID],sel_WPO_WFTask_.[VENDNAME],sel_WPO_WFTask_.[BUYERID],sel_WPO_WFTask_.[Workflow_Approval_Status],sel_WPO_WFTask_.[CompanyID],sel_WPO_WFTask_.[COMMENTS],sel_WPO_WFTask_.[SUBTOTAL],sel_WPO_WFTask_.[TRDISAMT],sel_WPO_WFTask_.[FRTAMNT],sel_WPO_WFTask_.[MSCCHAMT],sel_WPO_WFTask_.[TAXAMNT],sel_WPO_WFTask_.[isINC]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
+            N'WPO_ApprovalStatus_.[WPO_STAT_CD],
+            WPO_ApprovalStatus_.[WPO_STAT_DESC],
+            CAST(BINARY_CHECKSUM(WPO_ApprovalStatus_.[WPO_STAT_CD],WPO_ApprovalStatus_.[WPO_STAT_DESC]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
         SET @l_query_from = 
             ' FROM ( ' +
-                N'SELECT TOP 100 PERCENT IS_ROWNUM_COL, [PONUMBER],[CompanyID] from @IS_TEMP_T_GETLIST ' +
+                N'SELECT TOP 100 PERCENT IS_ROWNUM_COL, [WPO_STAT_CD] from @IS_TEMP_T_GETLIST ' +
                 'WHERE IS_ROWNUM_COL >= '+ convert(varchar, @l_start_gen_row_num) + 
                 ') IS_ALIAS LEFT JOIN ' +
                 @l_from_str + ' ';
 
         SET @l_query_where = 
-            N'ON sel_WPO_WFTask_.[PONUMBER] = IS_ALIAS.[PONUMBER] AND sel_WPO_WFTask_.[CompanyID] = IS_ALIAS.[CompanyID] ' 
+            N'ON WPO_ApprovalStatus_.[WPO_STAT_CD] = IS_ALIAS.[WPO_STAT_CD] ' 
 
         SET @l_final_sort = 'ORDER BY IS_ROWNUM_COL Asc '
 
@@ -149,25 +135,11 @@ BEGIN
         -- If page number and batch size are not valid numbers return an empty result set
         SET @l_query_select = 'SELECT '
         SET @l_query_cols = 
-            N'sel_WPO_WFTask_.[PONUMBER],
-            sel_WPO_WFTask_.[POSTATUS],
-            sel_WPO_WFTask_.[DOCDATE],
-            sel_WPO_WFTask_.[TOTAL],
-            sel_WPO_WFTask_.[VENDORID],
-            sel_WPO_WFTask_.[VENDNAME],
-            sel_WPO_WFTask_.[BUYERID],
-            sel_WPO_WFTask_.[Workflow_Approval_Status],
-            sel_WPO_WFTask_.[CompanyID],
-            sel_WPO_WFTask_.[COMMENTS],
-            sel_WPO_WFTask_.[SUBTOTAL],
-            sel_WPO_WFTask_.[TRDISAMT],
-            sel_WPO_WFTask_.[FRTAMNT],
-            sel_WPO_WFTask_.[MSCCHAMT],
-            sel_WPO_WFTask_.[TAXAMNT],
-            sel_WPO_WFTask_.[isINC],
-            CAST(BINARY_CHECKSUM(sel_WPO_WFTask_.[PONUMBER],sel_WPO_WFTask_.[POSTATUS],sel_WPO_WFTask_.[DOCDATE],sel_WPO_WFTask_.[TOTAL],sel_WPO_WFTask_.[VENDORID],sel_WPO_WFTask_.[VENDNAME],sel_WPO_WFTask_.[BUYERID],sel_WPO_WFTask_.[Workflow_Approval_Status],sel_WPO_WFTask_.[CompanyID],sel_WPO_WFTask_.[COMMENTS],sel_WPO_WFTask_.[SUBTOTAL],sel_WPO_WFTask_.[TRDISAMT],sel_WPO_WFTask_.[FRTAMNT],sel_WPO_WFTask_.[MSCCHAMT],sel_WPO_WFTask_.[TAXAMNT],sel_WPO_WFTask_.[isINC]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
+            N'WPO_ApprovalStatus_.[WPO_STAT_CD],
+            WPO_ApprovalStatus_.[WPO_STAT_DESC],
+            CAST(BINARY_CHECKSUM(WPO_ApprovalStatus_.[WPO_STAT_CD],WPO_ApprovalStatus_.[WPO_STAT_DESC]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
         SET @l_query_from = 
-            ' FROM [dbo].[sel_WPO_WFTask] sel_WPO_WFTask_ ' + 
+            ' FROM [dbo].[WPO_ApprovalStatus] WPO_ApprovalStatus_ ' + 
             'WHERE 1=2;'
         EXECUTE (@l_query_select + @l_query_cols + @l_query_from);
     END

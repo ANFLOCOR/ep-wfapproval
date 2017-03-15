@@ -1306,7 +1306,7 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>../Images/btn-open-over.gif</Value>
+          <Value>../Images/icon-open-over.png</Value>
         </Attribute>
         <Attribute>
           <Name>RedirectURL</Name>

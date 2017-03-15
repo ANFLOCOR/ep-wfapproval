@@ -1,4 +1,4 @@
-﻿if exists (select * from sysobjects where id = object_id(N'pePortalWFApprovalSel_WPO_WFTask1GetStats') and sysstat & 0xf = 4) drop procedure pePortalWFApprovalSel_WPO_WFTask1GetStats 
+﻿if exists (select * from sysobjects where id = object_id(N'pePortalWFApprovalWPO_ApprovalStatus1GetStats') and sysstat & 0xf = 4) drop procedure pePortalWFApprovalWPO_ApprovalStatus1GetStats 
 GO
 
 SET ANSI_NULLS ON
@@ -10,7 +10,7 @@ GO
 -- and returns the result back giving the current 
 -- page number and batch size.  SQL functions can include 
 -- sum, avg, max, etc
-CREATE PROCEDURE pePortalWFApprovalSel_WPO_WFTask1GetStats
+CREATE PROCEDURE pePortalWFApprovalWPO_ApprovalStatus1GetStats
         @p_select_str nvarchar(max),
         @p_join_str nvarchar(max),
         @p_where_str nvarchar(max),
@@ -60,7 +60,7 @@ CREATE PROCEDURE pePortalWFApprovalSel_WPO_WFTask1GetStats
         SET @l_temp_col_name = REPLACE(REPLACE(@l_select_str, '[', ''), ']', '')
 
         -- Run a query to get the select column type
-        SET @l_temp_col_type_query = N'SELECT @data_type_out = DATA_TYPE, @precision_out = NUMERIC_PRECISION, @scale_out = NUMERIC_SCALE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME=''sel_WPO_WFTask'' and COLUMN_NAME = ' + '''' + @l_temp_col_name + ''''
+        SET @l_temp_col_type_query = N'SELECT @data_type_out = DATA_TYPE, @precision_out = NUMERIC_PRECISION, @scale_out = NUMERIC_SCALE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME=''WPO_ApprovalStatus'' and COLUMN_NAME = ' + '''' + @l_temp_col_name + ''''
         SET @l_temp_col_type_query_params = N'@data_type_out varchar(20) OUTPUT, @precision_out varchar(10) OUTPUT, @scale_out varchar(10) OUTPUT'
         EXECUTE sp_executesql
         @l_temp_col_type_query,
@@ -73,7 +73,7 @@ CREATE PROCEDURE pePortalWFApprovalSel_WPO_WFTask1GetStats
             SET @l_temp_col_type = @l_temp_col_type + '(' + @l_temp_col_precision + ',' + @l_temp_col_scale + ')'
 
         -- Set up the from string.
-        SET @l_from_str = '[dbo].[sel_WPO_WFTask] sel_WPO_WFTask_'
+        SET @l_from_str = '[dbo].[WPO_ApprovalStatus] WPO_ApprovalStatus_'
 
         -- Set up the join string.
         SET @l_join_str = @p_join_str
@@ -92,7 +92,7 @@ CREATE PROCEDURE pePortalWFApprovalSel_WPO_WFTask1GetStats
             IF @p_sort_str IS NOT NULL
                 SET @l_sort_str = 'ORDER BY ' + @p_sort_str;
             ELSE
-                SET @l_sort_str = N'ORDER BY sel_WPO_WFTask_.[PONUMBER],sel_WPO_WFTask_.[CompanyID] asc '
+                SET @l_sort_str = N'ORDER BY WPO_ApprovalStatus_.[WPO_STAT_CD] asc '
 
             -- Calculate the rows to be included in the list
             SET @l_end_gen_row_num = @p_page_number * @p_batch_size
@@ -122,7 +122,7 @@ CREATE PROCEDURE pePortalWFApprovalSel_WPO_WFTask1GetStats
                 'FROM @IS_TEMP_FROM ' +
                 'WHERE IS_ROWNUM_COL >= ' + convert(varchar, @l_start_gen_row_num) +
                 ' AND IS_ROWNUM_COL <= ' + convert(varchar, @l_end_gen_row_num) +
-                ') ' + 'sel_WPO_WFTask_'
+                ') ' + 'WPO_ApprovalStatus_'
 
             -- Run the query and get the result for the current page
             EXECUTE (@l_create_temp + '     ' + @l_insert_to_temp + '     ' + @l_query + ' ');
@@ -132,7 +132,7 @@ CREATE PROCEDURE pePortalWFApprovalSel_WPO_WFTask1GetStats
         -- Return empty result if page number or batch size has invalid number
         BEGIN
             SET @l_query = 
-                'SELECT count(*) from ' + '[dbo].[sel_WPO_WFTask] sel_WPO_WFTask_ ' +
+                'SELECT count(*) from ' + '[dbo].[WPO_ApprovalStatus] WPO_ApprovalStatus_ ' +
                 'WHERE 1=2;'
             EXECUTE (@l_query)
         END

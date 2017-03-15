@@ -1,5 +1,5 @@
 ﻿' This class is "generated" and will be overwritten.
-' Your customizations should be made in Sel_WPO_WFTask1SqlView.vb 
+' Your customizations should be made in WPO_ApprovalStatus1SqlTable.vb 
 
 Imports BaseClasses.Data
 Imports BaseClasses
@@ -9,16 +9,16 @@ Imports BaseClasses.Data.SqlProvider
 Namespace ePortalWFApproval.Data
 
 ''' <summary>
-''' The generated superclass for the <see cref="Sel_WPO_WFTask1SqlView"></see> class.
+''' The generated superclass for the <see cref="WPO_ApprovalStatus1SqlTable"></see> class.
 ''' </summary>
 ''' <remarks>
 ''' This class is not intended to be instantiated directly.  To obtain an instance of this class, 
-''' use the methods of the <see cref="Sel_WPO_WFTask1View"></see> class.
+''' use the methods of the <see cref="WPO_ApprovalStatus1Table"></see> class.
 ''' </remarks>
-''' <seealso cref="Sel_WPO_WFTask1View"></seealso>
-''' <seealso cref="Sel_WPO_WFTask1SqlView"></seealso>
+''' <seealso cref="WPO_ApprovalStatus1Table"></seealso>
+''' <seealso cref="WPO_ApprovalStatus1SqlTable"></seealso>
 
-Public Class BaseSel_WPO_WFTask1SqlView
+Public Class BaseWPO_ApprovalStatus1SqlTable
 	Inherits StoredProceduresSQLServerAdapter
 	
 	Public Sub New()

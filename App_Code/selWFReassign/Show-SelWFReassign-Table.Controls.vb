@@ -2061,125 +2061,125 @@ Public Class BaseSelWFReassignTableControl
                 SetLiteral()
                 SetLiteral1()
                 SetLiteral2()
-            SetLiteral3()
-
-
-
-
-
-
-            SetTOTALLabel()
-            SetTOTALLabel1()
-
-
-
-            SetWPO_Date_AssignLabel()
-            SetWPO_PONumLabel()
-            SetWPO_RemarkLabel()
-            SetWPO_StatusLabel()
-            SetWPO_W_U_IDFilter()
-            SetWPO_W_U_IDLabel()
-            SetWPO_W_U_IDLabel1()
-            SetWPO_WDT_IDLabel()
-            SetWPO_WS_IDLabel()
-            SetExcelButton()
-
-            SetPDFButton()
-
-            SetWordButton()
-
-            SetbtnAssignTo()
-
-            SetActionsButton()
-
-            SetSelWFReassignFilterButton()
-
+                SetLiteral3()
+                
+                
+                
+                
+                
+                
+                SetTOTALLabel()
+                SetTOTALLabel1()
+                
+                
+                
+                SetWPO_Date_AssignLabel()
+                SetWPO_PONumLabel()
+                SetWPO_RemarkLabel()
+                SetWPO_StatusLabel()
+                SetWPO_W_U_IDFilter()
+                SetWPO_W_U_IDLabel()
+                SetWPO_W_U_IDLabel1()
+                SetWPO_WDT_IDLabel()
+                SetWPO_WS_IDLabel()
+                SetExcelButton()
+              
+                SetPDFButton()
+              
+                SetWordButton()
+              
+                SetbtnAssignTo()
+              
+                SetActionsButton()
+              
+                SetSelWFReassignFilterButton()
+              
             ' setting the state of expand or collapse alternative rows
-
-            Dim expandFirstRow As Boolean = False
-
+      
+            Dim expandFirstRow As Boolean= False   
+        
             Dim recControls() As SelWFReassignTableControlRow = Me.GetRecordControls()
-            For i As Integer = 0 To recControls.Length - 1
+            For i As Integer = 0 to recControls.Length - 1
                 Dim altRow As System.Web.UI.Control = DirectCast(MiscUtils.FindControlRecursively(recControls(i), "SelWFReassignTableControlAltRow"), System.Web.UI.Control)
                 If (altRow IsNot Nothing) Then
-                    If (expandFirstRow AndAlso i = 0) Then
+                    If (expandFirstRow AndAlso i = 0) Then                
                         altRow.Visible = True
-
-                        recControls(i).SelWFReassignRowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow.gif"
-                        recControls(i).SelWFReassignRowExpandCollapseRowButton.Attributes.Add("onmouseover", "")
-                        recControls(i).SelWFReassignRowExpandCollapseRowButton.Attributes.Add("onmouseout", "")
-
-                    Else
+                   
+                         recControls(i).SelWFReassignRowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow.gif"
+                         recControls(i).SelWFReassignRowExpandCollapseRowButton.Attributes.Add("onmouseover", "")
+                         recControls(i).SelWFReassignRowExpandCollapseRowButton.Attributes.Add("onmouseout", "")
+                   
+                    Else                
                         altRow.Visible = False
-
-                        recControls(i).SelWFReassignRowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow2.gif"
-                        recControls(i).SelWFReassignRowExpandCollapseRowButton.Attributes.Add("onmouseover", "")
-                        recControls(i).SelWFReassignRowExpandCollapseRowButton.Attributes.Add("onmouseout", "")
-
+                   
+                         recControls(i).SelWFReassignRowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow2.gif"
+                         recControls(i).SelWFReassignRowExpandCollapseRowButton.Attributes.Add("onmouseover", "")
+                         recControls(i).SelWFReassignRowExpandCollapseRowButton.Attributes.Add("onmouseout", "")
+                   
                     End If
                 End If
             Next
-
-
+      
+    
             ' Load data for each record and table UI control.
             ' Ordering is important because child controls get 
             ' their parent ids from their parent UI controls.
-
-
+                
+      
             ' this method calls the set method for controls with special formula like running total, sum, rank, etc
             SetFormulaControls()
-
-
-
-        End Sub
-
+            
+                    
+            
+      End Sub
+      
         Public Overridable Sub SetFormulaControls()
             ' this method calls Set methods for the control that has special formula
+        
+        
 
+    End Sub
 
-
-        End Sub
-
-
-        Public Sub PreFetchForeignKeyValues()
-            If (IsNothing(Me.DataSource)) Then
-                Return
-            End If
-
+    
+          Public Sub PreFetchForeignKeyValues()
+          If (IsNothing(Me.DataSource))
+            Return
+          End If
+          
             Me.Page.PregetDfkaRecords(SelWFReassignView.coID, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(SelWFReassignView.WPO_Status, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(SelWFReassignView.WPO_W_U_ID, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(SelWFReassignView.WPO_WDT_ID, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(SelWFReassignView.WPO_WS_ID, Me.DataSource)
-
-        End Sub
-
-
+          
+          End Sub
+        
+      
         Public Overridable Sub RegisterPostback()
-
-            Me.Page.RegisterPostBackTrigger(MiscUtils.FindControlRecursively(Me, "ExcelButton"))
-
-            Me.Page.RegisterPostBackTrigger(MiscUtils.FindControlRecursively(Me, "PDFButton"))
-
-            Me.Page.RegisterPostBackTrigger(MiscUtils.FindControlRecursively(Me, "WordButton"))
-
-
+        
+              Me.Page.RegisterPostBackTrigger(MiscUtils.FindControlRecursively(Me,"ExcelButton"))
+                        
+              Me.Page.RegisterPostBackTrigger(MiscUtils.FindControlRecursively(Me,"PDFButton"))
+                        
+              Me.Page.RegisterPostBackTrigger(MiscUtils.FindControlRecursively(Me,"WordButton"))
+                        
+        
         End Sub
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean, ByVal e As FormulaEvaluator) As String
-            If e Is Nothing Then
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean, ByVal e as FormulaEvaluator) As String
+            If e Is Nothing
                 e = New FormulaEvaluator()
             End If
-
+            
             e.Variables.Clear()
-
-
+            
+            
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -2187,11 +2187,11 @@ Public Class BaseSelWFReassignTableControl
                     e.Variables.Add(enumerator.Current.Key, enumerator.Current.Value)
                 End While
             End If
-
-            If includeDS Then
-
+            
+            If includeDS
+                
             End If
-
+            
             ' All variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -2205,28 +2205,28 @@ Public Class BaseSelWFReassignTableControl
             If resultObj Is Nothing Then
                 Return ""
             End If
-
+            
             If Not String.IsNullOrEmpty(format) AndAlso (String.IsNullOrEmpty(formula) OrElse formula.IndexOf("Format(") < 0) Then
                 Return FormulaUtils.Format(resultObj, format)
             Else
                 Return resultObj.ToString()
             End If
-        End Function
+        End Function			
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
-        End Function
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
+        End Function        
 
-
+        
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
-        End Function
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
+        End Function        
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -2234,7 +2234,7 @@ Public Class BaseSelWFReassignTableControl
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -2247,42 +2247,42 @@ Public Class BaseSelWFReassignTableControl
 
         Public Overridable Sub ResetControl()
 
-
+            
             Me.WPO_W_U_IDFilter.ClearSelection()
-
+            
             Me.ddlAssignTo.ClearSelection()
-
+            
             Me.TOTALFromFilter.Text = ""
-
+            
             Me.TOTALToFilter.Text = ""
-
+            
             Me.CurrentSortOrder.Reset()
             If (Me.InSession(Me, "Order_By")) Then
                 Me.CurrentSortOrder = OrderBy.FromXmlString(Me.GetFromSession(Me, "Order_By", Nothing))
-
+            
             Else
                 Me.CurrentSortOrder = New OrderBy(True, False)
-
+            
                 Me.CurrentSortOrder.Add(SelWFReassignView.WPO_Date_Assign, OrderByItem.OrderDir.Desc)
-
+              
                 Me.CurrentSortOrder.Add(SelWFReassignView.WPO_PONum, OrderByItem.OrderDir.Desc)
-
+                  
             End If
-
+                
             Me.PageIndex = 0
         End Sub
 
         Public Overridable Sub ResetPageControl()
             Me.PageIndex = 0
         End Sub
-
+        
         Protected Overridable Sub BindPaginationControls()
             ' Setup the pagination controls.
 
             ' Bind the pagination labels.
-
-            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then
-
+        
+            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then                      
+                    
                 Me.SelWFReassignPagination.CurrentPage.Text = (Me.PageIndex + 1).ToString()
             Else
                 Me.SelWFReassignPagination.CurrentPage.Text = "0"
@@ -2292,39 +2292,39 @@ Public Class BaseSelWFReassignTableControl
             Me.SelWFReassignPagination.TotalPages.Text = Me.TotalPages.ToString()
 
             ' Bind the buttons for SelWFReassignTableControl pagination.
-
+        
             Me.SelWFReassignPagination.FirstPage.Enabled = Not (Me.PageIndex = 0)
             If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
                 Me.SelWFReassignPagination.LastPage.Enabled = True
-            ElseIf Me._TotalPages = 0 Then          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.SelWFReassignPagination.LastPage.Enabled = False
+            ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
+                Me.SelWFReassignPagination.LastPage.Enabled = False            
             Else                               ' if the total pages is the last page, disable last and next buttons
                 Me.SelWFReassignPagination.LastPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
             End If
-
+          
             If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
                 Me.SelWFReassignPagination.NextPage.Enabled = True
-            ElseIf Me._TotalPages = 0 Then          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.SelWFReassignPagination.NextPage.Enabled = False
+            ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
+                Me.SelWFReassignPagination.NextPage.Enabled = False            
             Else                               ' if the total pages is the last page, disable last and next buttons
                 Me.SelWFReassignPagination.NextPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
             End If
-
+          
             Me.SelWFReassignPagination.PreviousPage.Enabled = Not (Me.PageIndex = 0)
 
 
         End Sub
 
-
-
+   
+    
         Public Overridable Sub SaveData()
             ' Save the data from the entire table.  Calls each row's Save Data
             ' to save their data.  This function is called by the Click handler of the
             ' Save button.  The button handler should Start/Commit/End a transaction.
-
+            
             Dim recCtl As SelWFReassignTableControlRow
             For Each recCtl In Me.GetRecordControls()
-
+        
                 If Me.InDeletedRecordIds(recCtl) Then
                     ' Delete any pending deletes. 
                     recCtl.Delete()
@@ -2333,99 +2333,99 @@ Public Class BaseSelWFReassignTableControl
                         recCtl.SaveData()
                     End If
                 End If
-
+          
             Next
-
-
-
-
+            
+            
+          
+    
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-
+          
             ' Set IsNewRecord to False for all records - since everything has been saved and is no longer "new"
             For Each recCtl In Me.GetRecordControls()
                 recCtl.IsNewRecord = False
             Next
-
-
+    
+      
             ' Set DeletedRecordsIds to Nothing since we have deleted all pending deletes.
             Me.DeletedRecordIds = Nothing
-
+      
         End Sub
 
         Public Overridable Function CreateCompoundJoinFilter() As CompoundFilter
             Dim jFilter As CompoundFilter = New CompoundFilter()
-
+         
             Return jFilter
         End Function
 
-
-        Public Overridable Function CreateOrderBy() As OrderBy
-            ' The CurrentSortOrder is initialized to the sort order on the
-            ' Query Wizard.  It may be modified by the Click handler for any of
-            ' the column heading to sort or reverse sort by that column.
-            ' You can add your own sort order, or modify it on the Query Wizard.
-            Return Me.CurrentSortOrder
-        End Function
-
+      
+          Public Overridable Function CreateOrderBy() As OrderBy
+          ' The CurrentSortOrder is initialized to the sort order on the
+          ' Query Wizard.  It may be modified by the Click handler for any of
+          ' the column heading to sort or reverse sort by that column.
+          ' You can add your own sort order, or modify it on the Query Wizard.
+          Return Me.CurrentSortOrder
+          End Function
+      
         Public Overridable Function CreateWhereClause() As WhereClause
             'This CreateWhereClause is used for loading the data.
             SelWFReassignView.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
-
-            Dim hasFiltersSelWFReassignTableControl As Boolean = False
-
-            Dim hasFiltersWPO_Step_WPO_StepDetailTableControl As Boolean = False
-
-            Dim hasFiltersSel_WPO_InquireDetailsTableControl As Boolean = False
-
+            
+        Dim hasFiltersSelWFReassignTableControl As Boolean = False
+      
+        Dim hasFiltersWPO_Step_WPO_StepDetailTableControl As Boolean = False
+      
+        Dim hasFiltersSel_WPO_InquireDetailsTableControl As Boolean = False
+      
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
             ' 2. User selected search criteria.
             ' 3. User selected filter criteria.
 
-
+              
             If IsValueSelected(Me.TOTALFromFilter) Then
-
-                hasFiltersSelWFReassignTableControl = True
-
+    
+              hasFiltersSelWFReassignTableControl = True            
+    
                 wc.iAND(SelWFReassignView.TOTAL, BaseFilter.ComparisonOperator.Greater_Than_Or_Equal, MiscUtils.GetSelectedValue(Me.TOTALFromFilter, Me.GetFromSession(Me.TOTALFromFilter)), False, False)
-
+            
             End If
-
-
-
+                  
+                
+                       
             If IsValueSelected(Me.TOTALToFilter) Then
-
-                hasFiltersSelWFReassignTableControl = True
-
+    
+              hasFiltersSelWFReassignTableControl = True            
+    
                 wc.iAND(SelWFReassignView.TOTAL, BaseFilter.ComparisonOperator.Less_Than_Or_Equal, MiscUtils.GetSelectedValue(Me.TOTALToFilter, Me.GetFromSession(Me.TOTALToFilter)), False, False)
-
+            
             End If
+                  
+                
+                       
 
-
-
-
-            Dim totalSelectedItemCount As Integer = 0
-
+                  Dim totalSelectedItemCount as Integer = 0
+                  
             If IsValueSelected(Me.WPO_W_U_IDFilter) Then
-
-                hasFiltersSelWFReassignTableControl = True
-
+    
+              hasFiltersSelWFReassignTableControl = True            
+    
                 Dim item As ListItem
                 Dim selectedItemCount As Integer = 0
                 For Each item In Me.WPO_W_U_IDFilter.Items
                     If item.Selected Then
                         selectedItemCount += 1
-
-                        totalSelectedItemCount += 1
-
+                        
+                          totalSelectedItemCount += 1
+                        
                     End If
                 Next
-
+                
                 Dim filter As WhereClause = New WhereClause
                 For Each item In Me.WPO_W_U_IDFilter.Items
                     If item.Selected AndAlso (item.Value = "--ANY--" OrElse item.Value = "--PLEASE_SELECT--") AndAlso selectedItemCount > 1 Then
@@ -2436,96 +2436,96 @@ Public Class BaseSelWFReassignTableControl
                     End If
                 Next
                 wc.iAND(filter)
-
+                
             End If
+                  
+                
+                       
+      If (totalSelectedItemCount > 50) Then
+          Throw new Exception(Page.GetResourceValue("Err:SelectedItemOverLimit", "ePortalWFApproval").Replace("{Limit}", "50").Replace("{SelectedCount}", totalSelectedItemCount.ToString()))
+      End If
+      
+    
+    Return wc
+    End Function
 
-
-
-            If (totalSelectedItemCount > 50) Then
-                Throw New Exception(Page.GetResourceValue("Err:SelectedItemOverLimit", "ePortalWFApproval").Replace("{Limit}", "50").Replace("{SelectedCount}", totalSelectedItemCount.ToString()))
-            End If
-
-
-            Return wc
-        End Function
-
-
-        Public Overridable Function CreateWhereClause(ByVal searchText As String, ByVal fromSearchControl As String, ByVal AutoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String) As WhereClause
+    
+        Public Overridable Function CreateWhereClause(ByVal searchText as String, ByVal fromSearchControl as String, ByVal AutoTypeAheadSearch as String, ByVal AutoTypeAheadWordSeparators as String) As WhereClause
             ' This CreateWhereClause is used for loading list of suggestions for Auto Type-Ahead feature.
             SelWFReassignView.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
+        
+          Dim hasFiltersSelWFReassignTableControl As Boolean = False
+        
+          Dim hasFiltersWPO_Step_WPO_StepDetailTableControl As Boolean = False
+        
+          Dim hasFiltersSel_WPO_InquireDetailsTableControl As Boolean = False
+        
+      ' Compose the WHERE clause consist of:
+      ' 1. Static clause defined at design time.
+      ' 2. User selected search criteria.
+      ' 3. User selected filter criteria.
 
-            Dim hasFiltersSelWFReassignTableControl As Boolean = False
-
-            Dim hasFiltersWPO_Step_WPO_StepDetailTableControl As Boolean = False
-
-            Dim hasFiltersSel_WPO_InquireDetailsTableControl As Boolean = False
-
-            ' Compose the WHERE clause consist of:
-            ' 1. Static clause defined at design time.
-            ' 2. User selected search criteria.
-            ' 3. User selected filter criteria.
-
-            Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
-
+      Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
+      
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
-
+          
             Dim TOTALFromFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "TOTALFromFilter_Ajax"), String)
             If IsValueSelected(TOTALFromFilterSelectedValue) Then
-
-                hasFiltersSelWFReassignTableControl = True
-
-                wc.iAND(SelWFReassignView.TOTAL, BaseFilter.ComparisonOperator.Greater_Than_Or_Equal, TOTALFromFilterSelectedValue, False, False)
-
-            End If
-
+    
+              hasFiltersSelWFReassignTableControl = True            
+    
+                 wc.iAND(SelWFReassignView.TOTAL, BaseFilter.ComparisonOperator.Greater_Than_Or_Equal, TOTALFromFilterSelectedValue, false, False)
+             
+             End If
+                      
             Dim TOTALToFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "TOTALToFilter_Ajax"), String)
             If IsValueSelected(TOTALToFilterSelectedValue) Then
-
-                hasFiltersSelWFReassignTableControl = True
-
-                wc.iAND(SelWFReassignView.TOTAL, BaseFilter.ComparisonOperator.Less_Than_Or_Equal, TOTALToFilterSelectedValue, False, False)
-
-            End If
-
+    
+              hasFiltersSelWFReassignTableControl = True            
+    
+                 wc.iAND(SelWFReassignView.TOTAL, BaseFilter.ComparisonOperator.Less_Than_Or_Equal, TOTALToFilterSelectedValue, false, False)
+             
+             End If
+                      
             Dim WPO_W_U_IDFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "WPO_W_U_IDFilter_Ajax"), String)
             If IsValueSelected(WPO_W_U_IDFilterSelectedValue) Then
-
-                hasFiltersSelWFReassignTableControl = True
-
-                If Not isNothing(WPO_W_U_IDFilterSelectedValue) Then
-                    Dim WPO_W_U_IDFilteritemListFromSession() As String = WPO_W_U_IDFilterSelectedValue.Split(","c)
-                    Dim index As Integer = 0
-
-                    Dim filter As WhereClause = New WhereClause
-                    For Each item As String In WPO_W_U_IDFilteritemListFromSession
-                        If index = 0 AndAlso item.ToString.Equals("") Then
-                        Else
-                            filter.iOR(SelWFReassignView.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, item, False, False)
-                            index += 1
-                        End If
-                    Next
-                    wc.iAND(filter)
-
-                End If
-
-            End If
-
-
-
+    
+              hasFiltersSelWFReassignTableControl = True            
+    
+            If Not isNothing(WPO_W_U_IDFilterSelectedValue) Then
+                Dim WPO_W_U_IDFilteritemListFromSession() As String = WPO_W_U_IDFilterSelectedValue.Split(","c)
+                Dim index As Integer = 0
+                  
+                Dim filter As WhereClause = New WhereClause
+                For Each item As String In WPO_W_U_IDFilteritemListFromSession
+                    If index = 0 AndAlso item.ToString.Equals("") Then
+                    Else
+                        filter.iOR(SelWFReassignView.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, item, False, False)
+                        index += 1
+                    End If
+                Next
+                wc.iAND(filter)
+                
+             End If
+                
+             End If
+                      
+      
+      
             Return wc
         End Function
 
+      
 
-
-        Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
-                                        ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
-                                        ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
-                                        ByVal resultList As ArrayList) As Boolean
-            Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
-                                     autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
-                                     resultList, False)
-        End Function
+         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
+                                         ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
+                                         ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
+                                         ByVal resultList As ArrayList) As Boolean
+              Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
+                                       autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
+                                       resultList, False)
+         End Function
 
         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
                                                ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
@@ -2574,10 +2574,10 @@ Public Class BaseSelWFReassignTableControl
                     If Len(resultItem) - index <= columnLength Then
                         If index = 0 Then
                             itemToAdd = resultItem
-                        Else
+                        Else                            
                             itemToAdd = resultItem.Substring(index)
                         End If
-                    Else
+                    Else                       
                         itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, index, index + columnLength, StringUtils.Direction.forward)
                     End If
                 ElseIf InvariantLCase(AutoTypeAheadDisplayFoundText).equals("inmiddleofmatchedstring") Then
@@ -2587,7 +2587,7 @@ Public Class BaseSelWFReassignTableControl
                     Else
                         ' Sanity check at end of the string
                         If index + Len(prefixText) >= Len(resultItem) - 1 OrElse _
-                        Len(resultItem) - index < subStringBeginIndex Then
+                        Len(resultItem) - index < subStringBeginIndex Then                           
                             itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, Len(resultItem) - 1 - columnLength, Len(resultItem) - 1, StringUtils.Direction.backward)
                         ElseIf index <= subStringBeginIndex Then
                             ' Sanity check at beginning of the string                          
@@ -2641,18 +2641,18 @@ Public Class BaseSelWFReassignTableControl
                 End If
 
                 If Not String.IsNullOrEmpty(itemToAdd) AndAlso Not resultList.Contains(itemToAdd) Then
-
+                   
                     resultList.Add(itemToAdd)
-
+          				
                     isAdded = True
                 End If
             End If
             Return isAdded
         End Function
-
-
+        
+    
         Protected Overridable Sub GetPageSize()
-
+        
             If Me.SelWFReassignPagination.PageSize.Text.Trim <> "" Then
                 Try
                     'Me.PageSize = Integer.Parse(Me.SelWFReassignPagination.PageSize.Text)
@@ -2662,30 +2662,30 @@ Public Class BaseSelWFReassignTableControl
         End Sub
 
         Protected Overridable Sub AddNewRecords()
-
+          
             Dim newRecordList As ArrayList = New ArrayList()
+          
+    Dim newUIDataList As System.Collections.Generic.List(Of Hashtable) = New System.Collections.Generic.List(Of Hashtable)()
 
-            Dim newUIDataList As System.Collections.Generic.List(Of Hashtable) = New System.Collections.Generic.List(Of Hashtable)()
+    ' Loop though all the record controls and if the record control
+    ' does not have a unique record id set, then create a record
+    ' and add to the list.
+    If Not Me.ResetData Then
+    Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SelWFReassignTableControlRepeater"), System.Web.UI.WebControls.Repeater)
+    If rep Is Nothing Then Return
 
-            ' Loop though all the record controls and if the record control
-            ' does not have a unique record id set, then create a record
-            ' and add to the list.
-            If Not Me.ResetData Then
-                Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SelWFReassignTableControlRepeater"), System.Web.UI.WebControls.Repeater)
-                If rep Is Nothing Then Return
-
-
-                Dim repItem As System.Web.UI.WebControls.RepeaterItem
-                For Each repItem In rep.Items
-
-                    ' Loop through all rows in the table, set its DataSource and call DataBind().
-
-                    Dim recControl As SelWFReassignTableControlRow = DirectCast(repItem.FindControl("SelWFReassignTableControlRow"), SelWFReassignTableControlRow)
-
+    
+    Dim repItem As System.Web.UI.WebControls.RepeaterItem
+    For Each repItem In rep.Items
+      
+    ' Loop through all rows in the table, set its DataSource and call DataBind().
+    
+    Dim recControl As SelWFReassignTableControlRow = DirectCast(repItem.FindControl("SelWFReassignTableControlRow"), SelWFReassignTableControlRow)
+    
 
                     If recControl.Visible AndAlso recControl.IsNewRecord() Then
                         Dim rec As SelWFReassignRecord = New SelWFReassignRecord()
-
+        
                         If recControl.coID.Text <> "" Then
                             rec.Parse(recControl.coID.Text, SelWFReassignView.coID)
                         End If
@@ -2716,41 +2716,41 @@ Public Class BaseSelWFReassignTableControl
                         If recControl.WPO_WS_ID.Text <> "" Then
                             rec.Parse(recControl.WPO_WS_ID.Text, SelWFReassignView.WPO_WS_ID)
                         End If
-                        newUIDataList.Add(recControl.PreservedUIData())
+                        newUIDataList.Add(recControl.PreservedUIData())	  
                         newRecordList.Add(rec)
                     End If
                 Next
             End If
-
-
+            
+    
             ' Add any new record to the list.
             Dim index As Integer = 0
             For index = 1 To Me.AddNewRecord
-
+              
                 newRecordList.Insert(0, New SelWFReassignRecord())
-                newUIDataList.Insert(0, New Hashtable())
-
+                newUIDataList.Insert(0, New Hashtable())				
+              
             Next
             Me.AddNewRecord = 0
 
             ' Finally, add any new records to the DataSource.
             If newRecordList.Count > 0 Then
-
+              
                 Dim finalList As ArrayList = New ArrayList(Me.DataSource)
                 finalList.InsertRange(0, newRecordList)
 
                 Me.DataSource = DirectCast(finalList.ToArray(GetType(SelWFReassignRecord)), SelWFReassignRecord())
-
+              
             End If
-
+            
             ' Add the existing UI data to this hash table
             If newUIDataList.Count > 0 Then
                 Me.UIData.InsertRange(0, newUIDataList)
             End If
-
+            
         End Sub
 
-
+        
         Public Sub AddToDeletedRecordIds(ByVal rec As SelWFReassignTableControlRow)
             If rec.IsNewRecord() Then
                 Return
@@ -2780,256 +2780,256 @@ Public Class BaseSelWFReassignTableControl
                 Me._DeletedRecordIds = value
             End Set
         End Property
-
-
+        
+      
         ' Create Set, WhereClause, and Populate Methods
-
+        
         Public Overridable Sub SetcoIDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.coIDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.coIDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral1()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral2()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal2.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal2.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral3()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetTOTALLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.TOTALLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.TOTALLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetTOTALLabel1()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.TOTALLabel1.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.TOTALLabel1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPO_Date_AssignLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPO_Date_AssignLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPO_Date_AssignLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPO_PONumLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPO_PONumLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPO_PONumLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPO_RemarkLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPO_RemarkLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPO_RemarkLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPO_StatusLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPO_StatusLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPO_StatusLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPO_W_U_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPO_W_U_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPO_W_U_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPO_W_U_IDLabel1()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPO_W_U_IDLabel1.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPO_W_U_IDLabel1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPO_WDT_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPO_WDT_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPO_WDT_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPO_WS_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPO_WS_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPO_WS_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetddlAssignTo()
 
-
-
-            Me.PopulateddlAssignTo(GetSelectedValue(Me.ddlAssignTo, GetFromSession(Me.ddlAssignTo)), 500)
-
+              
+            
+                Me.PopulateddlAssignTo(GetSelectedValue(Me.ddlAssignTo,  GetFromSession(Me.ddlAssignTo)), 500)					
+                    
         End Sub
-
+            
         Public Overridable Sub SetWPO_W_U_IDFilter()
 
-
-
+              
+            
             Dim WPO_W_U_IDFilterselectedFilterItemList As New ArrayList()
             Dim WPO_W_U_IDFilteritemsString As String = Nothing
             If (Me.InSession(Me.WPO_W_U_IDFilter)) Then
                 WPO_W_U_IDFilteritemsString = Me.GetFromSession(Me.WPO_W_U_IDFilter)
             End If
-
+            
             If (WPO_W_U_IDFilteritemsString IsNot Nothing) Then
                 Dim WPO_W_U_IDFilteritemListFromSession() As String = WPO_W_U_IDFilteritemsString.Split(","c)
-                For Each item As String In WPO_W_U_IDFilteritemListFromSession
+                For Each item as String In WPO_W_U_IDFilteritemListFromSession
                     WPO_W_U_IDFilterselectedFilterItemList.Add(item)
                 Next
             End If
-
-
+              
+            		
             Me.PopulateWPO_W_U_IDFilter(GetSelectedValueList(Me.WPO_W_U_IDFilter, WPO_W_U_IDFilterselectedFilterItemList), 500)
-
-            Dim url As String = Me.ModifyRedirectUrl("../sel_WASP_User/Sel-WASP-User-QuickSelector.aspx", "", True)
-
-            url = Me.Page.ModifyRedirectUrl(url, "", True)
-
-            url &= "?Target=" & Me.WPO_W_U_IDFilter.ClientID & "&Formula=" & CType(Me.Page, BaseApplicationPage).Encrypt("= Sel_WASP_User.W_U_Full_Name") & "&IndexField=" & CType(Me.Page, BaseApplicationPage).Encrypt("W_U_ID") & "&EmptyValue=" & CType(Me.Page, BaseApplicationPage).Encrypt("--ANY--") & "&EmptyDisplayText=" & CType(Me.Page, BaseApplicationPage).Encrypt(Me.Page.GetResourceValue("Txt:All")) & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup")
-
-
-            Me.WPO_W_U_IDFilter.Attributes.Item("onClick") = "initializePopupPage(this, '" & url & "', " & Convert.ToString(WPO_W_U_IDFilter.AutoPostBack).ToLower() & ", event); return false;"
-
-
-        End Sub
-
+                    
+              Dim url as String = Me.ModifyRedirectUrl("../sel_WASP_User/Sel-WASP-User-QuickSelector.aspx", "", True)
+              
+              url = Me.Page.ModifyRedirectUrl(url, "", True)                                  
+              
+              url &= "?Target=" & Me.WPO_W_U_IDFilter.ClientID & "&Formula=" & CType(Me.Page, BaseApplicationPage).Encrypt("= Sel_WASP_User.W_U_Full_Name")& "&IndexField=" & CType(Me.Page, BaseApplicationPage).Encrypt("W_U_ID")& "&EmptyValue=" & CType(Me.Page, BaseApplicationPage).Encrypt("--ANY--") & "&EmptyDisplayText=" & CType(Me.Page, BaseApplicationPage).Encrypt(Me.Page.GetResourceValue("Txt:All")) & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup")
+              
+              
+              Me.WPO_W_U_IDFilter.Attributes.Item("onClick") = "initializePopupPage(this, '" & url & "', " & Convert.ToString(WPO_W_U_IDFilter.AutoPostBack).ToLower() & ", event); return false;"        
+                  
+                                 
+              End Sub	
+            
         ' Get the filters' data for ddlAssignTo
         Protected Overridable Sub PopulateddlAssignTo(ByVal selectedValue As String, ByVal maxItems As Integer)
-
+                    
             Me.ddlAssignTo.Items.Clear()
-
+            
             ' 1. Setup the static list items        
-
+            		  
             ' Skip step 2 and 3 because no need to load data from database and insert data
+            
 
-
-            Try
+            Try    
                 ' Set the selected value.
                 SetSelectedValue(Me.ddlAssignTo, selectedValue)
 
-
+                
             Catch
             End Try
-
-            If Me.ddlAssignTo.SelectedValue IsNot Nothing AndAlso Me.ddlAssignTo.Items.FindByValue(Me.ddlAssignTo.SelectedValue) Is Nothing Then
+            
+            If Me.ddlAssignTo.SelectedValue IsNot Nothing AndAlso Me.ddlAssignTo.Items.FindByValue(Me.ddlAssignTo.SelectedValue) Is Nothing
                 Me.ddlAssignTo.SelectedValue = Nothing
             End If
 
-        End Sub
-
+              End Sub
+            
         ' Get the filters' data for WPO_W_U_IDFilter
         Protected Overridable Sub PopulateWPO_W_U_IDFilter(ByVal selectedValue As ArrayList, ByVal maxItems As Integer)
-
+                    
             'Setup the WHERE clause.
-
+            
             Dim wc As WhereClause = Me.CreateWhereClause_WPO_W_U_IDFilter()
             Me.WPO_W_U_IDFilter.Items.Clear()
-
+            		  			
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WPO_W_U_IDFilter function.
             ' It is better to customize the where clause there.
+            
 
-
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+            
             Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
 
-
+            	
 
             Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
-
+            
 
             Dim itemValues() As Sel_WASP_UserRecord = Nothing
-
-            If wc.RunQuery Then
+            
+            If wc.RunQuery
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim evaluator As New FormulaEvaluator
                 Dim listDuplicates As New ArrayList()
 
-
-
+                
+                
                 Do
-
+                    
                     itemValues = Sel_WASP_UserView.GetRecords(wc, orderBy, pageNum, maxItems)
-
-                    For Each itemValue As Sel_WASP_UserRecord In itemValues
+                                    
+                    For each itemValue As Sel_WASP_UserRecord In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.W_U_IDSpecified Then
                             cvalue = itemValue.W_U_ID.ToString()
 
-                            If counter < maxItems AndAlso Me.WPO_W_U_IDFilter.Items.FindByValue(cvalue) Is Nothing Then
-
+                            If counter < maxItems AndAlso Me.WPO_W_U_IDFilter.Items.FindByValue(cvalue) Is Nothing  Then
+                            
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_W_U_ID)
                                 If _isExpandableNonCompositeForeignKey AndAlso SelWFReassignView.WPO_W_U_ID.IsApplyDisplayAs Then
                                     fvalue = SelWFReassignView.GetDFKA(itemValue, SelWFReassignView.WPO_W_U_ID)
@@ -3037,25 +3037,25 @@ Public Class BaseSelWFReassignTableControl
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
                                     fvalue = itemValue.Format(Sel_WASP_UserView.W_U_ID)
                                 End If
-
+                                    
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                    fvalue = ""
+                                   fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If (fvalue.Length > 50) Then
-                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                If ( fvalue.Length > 50 ) Then
+                                   fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.WPO_W_U_IDFilter.Items.FindByText(fvalue)
-
+                
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                                     End If
                                 End If
 
@@ -3063,227 +3063,227 @@ Public Class BaseSelWFReassignTableControl
                                 Me.WPO_W_U_IDFilter.Items.Add(newItem)
 
                                 If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                                 End If
 
-                                counter += 1
+                                counter += 1			  
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
-            End If
+            End If			
+            
 
 
+                               
 
-
-
-            Try
-
+            Try    
+                
             Catch
             End Try
-
-
+            
+            
             Me.WPO_W_U_IDFilter.SetFieldMaxLength(50)
-
-
+                                 
+                  
             ' Add the selected value.
             If Me.WPO_W_U_IDFilter.Items.Count = 0 Then
                 Me.WPO_W_U_IDFilter.Items.Add(New ListItem(Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
             End If
-
+            
             ' Mark all items to be selected.
-            For Each item As ListItem In Me.WPO_W_U_IDFilter.Items
+            For Each item As ListItem in Me.WPO_W_U_IDFilter.Items
                 item.Selected = True
             Next
-
+                              
         End Sub
-
+            
         Public Overridable Function CreateWhereClause_ddlAssignTo() As WhereClause
-
+        
             ' By default, we simply return a new WhereClause.
             ' Add additional where clauses to restrict the items shown in control.
-
+            
             Dim wc As WhereClause = New WhereClause()
             Return wc
+            	                
 
-
-        End Function
-
-
+        End Function			
+        
+              
 
         Public Overridable Function CreateWhereClause_WPO_W_U_IDFilter() As WhereClause
-
-            Dim hasFiltersSelWFReassignTableControl As Boolean = False
-
-            Dim hasFiltersWPO_Step_WPO_StepDetailTableControl As Boolean = False
-
-            Dim hasFiltersSel_WPO_InquireDetailsTableControl As Boolean = False
-
+          
+              Dim hasFiltersSelWFReassignTableControl As Boolean = False
+            
+              Dim hasFiltersWPO_Step_WPO_StepDetailTableControl As Boolean = False
+            
+              Dim hasFiltersSel_WPO_InquireDetailsTableControl As Boolean = False
+            
             ' Create a where clause for the filter WPO_W_U_IDFilter.
             ' This function is called by the Populate method to load the items 
             ' in the WPO_W_U_IDFilterQuickSelector
-
+            
             Dim WPO_W_U_IDFilterselectedFilterItemList As New ArrayList()
             Dim WPO_W_U_IDFilteritemsString As String = Nothing
             If (Me.InSession(Me.WPO_W_U_IDFilter)) Then
                 WPO_W_U_IDFilteritemsString = Me.GetFromSession(Me.WPO_W_U_IDFilter)
             End If
-
+            
             If (WPO_W_U_IDFilteritemsString IsNot Nothing) Then
                 Dim WPO_W_U_IDFilteritemListFromSession() As String = WPO_W_U_IDFilteritemsString.Split(","c)
-                For Each item As String In WPO_W_U_IDFilteritemListFromSession
+                For Each item as String In WPO_W_U_IDFilteritemListFromSession
                     WPO_W_U_IDFilterselectedFilterItemList.Add(item)
                 Next
             End If
-
-            WPO_W_U_IDFilterselectedFilterItemList = GetSelectedValueList(Me.WPO_W_U_IDFilter, WPO_W_U_IDFilterselectedFilterItemList)
+              
+            WPO_W_U_IDFilterselectedFilterItemList = GetSelectedValueList(Me.WPO_W_U_IDFilter, WPO_W_U_IDFilterselectedFilterItemList) 
             Dim wc As New WhereClause
             If WPO_W_U_IDFilterselectedFilterItemList Is Nothing OrElse WPO_W_U_IDFilterselectedFilterItemList.Count = 0 Then
                 wc.RunQuery = False
-            Else
+            Else            
                 For Each item As String In WPO_W_U_IDFilterselectedFilterItemList
-
-
-                    wc.iOR(Sel_WASP_UserView.W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, item)
-
-
+              
+            	  
+                    wc.iOR(Sel_WASP_UserView.W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, item)                  
+                  
+                                 
                 Next
             End If
             Return wc
+        
+        End Function			
+            
 
-        End Function
-
-
-
-
+    
+    
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
             ' PreRender event is raised just before page is being displayed.
             Try
-                DbUtils.StartTransaction()
+                DbUtils.StartTransaction
                 Me.RegisterPostback()
-
+                
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-
-
+                  
+                
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
-
+                    
                     Me.LoadData()
                     Me.DataBind()
-
+                    
                 End If
-
-
-
+                
+               
+                				
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
         End Sub
-
-
+        
+        
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
 
             ' Save filter controls to values to session.
-
+        
             Me.SaveToSession(Me.ddlAssignTo, Me.ddlAssignTo.SelectedValue)
-
+                  
             Me.SaveToSession(Me.TOTALFromFilter, Me.TOTALFromFilter.Text)
-
+                  
             Me.SaveToSession(Me.TOTALToFilter, Me.TOTALToFilter.Text)
-
+                  
             Dim WPO_W_U_IDFilterselectedFilterItemList As ArrayList = GetSelectedValueList(Me.WPO_W_U_IDFilter, Nothing)
             Dim WPO_W_U_IDFilterSessionString As String = ""
-            If Not WPO_W_U_IDFilterselectedFilterItemList Is Nothing Then
-                For Each item As String In WPO_W_U_IDFilterselectedFilterItemList
-                    WPO_W_U_IDFilterSessionstring = WPO_W_U_IDFilterSessionstring & "," & item
-                Next
+            If Not WPO_W_U_IDFilterselectedFilterItemList is Nothing Then
+            For Each item As String In WPO_W_U_IDFilterselectedFilterItemList
+                WPO_W_U_IDFilterSessionstring = WPO_W_U_IDFilterSessionstring & "," & item
+            Next
             End If
             Me.SaveToSession(Me.WPO_W_U_IDFilter, WPO_W_U_IDFilterSessionstring)
-
-
+                  
+        
             'Save pagination state to session.
-
-
+         
+            
             ' Save table control properties to the session.
-
-            If Not Me.CurrentSortOrder Is Nothing Then
+            
+ If Not Me.CurrentSortOrder Is Nothing Then
                 If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then
                     Me.SaveToSession(Me, "Order_By", Me.CurrentSortOrder.ToXmlString())
                 End If
-            End If
+            End If            
             Me.SaveToSession(Me, "Page_Index", Me.PageIndex.ToString())
             Me.SaveToSession(Me, "Page_Size", Me.PageSize.ToString())
-
-            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)
-
+        
+            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)  
+        
         End Sub
-
-        Protected Sub SaveControlsToSession_Ajax()
+        
+        Protected  Sub SaveControlsToSession_Ajax()
             ' Save filter controls to values to session.
-
+          
             Me.SaveToSession(Me.ddlAssignTo, Me.ddlAssignTo.SelectedValue)
-
-            Me.SaveToSession("TOTALFromFilter_Ajax", Me.TOTALFromFilter.Text)
-
-            Me.SaveToSession("TOTALToFilter_Ajax", Me.TOTALToFilter.Text)
-
+                  
+      Me.SaveToSession("TOTALFromFilter_Ajax", Me.TOTALFromFilter.Text)
+              
+      Me.SaveToSession("TOTALToFilter_Ajax", Me.TOTALToFilter.Text)
+              
             Dim WPO_W_U_IDFilterselectedFilterItemList As ArrayList = GetSelectedValueList(Me.WPO_W_U_IDFilter, Nothing)
             Dim WPO_W_U_IDFilterSessionString As String = ""
-            If Not WPO_W_U_IDFilterselectedFilterItemList Is Nothing Then
-                For Each item As String In WPO_W_U_IDFilterselectedFilterItemList
-                    WPO_W_U_IDFilterSessionstring = WPO_W_U_IDFilterSessionstring & "," & item
-                Next
+            If Not WPO_W_U_IDFilterselectedFilterItemList is Nothing Then
+            For Each item As String In WPO_W_U_IDFilterselectedFilterItemList
+                WPO_W_U_IDFilterSessionstring = WPO_W_U_IDFilterSessionstring & "," & item
+            Next
             End If
             Me.SaveToSession("WPO_W_U_IDFilter_Ajax", WPO_W_U_IDFilterSessionString)
-
+          
             HttpContext.Current.Session("AppRelativeVirtualPath") = Me.Page.AppRelativeVirtualPath
-
+         
         End Sub
-
+        
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
             ' Clear filter controls values from the session.
-
+        
             Me.RemoveFromSession(Me.ddlAssignTo)
             Me.RemoveFromSession(Me.TOTALFromFilter)
             Me.RemoveFromSession(Me.TOTALToFilter)
             Me.RemoveFromSession(Me.WPO_W_U_IDFilter)
-
+    
             ' Clear pagination state from session.
-
-
-            ' Clear table properties from the session.
-            Me.RemoveFromSession(Me, "Order_By")
-            Me.RemoveFromSession(Me, "Page_Index")
-            Me.RemoveFromSession(Me, "Page_Size")
-
-            Me.RemoveFromSession(Me, "DeletedRecordIds")
-
+         
+    
+    ' Clear table properties from the session.
+    Me.RemoveFromSession(Me, "Order_By")
+    Me.RemoveFromSession(Me, "Page_Index")
+    Me.RemoveFromSession(Me, "Page_Size")
+    
+            Me.RemoveFromSession(Me, "DeletedRecordIds")  
+            
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
             MyBase.LoadViewState(savedState)
 
             Dim orderByStr As String = CType(ViewState("SelWFReassignTableControl_OrderBy"), String)
-
+          
             If orderByStr IsNot Nothing AndAlso orderByStr.Trim <> "" Then
                 Me.CurrentSortOrder = BaseClasses.Data.OrderBy.FromXmlString(orderByStr)
-
-            Else
+            
+            Else 
                 Me.CurrentSortOrder = New OrderBy(True, False)
-
+            
             End If
-
-
+            
+            
             Dim Pagination As Control = Me.FindControl("SelWFReassignPagination")
-            Dim PaginationType As String = ""
-            If Not (Pagination Is Nothing) Then
+             Dim PaginationType As String = ""
+             If Not (Pagination Is Nothing) Then
                 Dim Summary As Control = Pagination.FindControl("_Summary")
                 If Not (Summary Is Nothing) Then
                     If (DirectCast(Summary, System.Web.UI.WebControls.TextBox).Text.Equals("Infinite Pagination")) Then
@@ -3291,633 +3291,633 @@ Public Class BaseSelWFReassignTableControl
                     End If
                     If (DirectCast(Summary, System.Web.UI.WebControls.TextBox).Text.Equals("Infinite Pagination Mobile")) Then
                         PaginationType = "Infinite Pagination Mobile"
-                    End If
                 End If
-            End If
+             End If
+             End If
 
-            If Not (PaginationType.Equals("Infinite Pagination")) Then
-                If Not Me.Page.ClientQueryString.Contains("InfiIframe") AndAlso PaginationType.Equals("Infinite Pagination Mobile") Then
+            If Not (PaginationType.Equals("Infinite Pagination")) Then 
+              If Not Me.Page.ClientQueryString.Contains("InfiIframe") AndAlso PaginationType.Equals("Infinite Pagination Mobile") Then
                     Me.ViewState("Page_Index") = 0
                 End If
-                Dim pageIndex As String = CType(ViewState("Page_Index"), String)
-                If pageIndex IsNot Nothing Then
-                    Me.PageIndex = CInt(pageIndex)
-                End If
+              Dim pageIndex As String = CType(ViewState("Page_Index"), String)
+              If pageIndex IsNot Nothing Then
+                Me.PageIndex = CInt(pageIndex)
+              End If
             End If
 
             Dim pageSize As String = CType(ViewState("Page_Size"), String)
             If Not pageSize Is Nothing Then
-                Me.PageSize = CInt(pageSize)
+              Me.PageSize = CInt(pageSize)
             End If
 
-
-
+            
+    
             ' Load view state for pagination control.
-
+        
             Me.DeletedRecordIds = CType(Me.ViewState("DeletedRecordIds"), String)
-
+        
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
-
+          
             If Me.CurrentSortOrder IsNot Nothing Then
                 Me.ViewState("SelWFReassignTableControl_OrderBy") = Me.CurrentSortOrder.ToXmlString()
             End If
-
+                      
             Me.ViewState("Page_Index") = Me.PageIndex
             Me.ViewState("Page_Size") = Me.PageSize
-
+            
             Me.ViewState("DeletedRecordIds") = Me.DeletedRecordIds
-
-
+        
+    
             ' Load view state for pagination control.
-
-
+          
+    
             Return MyBase.SaveViewState()
         End Function
-
+        
         ' Generate set method for buttons
-
-        Public Overridable Sub SetExcelButton()
-
-
+        
+        Public Overridable Sub SetExcelButton()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetPDFButton()
-
-
+            
+        Public Overridable Sub SetPDFButton()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetWordButton()
-
-
+            
+        Public Overridable Sub SetWordButton()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetbtnAssignTo()
-
-
+            
+        Public Overridable Sub SetbtnAssignTo()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetActionsButton()
-
-
+            
+        Public Overridable Sub SetActionsButton()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetSelWFReassignFilterButton()
-
-
+            
+        Public Overridable Sub SetSelWFReassignFilterButton()                
+              
+   
         End Sub
-
+                    
 
         ' Generate the event handling functions for pagination events.
-
+        
         ' event handler for ImageButton
         Public Overridable Sub SelWFReassignPagination_FirstPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                Me.PageIndex = 0
-                Me.DataChanged = True
-
+              
+    Try
+    
+            Me.PageIndex = 0
+            Me.DataChanged = True
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub SelWFReassignPagination_LastPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                Me.DisplayLastPage = True
-                Me.DataChanged = True
-
+              
+    Try
+    
+            Me.DisplayLastPage = True
+            Me.DataChanged = True
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub SelWFReassignPagination_NextPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                Me.PageIndex += 1
-                Me.DataChanged = True
-
+              
+    Try
+    
+            Me.PageIndex += 1
+            Me.DataChanged = True
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for LinkButton
         Public Overridable Sub SelWFReassignPagination_PageSizeButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
-                Me.DataChanged = True
-
-                Me.PageSize = Me.SelWFReassignPagination.GetCurrentPageSize()
-
-                Me.PageIndex = Integer.Parse(Me.SelWFReassignPagination.CurrentPage.Text) - 1
-
+              
+    Try
+    
+            Me.DataChanged = True
+      
+            Me.PageSize = Me.SelWFReassignPagination.GetCurrentPageSize()
+      
+            Me.PageIndex = Integer.Parse(Me.SelWFReassignPagination.CurrentPage.Text) - 1
+          
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub SelWFReassignPagination_PreviousPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                If Me.PageIndex > 0 Then
-                    Me.PageIndex -= 1
-                    Me.DataChanged = True
-                End If
-
+              
+    Try
+    
+            If Me.PageIndex > 0 Then
+                Me.PageIndex -= 1
+                Me.DataChanged = True
+            End If
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
 
         ' Generate the event handling functions for sorting events.
-
+        
         Public Overridable Sub coIDLabel_Click(ByVal sender As Object, ByVal args As EventArgs)
             ' Sorts by coID when clicked.
-
+              
             ' Get previous sorting state for coID.
-
+            
             Dim sd As OrderByItem = Me.CurrentSortOrder.Find(SelWFReassignView.coID)
-            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing AndAlso Me.CurrentSortOrder.Items.Length > 1) Then
+            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing Andalso Me.CurrentSortOrder.Items.Length > 1) Then
                 ' First time sort, so add sort order for coID.
                 Me.CurrentSortOrder.Reset()
 
-
-                'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
-                If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
-
-                Me.CurrentSortOrder.Add(SelWFReassignView.coID, OrderByItem.OrderDir.Asc)
-
+    
+              'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
+              If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
+              
+              Me.CurrentSortOrder.Add(SelWFReassignView.coID, OrderByItem.OrderDir.Asc)
+            
             Else
                 ' Previously sorted by coID, so just reverse.
                 sd.Reverse()
             End If
-
+            
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
-
+              
         End Sub
-
+            
         Public Overridable Sub TOTALLabel_Click(ByVal sender As Object, ByVal args As EventArgs)
             ' Sorts by TOTAL when clicked.
-
+              
             ' Get previous sorting state for TOTAL.
-
+            
             Dim sd As OrderByItem = Me.CurrentSortOrder.Find(SelWFReassignView.TOTAL)
-            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing AndAlso Me.CurrentSortOrder.Items.Length > 1) Then
+            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing Andalso Me.CurrentSortOrder.Items.Length > 1) Then
                 ' First time sort, so add sort order for TOTAL.
                 Me.CurrentSortOrder.Reset()
 
-
-                'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
-                If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
-
-                Me.CurrentSortOrder.Add(SelWFReassignView.TOTAL, OrderByItem.OrderDir.Asc)
-
+    
+              'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
+              If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
+              
+              Me.CurrentSortOrder.Add(SelWFReassignView.TOTAL, OrderByItem.OrderDir.Asc)
+            
             Else
                 ' Previously sorted by TOTAL, so just reverse.
                 sd.Reverse()
             End If
-
+            
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
-
+              
         End Sub
-
+            
         Public Overridable Sub WPO_Date_AssignLabel_Click(ByVal sender As Object, ByVal args As EventArgs)
             ' Sorts by WPO_Date_Assign when clicked.
-
+              
             ' Get previous sorting state for WPO_Date_Assign.
-
+            
             Dim sd As OrderByItem = Me.CurrentSortOrder.Find(SelWFReassignView.WPO_Date_Assign)
-            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing AndAlso Me.CurrentSortOrder.Items.Length > 1) Then
+            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing Andalso Me.CurrentSortOrder.Items.Length > 1) Then
                 ' First time sort, so add sort order for WPO_Date_Assign.
                 Me.CurrentSortOrder.Reset()
 
-
-                'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
-                If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
-
-                Me.CurrentSortOrder.Add(SelWFReassignView.WPO_Date_Assign, OrderByItem.OrderDir.Asc)
-
+    
+              'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
+              If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
+              
+              Me.CurrentSortOrder.Add(SelWFReassignView.WPO_Date_Assign, OrderByItem.OrderDir.Asc)
+            
             Else
                 ' Previously sorted by WPO_Date_Assign, so just reverse.
                 sd.Reverse()
             End If
-
+            
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
-
+              
         End Sub
-
+            
         Public Overridable Sub WPO_PONumLabel_Click(ByVal sender As Object, ByVal args As EventArgs)
             ' Sorts by WPO_PONum when clicked.
-
+              
             ' Get previous sorting state for WPO_PONum.
-
+            
             Dim sd As OrderByItem = Me.CurrentSortOrder.Find(SelWFReassignView.WPO_PONum)
-            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing AndAlso Me.CurrentSortOrder.Items.Length > 1) Then
+            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing Andalso Me.CurrentSortOrder.Items.Length > 1) Then
                 ' First time sort, so add sort order for WPO_PONum.
                 Me.CurrentSortOrder.Reset()
 
-
-                'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
-                If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
-
-                Me.CurrentSortOrder.Add(SelWFReassignView.WPO_PONum, OrderByItem.OrderDir.Asc)
-
+    
+              'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
+              If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
+              
+              Me.CurrentSortOrder.Add(SelWFReassignView.WPO_PONum, OrderByItem.OrderDir.Asc)
+            
             Else
                 ' Previously sorted by WPO_PONum, so just reverse.
                 sd.Reverse()
             End If
-
+            
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
-
+              
         End Sub
-
+            
         Public Overridable Sub WPO_RemarkLabel_Click(ByVal sender As Object, ByVal args As EventArgs)
             ' Sorts by WPO_Remark when clicked.
-
+              
             ' Get previous sorting state for WPO_Remark.
-
+            
             Dim sd As OrderByItem = Me.CurrentSortOrder.Find(SelWFReassignView.WPO_Remark)
-            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing AndAlso Me.CurrentSortOrder.Items.Length > 1) Then
+            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing Andalso Me.CurrentSortOrder.Items.Length > 1) Then
                 ' First time sort, so add sort order for WPO_Remark.
                 Me.CurrentSortOrder.Reset()
 
-
-                'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
-                If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
-
-                Me.CurrentSortOrder.Add(SelWFReassignView.WPO_Remark, OrderByItem.OrderDir.Asc)
-
+    
+              'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
+              If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
+              
+              Me.CurrentSortOrder.Add(SelWFReassignView.WPO_Remark, OrderByItem.OrderDir.Asc)
+            
             Else
                 ' Previously sorted by WPO_Remark, so just reverse.
                 sd.Reverse()
             End If
-
+            
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
-
+              
         End Sub
-
+            
         Public Overridable Sub WPO_StatusLabel_Click(ByVal sender As Object, ByVal args As EventArgs)
             ' Sorts by WPO_Status when clicked.
-
+              
             ' Get previous sorting state for WPO_Status.
-
+            
             Dim sd As OrderByItem = Me.CurrentSortOrder.Find(SelWFReassignView.WPO_Status)
-            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing AndAlso Me.CurrentSortOrder.Items.Length > 1) Then
+            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing Andalso Me.CurrentSortOrder.Items.Length > 1) Then
                 ' First time sort, so add sort order for WPO_Status.
                 Me.CurrentSortOrder.Reset()
 
-
-                'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
-                If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
-
-                Me.CurrentSortOrder.Add(SelWFReassignView.WPO_Status, OrderByItem.OrderDir.Asc)
-
+    
+              'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
+              If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
+              
+              Me.CurrentSortOrder.Add(SelWFReassignView.WPO_Status, OrderByItem.OrderDir.Asc)
+            
             Else
                 ' Previously sorted by WPO_Status, so just reverse.
                 sd.Reverse()
             End If
-
+            
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
-
+              
         End Sub
-
+            
         Public Overridable Sub WPO_W_U_IDLabel_Click(ByVal sender As Object, ByVal args As EventArgs)
             ' Sorts by WPO_W_U_ID when clicked.
-
+              
             ' Get previous sorting state for WPO_W_U_ID.
-
+            
             Dim sd As OrderByItem = Me.CurrentSortOrder.Find(SelWFReassignView.WPO_W_U_ID)
-            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing AndAlso Me.CurrentSortOrder.Items.Length > 1) Then
+            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing Andalso Me.CurrentSortOrder.Items.Length > 1) Then
                 ' First time sort, so add sort order for WPO_W_U_ID.
                 Me.CurrentSortOrder.Reset()
 
-
-                'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
-                If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
-
-                Me.CurrentSortOrder.Add(SelWFReassignView.WPO_W_U_ID, OrderByItem.OrderDir.Asc)
-
+    
+              'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
+              If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
+              
+              Me.CurrentSortOrder.Add(SelWFReassignView.WPO_W_U_ID, OrderByItem.OrderDir.Asc)
+            
             Else
                 ' Previously sorted by WPO_W_U_ID, so just reverse.
                 sd.Reverse()
             End If
-
+            
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
-
+              
         End Sub
-
+            
         Public Overridable Sub WPO_WDT_IDLabel_Click(ByVal sender As Object, ByVal args As EventArgs)
             ' Sorts by WPO_WDT_ID when clicked.
-
+              
             ' Get previous sorting state for WPO_WDT_ID.
-
+            
             Dim sd As OrderByItem = Me.CurrentSortOrder.Find(SelWFReassignView.WPO_WDT_ID)
-            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing AndAlso Me.CurrentSortOrder.Items.Length > 1) Then
+            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing Andalso Me.CurrentSortOrder.Items.Length > 1) Then
                 ' First time sort, so add sort order for WPO_WDT_ID.
                 Me.CurrentSortOrder.Reset()
 
-
-                'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
-                If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
-
-                Me.CurrentSortOrder.Add(SelWFReassignView.WPO_WDT_ID, OrderByItem.OrderDir.Asc)
-
+    
+              'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
+              If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
+              
+              Me.CurrentSortOrder.Add(SelWFReassignView.WPO_WDT_ID, OrderByItem.OrderDir.Asc)
+            
             Else
                 ' Previously sorted by WPO_WDT_ID, so just reverse.
                 sd.Reverse()
             End If
-
+            
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
-
+              
         End Sub
-
+            
         Public Overridable Sub WPO_WS_IDLabel_Click(ByVal sender As Object, ByVal args As EventArgs)
             ' Sorts by WPO_WS_ID when clicked.
-
+              
             ' Get previous sorting state for WPO_WS_ID.
-
+            
             Dim sd As OrderByItem = Me.CurrentSortOrder.Find(SelWFReassignView.WPO_WS_ID)
-            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing AndAlso Me.CurrentSortOrder.Items.Length > 1) Then
+            If sd Is Nothing OrElse (Me.CurrentSortOrder.Items IsNot Nothing Andalso Me.CurrentSortOrder.Items.Length > 1) Then
                 ' First time sort, so add sort order for WPO_WS_ID.
                 Me.CurrentSortOrder.Reset()
 
-
-                'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
-                If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
-
-                Me.CurrentSortOrder.Add(SelWFReassignView.WPO_WS_ID, OrderByItem.OrderDir.Asc)
-
+    
+              'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
+              If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
+              
+              Me.CurrentSortOrder.Add(SelWFReassignView.WPO_WS_ID, OrderByItem.OrderDir.Asc)
+            
             Else
                 ' Previously sorted by WPO_WS_ID, so just reverse.
                 sd.Reverse()
             End If
-
+            
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
-
+              
         End Sub
-
+            
 
         ' Generate the event handling functions for button events.
-
+        
         ' event handler for ImageButton
         Public Overridable Sub ExcelButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+              
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            ' To customize the columns or the format, override this function in Section 1 of the page 
+            ' and modify it to your liking.
+            ' Build the where clause based on the current filter and search criteria
+            ' Create the Order By clause based on the user's current sorting preference.
+          
+              Dim wc As WhereClause = CreateWhereClause
+              Dim orderBy As OrderBy = Nothing
+              
+              orderBy = CreateOrderBy
+              
+              Dim done As Boolean = False
+              Dim val As Object = ""
+              ' Read pageSize records at a time and write out the Excel file.
+              Dim totalRowsReturned As Integer = 0
+          
+              Dim join As CompoundFilter = CreateCompoundJoinFilter()
+              Me.TotalRecords = SelWFReassignView.GetRecordCount(join, wc)
+              If Me.TotalRecords > 10000 Then
+          
+              ' Add each of the columns in order of export.
+              Dim columns() as BaseColumn = New BaseColumn() { _
+                         SelWFReassignView.WPO_ID, _ 
+             SelWFReassignView.WPO_WS_ID, _ 
+             SelWFReassignView.WPO_WDT_ID, _ 
+             SelWFReassignView.WPO_W_U_ID, _ 
+             SelWFReassignView.WPO_Status, _ 
+             SelWFReassignView.WPO_Date_Assign, _ 
+             SelWFReassignView.WPO_Remark, _ 
+             SelWFReassignView.WPO_PONum, _ 
+             SelWFReassignView.coID, _ 
+             SelWFReassignView.TOTAL, _ 
+             Nothing}
+              Dim  exportData as ExportDataToCSV = New ExportDataToCSV(SelWFReassignView.Instance, wc, orderBy, columns)
+              exportData.StartExport(Me.Page.Response, True)
 
-            Try
+              Dim dataForCSV As DataForExport = New DataForExport(SelWFReassignView.Instance, wc, orderBy, columns, join)
 
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
+              '  Read pageSize records at a time and write out the CSV file.
+              While (Not done)
+                  Dim recList As ArrayList = dataForCSV.GetRows(exportData.pageSize)
+                  If recList Is Nothing Then
+                      Exit While 'no more records we are done
+                  End If
 
-                ' To customize the columns or the format, override this function in Section 1 of the page 
-                ' and modify it to your liking.
-                ' Build the where clause based on the current filter and search criteria
-                ' Create the Order By clause based on the user's current sorting preference.
+                  totalRowsReturned = recList.Count
+                  For Each rec As BaseRecord In recList
+                      For Each col As BaseColumn In dataForCSV.ColumnList
+                          If col Is Nothing Then
+                              Continue For
+                          End If
 
-                Dim wc As WhereClause = CreateWhereClause
-                Dim orderBy As OrderBy = Nothing
+                          If Not dataForCSV.IncludeInExport(col) Then
+                              Continue For
+                          End If
 
-                orderBy = CreateOrderBy
+                          val = rec.GetValue(col).ToString()
+                          exportData.WriteColumnData(val, dataForCSV.IsString(col))
 
-                Dim done As Boolean = False
-                Dim val As Object = ""
-                ' Read pageSize records at a time and write out the Excel file.
-                Dim totalRowsReturned As Integer = 0
+                      Next col
+                      exportData.WriteNewRow()
+                  Next rec
 
-                Dim join As CompoundFilter = CreateCompoundJoinFilter()
-                Me.TotalRecords = SelWFReassignView.GetRecordCount(join, wc)
-                If Me.TotalRecords > 10000 Then
+                  '  If we already are below the pageSize, then we are done.
+                  If totalRowsReturned < exportData.pageSize Then
+                      done = True
+                  End If
+              End While
+              exportData.FinishExport(Me.Page.Response)
+          Else
+          
+              ' Create an instance of the Excel report class with the table class, where clause and order by.
+              Dim excelReport As ExportDataToExcel = New ExportDataToExcel(SelWFReassignView.Instance, wc, orderBy)
+              ' Add each of the columns in order of export.
+              ' To customize the data type, change the second parameter of the new ExcelColumn to be
+              ' a format string from Excel's Format Cell menu. For example "dddd, mmmm dd, yyyy h:mm AM/PM;@", "#,##0.00"
 
-                    ' Add each of the columns in order of export.
-                    Dim columns() As BaseColumn = New BaseColumn() { _
-                               SelWFReassignView.WPO_ID, _
-                   SelWFReassignView.WPO_WS_ID, _
-                   SelWFReassignView.WPO_WDT_ID, _
-                   SelWFReassignView.WPO_W_U_ID, _
-                   SelWFReassignView.WPO_Status, _
-                   SelWFReassignView.WPO_Date_Assign, _
-                   SelWFReassignView.WPO_Remark, _
-                   SelWFReassignView.WPO_PONum, _
-                   SelWFReassignView.coID, _
-                   SelWFReassignView.TOTAL, _
-                   Nothing}
-                    Dim exportData As ExportDataToCSV = New ExportDataToCSV(SelWFReassignView.Instance, wc, orderBy, columns)
-                    exportData.StartExport(Me.Page.Response, True)
+              If Me.Page.Response Is Nothing Then
+                Return
+              End If
 
-                    Dim dataForCSV As DataForExport = New DataForExport(SelWFReassignView.Instance, wc, orderBy, columns, join)
+              excelReport.CreateExcelBook()
 
-                    '  Read pageSize records at a time and write out the CSV file.
-                    While (Not done)
-                        Dim recList As ArrayList = dataForCSV.GetRows(exportData.pageSize)
-                        If recList Is Nothing Then
-                            Exit While 'no more records we are done
-                        End If
-
-                        totalRowsReturned = recList.Count
-                        For Each rec As BaseRecord In recList
-                            For Each col As BaseColumn In dataForCSV.ColumnList
-                                If col Is Nothing Then
-                                    Continue For
-                                End If
-
-                                If Not dataForCSV.IncludeInExport(col) Then
-                                    Continue For
-                                End If
-
-                                val = rec.GetValue(col).ToString()
-                                exportData.WriteColumnData(val, dataForCSV.IsString(col))
-
-                            Next col
-                            exportData.WriteNewRow()
-                        Next rec
-
-                        '  If we already are below the pageSize, then we are done.
-                        If totalRowsReturned < exportData.pageSize Then
-                            done = True
-                        End If
-                    End While
-                    exportData.FinishExport(Me.Page.Response)
-                Else
-
-                    ' Create an instance of the Excel report class with the table class, where clause and order by.
-                    Dim excelReport As ExportDataToExcel = New ExportDataToExcel(SelWFReassignView.Instance, wc, orderBy)
-                    ' Add each of the columns in order of export.
-                    ' To customize the data type, change the second parameter of the new ExcelColumn to be
-                    ' a format string from Excel's Format Cell menu. For example "dddd, mmmm dd, yyyy h:mm AM/PM;@", "#,##0.00"
-
-                    If Me.Page.Response Is Nothing Then
-                        Return
-                    End If
-
-                    excelReport.CreateExcelBook()
-
-                    Dim width As Integer = 0
-                    Dim columnCounter As Integer = 0
-                    Dim data As DataForExport = New DataForExport(SelWFReassignView.Instance, wc, orderBy, Nothing, join)
-                    data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_ID, "0"))
-                    data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_WS_ID, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_WDT_ID, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_W_U_ID, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_Status, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_Date_Assign, "Short Date"))
-                    data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_Remark, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_PONum, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(SelWFReassignView.coID, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(SelWFReassignView.TOTAL, "Standard"))
+              Dim width As Integer = 0
+              Dim columnCounter As Integer = 0
+              Dim data As DataForExport = New DataForExport(SelWFReassignView.Instance, wc, orderBy, Nothing, join)
+                       data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_ID, "0"))
+             data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_WS_ID, "Default"))
+             data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_WDT_ID, "Default"))
+             data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_W_U_ID, "Default"))
+             data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_Status, "Default"))
+             data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_Date_Assign, "Short Date"))
+             data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_Remark, "Default"))
+             data.ColumnList.Add(New ExcelColumn(SelWFReassignView.WPO_PONum, "Default"))
+             data.ColumnList.Add(New ExcelColumn(SelWFReassignView.coID, "Default"))
+             data.ColumnList.Add(New ExcelColumn(SelWFReassignView.TOTAL, "Standard"))
 
 
-                    For Each col As ExcelColumn In data.ColumnList
-                        width = excelReport.GetExcelCellWidth(col)
-                        If data.IncludeInExport(col) Then
-                            excelReport.AddColumnToExcelBook(columnCounter, col.ToString(), excelReport.GetExcelDataType(col), width, excelReport.GetDisplayFormat(col))
-                            columnCounter = columnCounter + 1
-                        End If
-                    Next col
+              For Each col As ExcelColumn In data.ColumnList
+                  width = excelReport.GetExcelCellWidth(col)
+                  If data.IncludeInExport(col) Then
+                      excelReport.AddColumnToExcelBook(columnCounter, col.ToString(), excelReport.GetExcelDataType(col), width, excelReport.GetDisplayFormat(col))
+                      columnCounter = columnCounter + 1
+                  End If
+              Next col
+              
+              While (Not done)
+                  Dim recList As ArrayList = data.GetRows(excelReport.pageSize)
 
-                    While (Not done)
-                        Dim recList As ArrayList = data.GetRows(excelReport.pageSize)
+                  If recList Is Nothing Then
+                      Exit While 'no more records we are done
+                  End If
 
-                        If recList Is Nothing Then
-                            Exit While 'no more records we are done
-                        End If
+                  totalRowsReturned = recList.Count
 
-                        totalRowsReturned = recList.Count
+                  For Each rec As BaseRecord In recList
+                      excelReport.AddRowToExcelBook()
+                      columnCounter = 0
 
-                        For Each rec As BaseRecord In recList
-                            excelReport.AddRowToExcelBook()
-                            columnCounter = 0
+                      For Each col As ExcelColumn In data.ColumnList
+                          If Not data.IncludeInExport(col) Then
+                              Continue For
+                          End If
 
-                            For Each col As ExcelColumn In data.ColumnList
-                                If Not data.IncludeInExport(col) Then
-                                    Continue For
-                                End If
+                          Dim _isExpandableNonCompositeForeignKey As Boolean = col.DisplayColumn.TableDefinition.IsExpandableNonCompositeForeignKey(col.DisplayColumn)
+                          If _isExpandableNonCompositeForeignKey AndAlso col.DisplayColumn.IsApplyDisplayAs Then
+                              val = SelWFReassignView.GetDFKA(rec.GetValue(col.DisplayColumn).ToString(), col.DisplayColumn, Nothing)
+                              If val Is Nothing Then
+                                  val = rec.Format(col.DisplayColumn)
+                              End If
+                          Else
+                              val = excelReport.GetValueForExcelExport(col, rec)
+                          End If
+                          excelReport.AddCellToExcelRow(columnCounter, excelReport.GetExcelDataType(col), val, col.DisplayFormat)
 
-                                Dim _isExpandableNonCompositeForeignKey As Boolean = col.DisplayColumn.TableDefinition.IsExpandableNonCompositeForeignKey(col.DisplayColumn)
-                                If _isExpandableNonCompositeForeignKey AndAlso col.DisplayColumn.IsApplyDisplayAs Then
-                                    val = SelWFReassignView.GetDFKA(rec.GetValue(col.DisplayColumn).ToString(), col.DisplayColumn, Nothing)
-                                    If val Is Nothing Then
-                                        val = rec.Format(col.DisplayColumn)
-                                    End If
-                                Else
-                                    val = excelReport.GetValueForExcelExport(col, rec)
-                                End If
-                                excelReport.AddCellToExcelRow(columnCounter, excelReport.GetExcelDataType(col), val, col.DisplayFormat)
+                          columnCounter = columnCounter + 1
+                      Next col
+                  Next rec
 
-                                columnCounter = columnCounter + 1
-                            Next col
-                        Next rec
+                  ' If we already are below the pageSize, then we are done.
+                  If totalRowsReturned < excelReport.pageSize Then
+                      done = True
+                  End If
+              End While
 
-                        ' If we already are below the pageSize, then we are done.
-                        If totalRowsReturned < excelReport.pageSize Then
-                            done = True
-                        End If
-                    End While
-
-                    excelReport.SaveExcelBook(Me.Page.Response)
-                End If
-
+              excelReport.SaveExcelBook(Me.Page.Response)
+          End If
+        
             Catch ex As Exception
-
-                ' Upon error, rollback the transaction
+            
+       ' Upon error, rollback the transaction
                 Me.Page.RollBackTransaction(sender)
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub PDFButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                Dim report As PDFReport = New PDFReport()
+              
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+                Dim report As PDFReport = New PDFReport() 
                 report.SpecificReportFileName = Page.Server.MapPath("Show-SelWFReassign-Table.PDFButton.report")
                 ' report.Title replaces the value tag of page header and footer containing ${ReportTitle}
                 report.Title = "selWFReassign"
@@ -3929,148 +3929,148 @@ Public Class BaseSelWFReassignTableControl
                 ' The 3rd parameter represents the text format of the column detail
                 ' The 4th parameter represents the horizontal alignment of the column detail
                 ' The 5th parameter represents the relative width of the column   			
-                report.AddColumn(SelWFReassignView.WPO_ID.Name, ReportEnum.Align.Right, "${WPO_ID}", ReportEnum.Align.Right, 15)
-                report.AddColumn(SelWFReassignView.WPO_WS_ID.Name, ReportEnum.Align.Left, "${WPO_WS_ID}", ReportEnum.Align.Left, 19)
-                report.AddColumn(SelWFReassignView.WPO_WDT_ID.Name, ReportEnum.Align.Left, "${WPO_WDT_ID}", ReportEnum.Align.Left, 19)
-                report.AddColumn(SelWFReassignView.WPO_W_U_ID.Name, ReportEnum.Align.Left, "${WPO_W_U_ID}", ReportEnum.Align.Left, 22)
-                report.AddColumn(SelWFReassignView.WPO_Status.Name, ReportEnum.Align.Left, "${WPO_Status}", ReportEnum.Align.Left, 22)
-                report.AddColumn(SelWFReassignView.WPO_Date_Assign.Name, ReportEnum.Align.Left, "${WPO_Date_Assign}", ReportEnum.Align.Left, 20)
-                report.AddColumn(SelWFReassignView.WPO_Remark.Name, ReportEnum.Align.Left, "${WPO_Remark}", ReportEnum.Align.Left, 28)
-                report.AddColumn(SelWFReassignView.WPO_PONum.Name, ReportEnum.Align.Left, "${WPO_PONum}", ReportEnum.Align.Left, 20)
-                report.AddColumn(SelWFReassignView.coID.Name, ReportEnum.Align.Left, "${coID}", ReportEnum.Align.Left, 25)
-                report.AddColumn(SelWFReassignView.TOTAL.Name, ReportEnum.Align.Right, "${TOTAL}", ReportEnum.Align.Right, 20)
+                 report.AddColumn(SelWFReassignView.WPO_ID.Name, ReportEnum.Align.Right, "${WPO_ID}", ReportEnum.Align.Right, 15)
+                 report.AddColumn(SelWFReassignView.WPO_WS_ID.Name, ReportEnum.Align.Left, "${WPO_WS_ID}", ReportEnum.Align.Left, 19)
+                 report.AddColumn(SelWFReassignView.WPO_WDT_ID.Name, ReportEnum.Align.Left, "${WPO_WDT_ID}", ReportEnum.Align.Left, 19)
+                 report.AddColumn(SelWFReassignView.WPO_W_U_ID.Name, ReportEnum.Align.Left, "${WPO_W_U_ID}", ReportEnum.Align.Left, 22)
+                 report.AddColumn(SelWFReassignView.WPO_Status.Name, ReportEnum.Align.Left, "${WPO_Status}", ReportEnum.Align.Left, 22)
+                 report.AddColumn(SelWFReassignView.WPO_Date_Assign.Name, ReportEnum.Align.Left, "${WPO_Date_Assign}", ReportEnum.Align.Left, 20)
+                 report.AddColumn(SelWFReassignView.WPO_Remark.Name, ReportEnum.Align.Left, "${WPO_Remark}", ReportEnum.Align.Left, 28)
+                 report.AddColumn(SelWFReassignView.WPO_PONum.Name, ReportEnum.Align.Left, "${WPO_PONum}", ReportEnum.Align.Left, 20)
+                 report.AddColumn(SelWFReassignView.coID.Name, ReportEnum.Align.Left, "${coID}", ReportEnum.Align.Left, 25)
+                 report.AddColumn(SelWFReassignView.TOTAL.Name, ReportEnum.Align.Right, "${TOTAL}", ReportEnum.Align.Right, 20)
 
-
-                Dim rowsPerQuery As Integer = 5000
-                Dim recordCount As Integer = 0
-
+          
+                Dim rowsPerQuery As Integer = 5000 
+                Dim recordCount As Integer = 0 
+                                
                 report.Page = Page.GetResourceValue("Txt:Page", "ePortalWFApproval")
                 report.ApplicationPath = Me.Page.MapPath(Page.Request.ApplicationPath)
-
+                
                 Dim whereClause As WhereClause = CreateWhereClause
                 Dim orderBy As OrderBy = CreateOrderBy
-                Dim joinFilter As BaseFilter = CreateCompoundJoinFilter()
-
-                Dim pageNum As Integer = 0
-                Dim totalRows As Integer = SelWFReassignView.GetRecordCount(joinFilter, whereClause)
+              Dim joinFilter As BaseFilter = CreateCompoundJoinFilter()
+            
+                Dim pageNum As Integer = 0 
+                Dim totalRows As Integer = SelWFReassignView.GetRecordCount(joinFilter,whereClause)
                 Dim columns As ColumnList = SelWFReassignView.GetColumnList()
                 Dim records As SelWFReassignRecord() = Nothing
-
-                Do
-
-                    records = SelWFReassignView.GetRecords(joinFilter, whereClause, orderBy, pageNum, rowsPerQuery)
+            
+                Do 
+                    
+                    records = SelWFReassignView.GetRecords(joinFilter,whereClause, orderBy, pageNum, rowsPerQuery)
                     If Not (records Is Nothing) AndAlso records.Length > 0 AndAlso whereClause.RunQuery Then
-                        For Each record As SelWFReassignRecord In records
-
+                      For Each record As SelWFReassignRecord In records 
+                    
                             ' AddData method takes four parameters   
                             ' The 1st parameters represent the data format
                             ' The 2nd parameters represent the data value
                             ' The 3rd parameters represent the default alignment of column using the data
                             ' The 4th parameters represent the maximum length of the data value being shown
-                            report.AddData("${WPO_ID}", record.Format(SelWFReassignView.WPO_ID), ReportEnum.Align.Right, 300)
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_WS_ID) Then
-                                report.AddData("${WPO_WS_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_WS_ID)
-                                _DFKA = SelWFReassignView.GetDFKA(record.WPO_WS_ID.ToString(), SelWFReassignView.WPO_WS_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso SelWFReassignView.WPO_WS_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WPO_WS_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WPO_WS_ID}", record.Format(SelWFReassignView.WPO_WS_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_WDT_ID) Then
-                                report.AddData("${WPO_WDT_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_WDT_ID)
-                                _DFKA = SelWFReassignView.GetDFKA(record.WPO_WDT_ID.ToString(), SelWFReassignView.WPO_WDT_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso SelWFReassignView.WPO_WDT_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WPO_WDT_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WPO_WDT_ID}", record.Format(SelWFReassignView.WPO_WDT_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_W_U_ID) Then
-                                report.AddData("${WPO_W_U_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_W_U_ID)
-                                _DFKA = SelWFReassignView.GetDFKA(record.WPO_W_U_ID.ToString(), SelWFReassignView.WPO_W_U_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso SelWFReassignView.WPO_W_U_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WPO_W_U_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WPO_W_U_ID}", record.Format(SelWFReassignView.WPO_W_U_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_Status) Then
-                                report.AddData("${WPO_Status}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_Status)
-                                _DFKA = SelWFReassignView.GetDFKA(record.WPO_Status.ToString(), SelWFReassignView.WPO_Status, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso SelWFReassignView.WPO_Status.IsApplyDisplayAs Then
-                                    report.AddData("${WPO_Status}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WPO_Status}", record.Format(SelWFReassignView.WPO_Status), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            report.AddData("${WPO_Date_Assign}", record.Format(SelWFReassignView.WPO_Date_Assign), ReportEnum.Align.Left, 300)
-                            report.AddData("${WPO_Remark}", record.Format(SelWFReassignView.WPO_Remark), ReportEnum.Align.Left, 300)
-                            report.AddData("${WPO_PONum}", record.Format(SelWFReassignView.WPO_PONum), ReportEnum.Align.Left, 300)
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.coID) Then
-                                report.AddData("${coID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.coID)
-                                _DFKA = SelWFReassignView.GetDFKA(record.coID.ToString(), SelWFReassignView.coID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso SelWFReassignView.coID.IsApplyDisplayAs Then
-                                    report.AddData("${coID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${coID}", record.Format(SelWFReassignView.coID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            report.AddData("${TOTAL}", record.Format(SelWFReassignView.TOTAL), ReportEnum.Align.Right, 300)
+                                                         report.AddData("${WPO_ID}", record.Format(SelWFReassignView.WPO_ID), ReportEnum.Align.Right, 300)
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_WS_ID) Then
+                                 report.AddData("${WPO_WS_ID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_WS_ID)
+                                 _DFKA = SelWFReassignView.GetDFKA(record.WPO_WS_ID.ToString(), SelWFReassignView.WPO_WS_ID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  SelWFReassignView.WPO_WS_ID.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_WS_ID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_WS_ID}", record.Format(SelWFReassignView.WPO_WS_ID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_WDT_ID) Then
+                                 report.AddData("${WPO_WDT_ID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_WDT_ID)
+                                 _DFKA = SelWFReassignView.GetDFKA(record.WPO_WDT_ID.ToString(), SelWFReassignView.WPO_WDT_ID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  SelWFReassignView.WPO_WDT_ID.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_WDT_ID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_WDT_ID}", record.Format(SelWFReassignView.WPO_WDT_ID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_W_U_ID) Then
+                                 report.AddData("${WPO_W_U_ID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_W_U_ID)
+                                 _DFKA = SelWFReassignView.GetDFKA(record.WPO_W_U_ID.ToString(), SelWFReassignView.WPO_W_U_ID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  SelWFReassignView.WPO_W_U_ID.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_W_U_ID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_W_U_ID}", record.Format(SelWFReassignView.WPO_W_U_ID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_Status) Then
+                                 report.AddData("${WPO_Status}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_Status)
+                                 _DFKA = SelWFReassignView.GetDFKA(record.WPO_Status.ToString(), SelWFReassignView.WPO_Status,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  SelWFReassignView.WPO_Status.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_Status}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_Status}", record.Format(SelWFReassignView.WPO_Status), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             report.AddData("${WPO_Date_Assign}", record.Format(SelWFReassignView.WPO_Date_Assign), ReportEnum.Align.Left, 300)
+                             report.AddData("${WPO_Remark}", record.Format(SelWFReassignView.WPO_Remark), ReportEnum.Align.Left, 300)
+                             report.AddData("${WPO_PONum}", record.Format(SelWFReassignView.WPO_PONum), ReportEnum.Align.Left, 300)
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.coID) Then
+                                 report.AddData("${coID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.coID)
+                                 _DFKA = SelWFReassignView.GetDFKA(record.coID.ToString(), SelWFReassignView.coID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  SelWFReassignView.coID.IsApplyDisplayAs Then
+                                     report.AddData("${coID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${coID}", record.Format(SelWFReassignView.coID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             report.AddData("${TOTAL}", record.Format(SelWFReassignView.TOTAL), ReportEnum.Align.Right, 300)
 
-                            report.WriteRow()
-                        Next
+                            report.WriteRow 
+                        Next 
                         pageNum = pageNum + 1
-                        recordCount += records.Length
-                    End If
-                Loop While Not (records Is Nothing) AndAlso recordCount < totalRows AndAlso whereClause.RunQuery
-
-                report.Close()
-                BaseClasses.Utils.NetUtils.WriteResponseBinaryAttachment(Me.Page.Response, report.Title + ".pdf", report.ReportInByteArray, 0, True)
-
+                        recordCount += records.Length 
+                    End If 
+                Loop While Not (records Is Nothing) AndAlso recordCount < totalRows  AndAlso whereClause.RunQuery 
+                
+                report.Close 
+                BaseClasses.Utils.NetUtils.WriteResponseBinaryAttachment(Me.Page.Response, report.Title + ".pdf", report.ReportInByteArray, 0, true)
+          
             Catch ex As Exception
-
-                ' Upon error, rollback the transaction
+            
+       ' Upon error, rollback the transaction
                 Me.Page.RollBackTransaction(sender)
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub WordButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
+              
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
                 Dim report As WordReport = New WordReport
                 report.SpecificReportFileName = Page.Server.MapPath("Show-SelWFReassign-Table.WordButton.word")
                 ' report.Title replaces the value tag of page header and footer containing ${ReportTitle}
@@ -4083,26 +4083,26 @@ Public Class BaseSelWFReassignTableControl
                 ' The 3rd parameter represents the text format of the column detail
                 ' The 4th parameter represents the horizontal alignment of the column detail
                 ' The 5th parameter represents the relative width of the column
-                report.AddColumn(SelWFReassignView.WPO_ID.Name, ReportEnum.Align.Right, "${WPO_ID}", ReportEnum.Align.Right, 15)
-                report.AddColumn(SelWFReassignView.WPO_WS_ID.Name, ReportEnum.Align.Left, "${WPO_WS_ID}", ReportEnum.Align.Left, 19)
-                report.AddColumn(SelWFReassignView.WPO_WDT_ID.Name, ReportEnum.Align.Left, "${WPO_WDT_ID}", ReportEnum.Align.Left, 19)
-                report.AddColumn(SelWFReassignView.WPO_W_U_ID.Name, ReportEnum.Align.Left, "${WPO_W_U_ID}", ReportEnum.Align.Left, 22)
-                report.AddColumn(SelWFReassignView.WPO_Status.Name, ReportEnum.Align.Left, "${WPO_Status}", ReportEnum.Align.Left, 22)
-                report.AddColumn(SelWFReassignView.WPO_Date_Assign.Name, ReportEnum.Align.Left, "${WPO_Date_Assign}", ReportEnum.Align.Left, 20)
-                report.AddColumn(SelWFReassignView.WPO_Remark.Name, ReportEnum.Align.Left, "${WPO_Remark}", ReportEnum.Align.Left, 28)
-                report.AddColumn(SelWFReassignView.WPO_PONum.Name, ReportEnum.Align.Left, "${WPO_PONum}", ReportEnum.Align.Left, 20)
-                report.AddColumn(SelWFReassignView.coID.Name, ReportEnum.Align.Left, "${coID}", ReportEnum.Align.Left, 25)
-                report.AddColumn(SelWFReassignView.TOTAL.Name, ReportEnum.Align.Right, "${TOTAL}", ReportEnum.Align.Right, 20)
+                 report.AddColumn(SelWFReassignView.WPO_ID.Name, ReportEnum.Align.Right, "${WPO_ID}", ReportEnum.Align.Right, 15)
+                 report.AddColumn(SelWFReassignView.WPO_WS_ID.Name, ReportEnum.Align.Left, "${WPO_WS_ID}", ReportEnum.Align.Left, 19)
+                 report.AddColumn(SelWFReassignView.WPO_WDT_ID.Name, ReportEnum.Align.Left, "${WPO_WDT_ID}", ReportEnum.Align.Left, 19)
+                 report.AddColumn(SelWFReassignView.WPO_W_U_ID.Name, ReportEnum.Align.Left, "${WPO_W_U_ID}", ReportEnum.Align.Left, 22)
+                 report.AddColumn(SelWFReassignView.WPO_Status.Name, ReportEnum.Align.Left, "${WPO_Status}", ReportEnum.Align.Left, 22)
+                 report.AddColumn(SelWFReassignView.WPO_Date_Assign.Name, ReportEnum.Align.Left, "${WPO_Date_Assign}", ReportEnum.Align.Left, 20)
+                 report.AddColumn(SelWFReassignView.WPO_Remark.Name, ReportEnum.Align.Left, "${WPO_Remark}", ReportEnum.Align.Left, 28)
+                 report.AddColumn(SelWFReassignView.WPO_PONum.Name, ReportEnum.Align.Left, "${WPO_PONum}", ReportEnum.Align.Left, 20)
+                 report.AddColumn(SelWFReassignView.coID.Name, ReportEnum.Align.Left, "${coID}", ReportEnum.Align.Left, 25)
+                 report.AddColumn(SelWFReassignView.TOTAL.Name, ReportEnum.Align.Right, "${TOTAL}", ReportEnum.Align.Right, 20)
 
-                Dim whereClause As WhereClause = CreateWhereClause
-
-                Dim orderBy As OrderBy = CreateOrderBy
-                Dim joinFilter As BaseFilter = CreateCompoundJoinFilter()
-
+              Dim whereClause As WhereClause = CreateWhereClause
+              
+              Dim orderBy As OrderBy = CreateOrderBy
+              Dim joinFilter As BaseFilter = CreateCompoundJoinFilter()
+                
                 Dim rowsPerQuery As Integer = 5000
                 Dim pageNum As Integer = 0
                 Dim recordCount As Integer = 0
-                Dim totalRows As Integer = SelWFReassignView.GetRecordCount(joinFilter, whereClause)
+                Dim totalRows As Integer = SelWFReassignView.GetRecordCount(joinFilter,whereClause)
 
                 report.Page = Page.GetResourceValue("Txt:Page", "ePortalWFApproval")
                 report.ApplicationPath = Me.Page.MapPath(Page.Request.ApplicationPath)
@@ -4110,227 +4110,227 @@ Public Class BaseSelWFReassignTableControl
                 Dim columns As ColumnList = SelWFReassignView.GetColumnList()
                 Dim records As SelWFReassignRecord() = Nothing
                 Do
-                    records = SelWFReassignView.GetRecords(joinFilter, whereClause, orderBy, pageNum, rowsPerQuery)
-
+                    records = SelWFReassignView.GetRecords(joinFilter,whereClause, orderBy, pageNum, rowsPerQuery)
+                    
                     If Not (records Is Nothing) AndAlso records.Length > 0 AndAlso whereClause.RunQuery Then
-                        For Each record As SelWFReassignRecord In records
+                      For Each record As SelWFReassignRecord In records
                             ' AddData method takes four parameters
                             ' The 1st parameters represent the data format
                             ' The 2nd parameters represent the data value
                             ' The 3rd parameters represent the default alignment of column using the data
                             ' The 4th parameters represent the maximum length of the data value being shown
-                            report.AddData("${WPO_ID}", record.Format(SelWFReassignView.WPO_ID), ReportEnum.Align.Right, 300)
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_WS_ID) Then
-                                report.AddData("${WPO_WS_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_WS_ID)
-                                _DFKA = SelWFReassignView.GetDFKA(record.WPO_WS_ID.ToString(), SelWFReassignView.WPO_WS_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso SelWFReassignView.WPO_WS_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WPO_WS_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WPO_WS_ID}", record.Format(SelWFReassignView.WPO_WS_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_WDT_ID) Then
-                                report.AddData("${WPO_WDT_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_WDT_ID)
-                                _DFKA = SelWFReassignView.GetDFKA(record.WPO_WDT_ID.ToString(), SelWFReassignView.WPO_WDT_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso SelWFReassignView.WPO_WDT_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WPO_WDT_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WPO_WDT_ID}", record.Format(SelWFReassignView.WPO_WDT_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_W_U_ID) Then
-                                report.AddData("${WPO_W_U_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_W_U_ID)
-                                _DFKA = SelWFReassignView.GetDFKA(record.WPO_W_U_ID.ToString(), SelWFReassignView.WPO_W_U_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso SelWFReassignView.WPO_W_U_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WPO_W_U_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WPO_W_U_ID}", record.Format(SelWFReassignView.WPO_W_U_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_Status) Then
-                                report.AddData("${WPO_Status}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_Status)
-                                _DFKA = SelWFReassignView.GetDFKA(record.WPO_Status.ToString(), SelWFReassignView.WPO_Status, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso SelWFReassignView.WPO_Status.IsApplyDisplayAs Then
-                                    report.AddData("${WPO_Status}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WPO_Status}", record.Format(SelWFReassignView.WPO_Status), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            report.AddData("${WPO_Date_Assign}", record.Format(SelWFReassignView.WPO_Date_Assign), ReportEnum.Align.Left, 300)
-                            report.AddData("${WPO_Remark}", record.Format(SelWFReassignView.WPO_Remark), ReportEnum.Align.Left, 300)
-                            report.AddData("${WPO_PONum}", record.Format(SelWFReassignView.WPO_PONum), ReportEnum.Align.Left, 300)
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.coID) Then
-                                report.AddData("${coID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.coID)
-                                _DFKA = SelWFReassignView.GetDFKA(record.coID.ToString(), SelWFReassignView.coID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso SelWFReassignView.coID.IsApplyDisplayAs Then
-                                    report.AddData("${coID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${coID}", record.Format(SelWFReassignView.coID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            report.AddData("${TOTAL}", record.Format(SelWFReassignView.TOTAL), ReportEnum.Align.Right, 300)
+                             report.AddData("${WPO_ID}", record.Format(SelWFReassignView.WPO_ID), ReportEnum.Align.Right, 300)
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_WS_ID) Then
+                                 report.AddData("${WPO_WS_ID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_WS_ID)
+                                 _DFKA = SelWFReassignView.GetDFKA(record.WPO_WS_ID.ToString(), SelWFReassignView.WPO_WS_ID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  SelWFReassignView.WPO_WS_ID.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_WS_ID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_WS_ID}", record.Format(SelWFReassignView.WPO_WS_ID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_WDT_ID) Then
+                                 report.AddData("${WPO_WDT_ID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_WDT_ID)
+                                 _DFKA = SelWFReassignView.GetDFKA(record.WPO_WDT_ID.ToString(), SelWFReassignView.WPO_WDT_ID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  SelWFReassignView.WPO_WDT_ID.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_WDT_ID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_WDT_ID}", record.Format(SelWFReassignView.WPO_WDT_ID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_W_U_ID) Then
+                                 report.AddData("${WPO_W_U_ID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_W_U_ID)
+                                 _DFKA = SelWFReassignView.GetDFKA(record.WPO_W_U_ID.ToString(), SelWFReassignView.WPO_W_U_ID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  SelWFReassignView.WPO_W_U_ID.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_W_U_ID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_W_U_ID}", record.Format(SelWFReassignView.WPO_W_U_ID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.WPO_Status) Then
+                                 report.AddData("${WPO_Status}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.WPO_Status)
+                                 _DFKA = SelWFReassignView.GetDFKA(record.WPO_Status.ToString(), SelWFReassignView.WPO_Status,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  SelWFReassignView.WPO_Status.IsApplyDisplayAs Then
+                                     report.AddData("${WPO_Status}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${WPO_Status}", record.Format(SelWFReassignView.WPO_Status), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             report.AddData("${WPO_Date_Assign}", record.Format(SelWFReassignView.WPO_Date_Assign), ReportEnum.Align.Left, 300)
+                             report.AddData("${WPO_Remark}", record.Format(SelWFReassignView.WPO_Remark), ReportEnum.Align.Left, 300)
+                             report.AddData("${WPO_PONum}", record.Format(SelWFReassignView.WPO_PONum), ReportEnum.Align.Left, 300)
+                             If BaseClasses.Utils.MiscUtils.IsNull(record.coID) Then
+                                 report.AddData("${coID}", "",ReportEnum.Align.Left, 300)
+                             Else 
+                                 Dim _isExpandableNonCompositeForeignKey as Boolean
+                                 Dim _DFKA as String = ""
+                                 _isExpandableNonCompositeForeignKey = SelWFReassignView.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(SelWFReassignView.coID)
+                                 _DFKA = SelWFReassignView.GetDFKA(record.coID.ToString(), SelWFReassignView.coID,Nothing)
+                                 If _isExpandableNonCompositeForeignKey AndAlso  (not _DFKA  Is Nothing)  AndAlso  SelWFReassignView.coID.IsApplyDisplayAs Then
+                                     report.AddData("${coID}", _DFKA,ReportEnum.Align.Left, 300)
+                                 Else 
+                                     report.AddData("${coID}", record.Format(SelWFReassignView.coID), ReportEnum.Align.Left, 300)
+                                 End If
+                             End If
+                             report.AddData("${TOTAL}", record.Format(SelWFReassignView.TOTAL), ReportEnum.Align.Right, 300)
 
-                            report.WriteRow()
+                            report.WriteRow
                         Next
                         pageNum = pageNum + 1
                         recordCount += records.Length
                     End If
-                Loop While Not (records Is Nothing) AndAlso recordCount < totalRows AndAlso whereClause.RunQuery
-                report.save()
-                BaseClasses.Utils.NetUtils.WriteResponseBinaryAttachment(Me.Page.Response, report.Title + ".doc", report.ReportInByteArray, 0, True)
-
+                Loop While Not (records Is Nothing) AndAlso recordCount < totalRows AndAlso whereClause.RunQuery 
+                report.save
+                BaseClasses.Utils.NetUtils.WriteResponseBinaryAttachment(Me.Page.Response, report.Title + ".doc", report.ReportInByteArray, 0, true)
+          
             Catch ex As Exception
-
-                ' Upon error, rollback the transaction
+            
+       ' Upon error, rollback the transaction
                 Me.Page.RollBackTransaction(sender)
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
-
+    
         End Sub
-
+        
         ' event handler for PushButton
         Public Overridable Sub btnAssignTo_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub ActionsButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
-                'This method is initially empty to implement custom click handler.
-
+              
+    Try
+    
+            'This method is initially empty to implement custom click handler.
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub SelWFReassignFilterButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
-                Me.DataChanged = True
-
+              
+    Try
+    
+          Me.DataChanged = True
+          
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
-
+        
+      
 
         ' Generate the event handling functions for filter and search events.
-
+        
         ' event handler for Aspx
         Protected Overridable Sub ddlAssignTo_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-            ' Setting the DataChanged to True results in the page being refreshed with
-            ' the most recent data from the database.  This happens in PreRender event
-            ' based on the current sort, search and filter criteria.
-            Me.DataChanged = True
-
+        
+           ' Setting the DataChanged to True results in the page being refreshed with
+           ' the most recent data from the database.  This happens in PreRender event
+           ' based on the current sort, search and filter criteria.
+           Me.DataChanged = True
+              	   
         End Sub
-
+            
         ' event handler for FieldFilter
         Protected Overridable Sub WPO_W_U_IDFilter_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-            ' Setting the DataChanged to True results in the page being refreshed with
-            ' the most recent data from the database.  This happens in PreRender event
-            ' based on the current sort, search and filter criteria.
-            Me.DataChanged = True
-
-
-
+           ' Setting the DataChanged to True results in the page being refreshed with
+           ' the most recent data from the database.  This happens in PreRender event
+           ' based on the current sort, search and filter criteria.
+           Me.DataChanged = True
+           
+          	                   
+              
         End Sub
-
-
+            
+    
         ' Generate the event handling functions for others
-
-
+        
+      
 
 
         Protected _TotalRecords As Integer = -1
         Public Property TotalRecords() As Integer
             Get
-                If _TotalRecords < 0 Then
+                If _TotalRecords < 0 
                     _TotalRecords = SelWFReassignView.GetRecordCount(CreateCompoundJoinFilter(), CreateWhereClause())
                 End If
                 Return Me._TotalRecords
             End Get
             Set(ByVal value As Integer)
                 If Me.PageSize > 0 Then
-
+                
                     Me.TotalPages = CInt(Math.Ceiling(value / Me.PageSize))
-
+                  
                 End If
                 Me._TotalRecords = value
             End Set
         End Property
 
-
-
+        
+    
         Protected _TotalPages As Integer = -1
         Public Property TotalPages() As Integer
             Get
                 If _TotalPages < 0 Then
-
+                
                     Me.TotalPages = CInt(Math.Ceiling(TotalRecords / Me.PageSize))
-
-                End If
+                  
+                End If                
                 Return Me._TotalPages
             End Get
             Set(ByVal value As Integer)
@@ -4349,196 +4349,196 @@ Public Class BaseSelWFReassignTableControl
         End Property
 
 
-
+          
         Private _CurrentSortOrder As OrderBy = Nothing
         Public Property CurrentSortOrder() As OrderBy
             Get
                 Return Me._CurrentSortOrder
             End Get
-            Set(ByVal value As OrderBy)
+            Set(ByVal value As BaseClasses.Data.OrderBy)
                 Me._CurrentSortOrder = value
             End Set
         End Property
-
-        Public Property DataSource() As SelWFReassignRecord()
+        
+        Public Property DataSource() As SelWFReassignRecord ()
             Get
                 Return DirectCast(MyBase._DataSource, SelWFReassignRecord())
             End Get
-            Set(ByVal value As SelWFReassignRecord())
+            Set(ByVal value() As SelWFReassignRecord)
                 Me._DataSource = value
             End Set
         End Property
-
+       
 #Region "Helper Properties"
-
+        
         Public ReadOnly Property ActionsButton() As ePortalWFApproval.UI.IThemeButtonWithArrow
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ActionsButton"), ePortalWFApproval.UI.IThemeButtonWithArrow)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property btnAssignTo() As System.Web.UI.WebControls.Button
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnAssignTo"), System.Web.UI.WebControls.Button)
             End Get
         End Property
-
+        
         Public ReadOnly Property coIDLabel() As System.Web.UI.WebControls.LinkButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "coIDLabel"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property ddlAssignTo() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlAssignTo"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
-
+        
         Public ReadOnly Property ExcelButton() As System.Web.UI.WebControls.ImageButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ExcelButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal2() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal2"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal3() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal3"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property PDFButton() As System.Web.UI.WebControls.ImageButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "PDFButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property SelWFReassignFilterButton() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SelWFReassignFilterButton"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property SelWFReassignPagination() As ePortalWFApproval.UI.IPagination
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SelWFReassignPagination"), ePortalWFApproval.UI.IPagination)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property SelWFReassignTitle() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SelWFReassignTitle"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property SelWFReassignToggleAll() As System.Web.UI.WebControls.CheckBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SelWFReassignToggleAll"), System.Web.UI.WebControls.CheckBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property TOTALFromFilter() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "TOTALFromFilter"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+        
         Public ReadOnly Property TOTALLabel() As System.Web.UI.WebControls.LinkButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "TOTALLabel"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property TOTALLabel1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "TOTALLabel1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property TOTALToFilter() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "TOTALToFilter"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+        
         Public ReadOnly Property WordButton() As System.Web.UI.WebControls.ImageButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WordButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPO_Date_AssignLabel() As System.Web.UI.WebControls.LinkButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_Date_AssignLabel"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPO_PONumLabel() As System.Web.UI.WebControls.LinkButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_PONumLabel"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPO_RemarkLabel() As System.Web.UI.WebControls.LinkButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_RemarkLabel"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPO_StatusLabel() As System.Web.UI.WebControls.LinkButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_StatusLabel"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPO_W_U_IDFilter() As BaseClasses.Web.UI.WebControls.QuickSelector
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_W_U_IDFilter"), BaseClasses.Web.UI.WebControls.QuickSelector)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPO_W_U_IDLabel() As System.Web.UI.WebControls.LinkButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_W_U_IDLabel"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPO_W_U_IDLabel1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_W_U_IDLabel1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPO_WDT_IDLabel() As System.Web.UI.WebControls.LinkButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_WDT_IDLabel"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPO_WS_IDLabel() As System.Web.UI.WebControls.LinkButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_WS_IDLabel"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-
+        
 #End Region
 
 #Region "Helper Functions"
