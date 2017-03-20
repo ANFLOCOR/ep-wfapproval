@@ -182,34 +182,34 @@ Partial Public Class Edit_WCAR_Doc1
 
         ' Write out the Set methods
         
-        Public Sub SetWCAR_Doc1TabContainer()
-            SetWCAR_Doc1TabContainer_Base() 
-        End Sub
-        
-        Public Sub SetWCAR_Doc_Attach1TableControl()
-            SetWCAR_Doc_Attach1TableControl_Base() 
-        End Sub
-        
-        Public Sub SetWCAR_Doc_Checker1TableControl()
-            SetWCAR_Doc_Checker1TableControl_Base() 
-        End Sub
-        
+        '        Public Sub SetWCAR_Doc1TabContainer()
+        '            SetWCAR_Doc1TabContainer_Base() 
+        '        End Sub
+
+        '        Public Sub SetWCAR_Doc_Attach1TableControl()
+        '            SetWCAR_Doc_Attach1TableControl_Base() 
+        '        End Sub
+
+        '        Public Sub SetWCAR_Doc_Checker1TableControl()
+        '            SetWCAR_Doc_Checker1TableControl_Base() 
+        '        End Sub
+
         Public Sub SetWCAR_Doc1RecordControl()
-            SetWCAR_Doc1RecordControl_Base() 
+            SetWCAR_Doc1RecordControl_Base()
         End Sub
-        
-'        Public Sub SetCancelButton()
-'            SetCancelButton_Base() 
-'        End Sub              
-            
-'        Public Sub SetSaveButton()
-'            SetSaveButton_Base() 
-'        End Sub              
-                         
-        
+
+        '        Public Sub SetCancelButton()
+        '            SetCancelButton_Base() 
+        '        End Sub              
+
+        '        Public Sub SetSaveButton()
+        '            SetSaveButton_Base() 
+        '        End Sub              
+
+
         ' Write out the methods for DataSource
-        
-   
+
+
 
 #End Region
 
@@ -258,6 +258,8 @@ Partial Public Class Edit_WCAR_Doc1
             ' or 'no access' page if not. Does not do anything if role-based security
             ' is not turned on, but you can override to add your own security.
             Me.Authorize("")
+			Me.Authorize(Ctype(WCAR_Doc1RecordControl, Control), "NOT_ANONYMOUS")
+					
     
             If (Not Me.IsPostBack) Then
             
@@ -275,7 +277,7 @@ Partial Public Class Edit_WCAR_Doc1
             End If
         
         
-            Page.Title = ExpandResourceValue("{Title:Edit} WCAR Document")
+            Page.Title = "ePortal Workflow Approval - Edit CAR Document (North)"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If
@@ -357,12 +359,6 @@ Partial Public Class Edit_WCAR_Doc1
           ' Load data for each record and table UI control.
         
           Select Case control
-          
-              Case "WCAR_Doc_Attach1TableControl"
-                 SetWCAR_Doc_Attach1TableControl()
-          
-              Case "WCAR_Doc_Checker1TableControl"
-                 SetWCAR_Doc_Checker1TableControl()
           
               Case "WCAR_Doc1RecordControl"
                  SetWCAR_Doc1RecordControl()
@@ -460,9 +456,7 @@ Partial Public Class Edit_WCAR_Doc1
      
                 Me.DataBind()
                 
-                
-            SetWCAR_Doc1TabContainer() 
-          
+                    
     
                 ' Load and bind data for each record and table UI control.
                         
@@ -543,36 +537,6 @@ Partial Public Class Edit_WCAR_Doc1
 
         ' Write out the Set methods
         
-        Public Sub SetWCAR_Doc1TabContainer_Base()           
-                        
-                   
-            If EvaluateFormula("URL(""TabVisible"")").ToLower() = "true" Then
-                MiscUtils.FindControlRecursively(Me, "WCAR_Doc1TabContainer").Visible = True
-            ElseIf EvaluateFormula("URL(""TabVisible"")").ToLower() = "false" Then
-                MiscUtils.FindControlRecursively(Me, "WCAR_Doc1TabContainer").Visible = False
-            End If
-         
-  
-        End Sub        
-      
-        Public Sub SetWCAR_Doc_Attach1TableControl_Base()           
-        
-        
-            If WCAR_Doc_Attach1TableControl.Visible Then
-                WCAR_Doc_Attach1TableControl.LoadData()
-                WCAR_Doc_Attach1TableControl.DataBind()
-            End If
-        End Sub        
-      
-        Public Sub SetWCAR_Doc_Checker1TableControl_Base()           
-        
-        
-            If WCAR_Doc_Checker1TableControl.Visible Then
-                WCAR_Doc_Checker1TableControl.LoadData()
-                WCAR_Doc_Checker1TableControl.DataBind()
-            End If
-        End Sub        
-      
         Public Sub SetWCAR_Doc1RecordControl_Base()           
         
         

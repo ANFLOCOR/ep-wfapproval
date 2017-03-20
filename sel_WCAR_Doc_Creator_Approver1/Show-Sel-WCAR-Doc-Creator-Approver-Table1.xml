@@ -52,7 +52,7 @@
         </Attribute>
         <Attribute>
           <Name>RedirectURL</Name>
-          <Value>../WCAR_Doc/Show-WCAR-Doc.aspx?WCAR_Doc={Sel_WCAR_Doc_Creator_ApproverTableControlRow:FV:WCD_ID}</Value>
+          <Value>../WCAR_Doc1/Edit-WCAR-Doc1.aspx?WCAR_Doc1={Sel_WCAR_Doc_Creator_Approver1TableControlRow:FV:WCD_ID}</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>

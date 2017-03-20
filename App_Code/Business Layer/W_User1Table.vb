@@ -83,7 +83,10 @@ Namespace ePortalWFApproval.Business
 
     Public Sub New()
         MyBase.New()
-    End Sub
+        End Sub
+
+
+      
 
 End Class ' W_User1Table
 End Namespace

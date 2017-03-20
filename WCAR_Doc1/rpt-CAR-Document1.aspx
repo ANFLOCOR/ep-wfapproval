@@ -20,7 +20,7 @@
 			<ContentTemplate>
 
                 <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td><table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
-                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dheci" valign="middle"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle"><span style="font-size:14pt"><b>CAR Document Preview (South)</b></span></td></tr></table>
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dheci" valign="middle"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle"><span style="font-size:14pt"><b>CAR Document Preview (North)</b></span></td></tr></table>
 </td><td class="dhb"></td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
 
                 </td><td class="panelHeaderR"></td></tr><tr><td class="panelL"></td><td>

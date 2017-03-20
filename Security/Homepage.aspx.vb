@@ -55,6 +55,7 @@ Partial Public Class Homepage
           LoadData_Base()
             'Me.Sel_Approver_Pending_TasksTitle.Text = "Welcome " & System.Web.HttpContext.Current.Session("FullName").ToString()
             System.Web.HttpContext.Current.Session("ActivityUserID") = System.Web.HttpContext.Current.Session("UserID").ToString()
+            System.Web.HttpContext.Current.Session("ActivityUserIDN") = System.Web.HttpContext.Current.Session("UserIDNorth").ToString()
       End Sub
       
       Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS as Boolean) As String

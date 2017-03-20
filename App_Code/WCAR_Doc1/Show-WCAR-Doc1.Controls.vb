@@ -257,10 +257,10 @@ Public Class WCAR_Doc1RecordControl
             End If
         End Sub
 
-        Public Overrides Sub btnPrint_Click(ByVal sender As Object, ByVal args As EventArgs)
+		Public Overrides Sub btnPrint_Click(ByVal sender As Object, ByVal args As EventArgs)
             Dim url As String = ""
             'Dim url As String = "../wf_car/ShowSel_WCAR_Activity_WCAR_DocTable.aspx?"
-            url = "../WCAR_Doc/rpt-CAR-Document.aspx?CAR_ID=" & Me.WCD_ID.Text
+            url = "../WCAR_Doc1/rpt-CAR-Document1.aspx?CAR_ID=" & Me.WCD_ID.Text
             Dim shouldRedirect As Boolean = True
             Try
                 DbUtils.StartTransaction()
