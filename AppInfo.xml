@@ -24075,6 +24075,70 @@
     <value>DatabaseWASS%dbo.sel_SysSetupUsers_UserRoles</value>
     <datatype>System.String</datatype>
   </option>
+  <option name="font_color_0" readonly="False" displayorder="-1">
+    <value>838146</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_1" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_2" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_3" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_4" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_5" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_6" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_7" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_8" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_9" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_10" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_11" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_12" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_13" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_14" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
+  <option name="font_color_15" readonly="False" displayorder="-1">
+    <value>16777215</value>
+    <datatype>System.String</datatype>
+  </option>
   <optiongroup name="NewAppOptions" displayorder="1">
     <displayname>New Applications</displayname>
     <description>These options only apply to new (future) applications when they are created.</description>

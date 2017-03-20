@@ -29,7 +29,7 @@
 
                 <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td><ePortalWFApproval:Sel_WPO_Activity_WPOP10100TableControl runat="server" id="Sel_WPO_Activity_WPOP10100TableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelHeaderL"></td><td class="dh">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle">
-                        <asp:Literal runat="server" id="Sel_WPO_Activity_WPOP10100Title" Text="PO Workflow Tasks">	</asp:Literal></td></tr></table>
+                        <asp:Literal runat="server" id="Sel_WPO_Activity_WPOP10100Title" Text="Purchase Order Workflow Tasks (South)">	</asp:Literal></td></tr></table>
 </td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0" style="width: 100%;"><tr><td></td><td class="prbbc"></td><td class="prbbc"></td><td><div id="ActionsDiv" runat="server" class="popupWrapper">
                 <table border="0" cellpadding="0" cellspacing="0"><tr><td></td><td></td><td></td><td></td><td style="text-align: right;" class="popupTableCellValue"><input type="image" src="../Images/closeButton.gif" onmouseover="this.src='../Images/closeButtonOver.gif'" onmouseout="this.src='../Images/closeButton.gif'" alt="" onclick="ISD_HidePopupPanel();return false;" align="top" /><br /></td></tr><tr><td></td><td>
                     <asp:ImageButton runat="server" id="PDFButton" causesvalidation="false" commandname="ReportData" imageurl="../Images/ButtonBarPDFExport.gif" onmouseout="this.src=&#39;../Images/ButtonBarPDFExport.gif&#39;" onmouseover="this.src=&#39;../Images/ButtonBarPDFExportOver.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;Btn:PDF&quot;, &quot;ePortalWFApproval&quot;) %>">		
@@ -52,38 +52,38 @@
 	</asp:ImageButton></td><td><asp:ImageButton runat="server" id="WCanvass_PO_MapResetButton" causesvalidation="False" commandname="ResetFilters" imageurl="../Images/ButtonBarReset.gif" onmouseout="this.src=&#39;../Images/ButtonBarReset.gif&#39;" onmouseover="this.src=&#39;../Images/ButtonBarResetOver.gif&#39;">		
 	</asp:ImageButton></td><td></td><td><ePortalWFApproval:Pagination runat="server" id="Sel_WPO_Activity_WPOP10100Pagination"></ePortalWFApproval:Pagination></td></tr></table>
 </td></tr><tr><td class="tre"></td><td class="tre"><table id="Sel_WPO_Activity_WPOP10100TableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc" style="text-align:center;"></th><th class="fls" style="text-align:center;"></th><th class="fls" style="text-align:center;"></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WPO_WDT_IDLabel1" Text="Workflow">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WPO_PONumLabel1" Text="PO Number">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="TOTALLabel1" Text="Total">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WPO_Date_AssignLabel1" Text="Date Assign">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WPO_StatusLabel3" Text="Status">	</asp:Literal></th></tr><asp:Repeater runat="server" id="Sel_WPO_Activity_WPOP10100TableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:Sel_WPO_Activity_WPOP10100TableControlRow runat="server" id="Sel_WPO_Activity_WPOP10100TableControlRow">
-<tr><td class="tableCellLabel" style="text-align:center;"><asp:ImageButton runat="server" id="ExpandRowButton" causesvalidation="False" commandname="ExpandCollapseRow" cssclass="button_link" imageurl="../Images/icon_expandcollapserow.gif" onmouseout="this.src=&#39;../Images/icon_expandcollapserow.gif&#39;" onmouseover="this.src=&#39;../Images/icon_expandcollapserow_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;Txt:ExpandCollapseRow&quot;, &quot;ePortalWFApproval&quot;) %>">		
-	</asp:ImageButton></td><td class="tableCellValue" style="text-align:center;"><asp:ImageButton runat="server" id="ImageButton" causesvalidation="False" commandname="Redirect" imageurl="../Images/icon-open.png" onmouseout="this.src=&#39;../Images/icon-open.png&#39;" onmouseover="this.src=&#39;../Images/icon-open-over.png&#39;" tooltip="&lt;%# GetResourceValue(&quot;Workflow Task Approval&quot;, &quot;ePortalWFApproval&quot;) %>">		
-	</asp:ImageButton></td><td class="tableCellLabel" style="text-align:center;"><asp:ImageButton runat="server" id="ImageButton3" causesvalidation="False" commandname="Redirect" imageurl="../Images/panelSearchButton.png" tooltip="&lt;%# GetResourceValue(&quot;Txt:ViewRecord&quot;, &quot;ePortalWFApproval&quot;) %>">		
+<tr><td class="ttc" style="text-align:center;"><asp:ImageButton runat="server" id="ExpandRowButton" causesvalidation="False" commandname="ExpandCollapseRow" cssclass="button_link" imageurl="../Images/icon_expandcollapserow.gif" onmouseout="this.src=&#39;../Images/icon_expandcollapserow.gif&#39;" onmouseover="this.src=&#39;../Images/icon_expandcollapserow_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;Txt:ExpandCollapseRow&quot;, &quot;ePortalWFApproval&quot;) %>">		
+	</asp:ImageButton></td><td class="ttc" style="text-align:center;"><asp:ImageButton runat="server" id="ImageButton" causesvalidation="False" commandname="Redirect" imageurl="../Images/icon-open.png" onmouseout="this.src=&#39;../Images/icon-open.png&#39;" onmouseover="this.src=&#39;../Images/icon-open-over.png&#39;" tooltip="&lt;%# GetResourceValue(&quot;Workflow Task Approval&quot;, &quot;ePortalWFApproval&quot;) %>">		
+	</asp:ImageButton></td><td class="ttc" style="text-align:center;"><asp:ImageButton runat="server" id="ImageButton3" causesvalidation="False" commandname="Redirect" imageurl="../Images/panelSearchButton.png" tooltip="&lt;%# GetResourceValue(&quot;Txt:ViewRecord&quot;, &quot;ePortalWFApproval&quot;) %>">		
 	</asp:ImageButton> 
-</td><td class="tableCellValue" style="text-align:left;"><span style="white-space:nowrap;">
+</td><td class="ttc" style="text-align:left;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPO_WDT_ID"></asp:Literal></span>
-<asp:Literal runat="server" id="WPO_Is_Done" visible="False"></asp:Literal></td><td class="tableCellValue" style="text-align:left;"><asp:Literal runat="server" id="WPO_PONum"></asp:Literal> 
+<asp:Literal runat="server" id="WPO_Is_Done" visible="False"></asp:Literal></td><td class="ttc" style="text-align:left;"><asp:Literal runat="server" id="WPO_PONum"></asp:Literal> 
 <span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPOP_C_ID" visible="False"></asp:Literal></span>
-</td><td class="tableCellValue" style="text-align:right;"><span style="white-space:nowrap;">
+</td><td class="ttc" style="text-align:right;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="TOTAL"></asp:Literal></span>
-</td><td class="tableCellValue" style="text-align:center;"><span style="white-space:nowrap;">
+</td><td class="ttc" style="text-align:center;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPO_Date_Assign"></asp:Literal></span>
-</td><td class="tableCellValue" style="text-align:right;"><span style="white-space:nowrap;">
+</td><td class="ttc" style="text-align:right;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPO_Status"></asp:Literal></span>
 </td></tr><tr id="Sel_WPO_Activity_WPOP10100TableControlAltRow" runat="server"><td class="tableCellLabel" style="text-align:center;"></td><td class="tableCellValue" colspan="7"><BaseClasses:TabContainer runat="server" id="Sel_WPO_Activity_WPOP10100TableControlTabContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
  <BaseClasses:TabPanel runat="server" id="TabPanel" HeaderText="Approval History">	<ContentTemplate> 
   <ePortalWFApproval:WPO_WFHistory_Details_newTableControl runat="server" id="WPO_WFHistory_Details_newTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><asp:panel id="WPO_WFHistory_Details_newTableControlCollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre"> 
 <table><tr><td></td><td></td><td></td><td></td><td></td><td><ePortalWFApproval:PaginationMedium runat="server" id="WPO_WFHistory_Details_newPagination"></ePortalWFApproval:PaginationMedium></td></tr></table>
-</td></tr><tr><td class="tre"><table id="WPO_WFHistory_Details_newTableControlGrid" cellpadding="1" cellspacing="2" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="tableCellValue" style="text-align:left;"><asp:Literal runat="server" id="WPO_W_U_IDLabel1" Text="User (Assigned)">	</asp:Literal> 
+</td></tr><tr><td class="tre"><table id="WPO_WFHistory_Details_newTableControlGrid" cellpadding="1" cellspacing="2" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc" style="text-align:left;"><asp:Literal runat="server" id="WPO_W_U_IDLabel1" Text="User (Assigned)">	</asp:Literal> 
 </th><th class="thc" style="text-align:left;"><asp:Literal runat="server" id="WPO_WS_IDLabel1" Text="Step">	</asp:Literal></th><th class="thc" style="text-align:left;"><asp:Literal runat="server" id="WPO_StatusLabel" Text="Status">	</asp:Literal></th><th class="thc" style="text-align:left;"><asp:Literal runat="server" id="WPO_Date_AssignLabel" Text="Date Assign">	</asp:Literal></th><th class="thc" style="text-align:left;"><asp:Literal runat="server" id="WPO_Date_ActionLabel1" Text="Date Action">	</asp:Literal></th><th class="thc" style="text-align:left;"><asp:Literal runat="server" id="WPO_RemarkLabel1" Text="Remark">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WPO_WFHistory_Details_newTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WPO_WFHistory_Details_newTableControlRow runat="server" id="WPO_WFHistory_Details_newTableControlRow">
-<tr><td class="tableCellValue" style="text-align:left;"><span style="white-space:nowrap;">
+<tr><td class="ttc" style="text-align:left;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPO_W_U_ID1"></asp:Literal></span>
-</td><td class="tableCellValue"><span style="white-space:nowrap;">
+</td><td class="ttc"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPO_WS_ID1"></asp:Literal></span>
-</td><td class="tableCellValue" style="text-align:left;"><span style="white-space:nowrap;">
+</td><td class="ttc" style="text-align:left;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPO_Status1"></asp:Literal></span>
-</td><td class="tableCellValue"><span style="white-space:nowrap;">
+</td><td class="ttc"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPO_Date_Assign1"></asp:Literal></span>
-</td><td class="tableCellValue"><span style="white-space:nowrap;">
+</td><td class="ttc"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPO_Date_Action1"></asp:Literal></span>
-</td><td class="tableCellValue"><asp:Literal runat="server" id="WPO_Remark1"></asp:Literal></td></tr></ePortalWFApproval:WPO_WFHistory_Details_newTableControlRow>
+</td><td class="ttc"><asp:Literal runat="server" id="WPO_Remark1"></asp:Literal></td></tr></ePortalWFApproval:WPO_WFHistory_Details_newTableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>
@@ -97,12 +97,12 @@
  <BaseClasses:TabPanel runat="server" id="TabPanel1" HeaderText="Workflow Path">	<ContentTemplate> 
   <ePortalWFApproval:WPO_Step_WPO_StepDetail_WASPTableControl runat="server" id="WPO_Step_WPO_StepDetail_WASPTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td></td><td></td></tr><tr><td class="panelHeaderL"></td><td class="dh"></td></tr><tr><td></td><td>
                   <asp:panel id="CollapsibleRegion2" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
-                    <table id="WPO_Step_WPO_StepDetail_WASPTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="WPO_SD_W_U_IDLabel" Text="User(Assigned)">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WPO_S_Step_TypeLabel" Text="Step Type">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WPO_S_IDLabel" Text="WPO S">	</asp:Literal></th><th class="thc"></th><th class="thc"></th><th class="thc"></th></tr><asp:Repeater runat="server" id="WPO_Step_WPO_StepDetail_WASPTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WPO_Step_WPO_StepDetail_WASPTableControlRow runat="server" id="WPO_Step_WPO_StepDetail_WASPTableControlRow">
-<tr><td class="tableCellValue" style="text-align:left;"><span style="white-space:nowrap;">
+                    <table id="WPO_Step_WPO_StepDetail_WASPTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="WPO_SD_W_U_IDLabel" Text="User(Assigned)">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WPO_S_Step_TypeLabel" Text="Step Type">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WPO_S_IDLabel" Text="WPO S">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WPO_Step_WPO_StepDetail_WASPTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WPO_Step_WPO_StepDetail_WASPTableControlRow runat="server" id="WPO_Step_WPO_StepDetail_WASPTableControlRow">
+<tr><td class="ttc" style="text-align:left;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPO_SD_W_U_ID"></asp:Literal></span>
-</td><td class="tableCellValue" style="text-align:right;"><asp:Literal runat="server" id="WPO_S_Step_Type"></asp:Literal> </td><td class="tableCellValue" style="text-align:right;"><span style="white-space:nowrap;">
+</td><td class="ttc" style="text-align:right;"><asp:Literal runat="server" id="WPO_S_Step_Type"></asp:Literal> </td><td class="ttc" style="text-align:right;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPO_S_ID"></asp:Literal></span>
-</td><td class="tableCellValue"></td><td class="tableCellLabel"></td><td class="tableCellValue"></td></tr><tr><td class="tableRowDivider" colspan="6"></td></tr></ePortalWFApproval:WPO_Step_WPO_StepDetail_WASPTableControlRow>
+</td></tr></ePortalWFApproval:WPO_Step_WPO_StepDetail_WASPTableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>
@@ -122,16 +122,16 @@
   <ePortalWFApproval:WPO_PRNo_QWFTableControl runat="server" id="WPO_PRNo_QWFTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td></td><td></td></tr><tr><td class="panelHeaderL"></td><td class="dh"></td></tr><tr><td></td><td>
                   <asp:panel id="CollapsibleRegion3" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
                     <table id="WPO_PRNo_QWFTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc" style="text-align:center;"></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="PRNoLabel" Text="PR No">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WPRD_TitleLabel" Text="Title">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WPRD_CreatedLabel" Text="Date Created">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WPRD_TotalLabel" Text="Total">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="CommentLabel" Text="Comment(s)">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WPO_PRNo_QWFTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WPO_PRNo_QWFTableControlRow runat="server" id="WPO_PRNo_QWFTableControlRow">
-<tr><td class="tableCellLabel" style="text-align:center;"><asp:ImageButton runat="server" id="ImageButton1" causesvalidation="False" commandname="Redirect" imageurl="../Images/icon_open.gif" onmouseout="this.src=&#39;../Images/icon_open.gif&#39;" onmouseover="this.src=&#39;../Images/icon_open_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;Txt:ViewRecord&quot;, &quot;ePortalWFApproval&quot;) %>">		
-	</asp:ImageButton></td><td class="tableCellValue"><asp:Literal runat="server" id="PRNo"></asp:Literal> 
+<tr><td class="ttc" style="text-align:center;"><asp:ImageButton runat="server" id="ImageButton1" causesvalidation="False" commandname="Redirect" imageurl="../Images/icon-open.png" onmouseout="this.src=&#39;../Images/icon-open.png&#39;" onmouseover="this.src=&#39;../Images/icon-open-over.png&#39;" tooltip="&lt;%# GetResourceValue(&quot;Txt:ViewRecord&quot;, &quot;ePortalWFApproval&quot;) %>">		
+	</asp:ImageButton></td><td class="ttc"><asp:Literal runat="server" id="PRNo"></asp:Literal> 
 <span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPRD_ID" visible="False"></asp:Literal></span>
-</td><td class="tableCellValue"><asp:Literal runat="server" id="WPRD_Title"></asp:Literal> 
-<asp:Literal runat="server" id="PONo" visible="False"></asp:Literal></td><td class="tableCellValue"><span style="white-space:nowrap;">
+</td><td class="ttc"><asp:Literal runat="server" id="WPRD_Title"></asp:Literal> 
+<asp:Literal runat="server" id="PONo" visible="False"></asp:Literal></td><td class="ttc"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPRD_Created"></asp:Literal></span>
-</td><td class="tableCellValue" style="text-align:right;"><span style="white-space:nowrap;">
+</td><td class="ttc" style="text-align:right;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPRD_Total"></asp:Literal></span>
-</td><td class="tableCellValue"><asp:Literal runat="server" id="Comment"></asp:Literal></td></tr><tr><td class="tableRowDivider" colspan="6"></td></tr></ePortalWFApproval:WPO_PRNo_QWFTableControlRow>
+</td><td class="ttc"><asp:Literal runat="server" id="Comment"></asp:Literal></td></tr></ePortalWFApproval:WPO_PRNo_QWFTableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>
@@ -148,14 +148,14 @@
   <ePortalWFApproval:WPO_CARNo_QWFTableControl runat="server" id="WPO_CARNo_QWFTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td></td><td></td></tr><tr><td class="panelHeaderL"></td><td class="dh"></td></tr><tr><td></td><td>
                   <asp:panel id="CollapsibleRegion6" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
                     <table id="WPO_CARNo_QWFTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc" style="text-align:center;"></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WCD_IDLabel" Text="CAR No">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WCD_Project_TitleLabel" Text="Project Title">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WCD_Exp_TotalLabel">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="CommentLabel1" Text="Comment">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="PRNumLabel">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WPO_CARNo_QWFTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WPO_CARNo_QWFTableControlRow runat="server" id="WPO_CARNo_QWFTableControlRow">
-<tr><td class="tableCellLabel"><asp:ImageButton runat="server" id="ImageButton2" causesvalidation="False" commandname="Redirect" imageurl="../Images/icon_open.gif" onmouseout="../Images/icon_open.gif" onmouseover="../Images/icon_open_over.gif" tooltip="&lt;%# GetResourceValue(&quot;Txt:ViewRecord&quot;, &quot;ePortalWFApproval&quot;) %>">		
-	</asp:ImageButton></td><td class="tableCellValue"><span style="white-space:nowrap;">
+<tr><td class="ttc"><asp:ImageButton runat="server" id="ImageButton2" causesvalidation="True" commandname="Redirect" imageurl="../Images/icon-open.png" onmouseout="this.src=&#39;../Images/icon-open.png&#39;" onmouseover="this.src=&#39;../Images/icon-open-over.png&#39;" tooltip="&lt;%# GetResourceValue(&quot;Txt:ViewRecord&quot;, &quot;ePortalWFApproval&quot;) %>">		
+	</asp:ImageButton></td><td class="ttc"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WCD_ID"></asp:Literal></span>
 <span style="white-space:nowrap;">
 <asp:Literal runat="server" id="CARID" visible="False"></asp:Literal></span>
-</td><td class="tableCellValue"><asp:Literal runat="server" id="WCD_Project_Title"></asp:Literal></td><td class="tableCellValue" style="text-align:right;"><span style="white-space:nowrap;">
+</td><td class="ttc"><asp:Literal runat="server" id="WCD_Project_Title"></asp:Literal></td><td class="ttc" style="text-align:right;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WCD_Exp_Total"></asp:Literal></span>
-</td><td class="tableCellValue"><asp:Literal runat="server" id="Comment2"></asp:Literal></td><td class="tableCellValue"><asp:Literal runat="server" id="PRNum"></asp:Literal></td></tr><tr><td class="tableRowDivider" colspan="6"></td></tr></ePortalWFApproval:WPO_CARNo_QWFTableControlRow>
+</td><td class="ttc"><asp:Literal runat="server" id="Comment2"></asp:Literal></td><td class="ttc"><asp:Literal runat="server" id="PRNum"></asp:Literal></td></tr></ePortalWFApproval:WPO_CARNo_QWFTableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>
@@ -175,19 +175,19 @@
   <ePortalWFApproval:View_WCPO_Canvass1TableControl runat="server" id="View_WCPO_Canvass1TableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td></td><td></td></tr><tr><td class="panelHeaderL"></td><td class="dh"></td></tr><tr><td></td><td>
                   <asp:panel id="CollapsibleRegion4" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
                     <table id="View_WCPO_Canvass1TableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc" style="text-align:center;"></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="PRIDLabel" Text="PR">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="CanvassDateLabel" Text="Canvass Date">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WCI_SubmitLabel" Text="Submit">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="WCI_StatusLabel" Text="Status">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="BuyerLabel" Text="Buyer">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="ClassificationLabel" Text="Classification">	</asp:Literal></th></tr><asp:Repeater runat="server" id="View_WCPO_Canvass1TableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:View_WCPO_Canvass1TableControlRow runat="server" id="View_WCPO_Canvass1TableControlRow">
-<tr><td class="tableCellLabel" style="text-align:center;"><asp:ImageButton runat="server" id="ImageButton4" causesvalidation="False" commandname="Redirect" imageurl="../Images/icon_open.gif" onmouseout="this.src=&#39;../Images/icon_open.gif&#39;" onmouseover="this.src=&#39;../Images/icon_open_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;Txt:ViewRecord&quot;, &quot;ePortalWFApproval&quot;) %>">		
-	</asp:ImageButton></td><td class="tableCellValue"><span style="white-space:nowrap;">
+<tr><td class="ttc" style="text-align:center;"><asp:ImageButton runat="server" id="ImageButton4" causesvalidation="False" commandname="Redirect" imageurl="../Images/icon-open.png" onmouseout="../Images/icon-open.png&#39;" onmouseover="../Images/icon-open-over.png&#39;" tooltip="&lt;%# GetResourceValue(&quot;Txt:ViewRecord&quot;, &quot;ePortalWFApproval&quot;) %>">		
+	</asp:ImageButton></td><td class="ttc"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="PRID"></asp:Literal></span>
  
 <span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WCI_ID" visible="False"></asp:Literal></span>
-</td><td class="tableCellValue"><span style="white-space:nowrap;">
+</td><td class="ttc"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="CanvassDate"></asp:Literal></span>
-</td><td class="tableCellValue"><asp:Literal runat="server" id="WCI_Submit"></asp:Literal></td><td class="tableCellValue"><asp:Literal runat="server" id="WCI_Status"></asp:Literal></td><td class="tableCellValue"><span style="white-space:nowrap;">
+</td><td class="ttc"><asp:Literal runat="server" id="WCI_Submit"></asp:Literal></td><td class="ttc"><asp:Literal runat="server" id="WCI_Status"></asp:Literal></td><td class="ttc"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="Buyer"></asp:Literal></span>
-</td><td class="tableCellValue"><span style="white-space:nowrap;">
+</td><td class="ttc"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="Classification"></asp:Literal></span>
-</td></tr><tr><td class="tableRowDivider" colspan="5"></td><td class="tableRowDivider"></td><td class="tableRowDivider"></td></tr></ePortalWFApproval:View_WCPO_Canvass1TableControlRow>
+</td></tr></ePortalWFApproval:View_WCPO_Canvass1TableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>
@@ -205,8 +205,8 @@
                   <asp:panel id="WPO_Doc_AttachTableControlCollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre"> 
 <table><tr><td></td><td class="prbbc"></td><td class="prbbc"></td><td class="prbbc"></td><td class="prspace"></td><td class="pra"><ePortalWFApproval:PaginationMedium runat="server" id="WPO_Doc_AttachPagination"></ePortalWFApproval:PaginationMedium>
             <!--To change the position of the pagination control, please search for "prspace" on the Online Help for instruction. --></td></tr></table>
-</td></tr><tr><td class="tre"><table id="WPO_Doc_AttachTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="WPODA_DescLabel" Text="Description">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WPODA_FileLabel" Text="File Upload">	</asp:Literal></th><th class="thc"></th><th class="thc"></th><th class="thc"></th><th class="thc"></th></tr><asp:Repeater runat="server" id="WPO_Doc_AttachTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WPO_Doc_AttachTableControlRow runat="server" id="WPO_Doc_AttachTableControlRow">
-<tr><td class="tableCellValue" style="text-align:left;"><asp:Literal runat="server" id="WPODA_Desc"></asp:Literal></td><td class="tableCellValue"><asp:LinkButton runat="server" id="WPODA_File" CommandName="Redirect"></asp:LinkButton></td><td class="tableCellLabel"></td><td class="tableCellValue"></td><td class="tableCellLabel"></td><td class="tableCellValue"></td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue" colspan="5"></td></tr><tr><td class="tableRowDivider" colspan="6"></td></tr></ePortalWFApproval:WPO_Doc_AttachTableControlRow>
+</td></tr><tr><td class="tre"><table id="WPO_Doc_AttachTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="WPODA_DescLabel" Text="Description">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WPODA_FileLabel" Text="File Upload">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WPO_Doc_AttachTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WPO_Doc_AttachTableControlRow runat="server" id="WPO_Doc_AttachTableControlRow">
+<tr><td class="ttc" style="text-align:left;"><asp:Literal runat="server" id="WPODA_Desc"></asp:Literal></td><td class="ttc"><asp:LinkButton runat="server" id="WPODA_File" CommandName="Redirect"></asp:LinkButton></td></tr></ePortalWFApproval:WPO_Doc_AttachTableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>

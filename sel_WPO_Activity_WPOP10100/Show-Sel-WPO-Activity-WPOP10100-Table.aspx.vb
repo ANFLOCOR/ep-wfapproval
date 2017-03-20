@@ -241,7 +241,7 @@ Public Sub SetSel_WPO_Activity_WPOP10100TableControl()
             End If
         
         
-            Page.Title = "Purchase Order Workflow Tasks"
+            Page.Title = "PO Workflow Tasks (South)"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If

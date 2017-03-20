@@ -260,7 +260,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WPO_Doc_Type_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -272,4 +271,5 @@
   <MenuName>WPO Document Type1</MenuName>
   <QSPath>../WPO_Doc_Type1/WPO-Doc-Type-QuickSelector1.aspx</QSPath>
   <TableCodeName>WPO_Doc_Type1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWPO_Doc_Type1</TableStoredProcPrefix>
 </XMLDefinition>

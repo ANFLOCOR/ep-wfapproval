@@ -1765,6 +1765,8 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControl
               AddHandler Me.NorthRedirectorButtonReCAR.Button.Click, AddressOf NorthRedirectorButtonReCAR_Click
                         
               AddHandler Me.NorthRedirectorButtonRePO.Button.Click, AddressOf NorthRedirectorButtonRePO_Click
+                        
+              AddHandler Me.SouthRedirectorButtonPODoc1.Button.Click, AddressOf SouthRedirectorButtonPODoc1_Click
                                 
         
           ' Setup events for others
@@ -2013,6 +2015,7 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControl
                 
                 
                 
+                
                 SetSel_Approver_Pending_TasksRefreshButton1()
               
                 SetNorthRedirectorButtonCARDoc()
@@ -2020,6 +2023,8 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControl
                 SetNorthRedirectorButtonReCAR()
               
                 SetNorthRedirectorButtonRePO()
+              
+                SetSouthRedirectorButtonPODoc1()
               
             ' setting the state of expand or collapse alternative rows
       
@@ -2735,6 +2740,11 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControl
               
    
         End Sub
+            
+        Public Overridable Sub SetSouthRedirectorButtonPODoc1()                
+              
+   
+        End Sub
                     
 
         ' Generate the event handling functions for pagination events.
@@ -2962,6 +2972,51 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControl
     
         End Sub
         
+        ' event handler for Button
+        Public Overridable Sub SouthRedirectorButtonPODoc1_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
+                  Dim url As String = "../sel_WPO_Activity_WPOP101001/Show-Sel-WPO-Activity-WPOP10100-Table1.aspx"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
+            Catch ex As Exception
+            
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+                DbUtils.EndTransaction
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
+        End Sub
+        
       
 
         ' Generate the event handling functions for filter and search events.
@@ -3141,6 +3196,12 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControl
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Sel_Approver_Pending_TasksTitle1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
+        
+        Public ReadOnly Property SouthRedirectorButtonPODoc1() As ePortalWFApproval.UI.IThemeButton
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SouthRedirectorButtonPODoc1"), ePortalWFApproval.UI.IThemeButton)
+          End Get
+          End Property
         
         Public ReadOnly Property WCAR_DocPagination() As ePortalWFApproval.UI.IPagination
             Get

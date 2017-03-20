@@ -350,7 +350,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>sel_WStep_WStep_Detail_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
   <canDeleteRecords Source="Database">N</canDeleteRecords>

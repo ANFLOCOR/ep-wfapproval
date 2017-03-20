@@ -1,41 +1,47 @@
 ﻿Failed to apply Transact-SQL code:
--- Creates a new record in the [dbo].[WPO_PRNo_QWF] table.
-CREATE PROCEDURE pePortalWFApprovalWPO_PRNo_QWFAdd
-    @p_CompanyID smallint,
-    @p_PRNo varchar(50),
-    @p_WPRD_Title varchar(250),
-    @p_WPRD_Created smalldatetime,
-    @p_WPRD_Total numeric(15,2),
-    @p_Comment varchar(500),
-    @p_PONo char(30),
-    @p_WPRD_ID int
+-- Creates a new record in the [dbo].[WPO_WFHistory_Details_new] table.
+CREATE PROCEDURE pePortalWFApprovalWPO_WFHistory_Details_new1Add
+    @p_WPO_ID int,
+    @p_WPO_W_U_ID int,
+    @p_WPO_WS_ID int,
+    @p_WPO_Status int,
+    @p_WPO_Date_Assign smalldatetime,
+    @p_WPO_Date_Action smalldatetime,
+    @p_WPO_Remark nvarchar(500),
+    @p_WPO_PONum nvarchar(20),
+    @p_WPOP_C_ID int,
+    @p_WPOP_ID int
 AS
 BEGIN
     INSERT
-    INTO [dbo].[WPO_PRNo_QWF]
+    INTO [dbo].[WPO_WFHistory_Details_new]
         (
-            [CompanyID],
-            [PRNo],
-            [WPRD_Title],
-            [WPRD_Created],
-            [WPRD_Total],
-            [Comment],
-            [PONo],
-            [WPRD_ID]
+            [WPO_ID],
+            [WPO_W_U_ID],
+            [WPO_WS_ID],
+            [WPO_Status],
+            [WPO_Date_Assign],
+            [WPO_Date_Action],
+            [WPO_Remark],
+            [WPO_PONum],
+            [WPOP_C_ID],
+            [WPOP_ID]
         )
     VALUES
         (
-             @p_CompanyID,
-             @p_PRNo,
-             @p_WPRD_Title,
-             @p_WPRD_Created,
-             @p_WPRD_Total,
-             @p_Comment,
-             @p_PONo,
-             @p_WPRD_ID
+             @p_WPO_ID,
+             @p_WPO_W_U_ID,
+             @p_WPO_WS_ID,
+             @p_WPO_Status,
+             @p_WPO_Date_Assign,
+             @p_WPO_Date_Action,
+             @p_WPO_Remark,
+             @p_WPO_PONum,
+             @p_WPOP_C_ID,
+             @p_WPOP_ID
         )
 
 END
 
-ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.WPO_PRNo_QWF' is not updatable because the modification affects multiple base tables.
+ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.WPO_WFHistory_Details_new' is not updatable because the modification affects multiple base tables.
 

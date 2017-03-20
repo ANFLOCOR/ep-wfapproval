@@ -39,22 +39,52 @@ Partial Public Class WPO_WFTaskN
         
 #Region "Section 1: Place your customizations here."
     
-      Public Sub SetPageFocus()
-          'To set focus on page load to a specific control pass this control to the SetStartupFocus method. To get a hold of  a control
-          'use FindControlRecursively method. For example:
-          'Dim controlToFocus As System.Web.UI.WebControls.TextBox = DirectCast(Me.FindControlRecursively("ProductsSearch"), System.Web.UI.WebControls.TextBox)
-          'Me.SetFocusOnLoad(controlToFocus)
-          'If no control is passed or control does not exist this method will set focus on the first focusable control on the page.
-          Me.SetFocusOnLoad()  
-      End Sub
-       
-      Public Sub LoadData()
-          ' LoadData reads database data and assigns it to UI controls.
-          ' Customize by adding code before or after the call to LoadData_Base()
-          ' or replace the call to LoadData_Base().
-          LoadData_Base()
-                  
-      End Sub
+        Public Sub LoadData()
+
+            LoadData_Base()
+
+            'Dim sPOP1 As String = Sel_WPO_WFTaskView.PONUMBER.UniqueName & " = " & Me.PONUMBER.Text
+            'Dim sCoID As String = ""
+            'For Each oPOP1 As Sel_WPO_WFTaskRecord In Sel_WPO_WFTaskView.GetRecords(sPOP1, Nothing, 0, 100)
+            '    sCoID = oPOP1.CompanyID.ToString()
+            'Next
+
+            System.Web.HttpContext.Current.Session("PONO") = Me.PONUMBER.Text
+            System.Web.HttpContext.Current.Session("CMPNY") = Me.CompanyID2.Text
+            System.Web.HttpContext.Current.Session("DOCDATE") = Me.DOCDATE.Text
+            System.Web.HttpContext.Current.Session("CMPNYDESC") = Me.CompanyID.Text
+
+            Me.ddlMoveTo.Visible = False
+
+            Dim wc As WhereClause = New WhereClause()
+            wc.iAND(Sel_POP10100_Incidental1View.Company_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.PONUMBER.Text)
+            wc.iAND(Sel_POP10100_Incidental1View.PONUMBER, BaseFilter.ComparisonOperator.EqualsTo, Me.PONUMBER.Text)
+
+            ' ''Dim sWhere As String = ""
+            ' ''sWhere = Sel_POP10100_Incidental1View.Company_ID.UniqueName & " = " & _
+            ' ''Me.CompanyID2.Text & " And " & Sel_POP10100_Incidental1View.PONUMBER.UniqueName & " = '" & Me.PONUMBER.Text & "'"
+
+            For Each oItem As Sel_POP10100_Incidental1Record In Sel_POP10100_Incidental1View.GetRecords(wc, Nothing, 0, 5)
+                litPaymentTerms.Text = oItem.PYMTRMID.ToString().Trim()
+            Next
+
+            'Dim sParam As String = Me.Page.Request.QueryString.Item("POP10100_Co").ToString()
+            'If sParam = "0" Then
+            'ShowSel_WCAR_Activity_WCAR_DocTable.aspx
+            If Me.Page.Request.QueryString.Item("POP10100_Co") Is Nothing Then
+                Dim url As String = "../wf_PO/ShowSel_WPO_Activity_WPOP10100Table.aspx?"
+                'Dim url As String = "../Security/Home.aspx?"
+
+                url = Me.ModifyRedirectUrl(url, "")
+
+                Me.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
+            End If
+        End Sub
+
+        Public Overrides Sub SaveData()
+            Me.SaveData_Base()
+        End Sub
       
       Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS as Boolean) As String
           Return EvaluateFormula_Base(formula, dataSourceForEvaluate, format, variables, includeDS)
@@ -89,32 +119,157 @@ Partial Public Class WPO_WFTaskN
       End Sub
 
 
-      
-      Public Overrides Sub SaveData()
-          Me.SaveData_Base()
-      End Sub
-               
-               
 
       Public Overrides Sub SetControl(ByVal control As String)
           Me.SetControl_Base(control)
       End Sub    
       
       
-      Public Sub Page_PreInit(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreInit
-          'Override call to PreInit_Base() here to change top level master page used by this page.
-          'For example for SharePoint applications uncomment next line to use Microsoft SharePoint default master page
-          'If Not Me.Master Is Nothing Then Me.Master.MasterPageFile = Microsoft.SharePoint.SPContext.Current.Web.MasterUrl	
-          'You may change here assignment of application theme
-          Try
-              Me.PreInit_Base()
-          Catch ex As Exception
-          
-          End Try			  
-      End Sub
       
 #Region "Ajax Functions"
 
+        '  <System.Web.Services.WebMethod()> _
+        '  Public Shared Function GetRecordFieldValue(ByVal tableName As String, _
+        '                                            ByVal recordID As String, _
+        '                                            ByVal columnName As String, _
+        '                                            ByVal fieldName As String, _
+        '                                            ByVal title As String, _
+        '                                            ByVal closeBtnText As String, _
+        '                                            ByVal persist As Boolean, _
+        '                                            ByVal popupWindowHeight As Integer, _
+        '                                            ByVal popupWindowWidth As Integer, _
+        '                                            ByVal popupWindowScrollBar As Boolean _
+        '                                            ) As Object()
+        '      ' GetRecordFieldValue gets the pop up window content from the column specified by
+        '      ' columnName in the record specified by the recordID in data base table specified by tableName.
+        '      ' Customize by adding code before or after the call to  GetRecordFieldValue_Base()
+        '      ' or replace the call to  GetRecordFieldValue_Base().
+        '      Return GetRecordFieldValue_Base(tableName, recordID, columnName, fieldName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
+        '  End Function
+
+        '  <System.Web.Services.WebMethod()> _
+        '  Public Shared Function GetImage(ByVal tableName As String, _
+        '                                  ByVal recordID As String, _
+        '                                  ByVal columnName As String, _
+        '                                  ByVal title As String, _
+        '                                  ByVal closeBtnText As String, _
+        '                                  ByVal persist As Boolean, _
+        '                                  ByVal popupWindowHeight As Integer, _
+        '                                  ByVal popupWindowWidth As Integer, _
+        '                                  ByVal popupWindowScrollBar As Boolean _
+        '                                  ) As Object()
+        '      ' GetImage gets the Image url for the image in the column "columnName" and
+        '      ' in the record specified by recordID in data base table specified by tableName.
+        '      ' Customize by adding code before or after the call to  GetImage_Base()
+        '      ' or replace the call to  GetImage_Base().
+        '      Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
+        '  End Function
+
+        'Protected Overloads Overrides Sub BasePage_PreRender(ByVal sender As Object, ByVal e As EventArgs)
+        '    MyBase.BasePage_PreRender(sender, e)
+        '    Base_RegisterPostback()
+        'End Sub
+      
+    
+      
+
+
+#End Region
+
+        Protected Sub RegisterPostback()
+            Base_RegisterPostback()
+        End Sub
+
+        Protected Overloads Overrides Sub BasePage_PreRender(ByVal sender As Object, ByVal e As EventArgs)
+            MyBase.BasePage_PreRender(sender, e)
+            RegisterPostback()
+        End Sub
+
+        Public Sub Page_PreInit(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreInit
+            'Override call to PreInit_Base() here to change top level master page used by this page, for example uncomment
+            'next line to use Microsoft SharePoint default master page
+            'If Not Me.Master Is Nothing Then Me.Master.MasterPageFile = Microsoft.SharePoint.SPContext.Current.Web.MasterUrl	
+            'You may change here assignment of application theme
+            Try
+                Me.PreInit_Base()
+            Catch ex As Exception
+                Try
+                    'when running application in Live preview or outside of Microsoft SharePoint environment use proforma top level master.
+                    Me.Master.MasterPageFile = "../Master Pages/SharePointMaster.master"
+                Catch ex1 As Exception
+                End Try
+            End Try
+        End Sub
+        '        Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord) As String
+        '            Return EvaluateFormula_Base(formula, dataSourceForEvaluate)
+        '        End Function
+        Public Sub SetPageFocus()
+            'load scripts to all controls on page so that they will retain focus on PostBack
+            Me.LoadFocusScripts(Me.Page)
+            'To set focus on page load to a specific control pass this control to the SetStartupFocus method. To get a hold of  a control
+            'use FindControlRecursively method. For example:
+            'Dim controlToFocus As System.Web.UI.WebControls.TextBox = DirectCast(Me.FindControlRecursively("ProductsSearch"), System.Web.UI.WebControls.TextBox)
+            'Me.SetFocusOnLoad(controlToFocus)
+            'If no control is passed or control does not exist this method will set focus on the first focusable control on the page.
+            Me.SetFocusOnLoad()
+        End Sub
+    ' Page Event Handlers - buttons, sort, links
+    
+
+        ' Write out the Set methods
+                     
+        
+        ' Write out the methods for DataSource
+        
+   
+
+Public Sub SetSel_WPO_WFTaskRecordControl()
+            SetSel_WPO_WFTaskRecordControl_Base() 
+        End Sub
+'<System.Web.Services.WebMethod()> _
+'      Public Shared Function GetAutoCompletionList_WPO_PRNo_QDetails1SearchText(ByVal prefixText As String, ByVal count As Integer) As String()
+'      ' GetWPO_PRNo_QDetails1SearchTextCompletionList gets the list of suggestions from the database.
+'      ' prefixText is the search text typed by the user .
+'      ' count specifies the number of suggestions to be returned.
+'      ' Customize by adding code before or after the call to  GetAutoCompletionList_WPO_PRNo_QDetails1SearchText()
+'      ' or replace the call to GetAutoCompletionList_WPO_PRNo_QDetails1SearchText().
+'      Return GetAutoCompletionList_WPO_PRNo_QDetails1SearchText_Base(prefixText, count)
+'      End Function
+'<System.Web.Services.WebMethod()> _
+'      Public Shared Function GetAutoCompletionList_WPO_Doc_Attach1SearchText(ByVal prefixText As String, ByVal count As Integer) As String()
+'      ' GetWPO_Doc_Attach1SearchTextCompletionList gets the list of suggestions from the database.
+'      ' prefixText is the search text typed by the user .
+'      ' count specifies the number of suggestions to be returned.
+'      ' Customize by adding code before or after the call to  GetAutoCompletionList_WPO_Doc_Attach1SearchText()
+'      ' or replace the call to GetAutoCompletionList_WPO_Doc_Attach1SearchText().
+'      Return GetAutoCompletionList_WPO_Doc_Attach1SearchText_Base(prefixText, count)
+'      End Function
+'<System.Web.Services.WebMethod()> _
+'      Public Shared Function GetAutoCompletionList_Sel_WPO_InquireDetails1SearchText(ByVal prefixText As String, ByVal count As Integer) As String()
+'      ' GetSel_WPO_InquireDetails1SearchTextCompletionList gets the list of suggestions from the database.
+'      ' prefixText is the search text typed by the user .
+'      ' count specifies the number of suggestions to be returned.
+'      ' Customize by adding code before or after the call to  GetAutoCompletionList_Sel_WPO_InquireDetails1SearchText()
+'      ' or replace the call to GetAutoCompletionList_Sel_WPO_InquireDetails1SearchText().
+'      Return GetAutoCompletionList_Sel_WPO_InquireDetails1SearchText_Base(prefixText, count)
+'      End Function
+        <System.Web.Services.WebMethod()> _
+        Public Shared Function GetImage(ByVal tableName As String, _
+                                        ByVal recordID As String, _
+                                        ByVal columnName As String, _
+                                        ByVal title As String, _
+                                        ByVal closeBtnText As String, _
+                                        ByVal persist As Boolean, _
+                                        ByVal popupWindowHeight As Integer, _
+                                        ByVal popupWindowWidth As Integer, _
+                                        ByVal popupWindowScrollBar As Boolean _
+                                        ) As Object()
+            ' GetImage gets the Image url for the image in the column "columnName" and
+            ' in the record specified by recordID in data base table specified by tableName.
+            ' Customize by adding code before or after the call to  GetImage_Base()
+            ' or replace the call to  GetImage_Base().
+            Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
+        End Function
         <System.Web.Services.WebMethod()> _
         Public Shared Function GetRecordFieldValue(ByVal tableName As String, _
                                                   ByVal recordID As String, _
@@ -133,49 +288,6 @@ Partial Public Class WPO_WFTaskN
             ' or replace the call to  GetRecordFieldValue_Base().
             Return GetRecordFieldValue_Base(tableName, recordID, columnName, fieldName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
         End Function
-
-        <System.Web.Services.WebMethod()> _
-        Public Shared Function GetImage(ByVal tableName As String, _
-                                        ByVal recordID As String, _
-                                        ByVal columnName As String, _
-                                        ByVal title As String, _
-                                        ByVal closeBtnText As String, _
-                                        ByVal persist As Boolean, _
-                                        ByVal popupWindowHeight As Integer, _
-                                        ByVal popupWindowWidth As Integer, _
-                                        ByVal popupWindowScrollBar As Boolean _
-                                        ) As Object()
-            ' GetImage gets the Image url for the image in the column "columnName" and
-            ' in the record specified by recordID in data base table specified by tableName.
-            ' Customize by adding code before or after the call to  GetImage_Base()
-            ' or replace the call to  GetImage_Base().
-            Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
-        End Function
-    
-      Protected Overloads Overrides Sub BasePage_PreRender(ByVal sender As Object, ByVal e As EventArgs)
-          MyBase.BasePage_PreRender(sender, e)
-          Base_RegisterPostback()
-      End Sub
-      
-    
-      
-
-
-#End Region
-
-    ' Page Event Handlers - buttons, sort, links
-    
-
-        ' Write out the Set methods
-                     
-        
-        ' Write out the methods for DataSource
-        
-   
-
-Public Sub SetSel_WPO_WFTaskRecordControl()
-            SetSel_WPO_WFTaskRecordControl_Base() 
-        End Sub
 #End Region
 
 #Region "Section 2: Do not modify this section."
@@ -241,7 +353,7 @@ Public Sub SetSel_WPO_WFTaskRecordControl()
             End If
         
         
-            Page.Title = "Purchase Order Approval"
+            Page.Title = "Purchase Order Approval (North)"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If
