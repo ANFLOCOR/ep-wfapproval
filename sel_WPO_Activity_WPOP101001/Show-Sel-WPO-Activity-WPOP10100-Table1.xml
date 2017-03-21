@@ -3590,6 +3590,14 @@
           <Value>false</Value>
         </Attribute>
         <Attribute>
+          <Name>InternalUse:ApplyStaticList</Name>
+          <Value>false</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:GenerateSpecificItems</Name>
+          <Value>True</Value>
+        </Attribute>
+        <Attribute>
           <Name>InternalUse:InitializeFormula</Name>
           <Value>URL("WPOP_C_ID")</Value>
         </Attribute>
