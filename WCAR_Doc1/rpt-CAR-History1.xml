@@ -14,6 +14,7 @@
     <Layout>WCAR_Doc1\rpt-CAR-History1.xml</Layout>
     <DisplayName>rpt-CAR-History1</DisplayName>
     <Description>This is a blank page.</Description>
+    <LoginRequired>&lt;PRoles&gt;NOT_ANONYMOUS&lt;/PRoles&gt;</LoginRequired>
     <CheckSum>263277726-1288</CheckSum>
   </Self>
   <ComposedOf>
@@ -59,7 +60,7 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>Blank page</Value>
+          <Value>ePortal Workflow Approval - CAR Approval History (North)</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>
@@ -98,7 +99,7 @@
     &lt;/Row&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;asp:literal id="Literal1" runat="server" text="CAR Approver History (South)"&amp;gt;&amp;lt;/asp:literal&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;b&amp;gt;&amp;lt;asp:literal id="Literal1" runat="server" text="CAR Approver History (North)"&amp;gt;&amp;lt;/asp:literal&amp;gt;&amp;lt;/b&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -110,7 +111,7 @@
     &lt;/Row&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;iframe id="frm" runat="server" width="1000" height="500" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;b&amp;gt;&amp;lt;iframe id="frm" runat="server" width="1000" height="500" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""&amp;gt;&amp;lt;/iframe&amp;gt;&amp;lt;/b&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;

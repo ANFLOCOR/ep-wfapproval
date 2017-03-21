@@ -1,6 +1,6 @@
 ﻿<%@ Register Tagprefix="Selectors" Namespace="ePortalWFApproval" %>
 
-<%@ Page Language="vb" EnableEventValidation="false" AutoEventWireup="false" CodeFile="rpt-CAR-History1.aspx.vb" Culture="en-US" MasterPageFile="../Master Pages/VerticalMenu.master" Inherits="ePortalWFApproval.UI.rpt_CAR_History1" %>
+<%@ Page Language="vb" EnableEventValidation="false" AutoEventWireup="false" CodeFile="rpt-PO-History.aspx.vb" Culture="en-US" MasterPageFile="../Master Pages/VerticalMenu.master" Inherits="ePortalWFApproval.UI.rpt_PO_History" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Tagprefix="BaseClasses" Namespace="BaseClasses.Web.UI.WebControls" Assembly="BaseClasses" %>
 <%@ Register Tagprefix="ePortalWFApproval" TagName="ThemeButton" Src="../Shared/ThemeButton.ascx" %>
@@ -19,7 +19,7 @@
 		<asp:UpdatePanel runat="server" id="UpdatePanel1" UpdateMode="Conditional">
 			<ContentTemplate>
 
-                <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td class="dfv"><ePortalWFApproval:ThemeButton runat="server" id="btnBack" button-causesvalidation="False" button-commandname="Redirect" button-text="Back" button-tooltip="Back"></ePortalWFApproval:ThemeButton></td></tr><tr><td class="dfv"><b><asp:literal id="Literal1" runat="server" text="CAR Approver History (North)"></asp:literal></b></td></tr><tr><td style="white-space:nowrap; width: 100%" class="thcnb"><b><iframe id="frm" runat="server" width="1000" height="500" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""></iframe></b></td></tr></table>
+                <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td class="dfv"><ePortalWFApproval:ThemeButton runat="server" id="btnBack" button-causesvalidation="False" button-commandname="Redirect" button-text="Back to Dashboard" button-tooltip="Back to Dashboard"></ePortalWFApproval:ThemeButton></td></tr><tr><td class="dfv"><b><span style="font-size:14pt"><asp:literal id="Literal1" runat="server" text="PO Approver History (South)"></asp:literal></span></b></td></tr><tr><td style="white-space:nowrap; width: 100%" class="thcnb"><iframe id="frm" runat="server" width="1000" height="500" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""></iframe></td></tr></table>
       </ContentTemplate>
 </asp:UpdatePanel>
 

@@ -14,6 +14,7 @@
     <Layout>WCAR_Doc1\rpt-CAR-Pipeline1.xml</Layout>
     <DisplayName>rpt-CAR-Pipeline1</DisplayName>
     <Description>This is a blank page.</Description>
+    <LoginRequired>&lt;PRoles&gt;NOT_ANONYMOUS&lt;/PRoles&gt;</LoginRequired>
     <CheckSum>263277726-1288</CheckSum>
   </Self>
   <ComposedOf>
@@ -59,7 +60,7 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>Blank page</Value>
+          <Value>ePortal Workflow Approval - CAR Approval Pipeline (North)</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>
@@ -98,7 +99,7 @@
     &lt;/Row&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;asp:literal id="Literal1" runat="server" text="CAR Approver Pipeline (South)"&amp;gt;&amp;lt;/asp:literal&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;b&amp;gt;&amp;lt;asp:literal id="Literal1" runat="server" text="CAR Approver Pipeline (North)"&amp;gt;&amp;lt;/asp:literal&amp;gt;&amp;lt;/b&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;

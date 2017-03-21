@@ -373,6 +373,10 @@ Partial Public Class SignIn
                 If Not myRecord1 Is Nothing Then
 
                     '************************************************************************
+                    'Modified By Ryan 3/21/2017 - Comment Code: RYEPWFASI032117
+                    'Check if User Exist in Approvers views( Sel_WASP_WF_Approver_ALLView (South) and Sel_WASP_WF_Approver_ALL1View (North)). 
+                    'If user does not exist then the user dont have permission to access the application
+                    'For the User to access please setup the user in eportal(eportal.anflocor.com) as approver of CAR,PO or FS.
                     If Not ApproverAccess Is Nothing Or Not northApproverAccess Is Nothing Then
                         If Not waspUserRecord Is Nothing Or Not waspUserRecordNorth Is Nothing Then
                         Else
