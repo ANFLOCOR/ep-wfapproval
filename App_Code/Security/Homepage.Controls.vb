@@ -850,7 +850,7 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControlRow
                 ' If the Date_Assigned is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_Approver_Pending_Tasks2View.Date_Assigned, "g")
+                Dim formattedValue As String = Me.DataSource.Format(Sel_Approver_Pending_Tasks2View.Date_Assigned, "d")
                               
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.Date_Assigned1.Text = formattedValue
@@ -860,7 +860,7 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControlRow
                 ' Date_Assigned is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.Date_Assigned1.Text = Sel_Approver_Pending_Tasks2View.Date_Assigned.Format(Sel_Approver_Pending_Tasks2View.Date_Assigned.DefaultValue, "g")
+                 Me.Date_Assigned1.Text = Sel_Approver_Pending_Tasks2View.Date_Assigned.Format(Sel_Approver_Pending_Tasks2View.Date_Assigned.DefaultValue, "d")
                         		
                 End If
                  
@@ -3500,7 +3500,7 @@ Public Class BaseSel_Approver_Pending_TasksTableControlRow
                 ' If the Date_Assigned is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_Approver_Pending_TasksView.Date_Assigned, "g")
+                Dim formattedValue As String = Me.DataSource.Format(Sel_Approver_Pending_TasksView.Date_Assigned, "d")
                               
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.Date_Assigned.Text = formattedValue
@@ -3510,7 +3510,7 @@ Public Class BaseSel_Approver_Pending_TasksTableControlRow
                 ' Date_Assigned is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.Date_Assigned.Text = Sel_Approver_Pending_TasksView.Date_Assigned.Format(Sel_Approver_Pending_TasksView.Date_Assigned.DefaultValue, "g")
+                 Me.Date_Assigned.Text = Sel_Approver_Pending_TasksView.Date_Assigned.Format(Sel_Approver_Pending_TasksView.Date_Assigned.DefaultValue, "d")
                         		
                 End If
                  

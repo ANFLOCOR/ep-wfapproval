@@ -128,8 +128,8 @@ The tags are case-sensitive and should contain the following case-sensitive attr
       <siteMapNode title="PO Workflow" description="PO Workflow" url="" imageURL="" roles="1389" order="0">
         <siteMapNode title="PO Pending Document" description="PO Pending Document" url="~/sel_WPO_Activity_WPOP101001/Show-Sel-WPO-Activity-WPOP10100-Table1.aspx?" imageURL="" roles="1390" order="0" />
         <siteMapNode title="PO Workflow Reassign Task" description="PO Workflow Reassign Task" url="" imageURL="" roles="1391" order="0" />
-        <siteMapNode title="Approver Pipeline" description="Approver Pipeline" url="" imageURL="" roles="1392" order="0" />
-        <siteMapNode title="Approver History" description="Approver History" url="" imageURL="" roles="1393" order="0" />
+        <siteMapNode title="Approver Pipeline" description="Approver Pipeline" url="~/sel_WPO_WFTask/rpt-PO-Pipeline1.aspx" imageURL="" roles="1392" order="0" />
+        <siteMapNode title="Approver History" description="Approver History" url="~/sel_WPO_WFTask/rpt-PO-History1.aspx" imageURL="" roles="1393" order="0" />
       </siteMapNode>
       <siteMapNode title="FS Workflow" description="FS Workflow" url="" imageURL="" roles="1394" order="0">
         <siteMapNode title="FS Pending Approval" description="FS Pending Approval" url="" imageURL="" roles="1395" order="0" />
@@ -150,8 +150,8 @@ The tags are case-sensitive and should contain the following case-sensitive attr
       <siteMapNode title="PO Workflow" description="PO Workflow" url="" imageURL="" roles="1371" order="0">
         <siteMapNode title="PO Pending Document" description="PO Pending Document" url="~/sel_WPO_Activity_WPOP10100/Show-Sel-WPO-Activity-WPOP10100-Table.aspx?" imageURL="" roles="1372" order="0" />
         <siteMapNode title="PO Workflow Reassign Task" description="PO Workflow Reassign Task" url="~/selWFReassign/Show-SelWFReassign-Table.aspx" imageURL="" roles="1373" order="0" />
-        <siteMapNode title="Approver Pipeline" description="Approver Pipeline" url="" imageURL="" roles="1374" order="0" />
-        <siteMapNode title="Approver History" description="Approver History" url="" imageURL="" roles="1375" order="0" />
+        <siteMapNode title="Approver Pipeline" description="Approver Pipeline" url="~/sel_WPO_WFTask/rpt-PO-Pipeline.aspx" imageURL="" roles="1374" order="0" />
+        <siteMapNode title="Approver History" description="Approver History" url="~/sel_WPO_WFTask/rpt-PO-History.aspx" imageURL="" roles="1375" order="0" />
       </siteMapNode>
       <siteMapNode title="FS Workflow" description="FS Workflow" url="" imageURL="" roles="1376" order="0">
         <siteMapNode title="FS Pedning Approval" description="FS Pedning Approval" url="" imageURL="" roles="1378" order="0" />

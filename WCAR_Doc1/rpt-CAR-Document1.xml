@@ -14,6 +14,7 @@
     <Layout>WCAR_Doc1\rpt-CAR-Document1.xml</Layout>
     <DisplayName>rpt-CAR-Document1</DisplayName>
     <Description>This is a blank page.</Description>
+    <LoginRequired>&lt;PRoles&gt;NOT_ANONYMOUS&lt;/PRoles&gt;</LoginRequired>
     <CheckSum>263277726-1288</CheckSum>
   </Self>
   <ComposedOf>
