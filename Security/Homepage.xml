@@ -1262,11 +1262,11 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>../Images/icon-open.png</Value>
+          <Value>this.src='../Images/icon-open.png'</Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>../Images/icon-open-over.png</Value>
+          <Value>this.src='../Images/icon-open-over.png'</Value>
         </Attribute>
         <Attribute>
           <Name>RedirectURL</Name>
@@ -1302,11 +1302,11 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>../Images/icon-open.png</Value>
+          <Value>this.src='../Images/icon-open.png'</Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>../Images/icon-open-over.png</Value>
+          <Value>this.src='../Images/icon-open-over.png'</Value>
         </Attribute>
         <Attribute>
           <Name>RedirectURL</Name>
@@ -1576,6 +1576,10 @@
         <Attribute>
           <Name>Button-Consumers</Name>
           <Value>page</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Button-RedirectURL</Name>
+          <Value>../selWFReassign1/Show-SelWFReassign-Table1.aspx</Value>
         </Attribute>
         <Attribute>
           <Name>Button-Text</Name>

@@ -135,7 +135,7 @@ Public Class Sel_WPO_Activity_WPOP10100TableControlRow
             
                 DbUtils.StartTransaction
               
-                  Dim url As String = "../sel_WPO_WFTask/WPO-WFTask.aspx?PONUM=" & Me.WPO_PONum.Text & "&COID=" & Me.GetRecord.WPOP_C_ID.ToString
+                  Dim url As String = "../sel_WPO_WFTask/Show-WPO-WFTask.aspx?PONUM=" & Me.WPO_PONum.Text & "&COID=" & Me.GetRecord.WPOP_C_ID.ToString
                   
                   If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
                   

@@ -126,19 +126,63 @@ Public Class Sel_WPO_Activity_WPOP101001TableControlRow
         
             End If
         End Sub
-End Class
 
-  
+        Public Overrides Sub ImageButton3_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
 
-Public Class Sel_WPO_Activity_WPOP101001TableControl
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+
+            DbUtils.StartTransaction()
+
+            Dim url As String = "../sel_WPO_WFTask/Show-WPO-WFTaskN.aspx?PONUMBR=" & Me.GetRecord.WPO_PONum.ToString & "&CompanyID=" & Me.GetRecord.WPOP_C_ID.ToString
+
+            If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+
+            Dim shouldRedirect As Boolean = True
+            Dim target As String = ""
+
+            Try
+
+                ' Enclose all database retrieval/update code within a Transaction boundary
+
+                url = Me.ModifyRedirectUrl(url, "", True)
+                url = Me.Page.ModifyRedirectUrl(url, "", True)
+
+            Catch ex As Exception
+
+                ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+            Finally
+                DbUtils.EndTransaction()
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
+
+            End If
+        End Sub
+    End Class
+
+
+
+    Public Class Sel_WPO_Activity_WPOP101001TableControl
         Inherits BaseSel_WPO_Activity_WPOP101001TableControl
 
-    ' The BaseSel_WPO_Activity_WPOP101001TableControl class implements the LoadData, DataBind, CreateWhereClause
-    ' and other methods to load and display the data in a table control.
+        ' The BaseSel_WPO_Activity_WPOP101001TableControl class implements the LoadData, DataBind, CreateWhereClause
+        ' and other methods to load and display the data in a table control.
 
-    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-    ' The Sel_WPO_Activity_WPOP101001TableControlRow class offers another place where you can customize
-    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
+        ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
+        ' The Sel_WPO_Activity_WPOP101001TableControlRow class offers another place where you can customize
+        ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
 
         Public Overrides Sub DataBind()
             MyBase.DataBind()
@@ -149,7 +193,7 @@ Public Class Sel_WPO_Activity_WPOP101001TableControl
         End Sub
 
 
-		Public Overrides Function CreateWhereClause() As WhereClause
+        Public Overrides Function CreateWhereClause() As WhereClause
 
             Sel_WPO_Activity_WPOP101001View.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
@@ -168,7 +212,7 @@ Public Class Sel_WPO_Activity_WPOP101001TableControl
             Return wc
         End Function
 
-		Protected Overrides Sub PopulateWPOP_C_IDFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
+        Protected Overrides Sub PopulateWPOP_C_IDFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
 
             'Setup the WHERE clause.
             Dim wc As WhereClause = New WhereClause
@@ -201,10 +245,10 @@ Public Class Sel_WPO_Activity_WPOP101001TableControl
             ' Set the selected value.
             'SetSelectedValue(Me.CompanyIDFilter, selectedValue)
             'me.CompanyIDFilter.SelectedIndex = 3
-			If IsNumeric(Me.Page.Request.QueryString.Item("Co")) Then
-				selectedValue = Me.Page.Request.QueryString.Item("Co")
-			End If
-		
+            If IsNumeric(Me.Page.Request.QueryString.Item("Co")) Then
+                selectedValue = Me.Page.Request.QueryString.Item("Co")
+            End If
+
             If selectedValue Is Nothing Or selectedValue = "" Then
                 Me.WPOP_C_IDFilter.SelectedIndex = 4
             Else
@@ -213,7 +257,7 @@ Public Class Sel_WPO_Activity_WPOP101001TableControl
 
         End Sub
 
-		Protected Overrides Sub PopulateWPO_StatusFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
+        Protected Overrides Sub PopulateWPO_StatusFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
 
             'Setup the WHERE clause.
             Dim wc As WhereClause = Me.CreateWhereClause_WPO_StatusFilter()
@@ -258,22 +302,22 @@ Public Class Sel_WPO_Activity_WPOP101001TableControl
 
 
         End Sub
-End Class
+    End Class
 
-  
 
-Public Class WPO_Step_WPO_StepDetail1TableControl
+
+    Public Class WPO_Step_WPO_StepDetail1TableControl
         Inherits BaseWPO_Step_WPO_StepDetail1TableControl
 
-    ' The BaseWPO_Step_WPO_StepDetail1TableControl class implements the LoadData, DataBind, CreateWhereClause
-    ' and other methods to load and display the data in a table control.
+        ' The BaseWPO_Step_WPO_StepDetail1TableControl class implements the LoadData, DataBind, CreateWhereClause
+        ' and other methods to load and display the data in a table control.
 
-    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-    ' The WPO_Step_WPO_StepDetail1TableControlRow class offers another place where you can customize
-    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
+        ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
+        ' The WPO_Step_WPO_StepDetail1TableControlRow class offers another place where you can customize
+        ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
 
 
-		Public Overrides Function CreateWhereClause() As WhereClause
+        Public Overrides Function CreateWhereClause() As WhereClause
             WPO_Step_WPO_StepDetail1View.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
             'DirectCast(MiscUtils.GetParentControlObject(Me, "WCAR_DocTableControlRow") ,WCAR_DocTableControlRow)
@@ -282,8 +326,8 @@ Public Class WPO_Step_WPO_StepDetail1TableControl
             Return wc
 
         End Function
-End Class
-Public Class WPO_Step_WPO_StepDetail1TableControlRow
+    End Class
+    Public Class WPO_Step_WPO_StepDetail1TableControlRow
         Inherits BaseWPO_Step_WPO_StepDetail1TableControlRow
         ' The BaseWPO_Step_WPO_StepDetail1TableControlRow implements code for a ROW within the
         ' the WPO_Step_WPO_StepDetail1TableControl table.  The BaseWPO_Step_WPO_StepDetail1TableControlRow implements the DataBind and SaveData methods.
@@ -291,21 +335,21 @@ Public Class WPO_Step_WPO_StepDetail1TableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
-        
 
-End Class
-Public Class WPO_PRNo_QWF1TableControl
+
+    End Class
+    Public Class WPO_PRNo_QWF1TableControl
         Inherits BaseWPO_PRNo_QWF1TableControl
 
-    ' The BaseWPO_PRNo_QWF1TableControl class implements the LoadData, DataBind, CreateWhereClause
-    ' and other methods to load and display the data in a table control.
+        ' The BaseWPO_PRNo_QWF1TableControl class implements the LoadData, DataBind, CreateWhereClause
+        ' and other methods to load and display the data in a table control.
 
-    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-    ' The WPO_PRNo_QWF1TableControlRow class offers another place where you can customize
-    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
+        ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
+        ' The WPO_PRNo_QWF1TableControlRow class offers another place where you can customize
+        ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
 
 
-		Public Overrides Function CreateWhereClause() As WhereClause
+        Public Overrides Function CreateWhereClause() As WhereClause
             WPO_PRNo_QWF1View.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
 
@@ -318,8 +362,8 @@ Public Class WPO_PRNo_QWF1TableControl
 
             Return wc
         End Function
-End Class
-Public Class WPO_PRNo_QWF1TableControlRow
+    End Class
+    Public Class WPO_PRNo_QWF1TableControlRow
         Inherits BaseWPO_PRNo_QWF1TableControlRow
         ' The BaseWPO_PRNo_QWF1TableControlRow implements code for a ROW within the
         ' the WPO_PRNo_QWF1TableControl table.  The BaseWPO_PRNo_QWF1TableControlRow implements the DataBind and SaveData methods.
@@ -388,19 +432,19 @@ Public Class WPO_PRNo_QWF1TableControlRow
         End Sub
 
 
-End Class
-Public Class WPO_CARNo_QWF1TableControl
+    End Class
+    Public Class WPO_CARNo_QWF1TableControl
         Inherits BaseWPO_CARNo_QWF1TableControl
 
-    ' The BaseWPO_CARNo_QWF1TableControl class implements the LoadData, DataBind, CreateWhereClause
-    ' and other methods to load and display the data in a table control.
+        ' The BaseWPO_CARNo_QWF1TableControl class implements the LoadData, DataBind, CreateWhereClause
+        ' and other methods to load and display the data in a table control.
 
-    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-    ' The WPO_CARNo_QWF1TableControlRow class offers another place where you can customize
-    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
+        ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
+        ' The WPO_CARNo_QWF1TableControlRow class offers another place where you can customize
+        ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
 
 
-		Public Overrides Function CreateWhereClause() As WhereClause
+        Public Overrides Function CreateWhereClause() As WhereClause
             WPO_CARNo_QWF1View.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
 
@@ -412,8 +456,8 @@ Public Class WPO_CARNo_QWF1TableControl
 
             Return wc
         End Function
-End Class
-Public Class WPO_CARNo_QWF1TableControlRow
+    End Class
+    Public Class WPO_CARNo_QWF1TableControlRow
         Inherits BaseWPO_CARNo_QWF1TableControlRow
         ' The BaseWPO_CARNo_QWF1TableControlRow implements code for a ROW within the
         ' the WPO_CARNo_QWF1TableControl table.  The BaseWPO_CARNo_QWF1TableControlRow implements the DataBind and SaveData methods.
@@ -482,19 +526,19 @@ Public Class WPO_CARNo_QWF1TableControlRow
         End Sub
 
 
-End Class
-Public Class WPO_Activity1TableControl
+    End Class
+    Public Class WPO_Activity1TableControl
         Inherits BaseWPO_Activity1TableControl
 
-    ' The BaseWPO_Activity1TableControl class implements the LoadData, DataBind, CreateWhereClause
-    ' and other methods to load and display the data in a table control.
+        ' The BaseWPO_Activity1TableControl class implements the LoadData, DataBind, CreateWhereClause
+        ' and other methods to load and display the data in a table control.
 
-    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-    ' The WPO_Activity1TableControlRow class offers another place where you can customize
-    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
+        ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
+        ' The WPO_Activity1TableControlRow class offers another place where you can customize
+        ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
 
 
-		Public Overrides Function CreateWhereClause() As WhereClause
+        Public Overrides Function CreateWhereClause() As WhereClause
             'This CreateWhereClause is used for loading the data.
             WPO_Activity1Table.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
@@ -505,8 +549,8 @@ Public Class WPO_Activity1TableControl
 
             Return wc
         End Function
-End Class
-Public Class WPO_Activity1TableControlRow
+    End Class
+    Public Class WPO_Activity1TableControlRow
         Inherits BaseWPO_Activity1TableControlRow
         ' The BaseWPO_Activity1TableControlRow implements code for a ROW within the
         ' the WPO_Activity1TableControl table.  The BaseWPO_Activity1TableControlRow implements the DataBind and SaveData methods.
@@ -514,21 +558,21 @@ Public Class WPO_Activity1TableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
-        
 
-End Class
-Public Class View_WCPO_Canvass11TableControl
+
+    End Class
+    Public Class View_WCPO_Canvass11TableControl
         Inherits BaseView_WCPO_Canvass11TableControl
 
-    ' The BaseView_WCPO_Canvass11TableControl class implements the LoadData, DataBind, CreateWhereClause
-    ' and other methods to load and display the data in a table control.
+        ' The BaseView_WCPO_Canvass11TableControl class implements the LoadData, DataBind, CreateWhereClause
+        ' and other methods to load and display the data in a table control.
 
-    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-    ' The View_WCPO_Canvass11TableControlRow class offers another place where you can customize
-    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
+        ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
+        ' The View_WCPO_Canvass11TableControlRow class offers another place where you can customize
+        ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
 
 
-		Public Overrides Function CreateWhereClause() As WhereClause
+        Public Overrides Function CreateWhereClause() As WhereClause
             View_WCPO_Canvass11View.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
 
@@ -538,8 +582,8 @@ Public Class View_WCPO_Canvass11TableControl
 
             Return wc
         End Function
-End Class
-Public Class View_WCPO_Canvass11TableControlRow
+    End Class
+    Public Class View_WCPO_Canvass11TableControlRow
         Inherits BaseView_WCPO_Canvass11TableControlRow
         ' The BaseView_WCPO_Canvass11TableControlRow implements code for a ROW within the
         ' the View_WCPO_Canvass11TableControl table.  The BaseView_WCPO_Canvass11TableControlRow implements the DataBind and SaveData methods.
@@ -589,10 +633,10 @@ Public Class View_WCPO_Canvass11TableControlRow
         End Sub
 
 
-End Class
+    End Class
 #End Region
 
-  
+
 
 #Region "Section 2: Do not modify this section."
     
@@ -1568,7 +1612,7 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             ' redirected to the URL.
             
               
-                  Dim url As String = "../wf_PO/ShowRecord_WPO_WFTask.aspx?PONUMBR={Sel_WPO_Activity_WPOP10100TableControlRow:FV:WPO_PONum}&CompanyID={Sel_WPO_Activity_WPOP10100TableControlRow:FV:WPOP_C_ID}"
+                  Dim url As String = "../sel_WPO_WFTask/Show-WPO-WFTaskN.aspx?PONUMBR={Sel_WPO_Activity_WPOP101001TableControlRow:FV:WPO_PONum}&CompanyID={Sel_WPO_Activity_WPOP101001TableControlRow:FV:WPOP_C_ID}"
                   
                   If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
                   

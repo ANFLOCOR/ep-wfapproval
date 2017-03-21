@@ -17,7 +17,7 @@
       </columnFunction>
       <columnDBFormat>
       </columnDBFormat>
-      <columnPK>N</columnPK>
+      <columnPK>Y</columnPK>
       <columnPermanent>N</columnPermanent>
       <columnComputed Source="User">N</columnComputed>
       <columnIdentity Source="User">N</columnIdentity>
@@ -52,7 +52,7 @@
       </insertingFormula>
       <updatingFormula>
       </updatingFormula>
-      <columnVirtualPK Source="User">N</columnVirtualPK>
+      <columnVirtualPK Source="User">Y</columnVirtualPK>
     </Column>
     <Column InternalName="1" Priority="2" ColumnNum="1">
       <columnName>W_U_User_Name</columnName>
@@ -186,13 +186,12 @@
   <Owner>dbo</Owner>
   <TableAliasName>sel_WASP_WF_Approver_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <PagingMethod>RowNum</PagingMethod>
-  <canCreateRecords Source="Database">N</canCreateRecords>
-  <canEditRecords Source="Database">N</canEditRecords>
-  <canDeleteRecords Source="Database">N</canDeleteRecords>
-  <canViewRecords Source="Database">N</canViewRecords>
+  <canCreateRecords Source="User">N</canCreateRecords>
+  <canEditRecords Source="User">N</canEditRecords>
+  <canDeleteRecords Source="User">N</canDeleteRecords>
+  <canViewRecords Source="Database">Y</canViewRecords>
   <AppShortName>ePortalWFApproval</AppShortName>
-  <FolderName>sel_WASP_WF_Approver2</FolderName>
+  <FolderName>sel_WASP_WF_Approver1</FolderName>
   <MenuName>WASP Workflow Approver1</MenuName>
   <QSPath>../sel_WASP_WF_Approver2/Sel-WASP-WF-Approver-QuickSelector1.aspx</QSPath>
   <TableCodeName>Sel_WASP_WF_Approver2</TableCodeName>
