@@ -651,11 +651,19 @@
         </Attribute>
         <Attribute>
           <Name>ImageUrl</Name>
-          <Value>../Images/Book_openHS.png</Value>
+          <Value>../Images/icon-view.png</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnMouseOut</Name>
+          <Value>this.src='../Images/icon-view.png'</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnMouseOver</Name>
+          <Value>this.src='../Images/icon-view-over.png'</Value>
         </Attribute>
         <Attribute>
           <Name>RedirectURL</Name>
-          <Value>../wf_PO/ShowRecord_WPO_WFTask.aspx?PONUMBR={Sel_WPO_Activity_WPOP10100TableControlRow:FV:WPO_PONum}&amp;CompanyID={Sel_WPO_Activity_WPOP10100TableControlRow:FV:WPOP_C_ID}</Value>
+          <Value>../sel_WPO_WFTask/Show-WPO-WFTaskN.aspx?PONUMBR={Sel_WPO_Activity_WPOP101001TableControlRow:FV:WPO_PONum}&amp;CompanyID={Sel_WPO_Activity_WPOP101001TableControlRow:FV:WPOP_C_ID}</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>

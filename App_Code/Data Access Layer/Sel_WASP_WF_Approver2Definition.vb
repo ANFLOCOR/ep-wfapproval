@@ -9,7 +9,7 @@
 Public Class Sel_WASP_WF_Approver2Definition
 
 #Region "Definition (XML) for Sel_WASP_WF_Approver2Definition table"
-	'Next 165 lines contain Table Definition (XML) for table "Sel_WASP_WF_Approver2Definition"
+	'Next 164 lines contain Table Definition (XML) for table "Sel_WASP_WF_Approver2Definition"
 	Private Shared _DefinitionString As String = ""
 #End Region
 	
@@ -37,7 +37,7 @@ Public Class Sel_WASP_WF_Approver2Definition
          tbf.Append(      "<columnUnique>N</columnUnique>")
          tbf.Append(      "<columnFunction></columnFunction>")
          tbf.Append(      "<columnDBFormat></columnDBFormat>")
-         tbf.Append(      "<columnPK>N</columnPK>")
+         tbf.Append(      "<columnPK>Y</columnPK>")
          tbf.Append(      "<columnPermanent>N</columnPermanent>")
          tbf.Append(      "<columnComputed Source=""User"">N</columnComputed>")
          tbf.Append(      "<columnIdentity Source=""User"">N</columnIdentity>")
@@ -64,7 +64,7 @@ Public Class Sel_WASP_WF_Approver2Definition
          tbf.Append(      "<updatingRecordFormula></updatingRecordFormula>")
          tbf.Append(      "<insertingFormula></insertingFormula>")
          tbf.Append(      "<updatingFormula></updatingFormula>")
-         tbf.Append(      "<columnVirtualPK Source=""User"">N</columnVirtualPK>")
+         tbf.Append(      "<columnVirtualPK Source=""User"">Y</columnVirtualPK>")
          tbf.Append(    "</Column>")
          tbf.Append(    "<Column InternalName=""1"" Priority=""2"" ColumnNum=""1"">")
          tbf.Append(      "<columnName>W_U_User_Name</columnName>")
@@ -176,13 +176,12 @@ Public Class Sel_WASP_WF_Approver2Definition
          tbf.Append(  "<Owner>dbo</Owner>")
          tbf.Append(  "<TableAliasName>sel_WASP_WF_Approver_</TableAliasName>")
          tbf.Append(  "<ConnectionName>DatabaseANFLO-WFN</ConnectionName>")
-         tbf.Append(  "<PagingMethod>RowNum</PagingMethod>")
-         tbf.Append(  "<canCreateRecords Source=""Database"">N</canCreateRecords>")
-         tbf.Append(  "<canEditRecords Source=""Database"">N</canEditRecords>")
-         tbf.Append(  "<canDeleteRecords Source=""Database"">N</canDeleteRecords>")
-         tbf.Append(  "<canViewRecords Source=""Database"">N</canViewRecords>")
+         tbf.Append(  "<canCreateRecords Source=""User"">N</canCreateRecords>")
+         tbf.Append(  "<canEditRecords Source=""User"">N</canEditRecords>")
+         tbf.Append(  "<canDeleteRecords Source=""User"">N</canDeleteRecords>")
+         tbf.Append(  "<canViewRecords Source=""Database"">Y</canViewRecords>")
          tbf.Append(  "<AppShortName>ePortalWFApproval</AppShortName>")
-         tbf.Append(  "<FolderName>sel_WASP_WF_Approver2</FolderName>")
+         tbf.Append(  "<FolderName>sel_WASP_WF_Approver1</FolderName>")
          tbf.Append(  "<MenuName>WASP Workflow Approver1</MenuName>")
          tbf.Append(  "<QSPath>../sel_WASP_WF_Approver2/Sel-WASP-WF-Approver-QuickSelector1.aspx</QSPath>")
          tbf.Append(  "<TableCodeName>Sel_WASP_WF_Approver2</TableCodeName>")
