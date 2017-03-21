@@ -76,9 +76,56 @@ Public Class Sel_WPO_Activity_WPOP101001TableControlRow
                 Me.ImageButton3.Visible = False
             End If
 
+            Me.LitWPO_PONum.Text = Me.GetRecord.WPO_PONum.ToString
+
         End Sub
 
 
+
+		Public Overrides Sub ImageButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+              'JESSY
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+            DbUtils.StartTransaction()
+
+            ' ''Dim url As String = "../sel_WPO_WFTask/WPO-WFTaskN.aspx?POP10100_PO={Sel_WPO_Activity_WPOP101001TableControl:FV:WPO_PONum}&POP10100_Co={Sel_WPO_Activity_WPOP101001TableControl:FV:WPOP_C_ID}"
+            Dim url As String = "../sel_WPO_WFTask/WPO-WFTaskN.aspx?POP10100_PO=" & Me.GetRecord.WPO_PONum.ToString & "&POP10100_Co=" & Me.GetRecord.WPOP_C_ID.ToString
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
+            Catch ex As Exception
+            
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+                DbUtils.EndTransaction
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
+        End Sub
 End Class
 
   
@@ -635,93 +682,94 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
         
                 
                 
-                SetPOActivityTabContainer()
-                
-                SetTOTAL()
-                
-                
-                
-                SetWPO_Date_Assign()
-                SetWPO_Is_Done()
-                SetWPO_PONum()
-                
-                SetWPO_Status()
-                
-                SetWPO_WDT_ID()
-                SetWPOP_C_ID()
-                SetImageButton()
-              
-                SetImageButton3()
-              
-                SetSel_WPO_Activity_WPOP101001RowExpandCollapseRowButton()
-              
-      
-      
+            SetLitWPO_PONum()
+            SetPOActivityTabContainer()
+
+            SetTOTAL()
+
+
+
+            SetWPO_Date_Assign()
+            SetWPO_Is_Done()
+            SetWPO_PONum()
+
+            SetWPO_Status()
+
+            SetWPO_WDT_ID()
+            SetWPOP_C_ID()
+            SetImageButton()
+
+            SetImageButton3()
+
+            SetSel_WPO_Activity_WPOP101001RowExpandCollapseRowButton()
+
+
+
             Me.IsNewRecord = True
-            
+
             If Me.DataSource.IsCreated Then
                 Me.IsNewRecord = False
-                
+
                 If Me.DataSource.GetID IsNot Nothing Then
                     Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
                 End If
-                
+
             End If
-            
+
             ' Now load data for each record and table child UI controls.
             ' Ordering is important because child controls get 
             ' their parent ids from their parent UI controls.
             Dim shouldResetControl As Boolean = False
-            
-        SetView_WCPO_Canvass11TableControl()
-        
-        SetWPO_Activity1TableControl()
-        
-        SetWPO_CARNo_QWF1TableControl()
-        
-        SetWPO_PRNo_QWF1TableControl()
-        
-        SetWPO_Step_WPO_StepDetail1TableControl()
-        
+
+            SetView_WCPO_Canvass11TableControl()
+
+            SetWPO_Activity1TableControl()
+
+            SetWPO_CARNo_QWF1TableControl()
+
+            SetWPO_PRNo_QWF1TableControl()
+
+            SetWPO_Step_WPO_StepDetail1TableControl()
+
         End Sub
-        
-        
+
+
         Public Overridable Sub SetTOTAL()
 
-                  
-            
-        
+
+
+
             ' Set the TOTAL Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 record retrieved from the database.
             ' Me.TOTAL is the ASP:Literal on the webpage.
-            
+
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetTOTAL()
             ' and add your own code before or after the call to the MyBase function.
 
-            
-                  
+
+
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.TOTALSpecified Then
-                				
+
                 ' If the TOTAL is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(Sel_WPO_Activity_WPOP101001View.TOTAL, "#,#.00")
-                              
+
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.TOTAL.Text = formattedValue
-                
-            Else 
-            
+
+            Else
+
                 ' TOTAL is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-        
-                 Me.TOTAL.Text = Sel_WPO_Activity_WPOP101001View.TOTAL.Format(Sel_WPO_Activity_WPOP101001View.TOTAL.DefaultValue, "#,#.00")
-                        		
-                End If
-                 
+
+                Me.TOTAL.Text = Sel_WPO_Activity_WPOP101001View.TOTAL.Format(Sel_WPO_Activity_WPOP101001View.TOTAL.DefaultValue, "#,#.00")
+
+            End If
+
             ' If the TOTAL is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.TOTAL.Text Is Nothing _
@@ -729,45 +777,45 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 ' Set the value specified on the Properties.
                 Me.TOTAL.Text = "&nbsp;"
             End If
-                                       
+
         End Sub
-                
+
         Public Overridable Sub SetWPO_Date_Assign()
 
-                  
-            
-        
+
+
+
             ' Set the WPO_Date_Assign Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 record retrieved from the database.
             ' Me.WPO_Date_Assign is the ASP:Literal on the webpage.
-            
+
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPO_Date_Assign()
             ' and add your own code before or after the call to the MyBase function.
 
-            
-                  
+
+
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPO_Date_AssignSpecified Then
-                				
+
                 ' If the WPO_Date_Assign is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(Sel_WPO_Activity_WPOP101001View.WPO_Date_Assign, "d")
-                              
+
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPO_Date_Assign.Text = formattedValue
-                
-            Else 
-            
+
+            Else
+
                 ' WPO_Date_Assign is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-        
-                 Me.WPO_Date_Assign.Text = Sel_WPO_Activity_WPOP101001View.WPO_Date_Assign.Format(Sel_WPO_Activity_WPOP101001View.WPO_Date_Assign.DefaultValue, "d")
-                        		
-                End If
-                 
+
+                Me.WPO_Date_Assign.Text = Sel_WPO_Activity_WPOP101001View.WPO_Date_Assign.Format(Sel_WPO_Activity_WPOP101001View.WPO_Date_Assign.DefaultValue, "d")
+
+            End If
+
             ' If the WPO_Date_Assign is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPO_Date_Assign.Text Is Nothing _
@@ -775,45 +823,45 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPO_Date_Assign.Text = "&nbsp;"
             End If
-                                       
+
         End Sub
-                
+
         Public Overridable Sub SetWPO_Is_Done()
 
-                  
-            
-        
+
+
+
             ' Set the WPO_Is_Done Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 record retrieved from the database.
             ' Me.WPO_Is_Done is the ASP:Literal on the webpage.
-            
+
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPO_Is_Done()
             ' and add your own code before or after the call to the MyBase function.
 
-            
-                  
+
+
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPO_Is_DoneSpecified Then
-                				
+
                 ' If the WPO_Is_Done is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(Sel_WPO_Activity_WPOP101001View.WPO_Is_Done)
-                              
+
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPO_Is_Done.Text = formattedValue
-                
-            Else 
-            
+
+            Else
+
                 ' WPO_Is_Done is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-        
-                 Me.WPO_Is_Done.Text = Sel_WPO_Activity_WPOP101001View.WPO_Is_Done.Format(Sel_WPO_Activity_WPOP101001View.WPO_Is_Done.DefaultValue)
-                        		
-                End If
-                 
+
+                Me.WPO_Is_Done.Text = Sel_WPO_Activity_WPOP101001View.WPO_Is_Done.Format(Sel_WPO_Activity_WPOP101001View.WPO_Is_Done.DefaultValue)
+
+            End If
+
             ' If the WPO_Is_Done is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPO_Is_Done.Text Is Nothing _
@@ -821,56 +869,56 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPO_Is_Done.Text = "&nbsp;"
             End If
-                                       
+
         End Sub
-                
+
         Public Overridable Sub SetWPO_PONum()
 
-                  
-            
-        
+
+
+
             ' Set the WPO_PONum Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 record retrieved from the database.
             ' Me.WPO_PONum is the ASP:Literal on the webpage.
-            
+
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPO_PONum()
             ' and add your own code before or after the call to the MyBase function.
 
-            
-                  
+
+
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPO_PONumSpecified Then
-                				
+
                 ' If the WPO_PONum is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = Sel_WPO_Activity_WPOP101001View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP101001View.WPO_PONum)
                 If _isExpandableNonCompositeForeignKey AndAlso Sel_WPO_Activity_WPOP101001View.WPO_PONum.IsApplyDisplayAs Then
-                                  
-                       formattedValue = Sel_WPO_Activity_WPOP101001View.GetDFKA(Me.DataSource.WPO_PONum.ToString(),Sel_WPO_Activity_WPOP101001View.WPO_PONum, Nothing)
-                                    
-                       If (formattedValue Is Nothing) Then
-                              formattedValue = Me.DataSource.Format(Sel_WPO_Activity_WPOP101001View.WPO_PONum)
-                       End If
+
+                    formattedValue = Sel_WPO_Activity_WPOP101001View.GetDFKA(Me.DataSource.WPO_PONum.ToString(), Sel_WPO_Activity_WPOP101001View.WPO_PONum, Nothing)
+
+                    If (formattedValue Is Nothing) Then
+                        formattedValue = Me.DataSource.Format(Sel_WPO_Activity_WPOP101001View.WPO_PONum)
+                    End If
                 Else
-                       formattedValue = Me.DataSource.WPO_PONum.ToString()
+                    formattedValue = Me.DataSource.WPO_PONum.ToString()
                 End If
-                                
+
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPO_PONum.Text = formattedValue
-                
-            Else 
-            
+
+            Else
+
                 ' WPO_PONum is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-        
-                 Me.WPO_PONum.Text = Sel_WPO_Activity_WPOP101001View.WPO_PONum.Format(Sel_WPO_Activity_WPOP101001View.WPO_PONum.DefaultValue)
-                        		
-                End If
-                 
+
+                Me.WPO_PONum.Text = Sel_WPO_Activity_WPOP101001View.WPO_PONum.Format(Sel_WPO_Activity_WPOP101001View.WPO_PONum.DefaultValue)
+
+            End If
+
             ' If the WPO_PONum is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPO_PONum.Text Is Nothing _
@@ -878,56 +926,56 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPO_PONum.Text = "&nbsp;"
             End If
-                                       
+
         End Sub
-                
+
         Public Overridable Sub SetWPO_Status()
 
-                  
-            
-        
+
+
+
             ' Set the WPO_Status Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 record retrieved from the database.
             ' Me.WPO_Status is the ASP:Literal on the webpage.
-            
+
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPO_Status()
             ' and add your own code before or after the call to the MyBase function.
 
-            
-                  
+
+
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPO_StatusSpecified Then
-                				
+
                 ' If the WPO_Status is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = Sel_WPO_Activity_WPOP101001View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP101001View.WPO_Status)
                 If _isExpandableNonCompositeForeignKey AndAlso Sel_WPO_Activity_WPOP101001View.WPO_Status.IsApplyDisplayAs Then
-                                  
-                       formattedValue = Sel_WPO_Activity_WPOP101001View.GetDFKA(Me.DataSource.WPO_Status.ToString(),Sel_WPO_Activity_WPOP101001View.WPO_Status, Nothing)
-                                    
-                       If (formattedValue Is Nothing) Then
-                              formattedValue = Me.DataSource.Format(Sel_WPO_Activity_WPOP101001View.WPO_Status)
-                       End If
+
+                    formattedValue = Sel_WPO_Activity_WPOP101001View.GetDFKA(Me.DataSource.WPO_Status.ToString(), Sel_WPO_Activity_WPOP101001View.WPO_Status, Nothing)
+
+                    If (formattedValue Is Nothing) Then
+                        formattedValue = Me.DataSource.Format(Sel_WPO_Activity_WPOP101001View.WPO_Status)
+                    End If
                 Else
-                       formattedValue = Me.DataSource.WPO_Status.ToString()
+                    formattedValue = Me.DataSource.WPO_Status.ToString()
                 End If
-                                
+
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPO_Status.Text = formattedValue
-                
-            Else 
-            
+
+            Else
+
                 ' WPO_Status is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-        
-                 Me.WPO_Status.Text = Sel_WPO_Activity_WPOP101001View.WPO_Status.Format(Sel_WPO_Activity_WPOP101001View.WPO_Status.DefaultValue)
-                        		
-                End If
-                 
+
+                Me.WPO_Status.Text = Sel_WPO_Activity_WPOP101001View.WPO_Status.Format(Sel_WPO_Activity_WPOP101001View.WPO_Status.DefaultValue)
+
+            End If
+
             ' If the WPO_Status is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPO_Status.Text Is Nothing _
@@ -935,56 +983,56 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPO_Status.Text = "&nbsp;"
             End If
-                                       
+
         End Sub
-                
+
         Public Overridable Sub SetWPO_WDT_ID()
 
-                  
-            
-        
+
+
+
             ' Set the WPO_WDT_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 record retrieved from the database.
             ' Me.WPO_WDT_ID is the ASP:Literal on the webpage.
-            
+
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPO_WDT_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-            
-                  
+
+
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPO_WDT_IDSpecified Then
-                				
+
                 ' If the WPO_WDT_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = Sel_WPO_Activity_WPOP101001View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP101001View.WPO_WDT_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso Sel_WPO_Activity_WPOP101001View.WPO_WDT_ID.IsApplyDisplayAs Then
-                                  
-                       formattedValue = Sel_WPO_Activity_WPOP101001View.GetDFKA(Me.DataSource.WPO_WDT_ID.ToString(),Sel_WPO_Activity_WPOP101001View.WPO_WDT_ID, Nothing)
-                                    
-                       If (formattedValue Is Nothing) Then
-                              formattedValue = Me.DataSource.Format(Sel_WPO_Activity_WPOP101001View.WPO_WDT_ID)
-                       End If
+
+                    formattedValue = Sel_WPO_Activity_WPOP101001View.GetDFKA(Me.DataSource.WPO_WDT_ID.ToString(), Sel_WPO_Activity_WPOP101001View.WPO_WDT_ID, Nothing)
+
+                    If (formattedValue Is Nothing) Then
+                        formattedValue = Me.DataSource.Format(Sel_WPO_Activity_WPOP101001View.WPO_WDT_ID)
+                    End If
                 Else
-                       formattedValue = Me.DataSource.WPO_WDT_ID.ToString()
+                    formattedValue = Me.DataSource.WPO_WDT_ID.ToString()
                 End If
-                                
+
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPO_WDT_ID.Text = formattedValue
-                
-            Else 
-            
+
+            Else
+
                 ' WPO_WDT_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-        
-                 Me.WPO_WDT_ID.Text = Sel_WPO_Activity_WPOP101001View.WPO_WDT_ID.Format(Sel_WPO_Activity_WPOP101001View.WPO_WDT_ID.DefaultValue)
-                        		
-                End If
-                 
+
+                Me.WPO_WDT_ID.Text = Sel_WPO_Activity_WPOP101001View.WPO_WDT_ID.Format(Sel_WPO_Activity_WPOP101001View.WPO_WDT_ID.DefaultValue)
+
+            End If
+
             ' If the WPO_WDT_ID is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPO_WDT_ID.Text Is Nothing _
@@ -992,124 +1040,134 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPO_WDT_ID.Text = "&nbsp;"
             End If
-                                       
+
         End Sub
-                
+
         Public Overridable Sub SetWPOP_C_ID()
 
-                  
-            					
+
+
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.WPOP_C_ID.ID) Then
-            
+
                 Me.WPOP_C_ID.Text = Me.PreviousUIData(Me.WPOP_C_ID.ID).ToString()
-              
+
                 Return
             End If
-            
-        
+
+
             ' Set the WPOP_C_ID TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.sel_WPO_Activity_WPOP10100 record retrieved from the database.
             ' Me.WPOP_C_ID is the ASP:TextBox on the webpage.
-            
+
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPOP_C_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-            
-                  
+
+
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPOP_C_IDSpecified Then
-                				
+
                 ' If the WPOP_C_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = Sel_WPO_Activity_WPOP101001View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(Sel_WPO_Activity_WPOP101001View.WPOP_C_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso Sel_WPO_Activity_WPOP101001View.WPOP_C_ID.IsApplyDisplayAs Then
-                                  
-                       formattedValue = Sel_WPO_Activity_WPOP101001View.GetDFKA(Me.DataSource.WPOP_C_ID.ToString(),Sel_WPO_Activity_WPOP101001View.WPOP_C_ID, Nothing)
-                                    
-                       If (formattedValue Is Nothing) Then
-                              formattedValue = Me.DataSource.Format(Sel_WPO_Activity_WPOP101001View.WPOP_C_ID)
-                       End If
+
+                    formattedValue = Sel_WPO_Activity_WPOP101001View.GetDFKA(Me.DataSource.WPOP_C_ID.ToString(), Sel_WPO_Activity_WPOP101001View.WPOP_C_ID, Nothing)
+
+                    If (formattedValue Is Nothing) Then
+                        formattedValue = Me.DataSource.Format(Sel_WPO_Activity_WPOP101001View.WPOP_C_ID)
+                    End If
                 Else
-                       formattedValue = Me.DataSource.WPOP_C_ID.ToString()
+                    formattedValue = Me.DataSource.WPOP_C_ID.ToString()
                 End If
-                                
+
                 Me.WPOP_C_ID.Text = formattedValue
-                
-            Else 
-            
+
+            Else
+
                 ' WPOP_C_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-        
-                 Me.WPOP_C_ID.Text = Sel_WPO_Activity_WPOP101001View.WPOP_C_ID.Format(Sel_WPO_Activity_WPOP101001View.WPOP_C_ID.DefaultValue)
-                        		
-                End If
-                 
-              AddHandler Me.WPOP_C_ID.TextChanged, AddressOf WPOP_C_ID_TextChanged
-                                 
+
+                Me.WPOP_C_ID.Text = Sel_WPO_Activity_WPOP101001View.WPOP_C_ID.Format(Sel_WPO_Activity_WPOP101001View.WPOP_C_ID.DefaultValue)
+
+            End If
+
+            AddHandler Me.WPOP_C_ID.TextChanged, AddressOf WPOP_C_ID_TextChanged
+
         End Sub
-                
-        Public Overridable Sub SetPOActivityTabContainer()           
-                        
-                   
+
+        Public Overridable Sub SetLitWPO_PONum()
+
+
+
+            'Code for the text property is generated inside the .aspx file.
+            'To override this property you can uncomment the following property and add your own value.
+            'Me.LitWPO_PONum.Text = "Some value"
+
+        End Sub
+
+        Public Overridable Sub SetPOActivityTabContainer()
+
+
             If EvaluateFormula("URL(""TabVisible"")").ToLower() = "true" Then
                 MiscUtils.FindControlRecursively(Me, "POActivityTabContainer").Visible = True
             ElseIf EvaluateFormula("URL(""TabVisible"")").ToLower() = "false" Then
                 MiscUtils.FindControlRecursively(Me, "POActivityTabContainer").Visible = False
             End If
-         
-  
-        End Sub        
-      
-        Public Overridable Sub SetView_WCPO_Canvass11TableControl()           
-        
-        
+
+
+        End Sub
+
+        Public Overridable Sub SetView_WCPO_Canvass11TableControl()
+
+
             If View_WCPO_Canvass11TableControl.Visible Then
                 View_WCPO_Canvass11TableControl.LoadData()
                 View_WCPO_Canvass11TableControl.DataBind()
             End If
-        End Sub        
-      
-        Public Overridable Sub SetWPO_Activity1TableControl()           
-        
-        
+        End Sub
+
+        Public Overridable Sub SetWPO_Activity1TableControl()
+
+
             If WPO_Activity1TableControl.Visible Then
                 WPO_Activity1TableControl.LoadData()
                 WPO_Activity1TableControl.DataBind()
             End If
-        End Sub        
-      
-        Public Overridable Sub SetWPO_CARNo_QWF1TableControl()           
-        
-        
+        End Sub
+
+        Public Overridable Sub SetWPO_CARNo_QWF1TableControl()
+
+
             If WPO_CARNo_QWF1TableControl.Visible Then
                 WPO_CARNo_QWF1TableControl.LoadData()
                 WPO_CARNo_QWF1TableControl.DataBind()
             End If
-        End Sub        
-      
-        Public Overridable Sub SetWPO_PRNo_QWF1TableControl()           
-        
-        
+        End Sub
+
+        Public Overridable Sub SetWPO_PRNo_QWF1TableControl()
+
+
             If WPO_PRNo_QWF1TableControl.Visible Then
                 WPO_PRNo_QWF1TableControl.LoadData()
                 WPO_PRNo_QWF1TableControl.DataBind()
             End If
-        End Sub        
-      
-        Public Overridable Sub SetWPO_Step_WPO_StepDetail1TableControl()           
-        
-        
+        End Sub
+
+        Public Overridable Sub SetWPO_Step_WPO_StepDetail1TableControl()
+
+
             If WPO_Step_WPO_StepDetail1TableControl.Visible Then
                 WPO_Step_WPO_StepDetail1TableControl.LoadData()
                 WPO_Step_WPO_StepDetail1TableControl.DataBind()
             End If
-        End Sub        
-      
+        End Sub
+
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
@@ -1117,10 +1175,10 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             If e Is Nothing Then
                 e = New FormulaEvaluator()
             End If
-            
+
             e.Variables.Clear()
 
-            
+
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -1129,11 +1187,11 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 End While
             End If
 
-            If includeDS
-                
-            End IF
-            
-            
+            If includeDS Then
+
+            End If
+
+
             ' Other variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -1159,22 +1217,22 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             Else
                 Return resultObj.ToString()
             End If
-        End Function      
-        
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
-        End Function        
+        End Function
 
-        
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
+        End Function
+
+
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
-        End Function        
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
+        End Function
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -1182,7 +1240,7 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -1191,13 +1249,13 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
         End Function
 
 
-        Public Overridable Sub RegisterPostback()       
-        
-        
+        Public Overridable Sub RegisterPostback()
+
+
         End Sub
 
-      
-        
+
+
         ' To customize, override this method in Sel_WPO_Activity_WPOP101001TableControlRow.
         Public Overridable Sub SaveData()
             ' Saves the associated record in the database.
@@ -1207,15 +1265,15 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             ' 1. Load the existing record from the database. Since we save the entire record, this ensures 
             ' that fields that are not displayed are also properly initialized.
             Me.LoadData()
-        
+
             ' The checksum is used to ensure the record was not changed by another user.
             If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
                 If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
                     Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "ePortalWFApproval"))
                 End If
             End If
-        
-              
+
+
             ' 2. Perform any custom validation.
             Me.Validate()
 
@@ -1226,44 +1284,44 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             ' 4. Save in the database.
             ' We should not save the record if the data did not change. This
             ' will save a database hit and avoid triggering any database triggers.
-             
+
             If Me.DataSource.IsAnyValueChanged Then
                 ' Save record to database but do not commit yet.
                 ' Auto generated ids are available after saving for use by child (dependent) records.
                 Me.DataSource.Save()
-              
+
                 DirectCast(GetParentControlObject(Me, "Sel_WPO_Activity_WPOP101001TableControl"), Sel_WPO_Activity_WPOP101001TableControl).DataChanged = True
                 DirectCast(GetParentControlObject(Me, "Sel_WPO_Activity_WPOP101001TableControl"), Sel_WPO_Activity_WPOP101001TableControl).ResetData = True
             End If
-            
-      
+
+
             ' update session or cookie by formula
-                                    
-      
+
+
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-            
+
             Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
-          
-        Dim recView_WCPO_Canvass11TableControl as View_WCPO_Canvass11TableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "View_WCPO_Canvass11TableControl"), View_WCPO_Canvass11TableControl)
-        recView_WCPO_Canvass11TableControl.SaveData()
-          
-        Dim recWPO_Activity1TableControl as WPO_Activity1TableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WPO_Activity1TableControl"), WPO_Activity1TableControl)
-        recWPO_Activity1TableControl.SaveData()
-          
-        Dim recWPO_CARNo_QWF1TableControl as WPO_CARNo_QWF1TableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WPO_CARNo_QWF1TableControl"), WPO_CARNo_QWF1TableControl)
-        recWPO_CARNo_QWF1TableControl.SaveData()
-          
-        Dim recWPO_PRNo_QWF1TableControl as WPO_PRNo_QWF1TableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WPO_PRNo_QWF1TableControl"), WPO_PRNo_QWF1TableControl)
-        recWPO_PRNo_QWF1TableControl.SaveData()
-          
-        Dim recWPO_Step_WPO_StepDetail1TableControl as WPO_Step_WPO_StepDetail1TableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WPO_Step_WPO_StepDetail1TableControl"), WPO_Step_WPO_StepDetail1TableControl)
-        recWPO_Step_WPO_StepDetail1TableControl.SaveData()
-          
+
+            Dim recView_WCPO_Canvass11TableControl As View_WCPO_Canvass11TableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "View_WCPO_Canvass11TableControl"), View_WCPO_Canvass11TableControl)
+            recView_WCPO_Canvass11TableControl.SaveData()
+
+            Dim recWPO_Activity1TableControl As WPO_Activity1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WPO_Activity1TableControl"), WPO_Activity1TableControl)
+            recWPO_Activity1TableControl.SaveData()
+
+            Dim recWPO_CARNo_QWF1TableControl As WPO_CARNo_QWF1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WPO_CARNo_QWF1TableControl"), WPO_CARNo_QWF1TableControl)
+            recWPO_CARNo_QWF1TableControl.SaveData()
+
+            Dim recWPO_PRNo_QWF1TableControl As WPO_PRNo_QWF1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WPO_PRNo_QWF1TableControl"), WPO_PRNo_QWF1TableControl)
+            recWPO_PRNo_QWF1TableControl.SaveData()
+
+            Dim recWPO_Step_WPO_StepDetail1TableControl As WPO_Step_WPO_StepDetail1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WPO_Step_WPO_StepDetail1TableControl"), WPO_Step_WPO_StepDetail1TableControl)
+            recWPO_Step_WPO_StepDetail1TableControl.SaveData()
+
         End Sub
 
         ' To customize, override this method in Sel_WPO_Activity_WPOP101001TableControlRow.
@@ -1273,9 +1331,9 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             ' To do this, it calls the Get methods for each of the field displayed on 
             ' the webpage.  It is better to make changes in the Get methods, rather 
             ' than making changes here.
-      
+
             ' Call the Get methods for each of the user interface controls.
-        
+
             GetTOTAL()
             GetWPO_Date_Assign()
             GetWPO_Is_Done()
@@ -1284,61 +1342,61 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             GetWPO_WDT_ID()
             GetWPOP_C_ID()
         End Sub
-        
-        
+
+
         Public Overridable Sub GetTOTAL()
-            
+
         End Sub
-                
+
         Public Overridable Sub GetWPO_Date_Assign()
-            
+
         End Sub
-                
+
         Public Overridable Sub GetWPO_Is_Done()
-            
+
         End Sub
-                
+
         Public Overridable Sub GetWPO_PONum()
-            
+
         End Sub
-                
+
         Public Overridable Sub GetWPO_Status()
-            
+
         End Sub
-                
+
         Public Overridable Sub GetWPO_WDT_ID()
-            
+
         End Sub
-                
+
         Public Overridable Sub GetWPOP_C_ID()
-            
+
         End Sub
-                
-      
-        ' To customize, override this method in Sel_WPO_Activity_WPOP101001TableControlRow.
-        
-        Public Overridable Function CreateWhereClause() As WhereClause
-        
-        Dim hasFiltersSel_WPO_Activity_WPOP101001TableControl As Boolean = False
-      
-        Dim hasFiltersView_WCPO_Canvass11TableControl As Boolean = False
-      
-        Dim hasFiltersWPO_Activity1TableControl As Boolean = False
-      
-        Dim hasFiltersWPO_CARNo_QWF1TableControl As Boolean = False
-      
-        Dim hasFiltersWPO_PRNo_QWF1TableControl As Boolean = False
-      
-        Dim hasFiltersWPO_Step_WPO_StepDetail1TableControl As Boolean = False
-      
-            Return Nothing
-            
-        End Function
-        
-    
+
 
         ' To customize, override this method in Sel_WPO_Activity_WPOP101001TableControlRow.
-        Public Overridable Sub Validate() 
+
+        Public Overridable Function CreateWhereClause() As WhereClause
+
+            Dim hasFiltersSel_WPO_Activity_WPOP101001TableControl As Boolean = False
+
+            Dim hasFiltersView_WCPO_Canvass11TableControl As Boolean = False
+
+            Dim hasFiltersWPO_Activity1TableControl As Boolean = False
+
+            Dim hasFiltersWPO_CARNo_QWF1TableControl As Boolean = False
+
+            Dim hasFiltersWPO_PRNo_QWF1TableControl As Boolean = False
+
+            Dim hasFiltersWPO_Step_WPO_StepDetail1TableControl As Boolean = False
+
+            Return Nothing
+
+        End Function
+
+
+
+        ' To customize, override this method in Sel_WPO_Activity_WPOP101001TableControlRow.
+        Public Overridable Sub Validate()
             ' Add custom validation for any control within this panel.
             ' Example.  If you have a State ASP:Textbox control
             ' If Me.State.Text <> "CA" Then
@@ -1348,19 +1406,19 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             ' The Validate method is common across all controls within
             ' this panel so you can validate multiple fields, but report
             ' one error message.
-            
-                
+
+
         End Sub
 
         Public Overridable Sub Delete()
-        
+
             If Me.IsNewRecord() Then
                 Return
             End If
 
             Dim pkValue As KeyValue = KeyValue.XmlToKey(Me.RecordUniqueId)
-          Sel_WPO_Activity_WPOP101001View.DeleteRecord(pkValue)
-          
+            Sel_WPO_Activity_WPOP101001View.DeleteRecord(pkValue)
+
             DirectCast(GetParentControlObject(Me, "Sel_WPO_Activity_WPOP101001TableControl"), Sel_WPO_Activity_WPOP101001TableControl).DataChanged = True
             DirectCast(GetParentControlObject(Me, "Sel_WPO_Activity_WPOP101001TableControl"), Sel_WPO_Activity_WPOP101001TableControl).ResetData = True
         End Sub
@@ -1372,41 +1430,41 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 Me.RegisterPostback()
 
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-                  
-                
+
+
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
                     Me.LoadData()
-                    Me.DataBind()			
+                    Me.DataBind()
                 End If
-                                
-                						
+
+
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
                 DbUtils.EndTransaction()
             End Try
         End Sub
-        
-            
+
+
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
-        
-    
+
+
             'Save pagination state to session.
-          
+
         End Sub
-        
-        
-    
+
+
+
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
-        
+
 
             ' Clear pagination state from session.
-        
+
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
@@ -1415,188 +1473,188 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             If Not isNewRecord Is Nothing AndAlso isNewRecord.Trim <> "" Then
                 Me.IsNewRecord = Boolean.Parse(isNewRecord)
             End If
-            
+
             Dim myCheckSum As String = CType(ViewState("CheckSum"), String)
             If Not myCheckSum Is Nothing AndAlso myCheckSum.Trim <> "" Then
                 Me.CheckSum = myCheckSum
             End If
-            
-    
+
+
             ' Load view state for pagination control.
-                 
+
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
             ViewState("IsNewRecord") = Me.IsNewRecord.ToString()
             ViewState("CheckSum") = Me.CheckSum
-            
-    
+
+
             ' Load view state for pagination control.
-                  
+
             Return MyBase.SaveViewState()
         End Function
-        
-        
-    
+
+
+
         ' Generate set method for buttons
-        
-        Public Overridable Sub SetImageButton()                
-              
-   
+
+        Public Overridable Sub SetImageButton()
+
+
         End Sub
-            
-        Public Overridable Sub SetImageButton3()                
-              
-   
+
+        Public Overridable Sub SetImageButton3()
+
+
         End Sub
-            
-        Public Overridable Sub SetSel_WPO_Activity_WPOP101001RowExpandCollapseRowButton()                
-              
-   
+
+        Public Overridable Sub SetSel_WPO_Activity_WPOP101001RowExpandCollapseRowButton()
+
+
         End Sub
-            
+
         ' event handler for ImageButton
         Public Overridable Sub ImageButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
+
             ' The redirect URL is set on the Properties, Custom Properties or Actions.
             ' The ModifyRedirectURL call resolves the parameters before the
             ' Response.Redirect redirects the page to the URL.  
             ' Any code after the Response.Redirect call will not be executed, since the page is
             ' redirected to the URL.
-            
-              
-                  Dim url As String = "../sel_WPO_WFTask/WPO-WFTaskN.aspx?POP10100_PO={Sel_WPO_Activity_WPOP101001TableControl:FV:WPO_PONum}&POP10100_Co={Sel_WPO_Activity_WPOP101001TableControl:FV:WPOP_C_ID}"
-                  
-                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
-                  
-        Dim shouldRedirect As Boolean = True
-        Dim target As String = ""
-      
-    Try
-    
-      ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction
-                
-            url = Me.ModifyRedirectUrl(url, "",True)
-            url = Me.Page.ModifyRedirectUrl(url, "",True)
-          
+
+
+            Dim url As String = "../sel_WPO_WFTask/WPO-WFTaskN.aspx?POP10100_PO={Sel_WPO_Activity_WPOP101001TableControl:FV:WPO_PONum}&POP10100_Co={Sel_WPO_Activity_WPOP101001TableControl:FV:WPOP_C_ID}"
+
+            If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+
+            Dim shouldRedirect As Boolean = True
+            Dim target As String = ""
+
+            Try
+
+                ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction()
+
+                url = Me.ModifyRedirectUrl(url, "", True)
+                url = Me.Page.ModifyRedirectUrl(url, "", True)
+
             Catch ex As Exception
-            
-       ' Upon error, rollback the transaction
+
+                ' Upon error, rollback the transaction
                 Me.Page.RollBackTransaction(sender)
                 shouldRedirect = False
                 Me.Page.ErrorOnPage = True
-    
+
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
+
             Finally
-                DbUtils.EndTransaction
+                DbUtils.EndTransaction()
             End Try
             If shouldRedirect Then
                 Me.Page.ShouldSaveControlsToSession = True
-      Me.Page.Response.Redirect(url)
-        
+                Me.Page.Response.Redirect(url)
+
             End If
         End Sub
-        
+
         ' event handler for ImageButton
         Public Overridable Sub ImageButton3_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
+
             ' The redirect URL is set on the Properties, Custom Properties or Actions.
             ' The ModifyRedirectURL call resolves the parameters before the
             ' Response.Redirect redirects the page to the URL.  
             ' Any code after the Response.Redirect call will not be executed, since the page is
             ' redirected to the URL.
-            
-              
-                  Dim url As String = "../wf_PO/ShowRecord_WPO_WFTask.aspx?PONUMBR={Sel_WPO_Activity_WPOP10100TableControlRow:FV:WPO_PONum}&CompanyID={Sel_WPO_Activity_WPOP10100TableControlRow:FV:WPOP_C_ID}"
-                  
-                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
-                  
-        Dim shouldRedirect As Boolean = True
-        Dim target As String = ""
-      
-    Try
-    
-      ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction
-                
-            url = Me.ModifyRedirectUrl(url, "",True)
-            url = Me.Page.ModifyRedirectUrl(url, "",True)
-          
+
+
+            Dim url As String = "../wf_PO/ShowRecord_WPO_WFTask.aspx?PONUMBR={Sel_WPO_Activity_WPOP10100TableControlRow:FV:WPO_PONum}&CompanyID={Sel_WPO_Activity_WPOP10100TableControlRow:FV:WPOP_C_ID}"
+
+            If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+
+            Dim shouldRedirect As Boolean = True
+            Dim target As String = ""
+
+            Try
+
+                ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction()
+
+                url = Me.ModifyRedirectUrl(url, "", True)
+                url = Me.Page.ModifyRedirectUrl(url, "", True)
+
             Catch ex As Exception
-            
-       ' Upon error, rollback the transaction
+
+                ' Upon error, rollback the transaction
                 Me.Page.RollBackTransaction(sender)
                 shouldRedirect = False
                 Me.Page.ErrorOnPage = True
-    
+
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
+
             Finally
-                DbUtils.EndTransaction
+                DbUtils.EndTransaction()
             End Try
             If shouldRedirect Then
                 Me.Page.ShouldSaveControlsToSession = True
-      Me.Page.Response.Redirect(url)
-        
+                Me.Page.Response.Redirect(url)
+
             End If
         End Sub
-        
+
         ' event handler for ImageButton
         Public Overridable Sub Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-          Dim panelControl as Sel_WPO_Activity_WPOP101001TableControl = DirectCast(MiscUtils.GetParentControlObject(Me, "Sel_WPO_Activity_WPOP101001TableControl"), Sel_WPO_Activity_WPOP101001TableControl)
 
-          Dim repeatedRows() as Sel_WPO_Activity_WPOP101001TableControlRow = panelControl.GetRecordControls()
-          For Each repeatedRow as Sel_WPO_Activity_WPOP101001TableControlRow in repeatedRows
-              Dim altRow as System.Web.UI.Control= DirectCast(MiscUtils.FindControlRecursively(repeatedRow, "Sel_WPO_Activity_WPOP101001TableControlAltRow"), System.Web.UI.Control)
-              If (altRow IsNot Nothing) Then
-                  If (sender Is repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton) Then
-                      altRow.Visible = Not altRow.Visible
-                  
-                  End If                      
-                  If (altRow.Visible) Then        
-                   
-                     repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow.gif"
-                     repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.Attributes.Add("onmouseover", "")
-                     repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.Attributes.Add("onmouseout", "")
-                                     
-                  Else
-                   
-                     repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow2.gif"
-                     repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.Attributes.Add("onmouseover", "")
-                     repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.Attributes.Add("onmouseout", "")
-                   
-                  End If
-              Else
-                  Me.Page.Response.Redirect("../Shared/ConfigureCollapseExpandRowBtn.aspx")
-              End If
-          Next
-          
-          
+            Try
+
+                Dim panelControl As Sel_WPO_Activity_WPOP101001TableControl = DirectCast(MiscUtils.GetParentControlObject(Me, "Sel_WPO_Activity_WPOP101001TableControl"), Sel_WPO_Activity_WPOP101001TableControl)
+
+                Dim repeatedRows() As Sel_WPO_Activity_WPOP101001TableControlRow = panelControl.GetRecordControls()
+                For Each repeatedRow As Sel_WPO_Activity_WPOP101001TableControlRow In repeatedRows
+                    Dim altRow As System.Web.UI.Control = DirectCast(MiscUtils.FindControlRecursively(repeatedRow, "Sel_WPO_Activity_WPOP101001TableControlAltRow"), System.Web.UI.Control)
+                    If (altRow IsNot Nothing) Then
+                        If (sender Is repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton) Then
+                            altRow.Visible = Not altRow.Visible
+
+                        End If
+                        If (altRow.Visible) Then
+
+                            repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow.gif"
+                            repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.Attributes.Add("onmouseover", "")
+                            repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.Attributes.Add("onmouseout", "")
+
+                        Else
+
+                            repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow2.gif"
+                            repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.Attributes.Add("onmouseover", "")
+                            repeatedRow.Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton.Attributes.Add("onmouseout", "")
+
+                        End If
+                    Else
+                        Me.Page.Response.Redirect("../Shared/ConfigureCollapseExpandRowBtn.aspx")
+                    End If
+                Next
+
+
             Catch ex As Exception
-            
+
                 Me.Page.ErrorOnPage = True
-    
+
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
+
             Finally
-    
+
             End Try
-    
+
         End Sub
-        
-        Protected Overridable Sub WPOP_C_ID_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
-                    
-              End Sub
-            
-   
+
+        Protected Overridable Sub WPOP_C_ID_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
+
+        End Sub
+
+
         Private _PreviousUIData As New Hashtable
         Public Overridable Property PreviousUIData() As Hashtable
             Get
@@ -1605,9 +1663,9 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             Set(ByVal value As Hashtable)
                 _PreviousUIData = value
             End Set
-        End Property   
+        End Property
 
-        
+
         Public Property RecordUniqueId() As String
             Get
                 Return CType(Me.ViewState("BaseSel_WPO_Activity_WPOP101001TableControlRow_Rec"), String)
@@ -1616,7 +1674,7 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 Me.ViewState("BaseSel_WPO_Activity_WPOP101001TableControlRow_Rec") = value
             End Set
         End Property
-            
+
         Public Property DataSource() As Sel_WPO_Activity_WPOP101001Record
             Get
                 Return DirectCast(MyBase._DataSource, Sel_WPO_Activity_WPOP101001Record)
@@ -1626,7 +1684,7 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
             End Set
         End Property
 
-        
+
         Private _checkSum As String
         Public Overridable Property CheckSum() As String
             Get
@@ -1636,7 +1694,7 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 Me._checkSum = value
             End Set
         End Property
-        
+
         Private _TotalPages As Integer
         Public Property TotalPages() As Integer
             Get
@@ -1646,7 +1704,7 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 Me._TotalPages = value
             End Set
         End Property
-        
+
         Private _PageIndex As Integer
         Public Property PageIndex() As Integer
             Get
@@ -1657,7 +1715,7 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 Me._PageIndex = value
             End Set
         End Property
-    
+
         Private _DisplayLastPage As Boolean
         Public Property DisplayLastPage() As Boolean
             Get
@@ -1667,107 +1725,113 @@ Public Class BaseSel_WPO_Activity_WPOP101001TableControlRow
                 Me._DisplayLastPage = value
             End Set
         End Property
-        
-        
+
+
 
 #Region "Helper Properties"
-        
+
         Public ReadOnly Property ImageButton() As System.Web.UI.WebControls.ImageButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ImageButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
-        
+
         Public ReadOnly Property ImageButton3() As System.Web.UI.WebControls.ImageButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ImageButton3"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
-        
+
+        Public ReadOnly Property LitWPO_PONum() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "LitWPO_PONum"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+
         Public ReadOnly Property POActivityTabContainer() As AjaxControlToolkit.TabContainer
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "POActivityTabContainer"), AjaxControlToolkit.TabContainer)
             End Get
         End Property
-        
+
         Public ReadOnly Property Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton() As System.Web.UI.WebControls.ImageButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Sel_WPO_Activity_WPOP101001RowExpandCollapseRowButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
-        
+
         Public ReadOnly Property TOTAL() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "TOTAL"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-            
+
         Public ReadOnly Property View_WCPO_Canvass11TableControl() As View_WCPO_Canvass11TableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "View_WCPO_Canvass11TableControl"), View_WCPO_Canvass11TableControl)
             End Get
         End Property
-        
+
         Public ReadOnly Property WPO_Activity1TableControl() As WPO_Activity1TableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_Activity1TableControl"), WPO_Activity1TableControl)
             End Get
         End Property
-        
+
         Public ReadOnly Property WPO_CARNo_QWF1TableControl() As WPO_CARNo_QWF1TableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_CARNo_QWF1TableControl"), WPO_CARNo_QWF1TableControl)
             End Get
         End Property
-        
+
         Public ReadOnly Property WPO_Date_Assign() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_Date_Assign"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-            
+
         Public ReadOnly Property WPO_Is_Done() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_Is_Done"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-            
+
         Public ReadOnly Property WPO_PONum() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_PONum"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-            
+
         Public ReadOnly Property WPO_PRNo_QWF1TableControl() As WPO_PRNo_QWF1TableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_PRNo_QWF1TableControl"), WPO_PRNo_QWF1TableControl)
             End Get
         End Property
-        
+
         Public ReadOnly Property WPO_Status() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_Status"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-            
+
         Public ReadOnly Property WPO_Step_WPO_StepDetail1TableControl() As WPO_Step_WPO_StepDetail1TableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_Step_WPO_StepDetail1TableControl"), WPO_Step_WPO_StepDetail1TableControl)
             End Get
         End Property
-        
+
         Public ReadOnly Property WPO_WDT_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_WDT_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-            
+
         Public ReadOnly Property WPOP_C_ID() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPOP_C_ID"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-            
+
 #End Region
 
 #Region "Helper Functions"

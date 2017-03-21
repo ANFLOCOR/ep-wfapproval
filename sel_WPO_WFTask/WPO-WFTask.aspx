@@ -32,7 +32,7 @@
 <%= SystemUtils.GenerateEnterKeyCaptureBeginTag(FindControlRecursively("SaveButton"))%>
 
                         <ePortalWFApproval:Sel_WPO_WFTaskRecordControl runat="server" id="Sel_WPO_WFTaskRecordControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelHeaderL"></td><td class="dh">
-                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dhtr" valign="middle" style="font-weight:bold;font-size:12pt;font-family:Tahoma;color:#02CA0C">
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dhtr" valign="middle" style="font-weight:bold;font-size:12pt;font-family:Tahoma;color:#016106">
                         <asp:Literal runat="server" id="Sel_WPO_WFTaskTitle" Text="Purchase Order Approval (South)">	</asp:Literal></td></tr></table>
 </td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
 

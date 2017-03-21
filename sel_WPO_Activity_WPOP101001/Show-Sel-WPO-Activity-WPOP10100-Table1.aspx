@@ -43,7 +43,8 @@
 	</asp:ImageButton></td><td class="ttc"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WPO_WDT_ID"></asp:Literal></span>
  
-<asp:Literal runat="server" id="WPO_Is_Done" visible="False"></asp:Literal></td><td class="ttc"><asp:Literal runat="server" id="WPO_PONum"></asp:Literal>  
+<asp:Literal runat="server" id="WPO_Is_Done" visible="False"></asp:Literal></td><td class="ttc"><asp:Literal runat="server" id="LitWPO_PONum" Text="MyLiteral">	</asp:Literal> 
+<asp:Literal runat="server" id="WPO_PONum"></asp:Literal>  
 <span style="white-space:nowrap;">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -55,6 +56,7 @@
 </tr>
 </table>
 </span>
+ 
 </td><td class="ttc" style="text-align:right;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="TOTAL"></asp:Literal></span>
 </td><td class="ttc"><span style="white-space:nowrap;">

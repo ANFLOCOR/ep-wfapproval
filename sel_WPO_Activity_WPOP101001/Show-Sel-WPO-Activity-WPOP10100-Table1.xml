@@ -715,6 +715,22 @@
       <ControlClass>System.Web.UI.WebControls.Literal</ControlClass>
     </ContainedComponent>
     <ContainedComponent>
+      <Name>LitWPO_PONum</Name>
+      <Type>Literal</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Text</Name>
+          <Value>MyLiteral</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>Sel_WPO_Activity_WPOP101001TableControl</InsideControl>
+      <InsideItemTemplate>true</InsideItemTemplate>
+    </ContainedComponent>
+    <ContainedComponent>
       <Name>PageTitle</Name>
       <Type>Literal</Type>
       <PassthroughAttributes>
@@ -4508,8 +4524,10 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="WPO_PONum"/&amp;gt;  
-&amp;lt;GEN:FIELDVALUE NAME="WPOP_C_ID" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;GEN:LITERAL Name="LitWPO_PONum" /&amp;gt; 
+&amp;lt;GEN:FIELDVALUE NAME="WPO_PONum" /&amp;gt;  
+&amp;lt;GEN:FIELDVALUE NAME="WPOP_C_ID" /&amp;gt; 
+&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
