@@ -425,7 +425,7 @@ Public Class WPO_PRNo_QWFTableControlRow
 
         End Sub
 
-        Public Overrides Sub ImageButton1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+		Public Overrides Sub ImageButton1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
 
             ' The redirect URL is set on the Properties, Custom Properties or Actions.
             ' The ModifyRedirectURL call resolves the parameters before the
@@ -435,7 +435,7 @@ Public Class WPO_PRNo_QWFTableControlRow
 
             DbUtils.StartTransaction()
 
-            Dim url As String = "../WPR_Doc/Show-WPR-Doc-WPO-SubmitPage.aspx?WPR_Doc=" & Me.WPRD_ID.Text '{PRNoRow:FV:WPRD_ID}"
+            Dim url As String = "../WPR_Doc/Show-WPR-Doc.aspx?WPR_Doc=" & Me.WPRD_ID.Text '{PRNoRow:FV:WPRD_ID}"
             'Dim url As String = "../WPR_Doc/Show-WPR-Doc-WPO1.aspx?WPR_Doc=" & Me.WPRD_ID.Text '{WPO_PRNo_QWFTableControlRow:FV:WPRD_ID}"
 
             If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
@@ -11832,7 +11832,7 @@ Public Class BaseWPO_PRNo_QWFTableControlRow
             ' redirected to the URL.
             
               
-                  Dim url As String = "../WPR_Doc/Show-WPR-Doc-WPO1.aspx?WPR_Doc={WPO_PRNo_QWFTableControlRow:FV:WPRD_ID}"
+                  Dim url As String = "../WPR_Doc/Show-WPR-Doc.aspx?WPR_Doc={WPO_PRNo_QWFTableControlRow:FV:WPRD_ID}"
                   
                   If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
                   

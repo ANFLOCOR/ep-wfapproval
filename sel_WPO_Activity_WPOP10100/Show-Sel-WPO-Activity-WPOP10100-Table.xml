@@ -720,7 +720,7 @@
         </Attribute>
         <Attribute>
           <Name>RedirectURL</Name>
-          <Value>../WPR_Doc/Show-WPR-Doc-WPO1.aspx?WPR_Doc={WPO_PRNo_QWFTableControlRow:FV:WPRD_ID}</Value>
+          <Value>../WPR_Doc/Show-WPR-Doc.aspx?WPR_Doc={WPO_PRNo_QWFTableControlRow:FV:WPRD_ID}</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>

@@ -1389,7 +1389,7 @@
         </Attribute>
         <Attribute>
           <Name>Visible</Name>
-          <Value>False</Value>
+          <Value>True</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_WPO_InquireDetailsTableControl</InsideControl>

@@ -162,7 +162,7 @@
 </th><th class="thc" style="text-align:left;"><asp:Literal runat="server" id="UNITCOSTLabel1" Text="Prev. Price Info">	</asp:Literal></th></tr><asp:Repeater runat="server" id="Sel_WPO_InquireDetailsTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:Sel_WPO_InquireDetailsTableControlRow runat="server" id="Sel_WPO_InquireDetailsTableControlRow">
 <tr><td class="ttc" style="font-weight:bold;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="LineNumber"></asp:Literal></span>
-<asp:ImageButton runat="server" id="iComment" causesvalidation="False" commandname="Redirect" imageurl="../Images/iconClear.gif" visible="False">		
+<asp:ImageButton runat="server" id="iComment" causesvalidation="False" commandname="Redirect" imageurl="../Images/iconClear.gif" visible="True">		
 	</asp:ImageButton><ePortalWFApproval:ThemeButton runat="server" id="iComment1" button-causesvalidation="False" button-commandname="Redirect" button-text="Comment" button-tooltip="Comment" visible="False"></ePortalWFApproval:ThemeButton><ePortalWFApproval:ThemeButton runat="server" id="imbItemHistory" button-causesvalidation="False" button-commandname="Redirect" button-text="Item History" button-tooltip="Item History" visible="False"></ePortalWFApproval:ThemeButton></td><td class="ttc" style="font-weight:bold;"><asp:LinkButton runat="server" id="ITEMNMBR" CommandName="Redirect" forecolor="Blue" tooltip="Click to View Item History" visible="False"></asp:LinkButton><asp:Literal runat="server" id="ITEMNMBR1"></asp:Literal> 
 <asp:Literal runat="server" id="PONUMBER1" visible="False"></asp:Literal></td><td class="ttc" style="font-weight:bold;"><asp:Literal runat="server" id="ITEMDESC"></asp:Literal> 
 <span style="white-space:nowrap;">
