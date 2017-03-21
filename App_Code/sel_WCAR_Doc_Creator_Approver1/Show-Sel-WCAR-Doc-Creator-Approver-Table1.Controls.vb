@@ -85,42 +85,42 @@ Public Class Sel_WCAR_Doc_Creator_Approver1TableControlRow
         '    End If
         'End Sub
 
-        Public Overrides Sub btnEdit_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-            Dim url As String = "../wf_car/EditWCAR_Doc.aspx?WCAR_Doc=" & Me.WCD_ID.Text '{Sel_WCAR_Doc_Creator_ApproverTableControlRow:FV:WCD_ID}"
-            Dim shouldRedirect As Boolean = True
-            Dim TargetKey As String = Nothing
-            Dim DFKA As String = Nothing
-            Dim id As String = Nothing
-            Dim value As String = Nothing
-            Try
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
+        'Public Overrides Sub btnEdit_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+        '    Dim url As String = "../WCAR_Doc1/Edit-WCAR-Doc1.aspx?WCAR_Doc=" & Me.WCD_ID.Text '{Sel_WCAR_Doc_Creator_ApproverTableControlRow:FV:WCD_ID}"
+        '    Dim shouldRedirect As Boolean = True
+        '    Dim TargetKey As String = Nothing
+        '    Dim DFKA As String = Nothing
+        '    Dim id As String = Nothing
+        '    Dim value As String = Nothing
+        '    Try
+        '        ' Enclose all database retrieval/update code within a Transaction boundary
+        '        DbUtils.StartTransaction()
 
-                url = Me.ModifyRedirectUrl(url, "", False)
-                url = Me.Page.ModifyRedirectUrl(url, "", False)
-                Me.Page.CommitTransaction(sender)
+        '        url = Me.ModifyRedirectUrl(url, "", False)
+        '        url = Me.Page.ModifyRedirectUrl(url, "", False)
+        '        Me.Page.CommitTransaction(sender)
 
-            Catch ex As Exception
-                ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                shouldRedirect = False
-                Me.Page.ErrorOnPage = True
+        '    Catch ex As Exception
+        '        ' Upon error, rollback the transaction
+        '        Me.Page.RollBackTransaction(sender)
+        '        shouldRedirect = False
+        '        Me.Page.ErrorOnPage = True
 
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-            Finally
-                DbUtils.EndTransaction()
-            End Try
-            If shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-            ElseIf Not TargetKey Is Nothing AndAlso _
-                        Not shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.CloseWindow(True)
+        '        ' Report the error message to the end user
+        '        Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+        '    Finally
+        '        DbUtils.EndTransaction()
+        '    End Try
+        '    If shouldRedirect Then
+        '        Me.Page.ShouldSaveControlsToSession = True
+        '        Me.Page.Response.Redirect(url)
+        '    ElseIf Not TargetKey Is Nothing AndAlso _
+        '                Not shouldRedirect Then
+        '        Me.Page.ShouldSaveControlsToSession = True
+        '        Me.Page.CloseWindow(True)
 
-            End If
-        End Sub
+        '    End If
+        'End Sub
 
         Public Overrides Sub btnVoid_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
 
@@ -504,7 +504,7 @@ Public Class Sel_WCAR_Doc_Creator_Approver1TableControlRow
             Me.WCD_StatusFilter.Items.Add(item4)
             Me.WCD_StatusFilter.Items.Add(item5)
 
-            Me.WCD_StatusFilter.Items.Insert(0, New ListItem(Page.GetResourceValue("Txt:All", "EPORTAL"), "--ANY--"))
+            Me.WCD_StatusFilter.Items.Insert(0, New ListItem(Page.GetResourceValue("All", "EPORTAL"), "--ANY--"))
             If Not Me.Page.IsPostBack Then Me.WCD_StatusFilter.SelectedIndex = 3 'Pending (default coz the number of items is less)
             'If selectedValue Is Nothing Then selectedValue = "Pending"
             SetSelectedValue(Me.WCD_StatusFilter, selectedValue)
@@ -1874,7 +1874,7 @@ Public Class BaseSel_WCAR_Doc_Creator_Approver1TableControlRow
             ' redirected to the URL.
             
               
-                  Dim url As String = "../WCAR_Doc/Show-WCAR-Doc.aspx?WCAR_Doc={Sel_WCAR_Doc_Creator_ApproverTableControlRow:FV:WCD_ID}"
+                  Dim url As String = "../WCAR_Doc1/Edit-WCAR-Doc1.aspx?WCAR_Doc1={Sel_WCAR_Doc_Creator_Approver1TableControlRow:FV:WCD_ID}"
                   
                   If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
                   

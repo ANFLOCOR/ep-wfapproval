@@ -2201,64 +2201,6 @@ Public Class BaseWCAR_Activity1TableControl
     
            ' Setup the filter and search.
         
-            If Not Me.Page.IsPostBack Then
-                Dim initialVal As String = ""
-                If  Me.InSession(Me.SortControl) 				
-                    initialVal = Me.GetFromSession(Me.SortControl)
-                   
-              
-              End If
-
-              
-                If InvariantEquals(initialVal, "Search for", True) Or InvariantEquals(initialVal, BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing), True) Then
-                initialVal = ""
-                End If
-              
-              If initialVal <> ""				
-                        
-                        Me.SortControl.Items.Add(New ListItem(initialVal, initialVal))
-                            
-                        Me.SortControl.SelectedValue = initialVal
-                            
-                    End If
-                
-            End If
-            If Not Me.Page.IsPostBack Then
-                Dim initialVal As String = ""
-                If  Me.InSession(Me.WCA_WDT_IDFilter) 				
-                    initialVal = Me.GetFromSession(Me.WCA_WDT_IDFilter)
-                
-                Else
-                    
-                    initialVal = EvaluateFormula("URL(""WCA_WDT_ID"")")
-                
-              End If
-              
-                If InvariantEquals(initialVal, "Search for", True) Or InvariantEquals(initialVal, BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing), True) Then
-                  initialVal = ""
-                End If
-              
-                If initialVal <> ""				
-                        
-                        Dim WCA_WDT_IDFilteritemListFromSession() As String = initialVal.Split(","c)
-                        Dim index As Integer = 0
-                        For Each item As String In WCA_WDT_IDFilteritemListFromSession
-                            If index = 0 AndAlso _
-                               item.ToString.Equals("") Then
-                            Else
-                                Me.WCA_WDT_IDFilter.Items.Add(item)
-                                Me.WCA_WDT_IDFilter.Items.Item(index).Selected = True
-                                index += 1
-                            End If
-                        Next
-                        Dim listItem As ListItem
-                        For Each listItem In Me.WCA_WDT_IDFilter.Items
-                            listItem.Selected = True
-                        Next
-                            
-                    End If
-                
-            End If
 
       
       
@@ -2287,9 +2229,6 @@ Public Class BaseWCAR_Activity1TableControl
         
             SaveControlsToSession_Ajax()
         
-              ' Show confirmation message on Click
-              Me.DeleteButton.Attributes.Add("onClick", "return (confirm(""" & (CType(Me.Page,BaseApplicationPage)).GetResourceValue("DeleteConfirm", "ePortalWFApproval") & """));")
-      
             ' Setup the pagination events.
             
               AddHandler Me.Pagination.FirstPage.Click, AddressOf Pagination_FirstPage_Click
@@ -2307,24 +2246,7 @@ Public Class BaseWCAR_Activity1TableControl
             ' Setup the sorting events.
           
             ' Setup the button events.
-          
-              AddHandler Me.AddButton.Click, AddressOf AddButton_Click
-                        
-              AddHandler Me.DeleteButton.Click, AddressOf DeleteButton_Click
-                        
-              AddHandler Me.ResetButton.Click, AddressOf ResetButton_Click
-                        
-              AddHandler Me.SaveButton.Click, AddressOf SaveButton_Click
-                        
-              AddHandler Me.ActionsButton.Button.Click, AddressOf ActionsButton_Click
-                        
-              AddHandler Me.FilterButton.Button.Click, AddressOf FilterButton_Click
-                        
-              AddHandler Me.FiltersButton.Button.Click, AddressOf FiltersButton_Click
-                        
-            AddHandler Me.SortControl.SelectedIndexChanged, AddressOf SortControl_SelectedIndexChanged
-              AddHandler Me.WCA_WDT_IDFilter.SelectedIndexChanged, AddressOf WCA_WDT_IDFilter_SelectedIndexChanged                  
-                        
+                  
         
           ' Setup events for others
                 
@@ -2562,31 +2484,6 @@ Public Class BaseWCAR_Activity1TableControl
                 
                 
                 
-                
-                
-                
-                
-                
-                SetSortByLabel()
-                SetSortControl()
-                
-                
-                SetWCA_WDT_IDFilter()
-                SetWCA_WDT_IDLabel1()
-                SetAddButton()
-              
-                SetDeleteButton()
-              
-                SetResetButton()
-              
-                SetSaveButton()
-              
-                SetActionsButton()
-              
-                SetFilterButton()
-              
-                SetFiltersButton()
-              
             ' setting the state of expand or collapse alternative rows
       
     
@@ -2598,9 +2495,7 @@ Public Class BaseWCAR_Activity1TableControl
             ' this method calls the set method for controls with special formula like running total, sum, rank, etc
             SetFormulaControls()
             
-             
-              SetFiltersButton()
-                     
+                    
             
       End Sub
       
@@ -2634,8 +2529,6 @@ Public Class BaseWCAR_Activity1TableControl
       
         Public Overridable Sub RegisterPostback()
         
-              Me.Page.RegisterPostBackTrigger(MiscUtils.FindControlRecursively(Me,"SaveButton"))
-                        
         
         End Sub
 
@@ -2716,10 +2609,6 @@ Public Class BaseWCAR_Activity1TableControl
 
         Public Overridable Sub ResetControl()
 
-            
-            Me.WCA_WDT_IDFilter.ClearSelection()
-            
-            Me.SortControl.ClearSelection()
             
             Me.CurrentSortOrder.Reset()
             If (Me.InSession(Me, "Order_By")) Then
@@ -2842,44 +2731,7 @@ Public Class BaseWCAR_Activity1TableControl
             ' 2. User selected search criteria.
             ' 3. User selected filter criteria.
 
-              
-
-                  Dim totalSelectedItemCount as Integer = 0
-                  
-            If IsValueSelected(Me.WCA_WDT_IDFilter) Then
-    
-              hasFiltersWCAR_Activity1TableControl = True            
-    
-                Dim item As ListItem
-                Dim selectedItemCount As Integer = 0
-                For Each item In Me.WCA_WDT_IDFilter.Items
-                    If item.Selected Then
-                        selectedItemCount += 1
-                        
-                          totalSelectedItemCount += 1
-                        
-                    End If
-                Next
                 
-                Dim filter As WhereClause = New WhereClause
-                For Each item In Me.WCA_WDT_IDFilter.Items
-                    If item.Selected AndAlso (item.Value = "--ANY--" OrElse item.Value = "--PLEASE_SELECT--") AndAlso selectedItemCount > 1 Then
-                        item.Selected = False
-                    End If
-                    If item.Selected Then
-                        filter.iOR(WCAR_Activity1Table.WCA_WDT_ID, BaseFilter.ComparisonOperator.EqualsTo, item.Value, False, False)
-                    End If
-                Next
-                wc.iAND(filter)
-                
-            End If
-                  
-                
-                       
-      If (totalSelectedItemCount > 50) Then
-          Throw new Exception(Page.GetResourceValue("Err:SelectedItemOverLimit", "ePortalWFApproval").Replace("{Limit}", "50").Replace("{SelectedCount}", totalSelectedItemCount.ToString()))
-      End If
-      
     
     Return wc
     End Function
@@ -2901,29 +2753,6 @@ Public Class BaseWCAR_Activity1TableControl
       
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
           
-            Dim WCA_WDT_IDFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "WCA_WDT_IDFilter_Ajax"), String)
-            If IsValueSelected(WCA_WDT_IDFilterSelectedValue) Then
-    
-              hasFiltersWCAR_Activity1TableControl = True            
-    
-            If Not isNothing(WCA_WDT_IDFilterSelectedValue) Then
-                Dim WCA_WDT_IDFilteritemListFromSession() As String = WCA_WDT_IDFilterSelectedValue.Split(","c)
-                Dim index As Integer = 0
-                  
-                Dim filter As WhereClause = New WhereClause
-                For Each item As String In WCA_WDT_IDFilteritemListFromSession
-                    If index = 0 AndAlso item.ToString.Equals("") Then
-                    Else
-                        filter.iOR(WCAR_Activity1Table.WCA_WDT_ID, BaseFilter.ComparisonOperator.EqualsTo, item, False, False)
-                        index += 1
-                    End If
-                Next
-                wc.iAND(filter)
-                
-             End If
-                
-             End If
-                      
       
       
             Return wc
@@ -3199,280 +3028,6 @@ Public Class BaseWCAR_Activity1TableControl
       
         ' Create Set, WhereClause, and Populate Methods
         
-        Public Overridable Sub SetSortByLabel()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.SortByLabel.Text = "Some value"
-                    
-                  End Sub
-                
-        Public Overridable Sub SetWCA_WDT_IDLabel1()
-
-                  
-                  
-                  End Sub
-                
-        Public Overridable Sub SetSortControl()
-
-              
-            
-                Me.PopulateSortControl(GetSelectedValue(Me.SortControl,  GetFromSession(Me.SortControl)), 500)					
-                    
-        End Sub
-            
-        Public Overridable Sub SetWCA_WDT_IDFilter()
-
-              
-            
-            Dim WCA_WDT_IDFilterselectedFilterItemList As New ArrayList()
-            Dim WCA_WDT_IDFilteritemsString As String = Nothing
-            If (Me.InSession(Me.WCA_WDT_IDFilter)) Then
-                WCA_WDT_IDFilteritemsString = Me.GetFromSession(Me.WCA_WDT_IDFilter)
-            End If
-            
-            If (WCA_WDT_IDFilteritemsString IsNot Nothing) Then
-                Dim WCA_WDT_IDFilteritemListFromSession() As String = WCA_WDT_IDFilteritemsString.Split(","c)
-                For Each item as String In WCA_WDT_IDFilteritemListFromSession
-                    WCA_WDT_IDFilterselectedFilterItemList.Add(item)
-                Next
-            End If
-              
-            		
-            Me.PopulateWCA_WDT_IDFilter(GetSelectedValueList(Me.WCA_WDT_IDFilter, WCA_WDT_IDFilterselectedFilterItemList), 500)
-                    
-              Dim url as String = Me.ModifyRedirectUrl("../WDoc_Type1/WDoc-Type-QuickSelector1.aspx", "", True)
-              
-              url = Me.Page.ModifyRedirectUrl(url, "", True)                                  
-              
-              url &= "?Target=" & Me.WCA_WDT_IDFilter.ClientID & "&DFKA=" & CType(Me.Page, BaseApplicationPage).Encrypt("WDT_Name")& "&IndexField=" & CType(Me.Page, BaseApplicationPage).Encrypt("WDT_ID")& "&EmptyValue=" & CType(Me.Page, BaseApplicationPage).Encrypt("--ANY--") & "&EmptyDisplayText=" & CType(Me.Page, BaseApplicationPage).Encrypt(Me.Page.GetResourceValue("Txt:All")) & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup")
-              
-              
-              Me.WCA_WDT_IDFilter.Attributes.Item("onClick") = "initializePopupPage(this, '" & url & "', " & Convert.ToString(WCA_WDT_IDFilter.AutoPostBack).ToLower() & ", event); return false;"        
-                  
-                                 
-              End Sub	
-            
-        ' Get the filters' data for SortControl
-        Protected Overridable Sub PopulateSortControl(ByVal selectedValue As String, ByVal maxItems As Integer)
-                    
-                
-                Me.SortControl.Items.Clear()
-
-                ' 1. Setup the static list items
-                							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("{Txt:PleaseSelect}"), "--PLEASE_SELECT--"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Date Action {Txt:Ascending}"), "WCA_Date_Action Asc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Date Action {Txt:Descending}"), "WCA_Date_Action Desc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Date Assign {Txt:Ascending}"), "WCA_Date_Assign Asc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Date Assign {Txt:Descending}"), "WCA_Date_Assign Desc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Is Done {Txt:Ascending}"), "WCA_Is_Done Asc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Is Done {Txt:Descending}"), "WCA_Is_Done Desc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Status {Txt:Ascending}"), "WCA_Status Asc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Status {Txt:Descending}"), "WCA_Status Desc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA W U {Txt:Ascending}"), "WCA_W_U_ID Asc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA W U {Txt:Descending}"), "WCA_W_U_ID Desc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA W U Delegate {Txt:Ascending}"), "WCA_W_U_ID_Delegate Asc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA W U Delegate {Txt:Descending}"), "WCA_W_U_ID_Delegate Desc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WCD {Txt:Ascending}"), "WCA_WCD_ID Asc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WCD {Txt:Descending}"), "WCA_WCD_ID Desc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WDT {Txt:Ascending}"), "WCA_WDT_ID Asc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WDT {Txt:Descending}"), "WCA_WDT_ID Desc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WS {Txt:Ascending}"), "WCA_WS_ID Asc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WS {Txt:Descending}"), "WCA_WS_ID Desc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WSD {Txt:Ascending}"), "WCA_WSD_ID Asc"))
-                            							
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WSD {Txt:Descending}"), "WCA_WSD_ID Desc"))
-                            
-
-            Try    
-                ' Set the selected value.
-                SetSelectedValue(Me.SortControl, selectedValue)
-
-                
-            Catch
-            End Try
-            
-            If Me.SortControl.SelectedValue IsNot Nothing AndAlso Me.SortControl.Items.FindByValue(Me.SortControl.SelectedValue) Is Nothing
-                Me.SortControl.SelectedValue = Nothing
-            End If
-
-              End Sub
-            
-        ' Get the filters' data for WCA_WDT_IDFilter
-        Protected Overridable Sub PopulateWCA_WDT_IDFilter(ByVal selectedValue As ArrayList, ByVal maxItems As Integer)
-                    
-            'Setup the WHERE clause.
-            
-            Dim wc As WhereClause = Me.CreateWhereClause_WCA_WDT_IDFilter()
-            Me.WCA_WDT_IDFilter.Items.Clear()
-            		  			
-            ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCA_WDT_IDFilter function.
-            ' It is better to customize the where clause there.
-            
-
-            Dim orderBy As OrderBy = New OrderBy(false, false)			
-            
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-
-            	
-
-            Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
-            
-
-            Dim itemValues() As WDoc_Type1Record = Nothing
-            
-            If wc.RunQuery
-                Dim counter As Integer = 0
-                Dim pageNum As Integer = 0
-                Dim evaluator As New FormulaEvaluator
-                Dim listDuplicates As New ArrayList()
-
-                
-                
-                Do
-                    
-                    itemValues = WDoc_Type1Table.GetRecords(wc, orderBy, pageNum, maxItems)
-                                    
-                    For each itemValue As WDoc_Type1Record In itemValues
-                        ' Create the item and add to the list.
-                        Dim cvalue As String = Nothing
-                        Dim fvalue As String = Nothing
-                        If itemValue.WDT_IDSpecified Then
-                            cvalue = itemValue.WDT_ID.ToString()
-
-                            If counter < maxItems AndAlso Me.WCA_WDT_IDFilter.Items.FindByValue(cvalue) Is Nothing  Then
-                            
-                                Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Activity1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Activity1Table.WCA_WDT_ID)
-                                If _isExpandableNonCompositeForeignKey AndAlso WCAR_Activity1Table.WCA_WDT_ID.IsApplyDisplayAs Then
-                                    fvalue = WCAR_Activity1Table.GetDFKA(itemValue, WCAR_Activity1Table.WCA_WDT_ID)
-                                End If
-                                If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                                    fvalue = itemValue.Format(WDoc_Type1Table.WDT_Name)
-                                End If
-                                    
-                                If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-
-                                If (IsNothing(fvalue)) Then
-                                   fvalue = ""
-                                End If
-
-                                fvalue = fvalue.Trim()
-
-                                If ( fvalue.Length > 50 ) Then
-                                   fvalue = fvalue.Substring(0, 50) & "..."
-                                End If
-
-                                Dim dupItem As ListItem = Me.WCA_WDT_IDFilter.Items.FindByText(fvalue)
-                
-                                If Not IsNothing(dupItem) Then
-                                    listDuplicates.Add(fvalue)
-                                    If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
-                                    End If
-                                End If
-
-                                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
-                                Me.WCA_WDT_IDFilter.Items.Add(newItem)
-
-                                If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
-                                End If
-
-                                counter += 1			  
-                            End If
-                        End If
-                    Next
-                    pageNum += 1
-                Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
-            End If			
-            
-
-
-                               
-
-            Try    
-                
-            Catch
-            End Try
-            
-            
-            Me.WCA_WDT_IDFilter.SetFieldMaxLength(50)
-                                 
-                  
-            ' Add the selected value.
-            If Me.WCA_WDT_IDFilter.Items.Count = 0 Then
-                Me.WCA_WDT_IDFilter.Items.Add(New ListItem(Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-            End If
-            
-            ' Mark all items to be selected.
-            For Each item As ListItem in Me.WCA_WDT_IDFilter.Items
-                item.Selected = True
-            Next
-                              
-        End Sub
-            
-              
-
-        Public Overridable Function CreateWhereClause_WCA_WDT_IDFilter() As WhereClause
-          
-              Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
-            
-            ' Create a where clause for the filter WCA_WDT_IDFilter.
-            ' This function is called by the Populate method to load the items 
-            ' in the WCA_WDT_IDFilterQuickSelector
-            
-            Dim WCA_WDT_IDFilterselectedFilterItemList As New ArrayList()
-            Dim WCA_WDT_IDFilteritemsString As String = Nothing
-            If (Me.InSession(Me.WCA_WDT_IDFilter)) Then
-                WCA_WDT_IDFilteritemsString = Me.GetFromSession(Me.WCA_WDT_IDFilter)
-            End If
-            
-            If (WCA_WDT_IDFilteritemsString IsNot Nothing) Then
-                Dim WCA_WDT_IDFilteritemListFromSession() As String = WCA_WDT_IDFilteritemsString.Split(","c)
-                For Each item as String In WCA_WDT_IDFilteritemListFromSession
-                    WCA_WDT_IDFilterselectedFilterItemList.Add(item)
-                Next
-            End If
-              
-            WCA_WDT_IDFilterselectedFilterItemList = GetSelectedValueList(Me.WCA_WDT_IDFilter, WCA_WDT_IDFilterselectedFilterItemList) 
-            Dim wc As New WhereClause
-            If WCA_WDT_IDFilterselectedFilterItemList Is Nothing OrElse WCA_WDT_IDFilterselectedFilterItemList.Count = 0 Then
-                wc.RunQuery = False
-            Else            
-                For Each item As String In WCA_WDT_IDFilterselectedFilterItemList
-              
-            	  
-                    wc.iOR(WDoc_Type1Table.WDT_ID, BaseFilter.ComparisonOperator.EqualsTo, item)                  
-                  
-                                 
-                Next
-            End If
-            Return wc
-        
-        End Function			
-            
 
     
     
@@ -3535,17 +3090,6 @@ Public Class BaseWCAR_Activity1TableControl
 
             ' Save filter controls to values to session.
         
-            Me.SaveToSession(Me.SortControl, Me.SortControl.SelectedValue)
-                  
-            Dim WCA_WDT_IDFilterselectedFilterItemList As ArrayList = GetSelectedValueList(Me.WCA_WDT_IDFilter, Nothing)
-            Dim WCA_WDT_IDFilterSessionString As String = ""
-            If Not WCA_WDT_IDFilterselectedFilterItemList is Nothing Then
-            For Each item As String In WCA_WDT_IDFilterselectedFilterItemList
-                WCA_WDT_IDFilterSessionstring = WCA_WDT_IDFilterSessionstring & "," & item
-            Next
-            End If
-            Me.SaveToSession(Me.WCA_WDT_IDFilter, WCA_WDT_IDFilterSessionstring)
-                  
         
             'Save pagination state to session.
          
@@ -3567,17 +3111,6 @@ Public Class BaseWCAR_Activity1TableControl
         Protected  Sub SaveControlsToSession_Ajax()
             ' Save filter controls to values to session.
           
-            Me.SaveToSession(Me.SortControl, Me.SortControl.SelectedValue)
-                  
-            Dim WCA_WDT_IDFilterselectedFilterItemList As ArrayList = GetSelectedValueList(Me.WCA_WDT_IDFilter, Nothing)
-            Dim WCA_WDT_IDFilterSessionString As String = ""
-            If Not WCA_WDT_IDFilterselectedFilterItemList is Nothing Then
-            For Each item As String In WCA_WDT_IDFilterselectedFilterItemList
-                WCA_WDT_IDFilterSessionstring = WCA_WDT_IDFilterSessionstring & "," & item
-            Next
-            End If
-            Me.SaveToSession("WCA_WDT_IDFilter_Ajax", WCA_WDT_IDFilterSessionString)
-          
             HttpContext.Current.Session("AppRelativeVirtualPath") = Me.Page.AppRelativeVirtualPath
          
         End Sub
@@ -3587,8 +3120,6 @@ Public Class BaseWCAR_Activity1TableControl
 
             ' Clear filter controls values from the session.
         
-            Me.RemoveFromSession(Me.SortControl)
-            Me.RemoveFromSession(Me.WCA_WDT_IDFilter)
     
             ' Clear pagination state from session.
          
@@ -3672,52 +3203,7 @@ Public Class BaseWCAR_Activity1TableControl
         End Function
         
         ' Generate set method for buttons
-        
-        Public Overridable Sub SetAddButton()                
-              
-   
-        End Sub
-            
-        Public Overridable Sub SetDeleteButton()                
-              
-   
-        End Sub
-            
-        Public Overridable Sub SetResetButton()                
-              
-   
-        End Sub
-            
-        Public Overridable Sub SetSaveButton()                
-              
-              Me.SaveButton.Attributes.Add("onclick", "SubmitHRefOnce(this, """ & Me.Page.GetResourceValue("Txt:SaveRecord", "ePortalWFApproval") & """);")
-            
-   
-        End Sub
-            
-        Public Overridable Sub SetActionsButton()                
-              
-   
-        End Sub
-            
-        Public Overridable Sub SetFilterButton()                
-              
-   
-        End Sub
-            
-        Public Overridable Sub SetFiltersButton()                
-                      
-         Dim themeButtonFiltersButton As IThemeButtonWithArrow = DirectCast(MiscUtils.FindControlRecursively(Me, "FiltersButton"), IThemeButtonWithArrow)
-         themeButtonFiltersButton.ArrowImage.ImageUrl = "../Images/ButtonExpandArrow.png"
-    
-      
-            If (IsValueSelected(WCA_WDT_IDFilter)) Then
-                themeButtonFiltersButton.ArrowImage.ImageUrl = "../Images/ButtonCheckmark.png"
-            End If
-        
-   
-        End Sub
-                    
+                
 
         ' Generate the event handling functions for pagination events.
         
@@ -3837,253 +3323,10 @@ Public Class BaseWCAR_Activity1TableControl
 
         ' Generate the event handling functions for button events.
         
-        ' event handler for ImageButton
-        Public Overridable Sub AddButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-      ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction
-                
-            Me.AddNewRecord = 1
-            Me.DataChanged = True
-      
-            Catch ex As Exception
-            
-       ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-                DbUtils.EndTransaction
-            End Try
-    
-        End Sub
-        
-        ' event handler for ImageButton
-        Public Overridable Sub DeleteButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-      ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction
-                
-            If(Not Me.Page.IsPageRefresh) Then
-        
-                Me.DeleteSelectedRecords(True)
-                Me.SetFormulaControls()
-                
-          
-            End If
-      
-            Catch ex As Exception
-            
-       ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-                DbUtils.EndTransaction
-            End Try
-    
-        End Sub
-        
-        ' event handler for ImageButton
-        Public Overridable Sub ResetButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-              Me.WCA_WDT_IDFilter.ClearSelection()
-            Me.SortControl.ClearSelection()
-              Me.CurrentSortOrder.Reset()
-              If Me.InSession(Me, "Order_By") Then
-                  Me.CurrentSortOrder = OrderBy.FromXmlString(Me.GetFromSession(Me, "Order_By", Nothing))
-              Else
-                  Me.CurrentSortOrder = New OrderBy(True, False)
-                  
-
-              End If
-              
-
-        ' Setting the DataChanged to True results in the page being refreshed with
-        ' the most recent data from the database.  This happens in PreRender event
-        ' based on the current sort, search and filter criteria.
-        Me.DataChanged = True
-            
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
-        ' event handler for ImageButton
-        Public Overridable Sub SaveButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-      ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction
-                
-        
-              If (Not Me.Page.IsPageRefresh) Then         
-                  Me.SaveData()
-              End If        
-        
-            Me.Page.CommitTransaction(sender)
-          ' Set IsNewRecord to False for all records - since everything has been saved and is no longer "new"
-          Dim recCtl As WCAR_Activity1TableControlRow
-          For Each recCtl in Me.GetRecordControls()
-            
-            recCtl.IsNewRecord = False
-          Next
-    
-      
-          ' Set DeletedRecordsIds to Nothing since we have deleted all pending deletes.
-          
-                Me.DeletedRecordIds = Nothing
-            
-            Catch ex As Exception
-            
-       ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-                DbUtils.EndTransaction
-            End Try
-    
-        End Sub
-        
-        ' event handler for Button
-        Public Overridable Sub ActionsButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-              
-    Try
-    
-            'This method is initially empty to implement custom click handler.
-      
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
-        ' event handler for Button
-        Public Overridable Sub FilterButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-              
-    Try
-    
-          Me.DataChanged = True
-          
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
-        ' event handler for Button
-        Public Overridable Sub FiltersButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-              
-    Try
-    
-            'This method is initially empty to implement custom click handler.
-      
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
       
 
         ' Generate the event handling functions for filter and search events.
         
-        ' event handler for OrderSort
-        Protected Overridable Sub SortControl_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-        
-                Dim SelVal1 As String = Me.SortControl.SelectedValue.ToUpper()
-                Dim words1() As String = Split(SelVal1)
-                If SelVal1 <> "" Then
-                SelVal1 = SelVal1.Replace(words1(words1.Length() - 1), "").TrimEnd()
-                For Each ColumnNam As BaseClasses.Data.BaseColumn In WCAR_Activity1Table.GetColumns()
-                If ColumnNam.Name.ToUpper = SelVal1 Then
-                SelVal1 = ColumnNam.InternalName.ToString
-                End If
-                Next
-                End If
-              
-                Dim sd As OrderByItem= Me.CurrentSortOrder.Find(WCAR_Activity1Table.GetColumnByName(SelVal1))
-                If sd Is Nothing Or Not Me.CurrentSortOrder.Items Is Nothing Then
-                'First time sort, so add sort order for Discontinued.
-                If Not WCAR_Activity1Table.GetColumnByName(SelVal1) Is Nothing Then
-                  Me.CurrentSortOrder.Reset()
-                End If
-                'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
-                 If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
-
-          
-            If SelVal1 <> "--PLEASE_SELECT--" AndAlso Not WCAR_Activity1Table.GetColumnByName(SelVal1) Is Nothing Then
-                  If  words1(words1.Length() - 1).Contains("ASC") Then
-            Me.CurrentSortOrder.Add(WCAR_Activity1Table.GetColumnByName(SelVal1),OrderByItem.OrderDir.Asc)
-                  Elseif words1(words1.Length() - 1).Contains("DESC") Then
-            Me.CurrentSortOrder.Add(WCAR_Activity1Table.GetColumnByName(SelVal1),OrderByItem.OrderDir.Desc)
-                  End If
-                End If
-
-              
-             End If
-              Me.DataChanged = true
-              
-            	   
-        End Sub
-            
-        ' event handler for FieldFilter
-        Protected Overridable Sub WCA_WDT_IDFilter_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-           ' Setting the DataChanged to True results in the page being refreshed with
-           ' the most recent data from the database.  This happens in PreRender event
-           ' based on the current sort, search and filter criteria.
-           Me.DataChanged = True
-           
-          	                   
-              
-        End Sub
-            
     
         ' Generate the event handling functions for others
         
@@ -4158,63 +3401,9 @@ Public Class BaseWCAR_Activity1TableControl
        
 #Region "Helper Properties"
         
-        Public ReadOnly Property ActionsButton() As ePortalWFApproval.UI.IThemeButtonWithArrow
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ActionsButton"), ePortalWFApproval.UI.IThemeButtonWithArrow)
-          End Get
-          End Property
-        
-        Public ReadOnly Property AddButton() As System.Web.UI.WebControls.ImageButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "AddButton"), System.Web.UI.WebControls.ImageButton)
-            End Get
-        End Property
-        
-        Public ReadOnly Property DeleteButton() As System.Web.UI.WebControls.ImageButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "DeleteButton"), System.Web.UI.WebControls.ImageButton)
-            End Get
-        End Property
-        
-        Public ReadOnly Property FilterButton() As ePortalWFApproval.UI.IThemeButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "FilterButton"), ePortalWFApproval.UI.IThemeButton)
-          End Get
-          End Property
-        
-        Public ReadOnly Property FiltersButton() As ePortalWFApproval.UI.IThemeButtonWithArrow
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "FiltersButton"), ePortalWFApproval.UI.IThemeButtonWithArrow)
-          End Get
-          End Property
-        
         Public ReadOnly Property Pagination() As ePortalWFApproval.UI.IPaginationModern
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Pagination"), ePortalWFApproval.UI.IPaginationModern)
-          End Get
-          End Property
-        
-        Public ReadOnly Property ResetButton() As System.Web.UI.WebControls.ImageButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ResetButton"), System.Web.UI.WebControls.ImageButton)
-            End Get
-        End Property
-        
-        Public ReadOnly Property SaveButton() As System.Web.UI.WebControls.ImageButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SaveButton"), System.Web.UI.WebControls.ImageButton)
-            End Get
-        End Property
-        
-        Public ReadOnly Property SortByLabel() As System.Web.UI.WebControls.Label
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SortByLabel"), System.Web.UI.WebControls.Label)
-            End Get
-        End Property
-        
-          Public ReadOnly Property SortControl() As System.Web.UI.WebControls.DropDownList
-          Get
-          Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SortControl"), System.Web.UI.WebControls.DropDownList)
           End Get
           End Property
         
@@ -4230,18 +3419,6 @@ Public Class BaseWCAR_Activity1TableControl
             End Get
         End Property
             
-        Public ReadOnly Property WCA_WDT_IDFilter() As BaseClasses.Web.UI.WebControls.QuickSelector
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCA_WDT_IDFilter"), BaseClasses.Web.UI.WebControls.QuickSelector)
-            End Get
-        End Property
-        
-        Public ReadOnly Property WCA_WDT_IDLabel1() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCA_WDT_IDLabel1"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
 #End Region
 
 #Region "Helper Functions"
