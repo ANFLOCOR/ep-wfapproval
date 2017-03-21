@@ -455,7 +455,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>selWFReassign_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -466,4 +465,5 @@
   <MenuName>Workflow Reassign1</MenuName>
   <QSPath>../selWFReassign1/SelWFReassign-QuickSelector1.aspx</QSPath>
   <TableCodeName>SelWFReassign1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalSelWFReassign1</TableStoredProcPrefix>
 </XMLDefinition>

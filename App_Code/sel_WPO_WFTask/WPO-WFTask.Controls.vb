@@ -18791,12 +18791,11 @@ Public Class BaseSel_WPO_WFTaskRecordControl
                 SetFRTAMNT()
                 SetFRTAMNTLabel()
                 SetLabel1()
-                SetLiteral1()
                 SetLiteral2()
                 SetLiteral3()
+                SetLiteral30()
                 SetLiteral4()
                 SetLiteral5()
-                SetLiteral7()
                 SetMSCCHAMT()
                 SetMSCCHAMTLabel()
                 SetPODetailsContainer()
@@ -19469,12 +19468,6 @@ Public Class BaseSel_WPO_WFTaskRecordControl
                     
                   End Sub
                 
-        Public Overridable Sub SetLiteral1()
-
-                  
-                  
-                  End Sub
-                
         Public Overridable Sub SetLiteral2()
 
                   
@@ -19487,6 +19480,12 @@ Public Class BaseSel_WPO_WFTaskRecordControl
                   
                   End Sub
                 
+        Public Overridable Sub SetLiteral30()
+
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral4()
 
                   
@@ -19494,12 +19493,6 @@ Public Class BaseSel_WPO_WFTaskRecordControl
                   End Sub
                 
         Public Overridable Sub SetLiteral5()
-
-                  
-                  
-                  End Sub
-                
-        Public Overridable Sub SetLiteral7()
 
                   
                   
@@ -20466,12 +20459,6 @@ Public Class BaseSel_WPO_WFTaskRecordControl
             End Get
         End Property
         
-        Public ReadOnly Property Literal1() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal1"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
         Public ReadOnly Property Literal2() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal2"), System.Web.UI.WebControls.Literal)
@@ -20484,6 +20471,12 @@ Public Class BaseSel_WPO_WFTaskRecordControl
             End Get
         End Property
         
+        Public ReadOnly Property Literal30() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal30"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
         Public ReadOnly Property Literal4() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal4"), System.Web.UI.WebControls.Literal)
@@ -20493,12 +20486,6 @@ Public Class BaseSel_WPO_WFTaskRecordControl
         Public ReadOnly Property Literal5() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal5"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property Literal7() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal7"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
         
@@ -22936,9 +22923,6 @@ Public Class BaseWPOP10100RecordControl1
       
             ' Call the Set methods for each controls on the panel
         
-                SetLiteral14()
-                SetLiteral15()
-                SetLiteral8()
                 SetWPOP_Remark1()
                 SetWPOP_RemarkLabel1()
       
@@ -23000,36 +22984,6 @@ Public Class BaseWPOP10100RecordControl1
               AddHandler Me.WPOP_Remark1.TextChanged, AddressOf WPOP_Remark1_TextChanged
                                  
         End Sub
-                
-        Public Overridable Sub SetLiteral14()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.Literal14.Text = "Some value"
-                    
-                  End Sub
-                
-        Public Overridable Sub SetLiteral15()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.Literal15.Text = "Some value"
-                    
-                  End Sub
-                
-        Public Overridable Sub SetLiteral8()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.Literal8.Text = "Some value"
-                    
-                  End Sub
                 
         Public Overridable Sub SetWPOP_RemarkLabel1()
 
@@ -23655,24 +23609,6 @@ Public Class BaseWPOP10100RecordControl1
         
 
 #Region "Helper Properties"
-        
-        Public ReadOnly Property Literal14() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal14"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property Literal15() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal15"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property Literal8() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal8"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
         
         Public ReadOnly Property WPOP_Remark1() As System.Web.UI.WebControls.TextBox
             Get

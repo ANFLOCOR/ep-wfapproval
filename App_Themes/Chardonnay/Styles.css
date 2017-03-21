@@ -195,3 +195,16 @@ a.button_link,
 	width: 16px;
 	}
 
+.table_cell, .alt_table_cell, .ttc, .tatc { /* data grid data container */
+	padding: 5px;
+	color: #666666;
+	vertical-align: top;
+	font-family: Tahoma, Geneva, ms sans serif;
+	font-size: 12px;
+	text-align: left;
+	border-right: 1px #cccccc solid;
+	border-bottom: 1px #cccccc solid;
+	background-color: #ffffff;
+	font-weight: bold;
+	}
+

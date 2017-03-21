@@ -1,45 +1,47 @@
 ﻿Failed to apply Transact-SQL code:
--- Creates a new record in the [dbo].[sel_WStep_WStep_Detail] table.
-CREATE PROCEDURE pePortalWFApprovalSel_WStep_WStep_DetailAdd
-    @p_WSD_ID int,
-    @p_WS_ID int,
-    @p_WS_WDT_ID int,
-    @p_WS_ID_Next int,
-    @p_WS_Step_Type varchar(20),
-    @p_WS_Approval_Needed smallint,
-    @p_WSD_W_U_ID int,
-    @p_WSD_Variable_Ref int,
-    @p_WSD_Variable_SQL varchar(100)
+-- Creates a new record in the [dbo].[WPO_WFHistory_Details_new] table.
+CREATE PROCEDURE pePortalWFApprovalWPO_WFHistory_Details_new1Add
+    @p_WPO_ID int,
+    @p_WPO_W_U_ID int,
+    @p_WPO_WS_ID int,
+    @p_WPO_Status int,
+    @p_WPO_Date_Assign smalldatetime,
+    @p_WPO_Date_Action smalldatetime,
+    @p_WPO_Remark nvarchar(500),
+    @p_WPO_PONum nvarchar(20),
+    @p_WPOP_C_ID int,
+    @p_WPOP_ID int
 AS
 BEGIN
     INSERT
-    INTO [dbo].[sel_WStep_WStep_Detail]
+    INTO [dbo].[WPO_WFHistory_Details_new]
         (
-            [WSD_ID],
-            [WS_ID],
-            [WS_WDT_ID],
-            [WS_ID_Next],
-            [WS_Step_Type],
-            [WS_Approval_Needed],
-            [WSD_W_U_ID],
-            [WSD_Variable_Ref],
-            [WSD_Variable_SQL]
+            [WPO_ID],
+            [WPO_W_U_ID],
+            [WPO_WS_ID],
+            [WPO_Status],
+            [WPO_Date_Assign],
+            [WPO_Date_Action],
+            [WPO_Remark],
+            [WPO_PONum],
+            [WPOP_C_ID],
+            [WPOP_ID]
         )
     VALUES
         (
-             @p_WSD_ID,
-             @p_WS_ID,
-             @p_WS_WDT_ID,
-             @p_WS_ID_Next,
-             @p_WS_Step_Type,
-             @p_WS_Approval_Needed,
-             @p_WSD_W_U_ID,
-             @p_WSD_Variable_Ref,
-             @p_WSD_Variable_SQL
+             @p_WPO_ID,
+             @p_WPO_W_U_ID,
+             @p_WPO_WS_ID,
+             @p_WPO_Status,
+             @p_WPO_Date_Assign,
+             @p_WPO_Date_Action,
+             @p_WPO_Remark,
+             @p_WPO_PONum,
+             @p_WPOP_C_ID,
+             @p_WPOP_ID
         )
 
 END
-JESSY GWAPO
 
-ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.sel_WStep_WStep_Detail' is not updatable because the modification affects multiple base tables.
+ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.WPO_WFHistory_Details_new' is not updatable because the modification affects multiple base tables.
 

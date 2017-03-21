@@ -92,7 +92,7 @@ CREATE PROCEDURE pePortalWFApprovalWPO_WFHistory_Details_new1GetStats
             IF @p_sort_str IS NOT NULL
                 SET @l_sort_str = 'ORDER BY ' + @p_sort_str;
             ELSE
-                SET @l_sort_str = ' '
+                SET @l_sort_str = N'ORDER BY WPO_WFHistory_Details_new_.[WPO_ID],WPO_WFHistory_Details_new_.[WPO_PONum],WPO_WFHistory_Details_new_.[WPOP_C_ID] asc '
 
             -- Calculate the rows to be included in the list
             SET @l_end_gen_row_num = @p_page_number * @p_batch_size

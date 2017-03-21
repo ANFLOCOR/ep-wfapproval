@@ -9,7 +9,7 @@
 Public Class Sel_WStep_WStep_Detail1Definition
 
 #Region "Definition (XML) for Sel_WStep_WStep_Detail1Definition table"
-	'Next 298 lines contain Table Definition (XML) for table "Sel_WStep_WStep_Detail1Definition"
+	'Next 297 lines contain Table Definition (XML) for table "Sel_WStep_WStep_Detail1Definition"
 	Private Shared _DefinitionString As String = ""
 #End Region
 	
@@ -309,7 +309,6 @@ Public Class Sel_WStep_WStep_Detail1Definition
          tbf.Append(  "<Owner>dbo</Owner>")
          tbf.Append(  "<TableAliasName>sel_WStep_WStep_Detail_</TableAliasName>")
          tbf.Append(  "<ConnectionName>DatabaseANFLO-WFN</ConnectionName>")
-         tbf.Append(  "<PagingMethod>RowNum</PagingMethod>")
          tbf.Append(  "<canCreateRecords Source=""Database"">N</canCreateRecords>")
          tbf.Append(  "<canEditRecords Source=""Database"">N</canEditRecords>")
          tbf.Append(  "<canDeleteRecords Source=""Database"">N</canDeleteRecords>")

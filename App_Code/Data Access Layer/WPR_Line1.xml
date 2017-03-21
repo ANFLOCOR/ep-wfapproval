@@ -755,7 +755,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WPR_Line_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -767,4 +766,5 @@
   <MenuName>WPR Line2</MenuName>
   <QSPath>../WPR_Line1/WPR-Line-QuickSelector1.aspx</QSPath>
   <TableCodeName>WPR_Line1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWPR_Line1</TableStoredProcPrefix>
 </XMLDefinition>

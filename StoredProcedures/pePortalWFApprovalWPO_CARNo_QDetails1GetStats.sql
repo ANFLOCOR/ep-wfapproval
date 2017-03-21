@@ -92,7 +92,7 @@ CREATE PROCEDURE pePortalWFApprovalWPO_CARNo_QDetails1GetStats
             IF @p_sort_str IS NOT NULL
                 SET @l_sort_str = 'ORDER BY ' + @p_sort_str;
             ELSE
-                SET @l_sort_str = ' '
+                SET @l_sort_str = N'ORDER BY WPO_CARNo_QDetails_.[PONum],WPO_CARNo_QDetails_.[PRNum] asc '
 
             -- Calculate the rows to be included in the list
             SET @l_end_gen_row_num = @p_page_number * @p_batch_size

@@ -1,5 +1,5 @@
 ﻿' This class is "generated" and will be overwritten.
-' Your customizations should be made in Sel_WPO_InquireDetails1View.vb
+' Your customizations should be made in Sel_WPO_InquireDetails1Record.vb
 
 Imports System.Data.SqlTypes
 Imports System.Data
@@ -25,34 +25,34 @@ Namespace ePortalWFApproval.Business
 ''' <seealso cref="Sel_WPO_InquireDetails1View"></seealso>
 
 <Serializable()> Public Class BaseSel_WPO_InquireDetails1View
-	Inherits KeylessTable
-	
+    Inherits PrimaryKeyTable
+    
 
-	Private ReadOnly TableDefinitionString As String = Sel_WPO_InquireDetails1Definition.GetXMLString()
-
-
+    Private ReadOnly TableDefinitionString As String = Sel_WPO_InquireDetails1Definition.GetXMLString()
 
 
 
 
 
-	Protected Sub New()
-		MyBase.New()
-		Me.Initialize()
-	End Sub
 
-	Protected Overridable Sub Initialize()
-		Dim def As New XmlTableDefinition(TableDefinitionString)
-		Me.TableDefinition = New TableDefinition()
-		Me.TableDefinition.TableClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Sel_WPO_InquireDetails1View")
-		def.InitializeTableDefinition(Me.TableDefinition)
-		Me.ConnectionName = def.GetConnectionName()
-		Me.RecordClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Sel_WPO_InquireDetails1Record")
-		Me.ApplicationName = "App_Code"
-		Me.DataAdapter = New Sel_WPO_InquireDetails1SqlView()
-		Directcast(Me.DataAdapter, Sel_WPO_InquireDetails1SqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, Sel_WPO_InquireDetails1SqlView).ApplicationName = Me.ApplicationName
-		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
+
+    Protected Sub New()
+        MyBase.New()
+        Me.Initialize()
+    End Sub
+
+    Protected Overridable Sub Initialize()
+        Dim def As New XmlTableDefinition(TableDefinitionString)
+        Me.TableDefinition = New TableDefinition()
+        Me.TableDefinition.TableClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Sel_WPO_InquireDetails1View")
+        def.InitializeTableDefinition(Me.TableDefinition)
+        Me.ConnectionName = def.GetConnectionName()
+        Me.RecordClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Sel_WPO_InquireDetails1Record")
+        Me.ApplicationName = "App_Code"
+        Me.DataAdapter = New Sel_WPO_InquireDetails1SqlView()
+        Directcast(Me.DataAdapter, Sel_WPO_InquireDetails1SqlView).ConnectionName = Me.ConnectionName
+        Directcast(Me.DataAdapter, Sel_WPO_InquireDetails1SqlView).ApplicationName = Me.ApplicationName
+        Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         CompanyIDColumn.CodeName = "CompanyID"
         PONUMBERColumn.CodeName = "PONUMBER"
         LineNumberColumn.CodeName = "LineNumber"
@@ -73,13 +73,14 @@ Namespace ePortalWFApproval.Business
         WPOFR_Unit_CostColumn.CodeName = "WPOFR_Unit_Cost"
         WCur_ShortColumn.CodeName = "WCur_Short"
         ExtCostForexColumn.CodeName = "ExtCostForex"
-		
-	End Sub
-	
+        
+    End Sub
+
 #Region "Overriden methods"
+
     
 #End Region
-	
+
 #Region "Properties for columns"
 
     ''' <summary>
@@ -465,6 +466,7 @@ Namespace ePortalWFApproval.Business
 
 
 #End Region
+
 
 #Region "Shared helper methods"
 
@@ -970,6 +972,144 @@ Namespace ePortalWFApproval.Business
     End Function       
         
 
+    ' Convenience method for getting a record using a string-based record identifier
+    Public Shared Function GetRecord(ByVal id As String, ByVal bMutable As Boolean) As Sel_WPO_InquireDetails1Record
+        Return CType(Sel_WPO_InquireDetails1View.Instance.GetRecordData(id, bMutable), Sel_WPO_InquireDetails1Record)
+    End Function
+
+    ' Convenience method for getting a record using a KeyValue record identifier
+    Public Shared Function GetRecord(ByVal id As KeyValue, ByVal bMutable As Boolean) As Sel_WPO_InquireDetails1Record
+        Return CType(Sel_WPO_InquireDetails1View.Instance.GetRecordData(id, bMutable), Sel_WPO_InquireDetails1Record)
+    End Function
+
+    ' Convenience method for creating a record
+    Public Overloads Function NewRecord( _
+        ByVal CompanyIDValue As String, _
+        ByVal PONUMBERValue As String, _
+        ByVal LineNumberValue As String, _
+        ByVal ITEMNMBRValue As String, _
+        ByVal ITEMDESCValue As String, _
+        ByVal UOFMValue As String, _
+        ByVal UNITCOSTValue As String, _
+        ByVal QTYORDERValue As String, _
+        ByVal EXTDCOSTValue As String, _
+        ByVal DOCDATEValue As String, _
+        ByVal REQSTDBYValue As String, _
+        ByVal ORDValue As String, _
+        ByVal COMMENTSValue As String, _
+        ByVal COMMENT_4Value As String, _
+        ByVal VENDORIDValue As String, _
+        ByVal VENDNAMEValue As String, _
+        ByVal WPOFR_RateValue As String, _
+        ByVal WPOFR_Unit_CostValue As String, _
+        ByVal WCur_ShortValue As String, _
+        ByVal ExtCostForexValue As String _
+    ) As KeyValue
+        Dim rec As IPrimaryKeyRecord = CType(Me.CreateRecord(), IPrimaryKeyRecord)
+                rec.SetString(CompanyIDValue, CompanyIDColumn)
+        rec.SetString(PONUMBERValue, PONUMBERColumn)
+        rec.SetString(LineNumberValue, LineNumberColumn)
+        rec.SetString(ITEMNMBRValue, ITEMNMBRColumn)
+        rec.SetString(ITEMDESCValue, ITEMDESCColumn)
+        rec.SetString(UOFMValue, UOFMColumn)
+        rec.SetString(UNITCOSTValue, UNITCOSTColumn)
+        rec.SetString(QTYORDERValue, QTYORDERColumn)
+        rec.SetString(EXTDCOSTValue, EXTDCOSTColumn)
+        rec.SetString(DOCDATEValue, DOCDATEColumn)
+        rec.SetString(REQSTDBYValue, REQSTDBYColumn)
+        rec.SetString(ORDValue, ORDColumn)
+        rec.SetString(COMMENTSValue, COMMENTSColumn)
+        rec.SetString(COMMENT_4Value, COMMENT_4Column)
+        rec.SetString(VENDORIDValue, VENDORIDColumn)
+        rec.SetString(VENDNAMEValue, VENDNAMEColumn)
+        rec.SetString(WPOFR_RateValue, WPOFR_RateColumn)
+        rec.SetString(WPOFR_Unit_CostValue, WPOFR_Unit_CostColumn)
+        rec.SetString(WCur_ShortValue, WCur_ShortColumn)
+        rec.SetString(ExtCostForexValue, ExtCostForexColumn)
+
+
+        rec.Create() 'update the DB so any DB-initialized fields (like autoincrement IDs) can be initialized
+
+        Dim key As KeyValue = rec.GetID()
+        Return key
+    End Function
+
+    ''' <summary>
+    '''  This method deletes a specified record
+    ''' </summary>
+    ''' <param name="kv">Keyvalue of the record to be deleted.</param>
+    Public Shared Sub DeleteRecord(ByVal kv As KeyValue)
+        Sel_WPO_InquireDetails1View.Instance.DeleteOneRecord(kv)
+    End Sub
+
+    ''' <summary>
+    ''' This method checks if record exist in the database using the keyvalue provided.
+    ''' </summary>
+    ''' <param name="kv">Key value of the record.</param>
+    Public Shared Function DoesRecordExist(ByVal kv As KeyValue) As Boolean
+        Dim recordExist As Boolean = True
+        Try
+            Sel_WPO_InquireDetails1View.GetRecord(kv, False)
+        Catch ex As Exception
+            recordExist = False
+        End Try
+        Return recordExist
+    End Function
+    
+    ''' <summary>
+    '''  This method returns all the primary columns in the table.
+    ''' </summary>
+    Public Shared Function GetPrimaryKeyColumns() As ColumnList
+        If (Not IsNothing(Sel_WPO_InquireDetails1View.Instance.TableDefinition.PrimaryKey)) Then
+            Return Sel_WPO_InquireDetails1View.Instance.TableDefinition.PrimaryKey.Columns
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    ''' <summary>
+    ''' This method takes a key and returns a keyvalue.
+    ''' </summary>
+    ''' <param name="key">key could be array of primary key values in case of composite primary key or a string containing single primary key value in case of non-composite primary key.</param>
+    Public Shared Function GetKeyValue(ByVal key As Object) As KeyValue
+        Dim kv As KeyValue = Nothing
+
+        If (Not (IsNothing(Sel_WPO_InquireDetails1View.Instance.TableDefinition.PrimaryKey))) Then
+
+            Dim isCompositePrimaryKey As Boolean = False
+            isCompositePrimaryKey = Sel_WPO_InquireDetails1View.Instance.TableDefinition.PrimaryKey.IsCompositeKey
+
+            If ((isCompositePrimaryKey) AndAlso (key.GetType.IsArray())) Then
+
+                ' If the key is composite, then construct a key value.
+                kv = New KeyValue
+                Dim fullKeyString As String = ""
+                Dim keyArray As Array = CType(key, Array)
+                If (Not IsNothing(keyArray)) Then
+                    Dim length As Integer = keyArray.Length
+                    Dim pkColumns As ColumnList = Sel_WPO_InquireDetails1View.Instance.TableDefinition.PrimaryKey.Columns
+                    Dim pkColumn As BaseColumn
+                    Dim index As Integer = 0
+                    For Each pkColumn In pkColumns
+                        Dim keyString As String = CType(keyArray.GetValue(index), String)
+                        If (Sel_WPO_InquireDetails1View.Instance.TableDefinition.TableType = BaseClasses.Data.TableDefinition.TableTypes.Virtual) Then
+                            kv.AddElement(pkColumn.UniqueName, keyString)
+                        Else
+                            kv.AddElement(pkColumn.InternalName, keyString)
+                        End If
+                        index = index + 1
+                    Next pkColumn
+                End If
+
+            Else
+                ' If the key is not composite, then get the key value.
+                kv = Sel_WPO_InquireDetails1View.Instance.TableDefinition.PrimaryKey.ParseValue(CType(key, String))
+            End If
+        End If
+        Return kv
+    End Function    
+
+
 	 ''' <summary>
      ''' This method takes a record and a Column and returns an evaluated value of DFKA formula.
      ''' </summary>
@@ -1043,7 +1183,7 @@ Namespace ePortalWFApproval.Business
             Return Nothing
         End If
     End Function
-    
+
 	''' <summary>
     ''' Evaluates the formula
     ''' </summary>
@@ -1064,7 +1204,9 @@ Namespace ePortalWFApproval.Business
             Return resultObj.ToString()
         End If
     End Function
-#End Region	
+
+
+#End Region 
 
 End Class
 End Namespace
