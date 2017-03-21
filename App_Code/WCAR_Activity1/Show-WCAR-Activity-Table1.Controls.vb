@@ -5212,175 +5212,96 @@ Public Class BaseWCAR_Activity1TableControl
             End If
             If Not Me.Page.IsPostBack Then
                 Dim initialVal As String = ""
-                If  Me.InSession(Me.SortControl) 				
-                    initialVal = Me.GetFromSession(Me.SortControl)
-                   
-              
+                If  Me.InSession(Me.WCA_W_U_IDFilter) 				
+                    initialVal = Me.GetFromSession(Me.WCA_W_U_IDFilter)
+                
+                Else
+                    
+                    initialVal = EvaluateFormula("URL(""WCA_W_U_ID"")")
+                
               End If
-
               
                 If InvariantEquals(initialVal, "Search for", True) Or InvariantEquals(initialVal, BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing), True) Then
-                initialVal = ""
+                  initialVal = ""
                 End If
               
-              If initialVal <> ""				
+                If initialVal <> ""				
                         
-                        Me.SortControl.Items.Add(New ListItem(initialVal, initialVal))
+                        Me.WCA_W_U_IDFilter.Items.Add(New ListItem(initialVal, initialVal))
                             
-                        Me.SortControl.SelectedValue = initialVal
+                        Me.WCA_W_U_IDFilter.SelectedValue = initialVal
                             
                     End If
                 
             End If
-            If Not Me.Page.IsPostBack Then
-                Dim initialVal As String = ""
-                If Me.InSession(Me.WCA_W_U_IDFilter) Then
-                    initialVal = Me.GetFromSession(Me.WCA_W_U_IDFilter)
 
-                Else
-
-                    initialVal = EvaluateFormula("URL(""WCA_W_U_ID"")")
-
-                End If
-
-                If InvariantEquals(initialVal, "Search for", True) Or InvariantEquals(initialVal, BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing), True) Then
-                    initialVal = ""
-                End If
-
-                If initialVal <> "" Then
-
-                    Me.WCA_W_U_IDFilter.Items.Add(New ListItem(initialVal, initialVal))
-
-                    Me.WCA_W_U_IDFilter.SelectedValue = initialVal
-
-                End If
-
-            End If
-            If Not Me.Page.IsPostBack Then
-                Dim initialVal As String = ""
-                If Me.InSession(Me.WCA_WDT_IDFilter) Then
-                    initialVal = Me.GetFromSession(Me.WCA_WDT_IDFilter)
-
-                Else
-
-                    initialVal = EvaluateFormula("URL(""WCA_WDT_ID"")")
-
-                End If
-
-                If InvariantEquals(initialVal, "Search for", True) Or InvariantEquals(initialVal, BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing), True) Then
-                    initialVal = ""
-                End If
-
-                If initialVal <> "" Then
-
-                    Dim WCA_WDT_IDFilteritemListFromSession() As String = initialVal.Split(","c)
-                    Dim index As Integer = 0
-                    For Each item As String In WCA_WDT_IDFilteritemListFromSession
-                        If index = 0 AndAlso _
-                           item.ToString.Equals("") Then
-                        Else
-                            Me.WCA_WDT_IDFilter.Items.Add(item)
-                            Me.WCA_WDT_IDFilter.Items.Item(index).Selected = True
-                            index += 1
-                        End If
-                    Next
-                    Dim listItem As ListItem
-                    For Each listItem In Me.WCA_WDT_IDFilter.Items
-                        listItem.Selected = True
-                    Next
-
-                End If
-
-            End If
-
-
-
+      
+      
             ' Control Initializations.
             ' Initialize the table's current sort order.
             If Me.InSession(Me, "Order_By") Then
                 Me.CurrentSortOrder = OrderBy.FromXmlString(Me.GetFromSession(Me, "Order_By", Nothing))
-
+         
             Else
-
+                   
                 Me.CurrentSortOrder = New OrderBy(True, False)
+            
+        End If
 
-            End If
+    
 
-
-
-            ' Setup default pagination settings.
-
+    ' Setup default pagination settings.
+    
             Me.PageSize = CInt(Me.GetFromSession(Me, "Page_Size", "10"))
             Me.PageIndex = CInt(Me.GetFromSession(Me, "Page_Index", "0"))
-
-
+        
+            
         End Sub
 
         Protected Overridable Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        
             SaveControlsToSession_Ajax()
-
+        
             ' Setup the pagination events.
-
-            AddHandler Me.Pagination.FirstPage.Click, AddressOf Pagination_FirstPage_Click
-
-            AddHandler Me.Pagination.LastPage.Click, AddressOf Pagination_LastPage_Click
-
-            AddHandler Me.Pagination.NextPage.Click, AddressOf Pagination_NextPage_Click
-
-            AddHandler Me.Pagination.PageSizeButton.Click, AddressOf Pagination_PageSizeButton_Click
-
-            AddHandler Me.Pagination.PreviousPage.Click, AddressOf Pagination_PreviousPage_Click
-
+            
+              AddHandler Me.Pagination.FirstPage.Click, AddressOf Pagination_FirstPage_Click
+                        
+              AddHandler Me.Pagination.LastPage.Click, AddressOf Pagination_LastPage_Click
+                        
+              AddHandler Me.Pagination.NextPage.Click, AddressOf Pagination_NextPage_Click
+                        
+              AddHandler Me.Pagination.PageSizeButton.Click, AddressOf Pagination_PageSizeButton_Click
+                        
+              AddHandler Me.Pagination.PreviousPage.Click, AddressOf Pagination_PreviousPage_Click
+                                    
             Dim url As String = ""  'to avoid warning in VS 
             url = "" 'to avoid warning in VS 
             ' Setup the sorting events.
-
+          
             ' Setup the button events.
-
-            AddHandler Me.ExcelButton.Click, AddressOf ExcelButton_Click
-
-            AddHandler Me.ImportButton.Click, AddressOf ImportButton_Click
-
-            AddHandler Me.NewButton.Click, AddressOf NewButton_Click
-
-            AddHandler Me.PDFButton.Click, AddressOf PDFButton_Click
-
-            AddHandler Me.ResetButton.Click, AddressOf ResetButton_Click
-
-            AddHandler Me.WordButton.Click, AddressOf WordButton_Click
-
-            AddHandler Me.btnAssignTo.Click, AddressOf btnAssignTo_Click
-
-            AddHandler Me.ActionsButton.Button.Click, AddressOf ActionsButton_Click
-
-            AddHandler Me.btnAssignTo1.Button.Click, AddressOf btnAssignTo1_Click
-
-            AddHandler Me.FilterButton.Button.Click, AddressOf FilterButton_Click
-
-            AddHandler Me.FiltersButton.Button.Click, AddressOf FiltersButton_Click
-
-            AddHandler Me.WCAR_ActivitySearchButton.Button.Click, AddressOf WCAR_ActivitySearchButton_Click
-
+          
+              AddHandler Me.btnAssignTo.Click, AddressOf btnAssignTo_Click
+                        
+              AddHandler Me.btnAssignTo1.Button.Click, AddressOf btnAssignTo1_Click
+                        
+              AddHandler Me.WCAR_ActivitySearchButton.Button.Click, AddressOf WCAR_ActivitySearchButton_Click
+                        
             AddHandler Me.ddlAssignTo.SelectedIndexChanged, AddressOf ddlAssignTo_SelectedIndexChanged
-            AddHandler Me.SortControl.SelectedIndexChanged, AddressOf SortControl_SelectedIndexChanged
-            AddHandler Me.WCA_W_U_IDFilter.SelectedIndexChanged, AddressOf WCA_W_U_IDFilter_SelectedIndexChanged
-
-            AddHandler Me.WCA_WDT_IDFilter.SelectedIndexChanged, AddressOf WCA_WDT_IDFilter_SelectedIndexChanged
-
-
-            ' Setup events for others
-
+              AddHandler Me.WCA_W_U_IDFilter.SelectedIndexChanged, AddressOf WCA_W_U_IDFilter_SelectedIndexChanged
+                    
+        
+          ' Setup events for others
+                
         End Sub
-
-
-        Public Overridable Sub LoadData()
-
+        
+        
+        Public Overridable Sub LoadData()        
+        
             ' Read data from database. Returns an array of records that can be assigned
             ' to the DataSource table control property.
-            Try
+            Try	
                 Dim joinFilter As CompoundFilter = CreateCompoundJoinFilter()
-
+                
                 ' The WHERE clause will be empty when displaying all records in table.
                 Dim wc As WhereClause = CreateWhereClause()
                 If wc IsNot Nothing AndAlso Not wc.RunQuery Then
@@ -5397,18 +5318,18 @@ Public Class BaseWCAR_Activity1TableControl
                 ' Call OrderBy to determine the order - either use the order defined
                 ' on the Query Wizard, or specified by user (by clicking on column heading)
                 Dim orderBy As OrderBy = CreateOrderBy()
-
+                
                 ' Get the pagesize from the pagesize control.
                 Me.GetPageSize()
-
+                               
                 If Me.DisplayLastPage Then
                     Dim totalRecords As Integer = If(Me._TotalRecords < 0, GetRecordCount(CreateCompoundJoinFilter(), CreateWhereClause()), Me._TotalRecords)
-
-                    Dim totalPages As Integer = CInt(Math.Ceiling(totalRecords / Me.PageSize))
-
+                     
+                      Dim totalPages As Integer = CInt(Math.Ceiling(totalRecords / Me.PageSize))
+                    
                     Me.PageIndex = totalPages - 1
-                End If
-
+                End If                               
+                
                 ' Make sure PageIndex (current page) and PageSize are within bounds.
                 If Me.PageIndex < 0 Then
                     Me.PageIndex = 0
@@ -5416,41 +5337,41 @@ Public Class BaseWCAR_Activity1TableControl
                 If Me.PageSize < 1 Then
                     Me.PageSize = 1
                 End If
-
+                
                 ' Retrieve the records and set the table DataSource.
                 ' Only PageSize records are fetched starting at PageIndex (zero based).
                 If Me.AddNewRecord > 0 Then
-                    ' Make sure to preserve the previously entered data on new rows.
+                ' Make sure to preserve the previously entered data on new rows.
                     Dim postdata As New ArrayList
                     For Each rc As WCAR_Activity1TableControlRow In Me.GetRecordControls()
                         If Not rc.IsNewRecord Then
                             rc.DataSource = rc.GetRecord()
                             rc.GetUIData()
                             postdata.Add(rc.DataSource)
-                            UIData.Add(rc.PreservedUIData())
+                            UIData.Add(rc.PreservedUIData())							
                         End If
                     Next
                     Me.DataSource = DirectCast(postdata.ToArray(GetType(WCAR_Activity1Record)), WCAR_Activity1Record())
                 Else  ' Get the records from the database	
-
-                    Me.DataSource = GetRecords(joinFilter, wc, orderBy, Me.PageIndex, Me.PageSize)
-
+                      
+                        Me.DataSource = GetRecords(joinFilter, wc, orderBy, Me.PageIndex, Me.PageSize)
+                      
                 End If
-
+                
                 ' if the datasource contains no records contained in database, then load the last page.
                 If (DbUtils.GetCreatedRecords(Me.DataSource).Length = 0 AndAlso Not Me.DisplayLastPage) Then
-                    Me.DisplayLastPage = True
-                    LoadData()
+                      Me.DisplayLastPage = True
+                      LoadData()
                 Else
-
+                
                     ' Add any new rows desired by the user.
                     Me.AddNewRecords()
-
+                       
 
                     ' Initialize the page and grand totals. now
-
+                
                 End If
-
+    
             Catch ex As Exception
                 ' Report the error message to the end user
                 Dim msg As String = ex.Message
@@ -5460,61 +5381,61 @@ Public Class BaseWCAR_Activity1TableControl
                 Throw New Exception(msg, ex.InnerException)
             End Try
         End Sub
-
+        
         Public Overridable Function GetRecords( _
             ByVal join As BaseFilter, _
             ByVal where As WhereClause, _
             ByVal orderBy As OrderBy, _
             ByVal pageIndex As Integer, _
             ByVal pageSize As Integer) As WCAR_Activity1Record()
-
+            
             ' By default, Select * will be executed to get a list of records.  If you want to run Select Distinct with certain column only, add the column to selCols
-            Dim selCols As New ColumnList
+            Dim selCols As New ColumnList     
+                        
 
-
-
+    
             ' If you want to specify certain columns to be in the select statement, you can write code similar to the following:
             ' However, if you don't specify PK, row button click might show an error message.
             ' And make sure you write similar code in GetRecordCount as well
             ' selCols.Add(WCAR_Activity1Table.Column1, True)         
             ' selCols.Add(WCAR_Activity1Table.Column2, True)          
             ' selCols.Add(WCAR_Activity1Table.Column3, True)    
-
-
-
+   
+            
+            
             ' If the parameters doesn't specify specific columns in the Select statement, then run Select *
             ' Alternatively, if the parameters specifies to include PK, also run Select *
-
-            If selCols.Count = 0 Then
-
+            
+            If selCols.Count = 0 Then                    
+              
                 Return WCAR_Activity1Table.GetRecords(join, where, orderBy, Me.PageIndex, Me.PageSize)
-
+                 
             Else
                 Dim databaseTable As New WCAR_Activity1Table
                 databaseTable.SelectedColumns.Clear()
                 databaseTable.SelectedColumns.AddRange(selCols)
-
+                
                 ' Stored Procedures provided by Iron Speed Designer specifies to query all columns, in order to query a subset of columns, it is necessary to disable stored procedures                  
-                databaseTable.DataAdapter.DisableStoredProcedures = True
-
-
-
+                databaseTable.DataAdapter.DisableStoredProcedures = True 
+                
+            
+                
                 Dim recList As ArrayList
                 orderBy.ExpandForeignKeyColums = False
                 recList = databaseTable.GetRecordList(join, where.GetFilter(), Nothing, orderBy, pageIndex, pageSize)
                 Return CType(recList.ToArray(GetType(WCAR_Activity1Record)), WCAR_Activity1Record())
-            End If
-
-        End Function
-
-
+            End If            
+            
+        End Function        
+        
+        
         Public Overridable Function GetRecordCount(ByVal join As BaseFilter, ByVal where As WhereClause) As Integer
 
 
             ' By default, Select * will be executed to get a list of records.  If you want to run Select Distinct with certain column only, add the column to selCols
-            Dim selCols As New ColumnList
-
-
+            Dim selCols As New ColumnList                 
+               
+    
             ' If you want to specify certain columns to be in the select statement, you can write code similar to the following:
             ' However, if you don't specify PK, row button click might show an error message.
             ' And make sure you write similar code in GetRecordCount as well
@@ -5525,228 +5446,189 @@ Public Class BaseWCAR_Activity1TableControl
 
             ' If the parameters doesn't specify specific columns in the Select statement, then run Select *
             ' Alternatively, if the parameters specifies to include PK, also run Select *
-
-            If selCols.Count = 0 Then
-
+            
+            If selCols.Count = 0 Then                    
+                     
                 Return WCAR_Activity1Table.GetRecordCount(join, where)
 
             Else
                 Dim databaseTable As New WCAR_Activity1Table
                 databaseTable.SelectedColumns.Clear()
-                databaseTable.SelectedColumns.AddRange(selCols)
-
+                databaseTable.SelectedColumns.AddRange(selCols)           
+                
                 ' Stored Procedures provided by Iron Speed Designer specifies to query all columns, in order to query a subset of columns, it is necessary to disable stored procedures                  
-                databaseTable.DataAdapter.DisableStoredProcedures = True
-
-
+                databaseTable.DataAdapter.DisableStoredProcedures = True 
+                
+                
                 Return CInt(databaseTable.GetRecordListCount(join, where.GetFilter(), Nothing, Nothing))
             End If
 
-        End Function
-
-
-
+        End Function        
+        
+      
+    
         Public Overrides Sub DataBind()
             ' The DataBind method binds the user interface controls to the values
             ' from the database record for each row in the table.  To do this, it calls the
             ' DataBind for each of the rows.
             ' DataBind also populates any filters above the table, and sets the pagination
             ' control to the correct number of records and the current page number.
-
-
-            MyBase.DataBind()
-
-
-            Me.ClearControlsFromSession()
+            
+            
+              MyBase.DataBind()
+            
+    
+            Me.ClearControlsFromSession()    
 
             ' Make sure that the DataSource is initialized.
             If Me.DataSource Is Nothing Then
                 Return
             End If
-
+            
             'LoadData for DataSource for chart and report if they exist
-
-            ' Improve performance by prefetching display as records.
-            Me.PreFetchForeignKeyValues()
-
+          
+          ' Improve performance by prefetching display as records.
+          Me.PreFetchForeignKeyValues()
+             
             ' Setup the pagination controls.
             BindPaginationControls()
 
+      
 
-
-
-
-            ' Bind the repeater with the list of records to expand the UI.
-
-            Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_Activity1TableControlRepeater"), System.Web.UI.WebControls.Repeater)
-            If rep Is Nothing Then Return
-            rep.DataSource = DataSource()
-            rep.DataBind()
-
-            Dim index As Integer = 0
-
-            For Each repItem As System.Web.UI.WebControls.RepeaterItem In rep.Items
-
-                ' Loop through all rows in the table, set its DataSource and call DataBind().
-                Dim recControl As WCAR_Activity1TableControlRow = DirectCast(repItem.FindControl("WCAR_Activity1TableControlRow"), WCAR_Activity1TableControlRow)
-                recControl.DataSource = Me.DataSource(index)
-                If Me.UIData.Count > index Then
-                    recControl.PreviousUIData = Me.UIData(index)
-                End If
-                recControl.DataBind()
-
-                recControl.Visible = Not Me.InDeletedRecordIds(recControl)
-
-                index += 1
-            Next
-
+    
+        
+          ' Bind the repeater with the list of records to expand the UI.
+          
+          Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_Activity1TableControlRepeater"), System.Web.UI.WebControls.Repeater)
+          If rep Is Nothing Then Return
+          rep.DataSource = DataSource()
+          rep.DataBind()
+                  
+          Dim index As Integer = 0
+          
+          For Each repItem As System.Web.UI.WebControls.RepeaterItem In rep.Items
+          
+            ' Loop through all rows in the table, set its DataSource and call DataBind().
+            Dim recControl As WCAR_Activity1TableControlRow = DirectCast(repItem.FindControl("WCAR_Activity1TableControlRow"), WCAR_Activity1TableControlRow)
+            recControl.DataSource = Me.DataSource(index)          
+            If Me.UIData.Count > index Then
+              recControl.PreviousUIData = Me.UIData(index)
+            End If
+            recControl.DataBind()
+          
+            recControl.Visible = Not Me.InDeletedRecordIds(recControl)
+          
+            index += 1
+          Next
+                 
             ' Call the Set methods for each controls on the panel
-
-
-
-
-            SetddlAssignTo()
-
-
-
-
-            SetlitAssignTo()
-            SetLiteral()
-            SetLiteral1()
-            SetLiteral2()
-
-
-
-
-            SetSortByLabel()
-            SetSortControl()
-
-            SetWCA_Date_AssignLabel()
-            SetWCA_RemarkLabel()
-            SetWCA_StatusLabel()
-            SetWCA_W_U_IDFilter()
-            SetWCA_W_U_IDLabel()
-            SetWCA_W_U_IDLabel1()
-            SetWCA_WCD_IDLabel()
-            SetWCA_WDT_IDFilter()
-            SetWCA_WDT_IDLabel()
-            SetWCA_WDT_IDLabel1()
-            SetWCA_WS_IDLabel()
-
-
-
-            SetExcelButton()
-
-            SetImportButton()
-
-            SetNewButton()
-
-            SetPDFButton()
-
-            SetResetButton()
-
-            SetWordButton()
-
-            SetbtnAssignTo()
-
-            SetActionsButton()
-
-            SetbtnAssignTo1()
-
-            SetFilterButton()
-
-            SetFiltersButton()
-
-            SetWCAR_ActivitySearchButton()
-
+        
+                
+                
+                SetddlAssignTo()
+                SetlitAssignTo()
+                SetLiteral()
+                SetLiteral1()
+                SetLiteral2()
+                
+                
+                SetWCA_Date_AssignLabel()
+                SetWCA_RemarkLabel()
+                SetWCA_StatusLabel()
+                SetWCA_W_U_IDFilter()
+                SetWCA_W_U_IDLabel()
+                SetWCA_W_U_IDLabel1()
+                SetWCA_WCD_IDLabel()
+                SetWCA_WDT_IDLabel()
+                SetWCA_WS_IDLabel()
+                
+                
+                SetbtnAssignTo()
+              
+                SetbtnAssignTo1()
+              
+                SetWCAR_ActivitySearchButton()
+              
             ' setting the state of expand or collapse alternative rows
-
-            Dim expandFirstRow As Boolean = False
-
+      
+            Dim expandFirstRow As Boolean= False   
+        
             Dim recControls() As WCAR_Activity1TableControlRow = Me.GetRecordControls()
-            For i As Integer = 0 To recControls.Length - 1
+            For i As Integer = 0 to recControls.Length - 1
                 Dim altRow As System.Web.UI.Control = DirectCast(MiscUtils.FindControlRecursively(recControls(i), "WCAR_Activity1TableControlAltRow"), System.Web.UI.Control)
                 If (altRow IsNot Nothing) Then
-                    If (expandFirstRow AndAlso i = 0) Then
+                    If (expandFirstRow AndAlso i = 0) Then                
                         altRow.Visible = True
-
-                        recControls(i).WCAR_ActivityRowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow.gif"
-                        recControls(i).WCAR_ActivityRowExpandCollapseRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over.gif'")
-                        recControls(i).WCAR_ActivityRowExpandCollapseRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow.gif'")
-
-                    Else
+                   
+                         recControls(i).WCAR_ActivityRowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow.gif"
+                         recControls(i).WCAR_ActivityRowExpandCollapseRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over.gif'")
+                         recControls(i).WCAR_ActivityRowExpandCollapseRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow.gif'")
+                   
+                    Else                
                         altRow.Visible = False
-
-                        recControls(i).WCAR_ActivityRowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow2.gif"
-                        recControls(i).WCAR_ActivityRowExpandCollapseRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over2.gif'")
-                        recControls(i).WCAR_ActivityRowExpandCollapseRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow2.gif'")
-
+                   
+                         recControls(i).WCAR_ActivityRowExpandCollapseRowButton.ImageUrl = "../Images/icon_expandcollapserow2.gif"
+                         recControls(i).WCAR_ActivityRowExpandCollapseRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over2.gif'")
+                         recControls(i).WCAR_ActivityRowExpandCollapseRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow2.gif'")
+                   
                     End If
                 End If
             Next
-
-
+      
+    
             ' Load data for each record and table UI control.
             ' Ordering is important because child controls get 
             ' their parent ids from their parent UI controls.
-
-
+                
+      
             ' this method calls the set method for controls with special formula like running total, sum, rank, etc
             SetFormulaControls()
-
-
-            SetFiltersButton()
-
-
-        End Sub
-
+            
+                    
+            
+      End Sub
+      
         Public Overridable Sub SetFormulaControls()
             ' this method calls Set methods for the control that has special formula
+        
+        
 
+    End Sub
 
-
-        End Sub
-
-
-        Public Sub PreFetchForeignKeyValues()
-            If (IsNothing(Me.DataSource)) Then
-                Return
-            End If
-
+    
+          Public Sub PreFetchForeignKeyValues()
+          If (IsNothing(Me.DataSource))
+            Return
+          End If
+          
             Me.Page.PregetDfkaRecords(WCAR_Activity1Table.WCA_W_U_ID, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WCAR_Activity1Table.WCA_W_U_ID, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WCAR_Activity1Table.WCA_WCD_ID, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WCAR_Activity1Table.WCA_WDT_ID, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WCAR_Activity1Table.WCA_WS_ID, Me.DataSource)
-
-        End Sub
-
-
+          
+          End Sub
+        
+      
         Public Overridable Sub RegisterPostback()
-
-            Me.Page.RegisterPostBackTrigger(MiscUtils.FindControlRecursively(Me, "ExcelButton"))
-
-            Me.Page.RegisterPostBackTrigger(MiscUtils.FindControlRecursively(Me, "PDFButton"))
-
-            Me.Page.RegisterPostBackTrigger(MiscUtils.FindControlRecursively(Me, "WordButton"))
-
-
+        
+        
         End Sub
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean, ByVal e As FormulaEvaluator) As String
-            If e Is Nothing Then
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean, ByVal e as FormulaEvaluator) As String
+            If e Is Nothing
                 e = New FormulaEvaluator()
             End If
-
+            
             e.Variables.Clear()
-
-
+            
+            
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -5754,11 +5636,11 @@ Public Class BaseWCAR_Activity1TableControl
                     e.Variables.Add(enumerator.Current.Key, enumerator.Current.Value)
                 End While
             End If
-
-            If includeDS Then
-
+            
+            If includeDS
+                
             End If
-
+            
             ' All variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -5772,28 +5654,28 @@ Public Class BaseWCAR_Activity1TableControl
             If resultObj Is Nothing Then
                 Return ""
             End If
-
+            
             If Not String.IsNullOrEmpty(format) AndAlso (String.IsNullOrEmpty(formula) OrElse formula.IndexOf("Format(") < 0) Then
                 Return FormulaUtils.Format(resultObj, format)
             Else
                 Return resultObj.ToString()
             End If
-        End Function
+        End Function			
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
-        End Function
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
+        End Function        
 
-
+        
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
-        End Function
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
+        End Function        
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -5801,7 +5683,7 @@ Public Class BaseWCAR_Activity1TableControl
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -5814,44 +5696,40 @@ Public Class BaseWCAR_Activity1TableControl
 
         Public Overridable Sub ResetControl()
 
-
+            
             Me.WCA_W_U_IDFilter.ClearSelection()
-
-            Me.WCA_WDT_IDFilter.ClearSelection()
-
+            
             Me.ddlAssignTo.ClearSelection()
-
-            Me.SortControl.ClearSelection()
-
+            
             Me.CurrentSortOrder.Reset()
             If (Me.InSession(Me, "Order_By")) Then
                 Me.CurrentSortOrder = OrderBy.FromXmlString(Me.GetFromSession(Me, "Order_By", Nothing))
-
+            
             Else
                 Me.CurrentSortOrder = New OrderBy(True, False)
-
+                
             End If
-
+                
             Me.PageIndex = 0
         End Sub
 
         Public Overridable Sub ResetPageControl()
             Me.PageIndex = 0
         End Sub
-
+        
         Protected Overridable Sub BindPaginationControls()
             ' Setup the pagination controls.
 
             ' Bind the pagination labels.
-
-            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then
-
+        
+            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then                      
+                    
                 Me.Pagination.CurrentPage.Text = (Me.PageIndex + 1).ToString()
             Else
                 Me.Pagination.CurrentPage.Text = "0"
             End If
-            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then
-
+            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then                      
+                    
                 Me.Pagination.CurrentPage.Text = (Me.PageIndex + 1).ToString()
             Else
                 Me.Pagination.CurrentPage.Text = "0"
@@ -5860,39 +5738,39 @@ Public Class BaseWCAR_Activity1TableControl
             Me.Pagination.PageSize.Text = Me.PageSize.ToString()
 
             ' Bind the buttons for WCAR_Activity1TableControl pagination.
-
+        
             Me.Pagination.FirstPage.Enabled = Not (Me.PageIndex = 0)
             If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
                 Me.Pagination.LastPage.Enabled = True
-            ElseIf Me._TotalPages = 0 Then          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.Pagination.LastPage.Enabled = False
+            ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
+                Me.Pagination.LastPage.Enabled = False            
             Else                               ' if the total pages is the last page, disable last and next buttons
                 Me.Pagination.LastPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
             End If
-
+          
             If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
                 Me.Pagination.NextPage.Enabled = True
-            ElseIf Me._TotalPages = 0 Then          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.Pagination.NextPage.Enabled = False
+            ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
+                Me.Pagination.NextPage.Enabled = False            
             Else                               ' if the total pages is the last page, disable last and next buttons
                 Me.Pagination.NextPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
             End If
-
+          
             Me.Pagination.PreviousPage.Enabled = Not (Me.PageIndex = 0)
 
 
         End Sub
 
-
-
+   
+    
         Public Overridable Sub SaveData()
             ' Save the data from the entire table.  Calls each row's Save Data
             ' to save their data.  This function is called by the Click handler of the
             ' Save button.  The button handler should Start/Commit/End a transaction.
-
+            
             Dim recCtl As WCAR_Activity1TableControlRow
             For Each recCtl In Me.GetRecordControls()
-
+        
                 If Me.InDeletedRecordIds(recCtl) Then
                     ' Delete any pending deletes. 
                     recCtl.Delete()
@@ -5901,184 +5779,124 @@ Public Class BaseWCAR_Activity1TableControl
                         recCtl.SaveData()
                     End If
                 End If
-
+          
             Next
-
-
-
-
+            
+            
+          
+    
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-
+          
             ' Set IsNewRecord to False for all records - since everything has been saved and is no longer "new"
             For Each recCtl In Me.GetRecordControls()
                 recCtl.IsNewRecord = False
             Next
-
-
+    
+      
             ' Set DeletedRecordsIds to Nothing since we have deleted all pending deletes.
             Me.DeletedRecordIds = Nothing
-
+      
         End Sub
 
         Public Overridable Function CreateCompoundJoinFilter() As CompoundFilter
             Dim jFilter As CompoundFilter = New CompoundFilter()
-
+         
             Return jFilter
         End Function
 
-
-        Public Overridable Function CreateOrderBy() As OrderBy
-            ' The CurrentSortOrder is initialized to the sort order on the
-            ' Query Wizard.  It may be modified by the Click handler for any of
-            ' the column heading to sort or reverse sort by that column.
-            ' You can add your own sort order, or modify it on the Query Wizard.
-            Return Me.CurrentSortOrder
-        End Function
-
+      
+          Public Overridable Function CreateOrderBy() As OrderBy
+          ' The CurrentSortOrder is initialized to the sort order on the
+          ' Query Wizard.  It may be modified by the Click handler for any of
+          ' the column heading to sort or reverse sort by that column.
+          ' You can add your own sort order, or modify it on the Query Wizard.
+          Return Me.CurrentSortOrder
+          End Function
+      
         Public Overridable Function CreateWhereClause() As WhereClause
             'This CreateWhereClause is used for loading the data.
             WCAR_Activity1Table.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
-
-            Dim hasFiltersSel_WAttach_Type_WCAR_Doc_Attach1TableControl As Boolean = False
-
-            Dim hasFiltersSel_WStep_WStep_Detail1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Doc1TableControl As Boolean = False
-
+            
+        Dim hasFiltersSel_WAttach_Type_WCAR_Doc_Attach1TableControl As Boolean = False
+      
+        Dim hasFiltersSel_WStep_WStep_Detail1TableControl As Boolean = False
+      
+        Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
+      
+        Dim hasFiltersWCAR_Doc1TableControl As Boolean = False
+      
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
             ' 2. User selected search criteria.
             ' 3. User selected filter criteria.
 
-
+              
             If IsValueSelected(Me.WCA_W_U_IDFilter) Then
-
-                hasFiltersWCAR_Activity1TableControl = True
-
+    
+              hasFiltersWCAR_Activity1TableControl = True            
+    
                 wc.iAND(WCAR_Activity1Table.WCA_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.WCA_W_U_IDFilter, Me.GetFromSession(Me.WCA_W_U_IDFilter)), False, False)
-
+            
             End If
+                  
+                
+                         
+    
+    Return wc
+    End Function
 
-
-
-
-            Dim totalSelectedItemCount As Integer = 0
-
-            If IsValueSelected(Me.WCA_WDT_IDFilter) Then
-
-                hasFiltersWCAR_Activity1TableControl = True
-
-                Dim item As ListItem
-                Dim selectedItemCount As Integer = 0
-                For Each item In Me.WCA_WDT_IDFilter.Items
-                    If item.Selected Then
-                        selectedItemCount += 1
-
-                        totalSelectedItemCount += 1
-
-                    End If
-                Next
-
-                Dim filter As WhereClause = New WhereClause
-                For Each item In Me.WCA_WDT_IDFilter.Items
-                    If item.Selected AndAlso (item.Value = "--ANY--" OrElse item.Value = "--PLEASE_SELECT--") AndAlso selectedItemCount > 1 Then
-                        item.Selected = False
-                    End If
-                    If item.Selected Then
-                        filter.iOR(WCAR_Activity1Table.WCA_WDT_ID, BaseFilter.ComparisonOperator.EqualsTo, item.Value, False, False)
-                    End If
-                Next
-                wc.iAND(filter)
-
-            End If
-
-
-
-            If (totalSelectedItemCount > 50) Then
-                Throw New Exception(Page.GetResourceValue("Err:SelectedItemOverLimit", "ePortalWFApproval").Replace("{Limit}", "50").Replace("{SelectedCount}", totalSelectedItemCount.ToString()))
-            End If
-
-
-            Return wc
-        End Function
-
-
-        Public Overridable Function CreateWhereClause(ByVal searchText As String, ByVal fromSearchControl As String, ByVal AutoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String) As WhereClause
+    
+        Public Overridable Function CreateWhereClause(ByVal searchText as String, ByVal fromSearchControl as String, ByVal AutoTypeAheadSearch as String, ByVal AutoTypeAheadWordSeparators as String) As WhereClause
             ' This CreateWhereClause is used for loading list of suggestions for Auto Type-Ahead feature.
             WCAR_Activity1Table.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
+        
+          Dim hasFiltersSel_WAttach_Type_WCAR_Doc_Attach1TableControl As Boolean = False
+        
+          Dim hasFiltersSel_WStep_WStep_Detail1TableControl As Boolean = False
+        
+          Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
+        
+          Dim hasFiltersWCAR_Doc1TableControl As Boolean = False
+        
+      ' Compose the WHERE clause consist of:
+      ' 1. Static clause defined at design time.
+      ' 2. User selected search criteria.
+      ' 3. User selected filter criteria.
 
-            Dim hasFiltersSel_WAttach_Type_WCAR_Doc_Attach1TableControl As Boolean = False
-
-            Dim hasFiltersSel_WStep_WStep_Detail1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Doc1TableControl As Boolean = False
-
-            ' Compose the WHERE clause consist of:
-            ' 1. Static clause defined at design time.
-            ' 2. User selected search criteria.
-            ' 3. User selected filter criteria.
-
-            Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
-
+      Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
+      
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
-
+          
             Dim WCA_W_U_IDFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "WCA_W_U_IDFilter_Ajax"), String)
             If IsValueSelected(WCA_W_U_IDFilterSelectedValue) Then
-
-                hasFiltersWCAR_Activity1TableControl = True
-
-                wc.iAND(WCAR_Activity1Table.WCA_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, WCA_W_U_IDFilterSelectedValue, False, False)
-
-            End If
-
-            Dim WCA_WDT_IDFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "WCA_WDT_IDFilter_Ajax"), String)
-            If IsValueSelected(WCA_WDT_IDFilterSelectedValue) Then
-
-                hasFiltersWCAR_Activity1TableControl = True
-
-                If Not isNothing(WCA_WDT_IDFilterSelectedValue) Then
-                    Dim WCA_WDT_IDFilteritemListFromSession() As String = WCA_WDT_IDFilterSelectedValue.Split(","c)
-                    Dim index As Integer = 0
-
-                    Dim filter As WhereClause = New WhereClause
-                    For Each item As String In WCA_WDT_IDFilteritemListFromSession
-                        If index = 0 AndAlso item.ToString.Equals("") Then
-                        Else
-                            filter.iOR(WCAR_Activity1Table.WCA_WDT_ID, BaseFilter.ComparisonOperator.EqualsTo, item, False, False)
-                            index += 1
-                        End If
-                    Next
-                    wc.iAND(filter)
-
-                End If
-
-            End If
-
-
-
+    
+              hasFiltersWCAR_Activity1TableControl = True            
+    
+                 wc.iAND(WCAR_Activity1Table.WCA_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, WCA_W_U_IDFilterSelectedValue, false, False)
+             
+             End If
+                      
+      
+      
             Return wc
         End Function
 
+      
 
-
-        Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
-                                        ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
-                                        ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
-                                        ByVal resultList As ArrayList) As Boolean
-            Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
-                                     autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
-                                     resultList, False)
-        End Function
+         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
+                                         ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
+                                         ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
+                                         ByVal resultList As ArrayList) As Boolean
+              Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
+                                       autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
+                                       resultList, False)
+         End Function
 
         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
                                                ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
@@ -6127,10 +5945,10 @@ Public Class BaseWCAR_Activity1TableControl
                     If Len(resultItem) - index <= columnLength Then
                         If index = 0 Then
                             itemToAdd = resultItem
-                        Else
+                        Else                            
                             itemToAdd = resultItem.Substring(index)
                         End If
-                    Else
+                    Else                       
                         itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, index, index + columnLength, StringUtils.Direction.forward)
                     End If
                 ElseIf InvariantLCase(AutoTypeAheadDisplayFoundText).equals("inmiddleofmatchedstring") Then
@@ -6140,7 +5958,7 @@ Public Class BaseWCAR_Activity1TableControl
                     Else
                         ' Sanity check at end of the string
                         If index + Len(prefixText) >= Len(resultItem) - 1 OrElse _
-                        Len(resultItem) - index < subStringBeginIndex Then
+                        Len(resultItem) - index < subStringBeginIndex Then                           
                             itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, Len(resultItem) - 1 - columnLength, Len(resultItem) - 1, StringUtils.Direction.backward)
                         ElseIf index <= subStringBeginIndex Then
                             ' Sanity check at beginning of the string                          
@@ -6194,18 +6012,18 @@ Public Class BaseWCAR_Activity1TableControl
                 End If
 
                 If Not String.IsNullOrEmpty(itemToAdd) AndAlso Not resultList.Contains(itemToAdd) Then
-
+                   
                     resultList.Add(itemToAdd)
-
+          				
                     isAdded = True
                 End If
             End If
             Return isAdded
         End Function
-
-
+        
+    
         Protected Overridable Sub GetPageSize()
-
+        
             If Me.Pagination.PageSize.Text.Trim <> "" Then
                 Try
                     'Me.PageSize = Integer.Parse(Me.Pagination.PageSize.Text)
@@ -6221,30 +6039,30 @@ Public Class BaseWCAR_Activity1TableControl
         End Sub
 
         Protected Overridable Sub AddNewRecords()
-
+          
             Dim newRecordList As ArrayList = New ArrayList()
+          
+    Dim newUIDataList As System.Collections.Generic.List(Of Hashtable) = New System.Collections.Generic.List(Of Hashtable)()
 
-            Dim newUIDataList As System.Collections.Generic.List(Of Hashtable) = New System.Collections.Generic.List(Of Hashtable)()
+    ' Loop though all the record controls and if the record control
+    ' does not have a unique record id set, then create a record
+    ' and add to the list.
+    If Not Me.ResetData Then
+    Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_Activity1TableControlRepeater"), System.Web.UI.WebControls.Repeater)
+    If rep Is Nothing Then Return
 
-            ' Loop though all the record controls and if the record control
-            ' does not have a unique record id set, then create a record
-            ' and add to the list.
-            If Not Me.ResetData Then
-                Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_Activity1TableControlRepeater"), System.Web.UI.WebControls.Repeater)
-                If rep Is Nothing Then Return
-
-
-                Dim repItem As System.Web.UI.WebControls.RepeaterItem
-                For Each repItem In rep.Items
-
-                    ' Loop through all rows in the table, set its DataSource and call DataBind().
-
-                    Dim recControl As WCAR_Activity1TableControlRow = DirectCast(repItem.FindControl("WCAR_Activity1TableControlRow"), WCAR_Activity1TableControlRow)
-
+    
+    Dim repItem As System.Web.UI.WebControls.RepeaterItem
+    For Each repItem In rep.Items
+      
+    ' Loop through all rows in the table, set its DataSource and call DataBind().
+    
+    Dim recControl As WCAR_Activity1TableControlRow = DirectCast(repItem.FindControl("WCAR_Activity1TableControlRow"), WCAR_Activity1TableControlRow)
+    
 
                     If recControl.Visible AndAlso recControl.IsNewRecord() Then
                         Dim rec As WCAR_Activity1Record = New WCAR_Activity1Record()
-
+        
                         If recControl.WCA_Date_Assign.Text <> "" Then
                             rec.Parse(recControl.WCA_Date_Assign.Text, WCAR_Activity1Table.WCA_Date_Assign)
                         End If
@@ -6272,41 +6090,41 @@ Public Class BaseWCAR_Activity1TableControl
                         If recControl.WCA_WS_ID.Text <> "" Then
                             rec.Parse(recControl.WCA_WS_ID.Text, WCAR_Activity1Table.WCA_WS_ID)
                         End If
-                        newUIDataList.Add(recControl.PreservedUIData())
+                        newUIDataList.Add(recControl.PreservedUIData())	  
                         newRecordList.Add(rec)
                     End If
                 Next
             End If
-
-
+            
+    
             ' Add any new record to the list.
             Dim index As Integer = 0
             For index = 1 To Me.AddNewRecord
-
+              
                 newRecordList.Insert(0, New WCAR_Activity1Record())
-                newUIDataList.Insert(0, New Hashtable())
-
+                newUIDataList.Insert(0, New Hashtable())				
+              
             Next
             Me.AddNewRecord = 0
 
             ' Finally, add any new records to the DataSource.
             If newRecordList.Count > 0 Then
-
+              
                 Dim finalList As ArrayList = New ArrayList(Me.DataSource)
                 finalList.InsertRange(0, newRecordList)
 
                 Me.DataSource = DirectCast(finalList.ToArray(GetType(WCAR_Activity1Record)), WCAR_Activity1Record())
-
+              
             End If
-
+            
             ' Add the existing UI data to this hash table
             If newUIDataList.Count > 0 Then
                 Me.UIData.InsertRange(0, newUIDataList)
             End If
-
+            
         End Sub
 
-
+        
         Public Sub AddToDeletedRecordIds(ByVal rec As WCAR_Activity1TableControlRow)
             If rec.IsNewRecord() Then
                 Return
@@ -6336,331 +6154,210 @@ Public Class BaseWCAR_Activity1TableControl
                 Me._DeletedRecordIds = value
             End Set
         End Property
-
-
+        
+      
         ' Create Set, WhereClause, and Populate Methods
-
+        
         Public Overridable Sub SetlitAssignTo()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.litAssignTo.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.litAssignTo.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral1()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral2()
 
-
-
-        End Sub
-
-        Public Overridable Sub SetSortByLabel()
-
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.SortByLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetWCA_Date_AssignLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCA_Date_AssignLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCA_Date_AssignLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCA_RemarkLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCA_RemarkLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCA_RemarkLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCA_StatusLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCA_StatusLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCA_StatusLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCA_W_U_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCA_W_U_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCA_W_U_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCA_W_U_IDLabel1()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCA_W_U_IDLabel1.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCA_W_U_IDLabel1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCA_WCD_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCA_WCD_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCA_WCD_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCA_WDT_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCA_WDT_IDLabel.Text = "Some value"
-
-        End Sub
-
-        Public Overridable Sub SetWCA_WDT_IDLabel1()
-
-
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCA_WDT_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCA_WS_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCA_WS_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCA_WS_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetddlAssignTo()
 
-
-
-            Me.PopulateddlAssignTo(GetSelectedValue(Me.ddlAssignTo, GetFromSession(Me.ddlAssignTo)), 500)
-
+              
+            
+                Me.PopulateddlAssignTo(GetSelectedValue(Me.ddlAssignTo,  GetFromSession(Me.ddlAssignTo)), 500)					
+                    
         End Sub
-
-        Public Overridable Sub SetSortControl()
-
-
-
-            Me.PopulateSortControl(GetSelectedValue(Me.SortControl, GetFromSession(Me.SortControl)), 500)
-
-        End Sub
-
+            
         Public Overridable Sub SetWCA_W_U_IDFilter()
 
-
-
-            Me.PopulateWCA_W_U_IDFilter(GetSelectedValue(Me.WCA_W_U_IDFilter, GetFromSession(Me.WCA_W_U_IDFilter)), 500)
-
-        End Sub
-
-        Public Overridable Sub SetWCA_WDT_IDFilter()
-
-
-
-            Dim WCA_WDT_IDFilterselectedFilterItemList As New ArrayList()
-            Dim WCA_WDT_IDFilteritemsString As String = Nothing
-            If (Me.InSession(Me.WCA_WDT_IDFilter)) Then
-                WCA_WDT_IDFilteritemsString = Me.GetFromSession(Me.WCA_WDT_IDFilter)
-            End If
-
-            If (WCA_WDT_IDFilteritemsString IsNot Nothing) Then
-                Dim WCA_WDT_IDFilteritemListFromSession() As String = WCA_WDT_IDFilteritemsString.Split(","c)
-                For Each item As String In WCA_WDT_IDFilteritemListFromSession
-                    WCA_WDT_IDFilterselectedFilterItemList.Add(item)
-                Next
-            End If
-
-
-            Me.PopulateWCA_WDT_IDFilter(GetSelectedValueList(Me.WCA_WDT_IDFilter, WCA_WDT_IDFilterselectedFilterItemList), 500)
-
-            Dim url As String = Me.ModifyRedirectUrl("../WDoc_Type1/WDoc-Type-QuickSelector1.aspx", "", True)
-
-            url = Me.Page.ModifyRedirectUrl(url, "", True)
-
-            url &= "?Target=" & Me.WCA_WDT_IDFilter.ClientID & "&DFKA=" & CType(Me.Page, BaseApplicationPage).Encrypt("WDT_Name") & "&IndexField=" & CType(Me.Page, BaseApplicationPage).Encrypt("WDT_ID") & "&EmptyValue=" & CType(Me.Page, BaseApplicationPage).Encrypt("--ANY--") & "&EmptyDisplayText=" & CType(Me.Page, BaseApplicationPage).Encrypt(Me.Page.GetResourceValue("Txt:All")) & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup")
-
-
-            Me.WCA_WDT_IDFilter.Attributes.Item("onClick") = "initializePopupPage(this, '" & url & "', " & Convert.ToString(WCA_WDT_IDFilter.AutoPostBack).ToLower() & ", event); return false;"
-
-
-        End Sub
-
+              
+            
+                Me.PopulateWCA_W_U_IDFilter(GetSelectedValue(Me.WCA_W_U_IDFilter,  GetFromSession(Me.WCA_W_U_IDFilter)), 500)					
+                                     
+              End Sub	
+            
         ' Get the filters' data for ddlAssignTo
         Protected Overridable Sub PopulateddlAssignTo(ByVal selectedValue As String, ByVal maxItems As Integer)
-
+                    
             Me.ddlAssignTo.Items.Clear()
-
+            
             ' 1. Setup the static list items        
-
+            							
             Me.ddlAssignTo.Items.Add(New ListItem(Me.Page.ExpandResourceValue("Please Select Approver"), "0"))
-
+                            		  
             ' Skip step 2 and 3 because no need to load data from database and insert data
+            
 
-
-            Try
+            Try    
                 ' Set the selected value.
                 SetSelectedValue(Me.ddlAssignTo, selectedValue)
 
-
+                
             Catch
             End Try
-
-            If Me.ddlAssignTo.SelectedValue IsNot Nothing AndAlso Me.ddlAssignTo.Items.FindByValue(Me.ddlAssignTo.SelectedValue) Is Nothing Then
+            
+            If Me.ddlAssignTo.SelectedValue IsNot Nothing AndAlso Me.ddlAssignTo.Items.FindByValue(Me.ddlAssignTo.SelectedValue) Is Nothing
                 Me.ddlAssignTo.SelectedValue = Nothing
             End If
 
-        End Sub
-
-        ' Get the filters' data for SortControl
-        Protected Overridable Sub PopulateSortControl(ByVal selectedValue As String, ByVal maxItems As Integer)
-
-
-            Me.SortControl.Items.Clear()
-
-            ' 1. Setup the static list items
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("{Txt:PleaseSelect}"), "--PLEASE_SELECT--"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Date Action {Txt:Ascending}"), "WCA_Date_Action Asc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Date Action {Txt:Descending}"), "WCA_Date_Action Desc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Date Assign {Txt:Ascending}"), "WCA_Date_Assign Asc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Date Assign {Txt:Descending}"), "WCA_Date_Assign Desc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Is Done {Txt:Ascending}"), "WCA_Is_Done Asc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Is Done {Txt:Descending}"), "WCA_Is_Done Desc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Status {Txt:Ascending}"), "WCA_Status Asc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA Status {Txt:Descending}"), "WCA_Status Desc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA W U {Txt:Ascending}"), "WCA_W_U_ID Asc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA W U {Txt:Descending}"), "WCA_W_U_ID Desc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA W U Delegate {Txt:Ascending}"), "WCA_W_U_ID_Delegate Asc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA W U Delegate {Txt:Descending}"), "WCA_W_U_ID_Delegate Desc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WCD {Txt:Ascending}"), "WCA_WCD_ID Asc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WCD {Txt:Descending}"), "WCA_WCD_ID Desc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WDT {Txt:Ascending}"), "WCA_WDT_ID Asc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WDT {Txt:Descending}"), "WCA_WDT_ID Desc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WS {Txt:Ascending}"), "WCA_WS_ID Asc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WS {Txt:Descending}"), "WCA_WS_ID Desc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WSD {Txt:Ascending}"), "WCA_WSD_ID Asc"))
-
-            Me.SortControl.Items.Add(New ListItem(Me.Page.ExpandResourceValue("WCA WSD {Txt:Descending}"), "WCA_WSD_ID Desc"))
-
-
-            Try
-                ' Set the selected value.
-                SetSelectedValue(Me.SortControl, selectedValue)
-
-
-            Catch
-            End Try
-
-            If Me.SortControl.SelectedValue IsNot Nothing AndAlso Me.SortControl.Items.FindByValue(Me.SortControl.SelectedValue) Is Nothing Then
-                Me.SortControl.SelectedValue = Nothing
-            End If
-
-        End Sub
-
+              End Sub
+            
         ' Get the filters' data for WCA_W_U_IDFilter
         Protected Overridable Sub PopulateWCA_W_U_IDFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
-
+                    
             'Setup the WHERE clause.
-
+            
             Me.WCA_W_U_IDFilter.Items.Clear()
             Dim wc As WhereClause = Me.CreateWhereClause_WCA_W_U_IDFilter()
-
+            		  			
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCA_W_U_IDFilter function.
             ' It is better to customize the where clause there.
-
+            
             ' Setup the static list items        
-
+            
             ' Add the All item.
-            Me.WCA_W_U_IDFilter.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
+            Me.WCA_W_U_IDFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
+                              
 
-
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(Sel_WASP_User1View.W_U_Full_Name, OrderByItem.OrderDir.Asc)
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(Sel_WASP_User1View.W_U_Full_Name, OrderByItem.OrderDir.Asc)
 
             Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
 
-
+            	
 
             Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
-
+            
 
             Dim itemValues() As Sel_WASP_User1Record = Nothing
-
-            If wc.RunQuery Then
+            
+            If wc.RunQuery
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim evaluator As New FormulaEvaluator
                 Dim listDuplicates As New ArrayList()
 
-
-
+                
+                
                 Do
-
+                    
                     itemValues = Sel_WASP_User1View.GetRecords(wc, orderBy, pageNum, maxItems)
-
-                    For Each itemValue As Sel_WASP_User1Record In itemValues
+                                    
+                    For each itemValue As Sel_WASP_User1Record In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.W_U_IDSpecified Then
                             cvalue = itemValue.W_U_ID.ToString()
 
-                            If counter < maxItems AndAlso Me.WCA_W_U_IDFilter.Items.FindByValue(cvalue) Is Nothing Then
-
+                            If counter < maxItems AndAlso Me.WCA_W_U_IDFilter.Items.FindByValue(cvalue) Is Nothing  Then
+                            
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Activity1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Activity1Table.WCA_W_U_ID)
                                 If _isExpandableNonCompositeForeignKey AndAlso WCAR_Activity1Table.WCA_W_U_ID.IsApplyDisplayAs Then
                                     fvalue = WCAR_Activity1Table.GetDFKA(itemValue, WCAR_Activity1Table.WCA_W_U_ID)
@@ -6668,25 +6365,25 @@ Public Class BaseWCAR_Activity1TableControl
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
                                     fvalue = itemValue.Format(Sel_WASP_User1View.W_U_ID)
                                 End If
-
+                                    
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                    fvalue = ""
+                                   fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If (fvalue.Length > 50) Then
-                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                If ( fvalue.Length > 50 ) Then
+                                   fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.WCA_W_U_IDFilter.Items.FindByText(fvalue)
-
+                
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                                     End If
                                 End If
 
@@ -6694,357 +6391,174 @@ Public Class BaseWCAR_Activity1TableControl
                                 Me.WCA_W_U_IDFilter.Items.Add(newItem)
 
                                 If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                                 End If
 
-                                counter += 1
+                                counter += 1			  
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
-            End If
+            End If			
+            
 
 
+                               
 
-
-
-            Try
-
+            Try    
+                
                 ' Set the selected value.
                 SetSelectedValue(Me.WCA_W_U_IDFilter, selectedValue)
-
+                    
             Catch
             End Try
-
-
-            If Me.WCA_W_U_IDFilter.SelectedValue IsNot Nothing AndAlso Me.WCA_W_U_IDFilter.Items.FindByValue(Me.WCA_W_U_IDFilter.SelectedValue) Is Nothing Then
+            
+                        
+            If Me.WCA_W_U_IDFilter.SelectedValue IsNot Nothing AndAlso Me.WCA_W_U_IDFilter.Items.FindByValue(Me.WCA_W_U_IDFilter.SelectedValue) Is Nothing
                 Me.WCA_W_U_IDFilter.SelectedValue = Nothing
-            End If
-
+            End If            
+                          
         End Sub
-
-        ' Get the filters' data for WCA_WDT_IDFilter
-        Protected Overridable Sub PopulateWCA_WDT_IDFilter(ByVal selectedValue As ArrayList, ByVal maxItems As Integer)
-
-            'Setup the WHERE clause.
-
-            Dim wc As WhereClause = Me.CreateWhereClause_WCA_WDT_IDFilter()
-            Me.WCA_WDT_IDFilter.Items.Clear()
-
-            ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCA_WDT_IDFilter function.
-            ' It is better to customize the where clause there.
-
-
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-
-
-
-            Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
-
-
-            Dim itemValues() As WDoc_Type1Record = Nothing
-
-            If wc.RunQuery Then
-                Dim counter As Integer = 0
-                Dim pageNum As Integer = 0
-                Dim evaluator As New FormulaEvaluator
-                Dim listDuplicates As New ArrayList()
-
-
-
-                Do
-
-                    itemValues = WDoc_Type1Table.GetRecords(wc, orderBy, pageNum, maxItems)
-
-                    For Each itemValue As WDoc_Type1Record In itemValues
-                        ' Create the item and add to the list.
-                        Dim cvalue As String = Nothing
-                        Dim fvalue As String = Nothing
-                        If itemValue.WDT_IDSpecified Then
-                            cvalue = itemValue.WDT_ID.ToString()
-
-                            If counter < maxItems AndAlso Me.WCA_WDT_IDFilter.Items.FindByValue(cvalue) Is Nothing Then
-
-                                Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Activity1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Activity1Table.WCA_WDT_ID)
-                                If _isExpandableNonCompositeForeignKey AndAlso WCAR_Activity1Table.WCA_WDT_ID.IsApplyDisplayAs Then
-                                    fvalue = WCAR_Activity1Table.GetDFKA(itemValue, WCAR_Activity1Table.WCA_WDT_ID)
-                                End If
-                                If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                                    fvalue = itemValue.Format(WDoc_Type1Table.WDT_Name)
-                                End If
-
-                                If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-
-                                If (IsNothing(fvalue)) Then
-                                    fvalue = ""
-                                End If
-
-                                fvalue = fvalue.Trim()
-
-                                If (fvalue.Length > 50) Then
-                                    fvalue = fvalue.Substring(0, 50) & "..."
-                                End If
-
-                                Dim dupItem As ListItem = Me.WCA_WDT_IDFilter.Items.FindByText(fvalue)
-
-                                If Not IsNothing(dupItem) Then
-                                    listDuplicates.Add(fvalue)
-                                    If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
-                                    End If
-                                End If
-
-                                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
-                                Me.WCA_WDT_IDFilter.Items.Add(newItem)
-
-                                If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
-                                End If
-
-                                counter += 1
-                            End If
-                        End If
-                    Next
-                    pageNum += 1
-                Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
-            End If
-
-
-
-
-
-            Try
-
-            Catch
-            End Try
-
-
-            Me.WCA_WDT_IDFilter.SetFieldMaxLength(50)
-
-
-            ' Add the selected value.
-            If Me.WCA_WDT_IDFilter.Items.Count = 0 Then
-                Me.WCA_WDT_IDFilter.Items.Add(New ListItem(Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-            End If
-
-            ' Mark all items to be selected.
-            For Each item As ListItem In Me.WCA_WDT_IDFilter.Items
-                item.Selected = True
-            Next
-
-        End Sub
-
+            
         Public Overridable Function CreateWhereClause_ddlAssignTo() As WhereClause
-
+        
             ' By default, we simply return a new WhereClause.
             ' Add additional where clauses to restrict the items shown in control.
-
+            
             Dim wc As WhereClause = New WhereClause()
             Return wc
+            	                
 
-
-        End Function
-
-
+        End Function			
+        
+              
 
         Public Overridable Function CreateWhereClause_WCA_W_U_IDFilter() As WhereClause
-
-            Dim hasFiltersSel_WAttach_Type_WCAR_Doc_Attach1TableControl As Boolean = False
-
-            Dim hasFiltersSel_WStep_WStep_Detail1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Doc1TableControl As Boolean = False
-
+          
+              Dim hasFiltersSel_WAttach_Type_WCAR_Doc_Attach1TableControl As Boolean = False
+            
+              Dim hasFiltersSel_WStep_WStep_Detail1TableControl As Boolean = False
+            
+              Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
+            
+              Dim hasFiltersWCAR_Doc1TableControl As Boolean = False
+            
             ' Create a where clause for the filter WCA_W_U_IDFilter.
             ' This function is called by the Populate method to load the items 
             ' in the WCA_W_U_IDFilterDropDownList
-
-            Dim wc As WhereClause = New WhereClause()
+            
+            Dim wc As WhereClause= New WhereClause()
             Return wc
+            
+        End Function			
+            
 
-        End Function
-
-
-
-        Public Overridable Function CreateWhereClause_WCA_WDT_IDFilter() As WhereClause
-
-            Dim hasFiltersSel_WAttach_Type_WCAR_Doc_Attach1TableControl As Boolean = False
-
-            Dim hasFiltersSel_WStep_WStep_Detail1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Doc1TableControl As Boolean = False
-
-            ' Create a where clause for the filter WCA_WDT_IDFilter.
-            ' This function is called by the Populate method to load the items 
-            ' in the WCA_WDT_IDFilterQuickSelector
-
-            Dim WCA_WDT_IDFilterselectedFilterItemList As New ArrayList()
-            Dim WCA_WDT_IDFilteritemsString As String = Nothing
-            If (Me.InSession(Me.WCA_WDT_IDFilter)) Then
-                WCA_WDT_IDFilteritemsString = Me.GetFromSession(Me.WCA_WDT_IDFilter)
-            End If
-
-            If (WCA_WDT_IDFilteritemsString IsNot Nothing) Then
-                Dim WCA_WDT_IDFilteritemListFromSession() As String = WCA_WDT_IDFilteritemsString.Split(","c)
-                For Each item As String In WCA_WDT_IDFilteritemListFromSession
-                    WCA_WDT_IDFilterselectedFilterItemList.Add(item)
-                Next
-            End If
-
-            WCA_WDT_IDFilterselectedFilterItemList = GetSelectedValueList(Me.WCA_WDT_IDFilter, WCA_WDT_IDFilterselectedFilterItemList)
-            Dim wc As New WhereClause
-            If WCA_WDT_IDFilterselectedFilterItemList Is Nothing OrElse WCA_WDT_IDFilterselectedFilterItemList.Count = 0 Then
-                wc.RunQuery = False
-            Else
-                For Each item As String In WCA_WDT_IDFilterselectedFilterItemList
-
-
-                    wc.iOR(WDoc_Type1Table.WDT_ID, BaseFilter.ComparisonOperator.EqualsTo, item)
-
-
-                Next
-            End If
-            Return wc
-
-        End Function
-
-
-
-
+    
+    
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
             ' PreRender event is raised just before page is being displayed.
             Try
-                DbUtils.StartTransaction()
+                DbUtils.StartTransaction
                 Me.RegisterPostback()
-
+                
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-
-
+                  
+                
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
-
+                    
                     Me.LoadData()
                     Me.DataBind()
-
+                    
                 End If
-
-
-
+                
+               
+                				
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
         End Sub
-
-
+        
+        
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
 
             ' Save filter controls to values to session.
-
+        
             Me.SaveToSession(Me.ddlAssignTo, Me.ddlAssignTo.SelectedValue)
-
-            Me.SaveToSession(Me.SortControl, Me.SortControl.SelectedValue)
-
+                  
             Me.SaveToSession(Me.WCA_W_U_IDFilter, Me.WCA_W_U_IDFilter.SelectedValue)
-
-            Dim WCA_WDT_IDFilterselectedFilterItemList As ArrayList = GetSelectedValueList(Me.WCA_WDT_IDFilter, Nothing)
-            Dim WCA_WDT_IDFilterSessionString As String = ""
-            If Not WCA_WDT_IDFilterselectedFilterItemList Is Nothing Then
-                For Each item As String In WCA_WDT_IDFilterselectedFilterItemList
-                    WCA_WDT_IDFilterSessionstring = WCA_WDT_IDFilterSessionstring & "," & item
-                Next
-            End If
-            Me.SaveToSession(Me.WCA_WDT_IDFilter, WCA_WDT_IDFilterSessionstring)
-
-
+                  
+        
             'Save pagination state to session.
-
-
+         
+            
             ' Save table control properties to the session.
-
-            If Not Me.CurrentSortOrder Is Nothing Then
+            
+ If Not Me.CurrentSortOrder Is Nothing Then
                 If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then
                     Me.SaveToSession(Me, "Order_By", Me.CurrentSortOrder.ToXmlString())
                 End If
-            End If
+            End If            
             Me.SaveToSession(Me, "Page_Index", Me.PageIndex.ToString())
             Me.SaveToSession(Me, "Page_Size", Me.PageSize.ToString())
-
-            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)
-
+        
+            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)  
+        
         End Sub
-
-        Protected Sub SaveControlsToSession_Ajax()
+        
+        Protected  Sub SaveControlsToSession_Ajax()
             ' Save filter controls to values to session.
-
+          
             Me.SaveToSession(Me.ddlAssignTo, Me.ddlAssignTo.SelectedValue)
-
-            Me.SaveToSession(Me.SortControl, Me.SortControl.SelectedValue)
-
-            Me.SaveToSession("WCA_W_U_IDFilter_Ajax", Me.WCA_W_U_IDFilter.SelectedValue)
-
-            Dim WCA_WDT_IDFilterselectedFilterItemList As ArrayList = GetSelectedValueList(Me.WCA_WDT_IDFilter, Nothing)
-            Dim WCA_WDT_IDFilterSessionString As String = ""
-            If Not WCA_WDT_IDFilterselectedFilterItemList Is Nothing Then
-                For Each item As String In WCA_WDT_IDFilterselectedFilterItemList
-                    WCA_WDT_IDFilterSessionstring = WCA_WDT_IDFilterSessionstring & "," & item
-                Next
-            End If
-            Me.SaveToSession("WCA_WDT_IDFilter_Ajax", WCA_WDT_IDFilterSessionString)
-
+                  
+      Me.SaveToSession("WCA_W_U_IDFilter_Ajax", Me.WCA_W_U_IDFilter.SelectedValue)
+              
             HttpContext.Current.Session("AppRelativeVirtualPath") = Me.Page.AppRelativeVirtualPath
-
+         
         End Sub
-
+        
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
             ' Clear filter controls values from the session.
-
+        
             Me.RemoveFromSession(Me.ddlAssignTo)
-            Me.RemoveFromSession(Me.SortControl)
             Me.RemoveFromSession(Me.WCA_W_U_IDFilter)
-            Me.RemoveFromSession(Me.WCA_WDT_IDFilter)
-
+    
             ' Clear pagination state from session.
-
-
-            ' Clear table properties from the session.
-            Me.RemoveFromSession(Me, "Order_By")
-            Me.RemoveFromSession(Me, "Page_Index")
-            Me.RemoveFromSession(Me, "Page_Size")
-
-            Me.RemoveFromSession(Me, "DeletedRecordIds")
-
+         
+    
+    ' Clear table properties from the session.
+    Me.RemoveFromSession(Me, "Order_By")
+    Me.RemoveFromSession(Me, "Page_Index")
+    Me.RemoveFromSession(Me, "Page_Size")
+    
+            Me.RemoveFromSession(Me, "DeletedRecordIds")  
+            
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
             MyBase.LoadViewState(savedState)
 
             Dim orderByStr As String = CType(ViewState("WCAR_Activity1TableControl_OrderBy"), String)
-
+          
             If orderByStr IsNot Nothing AndAlso orderByStr.Trim <> "" Then
                 Me.CurrentSortOrder = BaseClasses.Data.OrderBy.FromXmlString(orderByStr)
-
-            Else
+            
+            Else 
                 Me.CurrentSortOrder = New OrderBy(True, False)
-
+            
             End If
-
-
+            
+            
             Dim Pagination As Control = Me.FindControl("")
-            Dim PaginationType As String = ""
-            If Not (Pagination Is Nothing) Then
+             Dim PaginationType As String = ""
+             If Not (Pagination Is Nothing) Then
                 Dim Summary As Control = Pagination.FindControl("_Summary")
                 If Not (Summary Is Nothing) Then
                     If (DirectCast(Summary, System.Web.UI.WebControls.TextBox).Text.Equals("Infinite Pagination")) Then
@@ -7052,998 +6566,259 @@ Public Class BaseWCAR_Activity1TableControl
                     End If
                     If (DirectCast(Summary, System.Web.UI.WebControls.TextBox).Text.Equals("Infinite Pagination Mobile")) Then
                         PaginationType = "Infinite Pagination Mobile"
-                    End If
                 End If
-            End If
+             End If
+             End If
 
-            If Not (PaginationType.Equals("Infinite Pagination")) Then
-                If Not Me.Page.ClientQueryString.Contains("InfiIframe") AndAlso PaginationType.Equals("Infinite Pagination Mobile") Then
+            If Not (PaginationType.Equals("Infinite Pagination")) Then 
+              If Not Me.Page.ClientQueryString.Contains("InfiIframe") AndAlso PaginationType.Equals("Infinite Pagination Mobile") Then
                     Me.ViewState("Page_Index") = 0
                 End If
-                Dim pageIndex As String = CType(ViewState("Page_Index"), String)
-                If pageIndex IsNot Nothing Then
-                    Me.PageIndex = CInt(pageIndex)
-                End If
+              Dim pageIndex As String = CType(ViewState("Page_Index"), String)
+              If pageIndex IsNot Nothing Then
+                Me.PageIndex = CInt(pageIndex)
+              End If
             End If
 
             Dim pageSize As String = CType(ViewState("Page_Size"), String)
             If Not pageSize Is Nothing Then
-                Me.PageSize = CInt(pageSize)
+              Me.PageSize = CInt(pageSize)
             End If
 
-
-
+            
+    
             ' Load view state for pagination control.
-
+        
             Me.DeletedRecordIds = CType(Me.ViewState("DeletedRecordIds"), String)
-
+        
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
-
+          
             If Me.CurrentSortOrder IsNot Nothing Then
                 Me.ViewState("WCAR_Activity1TableControl_OrderBy") = Me.CurrentSortOrder.ToXmlString()
             End If
-
+                      
             Me.ViewState("Page_Index") = Me.PageIndex
             Me.ViewState("Page_Size") = Me.PageSize
-
+            
             Me.ViewState("DeletedRecordIds") = Me.DeletedRecordIds
-
-
+        
+    
             ' Load view state for pagination control.
-
-
+          
+    
             Return MyBase.SaveViewState()
         End Function
-
+        
         ' Generate set method for buttons
-
-        Public Overridable Sub SetExcelButton()
-
-
+        
+        Public Overridable Sub SetbtnAssignTo()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetImportButton()
-
-            Me.ImportButton.PostBackUrl = "../Shared/SelectFileToImport.aspx?TableName=WCAR_Activity1"
-            Me.ImportButton.Attributes.Item("onClick") = "window.open('" & Me.Page.EncryptUrlParameter(Me.ImportButton.PostBackUrl) & "','importWindow', 'width=700, height=500,top=' +(screen.availHeight-500)/2 + ',left=' + (screen.availWidth-700)/2+ ', resizable=yes, scrollbars=yes,modal=yes'); return false;"
-
-
+            
+        Public Overridable Sub SetbtnAssignTo1()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetNewButton()
-
-            Try
-                Dim url As String = "../Shared/ConfigureAddRecord.aspx?TabVisible=False&SaveAndNewVisible=False"
-
-
-                url = Me.ModifyRedirectUrl(url, "", True)
-
-                url = Me.Page.ModifyRedirectUrl(url, "", True)
-
-                url = url & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup") & "&Target=" & CType(Me.Page, BaseApplicationPage).Encrypt(MiscUtils.FindControlRecursively(Me, "WCAR_Activity1TableControl_PostbackTracker").ClientID)
-
-                Dim javascriptCall As String = ""
-
-                javascriptCall = "initializePopupPage2(document.getElementById('" & MiscUtils.FindControlRecursively(Me, "WCAR_Activity1TableControl_PostbackTracker").ClientID & "'), '" & url & "', true, event);"
-
-                Me.NewButton.Attributes.Item("onClick") = javascriptCall & "return false;"
-            Catch
-                ' do nothing.  If the code above fails, server side click event, NewButton_ClickNewButton_Click will be trigger when user click the button.
-            End Try
-
-
+            
+        Public Overridable Sub SetWCAR_ActivitySearchButton()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetPDFButton()
-
-
-        End Sub
-
-        Public Overridable Sub SetResetButton()
-
-
-        End Sub
-
-        Public Overridable Sub SetWordButton()
-
-
-        End Sub
-
-        Public Overridable Sub SetbtnAssignTo()
-
-
-        End Sub
-
-        Public Overridable Sub SetActionsButton()
-
-
-        End Sub
-
-        Public Overridable Sub SetbtnAssignTo1()
-
-
-        End Sub
-
-        Public Overridable Sub SetFilterButton()
-
-
-        End Sub
-
-        Public Overridable Sub SetFiltersButton()
-
-            Dim themeButtonFiltersButton As IThemeButtonWithArrow = DirectCast(MiscUtils.FindControlRecursively(Me, "FiltersButton"), IThemeButtonWithArrow)
-            themeButtonFiltersButton.ArrowImage.ImageUrl = "../Images/ButtonExpandArrow.png"
-
-
-            If (IsValueSelected(WCA_W_U_IDFilter)) Then
-                themeButtonFiltersButton.ArrowImage.ImageUrl = "../Images/ButtonCheckmark.png"
-            End If
-
-            If (IsValueSelected(WCA_WDT_IDFilter)) Then
-                themeButtonFiltersButton.ArrowImage.ImageUrl = "../Images/ButtonCheckmark.png"
-            End If
-
-
-        End Sub
-
-        Public Overridable Sub SetWCAR_ActivitySearchButton()
-
-
-        End Sub
-
+                    
 
         ' Generate the event handling functions for pagination events.
-
+        
         ' event handler for ImageButton
         Public Overridable Sub Pagination_FirstPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                Me.PageIndex = 0
-                Me.DataChanged = True
-
+              
+    Try
+    
+            Me.PageIndex = 0
+            Me.DataChanged = True
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub Pagination_LastPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                Me.DisplayLastPage = True
-                Me.DataChanged = True
-
+              
+    Try
+    
+            Me.DisplayLastPage = True
+            Me.DataChanged = True
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub Pagination_NextPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                Me.PageIndex += 1
-                Me.DataChanged = True
-
+              
+    Try
+    
+            Me.PageIndex += 1
+            Me.DataChanged = True
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for LinkButton
         Public Overridable Sub Pagination_PageSizeButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
-                Me.DataChanged = True
-
-                Me.PageSize = Me.Pagination.GetCurrentPageSize()
-
-                Me.PageIndex = Integer.Parse(Me.Pagination.CurrentPage.Text) - 1
-
+              
+    Try
+    
+            Me.DataChanged = True
+      
+            Me.PageSize = Me.Pagination.GetCurrentPageSize()
+      
+            Me.PageIndex = Integer.Parse(Me.Pagination.CurrentPage.Text) - 1
+          
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub Pagination_PreviousPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                If Me.PageIndex > 0 Then
-                    Me.PageIndex -= 1
-                    Me.DataChanged = True
-                End If
-
+              
+    Try
+    
+            If Me.PageIndex > 0 Then
+                Me.PageIndex -= 1
+                Me.DataChanged = True
+            End If
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
 
         ' Generate the event handling functions for sorting events.
-
+        
 
         ' Generate the event handling functions for button events.
-
-        ' event handler for ImageButton
-        Public Overridable Sub ExcelButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                ' To customize the columns or the format, override this function in Section 1 of the page 
-                ' and modify it to your liking.
-                ' Build the where clause based on the current filter and search criteria
-                ' Create the Order By clause based on the user's current sorting preference.
-
-                Dim wc As WhereClause = CreateWhereClause
-                Dim orderBy As OrderBy = Nothing
-
-                orderBy = CreateOrderBy
-
-                Dim done As Boolean = False
-                Dim val As Object = ""
-                ' Read pageSize records at a time and write out the Excel file.
-                Dim totalRowsReturned As Integer = 0
-
-                Dim join As CompoundFilter = CreateCompoundJoinFilter()
-                Me.TotalRecords = WCAR_Activity1Table.GetRecordCount(join, wc)
-                If Me.TotalRecords > 10000 Then
-
-                    ' Add each of the columns in order of export.
-                    Dim columns() As BaseColumn = New BaseColumn() { _
-                               WCAR_Activity1Table.WCA_ID, _
-                   WCAR_Activity1Table.WCA_WS_ID, _
-                   WCAR_Activity1Table.WCA_WDT_ID, _
-                   WCAR_Activity1Table.WCA_W_U_ID, _
-                   WCAR_Activity1Table.WCA_WCD_ID, _
-                   WCAR_Activity1Table.WCA_Status, _
-                   WCAR_Activity1Table.WCA_Date_Assign, _
-                   WCAR_Activity1Table.WCA_Remark, _
-                   Nothing}
-                    Dim exportData As ExportDataToCSV = New ExportDataToCSV(WCAR_Activity1Table.Instance, wc, orderBy, columns)
-                    exportData.StartExport(Me.Page.Response, True)
-
-                    Dim dataForCSV As DataForExport = New DataForExport(WCAR_Activity1Table.Instance, wc, orderBy, columns, join)
-
-                    '  Read pageSize records at a time and write out the CSV file.
-                    While (Not done)
-                        Dim recList As ArrayList = dataForCSV.GetRows(exportData.pageSize)
-                        If recList Is Nothing Then
-                            Exit While 'no more records we are done
-                        End If
-
-                        totalRowsReturned = recList.Count
-                        For Each rec As BaseRecord In recList
-                            For Each col As BaseColumn In dataForCSV.ColumnList
-                                If col Is Nothing Then
-                                    Continue For
-                                End If
-
-                                If Not dataForCSV.IncludeInExport(col) Then
-                                    Continue For
-                                End If
-
-                                val = rec.GetValue(col).ToString()
-                                exportData.WriteColumnData(val, dataForCSV.IsString(col))
-
-                            Next col
-                            exportData.WriteNewRow()
-                        Next rec
-
-                        '  If we already are below the pageSize, then we are done.
-                        If totalRowsReturned < exportData.pageSize Then
-                            done = True
-                        End If
-                    End While
-                    exportData.FinishExport(Me.Page.Response)
-                Else
-
-                    ' Create an instance of the Excel report class with the table class, where clause and order by.
-                    Dim excelReport As ExportDataToExcel = New ExportDataToExcel(WCAR_Activity1Table.Instance, wc, orderBy)
-                    ' Add each of the columns in order of export.
-                    ' To customize the data type, change the second parameter of the new ExcelColumn to be
-                    ' a format string from Excel's Format Cell menu. For example "dddd, mmmm dd, yyyy h:mm AM/PM;@", "#,##0.00"
-
-                    If Me.Page.Response Is Nothing Then
-                        Return
-                    End If
-
-                    excelReport.CreateExcelBook()
-
-                    Dim width As Integer = 0
-                    Dim columnCounter As Integer = 0
-                    Dim data As DataForExport = New DataForExport(WCAR_Activity1Table.Instance, wc, orderBy, Nothing, join)
-                    data.ColumnList.Add(New ExcelColumn(WCAR_Activity1Table.WCA_ID, "0"))
-                    data.ColumnList.Add(New ExcelColumn(WCAR_Activity1Table.WCA_WS_ID, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(WCAR_Activity1Table.WCA_WDT_ID, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(WCAR_Activity1Table.WCA_W_U_ID, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(WCAR_Activity1Table.WCA_WCD_ID, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(WCAR_Activity1Table.WCA_Status, "Default"))
-                    data.ColumnList.Add(New ExcelColumn(WCAR_Activity1Table.WCA_Date_Assign, "Short Date"))
-                    data.ColumnList.Add(New ExcelColumn(WCAR_Activity1Table.WCA_Remark, "Default"))
-
-
-                    For Each col As ExcelColumn In data.ColumnList
-                        width = excelReport.GetExcelCellWidth(col)
-                        If data.IncludeInExport(col) Then
-                            excelReport.AddColumnToExcelBook(columnCounter, col.ToString(), excelReport.GetExcelDataType(col), width, excelReport.GetDisplayFormat(col))
-                            columnCounter = columnCounter + 1
-                        End If
-                    Next col
-
-                    While (Not done)
-                        Dim recList As ArrayList = data.GetRows(excelReport.pageSize)
-
-                        If recList Is Nothing Then
-                            Exit While 'no more records we are done
-                        End If
-
-                        totalRowsReturned = recList.Count
-
-                        For Each rec As BaseRecord In recList
-                            excelReport.AddRowToExcelBook()
-                            columnCounter = 0
-
-                            For Each col As ExcelColumn In data.ColumnList
-                                If Not data.IncludeInExport(col) Then
-                                    Continue For
-                                End If
-
-                                Dim _isExpandableNonCompositeForeignKey As Boolean = col.DisplayColumn.TableDefinition.IsExpandableNonCompositeForeignKey(col.DisplayColumn)
-                                If _isExpandableNonCompositeForeignKey AndAlso col.DisplayColumn.IsApplyDisplayAs Then
-                                    val = WCAR_Activity1Table.GetDFKA(rec.GetValue(col.DisplayColumn).ToString(), col.DisplayColumn, Nothing)
-                                    If val Is Nothing Then
-                                        val = rec.Format(col.DisplayColumn)
-                                    End If
-                                Else
-                                    val = excelReport.GetValueForExcelExport(col, rec)
-                                End If
-                                excelReport.AddCellToExcelRow(columnCounter, excelReport.GetExcelDataType(col), val, col.DisplayFormat)
-
-                                columnCounter = columnCounter + 1
-                            Next col
-                        Next rec
-
-                        ' If we already are below the pageSize, then we are done.
-                        If totalRowsReturned < excelReport.pageSize Then
-                            done = True
-                        End If
-                    End While
-
-                    excelReport.SaveExcelBook(Me.Page.Response)
-                End If
-
-            Catch ex As Exception
-
-                ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
-            Finally
-                DbUtils.EndTransaction()
-            End Try
-
-        End Sub
-
-        ' event handler for ImageButton
-        Public Overridable Sub ImportButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-            Catch ex As Exception
-
-                ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
-            Finally
-                DbUtils.EndTransaction()
-            End Try
-
-        End Sub
-
-        ' event handler for ImageButton
-        Public Overridable Sub NewButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            ' The redirect URL is set on the Properties, Custom Properties or Actions.
-            ' The ModifyRedirectURL call resolves the parameters before the
-            ' Response.Redirect redirects the page to the URL.  
-            ' Any code after the Response.Redirect call will not be executed, since the page is
-            ' redirected to the URL.
-
-
-            Dim url As String = "../Shared/ConfigureAddRecord.aspx?TabVisible=False&SaveAndNewVisible=False"
-
-            If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
-
-            Dim shouldRedirect As Boolean = True
-            Dim target As String = ""
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                url = Me.ModifyRedirectUrl(url, "", True)
-                url = Me.Page.ModifyRedirectUrl(url, "", True)
-
-            Catch ex As Exception
-
-                ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                shouldRedirect = False
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
-            Finally
-                DbUtils.EndTransaction()
-            End Try
-            If shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-
-                url = url & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup") & "&Target=" & CType(Me.Page, BaseApplicationPage).Encrypt(MiscUtils.FindControlRecursively(Me, "WCAR_Activity1TableControl_PostbackTracker").ClientID)
-
-                Dim javascriptCall As String = ""
-
-                javascriptCall = "initializePopupPage2(document.getElementById('" & MiscUtils.FindControlRecursively(Me, "WCAR_Activity1TableControl_PostbackTracker").ClientID & "'), '" & url & "', true, event);"
-                AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "NewButton_Click", javascriptCall, True)
-
-            End If
-        End Sub
-
-        ' event handler for ImageButton
-        Public Overridable Sub PDFButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                Dim report As PDFReport = New PDFReport()
-                report.SpecificReportFileName = Page.Server.MapPath("Show-WCAR-Activity-Table1.PDFButton.report")
-                ' report.Title replaces the value tag of page header and footer containing ${ReportTitle}
-                report.Title = "WCAR_Activity"
-                ' If Show-WCAR-Activity-Table1.PDFButton.report specifies a valid report template,
-                ' AddColumn method will generate a report template.   
-                ' Each AddColumn method-call specifies a column
-                ' The 1st parameter represents the text of the column header
-                ' The 2nd parameter represents the horizontal alignment of the column header
-                ' The 3rd parameter represents the text format of the column detail
-                ' The 4th parameter represents the horizontal alignment of the column detail
-                ' The 5th parameter represents the relative width of the column   			
-                report.AddColumn(WCAR_Activity1Table.WCA_ID.Name, ReportEnum.Align.Right, "${WCA_ID}", ReportEnum.Align.Right, 15)
-                report.AddColumn(WCAR_Activity1Table.WCA_WS_ID.Name, ReportEnum.Align.Left, "${WCA_WS_ID}", ReportEnum.Align.Left, 28)
-                report.AddColumn(WCAR_Activity1Table.WCA_WDT_ID.Name, ReportEnum.Align.Left, "${WCA_WDT_ID}", ReportEnum.Align.Left, 28)
-                report.AddColumn(WCAR_Activity1Table.WCA_W_U_ID.Name, ReportEnum.Align.Left, "${WCA_W_U_ID}", ReportEnum.Align.Left, 22)
-                report.AddColumn(WCAR_Activity1Table.WCA_WCD_ID.Name, ReportEnum.Align.Left, "${WCA_WCD_ID}", ReportEnum.Align.Left, 28)
-                report.AddColumn(WCAR_Activity1Table.WCA_Status.Name, ReportEnum.Align.Left, "${WCA_Status}", ReportEnum.Align.Left, 28)
-                report.AddColumn(WCAR_Activity1Table.WCA_Date_Assign.Name, ReportEnum.Align.Left, "${WCA_Date_Assign}", ReportEnum.Align.Left, 20)
-                report.AddColumn(WCAR_Activity1Table.WCA_Remark.Name, ReportEnum.Align.Left, "${WCA_Remark}", ReportEnum.Align.Left, 28)
-
-
-                Dim rowsPerQuery As Integer = 5000
-                Dim recordCount As Integer = 0
-
-                report.Page = Page.GetResourceValue("Txt:Page", "ePortalWFApproval")
-                report.ApplicationPath = Me.Page.MapPath(Page.Request.ApplicationPath)
-
-                Dim whereClause As WhereClause = CreateWhereClause
-                Dim orderBy As OrderBy = CreateOrderBy
-                Dim joinFilter As BaseFilter = CreateCompoundJoinFilter()
-
-                Dim pageNum As Integer = 0
-                Dim totalRows As Integer = WCAR_Activity1Table.GetRecordCount(joinFilter, whereClause)
-                Dim columns As ColumnList = WCAR_Activity1Table.GetColumnList()
-                Dim records As WCAR_Activity1Record() = Nothing
-
-                Do
-
-                    records = WCAR_Activity1Table.GetRecords(joinFilter, whereClause, orderBy, pageNum, rowsPerQuery)
-                    If Not (records Is Nothing) AndAlso records.Length > 0 AndAlso whereClause.RunQuery Then
-                        For Each record As WCAR_Activity1Record In records
-
-                            ' AddData method takes four parameters   
-                            ' The 1st parameters represent the data format
-                            ' The 2nd parameters represent the data value
-                            ' The 3rd parameters represent the default alignment of column using the data
-                            ' The 4th parameters represent the maximum length of the data value being shown
-                            report.AddData("${WCA_ID}", record.Format(WCAR_Activity1Table.WCA_ID), ReportEnum.Align.Right, 300)
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WCA_WS_ID) Then
-                                report.AddData("${WCA_WS_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = WCAR_Activity1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Activity1Table.WCA_WS_ID)
-                                _DFKA = WCAR_Activity1Table.GetDFKA(record.WCA_WS_ID.ToString(), WCAR_Activity1Table.WCA_WS_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso WCAR_Activity1Table.WCA_WS_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WCA_WS_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WCA_WS_ID}", record.Format(WCAR_Activity1Table.WCA_WS_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WCA_WDT_ID) Then
-                                report.AddData("${WCA_WDT_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = WCAR_Activity1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Activity1Table.WCA_WDT_ID)
-                                _DFKA = WCAR_Activity1Table.GetDFKA(record.WCA_WDT_ID.ToString(), WCAR_Activity1Table.WCA_WDT_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso WCAR_Activity1Table.WCA_WDT_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WCA_WDT_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WCA_WDT_ID}", record.Format(WCAR_Activity1Table.WCA_WDT_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WCA_W_U_ID) Then
-                                report.AddData("${WCA_W_U_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = WCAR_Activity1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Activity1Table.WCA_W_U_ID)
-                                _DFKA = WCAR_Activity1Table.GetDFKA(record.WCA_W_U_ID.ToString(), WCAR_Activity1Table.WCA_W_U_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso WCAR_Activity1Table.WCA_W_U_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WCA_W_U_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WCA_W_U_ID}", record.Format(WCAR_Activity1Table.WCA_W_U_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WCA_WCD_ID) Then
-                                report.AddData("${WCA_WCD_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = WCAR_Activity1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Activity1Table.WCA_WCD_ID)
-                                _DFKA = WCAR_Activity1Table.GetDFKA(record.WCA_WCD_ID.ToString(), WCAR_Activity1Table.WCA_WCD_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso WCAR_Activity1Table.WCA_WCD_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WCA_WCD_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WCA_WCD_ID}", record.Format(WCAR_Activity1Table.WCA_WCD_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            report.AddData("${WCA_Status}", record.Format(WCAR_Activity1Table.WCA_Status), ReportEnum.Align.Left, 300)
-                            report.AddData("${WCA_Date_Assign}", record.Format(WCAR_Activity1Table.WCA_Date_Assign), ReportEnum.Align.Left, 300)
-                            report.AddData("${WCA_Remark}", record.Format(WCAR_Activity1Table.WCA_Remark), ReportEnum.Align.Left, 300)
-
-                            report.WriteRow()
-                        Next
-                        pageNum = pageNum + 1
-                        recordCount += records.Length
-                    End If
-                Loop While Not (records Is Nothing) AndAlso recordCount < totalRows AndAlso whereClause.RunQuery
-
-                report.Close()
-                BaseClasses.Utils.NetUtils.WriteResponseBinaryAttachment(Me.Page.Response, report.Title + ".pdf", report.ReportInByteArray, 0, True)
-
-            Catch ex As Exception
-
-                ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
-            Finally
-                DbUtils.EndTransaction()
-            End Try
-
-        End Sub
-
-        ' event handler for ImageButton
-        Public Overridable Sub ResetButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                Me.WCA_W_U_IDFilter.ClearSelection()
-                Me.WCA_WDT_IDFilter.ClearSelection()
-                Me.ddlAssignTo.ClearSelection()
-                Me.SortControl.ClearSelection()
-                Me.CurrentSortOrder.Reset()
-                If Me.InSession(Me, "Order_By") Then
-                    Me.CurrentSortOrder = OrderBy.FromXmlString(Me.GetFromSession(Me, "Order_By", Nothing))
-                Else
-                    Me.CurrentSortOrder = New OrderBy(True, False)
-
-
-                End If
-
-
-                ' Setting the DataChanged to True results in the page being refreshed with
-                ' the most recent data from the database.  This happens in PreRender event
-                ' based on the current sort, search and filter criteria.
-                Me.DataChanged = True
-
-            Catch ex As Exception
-
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
-            Finally
-
-            End Try
-
-        End Sub
-
-        ' event handler for ImageButton
-        Public Overridable Sub WordButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                Dim report As WordReport = New WordReport
-                report.SpecificReportFileName = Page.Server.MapPath("Show-WCAR-Activity-Table1.WordButton.word")
-                ' report.Title replaces the value tag of page header and footer containing ${ReportTitle}
-                report.Title = "WCAR_Activity"
-                ' If Show-WCAR-Activity-Table1.WordButton.report specifies a valid report template,
-                ' AddColumn method will generate a report template.
-                ' Each AddColumn method-call specifies a column
-                ' The 1st parameter represents the text of the column header
-                ' The 2nd parameter represents the horizontal alignment of the column header
-                ' The 3rd parameter represents the text format of the column detail
-                ' The 4th parameter represents the horizontal alignment of the column detail
-                ' The 5th parameter represents the relative width of the column
-                report.AddColumn(WCAR_Activity1Table.WCA_ID.Name, ReportEnum.Align.Right, "${WCA_ID}", ReportEnum.Align.Right, 15)
-                report.AddColumn(WCAR_Activity1Table.WCA_WS_ID.Name, ReportEnum.Align.Left, "${WCA_WS_ID}", ReportEnum.Align.Left, 28)
-                report.AddColumn(WCAR_Activity1Table.WCA_WDT_ID.Name, ReportEnum.Align.Left, "${WCA_WDT_ID}", ReportEnum.Align.Left, 28)
-                report.AddColumn(WCAR_Activity1Table.WCA_W_U_ID.Name, ReportEnum.Align.Left, "${WCA_W_U_ID}", ReportEnum.Align.Left, 22)
-                report.AddColumn(WCAR_Activity1Table.WCA_WCD_ID.Name, ReportEnum.Align.Left, "${WCA_WCD_ID}", ReportEnum.Align.Left, 28)
-                report.AddColumn(WCAR_Activity1Table.WCA_Status.Name, ReportEnum.Align.Left, "${WCA_Status}", ReportEnum.Align.Left, 28)
-                report.AddColumn(WCAR_Activity1Table.WCA_Date_Assign.Name, ReportEnum.Align.Left, "${WCA_Date_Assign}", ReportEnum.Align.Left, 20)
-                report.AddColumn(WCAR_Activity1Table.WCA_Remark.Name, ReportEnum.Align.Left, "${WCA_Remark}", ReportEnum.Align.Left, 28)
-
-                Dim whereClause As WhereClause = CreateWhereClause
-
-                Dim orderBy As OrderBy = CreateOrderBy
-                Dim joinFilter As BaseFilter = CreateCompoundJoinFilter()
-
-                Dim rowsPerQuery As Integer = 5000
-                Dim pageNum As Integer = 0
-                Dim recordCount As Integer = 0
-                Dim totalRows As Integer = WCAR_Activity1Table.GetRecordCount(joinFilter, whereClause)
-
-                report.Page = Page.GetResourceValue("Txt:Page", "ePortalWFApproval")
-                report.ApplicationPath = Me.Page.MapPath(Page.Request.ApplicationPath)
-
-                Dim columns As ColumnList = WCAR_Activity1Table.GetColumnList()
-                Dim records As WCAR_Activity1Record() = Nothing
-                Do
-                    records = WCAR_Activity1Table.GetRecords(joinFilter, whereClause, orderBy, pageNum, rowsPerQuery)
-
-                    If Not (records Is Nothing) AndAlso records.Length > 0 AndAlso whereClause.RunQuery Then
-                        For Each record As WCAR_Activity1Record In records
-                            ' AddData method takes four parameters
-                            ' The 1st parameters represent the data format
-                            ' The 2nd parameters represent the data value
-                            ' The 3rd parameters represent the default alignment of column using the data
-                            ' The 4th parameters represent the maximum length of the data value being shown
-                            report.AddData("${WCA_ID}", record.Format(WCAR_Activity1Table.WCA_ID), ReportEnum.Align.Right, 300)
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WCA_WS_ID) Then
-                                report.AddData("${WCA_WS_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = WCAR_Activity1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Activity1Table.WCA_WS_ID)
-                                _DFKA = WCAR_Activity1Table.GetDFKA(record.WCA_WS_ID.ToString(), WCAR_Activity1Table.WCA_WS_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso WCAR_Activity1Table.WCA_WS_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WCA_WS_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WCA_WS_ID}", record.Format(WCAR_Activity1Table.WCA_WS_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WCA_WDT_ID) Then
-                                report.AddData("${WCA_WDT_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = WCAR_Activity1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Activity1Table.WCA_WDT_ID)
-                                _DFKA = WCAR_Activity1Table.GetDFKA(record.WCA_WDT_ID.ToString(), WCAR_Activity1Table.WCA_WDT_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso WCAR_Activity1Table.WCA_WDT_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WCA_WDT_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WCA_WDT_ID}", record.Format(WCAR_Activity1Table.WCA_WDT_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WCA_W_U_ID) Then
-                                report.AddData("${WCA_W_U_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = WCAR_Activity1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Activity1Table.WCA_W_U_ID)
-                                _DFKA = WCAR_Activity1Table.GetDFKA(record.WCA_W_U_ID.ToString(), WCAR_Activity1Table.WCA_W_U_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso WCAR_Activity1Table.WCA_W_U_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WCA_W_U_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WCA_W_U_ID}", record.Format(WCAR_Activity1Table.WCA_W_U_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            If BaseClasses.Utils.MiscUtils.IsNull(record.WCA_WCD_ID) Then
-                                report.AddData("${WCA_WCD_ID}", "", ReportEnum.Align.Left, 300)
-                            Else
-                                Dim _isExpandableNonCompositeForeignKey As Boolean
-                                Dim _DFKA As String = ""
-                                _isExpandableNonCompositeForeignKey = WCAR_Activity1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Activity1Table.WCA_WCD_ID)
-                                _DFKA = WCAR_Activity1Table.GetDFKA(record.WCA_WCD_ID.ToString(), WCAR_Activity1Table.WCA_WCD_ID, Nothing)
-                                If _isExpandableNonCompositeForeignKey AndAlso (Not _DFKA Is Nothing) AndAlso WCAR_Activity1Table.WCA_WCD_ID.IsApplyDisplayAs Then
-                                    report.AddData("${WCA_WCD_ID}", _DFKA, ReportEnum.Align.Left, 300)
-                                Else
-                                    report.AddData("${WCA_WCD_ID}", record.Format(WCAR_Activity1Table.WCA_WCD_ID), ReportEnum.Align.Left, 300)
-                                End If
-                            End If
-                            report.AddData("${WCA_Status}", record.Format(WCAR_Activity1Table.WCA_Status), ReportEnum.Align.Left, 300)
-                            report.AddData("${WCA_Date_Assign}", record.Format(WCAR_Activity1Table.WCA_Date_Assign), ReportEnum.Align.Left, 300)
-                            report.AddData("${WCA_Remark}", record.Format(WCAR_Activity1Table.WCA_Remark), ReportEnum.Align.Left, 300)
-
-                            report.WriteRow()
-                        Next
-                        pageNum = pageNum + 1
-                        recordCount += records.Length
-                    End If
-                Loop While Not (records Is Nothing) AndAlso recordCount < totalRows AndAlso whereClause.RunQuery
-                report.save()
-                BaseClasses.Utils.NetUtils.WriteResponseBinaryAttachment(Me.Page.Response, report.Title + ".doc", report.ReportInByteArray, 0, True)
-
-            Catch ex As Exception
-
-                ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
-            Finally
-                DbUtils.EndTransaction()
-            End Try
-
-        End Sub
-
+        
         ' event handler for PushButton
         Public Overridable Sub btnAssignTo_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
-        ' event handler for Button
-        Public Overridable Sub ActionsButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
-                'This method is initially empty to implement custom click handler.
-
-            Catch ex As Exception
-
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
-            Finally
-
-            End Try
-
-        End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub btnAssignTo1_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
-        ' event handler for Button
-        Public Overridable Sub FilterButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
-                Me.DataChanged = True
-
-            Catch ex As Exception
-
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
-            Finally
-
-            End Try
-
-        End Sub
-
-        ' event handler for Button
-        Public Overridable Sub FiltersButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
-                'This method is initially empty to implement custom click handler.
-
-            Catch ex As Exception
-
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
-            Finally
-
-            End Try
-
-        End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub WCAR_ActivitySearchButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
-                Me.DataChanged = True
-
+              
+    Try
+    
+          Me.DataChanged = True
+          
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
-
+        
+      
 
         ' Generate the event handling functions for filter and search events.
-
+        
         ' event handler for Aspx
         Protected Overridable Sub ddlAssignTo_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-            ' Setting the DataChanged to True results in the page being refreshed with
-            ' the most recent data from the database.  This happens in PreRender event
-            ' based on the current sort, search and filter criteria.
-            Me.DataChanged = True
-
+        
+           ' Setting the DataChanged to True results in the page being refreshed with
+           ' the most recent data from the database.  This happens in PreRender event
+           ' based on the current sort, search and filter criteria.
+           Me.DataChanged = True
+              	   
         End Sub
-
-        ' event handler for OrderSort
-        Protected Overridable Sub SortControl_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-            Dim SelVal1 As String = Me.SortControl.SelectedValue.ToUpper()
-            Dim words1() As String = Split(SelVal1)
-            If SelVal1 <> "" Then
-                SelVal1 = SelVal1.Replace(words1(words1.Length() - 1), "").TrimEnd()
-                For Each ColumnNam As BaseClasses.Data.BaseColumn In WCAR_Activity1Table.GetColumns()
-                    If ColumnNam.Name.ToUpper = SelVal1 Then
-                        SelVal1 = ColumnNam.InternalName.ToString
-                    End If
-                Next
-            End If
-
-            Dim sd As OrderByItem = Me.CurrentSortOrder.Find(WCAR_Activity1Table.GetColumnByName(SelVal1))
-            If sd Is Nothing Or Not Me.CurrentSortOrder.Items Is Nothing Then
-                'First time sort, so add sort order for Discontinued.
-                If Not WCAR_Activity1Table.GetColumnByName(SelVal1) Is Nothing Then
-                    Me.CurrentSortOrder.Reset()
-                End If
-                'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
-                If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
-
-
-                If SelVal1 <> "--PLEASE_SELECT--" AndAlso Not WCAR_Activity1Table.GetColumnByName(SelVal1) Is Nothing Then
-                    If words1(words1.Length() - 1).Contains("ASC") Then
-                        Me.CurrentSortOrder.Add(WCAR_Activity1Table.GetColumnByName(SelVal1), OrderByItem.OrderDir.Asc)
-                    ElseIf words1(words1.Length() - 1).Contains("DESC") Then
-                        Me.CurrentSortOrder.Add(WCAR_Activity1Table.GetColumnByName(SelVal1), OrderByItem.OrderDir.Desc)
-                    End If
-                End If
-
-
-            End If
-            Me.DataChanged = True
-
-
-        End Sub
-
+            
         ' event handler for FieldFilter
         Protected Overridable Sub WCA_W_U_IDFilter_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-            ' Setting the DataChanged to True results in the page being refreshed with
-            ' the most recent data from the database.  This happens in PreRender event
-            ' based on the current sort, search and filter criteria.
-            Me.DataChanged = True
-
-
-
-        End Sub
-
-        ' event handler for FieldFilter
-        Protected Overridable Sub WCA_WDT_IDFilter_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
            ' Setting the DataChanged to True results in the page being refreshed with
            ' the most recent data from the database.  This happens in PreRender event
            ' based on the current sort, search and filter criteria.
@@ -8127,12 +6902,6 @@ Public Class BaseWCAR_Activity1TableControl
        
 #Region "Helper Properties"
         
-        Public ReadOnly Property ActionsButton() As ePortalWFApproval.UI.IThemeButtonWithArrow
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ActionsButton"), ePortalWFApproval.UI.IThemeButtonWithArrow)
-          End Get
-          End Property
-        
         Public ReadOnly Property btnAssignTo() As System.Web.UI.WebControls.Button
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnAssignTo"), System.Web.UI.WebControls.Button)
@@ -8148,30 +6917,6 @@ Public Class BaseWCAR_Activity1TableControl
         Public ReadOnly Property ddlAssignTo() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlAssignTo"), System.Web.UI.WebControls.DropDownList)
-            End Get
-        End Property
-        
-        Public ReadOnly Property ExcelButton() As System.Web.UI.WebControls.ImageButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ExcelButton"), System.Web.UI.WebControls.ImageButton)
-            End Get
-        End Property
-        
-        Public ReadOnly Property FilterButton() As ePortalWFApproval.UI.IThemeButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "FilterButton"), ePortalWFApproval.UI.IThemeButton)
-          End Get
-          End Property
-        
-        Public ReadOnly Property FiltersButton() As ePortalWFApproval.UI.IThemeButtonWithArrow
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "FiltersButton"), ePortalWFApproval.UI.IThemeButtonWithArrow)
-          End Get
-          End Property
-        
-        Public ReadOnly Property ImportButton() As System.Web.UI.WebControls.ImageButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ImportButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
         
@@ -8199,39 +6944,9 @@ Public Class BaseWCAR_Activity1TableControl
             End Get
         End Property
         
-        Public ReadOnly Property NewButton() As System.Web.UI.WebControls.ImageButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "NewButton"), System.Web.UI.WebControls.ImageButton)
-            End Get
-        End Property
-        
         Public ReadOnly Property Pagination() As ePortalWFApproval.UI.IPaginationModern
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Pagination"), ePortalWFApproval.UI.IPaginationModern)
-          End Get
-          End Property
-        
-        Public ReadOnly Property PDFButton() As System.Web.UI.WebControls.ImageButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "PDFButton"), System.Web.UI.WebControls.ImageButton)
-            End Get
-        End Property
-        
-        Public ReadOnly Property ResetButton() As System.Web.UI.WebControls.ImageButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ResetButton"), System.Web.UI.WebControls.ImageButton)
-            End Get
-        End Property
-        
-        Public ReadOnly Property SortByLabel() As System.Web.UI.WebControls.Label
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SortByLabel"), System.Web.UI.WebControls.Label)
-            End Get
-        End Property
-        
-          Public ReadOnly Property SortControl() As System.Web.UI.WebControls.DropDownList
-          Get
-          Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SortControl"), System.Web.UI.WebControls.DropDownList)
           End Get
           End Property
         
@@ -8283,21 +6998,9 @@ Public Class BaseWCAR_Activity1TableControl
             End Get
         End Property
         
-        Public ReadOnly Property WCA_WDT_IDFilter() As BaseClasses.Web.UI.WebControls.QuickSelector
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCA_WDT_IDFilter"), BaseClasses.Web.UI.WebControls.QuickSelector)
-            End Get
-        End Property
-        
         Public ReadOnly Property WCA_WDT_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCA_WDT_IDLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property WCA_WDT_IDLabel1() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCA_WDT_IDLabel1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
         
@@ -8319,12 +7022,6 @@ Public Class BaseWCAR_Activity1TableControl
             End Get
         End Property
             
-        Public ReadOnly Property WordButton() As System.Web.UI.WebControls.ImageButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WordButton"), System.Web.UI.WebControls.ImageButton)
-            End Get
-        End Property
-        
 #End Region
 
 #Region "Helper Functions"
