@@ -45,7 +45,15 @@ Public Class WCAR_Doc_Attach1TableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
-        
+
+
+
+        Public Overrides Function CreateWhereClause_WCDA_WAT_IDDropDownList() As WhereClause
+            Dim wc As WhereClause = New WhereClause()
+            wc.iAND(WAttach_Type1Table.WAT_Operation, BaseFilter.ComparisonOperator.EqualsTo, "CAR")
+            Return wc
+        End Function
+
 
 End Class
 
@@ -72,6 +80,231 @@ Public Class WCAR_Doc_Checker1TableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
+
+
+        Protected Overrides Sub PopulateWCDC_U_IDDropDownList( _
+           ByVal selectedValue As String, _
+           ByVal maxItems As Integer)
+
+            Dim wc As WhereClause = New WhereClause 'CreateWhereClause_WCDC_U_IDDropDownList()
+            Dim orderBy As OrderBy = New OrderBy(False, True)
+            orderBy.Add(Sel_WASP_WF_Creator1View.W_U_Full_Name, OrderByItem.OrderDir.Asc)
+            'orderBy.Add(Sel_WASS_WF_CreatorView.SSU_FullName, OrderByItem.OrderDir.Asc)
+            Me.WCDC_U_ID.Items.Clear()
+            Dim itemValue As Sel_WASP_WF_Creator1Record
+            'Dim itemValue As Sel_WASS_WF_CreatorRecord
+            For Each itemValue In Sel_WASP_WF_Creator1View.GetRecords(wc, orderBy, 0, maxItems)
+                'For Each itemValue In Sel_WASS_WF_CreatorView.GetRecords(wc, orderBy, 0, maxItems)
+                ' Create the item and add to the list.
+                Dim cvalue As String = Nothing
+                Dim fvalue As String = Nothing
+                If itemValue.W_U_IDSpecified Then
+                    cvalue = itemValue.W_U_ID.ToString()
+                    fvalue = itemValue.W_U_Full_Name.ToString()
+                End If
+                'If itemValue.SSU_RowIDSpecified Then
+                '    cvalue = itemValue.SSU_RowID.ToString()
+                '    fvalue = itemValue.SSU_FullName.ToString()
+                'End If
+                Dim item As ListItem = New ListItem(fvalue, cvalue)
+                If cvalue <> System.Web.HttpContext.Current.Session("UserIDNorth").ToString() Then
+                    Me.WCDC_U_ID.Items.Add(item)
+                End If
+            Next
+
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.WCDC_U_ID, selectedValue) AndAlso _
+                Not MiscUtils.SetSelectedValue(Me.WCDC_U_ID, WCAR_Doc_Checker1Table.WCDC_U_ID.Format(selectedValue)) Then
+                Dim fvalue As String = WCAR_Doc_Checker1Table.WCDC_U_ID.Format(selectedValue)
+                Dim item As ListItem = New ListItem(fvalue, selectedValue)
+                item.Selected = True
+                Me.WCDC_U_ID.Items.Insert(0, item)
+            End If
+
+            Me.WCDC_U_ID.Items.Insert(0, New ListItem(Page.GetResourceValue("** PLEASE SELECT **", "EPORTAL CAR"), "--PLEASE_SELECT--"))
+        End Sub
+
+        Public Overrides Sub SaveData()
+
+            Me.LoadData()
+
+            ' The checksum is used to ensure the record was not changed by another user.
+            If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
+                If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
+                    Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "EPORTAL"))
+                End If
+            End If
+
+            Dim wCAR_DocRecordControlObj As WCAR_Doc1RecordControl
+
+
+            wCAR_DocRecordControlObj = DirectCast(Me.Page.FindControlRecursively("WCAR_Doc1RecordControl"), WCAR_Doc1RecordControl)
+            If (Not IsNothing(wCAR_DocRecordControlObj) AndAlso IsNothing(wCAR_DocRecordControlObj.DataSource)) Then
+                ' Load the record if it is not loaded yet.
+                wCAR_DocRecordControlObj.LoadData()
+            End If
+            If (IsNothing(wCAR_DocRecordControlObj) OrElse IsNothing(wCAR_DocRecordControlObj.DataSource)) Then
+                ' Get the error message from the application resource file.
+                Throw New Exception(Page.GetResourceValue("Err:NoParentRecId", "EPORTAL"))
+            End If
+
+            Me.DataSource.WCDC_WCD_ID = wCAR_DocRecordControlObj.DataSource.WCD_ID
+
+            ' 2. Perform any custom validation.
+            Me.Validate()
+
+            ' 3. Set the values in the record with data from UI controls.
+            ' This calls the Get() method for each of the user interface controls.
+            Me.GetUIData()
+
+            ' 4. Save in the database.
+            ' We should not save the record if the data did not change. This
+            ' will save a database hit and avoid triggering any database triggers.
+            If Me.DataSource.IsAnyValueChanged Then
+                ' Save record to database but do not commit yet.
+                ' Auto generated ids are available after saving for use by child (dependent) records.
+                Me.DataSource.Save()
+                'note: send email to added co-requester(s)			
+
+                Send_Email_Notification(Me.WCDC_U_ID.SelectedValue.ToString(), _
+                "CAR Concurrence Needed (CAR# " & wCAR_DocRecordControlObj.WCD_No.Text & ")", wCAR_DocRecordControlObj.sEmailContentForm)
+
+                DirectCast(GetParentControlObject(Me, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl).DataChanged = True
+                DirectCast(GetParentControlObject(Me, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl).ResetData = True
+            End If
+            ' Setting the DataChanged to True results in the page being refreshed with
+            ' the most recent data from the database.  This happens in PreRender event
+            ' based on the current sort, search and filter criteria.
+            Me.DataChanged = True
+            Me.ResetData = True
+
+            Me.CheckSum = ""
+            ' For Master-Detail relationships, save data on the Detail table(s)
+
+        End Sub
+
+        Private Sub Send_Email_Notification(ByVal SendTo_User_ID As String, ByVal Subject As String, ByVal Content As String)
+            Dim sEmail As String = ""
+
+            Try
+
+                'Dim wc2 As WhereClause = New WhereClause
+                'Dim itemValue2 As Sel_SysSetupUsers_EmailRecord
+                'wc2.iAND(Sel_SysSetupUsers_EmailView.SSU_RowID, BaseFilter.ComparisonOperator.EqualsTo, SendTo_User_ID)
+
+                'If Sel_SysSetupUsers_EmailView.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+                '    For Each itemValue2 In Sel_SysSetupUsers_EmailView.GetRecords(wc2, Nothing, 0, 100)
+                '        If itemValue2.SSU_RowIDSpecified Then
+                '            sEmail = itemValue2.SSUE_Email.ToString()
+                '        End If
+                '    Next
+                'End If
+
+                Dim wc2 As WhereClause = New WhereClause
+                Dim itemValue2 As W_User1Record
+                wc2.iAND(W_User1Table.W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, SendTo_User_ID)
+
+                If W_User1Table.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+                    For Each itemValue2 In W_User1Table.GetRecords(wc2, Nothing, 0, 100)
+                        If itemValue2.W_U_IDSpecified Then
+                            sEmail = itemValue2.W_U_Email.ToString()
+                        End If
+                    Next
+                End If
+
+
+                Dim email As New BaseClasses.Utils.MailSender
+
+                email.AddFrom("noreply@anflocor.com")
+                email.AddTo(sEmail)
+                email.SetSubject(Subject)
+                email.SetContent(Content)
+                email.SetIsHtmlContent(False)
+                email.SendMessage()
+            Catch ex As Exception
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "Send Email Error", ex.Message)
+            End Try
+        End Sub
+
+        Public Overrides Sub DataBind()
+            MyBase.DataBind()
+
+            If Me.DataSource Is Nothing Then
+                Return
+            End If
+
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing Then
+                Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
+            End If
+
+            SetWCDC_Rem()
+            SetWCDC_Status()
+            SetWCDC_U_ID()
+
+            Me.IsNewRecord = True
+
+            If Me.DataSource.IsCreated Then
+                Me.IsNewRecord = False
+
+                Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
+            End If
+
+            Dim shouldResetControl As Boolean = False
+            Dim oHead As WCAR_Doc1RecordControl
+            oHead = DirectCast(Me.Page.FindControlRecursively("WCAR_Doc1RecordControl"), WCAR_Doc1RecordControl)
+            oHead.LoadData()
+            If System.Web.HttpContext.Current.Session("UserIDNorth").ToString() <> oHead.DataSource.WCD_U_ID.ToString() Then
+                Me.WCDC_U_ID.Enabled = False
+                Me.WCAR_Doc_CheckerRowDeleteButton.Visible = False
+            End If
+        End Sub
+
+        Public Overrides Sub SetWCDC_U_ID()
+
+            ' If selection was retrieved from UI previously, restore it
+            If Me.PreviousUIData.ContainsKey(Me.WCDC_U_ID.ID) Then
+                If Me.PreviousUIData(Me.WCDC_U_ID.ID) Is Nothing Then
+                    Me.PopulateWCDC_U_IDDropDownList(Nothing, 200)
+                Else
+                    Me.PopulateWCDC_U_IDDropDownList(Me.PreviousUIData(Me.WCDC_U_ID.ID).ToString(), 200)
+                End If
+                Return
+            End If
+
+
+            ' Set the WCDC_U_ID DropDownList on the webpage with value from the
+            ' WCAR_Doc_Checker database record.
+
+            ' Me.DataSource is the WCAR_Doc_Checker record retrieved from the database.
+            ' Me.WCDC_U_ID is the ASP:DropDownList on the webpage.
+
+            ' You can modify this method directly, or replace it with a call to
+            '     MyBase.SetWCDC_U_ID()
+            ' and add your own code before or after the call to the MyBase function.
+
+
+            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCDC_U_IDSpecified Then
+
+                ' If the WCDC_U_ID is non-NULL, then format the value.
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Me.PopulateWCDC_U_IDDropDownList(Me.DataSource.WCDC_U_ID.ToString(), 200)
+
+            Else
+
+                ' WCDC_U_ID is NULL in the database, so use the Default Value.  
+                ' Default Value could also be NULL.
+                If Me.DataSource IsNot Nothing AndAlso Me.DataSource.IsCreated Then
+                    Me.PopulateWCDC_U_IDDropDownList(Nothing, 200)
+                Else
+                    Me.PopulateWCDC_U_IDDropDownList(WCAR_Doc_CheckerTable.WCDC_U_ID.DefaultValue, 200)
+                End If
+
+            End If
+
+        End Sub
+
+
         
 
 End Class
@@ -98,7 +331,1268 @@ Public Class WCAR_Doc1RecordControl
 
         ' This is the ideal place to add your code customizations. For example, you can override the LoadData, 
         ' CreateWhereClause, DataBind, SaveData, GetUIData, and Validate methods.
-        
+
+
+        Public sEmailContentForm As String = ""
+
+        Protected Overrides Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+            Me.btnChecked.Button.Attributes.Add("onClick", "javascript:return confirm(""Are you sure you want to concur to this document?"");")
+            AddHandler Me.btnChecked.Button.Click, AddressOf btnChecked_Click
+            AddHandler Me.btnRemoveCheck.Button.Click, AddressOf btnRemoveCheck_Click
+            AddHandler Me.CancelButton.Button.Click, AddressOf CancelButton_Click
+            AddHandler Me.CancelButton1.Button.Click, AddressOf CancelButton1_Click
+            AddHandler Me.btnVoid.Button.Click, AddressOf btnVoid_Click
+            AddHandler Me.SaveButton.Button.Click, AddressOf SaveButton_Click
+            Me.SaveButton.Button.Attributes.Add("onclick", "SubmitHRefOnce(this, """ & Me.Page.GetResourceValue("Txt:SaveRecord", "EPORTAL") & """);")
+            AddHandler Me.WCD_C_ID.SelectedIndexChanged, AddressOf WCD_C_ID_SelectedIndexChanged
+            AddHandler Me.WCD_WCur_ID.SelectedIndexChanged, AddressOf WCD_WCur_ID_SelectedIndexChanged
+            AddHandler Me.WCD_WDT_ID.SelectedIndexChanged, AddressOf WCD_WDT_ID_SelectedIndexChanged
+
+            Dim sCur As String = CStr(IIf(Not IsNumeric(WCD_Exp_Cur_Yr.Text), "0", WCD_Exp_Cur_Yr.Text))
+            Dim sNxt As String = CStr(IIf(Not IsNumeric(WCD_Exp_Nxt_Yr.Text), "0", WCD_Exp_Nxt_Yr.Text))
+            Dim sSub As String = CStr(IIf(Not IsNumeric(WCD_Exp_Sub_Yr.Text), "0", WCD_Exp_Sub_Yr.Text))
+            Dim sngTotal As Single = CSng(sCur) + CSng(sNxt) + CSng(sSub)
+            Me.lblTotal1.Text = sngTotal.ToString("#,#.00")
+            If Page.IsPostBack Then
+                Me.WCD_Exp_Total.Text = sCur
+            End If
+
+            AddHandler Me.imbFind.Click, AddressOf imbFind_Click
+            Me.WCD_Supplementary.Attributes.Add("onclick", "Supplementary('" & Me.WCD_Supplementary.ClientID & "','" & _
+            Me.WCD_Supplementary_WCD_ID.ClientID & "','" & Me.imbFind.ClientID & "','" & Me.WCD_Supplementary_Manual.ClientID & "')")
+            'Me.WCD_Supplementary_WCD_ID.Enabled = False
+            Me.WCD_Supplementary_Manual.Enabled = False
+            'Me.imbFind.Enabled = False
+            Me.imbFind.Attributes.Add("onClick", "OpenCARSelector('" & Me.WCD_Supplementary_WCD_ID.ClientID & "');return false;")
+            Me.imbRelated.Attributes.Add("onClick", "OpenRelatedCAR('" & Me.WCD_Supplementary_WCD_ID.ClientID & "','" & Me.WCD_C_ID.ClientID & "');return false;")
+
+            If Me.WCD_Status.Text = "Return" Then
+                Me.WCD_C_ID.Enabled = False
+                Me.WCD_No.Enabled = False
+                Me.WCD_Request_Date.Enabled = False
+                Me.WCD_Project_Title.Enabled = False
+                Me.WCD_Unit_Location.Enabled = False
+                Me.WCD_Project_No.Enabled = False
+                Me.WCD_Proj_Inc_ACB.Enabled = False
+                'Me.WCD_Remark.Enabled = False
+                Me.WCD_Supplementary.Enabled = False
+                Me.WCD_Supplementary_WCD_ID.Enabled = True 'False (changed to True to avoid error in submitting when status is Return)
+                Me.WCD_Supplementary_Manual.Enabled = False
+                Me.WCD_WDT_ID.Enabled = False
+                Me.WCD_WCur_ID.Enabled = False
+                Me.WCD_Exp_Cur_Yr.Enabled = False
+                Me.WCD_Exp_Nxt_Yr.Enabled = False
+                Me.WCD_Exp_Sub_Yr.Enabled = False
+                Me.WCD_Exp_Total.Enabled = False
+                Me.WCD_Exp_Prev_Total.Enabled = False
+                Me.WCD_Exp_Budget.Enabled = False
+                Me.WCD_Exp_Under_Over_Budget.Enabled = False
+                Me.imbFind.Enabled = False
+                Me.imbRelated.Enabled = False
+
+                Dim oTab1 As WCAR_Doc_Checker1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
+                'Dim oTab3 As WCAR_Doc_CheckerTableControlRow = DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_CheckerTableControlRow"), WCAR_Doc_CheckerTableControlRow)			
+
+                oTab1.WCAR_Doc_CheckerAddButton.Enabled = False
+                ''oTab2.WCDoc_ProjClass_ID.Enabled = False
+                'oTab3.WCDC_U_ID.Enabled = False
+            End If
+
+
+        End Sub
+
+        Private Sub MyPreRender( _
+        ByVal sender As Object, _
+        ByVal e As System.EventArgs) Handles MyBase.PreRender
+
+            Dim script As String = "<script language=""javascript"">" & vbCrLf & _
+            "function addCommas(nStr) {" & vbcrlf & _
+            "  nStr += '';" & vbcrlf & _
+            "  x = nStr.split('.');" & vbcrlf & _
+            "  x1 = x[0];" & vbcrlf & _
+            "  x2 = x.length > 1 ? '.' + x[1] : '';" & vbcrlf & _
+            "  var rgx = /(\d+)(\d{3})/;" & vbcrlf & _
+            "  while (rgx.test(x1)) {" & vbcrlf & _
+            "    x1 = x1.replace(rgx, '$1' + ',' + '$2');" & vbcrlf & _
+            "  }" & vbcrlf & _
+            "  return x1 + x2; }" & vbcrlf & _
+            "function Supplementary(Checker,Texter,Finder,Manual) {" & vbcrlf & _
+            "  if (document.getElementById(Checker).checked) {" & vbcrlf & _
+            "    document.getElementById(Texter).disabled=false;" & vbcrlf & _
+            "    document.getElementById(Finder).disabled=false;" & vbcrlf & _
+            "    document.getElementById(Manual).disabled=false;}" & vbcrlf & _
+            "  else {" & vbcrlf & _
+            "    document.getElementById(Texter).disabled=true;" & vbcrlf & _
+            "    document.getElementById(Finder).disabled=true;" & vbcrlf & _
+            "    document.getElementById(Manual).disabled=true;" & vbcrlf & _
+            "    document.getElementById(Manual).value='';" & vbcrlf & _
+            "    document.getElementById(Texter).value='';}}" & vbcrlf & _
+            "function RefreshThisRequestSum() {" & vbCrLf & _
+            "  var sum = 0;" & vbCrLf & _
+            "  var numValue1 = document.getElementById('" & Me.WCD_Exp_Cur_Yr.ClientID & "').value;" & vbCrLf & _
+            "  numValue1 = numValue1.replace("","","""");" & vbcrlf & _
+            "  var numValue2 = document.getElementById('" & Me.WCD_Exp_Nxt_Yr.ClientID & "').value;" & vbCrLf & _
+            "  numValue2 = numValue2.replace("","","""");" & vbcrlf & _
+            "  var numValue3 = document.getElementById('" & Me.WCD_Exp_Sub_Yr.ClientID & "').value;" & vbCrLf & _
+            "  numValue3 = numValue3.replace("","","""");" & vbcrlf & _
+            "  if (!isNaN(numValue1)) { " & vbcrlf & _
+            "    if (numValue1.length > 0) { " & vbcrlf & _
+            "      sum += parseFloat(numValue1); } }" & vbCrLf & _
+            "  if (!isNaN(numValue2)) { " & vbcrlf & _
+            "    if (numValue2.length > 0) { " & vbcrlf & _
+            "      sum += parseFloat(numValue2); } }" & vbCrLf & _
+            "  if (!isNaN(numValue3)) { " & vbcrlf & _
+            "    if (numValue3.length > 0) { " & vbcrlf & _
+            "      sum += parseFloat(numValue3); } }" & vbCrLf & _
+            "  document.getElementById('" & Me.lblTotal1.ClientID & "').innerHTML = addCommas(sum.toFixed(2));" & vbCrLf & _
+            "  document.getElementById('" & Me.WCD_Exp_Total.ClientID & "').value = numValue1;" & vbCrLf & _
+            "}" & vbCrLf & _
+            "" & vbCrLf & _
+            "RefreshThisRequestSum();" & vbCrLf & _
+            "</script>"
+            Me.Page.ClientScript.RegisterStartupScript(GetType(Page), "RefreshThisRequestSum", script)
+        End Sub
+
+        Protected Overrides Sub PopulateWCD_C_IDDropDownList(ByVal selectedValue As String, ByVal maxItems As Integer)
+
+            'Dim wc As WhereClause = New WhereClause
+            'wc.iAND(Sel_WASS_User_Dynamics_CompanyView.SSUC_SSU_UserName, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString())
+
+            'Dim orderBy As OrderBy = New OrderBy(False, True)
+            ''orderBy.Add(Sel_WASS_User_Dynamics_CompanyView.SSC_CompanyName, BaseClasses.Data.OrderByItem.OrderDir.Asc)
+            'orderBy.Add(Sel_WASS_User_Dynamics_CompanyView.SSUC_isDefault, BaseClasses.Data.OrderByItem.OrderDir.Desc)
+            'Me.WCD_C_ID.Items.Clear()
+            'Dim itemValue As Sel_WASS_User_Dynamics_CompanyRecord
+
+            'For Each itemValue In Sel_WASS_User_Dynamics_CompanyView.GetRecords(wc, orderBy, 0, maxItems)
+            '    Dim cvalue As String = itemValue.CMPANYID.ToString()
+            '    Dim fvalue As String = itemValue.SSC_Description 'itemValue.Format(Sel_W_User_DYNAMICS_CompanyView.Company_Short_Name)
+            '    If fvalue Is Nothing Then
+            '        fvalue = itemValue.SSC_CompanyName
+            '    End If
+            '    Dim item As ListItem = New ListItem(fvalue, cvalue)
+            '    Me.WCD_C_ID.Items.Add(item)
+            'Next
+
+            'If Not selectedValue Is Nothing AndAlso _
+            'selectedValue.Trim <> "" AndAlso _
+            '    Not SetSelectedValue(Me.WCD_C_ID, selectedValue) Then
+            '    Dim sWhere As String = Sel_WASS_User_Dynamics_CompanyView.CMPANYID.UniqueName & " = " & selectedValue
+            '    Dim sCompany As String = ""
+            '    For Each itemValue1 As Sel_WASS_User_Dynamics_CompanyRecord In Sel_WASS_User_Dynamics_CompanyView.GetRecords(sWhere, Nothing, 0, 5)
+            '        sCompany = itemValue1.Company_Short_Name
+            '    Next
+            '    Dim fvalue As String = Sel_WASS_User_Dynamics_CompanyView.CMPANYID.Format(selectedValue)
+            '    Dim item As ListItem = New ListItem(sCompany, selectedValue)
+            '    item.Selected = True
+            '    'Me.WCD_C_ID.Items.Insert(0, item)
+            'End If
+
+            ''Me.WCD_C_ID.Items.Insert(0, New ListItem(Page.GetResourceValue("** PLEASE_SELECT **", "CAR"), "--PLEASE_SELECT--"))
+
+
+            Dim wc As WhereClause = New WhereClause
+            wc.iAND(Sel_W_User_DYNAMICS_Company1View.W_U_User_Name, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString())
+
+            Dim orderBy As OrderBy = New OrderBy(False, True)
+            orderBy.Add(Sel_W_User_DYNAMICS_Company1View.Company_Short_Name, BaseClasses.Data.OrderByItem.OrderDir.Asc)
+
+            Me.WCD_C_ID.Items.Clear()
+            Dim itemValue As Sel_W_User_DYNAMICS_Company1Record
+
+            For Each itemValue In Sel_W_User_DYNAMICS_Company1View.GetRecords(wc, orderBy, 0, maxItems)
+                Dim cvalue As String = itemValue.Company_ID.ToString()
+                Dim fvalue As String = itemValue.Company_Short_Name 'itemValue.Format(Sel_W_User_DYNAMICS_CompanyView.Company_Short_Name)
+                Dim item As ListItem = New ListItem(fvalue, cvalue)
+                Me.WCD_C_ID.Items.Add(item)
+            Next
+
+            If Not selectedValue Is Nothing AndAlso _
+            selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.WCD_C_ID, selectedValue) Then
+                Dim sWhere As String = Sel_W_User_DYNAMICS_Company1View.Company_ID.UniqueName & " = " & selectedValue
+                Dim sCompany As String = ""
+                For Each itemValue1 As Sel_W_User_DYNAMICS_Company1Record In Sel_W_User_DYNAMICS_Company1View.GetRecords(sWhere, Nothing, 0, 5)
+                    sCompany = itemValue1.Company_Short_Name
+                Next
+                Dim fvalue As String = Sel_W_User_DYNAMICS_Company1View.Company_ID.Format(selectedValue)
+                Dim item As ListItem = New ListItem(sCompany, selectedValue)
+                item.Selected = True
+                Me.WCD_C_ID.Items.Insert(0, item)
+            End If
+
+            Me.WCD_C_ID.Items.Insert(0, New ListItem(Page.GetResourceValue("Txt:PleaseSelect", "EPORTAL"), "--PLEASE_SELECT--"))
+        End Sub
+
+        Public Overrides Function CreateWhereClause_WCD_WDT_IDDropDownList() As WhereClause
+            Dim wc As WhereClause = New WhereClause()
+
+            wc.iAND(WDoc_Type1Table.WDT_C_ID, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, Me.WCD_C_ID.SelectedValue.ToString())
+            Return wc
+        End Function
+
+        Protected Sub MultipleDropdown_myInit(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Init
+
+            WCD_C_ID.AutoPostBack = True
+            'WCD_WDT_ID.AutoPostBack = True
+
+            AddHandler WCD_C_ID.SelectedIndexChanged, AddressOf WCD_C_ID_SelectedIndexChanged
+            'AddHandler WCD_WCur_ID.SelectedIndexChanged, AddressOf WCD_WCur_ID_SelectedIndexChanged
+            'WCD_WDT_ID.Enabled = False	
+        End Sub
+
+        Protected Overrides Sub WCD_C_ID_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs)
+            WCD_WDT_ID.Dispose()
+            'WCD_WDT_ID.Enabled = True		
+            Me.PopulateWCD_WDT_IDDropDown(100)
+            System.Web.HttpContext.Current.Session("CAR_C_ID") = Me.WCD_C_ID.SelectedValue.ToString()
+        End Sub
+
+        Protected Sub PopulateWCD_WDT_IDDropDown(ByVal maxItems As Integer)
+
+            Dim wc As WhereClause = New WhereClause
+            Dim selectedValue As String = WCD_C_ID.SelectedValue
+            Dim selectedText As String = WCD_C_ID.SelectedItem.Text
+            wc.iAND(WDoc_Type1Table.WDT_C_ID, BaseFilter.ComparisonOperator.EqualsTo, selectedValue)
+            wc.iAND(WDoc_Type1Table.WDT_Type, BaseFilter.ComparisonOperator.EqualsTo, "CAR")
+            wc.iAND(WDoc_Type1Table.WDT_Limit, BaseFilter.ComparisonOperator.Greater_Than, "0")
+
+            Me.WCD_WDT_ID.Items.Clear()
+
+            Me.WCD_WDT_ID.Items.Insert(0, New ListItem(Page.GetResourceValue("** PLEASE SELECT **", "CAR"), "--PLEASE_SELECT--"))
+
+            If (BaseClasses.Utils.StringUtils.InvariantUCase(selectedText).Equals(BaseClasses.Utils.StringUtils.InvariantUCase(Page.GetResourceValue("** PLEASE SELECT **", "EPORTAL CAR")))) Then
+                ' if "Please Select" string is selected for first dropdown list,
+                ' then do not continue populating the second dropdown list.
+                Return
+            End If
+
+            Dim itemValue As WDoc_Type1Record
+            For Each itemValue In WDoc_Type1Table.GetRecords(wc, Nothing, 0, maxItems)
+
+                If (itemValue.WDT_C_IDSpecified) Then
+                    Dim cvalue As String = itemValue.WDT_ID.ToString()
+                    Dim fvalue As String = itemValue.Format(WDoc_Type1Table.WDT_Name)
+                    Dim item As ListItem = New ListItem(fvalue, cvalue)
+                    If (Not Me.WCD_WDT_ID.Items.Contains(item)) Then
+                        Me.WCD_WDT_ID.Items.Add(item)
+                    End If
+                End If
+            Next
+
+            'Me.WCD_WDT_ID.SelectedIndex = 0		
+        End Sub
+
+        Private Function FindDelegate(AssignedApprover As String, Optional ByRef Info As String = "") As String
+            Dim sApprover As String = AssignedApprover
+            Dim sCheck As String = AssignedApprover
+            Dim bNoMoreDelegate As Boolean = False
+            Dim sWhereDelegate As String = ""
+            Dim iCircular As Integer = 0
+            Do While Not bNoMoreDelegate
+                sWhereDelegate = WTask_Delegation1Table.WTD_W_U_ID.UniqueName & " = '" & sApprover & _
+                "' And " & WTask_Delegation1Table.WTD_WDT_Type.UniqueName & " = 'CAR' And " & _
+                WTask_Delegation1Table.WTD_From.UniqueName & " <= '" & Now.ToShortDateString() & _
+                "' And " & WTask_Delegation1Table.WTD_To.UniqueName & " >= '" & Now.ToShortDateString() & "'" & _
+                " And " & WTask_Delegation1Table.WTD_C_ID.UniqueName & " = " & Me.WCD_C_ID.SelectedValue.ToString()
+
+                sCheck = ""
+                For Each oDelegate As WTask_Delegation1Record In WTask_Delegation1Table.GetRecords(sWhereDelegate, Nothing, 0, 5)
+                    sApprover = oDelegate.WTD_W_U_ID_Delegate.ToString()
+                    sCheck = oDelegate.WTD_W_U_ID_Delegate.ToString()
+                Next
+
+                If sCheck = "" Then
+                    bNoMoreDelegate = True
+                    Info = " #Delegated Task#"
+                End If
+                iCircular += 1
+                If iCircular > 15 Then 'threshold loop
+                    'default to original approver
+                    sApprover = AssignedApprover
+                    'exit infinite loop
+                    bNoMoreDelegate = True
+                End If
+            Loop
+            Return sApprover
+        End Function
+
+        Private Function Content_Formatter(User_ID As String, Title As String, Company As String, Details As String, _
+        DocDate As String, Remarks As String, Total As String, Requester_ID As String, Color_Hex As String, _
+        Page As String, Document As String, ApproverRem As String, Status As String, WF_Type As String, Optional Default_Type As String = "") As String
+            Dim wc2 As WhereClause = New WhereClause
+            Dim itemValue2 As W_Email1Record
+            'Dim itemValue2 As SysSetupWASSEmailRecord
+            Dim sDirectory As String
+            Dim sSite As String
+            Dim sTemplate As String
+
+            If Default_Type = "" Then
+                wc2.iAND(W_Email1Table.WE_U_ID, BaseFilter.ComparisonOperator.EqualsTo, User_ID)
+                'wc2.iAND(SysSetupWASSEmailTable.WE_U_ID, BaseFilter.ComparisonOperator.EqualsTo, User_ID)
+
+                If W_Email1Table.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+                    'If SysSetupWASSEmailTable.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+                    For Each itemValue2 In W_Email1Table.GetRecords(wc2, Nothing, 0, 100)
+                        'For Each itemValue2 In SysSetupWASSEmailTable.GetRecords(wc2, Nothing, 0, 100)
+                        If itemValue2.WE_U_IDSpecified Then
+                            sDirectory = itemValue2.WE_Directory.ToString()
+                            sSite = itemValue2.WE_Site.ToString()
+                            sTemplate = itemValue2.WE_Template.ToString()
+                        End If
+                    Next
+                End If
+            Else
+                wc2.iAND(W_Email_Default1Table.WED_Type, BaseFilter.ComparisonOperator.EqualsTo, Default_Type)
+                'wc2.iAND(SysSetupEmailDefaultTable.WED_Type, BaseFilter.ComparisonOperator.EqualsTo, Default_Type)
+
+                If W_Email_Default1Table.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+                    'If SysSetupEmailDefaultTable.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+                    For Each itemValue21 As W_Email_Default1Record In W_Email_Default1Table.GetRecords(wc2, Nothing, 0, 100)
+                        'For Each itemValue21 As SysSetupEmailDefaultRecord In SysSetupEmailDefaultTable.GetRecords(wc2, Nothing, 0, 100)
+                        If itemValue21.WED_IDSpecified Then
+                            sDirectory = "eportal" 'itemValue21.WE_Directory.ToString()
+                            sSite = "http://eportal.anflocor.com" 'itemValue21.WE_Site.ToString()
+                            sTemplate = itemValue21.WED_Template.ToString()
+                        End If
+                    Next
+                End If
+            End If
+
+            sTemplate = Replace(sTemplate, "@TITLE", Title)
+            sTemplate = Replace(sTemplate, "@COM", Company)
+            sTemplate = Replace(sTemplate, "@DET", Details)
+            sTemplate = Replace(sTemplate, "@DTE", DocDate)
+            sTemplate = Replace(sTemplate, "@REM", Remarks)
+            sTemplate = Replace(sTemplate, "@TOT", Total)
+            sTemplate = Replace(sTemplate, "@SITE", sSite)
+            sTemplate = Replace(sTemplate, "@LOC", sDirectory)
+
+            Dim wc3 As WhereClause = New WhereClause
+            Dim itemValue3 As W_User1Record
+            Dim sFullName As String 'creator
+            Dim sUserEmail As String 'creator
+            wc3.iAND(W_User1Table.W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, Requester_ID)
+
+            If W_User1Table.GetRecords(wc3, Nothing, 0, 100).Length > 0 Then
+                For Each itemValue3 In W_User1Table.GetRecords(wc3, Nothing, 0, 100)
+                    If itemValue3.W_U_IDSpecified Then
+                        sFullName = itemValue3.W_U_Full_Name.ToString()
+                        sUserEmail = itemValue3.W_U_Email.ToString()
+                    End If
+                Next
+            End If
+
+            'Dim wc3 As WhereClause = New WhereClause
+            'Dim itemValue3 As W_UserRecord
+            'Dim sFullName As String 'creator
+            'Dim sUserEmail As String 'creator
+            'wc3.iAND(W_UserTable.W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, SendTo_User_ID)
+
+            'If W_UserTable.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+            '    For Each itemValue3 In W_UserTable.GetRecords(wc2, Nothing, 0, 100)
+            '        If itemValue3.W_U_IDSpecified Then
+            '            sFullName = itemValue3.W_U_Full_Name.ToString()
+            '            sUserEmail = itemValue3.W_U_Email.ToString()
+            '        End If
+            '    Next
+            'End If
+
+            sTemplate = Replace(sTemplate, "@USR", sUserEmail)
+            sTemplate = Replace(sTemplate, "@REQ", sFullName)
+
+            sTemplate = Replace(sTemplate, "@PAGE", Page)
+            sTemplate = Replace(sTemplate, "@DOC", "CAR# " & Document)
+            sTemplate = Replace(sTemplate, "@COLOR", Color_Hex)
+            sTemplate = Replace(sTemplate, "@APPREM", ApproverRem)
+            sTemplate = Replace(sTemplate, "@STAT", Status)
+            sTemplate = Replace(sTemplate, "@WF", WF_Type)
+
+            Return sTemplate
+        End Function
+
+
+        Public Overrides Sub SaveData()
+
+            Me.LoadData()
+
+            ' The checksum is used to ensure the record was not changed by another user.
+            If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
+                If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
+                    Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "EPORTAL"))
+                End If
+            End If
+
+            Dim Panel As System.Web.UI.WebControls.Panel = CType(MiscUtils.FindControlRecursively(Me, "WCAR_DocRecordControlPanel"), System.Web.UI.WebControls.Panel)
+
+            If ((Not IsNothing(Panel)) AndAlso (Not Panel.Visible)) OrElse IsNothing(Me.DataSource) Then
+                Return
+            End If
+
+            Me.Validate()
+
+            Dim sStatusReturn As String = ""
+            sStatusReturn = Me.WCD_Status.Text
+            'Me.WCD_U_ID.Text = System.Web.HttpContext.Current.Session("UserID").ToString()
+            If Me.WCD_Status.Text = "For Review" And Me.WCD_Submit.Checked Then
+                Me.WCD_Status.Text = "Pending" 'if the status becomes 'For Review' (in cases of 1st step rejection/return to Creator)
+            End If
+            'ensure that the document is 'Pending' once it returns to the WF
+            If Me.WCD_Status.Text = "Return" And Me.WCD_Submit.Checked Then
+                Me.WCD_Status.Text = "Pending" 'if the status becomes 'For Review' (in cases of 1st step rejection/return to Creator)
+            End If
+            'GET CAR ID From CAR No
+            Dim bOverrideMinCheck As Boolean = False
+
+            If Me.WCD_Supplementary.Checked And Me.WCD_Supplementary_WCD_ID.Text <> "" Then
+                Dim sWhereCAR As String = WCAR_Doc1Table.WCD_No.UniqueName & "='" & Me.WCD_Supplementary_WCD_ID.Text & "'" & _
+                " And " & WCAR_Doc1Table.WCD_C_ID.UniqueName & " = " & Me.WCD_C_ID.SelectedValue.ToString()
+                Dim sTempCAR As String = ""
+                Dim sOrigCAR As String = Me.WCD_Supplementary_WCD_ID.Text
+                For Each oSC As WCAR_Doc1Record In WCAR_Doc1Table.GetRecords(sWhereCAR, Nothing, 0, 5)
+                    sTempCAR = oSC.WCD_ID.ToString()
+                Next
+                Me.WCD_Supplementary_WCD_ID.Text = sTempCAR
+                'Me.WCD_Supplementary_WCD_ID1.Text = sTempCAR
+                bOverrideMinCheck = True
+            ElseIf Me.WCD_Supplementary.Checked And Me.WCD_Supplementary_WCD_ID.Text = "" Then
+                If Me.WCD_Supplementary_Manual.Text = "" Then
+                    Throw New Exception("You must supply a valid CAR No. Uncheck the supplementary option if you do not intend this document to be a supplementary CAR.")
+                Else
+                    bOverrideMinCheck = True
+                End If
+            ElseIf Not Me.WCD_Supplementary.Checked And Me.WCD_Supplementary_WCD_ID.Text <> "" Then
+                Throw New Exception("You do not have to supply any CAR if this document is not a supplementary CAR.")
+            Else
+                Me.WCD_Supplementary_WCD_ID.Text = ""
+            End If
+
+            Me.GetUIData()
+            'note: check if selected workflow path is Proper for the amount
+            Dim sWhereAmount As String = WDoc_Type1Table.WDT_ID.UniqueName & " = " & Me.WCD_WDT_ID.SelectedValue.ToString()
+            For Each oLimit As WDoc_Type1Record In WDoc_Type1Table.GetRecords(sWhereAmount, Nothing, 0, 100)
+                If CSng(oLimit.WDT_Limit) < CSng(Me.WCD_Exp_Cur_Yr.Text) Then 'amount in doc is greater than the assigned path
+                    Throw New Exception("Selected WORKFLOW path is invalid since the amount exceeds the required value for this approver list.")
+                End If
+            Next
+            'note: check the encoded amount against the CAR limit per company
+            Dim iCAR_Min As Single
+            iCAR_Min = 0
+            If Not bOverrideMinCheck Then 'override if supplementary
+                Dim sWhereMin As String = WCAR_Minimum1Table.WCM_C_ID.UniqueName & " = " & Me.WCD_C_ID.SelectedValue.ToString() & _
+                " And " & WCAR_Minimum1Table.WCM_WCur_ID.UniqueName & " = " & Me.WCD_WCur_ID.SelectedValue.ToString()
+                For Each oRec As WCAR_Minimum1Record In WCAR_Minimum1Table.GetRecords(sWhereMin, Nothing, 0, 100)
+                    iCAR_Min = oRec.WCM_Min
+                Next
+
+                If iCAR_Min > 0 Then
+                    If iCAR_Min > CInt(Me.WCD_Exp_Total.Text) Then
+                        Throw New Exception("CAR Total Amount (Total Expenditure This Request) is less than the required minimum amount." & vbCrLf & vbCrLf & _
+                        "For " & Me.WCD_C_ID.SelectedItem.Text & " the minimum amount is " & iCAR_Min.ToString() & _
+                        " (" & Me.WCD_WCur_ID.SelectedItem.Text & ").")
+                    End If
+                Else
+                    Throw New Exception("CAR minimum amount for this currency(" & Me.WCD_WCur_ID.SelectedItem.Text & ") has no setup value.")
+                End If
+            End If
+            '------- format email
+            'Dim sWhere1 As String = Sel_SysSetupUsers_EmailView.SSU_RowID.UniqueName & " = " & Me.WCD_U_ID.Text
+            Dim sWhere1 As String = W_User1Table.W_U_ID.UniqueName & " = " & Me.WCD_U_ID.Text
+
+            Dim sUser As String = ""
+            'For Each oRec As Sel_SysSetupUsers_EmailRecord In Sel_SysSetupUsers_EmailView.GetRecords(sWhere1, Nothing, 0, 100)
+            For Each oRec As W_User1Record In W_User1Table.GetRecords(sWhere1, Nothing, 0, 100)
+                'For Each oRec As Sel_SysSetupUsers_EmailRecord In Sel_SysSetupUsers_EmailView.GetRecords(sWhere1, Nothing, 0, 100)
+                'sUser = oRec.SSU_FullName.ToString()
+                sUser = oRec.W_U_Full_Name.ToString()
+            Next
+
+            Dim sEmailContent As String = "Company: @C" & vbCrLf & vbCrLf & "Details:" & vbCrLf & "@D" & vbCrLf & _
+            vbCrLf & "Request Date: @RD" & _
+            vbCrLf & "Remarks: @Rem" & vbCrLf & "Total: @T"
+
+            sEmailContent = Replace(sEmailContent, "@C", Me.WCD_C_ID.SelectedItem.ToString())
+            sEmailContent = Replace(sEmailContent, "@D", Me.WCD_Project_Title.Text)
+            sEmailContent = Replace(sEmailContent, "@RD", Me.WCD_Request_Date.Text)
+            sEmailContent = Replace(sEmailContent, "@Rem", Me.WCD_Remark.Text)
+            sEmailContent = Replace(sEmailContent, "@T", Me.WCD_Exp_Cur_Yr.Text)
+            sEmailContent &= vbCrLf & "Creator: " & sUser
+            sEmailContent &= vbCrLf & vbCrLf & "http://eportal.anflocor.com"
+
+            Me.sEmailContentForm = sEmailContent
+            '------- format email
+            If Me.DataSource.IsAnyValueChanged Then
+                ' Save record to database but do not commit yet.
+                ' Auto generated ids are available after saving for use by child (dependent) records.
+                If Me.WCD_Submit.Checked.ToString().ToUpper() = "TRUE" Then
+                    'note: check if doc has co-requesters -> count co-requesters and count 'Concurred' status = must be equal
+                    Dim sWhere As String = ""
+                    Dim iRequester As Integer = 0
+                    Dim iConcurred As Integer = 0
+
+                    sWhere = WCAR_Doc_Checker1Table.WCDC_WCD_ID.UniqueName & " = " & Me.WCD_ID.Text
+                    For Each oRec As WCAR_Doc_Checker1Record In WCAR_Doc_Checker1Table.GetRecords(sWhere, Nothing, 0, 100)
+                        If oRec.WCDC_Status = "Concurred" Then
+                            iConcurred += 1
+                        End If
+                        iRequester += 1
+                    Next
+
+                    If iRequester <> iConcurred Then
+                        'RegisterAlert("Submit CAR Error", "Insufficient co-requester concurrency.", True)
+                        'Utils.MiscUtils.RegisterJScriptAlert(Me, "Warning", "Insufficient co-requester concurrency.")
+                        Throw New Exception("Insufficient co-requester concurrency." & vbCrLf & vbCrLf & _
+                        "Do not submit this document if there are incomplete co-requester approvals.")
+                        Exit Sub
+                    End If
+
+                    Dim oRec1 As WCAR_Doc_Checker1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
+
+                    If oRec1.GetRecordControls.Length <> iConcurred Then '> 0
+                        'note: if user has added co-requesters -> do not allow submission
+                        Throw New Exception("Insufficient co-requester concurrency." & vbCrLf & vbCrLf & _
+                        "Do not submit this document if there are incomplete co-requester approvals.")
+                    End If
+                End If
+
+                If System.Web.HttpContext.Current.Session("CAR_No").ToString() <> Me.WCD_No.Text Then
+                    Dim whereStr As String = WCAR_Doc1Table.WCD_No.UniqueName & " = '" & Me.WCD_No.Text & "'"
+
+                    Dim rec As WCAR_Doc1Record = WCAR_Doc1Table.GetRecord(whereStr)
+                    If (Not IsNothing(rec)) Then
+                        Throw New Exception("The CAR No: " & Me.WCD_No.Text & " already exists." & vbCrLf & _
+                        vbCrLf & "Enter a new CAR No and try to save this document again.")
+                    Else
+                        Me.DataSource.Save()
+                    End If
+                Else
+                    Me.DataSource.Save()
+                End If
+                'Me.DataSource.Save()
+                'User checks the Submit control -> Finds the 1st step using the Doc Type ID
+                If Me.WCD_Submit.Checked.ToString().ToUpper() = "TRUE" Then
+                    If sStatusReturn <> "Return" Then
+                        Dim wc1 As WhereClause = New WhereClause
+                        wc1.iAND(WStep1Table.WS_WDT_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.WCD_WDT_ID.SelectedValue)
+                        wc1.iAND(WStep1Table.WS_Step_Type, BaseFilter.ComparisonOperator.EqualsTo, "Start")
+
+                        Dim itemValue1 As WStep1Record
+                        For Each itemValue1 In WStep1Table.GetRecords(wc1, Nothing, 0, 100)
+                            If (itemValue1.WS_IDSpecified) Then
+                                'UpdateRecord_Prev_Rej_Invisible
+                                'note: if just in case this doc is resubmitted -> do not show Rejected doc to user task (IsDone=True)
+                                Dim sWhereRej As String = WCAR_Activity1Table.WCA_WCD_ID.UniqueName & " = " & Me.DataSource.WCD_ID.ToString() & _
+                                " AND " & WCAR_Activity1Table.WCA_Status.UniqueName & " = 'Rejected'"
+                                For Each oRej As WCAR_Activity1Record In WCAR_Activity1Table.GetRecords(sWhereRej, Nothing, 0, 100)
+                                    WCAR_Activity1Record.UpdateRecord_Prev_Rej_Invisible(oRej.WCA_ID.ToString())
+                                Next
+
+                                'Query the details table to find assigned users
+                                Dim wc2 As WhereClause = New WhereClause
+                                wc2.iAND(WStep_Detail1Table.WSD_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, itemValue1.WS_ID.ToString())
+
+                                Dim itemValue2 As WStep_Detail1Record
+                                For Each itemValue2 In WStep_Detail1Table.GetRecords(wc2, Nothing, 0, 100)
+                                    If (itemValue2.WSD_WS_IDSpecified) Then
+                                        'insert to WCAR_Activity table
+                                        WCAR_Activity1Record.AddRecord(itemValue1.WS_ID.ToString(), itemValue2.WSD_ID.ToString(), _
+                                        Me.WCD_WDT_ID.SelectedValue.ToString(), _
+                                        FindDelegate(itemValue2.WSD_W_U_ID.ToString()), "0", _
+                                        Me.DataSource.WCD_ID.ToString())
+                                        'note: do not insert(update) delegate until task expires
+                                        'delegate:itemValue2.WSD_W_U_ID_Delegate.ToString() -> 0
+                                        Dim sInfo As String = ""
+                                        'Dim sInfo As String = ""
+                                        'Dim sRemark As String = txtRemark.Text
+                                        Dim sDelegate As String = FindDelegate(itemValue2.WSD_W_U_ID.ToString(), sInfo)
+                                        'Dim sUserRej As String = System.Web.HttpContext.Current.Session("FullName").ToString()
+
+                                        sEmailContent = Content_Formatter(sDelegate, _
+                                        "CAR Information Needed (CAR# " & Me.WCD_No.Text & ")", Me.WCD_C_ID.SelectedItem.ToString(), _
+                                        Me.WCD_Project_Title.Text, Me.WCD_Request_Date.Text, Me.WCD_Remark.Text, Me.WCD_Exp_Cur_Yr.Text, _
+                                        System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#4682b4", "wf_car/ShowSel_WCAR_Activity_WCAR_Doc1Table.aspx", Me.WCD_No.Text, _
+                                        "", "", "CAR")
+
+                                        Send_Email_Notification(sDelegate, "CAR Approval Needed (CAR# " & _
+                                        Me.WCD_No.Text & ")" & sInfo, sEmailContent)
+                                        'Dim sInfo As String = ""
+                                        'Send_Email_Notification(FindDelegate(itemValue2.WSD_W_U_ID.ToString(), sInfo), _
+                                        '"CAR Approval Needed (CAR# " & Me.WCD_No.Text & ")" & sInfo, sEmailContent)
+                                    End If
+                                Next
+                            End If
+                        Next
+                    Else
+                        ''added Return status handling **pepanes 09.20.2013
+                        '### handle 'Return' here ###
+                        Dim wc5 As WhereClause = New WhereClause
+                        Dim ob5 As OrderBy = New OrderBy(False, True)
+                        wc5.iAND(WCAR_Activity1Table.WCA_WCD_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.WCD_ID.Text)
+                        'wc5.iAND(WCAR_ActivityTable.WCA_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, "")
+                        wc5.iAND(WCAR_Activity1Table.WCA_Status, BaseFilter.ComparisonOperator.EqualsTo, "Return")
+                        'wc5.iAND(WCAR_ActivityTable.WCA_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
+                        ''04.02.2014 - pepanes * added filter for "Return" status for Creator
+                        wc5.iAND(WCAR_Activity1Table.WCA_Is_Done, BaseFilter.ComparisonOperator.EqualsTo, "0")
+                        ''04.02.2014 - pepanes * added order by to filter last record with "Return" status
+                        ob5.Add(WCAR_Activity1Table.WCA_Date_Assign, OrderByItem.OrderDir.Desc)
+                        If WCAR_Activity1Table.GetRecords(wc5, Nothing, 0, 100).Length > 0 Then
+                            For Each itemValue5 As WCAR_Activity1Record In WCAR_Activity1Table.GetRecords(wc5, Nothing, 0, 100)
+                                'note: update Activity table (current user) -> 'Approved'
+
+                                Dim sInfo As String = ""
+                                Dim sDelegate As String = FindDelegate(itemValue5.WCA_W_U_ID.ToString(), sInfo)
+
+                                sEmailContent = Content_Formatter(sDelegate, _
+                                "CAR Information Needed (CAR# " & Me.WCD_No.Text & ")", Me.WCD_C_ID.SelectedItem.ToString(), _
+                                Me.WCD_Project_Title.Text, Me.WCD_Request_Date.Text, Me.WCD_Remark.Text, Me.WCD_Exp_Cur_Yr.Text, _
+                                System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#4682b4", "wf_car/ShowSel_WCAR_Activity_WCAR_Doc1Table.aspx", Me.WCD_No.Text, _
+                                "", "", "CAR")
+
+                                Send_Email_Notification(sDelegate, "CAR Approval Needed (CAR# " & _
+                                Me.WCD_No.Text & ")" & sInfo, sEmailContent)
+
+                                WCAR_Activity1Record.UpdateRecord(itemValue5.WCA_ID.ToString(), "Pending")
+                            Next
+                        End If
+                    End If
+
+                End If
+            End If
+
+            Me.DataChanged = True
+            Me.ResetData = True
+
+            Me.CheckSum = ""
+            Dim recWCAR_Doc_Attach1TableControl As WCAR_Doc_Attach1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_Attach1TableControl"), WCAR_Doc_Attach1TableControl)
+            recWCAR_Doc_Attach1TableControl.SaveData()
+
+            Dim recWCAR_Doc_Checker1TableControl As WCAR_Doc_Checker1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
+            recWCAR_Doc_Checker1TableControl.SaveData()
+        End Sub
+
+
+        Private Sub Send_Email_Notification(ByVal SendTo_User_ID As String, ByVal Subject As String, ByVal Content As String)
+            Dim sEmail As String = ""
+
+            Try
+                Dim wc2 As WhereClause = New WhereClause
+                Dim itemValue2 As W_User1Record
+                wc2.iAND(W_User1Table.W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, SendTo_User_ID)
+
+                If W_User1Table.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+                    For Each itemValue2 In W_User1Table.GetRecords(wc2, Nothing, 0, 100)
+                        If itemValue2.W_U_IDSpecified Then
+                            sEmail = itemValue2.W_U_Email.ToString()
+                        End If
+                    Next
+                End If
+
+                'Dim wc2 As WhereClause = New WhereClause
+                'Dim itemValue2 As Sel_SysSetupUsers_EmailRecord
+                'wc2.iAND(Sel_SysSetupUsers_EmailView.SSU_RowID, BaseFilter.ComparisonOperator.EqualsTo, SendTo_User_ID)
+
+                'If Sel_SysSetupUsers_EmailView.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+                '    For Each itemValue2 In Sel_SysSetupUsers_EmailView.GetRecords(wc2, Nothing, 0, 100)
+                '        If itemValue2.SSU_RowIDSpecified Then
+                '            sEmail = itemValue2.SSUE_Email.ToString()
+                '        End If
+                '    Next
+                'End If
+
+                Dim email As New BaseClasses.Utils.MailSender
+
+                email.AddFrom("noreply@anflocor.com")
+                email.AddTo(sEmail)
+                email.SetSubject(Subject)
+                email.SetContent(Content)
+                email.SetIsHtmlContent(True)
+                email.SendMessage()
+            Catch ex As Exception
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "Send Email Error", ex.Message)
+            End Try
+        End Sub
+
+
+
+        Public Overrides Sub DataBind()
+            MyBase.DataBind()
+
+            If Me.DataSource Is Nothing Then
+                Return
+            End If
+
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing AndAlso _
+                (Me.CheckSum Is Nothing OrElse Me.CheckSum.Trim = "") Then
+                Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
+            End If
+
+            SetWCD_C_ID()
+            SetWCD_Exp_Budget()
+            SetWCD_Exp_Cur_Yr()
+            SetWCD_Exp_Nxt_Yr()
+            SetWCD_Exp_Prev_Total()
+            SetWCD_Exp_Sub_Yr()
+            SetWCD_Exp_Total()
+            SetWCD_Exp_Under_Over_Budget()
+            SetWCD_No()
+            SetWCD_Proj_Inc_ACB()
+            SetWCD_Project_No()
+            SetWCD_Project_Title()
+            SetWCD_Remark()
+            SetWCD_Request_Date()
+            SetWCD_Status()
+            SetWCD_Submit()
+            SetWCD_U_ID()
+            SetWCD_Unit_Location()
+            SetWCD_WCur_ID()
+            SetWCD_WDT_ID()
+
+            Me.IsNewRecord = True
+            If Me.DataSource.IsCreated Then
+                Me.IsNewRecord = False
+
+                Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
+            End If
+
+            Dim shouldResetControl As Boolean = False
+
+            'if current log in user is not the creator -> disable submit button
+            'only the creator can submit the document
+            Me.WCD_Exp_Cur_Yr.Style("text-align") = "right"
+            Me.WCD_Exp_Nxt_Yr.Style("text-align") = "right"
+            Me.WCD_Exp_Sub_Yr.Style("text-align") = "right"
+            Me.WCD_Exp_Total.Style("text-align") = "right"
+            Me.WCD_Exp_Prev_Total.Style("text-align") = "right"
+            Me.WCD_Exp_Budget.Style("text-align") = "right"
+            Me.WCD_Exp_Under_Over_Budget.Style("text-align") = "right"
+            If System.Web.HttpContext.Current.Session("UserID").ToString() <> Me.DataSource.WCD_U_ID.ToString() Then
+                Me.WCD_Submit.Enabled = False
+                Me.WCD_WDT_ID.Enabled = False
+                Me.btnChecked.Visible = True
+                Me.btnRemoveCheck.Visible = True
+                Me.SaveButton.Visible = False
+                '#################################
+                Me.WCD_No.BorderStyle = BorderStyle.Solid
+                Me.WCD_No.ReadOnly = True
+                Me.WCD_Request_Date.BorderStyle = BorderStyle.Solid
+                Me.WCD_Request_Date.ReadOnly = True
+                Me.WCD_Project_Title.BorderStyle = BorderStyle.Solid
+                Me.WCD_Project_Title.ReadOnly = True
+                Me.WCD_Unit_Location.BorderStyle = BorderStyle.Solid
+                Me.WCD_Unit_Location.ReadOnly = True
+                Me.WCD_Project_No.BorderStyle = BorderStyle.Solid
+                Me.WCD_Project_No.ReadOnly = True
+                Me.WCD_Remark.BorderStyle = BorderStyle.Solid
+                Me.WCD_Remark.ReadOnly = True
+                Me.WCD_Supplementary_Manual.BorderStyle = BorderStyle.Solid
+                Me.WCD_Supplementary_Manual.ReadOnly = True
+                Me.WCD_Status.BorderStyle = BorderStyle.Solid
+                Me.WCD_Status.ReadOnly = True
+                Me.WCD_Exp_Cur_Yr.BorderStyle = BorderStyle.Solid
+                Me.WCD_Exp_Cur_Yr.ReadOnly = True
+                Me.WCD_Exp_Nxt_Yr.BorderStyle = BorderStyle.Solid
+                Me.WCD_Exp_Nxt_Yr.ReadOnly = True
+                Me.WCD_Exp_Sub_Yr.BorderStyle = BorderStyle.Solid
+                Me.WCD_Exp_Sub_Yr.ReadOnly = True
+                Me.WCD_Exp_Total.BorderStyle = BorderStyle.Solid
+                Me.WCD_Exp_Total.ReadOnly = True
+                Me.WCD_Exp_Prev_Total.BorderStyle = BorderStyle.Solid
+                Me.WCD_Exp_Prev_Total.ReadOnly = True
+                Me.WCD_Exp_Budget.BorderStyle = BorderStyle.Solid
+                Me.WCD_Exp_Budget.ReadOnly = True
+                Me.WCD_Exp_Under_Over_Budget.BorderStyle = BorderStyle.Solid
+                Me.WCD_Exp_Under_Over_Budget.ReadOnly = True
+
+                Me.WCD_C_ID.Enabled = False
+                Me.WCD_Proj_Inc_ACB.Enabled = False
+                Me.WCD_Supplementary.Enabled = False
+                Me.WCD_Supplementary_WCD_ID.Enabled = False
+                Me.WCD_WDT_ID.Enabled = False
+                Me.WCD_Submit.Enabled = False
+                Me.WCD_WCur_ID.Enabled = False
+            Else 'creator
+                Me.WCD_Submit.Enabled = True
+                Me.WCD_WDT_ID.Enabled = True
+                Me.btnChecked.Visible = False
+                Me.btnRemoveCheck.Visible = False
+                Me.SaveButton.Visible = True
+
+
+                '#################################
+                'Me.WCD_C_ID.BorderStyle = BorderStyle.NotSet
+                'Me.WCD_C_ID.Enabled = True
+            End If
+
+            'since it is loaded -> find the minimum
+            System.Web.HttpContext.Current.Session("CAR_Min") = "0"
+            Dim sWhere As String = WCAR_Minimum1Table.WCM_C_ID.UniqueName & " = " & Me.WCD_C_ID.SelectedValue.ToString() & _
+            " And " & WCAR_Minimum1Table.WCM_WCur_ID.UniqueName & " = " & Me.WCD_WCur_ID.SelectedValue.ToString()
+            For Each oRec As WCAR_Minimum1Record In WCAR_Minimum1Table.GetRecords(sWhere, Nothing, 0, 100)
+                System.Web.HttpContext.Current.Session("CAR_Min") = oRec.WCM_Min.ToString()
+            Next
+
+            'added 9/6/2013: OVG request (return status) pepanes **09.26.2013
+            If Me.WCD_Status.Text = "Return" Then
+                Me.WCD_C_ID.Enabled = False
+                Me.WCD_No.Enabled = False
+                Me.WCD_Request_Date.Enabled = False
+                Me.WCD_Project_Title.Enabled = False
+                Me.WCD_Unit_Location.Enabled = False
+                Me.WCD_Project_No.Enabled = False
+                Me.WCD_Proj_Inc_ACB.Enabled = False
+                'Me.WCD_Remark.Enabled = False
+                Me.WCD_Supplementary.Enabled = False
+                Me.WCD_Supplementary_WCD_ID.Enabled = False
+                Me.WCD_Supplementary_Manual.Enabled = False
+                Me.WCD_WDT_ID.Enabled = False
+                Me.WCD_WCur_ID.Enabled = False
+                Me.WCD_Exp_Cur_Yr.Enabled = False
+                Me.WCD_Exp_Nxt_Yr.Enabled = False
+                Me.WCD_Exp_Sub_Yr.Enabled = False
+                Me.WCD_Exp_Total.Enabled = False
+                Me.WCD_Exp_Prev_Total.Enabled = False
+                Me.WCD_Exp_Budget.Enabled = False
+                Me.WCD_Exp_Under_Over_Budget.Enabled = False
+                Me.imbFind.Enabled = False
+                Me.imbRelated.Enabled = False
+
+                Dim oTab1 As WCAR_Doc_Checker1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
+                ''Dim oTab2 As WCAR_Doc_ProjClassRecordControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_ProjClassRecordControl"), WCAR_Doc_ProjClassRecordControl)
+                Dim oTab3 As WCAR_Doc_Checker1TableControlRow = DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_Checker1TableControlRow"), WCAR_Doc_Checker1TableControlRow)
+
+                oTab1.WCAR_Doc_CheckerAddButton.Enabled = False
+                ''oTab2.WCDoc_ProjClass_ID.Enabled = False
+                If Not IsNothing(oTab3) Then
+                    oTab3.WCDC_U_ID.Enabled = False
+                End If
+
+            End If
+
+            '04-19-2016 ryan start'
+
+            Dim wc1 As WhereClause = New WhereClause
+            Dim bCanBeVoided As Boolean = True
+
+            wc1.iAND(WCAR_Activity1Table.WCA_WCD_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.DataSource.WCD_ID.ToString())
+            For Each itemValue1 As WCAR_Activity1Record In WCAR_Activity1Table.GetRecords(wc1, Nothing, 0, 100)
+                If itemValue1.WCA_Status.ToString() = "Approved" Or itemValue1.WCA_Status.ToString() = "Rejected" Or _
+                itemValue1.WCA_Status.ToString() = "Voided" Or itemValue1.WCA_Status.ToString() = "Completed" Or _
+                Mid(itemValue1.WCA_Status.ToString(), 1, 6) = "System" Then
+                    bCanBeVoided = False
+                End If
+            Next
+
+            If Not bCanBeVoided Or Me.DataSource.WCD_U_ID.ToString() <> System.Web.HttpContext.Current.Session("UserIDNorth").ToString() Or _
+            Me.WCD_Status.Text = "Voided" Then
+                Me.btnVoid.Visible = False
+
+            ElseIf Not bCanBeVoided And Me.DataSource.WCD_U_ID.ToString() = System.Web.HttpContext.Current.Session("UserIDNorth").ToString() And _
+            Me.WCD_Status.Text = "For Review" Then
+
+                Me.btnVoid.Visible = True
+            End If
+
+            If Me.DataSource.WCD_U_ID.ToString() <> System.Web.HttpContext.Current.Session("UserIDNorth").ToString() Then
+                If Not bCanBeVoided Or Me.WCD_Status.Text = "Voided" Then
+                    Me.btnVoid.Visible = False
+                End If
+            ElseIf Me.DataSource.WCD_U_ID.ToString() = System.Web.HttpContext.Current.Session("UserIDNorth").ToString() Then
+                'note: even if there is already an Action done with this document but is Rejected back to the Creator -> 'For Review'
+                'enable the Voiding button
+                If Not bCanBeVoided And Me.WCD_Status.Text = "For Review" Then
+                    Me.btnVoid.Visible = True
+                ElseIf bCanBeVoided And Me.WCD_Status.Text = "Pending" Then
+                    Me.btnVoid.Visible = True
+                    'ElseIf Not bCanBeVoided And Me.WCD_Status.Text = "Pending" Then
+
+                Else
+                    Me.btnVoid.Visible = False
+                End If
+            End If
+
+            'end'
+
+
+        End Sub
+
+        Private Function Email_Message() As String
+            '------- format email
+            Dim sWhere1 As String = W_User1Table.W_U_ID.UniqueName & " = " & Me.WCD_U_ID.Text
+            Dim sUser As String = ""
+            For Each oRec As W_User1Record In W_User1Table.GetRecords(sWhere1, Nothing, 0, 100)
+                sUser = oRec.W_U_Full_Name.ToString()
+            Next
+            'Dim sWhere1 As String = Sel_SysSetupUsers_EmailView.SSU_RowID.UniqueName & " = " & Me.WCD_U_ID.Text
+            'Dim sUser As String = ""
+            'For Each oRec As Sel_SysSetupUsers_EmailRecord In Sel_SysSetupUsers_EmailView.GetRecords(sWhere1, Nothing, 0, 100)
+            '    sUser = oRec.SSU_FullName.ToString()
+            'Next
+
+            Dim sEmailContent As String = "Company: @C" & vbcrlf & vbcrlf & "Details:" & vbcrlf & "@D" & vbcrlf & _
+            vbcrlf & "Request Date: @RD" & _
+            vbcrlf & "Remarks: @Rem" & vbcrlf & "Total: @T"
+
+            sEmailContent = Replace(sEmailContent, "@C", Me.WCD_C_ID.SelectedItem.ToString())
+            sEmailContent = Replace(sEmailContent, "@D", Me.WCD_Project_Title.Text)
+            sEmailContent = Replace(sEmailContent, "@RD", Me.WCD_Request_Date.Text)
+            sEmailContent = Replace(sEmailContent, "@Rem", Me.WCD_Remark.Text)
+            sEmailContent = Replace(sEmailContent, "@T", Me.WCD_Exp_Cur_Yr.Text)
+            sEmailContent &= vbcrlf & "Creator: " & sUser
+            sEmailContent &= vbCrLf & vbCrLf & "http://eportal.anflocor.com"
+
+            Return sEmailContent
+            '------- format email		
+        End Function
+
+
+
+        Public Overrides Sub btnChecked_Click(ByVal sender As Object, ByVal args As EventArgs)
+            Dim url As String = "../sel_WCAR_Doc_Creator_Approver1/Show-Sel-WCAR-Doc-Creator-Approver1-Table.aspx"
+            Dim shouldRedirect As Boolean = True
+            Dim TargetKey As String = Nothing
+            Dim DFKA As String = Nothing
+            Dim id As String = Nothing
+            Dim value As String = Nothing
+
+            Try
+                ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction()
+
+                If (Not Me.Page.IsPageRefresh) Then
+                    'WCAR_Doc_CheckerRecord.AddRecord(Me.WCD_ID.Text, System.Web.HttpContext.Current.Session("UserID").ToString())
+                    Dim oRem As TextBox = DirectCast(Me.Page.FindControlRecursively("txtCoRequestRem"), TextBox)
+                    WCAR_Doc_Checker1Record.UpdateRecord(Me.WCD_ID.Text, System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "Concurred", oRem.Text)
+                    'send email to creator
+                    Send_Email_Notification(Me.WCD_U_ID.Text, _
+                    "CAR Co-Requester Concurred (CAR# " & Me.WCD_No.Text & ")", Email_Message())
+                End If
+                'WCAR_Doc_CheckerRecord.AddRecord(Me.WCD_ID.ToString(), System.Web.HttpContext.Current.Session("UserID").ToString())
+
+                url = Me.ModifyRedirectUrl(url, "", False)
+                url = Me.Page.ModifyRedirectUrl(url, "", False)
+                Me.Page.CommitTransaction(sender)
+
+            Catch ex As Exception
+                ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+            Finally
+                DbUtils.EndTransaction()
+            End Try
+
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
+            ElseIf Not TargetKey Is Nothing AndAlso _
+                        Not shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.CloseWindow(True)
+
+            End If
+        End Sub
+
+        Public Overrides Sub btnRemoveCheck_Click(ByVal sender As Object, ByVal args As EventArgs)
+
+            Dim url As String = "../sel_WCAR_Doc_Creator_Approver/Show-Sel-WCAR-Doc-Creator-Approver-Table.aspx"
+            Dim shouldRedirect As Boolean = True
+            Dim TargetKey As String = Nothing
+            Dim DFKA As String = Nothing
+            Dim id As String = Nothing
+            Dim value As String = Nothing
+            Try
+                ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction()
+
+                If (Not Me.Page.IsPageRefresh) Then
+                    Dim oRem As TextBox = DirectCast(Me.Page.FindControlRecursively("txtCoRequestRem"), TextBox)
+                    'WCAR_Doc_CheckerRecord.AddRecord(Me.WCD_ID.Text, System.Web.HttpContext.Current.Session("UserID").ToString())
+                    WCAR_Doc_Checker1Record.UpdateRecord(Me.WCD_ID.Text, System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "", oRem.Text)
+                End If
+
+                url = Me.ModifyRedirectUrl(url, "", False)
+                url = Me.Page.ModifyRedirectUrl(url, "", False)
+                Me.Page.CommitTransaction(sender)
+
+            Catch ex As Exception
+                ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+            Finally
+                DbUtils.EndTransaction()
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
+            ElseIf Not TargetKey Is Nothing AndAlso _
+                        Not shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.CloseWindow(True)
+
+            End If
+        End Sub
+
+
+
+
+        Public Overrides Sub SaveButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+
+
+            Dim url As String = "../sel_WCAR_Doc_Creator_Approver1/Show-Sel-WCAR-Doc-Creator-Approver1-Table.aspx"
+
+            If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+
+            Dim shouldRedirect As Boolean = True
+            Dim target As String = ""
+
+            Try
+
+                ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction()
+
+
+                If (Not Me.Page.IsPageRefresh) Then
+                    Me.Page.SaveData()
+                End If
+
+
+                url = Me.ModifyRedirectUrl(url, "", True)
+                url = Me.Page.ModifyRedirectUrl(url, "", True)
+                Me.Page.CommitTransaction(sender)
+            Catch ex As Exception
+
+                ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+            Finally
+                DbUtils.EndTransaction()
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
+
+            End If
+        End Sub
+
+		Public Overrides Sub CancelButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+
+
+            Dim url As String = "../sel_WCAR_Doc_Creator_Approver1/Show-Sel-WCAR-Doc-Creator-Approver-Table1.aspx"
+
+            If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+
+            Dim shouldRedirect As Boolean = True
+            Dim target As String = ""
+
+            Try
+
+                ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction()
+
+                url = Me.ModifyRedirectUrl(url, "", True)
+                url = Me.Page.ModifyRedirectUrl(url, "", True)
+
+            Catch ex As Exception
+
+                ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+            Finally
+                DbUtils.EndTransaction()
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
+
+            End If
+        End Sub
+
+
+		Public Overrides Sub CancelButton1_Click(ByVal sender As Object, ByVal args As EventArgs)
+
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            'cezar'
+
+            Dim url As String = "../sel_WCAR_Doc_Creator_Approver1/Show-Sel-WCAR-Doc-Creator-Approver-Table1.aspx"
+
+            If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+
+            Dim shouldRedirect As Boolean = True
+            Dim target As String = ""
+
+            Try
+
+                ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction()
+
+                url = Me.ModifyRedirectUrl(url, "", True)
+                url = Me.Page.ModifyRedirectUrl(url, "", True)
+
+            Catch ex As Exception
+
+                ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+            Finally
+                DbUtils.EndTransaction()
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
+
+            End If
+        End Sub
+
+
+
+        Public Overrides Sub btnVoid_Click(ByVal sender As Object, ByVal args As EventArgs)
+
+
+            Dim url As String = "../sel_WCAR_Doc_Creator_Approver1/Show-Sel-WCAR-Doc-Creator-Approver1-Table.aspx"
+
+            If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+
+            Dim shouldRedirect As Boolean = True
+            Try
+                'note: search Activity table for same DOC ID -> use enumeration to update Status -> 'Voided'
+                'note: update WCAR_Doc record Status -> 'Voided'
+
+                Dim wc4 As WhereClause = New WhereClause
+                Dim bExist As Boolean = False
+
+                If Me.WCD_Submit.Text = "Yes" And Me.WCD_Status.Text = "Pending" Then
+
+                    wc4.iAND(WCAR_Activity1Table.WCA_WCD_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.WCD_ID.Text)
+
+                    For Each itemValue4 As WCAR_Activity1Record In WCAR_Activity1Table.GetRecords(wc4, Nothing, 0, 100)
+                        'note: update Activity table (other user(s) if multiple approvers) -> 'System Voided'
+                        If itemValue4.WCA_Status.ToString() <> "Pending" Then
+                            'approver acted -> abort voiding
+                            bExist = True
+                            Throw New Exception("This item cannot be voided. Refresh this page to view the document status.")
+                        End If
+                        'WCAR_ActivityRecord.UpdateRecord(itemValue4.WCA_ID.ToString(), "System Voided")
+                    Next
+
+                    For Each itemValue4 As WCAR_Activity1Record In WCAR_Activity1Table.GetRecords(wc4, Nothing, 0, 100)
+                        WCAR_Activity1Record.UpdateRecord(itemValue4.WCA_ID.ToString(), "System Voided")
+                    Next
+
+                    url = Me.ModifyRedirectUrl(url, "", True)
+                    url = Me.Page.ModifyRedirectUrl(url, "", True)
+
+                End If
+
+                If bExist Then Exit Sub
+
+                'note: void CAR
+                Dim wc6 As WhereClause = New WhereClause
+                wc6.iAND(WCAR_Doc1Table.WCD_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.WCD_ID.Text)
+                For Each itemValue6 As WCAR_Doc1Record In WCAR_Doc1Table.GetRecords(wc6, Nothing, 0, 100)
+                    WCAR_Doc1Record.UpdateRecord(itemValue6.WCD_ID.ToString(), "Voided")
+                Next
+
+                url = Me.ModifyRedirectUrl(url, "", True)
+                url = Me.Page.ModifyRedirectUrl(url, "", True)
+
+                Dim WCAR_DocTableControlObj As WCAR_Doc1RecordControl = DirectCast(Me.Page.FindControlRecursively("WCAR_Doc1RecordControl"), WCAR_Doc1RecordControl)
+                WCAR_DocTableControlObj.ResetData = True
+            Catch ex As Exception
+                Me.Page.ErrorOnPage = True
+                shouldRedirect = False
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+            Finally
+
+            End Try
+
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
+
+            End If
+
+        End Sub
+
+        Public Overrides Sub SetWCD_Request_Date()
+
+
+
+
+            ' Set the WCD_Request_Date TextBox on the webpage with value from the
+            ' DatabaseANFLO-WF%dbo.WCAR_Doc database record.
+
+            ' Me.DataSource is the DatabaseANFLO-WF%dbo.WCAR_Doc record retrieved from the database.
+            ' Me.WCD_Request_Date is the ASP:TextBox on the webpage.
+
+            ' You can modify this method directly, or replace it with a call to
+            '     MyBase.SetWCD_Request_Date()
+            ' and add your own code before or after the call to the MyBase function.
+
+
+
+            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Request_DateSpecified Then
+
+                ' If the WCD_Request_Date is non-NULL, then format the value.
+
+                ' The Format method will use the Display Format
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Request_Date, "g")
+
+                Me.WCD_Request_Date.Text = formattedValue
+                Me.WCD_Request_Date.Text = DateTime.Parse(Me.WCD_Request_Date.Text).ToShortDateString.ToString()
+            Else
+
+                ' WCD_Request_Date is NULL in the database, so use the Default Value.  
+                ' Default Value could also be NULL.
+
+                Me.WCD_Request_Date.Text = WCAR_Doc1Table.WCD_Request_Date.Format(WCAR_Doc1Table.WCD_Request_Date.DefaultValue, "g")
+
+            End If
+
+            AddHandler Me.WCD_Request_Date.TextChanged, AddressOf WCD_Request_Date_TextChanged
+
+        End Sub
+
+
+
 
 End Class
 
@@ -126,17 +1620,15 @@ Public Class BaseWCAR_Doc_Attach1TableControlRow
         Protected Overridable Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
          
               ' Show confirmation message on Click
-              Me.DeleteRowButton.Attributes.Add("onClick", "return (confirm(""" & (CType(Me.Page,BaseApplicationPage)).GetResourceValue("DeleteRecordConfirm", "ePortalWFApproval") & """));")
+              Me.WCAR_Doc_AttachRowDeleteButton.Attributes.Add("onClick", "return (confirm(""" & (CType(Me.Page,BaseApplicationPage)).GetResourceValue("DeleteRecordConfirm", "ePortalWFApproval") & """));")
                   
         
               ' Register the event handlers.
           
-              AddHandler Me.DeleteRowButton.Click, AddressOf DeleteRowButton_Click
+              AddHandler Me.WCAR_Doc_AttachRowDeleteButton.Click, AddressOf WCAR_Doc_AttachRowDeleteButton_Click
                         
-              AddHandler Me.EditRowButton.Click, AddressOf EditRowButton_Click
-                        
-              AddHandler Me.WCDA_WAT_ID.SelectedIndexChanged, AddressOf WCDA_WAT_ID_SelectedIndexChanged                  
-                
+              AddHandler Me.WCDA_WAT_ID.SelectedIndexChanged, AddressOf WCDA_WAT_ID_SelectedIndexChanged
+            
               AddHandler Me.WCDA_Desc.TextChanged, AddressOf WCDA_Desc_TextChanged
             
     
@@ -198,17 +1690,11 @@ Public Class BaseWCAR_Doc_Attach1TableControlRow
             ' Call the Set methods for each controls on the panel
         
                 
-                
-                
                 SetWCDA_Desc()
-                SetWCDA_DescLabel()
                 
-                SetWCDA_FileLabel()
+                SetWCDA_FileImage()
                 SetWCDA_WAT_ID()
-                SetWCDA_WAT_IDLabel()
-                SetDeleteRowButton()
-              
-                SetEditRowButton()
+                SetWCAR_Doc_AttachRowDeleteButton()
               
       
       
@@ -278,6 +1764,26 @@ Public Class BaseWCAR_Doc_Attach1TableControlRow
                                  
         End Sub
                 
+        Public Overridable Sub SetWCDA_FileImage()
+
+                  
+                
+            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCDA_FileSpecified Then
+                
+                Me.WCDA_FileImage.Text = Page.GetResourceValue("Txt:OpenFile", "ePortalWFApproval")
+                        
+                Me.WCDA_FileImage.OnClientClick = "window.open('../Shared/ExportFieldValue.aspx?Table=" & _
+                            Me.Page.Encrypt("WCAR_Doc_Attach1") & _
+                            "&Field=" & Me.Page.Encrypt("WCDA_File") & _
+                            "&Record=" & Me.Page.Encrypt(HttpUtility.UrlEncode(Me.DataSource.GetID().ToString())) & _
+                                "','','left=100,top=50,width=400,height=300,resizable,scrollbars=1');return false;"
+                   
+                Me.WCDA_FileImage.Visible = True
+            Else
+                Me.WCDA_FileImage.Visible = False
+            End If
+        End Sub
+                
         Public Overridable Sub SetWCDA_WAT_ID()
 
                   
@@ -298,11 +1804,11 @@ Public Class BaseWCAR_Doc_Attach1TableControlRow
             End If
             
         
-            ' Set the WCDA_WAT_ID QuickSelector on the webpage with value from the
+            ' Set the WCDA_WAT_ID DropDownList on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc_Attach database record.
             
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc_Attach record retrieved from the database.
-            ' Me.WCDA_WAT_ID is the ASP:QuickSelector on the webpage.
+            ' Me.WCDA_WAT_ID is the ASP:DropDownList on the webpage.
             
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCDA_WAT_ID()
@@ -326,94 +1832,16 @@ Public Class BaseWCAR_Doc_Attach1TableControlRow
                 				
             End If			
                 
-            ' Add the Please Select item.
-            If selectedValue Is Nothing OrElse selectedValue = ""  Then
-                  MiscUtils.ResetSelectedItem(Me.WCDA_WAT_ID, New ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
-            End If              
-            
             
                   
             ' Populate the item(s) to the control
             
-            Me.WCDA_WAT_ID.SetFieldMaxLength(50)
-            
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) 
-            variables = New System.Collections.Generic.Dictionary(Of String, Object)              
-            Dim evaluator As FormulaEvaluator
-            evaluator = New FormulaEvaluator
-              
-            If Not selectedValue Is Nothing AndAlso _
-                selectedValue.Trim <> "" AndAlso _
-                Not SetSelectedValue(Me.WCDA_WAT_ID, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.WCDA_WAT_ID, selectedValue)Then
-
-                ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.WAttach_Type.WAT_ID = selectedValue
-                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
-                Dim whereClause2 As WhereClause = New WhereClause()
-                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(WAttach_Type1Table.WAT_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
-                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
-
-                Try
-                    ' Execute the query
-                    Dim rc() As WAttach_Type1Record = WAttach_Type1Table.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
-                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-                      ' if find a record, add it to the dropdown and set it as selected item
-                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
-                      Dim itemValue As WAttach_Type1Record = DirectCast(rc(0), WAttach_Type1Record)
-                        ' Create the item and add to the list.
-                        Dim cvalue As String = Nothing
-                        Dim fvalue As String = Nothing
-                        If itemValue.WAT_IDSpecified Then
-                            cvalue = itemValue.WAT_ID.ToString() 
-                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc_Attach1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc_Attach1Table.WCDA_WAT_ID)
-                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc_Attach1Table.WCDA_WAT_ID.IsApplyDisplayAs Then
-                          fvalue = WCAR_Doc_Attach1Table.GetDFKA(itemValue, WCAR_Doc_Attach1Table.WCDA_WAT_ID)
-                          End If
-                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                          fvalue = itemValue.Format(WAttach_Type1Table.WAT_Name)
-                          End If
-                        
-                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-                              ResetSelectedItem(Me.WCDA_WAT_ID, New ListItem(fvalue, cvalue))
-                            End If
-                        End If
-                Catch
-                End Try
-
-            End If					
-                        
-              Dim url as String = Me.ModifyRedirectUrl("../WAttach_Type1/WAttach-Type-QuickSelector1.aspx", "", True)
-              
-              url = Me.Page.ModifyRedirectUrl(url, "", True)                                  
-              
-              url &= "?Target=" & Me.WCDA_WAT_ID.ClientID & "&DFKA=" & CType(Me.Page, BaseApplicationPage).Encrypt("WAT_Name")& "&IndexField=" & CType(Me.Page, BaseApplicationPage).Encrypt("WAT_ID")& "&EmptyValue=" & CType(Me.Page, BaseApplicationPage).Encrypt("--PLEASE_SELECT--") & "&EmptyDisplayText=" & CType(Me.Page, BaseApplicationPage).Encrypt(Me.Page.GetResourceValue("Txt:PleaseSelect"))& "&Mode=" & CType(Me.Page, BaseApplicationPage).Encrypt("FieldValueSingleSelection") & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup")
-              
-              
-              Me.WCDA_WAT_ID.Attributes.Item("onClick") = "initializePopupPage(this, '" & url & "', " & Convert.ToString(WCDA_WAT_ID.AutoPostBack).ToLower() & ", event); return false;"        
-                  
-                    
+            Me.PopulateWCDA_WAT_IDDropDownList(selectedValue, 100)              
+                
                   
            
              
         End Sub
-                
-        Public Overridable Sub SetWCDA_DescLabel()
-
-                  
-                  
-                  End Sub
-                
-        Public Overridable Sub SetWCDA_FileLabel()
-
-                  
-                  
-                  End Sub
-                
-        Public Overridable Sub SetWCDA_WAT_IDLabel()
-
-                  
-                  
-                  End Sub
                 
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
@@ -522,8 +1950,8 @@ Public Class BaseWCAR_Doc_Attach1TableControlRow
         
         Dim parentCtrl As WCAR_Doc1RecordControl
           
-          
-          parentCtrl = DirectCast(Me.Page.FindControlRecursively("WCAR_Doc1RecordControl"), WCAR_Doc1RecordControl)				  
+          				  
+          parentCtrl = DirectCast(MiscUtils.GetParentControlObject(Me, "WCAR_Doc1RecordControl"), WCAR_Doc1RecordControl)				  
               
           If (Not IsNothing(parentCtrl) AndAlso IsNothing(parentCtrl.DataSource)) 
                 ' Load the record if it is not loaded yet.
@@ -616,7 +2044,7 @@ Public Class BaseWCAR_Doc_Attach1TableControlRow
                 
         Public Overridable Sub GetWCDA_WAT_ID()
          
-            ' Retrieve the value entered by the user on the WCDA_WAT_ID ASP:QuickSelector, and
+            ' Retrieve the value entered by the user on the WCDA_WAT_ID ASP:DropDownList, and
             ' save it into the WCDA_WAT_ID field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc_Attach record.
                         
             ' Custom validation should be performed in Validate, not here.
@@ -745,18 +2173,163 @@ Public Class BaseWCAR_Doc_Attach1TableControlRow
     
         ' Generate set method for buttons
         
-        Public Overridable Sub SetDeleteRowButton()                
+        Public Overridable Sub SetWCAR_Doc_AttachRowDeleteButton()                
               
    
         End Sub
             
-        Public Overridable Sub SetEditRowButton()                
-              
-   
-        End Sub
+                        
+        Public Overridable Function CreateWhereClause_WCDA_WAT_IDDropDownList() As WhereClause
+            ' By default, we simply return a new WhereClause.
+            ' Add additional where clauses to restrict the items shown in the dropdown list.
+            						
+            ' This WhereClause is for the DatabaseANFLO-WFN%dbo.WAttach_Type table.
+            ' Examples:
+            ' wc.iAND(WAttach_Type1Table.WAT_Name, BaseFilter.ComparisonOperator.EqualsTo, "XYZ")
+            ' wc.iAND(WAttach_Type1Table.Active, BaseFilter.ComparisonOperator.EqualsTo, "1")
             
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+            				
+        End Function
+                  
+        ' Fill the WCDA_WAT_ID list.
+        Protected Overridable Sub PopulateWCDA_WAT_IDDropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+            		  					                
+            Me.WCDA_WAT_ID.Items.Clear()
+            
+                    
+            ' 1. Setup the static list items        
+            
+            ' Add the Please Select item.
+            Me.WCDA_WAT_ID.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            		  			
+            ' 2. Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCDA_WAT_IDDropDownList function.
+            ' It is better to customize the where clause there.
+            
+            Dim wc As WhereClause = CreateWhereClause_WCDA_WAT_IDDropDownList()
+            ' Create the ORDER BY clause to sort based on the displayed value.			
+                
+
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(WAttach_Type1Table.WAT_Name, OrderByItem.OrderDir.Asc)
+
+                      Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      
+            ' 3. Read a total of maxItems from the database and insert them		
+            Dim itemValues() As WAttach_Type1Record = Nothing
+            Dim evaluator As New FormulaEvaluator                
+            If wc.RunQuery
+                Dim counter As Integer = 0
+                Dim pageNum As Integer = 0
+                Dim listDuplicates As New ArrayList()
+
+                Do
+                    itemValues = WAttach_Type1Table.GetRecords(wc, orderBy, pageNum, maxItems)
+                    For each itemValue As WAttach_Type1Record In itemValues
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.WAT_IDSpecified Then
+                            cvalue = itemValue.WAT_ID.ToString() 
+                            
+                            If counter < maxItems AndAlso Me.WCDA_WAT_ID.Items.FindByValue(cvalue) Is Nothing Then
+                            
+                                Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc_Attach1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc_Attach1Table.WCDA_WAT_ID)
+                                If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc_Attach1Table.WCDA_WAT_ID.IsApplyDisplayAs Then
+                                fvalue = WCAR_Doc_Attach1Table.GetDFKA(itemValue, WCAR_Doc_Attach1Table.WCDA_WAT_ID)
+                                End If
+                                If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                                fvalue = itemValue.Format(WAttach_Type1Table.WAT_Name)
+                                End If
+                              
+                                If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+
+                                If (IsNothing(fvalue)) Then
+                                   fvalue = ""
+                                End If
+
+                                fvalue = fvalue.Trim()
+
+                                If ( fvalue.Length > 50 ) Then
+                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                End If
+
+                                Dim dupItem As ListItem = Me.WCDA_WAT_ID.Items.FindByText(fvalue)
+                          
+                                If Not IsNothing(dupItem) Then
+                                    listDuplicates.Add(fvalue)
+                                    If Not String.IsNullOrEmpty(dupItem.Value) Then
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
+                                    End If
+                                End If
+
+                                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
+                                Me.WCDA_WAT_ID.Items.Add(newItem)
+
+                                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
+                                End If
+
+                                counter += 1			  
+                            End If
+                        End If
+                    Next
+                    pageNum += 1
+                Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
+            End If
+                            
+                    
+            ' 4. Set the selected value (insert if not already present).
+              
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.WCDA_WAT_ID, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.WCDA_WAT_ID, selectedValue)Then
+
+                ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.WAttach_Type.WAT_ID = selectedValue
+                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
+                Dim whereClause2 As WhereClause = New WhereClause()
+                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(WAttach_Type1Table.WAT_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
+                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
+
+                Try
+                    ' Execute the query
+                    Dim rc() As WAttach_Type1Record = WAttach_Type1Table.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
+                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      ' if find a record, add it to the dropdown and set it as selected item
+                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
+                      Dim itemValue As WAttach_Type1Record = DirectCast(rc(0), WAttach_Type1Record)
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.WAT_IDSpecified Then
+                            cvalue = itemValue.WAT_ID.ToString() 
+                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc_Attach1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc_Attach1Table.WCDA_WAT_ID)
+                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc_Attach1Table.WCDA_WAT_ID.IsApplyDisplayAs Then
+                          fvalue = WCAR_Doc_Attach1Table.GetDFKA(itemValue, WCAR_Doc_Attach1Table.WCDA_WAT_ID)
+                          End If
+                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                          fvalue = itemValue.Format(WAttach_Type1Table.WAT_Name)
+                          End If
+                        
+                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+                              ResetSelectedItem(Me.WCDA_WAT_ID, New ListItem(fvalue, cvalue))
+                            End If
+                        End If
+                Catch
+                End Try
+
+            End If					
+                        
+                
+        End Sub
+        
+              
         ' event handler for ImageButton
-        Public Overridable Sub DeleteRowButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+        Public Overridable Sub WCAR_Doc_AttachRowDeleteButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
               
     Try
     
@@ -791,60 +2364,24 @@ Public Class BaseWCAR_Doc_Attach1TableControlRow
     
         End Sub
         
-        ' event handler for ImageButton
-        Public Overridable Sub EditRowButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-            ' The redirect URL is set on the Properties, Custom Properties or Actions.
-            ' The ModifyRedirectURL call resolves the parameters before the
-            ' Response.Redirect redirects the page to the URL.  
-            ' Any code after the Response.Redirect call will not be executed, since the page is
-            ' redirected to the URL.
-            
-              
-                  Dim url As String = "../Shared/ConfigureEditRecord.aspx"
-                  
-                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
-                  
-        Dim shouldRedirect As Boolean = True
-        Dim target As String = ""
-      
-    Try
-    
-      ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction
-                
-            url = Me.ModifyRedirectUrl(url, "",True)
-            url = Me.Page.ModifyRedirectUrl(url, "",True)
-          
-            Catch ex As Exception
-            
-       ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                shouldRedirect = False
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-                DbUtils.EndTransaction
-            End Try
-            If shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-      Me.Page.Response.Redirect(url)
-        
-            End If
-        End Sub
-        
         Protected Overridable Sub WCDA_WAT_ID_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
 
+            ' for the value inserted by quick add button or large list selector, 
+            ' the value is necessary to be inserted by this event during postback 
+            Dim val As String = CType(Me.Page.Session()(WCDA_WAT_ID.ClientID & "_SelectedValue"), String)
+            Dim displayText As String = CType(Me.Page.Session()(WCDA_WAT_ID.ClientID & "_SelectedDisplayText"), String)
+            If displayText <> "" AndAlso val <> "" Then
+                Me.WCDA_WAT_ID.Items.Add(New ListItem(displayText, val))
+                Me.WCDA_WAT_ID.SelectedIndex = Me.WCDA_WAT_ID.Items.Count - 1
+                Me.Page.Session.Remove(WCDA_WAT_ID.ClientID & "_SelectedValue")
+                Me.Page.Session.Remove(WCDA_WAT_ID.ClientID & "_SelectedDisplayText")
+            End If
 
           									
                 
                 
         End Sub
-                      
-                    
+            
         Protected Overridable Sub WCDA_Desc_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
                     
               End Sub
@@ -925,60 +2462,36 @@ Public Class BaseWCAR_Doc_Attach1TableControlRow
 
 #Region "Helper Properties"
         
-        Public ReadOnly Property DeleteRowButton() As System.Web.UI.WebControls.ImageButton
+        Public ReadOnly Property WCAR_Doc_AttachRowDeleteButton() As System.Web.UI.WebControls.ImageButton
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "DeleteRowButton"), System.Web.UI.WebControls.ImageButton)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_Doc_AttachRowDeleteButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
         
-        Public ReadOnly Property EditRowButton() As System.Web.UI.WebControls.ImageButton
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "EditRowButton"), System.Web.UI.WebControls.ImageButton)
-            End Get
-        End Property
-        
-        Public ReadOnly Property SelectRow1() As System.Web.UI.WebControls.CheckBox
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SelectRow1"), System.Web.UI.WebControls.CheckBox)
-            End Get
-        End Property
-            
         Public ReadOnly Property WCDA_Desc() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDA_Desc"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
             
-        Public ReadOnly Property WCDA_DescLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDA_DescLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
         Public ReadOnly Property WCDA_File() As System.Web.UI.WebControls.FileUpload
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDA_File"), System.Web.UI.WebControls.FileUpload)
             End Get
         End Property
             
-        Public ReadOnly Property WCDA_FileLabel() As System.Web.UI.WebControls.Literal
+        Public ReadOnly Property WCDA_FileImage() As System.Web.UI.WebControls.LinkButton
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDA_FileLabel"), System.Web.UI.WebControls.Literal)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDA_FileImage"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-        
-              Public ReadOnly Property WCDA_WAT_ID() As BaseClasses.Web.UI.WebControls.QuickSelector
-                  Get
-                      Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDA_WAT_ID"), BaseClasses.Web.UI.WebControls.QuickSelector)
-              End Get
-              End Property
             
-        Public ReadOnly Property WCDA_WAT_IDLabel() As System.Web.UI.WebControls.Literal
+        Public ReadOnly Property WCDA_WAT_ID() As System.Web.UI.WebControls.DropDownList
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDA_WAT_IDLabel"), System.Web.UI.WebControls.Literal)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDA_WAT_ID"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
-        
+            
 #End Region
 
 #Region "Helper Functions"
@@ -1131,17 +2644,7 @@ Public Class BaseWCAR_Doc_Attach1TableControl
               Me.DeleteButton.Attributes.Add("onClick", "return (confirm(""" & (CType(Me.Page,BaseApplicationPage)).GetResourceValue("DeleteConfirm", "ePortalWFApproval") & """));")
       
             ' Setup the pagination events.
-            
-              AddHandler Me.Pagination.FirstPage.Click, AddressOf Pagination_FirstPage_Click
                         
-              AddHandler Me.Pagination.LastPage.Click, AddressOf Pagination_LastPage_Click
-                        
-              AddHandler Me.Pagination.NextPage.Click, AddressOf Pagination_NextPage_Click
-                        
-              AddHandler Me.Pagination.PageSizeButton.Click, AddressOf Pagination_PageSizeButton_Click
-                        
-              AddHandler Me.Pagination.PreviousPage.Click, AddressOf Pagination_PreviousPage_Click
-                                    
             Dim url As String = ""  'to avoid warning in VS 
             url = "" 'to avoid warning in VS 
             ' Setup the sorting events.
@@ -1395,10 +2898,12 @@ Public Class BaseWCAR_Doc_Attach1TableControl
                 
                 
                 
-                
+                SetLiteral31()
                 SetSortByLabel1()
                 SetSortControl1()
-                
+                SetWCDA_DescLabel()
+                SetWCDA_FileLabel()
+                SetWCDA_WAT_IDLabel()
                 SetAddButton()
               
                 SetDeleteButton()
@@ -1548,34 +3053,9 @@ Public Class BaseWCAR_Doc_Attach1TableControl
 
             ' Bind the pagination labels.
         
-            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then                      
-                    
-                Me.Pagination.CurrentPage.Text = (Me.PageIndex + 1).ToString()
-            Else
-                Me.Pagination.CurrentPage.Text = "0"
-            End If
-            Me.Pagination.PageSize.Text = Me.PageSize.ToString()
 
             ' Bind the buttons for WCAR_Doc_Attach1TableControl pagination.
         
-            Me.Pagination.FirstPage.Enabled = Not (Me.PageIndex = 0)
-            If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
-                Me.Pagination.LastPage.Enabled = True
-            ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.Pagination.LastPage.Enabled = False            
-            Else                               ' if the total pages is the last page, disable last and next buttons
-                Me.Pagination.LastPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
-            End If
-          
-            If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
-                Me.Pagination.NextPage.Enabled = True
-            ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.Pagination.NextPage.Enabled = False            
-            Else                               ' if the total pages is the last page, disable last and next buttons
-                Me.Pagination.NextPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
-            End If
-          
-            Me.Pagination.PreviousPage.Enabled = Not (Me.PageIndex = 0)
 
 
         End Sub
@@ -1655,15 +3135,15 @@ Public Class BaseWCAR_Doc_Attach1TableControl
               
       Dim selectedRecordKeyValue as KeyValue = New KeyValue()
     
-              Dim wCAR_Doc1RecordControlObj As ePortalWFApproval.UI.Controls.Edit_WCAR_Doc1.WCAR_Doc1RecordControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc1RecordControl"), ePortalWFApproval.UI.Controls.Edit_WCAR_Doc1.WCAR_Doc1RecordControl)
-              
+              Dim wCAR_Doc1RecordControlObj as WCAR_Doc1RecordControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WCAR_Doc1RecordControl") ,WCAR_Doc1RecordControl)
+                              
                 If (Not IsNothing(wCAR_Doc1RecordControlObj) AndAlso Not IsNothing(wCAR_Doc1RecordControlObj.GetRecord()) AndAlso wCAR_Doc1RecordControlObj.GetRecord().IsCreated AndAlso Not IsNothing(wCAR_Doc1RecordControlObj.GetRecord().WCD_ID))
                     wc.iAND(WCAR_Doc_Attach1Table.WCDA_WCD_ID, BaseFilter.ComparisonOperator.EqualsTo, wCAR_Doc1RecordControlObj.GetRecord().WCD_ID.ToString())
                     selectedRecordKeyValue.AddElement(WCAR_Doc_Attach1Table.WCDA_WCD_ID.InternalName, wCAR_Doc1RecordControlObj.GetRecord().WCD_ID.ToString())
                 Else
                     wc.RunQuery = False
-                    Return wc
-                End If
+                    Return wc                    
+                End If          
               
       HttpContext.Current.Session("WCAR_Doc_Attach1TableControlWhereClause") = selectedRecordKeyValue.ToXmlString()
       
@@ -1845,12 +3325,6 @@ Public Class BaseWCAR_Doc_Attach1TableControl
     
         Protected Overridable Sub GetPageSize()
         
-            If Me.Pagination.PageSize.Text.Trim <> "" Then
-                Try
-                    'Me.PageSize = Integer.Parse(Me.Pagination.PageSize.Text)
-                Catch ex As Exception
-                End Try
-            End If
         End Sub
 
         Protected Overridable Sub AddNewRecords()
@@ -1880,6 +3354,9 @@ Public Class BaseWCAR_Doc_Attach1TableControl
         
                         If recControl.WCDA_Desc.Text <> "" Then
                             rec.Parse(recControl.WCDA_Desc.Text, WCAR_Doc_Attach1Table.WCDA_Desc)
+                        End If
+                        If recControl.WCDA_FileImage.Text <> "" Then
+                            rec.Parse(recControl.WCDA_FileImage.Text, WCAR_Doc_Attach1Table.WCDA_File)
                         End If
                         If MiscUtils.IsValueSelected(recControl.WCDA_WAT_ID) Then
                             rec.Parse(recControl.WCDA_WAT_ID.SelectedItem.Value, WCAR_Doc_Attach1Table.WCDA_WAT_ID)
@@ -1952,6 +3429,16 @@ Public Class BaseWCAR_Doc_Attach1TableControl
       
         ' Create Set, WhereClause, and Populate Methods
         
+        Public Overridable Sub SetLiteral31()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal31.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetSortByLabel1()
 
                   
@@ -1959,6 +3446,36 @@ Public Class BaseWCAR_Doc_Attach1TableControl
                       'Code for the text property is generated inside the .aspx file.
                       'To override this property you can uncomment the following property and add your own value.
                       'Me.SortByLabel1.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetWCDA_DescLabel()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCDA_DescLabel.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetWCDA_FileLabel()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCDA_FileLabel.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetWCDA_WAT_IDLabel()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCDA_WAT_IDLabel.Text = "Some value"
                     
                   End Sub
                 
@@ -2127,7 +3644,7 @@ Public Class BaseWCAR_Doc_Attach1TableControl
             End If
             
             
-            Dim Pagination As Control = Me.FindControl("Pagination")
+            Dim Pagination As Control = Me.FindControl("")
              Dim PaginationType As String = ""
              If Not (Pagination Is Nothing) Then
                 Dim Summary As Control = Pagination.FindControl("_Summary")
@@ -2210,116 +3727,6 @@ Public Class BaseWCAR_Doc_Attach1TableControl
                     
 
         ' Generate the event handling functions for pagination events.
-        
-        ' event handler for ImageButton
-        Public Overridable Sub Pagination_FirstPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-            Me.PageIndex = 0
-            Me.DataChanged = True
-      
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
-        ' event handler for ImageButton
-        Public Overridable Sub Pagination_LastPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-            Me.DisplayLastPage = True
-            Me.DataChanged = True
-      
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
-        ' event handler for ImageButton
-        Public Overridable Sub Pagination_NextPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-            Me.PageIndex += 1
-            Me.DataChanged = True
-      
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
-        ' event handler for LinkButton
-        Public Overridable Sub Pagination_PageSizeButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-              
-    Try
-    
-            Me.DataChanged = True
-      
-            Me.PageSize = Me.Pagination.GetCurrentPageSize()
-      
-            Me.PageIndex = Integer.Parse(Me.Pagination.CurrentPage.Text) - 1
-          
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
-        ' event handler for ImageButton
-        Public Overridable Sub Pagination_PreviousPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-            If Me.PageIndex > 0 Then
-                Me.PageIndex -= 1
-                Me.DataChanged = True
-            End If
-      
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
         
 
         ' Generate the event handling functions for sorting events.
@@ -2565,11 +3972,11 @@ Public Class BaseWCAR_Doc_Attach1TableControl
           End Get
           End Property
         
-        Public ReadOnly Property Pagination() As ePortalWFApproval.UI.IPaginationModern
+        Public ReadOnly Property Literal31() As System.Web.UI.WebControls.Literal
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Pagination"), ePortalWFApproval.UI.IPaginationModern)
-          End Get
-          End Property
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal31"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
         
         Public ReadOnly Property SortByLabel1() As System.Web.UI.WebControls.Label
             Get
@@ -2583,12 +3990,24 @@ Public Class BaseWCAR_Doc_Attach1TableControl
           End Get
           End Property
         
-        Public ReadOnly Property ToggleAll1() As System.Web.UI.WebControls.CheckBox
+        Public ReadOnly Property WCDA_DescLabel() As System.Web.UI.WebControls.Literal
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ToggleAll1"), System.Web.UI.WebControls.CheckBox)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDA_DescLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-            
+        
+        Public ReadOnly Property WCDA_FileLabel() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDA_FileLabel"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property WCDA_WAT_IDLabel() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDA_WAT_IDLabel"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
 #End Region
 
 #Region "Helper Functions"
@@ -2641,37 +4060,14 @@ Public Class BaseWCAR_Doc_Attach1TableControl
         End Function
         
           
-        Public Overridable Function GetSelectedRecordIndex() As Integer
-            Dim counter As Integer = 0
-            Dim recControl As WCAR_Doc_Attach1TableControlRow
-            For Each recControl In Me.GetRecordControls()
-                If recControl.SelectRow1.Checked Then
-                    Return counter
-                End If
-                counter += 1
-            Next
-            Return -1
-        End Function
-        
         Public Overridable Function GetSelectedRecordControl() As WCAR_Doc_Attach1TableControlRow
-            Dim selectedList() As WCAR_Doc_Attach1TableControlRow = Me.GetSelectedRecordControls()
-            If selectedList.Length = 0 Then
-                Return Nothing
-            End If
-            Return selectedList(0)
+            Return Nothing
           
         End Function
 
         Public Overridable Function GetSelectedRecordControls() As WCAR_Doc_Attach1TableControlRow()
         
-            Dim selectedList As ArrayList = New ArrayList(25)
-            Dim recControl As WCAR_Doc_Attach1TableControlRow
-            For Each recControl In Me.GetRecordControls()
-                If recControl.SelectRow1 IsNot Nothing AndAlso recControl.SelectRow1.Checked Then
-                    selectedList.Add(recControl)
-                End If
-            Next
-            Return DirectCast(selectedList.ToArray(GetType(WCAR_Doc_Attach1TableControlRow)), WCAR_Doc_Attach1TableControlRow())
+            Return DirectCast((new ArrayList()).ToArray(GetType(WCAR_Doc_Attach1TableControlRow)), WCAR_Doc_Attach1TableControlRow())
           
         End Function
 
@@ -2691,8 +4087,6 @@ Public Class BaseWCAR_Doc_Attach1TableControl
                   
                     End If
                     recCtl.Visible = False
-                
-                    recCtl.SelectRow1.Checked = False
                 
                 Else
                 
@@ -2747,20 +4141,14 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
         Protected Overridable Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
          
               ' Show confirmation message on Click
-              Me.DeleteRowButton1.Attributes.Add("onClick", "return (confirm(""" & (CType(Me.Page,BaseApplicationPage)).GetResourceValue("DeleteRecordConfirm", "ePortalWFApproval") & """));")
+              Me.WCAR_Doc_CheckerRowDeleteButton.Attributes.Add("onClick", "return (confirm(""" & (CType(Me.Page,BaseApplicationPage)).GetResourceValue("DeleteRecordConfirm", "ePortalWFApproval") & """));")
                   
         
               ' Register the event handlers.
           
-              AddHandler Me.DeleteRowButton1.Click, AddressOf DeleteRowButton1_Click
+              AddHandler Me.WCAR_Doc_CheckerRowDeleteButton.Click, AddressOf WCAR_Doc_CheckerRowDeleteButton_Click
                         
-              AddHandler Me.EditRowButton1.Click, AddressOf EditRowButton1_Click
-                        
-              AddHandler Me.WCDC_U_ID.SelectedIndexChanged, AddressOf WCDC_U_ID_SelectedIndexChanged                  
-                
-              AddHandler Me.WCDC_Rem.TextChanged, AddressOf WCDC_Rem_TextChanged
-            
-              AddHandler Me.WCDC_Status.TextChanged, AddressOf WCDC_Status_TextChanged
+              AddHandler Me.WCDC_U_ID.SelectedIndexChanged, AddressOf WCDC_U_ID_SelectedIndexChanged
             
     
         End Sub
@@ -2821,17 +4209,10 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
             ' Call the Set methods for each controls on the panel
         
                 
-                
-                
                 SetWCDC_Rem()
-                SetWCDC_RemLabel()
                 SetWCDC_Status()
-                SetWCDC_StatusLabel()
                 SetWCDC_U_ID()
-                SetWCDC_U_IDLabel()
-                SetDeleteRowButton1()
-              
-                SetEditRowButton1()
+                SetWCAR_Doc_CheckerRowDeleteButton()
               
       
       
@@ -2857,21 +4238,13 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
         Public Overridable Sub SetWCDC_Rem()
 
                   
-            					
-            ' If data was retrieved from UI previously, restore it
-            If Me.PreviousUIData.ContainsKey(Me.WCDC_Rem.ID) Then
-            
-                Me.WCDC_Rem.Text = Me.PreviousUIData(Me.WCDC_Rem.ID).ToString()
-              
-                Return
-            End If
             
         
-            ' Set the WCDC_Rem TextBox on the webpage with value from the
+            ' Set the WCDC_Rem Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc_Checker database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc_Checker record retrieved from the database.
-            ' Me.WCDC_Rem is the ASP:TextBox on the webpage.
+            ' Me.WCDC_Rem is the ASP:Literal on the webpage.
             
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCDC_Rem()
@@ -2886,6 +4259,7 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc_Checker1Table.WCDC_Rem)
                               
+                formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WCDC_Rem.Text = formattedValue
                 
             Else 
@@ -2896,29 +4270,19 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
                  Me.WCDC_Rem.Text = WCAR_Doc_Checker1Table.WCDC_Rem.Format(WCAR_Doc_Checker1Table.WCDC_Rem.DefaultValue)
                         		
                 End If
-                 
-              AddHandler Me.WCDC_Rem.TextChanged, AddressOf WCDC_Rem_TextChanged
-                                 
+                                      
         End Sub
                 
         Public Overridable Sub SetWCDC_Status()
 
                   
-            					
-            ' If data was retrieved from UI previously, restore it
-            If Me.PreviousUIData.ContainsKey(Me.WCDC_Status.ID) Then
-            
-                Me.WCDC_Status.Text = Me.PreviousUIData(Me.WCDC_Status.ID).ToString()
-              
-                Return
-            End If
             
         
-            ' Set the WCDC_Status TextBox on the webpage with value from the
+            ' Set the WCDC_Status Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc_Checker database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc_Checker record retrieved from the database.
-            ' Me.WCDC_Status is the ASP:TextBox on the webpage.
+            ' Me.WCDC_Status is the ASP:Literal on the webpage.
             
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCDC_Status()
@@ -2933,6 +4297,7 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc_Checker1Table.WCDC_Status)
                               
+                formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WCDC_Status.Text = formattedValue
                 
             Else 
@@ -2943,9 +4308,7 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
                  Me.WCDC_Status.Text = WCAR_Doc_Checker1Table.WCDC_Status.Format(WCAR_Doc_Checker1Table.WCDC_Status.DefaultValue)
                         		
                 End If
-                 
-              AddHandler Me.WCDC_Status.TextChanged, AddressOf WCDC_Status_TextChanged
-                                 
+                                      
         End Sub
                 
         Public Overridable Sub SetWCDC_U_ID()
@@ -2968,11 +4331,11 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
             End If
             
         
-            ' Set the WCDC_U_ID QuickSelector on the webpage with value from the
+            ' Set the WCDC_U_ID DropDownList on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc_Checker database record.
             
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc_Checker record retrieved from the database.
-            ' Me.WCDC_U_ID is the ASP:QuickSelector on the webpage.
+            ' Me.WCDC_U_ID is the ASP:DropDownList on the webpage.
             
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCDC_U_ID()
@@ -2996,94 +4359,16 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
                 				
             End If			
                 
-            ' Add the Please Select item.
-            If selectedValue Is Nothing OrElse selectedValue = ""  Then
-                  MiscUtils.ResetSelectedItem(Me.WCDC_U_ID, New ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
-            End If              
-            
             
                   
             ' Populate the item(s) to the control
             
-            Me.WCDC_U_ID.SetFieldMaxLength(50)
-            
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) 
-            variables = New System.Collections.Generic.Dictionary(Of String, Object)              
-            Dim evaluator As FormulaEvaluator
-            evaluator = New FormulaEvaluator
-              
-            If Not selectedValue Is Nothing AndAlso _
-                selectedValue.Trim <> "" AndAlso _
-                Not SetSelectedValue(Me.WCDC_U_ID, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.WCDC_U_ID, selectedValue)Then
-
-                ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.sel_WASP_User.W_U_ID = selectedValue
-                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
-                Dim whereClause2 As WhereClause = New WhereClause()
-                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(Sel_WASP_User1View.W_U_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
-                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
-
-                Try
-                    ' Execute the query
-                    Dim rc() As Sel_WASP_User1Record = Sel_WASP_User1View.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
-                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-                      ' if find a record, add it to the dropdown and set it as selected item
-                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
-                      Dim itemValue As Sel_WASP_User1Record = DirectCast(rc(0), Sel_WASP_User1Record)
-                        ' Create the item and add to the list.
-                        Dim cvalue As String = Nothing
-                        Dim fvalue As String = Nothing
-                        If itemValue.W_U_IDSpecified Then
-                            cvalue = itemValue.W_U_ID.ToString() 
-                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc_Checker1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc_Checker1Table.WCDC_U_ID)
-                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc_Checker1Table.WCDC_U_ID.IsApplyDisplayAs Then
-                          fvalue = WCAR_Doc_Checker1Table.GetDFKA(itemValue, WCAR_Doc_Checker1Table.WCDC_U_ID)
-                          End If
-                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                          fvalue = itemValue.Format(Sel_WASP_User1View.W_U_ID)
-                          End If
-                        
-                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-                              ResetSelectedItem(Me.WCDC_U_ID, New ListItem(fvalue, cvalue))
-                            End If
-                        End If
-                Catch
-                End Try
-
-            End If					
-                        
-              Dim url as String = Me.ModifyRedirectUrl("../sel_WASP_User1/Sel-WASP-User-QuickSelector1.aspx", "", True)
-              
-              url = Me.Page.ModifyRedirectUrl(url, "", True)                                  
-              
-              url &= "?Target=" & Me.WCDC_U_ID.ClientID & "&Formula=" & CType(Me.Page, BaseApplicationPage).Encrypt("= Sel_WASP_User1.W_U_Full_Name")& "&IndexField=" & CType(Me.Page, BaseApplicationPage).Encrypt("W_U_ID")& "&EmptyValue=" & CType(Me.Page, BaseApplicationPage).Encrypt("--PLEASE_SELECT--") & "&EmptyDisplayText=" & CType(Me.Page, BaseApplicationPage).Encrypt(Me.Page.GetResourceValue("Txt:PleaseSelect"))& "&Mode=" & CType(Me.Page, BaseApplicationPage).Encrypt("FieldValueSingleSelection") & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup")
-              
-              
-              Me.WCDC_U_ID.Attributes.Item("onClick") = "initializePopupPage(this, '" & url & "', " & Convert.ToString(WCDC_U_ID.AutoPostBack).ToLower() & ", event); return false;"        
-                  
-                    
+            Me.PopulateWCDC_U_IDDropDownList(selectedValue, 100)              
+                
                   
            
              
         End Sub
-                
-        Public Overridable Sub SetWCDC_RemLabel()
-
-                  
-                  
-                  End Sub
-                
-        Public Overridable Sub SetWCDC_StatusLabel()
-
-                  
-                  
-                  End Sub
-                
-        Public Overridable Sub SetWCDC_U_IDLabel()
-
-                  
-                  
-                  End Sub
                 
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
@@ -3192,8 +4477,8 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
         
         Dim parentCtrl As WCAR_Doc1RecordControl
           
-          
-          parentCtrl = DirectCast(Me.Page.FindControlRecursively("WCAR_Doc1RecordControl"), WCAR_Doc1RecordControl)				  
+          				  
+          parentCtrl = DirectCast(MiscUtils.GetParentControlObject(Me, "WCAR_Doc1RecordControl"), WCAR_Doc1RecordControl)				  
               
           If (Not IsNothing(parentCtrl) AndAlso IsNothing(parentCtrl.DataSource)) 
                 ' Load the record if it is not loaded yet.
@@ -3259,33 +4544,15 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
         
         Public Overridable Sub GetWCDC_Rem()
             
-            ' Retrieve the value entered by the user on the WCDC_Rem ASP:TextBox, and
-            ' save it into the WCDC_Rem field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc_Checker record.
-            
-            ' Custom validation should be performed in Validate, not here.
-            
-            'Save the value to data source
-            Me.DataSource.Parse(Me.WCDC_Rem.Text, WCAR_Doc_Checker1Table.WCDC_Rem)			
-
-                      
         End Sub
                 
         Public Overridable Sub GetWCDC_Status()
             
-            ' Retrieve the value entered by the user on the WCDC_Status ASP:TextBox, and
-            ' save it into the WCDC_Status field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc_Checker record.
-            
-            ' Custom validation should be performed in Validate, not here.
-            
-            'Save the value to data source
-            Me.DataSource.Parse(Me.WCDC_Status.Text, WCAR_Doc_Checker1Table.WCDC_Status)			
-
-                      
         End Sub
                 
         Public Overridable Sub GetWCDC_U_ID()
          
-            ' Retrieve the value entered by the user on the WCDC_U_ID ASP:QuickSelector, and
+            ' Retrieve the value entered by the user on the WCDC_U_ID ASP:DropDownList, and
             ' save it into the WCDC_U_ID field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc_Checker record.
                         
             ' Custom validation should be performed in Validate, not here.
@@ -3414,18 +4681,163 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
     
         ' Generate set method for buttons
         
-        Public Overridable Sub SetDeleteRowButton1()                
+        Public Overridable Sub SetWCAR_Doc_CheckerRowDeleteButton()                
               
    
         End Sub
             
-        Public Overridable Sub SetEditRowButton1()                
-              
-   
-        End Sub
+                        
+        Public Overridable Function CreateWhereClause_WCDC_U_IDDropDownList() As WhereClause
+            ' By default, we simply return a new WhereClause.
+            ' Add additional where clauses to restrict the items shown in the dropdown list.
+            						
+            ' This WhereClause is for the DatabaseANFLO-WFN%dbo.sel_WASP_User table.
+            ' Examples:
+            ' wc.iAND(Sel_WASP_User1View.W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, "XYZ")
+            ' wc.iAND(Sel_WASP_User1View.Active, BaseFilter.ComparisonOperator.EqualsTo, "1")
             
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+            				
+        End Function
+                  
+        ' Fill the WCDC_U_ID list.
+        Protected Overridable Sub PopulateWCDC_U_IDDropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+            		  					                
+            Me.WCDC_U_ID.Items.Clear()
+            
+                    
+            ' 1. Setup the static list items        
+            
+            ' Add the Please Select item.
+            Me.WCDC_U_ID.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            		  			
+            ' 2. Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCDC_U_IDDropDownList function.
+            ' It is better to customize the where clause there.
+            
+            Dim wc As WhereClause = CreateWhereClause_WCDC_U_IDDropDownList()
+            ' Create the ORDER BY clause to sort based on the displayed value.			
+                
+
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(Sel_WASP_User1View.W_U_Full_Name, OrderByItem.OrderDir.Asc)
+
+                      Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      
+            ' 3. Read a total of maxItems from the database and insert them		
+            Dim itemValues() As Sel_WASP_User1Record = Nothing
+            Dim evaluator As New FormulaEvaluator                
+            If wc.RunQuery
+                Dim counter As Integer = 0
+                Dim pageNum As Integer = 0
+                Dim listDuplicates As New ArrayList()
+
+                Do
+                    itemValues = Sel_WASP_User1View.GetRecords(wc, orderBy, pageNum, maxItems)
+                    For each itemValue As Sel_WASP_User1Record In itemValues
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.W_U_IDSpecified Then
+                            cvalue = itemValue.W_U_ID.ToString() 
+                            
+                            If counter < maxItems AndAlso Me.WCDC_U_ID.Items.FindByValue(cvalue) Is Nothing Then
+                            
+                                Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc_Checker1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc_Checker1Table.WCDC_U_ID)
+                                If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc_Checker1Table.WCDC_U_ID.IsApplyDisplayAs Then
+                                fvalue = WCAR_Doc_Checker1Table.GetDFKA(itemValue, WCAR_Doc_Checker1Table.WCDC_U_ID)
+                                End If
+                                If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                                fvalue = itemValue.Format(Sel_WASP_User1View.W_U_ID)
+                                End If
+                              
+                                If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+
+                                If (IsNothing(fvalue)) Then
+                                   fvalue = ""
+                                End If
+
+                                fvalue = fvalue.Trim()
+
+                                If ( fvalue.Length > 50 ) Then
+                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                End If
+
+                                Dim dupItem As ListItem = Me.WCDC_U_ID.Items.FindByText(fvalue)
+                          
+                                If Not IsNothing(dupItem) Then
+                                    listDuplicates.Add(fvalue)
+                                    If Not String.IsNullOrEmpty(dupItem.Value) Then
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
+                                    End If
+                                End If
+
+                                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
+                                Me.WCDC_U_ID.Items.Add(newItem)
+
+                                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
+                                End If
+
+                                counter += 1			  
+                            End If
+                        End If
+                    Next
+                    pageNum += 1
+                Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
+            End If
+                            
+                    
+            ' 4. Set the selected value (insert if not already present).
+              
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.WCDC_U_ID, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.WCDC_U_ID, selectedValue)Then
+
+                ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.sel_WASP_User.W_U_ID = selectedValue
+                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
+                Dim whereClause2 As WhereClause = New WhereClause()
+                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(Sel_WASP_User1View.W_U_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
+                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
+
+                Try
+                    ' Execute the query
+                    Dim rc() As Sel_WASP_User1Record = Sel_WASP_User1View.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
+                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      ' if find a record, add it to the dropdown and set it as selected item
+                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
+                      Dim itemValue As Sel_WASP_User1Record = DirectCast(rc(0), Sel_WASP_User1Record)
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.W_U_IDSpecified Then
+                            cvalue = itemValue.W_U_ID.ToString() 
+                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc_Checker1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc_Checker1Table.WCDC_U_ID)
+                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc_Checker1Table.WCDC_U_ID.IsApplyDisplayAs Then
+                          fvalue = WCAR_Doc_Checker1Table.GetDFKA(itemValue, WCAR_Doc_Checker1Table.WCDC_U_ID)
+                          End If
+                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                          fvalue = itemValue.Format(Sel_WASP_User1View.W_U_ID)
+                          End If
+                        
+                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+                              ResetSelectedItem(Me.WCDC_U_ID, New ListItem(fvalue, cvalue))
+                            End If
+                        End If
+                Catch
+                End Try
+
+            End If					
+                        
+                
+        End Sub
+        
+              
         ' event handler for ImageButton
-        Public Overridable Sub DeleteRowButton1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+        Public Overridable Sub WCAR_Doc_CheckerRowDeleteButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
               
     Try
     
@@ -3460,67 +4872,23 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
     
         End Sub
         
-        ' event handler for ImageButton
-        Public Overridable Sub EditRowButton1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-            ' The redirect URL is set on the Properties, Custom Properties or Actions.
-            ' The ModifyRedirectURL call resolves the parameters before the
-            ' Response.Redirect redirects the page to the URL.  
-            ' Any code after the Response.Redirect call will not be executed, since the page is
-            ' redirected to the URL.
-            
-              
-                  Dim url As String = "../Shared/ConfigureEditRecord.aspx"
-                  
-                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
-                  
-        Dim shouldRedirect As Boolean = True
-        Dim target As String = ""
-      
-    Try
-    
-      ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction
-                
-            url = Me.ModifyRedirectUrl(url, "",True)
-            url = Me.Page.ModifyRedirectUrl(url, "",True)
-          
-            Catch ex As Exception
-            
-       ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                shouldRedirect = False
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-                DbUtils.EndTransaction
-            End Try
-            If shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-      Me.Page.Response.Redirect(url)
-        
-            End If
-        End Sub
-        
         Protected Overridable Sub WCDC_U_ID_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
 
+            ' for the value inserted by quick add button or large list selector, 
+            ' the value is necessary to be inserted by this event during postback 
+            Dim val As String = CType(Me.Page.Session()(WCDC_U_ID.ClientID & "_SelectedValue"), String)
+            Dim displayText As String = CType(Me.Page.Session()(WCDC_U_ID.ClientID & "_SelectedDisplayText"), String)
+            If displayText <> "" AndAlso val <> "" Then
+                Me.WCDC_U_ID.Items.Add(New ListItem(displayText, val))
+                Me.WCDC_U_ID.SelectedIndex = Me.WCDC_U_ID.Items.Count - 1
+                Me.Page.Session.Remove(WCDC_U_ID.ClientID & "_SelectedValue")
+                Me.Page.Session.Remove(WCDC_U_ID.ClientID & "_SelectedDisplayText")
+            End If
 
           									
                 
                 
         End Sub
-                      
-                    
-        Protected Overridable Sub WCDC_Rem_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
-                    
-              End Sub
-            
-        Protected Overridable Sub WCDC_Status_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
-                    
-              End Sub
             
    
         Private _PreviousUIData As New Hashtable
@@ -3598,60 +4966,30 @@ Public Class BaseWCAR_Doc_Checker1TableControlRow
 
 #Region "Helper Properties"
         
-        Public ReadOnly Property DeleteRowButton1() As System.Web.UI.WebControls.ImageButton
+        Public ReadOnly Property WCAR_Doc_CheckerRowDeleteButton() As System.Web.UI.WebControls.ImageButton
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "DeleteRowButton1"), System.Web.UI.WebControls.ImageButton)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_Doc_CheckerRowDeleteButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
         
-        Public ReadOnly Property EditRowButton1() As System.Web.UI.WebControls.ImageButton
+        Public ReadOnly Property WCDC_Rem() As System.Web.UI.WebControls.Literal
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "EditRowButton1"), System.Web.UI.WebControls.ImageButton)
-            End Get
-        End Property
-        
-        Public ReadOnly Property SelectRow2() As System.Web.UI.WebControls.CheckBox
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SelectRow2"), System.Web.UI.WebControls.CheckBox)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_Rem"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
             
-        Public ReadOnly Property WCDC_Rem() As System.Web.UI.WebControls.TextBox
+        Public ReadOnly Property WCDC_Status() As System.Web.UI.WebControls.Literal
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_Rem"), System.Web.UI.WebControls.TextBox)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_Status"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
             
-        Public ReadOnly Property WCDC_RemLabel() As System.Web.UI.WebControls.Literal
+        Public ReadOnly Property WCDC_U_ID() As System.Web.UI.WebControls.DropDownList
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_RemLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property WCDC_Status() As System.Web.UI.WebControls.TextBox
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_Status"), System.Web.UI.WebControls.TextBox)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_U_ID"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
             
-        Public ReadOnly Property WCDC_StatusLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_StatusLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-              Public ReadOnly Property WCDC_U_ID() As BaseClasses.Web.UI.WebControls.QuickSelector
-                  Get
-                      Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_U_ID"), BaseClasses.Web.UI.WebControls.QuickSelector)
-              End Get
-              End Property
-            
-        Public ReadOnly Property WCDC_U_IDLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_U_IDLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
 #End Region
 
 #Region "Helper Functions"
@@ -3804,17 +5142,7 @@ Public Class BaseWCAR_Doc_Checker1TableControl
               Me.DeleteButton1.Attributes.Add("onClick", "return (confirm(""" & (CType(Me.Page,BaseApplicationPage)).GetResourceValue("DeleteConfirm", "ePortalWFApproval") & """));")
       
             ' Setup the pagination events.
-            
-              AddHandler Me.Pagination1.FirstPage.Click, AddressOf Pagination1_FirstPage_Click
                         
-              AddHandler Me.Pagination1.LastPage.Click, AddressOf Pagination1_LastPage_Click
-                        
-              AddHandler Me.Pagination1.NextPage.Click, AddressOf Pagination1_NextPage_Click
-                        
-              AddHandler Me.Pagination1.PageSizeButton.Click, AddressOf Pagination1_PageSizeButton_Click
-                        
-              AddHandler Me.Pagination1.PreviousPage.Click, AddressOf Pagination1_PreviousPage_Click
-                                    
             Dim url As String = ""  'to avoid warning in VS 
             url = "" 'to avoid warning in VS 
             ' Setup the sorting events.
@@ -3824,6 +5152,8 @@ Public Class BaseWCAR_Doc_Checker1TableControl
               AddHandler Me.AddButton1.Click, AddressOf AddButton1_Click
                         
               AddHandler Me.DeleteButton1.Click, AddressOf DeleteButton1_Click
+                        
+              AddHandler Me.WCAR_Doc_CheckerAddButton.Click, AddressOf WCAR_Doc_CheckerAddButton_Click
                         
               AddHandler Me.Actions2Button.Button.Click, AddressOf Actions2Button_Click
                         
@@ -4068,13 +5398,17 @@ Public Class BaseWCAR_Doc_Checker1TableControl
                 
                 
                 
-                
                 SetSortByLabel2()
                 SetSortControl2()
                 
+                SetWCDC_RemLabel()
+                SetWCDC_StatusLabel()
+                SetWCDC_U_IDLabel1()
                 SetAddButton1()
               
                 SetDeleteButton1()
+              
+                SetWCAR_Doc_CheckerAddButton()
               
                 SetActions2Button()
               
@@ -4221,34 +5555,9 @@ Public Class BaseWCAR_Doc_Checker1TableControl
 
             ' Bind the pagination labels.
         
-            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then                      
-                    
-                Me.Pagination1.CurrentPage.Text = (Me.PageIndex + 1).ToString()
-            Else
-                Me.Pagination1.CurrentPage.Text = "0"
-            End If
-            Me.Pagination1.PageSize.Text = Me.PageSize.ToString()
 
             ' Bind the buttons for WCAR_Doc_Checker1TableControl pagination.
         
-            Me.Pagination1.FirstPage.Enabled = Not (Me.PageIndex = 0)
-            If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
-                Me.Pagination1.LastPage.Enabled = True
-            ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.Pagination1.LastPage.Enabled = False            
-            Else                               ' if the total pages is the last page, disable last and next buttons
-                Me.Pagination1.LastPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
-            End If
-          
-            If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
-                Me.Pagination1.NextPage.Enabled = True
-            ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.Pagination1.NextPage.Enabled = False            
-            Else                               ' if the total pages is the last page, disable last and next buttons
-                Me.Pagination1.NextPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
-            End If
-          
-            Me.Pagination1.PreviousPage.Enabled = Not (Me.PageIndex = 0)
 
 
         End Sub
@@ -4328,15 +5637,15 @@ Public Class BaseWCAR_Doc_Checker1TableControl
               
       Dim selectedRecordKeyValue as KeyValue = New KeyValue()
     
-              Dim wCAR_Doc1RecordControlObj As ePortalWFApproval.UI.Controls.Edit_WCAR_Doc1.WCAR_Doc1RecordControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc1RecordControl"), ePortalWFApproval.UI.Controls.Edit_WCAR_Doc1.WCAR_Doc1RecordControl)
-              
+              Dim wCAR_Doc1RecordControlObj as WCAR_Doc1RecordControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WCAR_Doc1RecordControl") ,WCAR_Doc1RecordControl)
+                              
                 If (Not IsNothing(wCAR_Doc1RecordControlObj) AndAlso Not IsNothing(wCAR_Doc1RecordControlObj.GetRecord()) AndAlso wCAR_Doc1RecordControlObj.GetRecord().IsCreated AndAlso Not IsNothing(wCAR_Doc1RecordControlObj.GetRecord().WCD_ID))
                     wc.iAND(WCAR_Doc_Checker1Table.WCDC_WCD_ID, BaseFilter.ComparisonOperator.EqualsTo, wCAR_Doc1RecordControlObj.GetRecord().WCD_ID.ToString())
                     selectedRecordKeyValue.AddElement(WCAR_Doc_Checker1Table.WCDC_WCD_ID.InternalName, wCAR_Doc1RecordControlObj.GetRecord().WCD_ID.ToString())
                 Else
                     wc.RunQuery = False
-                    Return wc
-                End If
+                    Return wc                    
+                End If          
               
       HttpContext.Current.Session("WCAR_Doc_Checker1TableControlWhereClause") = selectedRecordKeyValue.ToXmlString()
       
@@ -4518,12 +5827,6 @@ Public Class BaseWCAR_Doc_Checker1TableControl
     
         Protected Overridable Sub GetPageSize()
         
-            If Me.Pagination1.PageSize.Text.Trim <> "" Then
-                Try
-                    'Me.PageSize = Integer.Parse(Me.Pagination1.PageSize.Text)
-                Catch ex As Exception
-                End Try
-            End If
         End Sub
 
         Protected Overridable Sub AddNewRecords()
@@ -4635,6 +5938,36 @@ Public Class BaseWCAR_Doc_Checker1TableControl
                       'Code for the text property is generated inside the .aspx file.
                       'To override this property you can uncomment the following property and add your own value.
                       'Me.SortByLabel2.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetWCDC_RemLabel()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCDC_RemLabel.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetWCDC_StatusLabel()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCDC_StatusLabel.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetWCDC_U_IDLabel1()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCDC_U_IDLabel1.Text = "Some value"
                     
                   End Sub
                 
@@ -4807,7 +6140,7 @@ Public Class BaseWCAR_Doc_Checker1TableControl
             End If
             
             
-            Dim Pagination As Control = Me.FindControl("Pagination1")
+            Dim Pagination As Control = Me.FindControl("")
              Dim PaginationType As String = ""
              If Not (Pagination Is Nothing) Then
                 Dim Summary As Control = Pagination.FindControl("_Summary")
@@ -4874,6 +6207,11 @@ Public Class BaseWCAR_Doc_Checker1TableControl
    
         End Sub
             
+        Public Overridable Sub SetWCAR_Doc_CheckerAddButton()                
+              
+   
+        End Sub
+            
         Public Overridable Sub SetActions2Button()                
               
    
@@ -4890,116 +6228,6 @@ Public Class BaseWCAR_Doc_Checker1TableControl
                     
 
         ' Generate the event handling functions for pagination events.
-        
-        ' event handler for ImageButton
-        Public Overridable Sub Pagination1_FirstPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-            Me.PageIndex = 0
-            Me.DataChanged = True
-      
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
-        ' event handler for ImageButton
-        Public Overridable Sub Pagination1_LastPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-            Me.DisplayLastPage = True
-            Me.DataChanged = True
-      
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
-        ' event handler for ImageButton
-        Public Overridable Sub Pagination1_NextPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-            Me.PageIndex += 1
-            Me.DataChanged = True
-      
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
-        ' event handler for LinkButton
-        Public Overridable Sub Pagination1_PageSizeButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-              
-    Try
-    
-            Me.DataChanged = True
-      
-            Me.PageSize = Me.Pagination1.GetCurrentPageSize()
-      
-            Me.PageIndex = Integer.Parse(Me.Pagination1.CurrentPage.Text) - 1
-          
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
-        
-        ' event handler for ImageButton
-        Public Overridable Sub Pagination1_PreviousPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-              
-    Try
-    
-            If Me.PageIndex > 0 Then
-                Me.PageIndex -= 1
-                Me.DataChanged = True
-            End If
-      
-            Catch ex As Exception
-            
-                Me.Page.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-    
-        End Sub
         
 
         ' Generate the event handling functions for sorting events.
@@ -5064,6 +6292,32 @@ Public Class BaseWCAR_Doc_Checker1TableControl
     
         End Sub
         
+        ' event handler for ImageButton
+        Public Overridable Sub WCAR_Doc_CheckerAddButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+              
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            Me.AddNewRecord = 1
+            Me.DataChanged = True
+      
+            Catch ex As Exception
+            
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+                DbUtils.EndTransaction
+            End Try
+    
+        End Sub
+        
         ' event handler for Button
         Public Overridable Sub Actions2Button_Click(ByVal sender As Object, ByVal args As EventArgs)
               
@@ -5111,32 +6365,32 @@ Public Class BaseWCAR_Doc_Checker1TableControl
         ' event handler for OrderSort
         Protected Overridable Sub SortControl2_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
         
-                Dim SelVal1 As String = Me.SortControl2.SelectedValue.ToUpper()
-                Dim words1() As String = Split(SelVal1)
-                If SelVal1 <> "" Then
-                SelVal1 = SelVal1.Replace(words1(words1.Length() - 1), "").TrimEnd()
+                Dim SelVal2 As String = Me.SortControl2.SelectedValue.ToUpper()
+                Dim words2() As String = Split(SelVal2)
+                If SelVal2 <> "" Then
+                SelVal2 = SelVal2.Replace(words2(words2.Length() - 1), "").TrimEnd()
                 For Each ColumnNam As BaseClasses.Data.BaseColumn In WCAR_Doc_Checker1Table.GetColumns()
-                If ColumnNam.Name.ToUpper = SelVal1 Then
-                SelVal1 = ColumnNam.InternalName.ToString
+                If ColumnNam.Name.ToUpper = SelVal2 Then
+                SelVal2 = ColumnNam.InternalName.ToString
                 End If
                 Next
                 End If
               
-                Dim sd As OrderByItem= Me.CurrentSortOrder.Find(WCAR_Doc_Checker1Table.GetColumnByName(SelVal1))
+                Dim sd As OrderByItem= Me.CurrentSortOrder.Find(WCAR_Doc_Checker1Table.GetColumnByName(SelVal2))
                 If sd Is Nothing Or Not Me.CurrentSortOrder.Items Is Nothing Then
                 'First time sort, so add sort order for Discontinued.
-                If Not WCAR_Doc_Checker1Table.GetColumnByName(SelVal1) Is Nothing Then
+                If Not WCAR_Doc_Checker1Table.GetColumnByName(SelVal2) Is Nothing Then
                   Me.CurrentSortOrder.Reset()
                 End If
                 'If default sort order was GeoProximity, create new CurrentSortOrder of OrderBy type
                  If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then Me.CurrentSortOrder = New OrderBy(True, False)
 
           
-            If SelVal1 <> "--PLEASE_SELECT--" AndAlso Not WCAR_Doc_Checker1Table.GetColumnByName(SelVal1) Is Nothing Then
-                  If  words1(words1.Length() - 1).Contains("ASC") Then
-            Me.CurrentSortOrder.Add(WCAR_Doc_Checker1Table.GetColumnByName(SelVal1),OrderByItem.OrderDir.Asc)
-                  Elseif words1(words1.Length() - 1).Contains("DESC") Then
-            Me.CurrentSortOrder.Add(WCAR_Doc_Checker1Table.GetColumnByName(SelVal1),OrderByItem.OrderDir.Desc)
+            If SelVal2 <> "--PLEASE_SELECT--" AndAlso Not WCAR_Doc_Checker1Table.GetColumnByName(SelVal2) Is Nothing Then
+                  If  words2(words2.Length() - 1).Contains("ASC") Then
+            Me.CurrentSortOrder.Add(WCAR_Doc_Checker1Table.GetColumnByName(SelVal2),OrderByItem.OrderDir.Asc)
+                  Elseif words2(words2.Length() - 1).Contains("DESC") Then
+            Me.CurrentSortOrder.Add(WCAR_Doc_Checker1Table.GetColumnByName(SelVal2),OrderByItem.OrderDir.Desc)
                   End If
                 End If
 
@@ -5245,12 +6499,6 @@ Public Class BaseWCAR_Doc_Checker1TableControl
           End Get
           End Property
         
-        Public ReadOnly Property Pagination1() As ePortalWFApproval.UI.IPaginationModern
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Pagination1"), ePortalWFApproval.UI.IPaginationModern)
-          End Get
-          End Property
-        
         Public ReadOnly Property SortByLabel2() As System.Web.UI.WebControls.Label
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SortByLabel2"), System.Web.UI.WebControls.Label)
@@ -5263,12 +6511,30 @@ Public Class BaseWCAR_Doc_Checker1TableControl
           End Get
           End Property
         
-        Public ReadOnly Property ToggleAll2() As System.Web.UI.WebControls.CheckBox
+        Public ReadOnly Property WCAR_Doc_CheckerAddButton() As System.Web.UI.WebControls.ImageButton
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ToggleAll2"), System.Web.UI.WebControls.CheckBox)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_Doc_CheckerAddButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
-            
+        
+        Public ReadOnly Property WCDC_RemLabel() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_RemLabel"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property WCDC_StatusLabel() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_StatusLabel"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property WCDC_U_IDLabel1() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCDC_U_IDLabel1"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
 #End Region
 
 #Region "Helper Functions"
@@ -5321,37 +6587,14 @@ Public Class BaseWCAR_Doc_Checker1TableControl
         End Function
         
           
-        Public Overridable Function GetSelectedRecordIndex() As Integer
-            Dim counter As Integer = 0
-            Dim recControl As WCAR_Doc_Checker1TableControlRow
-            For Each recControl In Me.GetRecordControls()
-                If recControl.SelectRow2.Checked Then
-                    Return counter
-                End If
-                counter += 1
-            Next
-            Return -1
-        End Function
-        
         Public Overridable Function GetSelectedRecordControl() As WCAR_Doc_Checker1TableControlRow
-            Dim selectedList() As WCAR_Doc_Checker1TableControlRow = Me.GetSelectedRecordControls()
-            If selectedList.Length = 0 Then
-                Return Nothing
-            End If
-            Return selectedList(0)
+            Return Nothing
           
         End Function
 
         Public Overridable Function GetSelectedRecordControls() As WCAR_Doc_Checker1TableControlRow()
         
-            Dim selectedList As ArrayList = New ArrayList(25)
-            Dim recControl As WCAR_Doc_Checker1TableControlRow
-            For Each recControl In Me.GetRecordControls()
-                If recControl.SelectRow2 IsNot Nothing AndAlso recControl.SelectRow2.Checked Then
-                    selectedList.Add(recControl)
-                End If
-            Next
-            Return DirectCast(selectedList.ToArray(GetType(WCAR_Doc_Checker1TableControlRow)), WCAR_Doc_Checker1TableControlRow())
+            Return DirectCast((new ArrayList()).ToArray(GetType(WCAR_Doc_Checker1TableControlRow)), WCAR_Doc_Checker1TableControlRow())
           
         End Function
 
@@ -5371,8 +6614,6 @@ Public Class BaseWCAR_Doc_Checker1TableControl
                   
                     End If
                     recCtl.Visible = False
-                
-                    recCtl.SelectRow2.Checked = False
                 
                 Else
                 
@@ -5433,21 +6674,33 @@ Public Class BaseWCAR_Doc1RecordControl
         
               ' Register the event handlers.
           
-              AddHandler Me.WCD_C_ID.SelectedIndexChanged, AddressOf WCD_C_ID_SelectedIndexChanged                  
-                
-              AddHandler Me.WCD_U_ID.SelectedIndexChanged, AddressOf WCD_U_ID_SelectedIndexChanged                  
-                
-              AddHandler Me.WCD_WCur_ID.SelectedIndexChanged, AddressOf WCD_WCur_ID_SelectedIndexChanged                  
-                
-              AddHandler Me.WCD_WDT_ID.SelectedIndexChanged, AddressOf WCD_WDT_ID_SelectedIndexChanged                  
-                
+              AddHandler Me.imbFind.Click, AddressOf imbFind_Click
+                        
+              AddHandler Me.imbRelated.Click, AddressOf imbRelated_Click
+                        
+              AddHandler Me.btnChecked.Button.Click, AddressOf btnChecked_Click
+                        
+              AddHandler Me.btnRemoveCheck.Button.Click, AddressOf btnRemoveCheck_Click
+                        
+              AddHandler Me.btnVoid.Button.Click, AddressOf btnVoid_Click
+                        
+              AddHandler Me.CancelButton.Button.Click, AddressOf CancelButton_Click
+                        
+              AddHandler Me.CancelButton1.Button.Click, AddressOf CancelButton1_Click
+                        
+              AddHandler Me.SaveButton.Button.Click, AddressOf SaveButton_Click
+                        
+              AddHandler Me.WCD_C_ID.SelectedIndexChanged, AddressOf WCD_C_ID_SelectedIndexChanged
+            
+              AddHandler Me.WCD_WCur_ID.SelectedIndexChanged, AddressOf WCD_WCur_ID_SelectedIndexChanged
+            
+              AddHandler Me.WCD_WDT_ID.SelectedIndexChanged, AddressOf WCD_WDT_ID_SelectedIndexChanged
+            
               AddHandler Me.WCD_Proj_Inc_ACB.CheckedChanged, AddressOf WCD_Proj_Inc_ACB_CheckedChanged
             
               AddHandler Me.WCD_Submit.CheckedChanged, AddressOf WCD_Submit_CheckedChanged
             
               AddHandler Me.WCD_Supplementary.CheckedChanged, AddressOf WCD_Supplementary_CheckedChanged
-            
-              AddHandler Me.WCD_Created.TextChanged, AddressOf WCD_Created_TextChanged
             
               AddHandler Me.WCD_Exp_Budget.TextChanged, AddressOf WCD_Exp_Budget_TextChanged
             
@@ -5467,6 +6720,10 @@ Public Class BaseWCAR_Doc1RecordControl
             
               AddHandler Me.WCD_Project_No.TextChanged, AddressOf WCD_Project_No_TextChanged
             
+              AddHandler Me.WCD_Project_Title.TextChanged, AddressOf WCD_Project_Title_TextChanged
+            
+              AddHandler Me.WCD_Remark.TextChanged, AddressOf WCD_Remark_TextChanged
+            
               AddHandler Me.WCD_Request_Date.TextChanged, AddressOf WCD_Request_Date_TextChanged
             
               AddHandler Me.WCD_Status.TextChanged, AddressOf WCD_Status_TextChanged
@@ -5475,8 +6732,12 @@ Public Class BaseWCAR_Doc1RecordControl
             
               AddHandler Me.WCD_Supplementary_WCD_ID.TextChanged, AddressOf WCD_Supplementary_WCD_ID_TextChanged
             
-              AddHandler Me.WCD_Unit_Location.TextChanged, AddressOf WCD_Unit_Location_TextChanged
+              AddHandler Me.WCD_U_ID.TextChanged, AddressOf WCD_U_ID_TextChanged
             
+              AddHandler Me.WCD_Unit_Location.TextChanged, AddressOf WCD_Unit_Location_TextChanged
+            					
+              AddHandler Me.txtCoRequestRem.TextChanged, AddressOf txtCoRequestRem_TextChanged
+                    
     
         End Sub
 
@@ -5571,10 +6832,58 @@ Public Class BaseWCAR_Doc1RecordControl
             ' Call the Set methods for each controls on the panel
         
                 
+                
+                
+                
+                
+                
+                
+                SetlblTotal1()
+                SetLiteral()
+                SetLiteral1()
+                SetLiteral10()
+                SetLiteral11()
+                SetLiteral12()
+                SetLiteral13()
+                SetLiteral14()
+                SetLiteral15()
+                SetLiteral16()
+                SetLiteral17()
+                SetLiteral18()
+                SetLiteral19()
+                SetLiteral2()
+                SetLiteral20()
+                SetLiteral21()
+                SetLiteral22()
+                SetLiteral23()
+                SetLiteral24()
+                SetLiteral25()
+                SetLiteral26()
+                SetLiteral27()
+                SetLiteral28()
+                SetLiteral29()
+                SetLiteral3()
+                SetLiteral30()
+                SetLiteral32()
+                SetLiteral4()
+                SetLiteral5()
+                SetLiteral6()
+                SetLiteral7()
+                SetLiteral8()
+                SetLiteral9()
+                
+                
+                SettxtCoRequestRem()
+                
+                
+                
+                
+                SetWCAR_Doc1TabContainer()
+                SetWCAR_DocRecordControlTabContainer()
+                
+                
                 SetWCD_C_ID()
                 SetWCD_C_IDLabel()
-                SetWCD_Created()
-                SetWCD_CreatedLabel()
                 SetWCD_Exp_Budget()
                 SetWCD_Exp_BudgetLabel()
                 SetWCD_Exp_Cur_Yr()
@@ -5589,6 +6898,7 @@ Public Class BaseWCAR_Doc1RecordControl
                 SetWCD_Exp_TotalLabel()
                 SetWCD_Exp_Under_Over_Budget()
                 SetWCD_Exp_Under_Over_BudgetLabel()
+                SetWCD_ID()
                 SetWCD_No()
                 SetWCD_NoLabel()
                 SetWCD_Proj_Inc_ACB()
@@ -5607,18 +6917,30 @@ Public Class BaseWCAR_Doc1RecordControl
                 SetWCD_SubmitLabel()
                 SetWCD_Supplementary()
                 SetWCD_Supplementary_Manual()
-                SetWCD_Supplementary_ManualLabel()
                 SetWCD_Supplementary_WCD_ID()
-                SetWCD_Supplementary_WCD_IDLabel()
-                SetWCD_SupplementaryLabel()
                 SetWCD_U_ID()
-                SetWCD_U_IDLabel()
                 SetWCD_Unit_Location()
                 SetWCD_Unit_LocationLabel()
                 SetWCD_WCur_ID()
                 SetWCD_WCur_IDLabel()
                 SetWCD_WDT_ID()
                 SetWCD_WDT_IDLabel()
+                SetimbFind()
+              
+                SetimbRelated()
+              
+                SetbtnChecked()
+              
+                SetbtnRemoveCheck()
+              
+                SetbtnVoid()
+              
+                SetCancelButton()
+              
+                SetCancelButton1()
+              
+                SetSaveButton()
+              
       
       
             Me.IsNewRecord = True
@@ -5637,21 +6959,17 @@ Public Class BaseWCAR_Doc1RecordControl
             ' their parent ids from their parent UI controls.
             Dim shouldResetControl As Boolean = False
             
-        Dim recWCAR_Doc_Attach1TableControl as WCAR_Doc_Attach1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Attach1TableControl"), WCAR_Doc_Attach1TableControl)
+            If (shouldResetControl OrElse Me.Page.IsPageRefresh)
+              WCAR_Doc_Attach1TableControl.ResetControl()
+            End IF
+                    
+        SetWCAR_Doc_Attach1TableControl()
         
             If (shouldResetControl OrElse Me.Page.IsPageRefresh)
-              recWCAR_Doc_Attach1TableControl.ResetControl()
+              WCAR_Doc_Checker1TableControl.ResetControl()
             End IF
-        
-        Me.Page.SetControl("WCAR_Doc_Attach1TableControl")
-        
-        Dim recWCAR_Doc_Checker1TableControl as WCAR_Doc_Checker1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
-        
-            If (shouldResetControl OrElse Me.Page.IsPageRefresh)
-              recWCAR_Doc_Checker1TableControl.ResetControl()
-            End IF
-        
-        Me.Page.SetControl("WCAR_Doc_Checker1TableControl")
+                    
+        SetWCAR_Doc_Checker1TableControl()
         
         End Sub
         
@@ -5667,11 +6985,11 @@ Public Class BaseWCAR_Doc1RecordControl
                   
             
         
-            ' Set the WCD_C_ID QuickSelector on the webpage with value from the
+            ' Set the WCD_C_ID DropDownList on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
             
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
-            ' Me.WCD_C_ID is the ASP:QuickSelector on the webpage.
+            ' Me.WCD_C_ID is the ASP:DropDownList on the webpage.
             
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_C_ID()
@@ -5695,114 +7013,15 @@ Public Class BaseWCAR_Doc1RecordControl
                 				
             End If			
                 
-            ' Add the Please Select item.
-            If selectedValue Is Nothing OrElse selectedValue = ""  Then
-                  MiscUtils.ResetSelectedItem(Me.WCD_C_ID, New ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
-            End If              
-            
             
                   
             ' Populate the item(s) to the control
             
-            Me.WCD_C_ID.SetFieldMaxLength(50)
-            
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) 
-            variables = New System.Collections.Generic.Dictionary(Of String, Object)              
-            Dim evaluator As FormulaEvaluator
-            evaluator = New FormulaEvaluator
-              
-            If Not selectedValue Is Nothing AndAlso _
-                selectedValue.Trim <> "" AndAlso _
-                Not SetSelectedValue(Me.WCD_C_ID, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.WCD_C_ID, selectedValue)Then
-
-                ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.sel_WF_DYNAMICS_Company.Company_ID = selectedValue
-                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
-                Dim whereClause2 As WhereClause = New WhereClause()
-                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(Sel_WF_DYNAMICS_Company1View.Company_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
-                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
-
-                Try
-                    ' Execute the query
-                    Dim rc() As Sel_WF_DYNAMICS_Company1Record = Sel_WF_DYNAMICS_Company1View.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
-                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-                      ' if find a record, add it to the dropdown and set it as selected item
-                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
-                      Dim itemValue As Sel_WF_DYNAMICS_Company1Record = DirectCast(rc(0), Sel_WF_DYNAMICS_Company1Record)
-                        ' Create the item and add to the list.
-                        Dim cvalue As String = Nothing
-                        Dim fvalue As String = Nothing
-                        If itemValue.Company_IDSpecified Then
-                            cvalue = itemValue.Company_ID.ToString() 
-                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_C_ID)
-                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_C_ID.IsApplyDisplayAs Then
-                          fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_C_ID)
-                          End If
-                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                          fvalue = itemValue.Format(Sel_WF_DYNAMICS_Company1View.Company_ID)
-                          End If
-                        
-                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-                              ResetSelectedItem(Me.WCD_C_ID, New ListItem(fvalue, cvalue))
-                            End If
-                        End If
-                Catch
-                End Try
-
-            End If					
-                        
-              Dim url as String = Me.ModifyRedirectUrl("../sel_WF_DYNAMICS_Company1/Sel-WF-DYNAMICS-Company-QuickSelector1.aspx", "", True)
-              
-              url = Me.Page.ModifyRedirectUrl(url, "", True)                                  
-              
-              url &= "?Target=" & Me.WCD_C_ID.ClientID & "&Formula=" & CType(Me.Page, BaseApplicationPage).Encrypt("= Sel_WF_DYNAMICS_Company1.Company_Short_Name")& "&IndexField=" & CType(Me.Page, BaseApplicationPage).Encrypt("Company_ID")& "&EmptyValue=" & CType(Me.Page, BaseApplicationPage).Encrypt("--PLEASE_SELECT--") & "&EmptyDisplayText=" & CType(Me.Page, BaseApplicationPage).Encrypt(Me.Page.GetResourceValue("Txt:PleaseSelect"))& "&Mode=" & CType(Me.Page, BaseApplicationPage).Encrypt("FieldValueSingleSelection") & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup")
-              
-              
-              Me.WCD_C_ID.Attributes.Item("onClick") = "initializePopupPage(this, '" & url & "', " & Convert.ToString(WCD_C_ID.AutoPostBack).ToLower() & ", event); return false;"        
-                  
-                    
+            Me.PopulateWCD_C_IDDropDownList(selectedValue, 100)              
+                
                   
            
              
-        End Sub
-                
-        Public Overridable Sub SetWCD_Created()
-
-                  
-            
-        
-            ' Set the WCD_Created TextBox on the webpage with value from the
-            ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
-
-            ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
-            ' Me.WCD_Created is the ASP:TextBox on the webpage.
-            
-            ' You can modify this method directly, or replace it with a call to
-            '     MyBase.SetWCD_Created()
-            ' and add your own code before or after the call to the MyBase function.
-
-            
-                  
-            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_CreatedSpecified Then
-                				
-                ' If the WCD_Created is non-NULL, then format the value.
-
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Created, "g")
-                              
-                Me.WCD_Created.Text = formattedValue
-                
-            Else 
-            
-                ' WCD_Created is NULL in the database, so use the Default Value.  
-                ' Default Value could also be NULL.
-        
-                 Me.WCD_Created.Text = WCAR_Doc1Table.WCD_Created.Format(WCAR_Doc1Table.WCD_Created.DefaultValue, "g")
-                        		
-                End If
-                 
-              AddHandler Me.WCD_Created.TextChanged, AddressOf WCD_Created_TextChanged
-                                 
         End Sub
                 
         Public Overridable Sub SetWCD_Exp_Budget()
@@ -6078,6 +7297,44 @@ Public Class BaseWCAR_Doc1RecordControl
                                  
         End Sub
                 
+        Public Overridable Sub SetWCD_ID()
+
+                  
+            
+        
+            ' Set the WCD_ID Literal on the webpage with value from the
+            ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
+
+            ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
+            ' Me.WCD_ID is the ASP:Literal on the webpage.
+            
+            ' You can modify this method directly, or replace it with a call to
+            '     MyBase.SetWCD_ID()
+            ' and add your own code before or after the call to the MyBase function.
+
+            
+                  
+            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_IDSpecified Then
+                				
+                ' If the WCD_ID is non-NULL, then format the value.
+
+                ' The Format method will use the Display Format
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_ID)
+                              
+                formattedValue = HttpUtility.HtmlEncode(formattedValue)
+                Me.WCD_ID.Text = formattedValue
+                
+            Else 
+            
+                ' WCD_ID is NULL in the database, so use the Default Value.  
+                ' Default Value could also be NULL.
+        
+                 Me.WCD_ID.Text = WCAR_Doc1Table.WCD_ID.Format(WCAR_Doc1Table.WCD_ID.DefaultValue)
+                        		
+                End If
+                                      
+        End Sub
+                
         Public Overridable Sub SetWCD_No()
 
                   
@@ -6213,17 +7470,19 @@ Public Class BaseWCAR_Doc1RecordControl
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Project_Title)
                               
-                Me.WCD_Project_Title.Content = formattedValue               
-              
+                Me.WCD_Project_Title.Text = formattedValue
+                
             Else 
             
                 ' WCD_Project_Title is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-            Me.WCD_Project_Title.Content = WCAR_Doc1Table.WCD_Project_Title.Format(WCAR_Doc1Table.WCD_Project_Title.DefaultValue)
+                 Me.WCD_Project_Title.Text = WCAR_Doc1Table.WCD_Project_Title.Format(WCAR_Doc1Table.WCD_Project_Title.DefaultValue)
                         		
                 End If
-                                      
+                 
+              AddHandler Me.WCD_Project_Title.TextChanged, AddressOf WCD_Project_Title_TextChanged
+                                 
         End Sub
                 
         Public Overridable Sub SetWCD_Remark()
@@ -6250,17 +7509,19 @@ Public Class BaseWCAR_Doc1RecordControl
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Remark)
                               
-                Me.WCD_Remark.Content = formattedValue               
-              
+                Me.WCD_Remark.Text = formattedValue
+                
             Else 
             
                 ' WCD_Remark is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-            Me.WCD_Remark.Content = WCAR_Doc1Table.WCD_Remark.Format(WCAR_Doc1Table.WCD_Remark.DefaultValue)
+                 Me.WCD_Remark.Text = WCAR_Doc1Table.WCD_Remark.Format(WCAR_Doc1Table.WCD_Remark.DefaultValue)
                         		
                 End If
-                                      
+                 
+              AddHandler Me.WCD_Remark.TextChanged, AddressOf WCD_Remark_TextChanged
+                                 
         End Sub
                 
         Public Overridable Sub SetWCD_Request_Date()
@@ -6489,110 +7750,39 @@ Public Class BaseWCAR_Doc1RecordControl
 
                   
             
-
-            Dim selectedValue As String = Nothing
-            
-            ' figure out the selectedValue
-                  
-            
         
-            ' Set the WCD_U_ID QuickSelector on the webpage with value from the
+            ' Set the WCD_U_ID TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
-            
+
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
-            ' Me.WCD_U_ID is the ASP:QuickSelector on the webpage.
+            ' Me.WCD_U_ID is the ASP:TextBox on the webpage.
             
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_U_ID()
             ' and add your own code before or after the call to the MyBase function.
 
             
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_U_IDSpecified Then
-                            
+                				
                 ' If the WCD_U_ID is non-NULL, then format the value.
+
                 ' The Format method will return the Display Foreign Key As (DFKA) value
-                selectedValue = Me.DataSource.WCD_U_ID.ToString()
-            Else
+                Dim formattedValue As String = Me.DataSource.WCD_U_ID.ToString()
+                                
+                            
+                Me.WCD_U_ID.Text = formattedValue
                 
+            Else 
+            
                 ' WCD_U_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-                If Me.DataSource IsNot Nothing AndAlso Me.DataSource.IsCreated Then
-                    selectedValue = Nothing
-                Else
-                    selectedValue = WCAR_Doc1Table.WCD_U_ID.DefaultValue
+        
+                 Me.WCD_U_ID.Text = WCAR_Doc1Table.WCD_U_ID.DefaultValue		
                 End If
-                				
-            End If			
-                
-            ' Add the Please Select item.
-            If selectedValue Is Nothing OrElse selectedValue = ""  Then
-                  MiscUtils.ResetSelectedItem(Me.WCD_U_ID, New ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
-            End If              
-            
-            
-                  
-            ' Populate the item(s) to the control
-            
-            Me.WCD_U_ID.SetFieldMaxLength(50)
-            
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) 
-            variables = New System.Collections.Generic.Dictionary(Of String, Object)              
-            Dim evaluator As FormulaEvaluator
-            evaluator = New FormulaEvaluator
-              
-            If Not selectedValue Is Nothing AndAlso _
-                selectedValue.Trim <> "" AndAlso _
-                Not SetSelectedValue(Me.WCD_U_ID, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.WCD_U_ID, selectedValue)Then
-
-                ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.sel_WASP_User.W_U_ID = selectedValue
-                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
-                Dim whereClause2 As WhereClause = New WhereClause()
-                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(Sel_WASP_User1View.W_U_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
-                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
-
-                Try
-                    ' Execute the query
-                    Dim rc() As Sel_WASP_User1Record = Sel_WASP_User1View.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
-                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-                      ' if find a record, add it to the dropdown and set it as selected item
-                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
-                      Dim itemValue As Sel_WASP_User1Record = DirectCast(rc(0), Sel_WASP_User1Record)
-                        ' Create the item and add to the list.
-                        Dim cvalue As String = Nothing
-                        Dim fvalue As String = Nothing
-                        If itemValue.W_U_IDSpecified Then
-                            cvalue = itemValue.W_U_ID.ToString() 
-                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_U_ID)
-                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_U_ID.IsApplyDisplayAs Then
-                          fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_U_ID)
-                          End If
-                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                          fvalue = itemValue.Format(Sel_WASP_User1View.W_U_ID)
-                          End If
-                        
-                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-                              ResetSelectedItem(Me.WCD_U_ID, New ListItem(fvalue, cvalue))
-                            End If
-                        End If
-                Catch
-                End Try
-
-            End If					
-                        
-              Dim url as String = Me.ModifyRedirectUrl("../sel_WASP_User1/Sel-WASP-User-QuickSelector1.aspx", "", True)
-              
-              url = Me.Page.ModifyRedirectUrl(url, "", True)                                  
-              
-              url &= "?Target=" & Me.WCD_U_ID.ClientID & "&Formula=" & CType(Me.Page, BaseApplicationPage).Encrypt("= Sel_WASP_User1.W_U_Full_Name")& "&IndexField=" & CType(Me.Page, BaseApplicationPage).Encrypt("W_U_ID")& "&EmptyValue=" & CType(Me.Page, BaseApplicationPage).Encrypt("--PLEASE_SELECT--") & "&EmptyDisplayText=" & CType(Me.Page, BaseApplicationPage).Encrypt(Me.Page.GetResourceValue("Txt:PleaseSelect"))& "&Mode=" & CType(Me.Page, BaseApplicationPage).Encrypt("FieldValueSingleSelection") & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup")
-              
-              
-              Me.WCD_U_ID.Attributes.Item("onClick") = "initializePopupPage(this, '" & url & "', " & Convert.ToString(WCD_U_ID.AutoPostBack).ToLower() & ", event); return false;"        
-                  
-                    
-                  
-           
-             
+                 
+              AddHandler Me.WCD_U_ID.TextChanged, AddressOf WCD_U_ID_TextChanged
+                                 
         End Sub
                 
         Public Overridable Sub SetWCD_Unit_Location()
@@ -6645,11 +7835,11 @@ Public Class BaseWCAR_Doc1RecordControl
                   
             
         
-            ' Set the WCD_WCur_ID QuickSelector on the webpage with value from the
+            ' Set the WCD_WCur_ID DropDownList on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
             
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
-            ' Me.WCD_WCur_ID is the ASP:QuickSelector on the webpage.
+            ' Me.WCD_WCur_ID is the ASP:DropDownList on the webpage.
             
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_WCur_ID()
@@ -6673,72 +7863,12 @@ Public Class BaseWCAR_Doc1RecordControl
                 				
             End If			
                 
-            ' Add the Please Select item.
-            If selectedValue Is Nothing OrElse selectedValue = ""  Then
-                  MiscUtils.ResetSelectedItem(Me.WCD_WCur_ID, New ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
-            End If              
-            
             
                   
             ' Populate the item(s) to the control
             
-            Me.WCD_WCur_ID.SetFieldMaxLength(50)
-            
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) 
-            variables = New System.Collections.Generic.Dictionary(Of String, Object)              
-            Dim evaluator As FormulaEvaluator
-            evaluator = New FormulaEvaluator
-              
-            If Not selectedValue Is Nothing AndAlso _
-                selectedValue.Trim <> "" AndAlso _
-                Not SetSelectedValue(Me.WCD_WCur_ID, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.WCD_WCur_ID, selectedValue)Then
-
-                ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.WCurrency.WCur_ID = selectedValue
-                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
-                Dim whereClause2 As WhereClause = New WhereClause()
-                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(WCurrency1Table.WCur_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
-                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
-
-                Try
-                    ' Execute the query
-                    Dim rc() As WCurrency1Record = WCurrency1Table.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
-                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-                      ' if find a record, add it to the dropdown and set it as selected item
-                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
-                      Dim itemValue As WCurrency1Record = DirectCast(rc(0), WCurrency1Record)
-                        ' Create the item and add to the list.
-                        Dim cvalue As String = Nothing
-                        Dim fvalue As String = Nothing
-                        If itemValue.WCur_IDSpecified Then
-                            cvalue = itemValue.WCur_ID.ToString() 
-                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WCur_ID)
-                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WCur_ID.IsApplyDisplayAs Then
-                          fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WCur_ID)
-                          End If
-                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                          fvalue = itemValue.Format(WCurrency1Table.WCur_Desc)
-                          End If
-                        
-                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-                              ResetSelectedItem(Me.WCD_WCur_ID, New ListItem(fvalue, cvalue))
-                            End If
-                        End If
-                Catch
-                End Try
-
-            End If					
-                        
-              Dim url as String = Me.ModifyRedirectUrl("../WCurrency1/WCurrency-QuickSelector1.aspx", "", True)
-              
-              url = Me.Page.ModifyRedirectUrl(url, "", True)                                  
-              
-              url &= "?Target=" & Me.WCD_WCur_ID.ClientID & "&DFKA=" & CType(Me.Page, BaseApplicationPage).Encrypt("WCur_Desc")& "&IndexField=" & CType(Me.Page, BaseApplicationPage).Encrypt("WCur_ID")& "&EmptyValue=" & CType(Me.Page, BaseApplicationPage).Encrypt("--PLEASE_SELECT--") & "&EmptyDisplayText=" & CType(Me.Page, BaseApplicationPage).Encrypt(Me.Page.GetResourceValue("Txt:PleaseSelect"))& "&Mode=" & CType(Me.Page, BaseApplicationPage).Encrypt("FieldValueSingleSelection") & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup")
-              
-              
-              Me.WCD_WCur_ID.Attributes.Item("onClick") = "initializePopupPage(this, '" & url & "', " & Convert.ToString(WCD_WCur_ID.AutoPostBack).ToLower() & ", event); return false;"        
-                  
-                    
+            Me.PopulateWCD_WCur_IDDropDownList(selectedValue, 100)              
+                
                   
            
              
@@ -6755,11 +7885,11 @@ Public Class BaseWCAR_Doc1RecordControl
                   
             
         
-            ' Set the WCD_WDT_ID QuickSelector on the webpage with value from the
+            ' Set the WCD_WDT_ID DropDownList on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
             
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
-            ' Me.WCD_WDT_ID is the ASP:QuickSelector on the webpage.
+            ' Me.WCD_WDT_ID is the ASP:DropDownList on the webpage.
             
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_WDT_ID()
@@ -6783,221 +7913,513 @@ Public Class BaseWCAR_Doc1RecordControl
                 				
             End If			
                 
-            ' Add the Please Select item.
-            If selectedValue Is Nothing OrElse selectedValue = ""  Then
-                  MiscUtils.ResetSelectedItem(Me.WCD_WDT_ID, New ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
-            End If              
-            
             
                   
             ' Populate the item(s) to the control
             
-            Me.WCD_WDT_ID.SetFieldMaxLength(50)
-            
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) 
-            variables = New System.Collections.Generic.Dictionary(Of String, Object)              
-            Dim evaluator As FormulaEvaluator
-            evaluator = New FormulaEvaluator
-              
-            If Not selectedValue Is Nothing AndAlso _
-                selectedValue.Trim <> "" AndAlso _
-                Not SetSelectedValue(Me.WCD_WDT_ID, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.WCD_WDT_ID, selectedValue)Then
-
-                ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.WDoc_Type.WDT_ID = selectedValue
-                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
-                Dim whereClause2 As WhereClause = New WhereClause()
-                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(WDoc_Type1Table.WDT_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
-                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
-
-                Try
-                    ' Execute the query
-                    Dim rc() As WDoc_Type1Record = WDoc_Type1Table.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
-                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-                      ' if find a record, add it to the dropdown and set it as selected item
-                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
-                      Dim itemValue As WDoc_Type1Record = DirectCast(rc(0), WDoc_Type1Record)
-                        ' Create the item and add to the list.
-                        Dim cvalue As String = Nothing
-                        Dim fvalue As String = Nothing
-                        If itemValue.WDT_IDSpecified Then
-                            cvalue = itemValue.WDT_ID.ToString() 
-                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WDT_ID)
-                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WDT_ID.IsApplyDisplayAs Then
-                          fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WDT_ID)
-                          End If
-                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                          fvalue = itemValue.Format(WDoc_Type1Table.WDT_Name)
-                          End If
-                        
-                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-                              ResetSelectedItem(Me.WCD_WDT_ID, New ListItem(fvalue, cvalue))
-                            End If
-                        End If
-                Catch
-                End Try
-
-            End If					
-                        
-              Dim url as String = Me.ModifyRedirectUrl("../WDoc_Type1/WDoc-Type-QuickSelector1.aspx", "", True)
-              
-              url = Me.Page.ModifyRedirectUrl(url, "", True)                                  
-              
-              url &= "?Target=" & Me.WCD_WDT_ID.ClientID & "&DFKA=" & CType(Me.Page, BaseApplicationPage).Encrypt("WDT_Name")& "&IndexField=" & CType(Me.Page, BaseApplicationPage).Encrypt("WDT_ID")& "&EmptyValue=" & CType(Me.Page, BaseApplicationPage).Encrypt("--PLEASE_SELECT--") & "&EmptyDisplayText=" & CType(Me.Page, BaseApplicationPage).Encrypt(Me.Page.GetResourceValue("Txt:PleaseSelect"))& "&Mode=" & CType(Me.Page, BaseApplicationPage).Encrypt("FieldValueSingleSelection") & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup")
-              
-              
-              Me.WCD_WDT_ID.Attributes.Item("onClick") = "initializePopupPage(this, '" & url & "', " & Convert.ToString(WCD_WDT_ID.AutoPostBack).ToLower() & ", event); return false;"        
-                  
-                    
+            Me.PopulateWCD_WDT_IDDropDownList(selectedValue, 100)              
+                
                   
            
              
         End Sub
                 
-        Public Overridable Sub SetWCD_C_IDLabel()
+        Public Overridable Sub SetlblTotal1()
 
                   
                   
                   End Sub
                 
-        Public Overridable Sub SetWCD_CreatedLabel()
+        Public Overridable Sub SetLiteral()
 
                   
                   
+                  End Sub
+                
+        Public Overridable Sub SetLiteral1()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal1.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral10()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral11()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal11.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral12()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal12.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral13()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal13.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral14()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral15()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral16()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal16.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral17()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral18()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral19()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral2()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal2.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral20()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral21()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral22()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral23()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral24()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral25()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral26()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral27()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal27.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral28()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal28.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral29()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral3()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal3.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral30()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral32()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal32.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral4()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal4.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral5()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral6()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal6.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral7()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal7.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral8()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal8.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetLiteral9()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal9.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SettxtCoRequestRem()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetWCD_C_IDLabel()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_C_IDLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Exp_BudgetLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_BudgetLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Exp_Cur_YrLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_Cur_YrLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Exp_Nxt_YrLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_Nxt_YrLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Exp_Prev_TotalLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_Prev_TotalLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Exp_Sub_YrLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_Sub_YrLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Exp_TotalLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_TotalLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Exp_Under_Over_BudgetLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_Under_Over_BudgetLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_NoLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_NoLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Proj_Inc_ACBLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Proj_Inc_ACBLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Project_NoLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Project_NoLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Project_TitleLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Project_TitleLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_RemarkLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_RemarkLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Request_DateLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Request_DateLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_StatusLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_StatusLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_SubmitLabel()
 
                   
                   
-                  End Sub
-                
-        Public Overridable Sub SetWCD_Supplementary_ManualLabel()
-
-                  
-                  
-                  End Sub
-                
-        Public Overridable Sub SetWCD_Supplementary_WCD_IDLabel()
-
-                  
-                  
-                  End Sub
-                
-        Public Overridable Sub SetWCD_SupplementaryLabel()
-
-                  
-                  
-                  End Sub
-                
-        Public Overridable Sub SetWCD_U_IDLabel()
-
-                  
-                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_SubmitLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_Unit_LocationLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Unit_LocationLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_WCur_IDLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_WCur_IDLabel.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWCD_WDT_IDLabel()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_WDT_IDLabel.Text = "Some value"
+                    
                   End Sub
                 
+        Public Overridable Sub SetWCAR_Doc1TabContainer()           
+                        
+                   
+            If EvaluateFormula("URL(""TabVisible"")").ToLower() = "true" Then
+                MiscUtils.FindControlRecursively(Me, "WCAR_Doc1TabContainer").Visible = True
+            ElseIf EvaluateFormula("URL(""TabVisible"")").ToLower() = "false" Then
+                MiscUtils.FindControlRecursively(Me, "WCAR_Doc1TabContainer").Visible = False
+            End If
+         
+  
+        End Sub        
+      
+        Public Overridable Sub SetWCAR_DocRecordControlTabContainer()           
+                        
+                   
+            If EvaluateFormula("URL(""TabVisible"")").ToLower() = "true" Then
+                MiscUtils.FindControlRecursively(Me, "WCAR_DocRecordControlTabContainer").Visible = True
+            ElseIf EvaluateFormula("URL(""TabVisible"")").ToLower() = "false" Then
+                MiscUtils.FindControlRecursively(Me, "WCAR_DocRecordControlTabContainer").Visible = False
+            End If
+         
+  
+        End Sub        
+      
+        Public Overridable Sub SetWCAR_Doc_Attach1TableControl()           
+        
+        
+            If WCAR_Doc_Attach1TableControl.Visible Then
+                WCAR_Doc_Attach1TableControl.LoadData()
+                WCAR_Doc_Attach1TableControl.DataBind()
+            End If
+        End Sub        
+      
+        Public Overridable Sub SetWCAR_Doc_Checker1TableControl()           
+        
+        
+            If WCAR_Doc_Checker1TableControl.Visible Then
+                WCAR_Doc_Checker1TableControl.LoadData()
+                WCAR_Doc_Checker1TableControl.DataBind()
+            End If
+        End Sub        
+      
         Public Overridable Sub ResetControl()
           
         End Sub
@@ -7085,6 +8507,8 @@ Public Class BaseWCAR_Doc1RecordControl
 
         Public Overridable Sub RegisterPostback()       
         
+              Me.Page.RegisterPostBackTrigger(MiscUtils.FindControlRecursively(Me,"SaveButton"))
+                        
         
         End Sub
 
@@ -7144,11 +8568,11 @@ Public Class BaseWCAR_Doc1RecordControl
             
             Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
-                    
-        Dim recWCAR_Doc_Attach1TableControl as WCAR_Doc_Attach1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Attach1TableControl"), WCAR_Doc_Attach1TableControl)
+          
+        Dim recWCAR_Doc_Attach1TableControl as WCAR_Doc_Attach1TableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_Attach1TableControl"), WCAR_Doc_Attach1TableControl)
         recWCAR_Doc_Attach1TableControl.SaveData()
-                    
-        Dim recWCAR_Doc_Checker1TableControl as WCAR_Doc_Checker1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
+          
+        Dim recWCAR_Doc_Checker1TableControl as WCAR_Doc_Checker1TableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
         recWCAR_Doc_Checker1TableControl.SaveData()
           
         End Sub
@@ -7164,7 +8588,6 @@ Public Class BaseWCAR_Doc1RecordControl
             ' Call the Get methods for each of the user interface controls.
         
             GetWCD_C_ID()
-            GetWCD_Created()
             GetWCD_Exp_Budget()
             GetWCD_Exp_Cur_Yr()
             GetWCD_Exp_Nxt_Yr()
@@ -7172,6 +8595,7 @@ Public Class BaseWCAR_Doc1RecordControl
             GetWCD_Exp_Sub_Yr()
             GetWCD_Exp_Total()
             GetWCD_Exp_Under_Over_Budget()
+            GetWCD_ID()
             GetWCD_No()
             GetWCD_Proj_Inc_ACB()
             GetWCD_Project_No()
@@ -7192,29 +8616,13 @@ Public Class BaseWCAR_Doc1RecordControl
         
         Public Overridable Sub GetWCD_C_ID()
          
-            ' Retrieve the value entered by the user on the WCD_C_ID ASP:QuickSelector, and
+            ' Retrieve the value entered by the user on the WCD_C_ID ASP:DropDownList, and
             ' save it into the WCD_C_ID field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc record.
                         
             ' Custom validation should be performed in Validate, not here.
             
             Me.DataSource.Parse(GetValueSelectedPageRequest(Me.WCD_C_ID), WCAR_Doc1Table.WCD_C_ID)				
             
-        End Sub
-                
-        Public Overridable Sub GetWCD_Created()
-            
-            ' Retrieve the value entered by the user on the WCD_Created ASP:TextBox, and
-            ' save it into the WCD_Created field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc record.
-            ' Parse will also validate the date to ensure it is of the proper format
-            ' and a valid date.  The format is verified based on the current culture 
-            ' settings including the order of month, day and year and the separator character.
-            ' Parse throws an exception if the date is invalid.
-            ' Custom validation should be performed in Validate, not here.
-            
-            'Save the value to data source
-            Me.DataSource.Parse(Me.WCD_Created.Text, WCAR_Doc1Table.WCD_Created)			
-
-                      
         End Sub
                 
         Public Overridable Sub GetWCD_Exp_Budget()
@@ -7308,6 +8716,10 @@ Public Class BaseWCAR_Doc1RecordControl
                       
         End Sub
                 
+        Public Overridable Sub GetWCD_ID()
+            
+        End Sub
+                
         Public Overridable Sub GetWCD_No()
             
             ' Retrieve the value entered by the user on the WCD_No ASP:TextBox, and
@@ -7354,7 +8766,7 @@ Public Class BaseWCAR_Doc1RecordControl
             ' Custom validation should be performed in Validate, not here.
             
             'Save the value to data source
-            Me.DataSource.Parse(Me.WCD_Project_Title.Content, WCAR_Doc1Table.WCD_Project_Title)			
+            Me.DataSource.Parse(Me.WCD_Project_Title.Text, WCAR_Doc1Table.WCD_Project_Title)			
 
                       
         End Sub
@@ -7367,7 +8779,7 @@ Public Class BaseWCAR_Doc1RecordControl
             ' Custom validation should be performed in Validate, not here.
             
             'Save the value to data source
-            Me.DataSource.Parse(Me.WCD_Remark.Content, WCAR_Doc1Table.WCD_Remark)			
+            Me.DataSource.Parse(Me.WCD_Remark.Text, WCAR_Doc1Table.WCD_Remark)			
 
                       
         End Sub
@@ -7452,14 +8864,16 @@ Public Class BaseWCAR_Doc1RecordControl
         End Sub
                 
         Public Overridable Sub GetWCD_U_ID()
-         
-            ' Retrieve the value entered by the user on the WCD_U_ID ASP:QuickSelector, and
+            
+            ' Retrieve the value entered by the user on the WCD_U_ID ASP:TextBox, and
             ' save it into the WCD_U_ID field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc record.
-                        
+            
             ' Custom validation should be performed in Validate, not here.
             
-            Me.DataSource.Parse(GetValueSelectedPageRequest(Me.WCD_U_ID), WCAR_Doc1Table.WCD_U_ID)				
-            
+            'Save the value to data source
+            Me.DataSource.Parse(Me.WCD_U_ID.Text, WCAR_Doc1Table.WCD_U_ID)			
+
+                      
         End Sub
                 
         Public Overridable Sub GetWCD_Unit_Location()
@@ -7477,7 +8891,7 @@ Public Class BaseWCAR_Doc1RecordControl
                 
         Public Overridable Sub GetWCD_WCur_ID()
          
-            ' Retrieve the value entered by the user on the WCD_WCur_ID ASP:QuickSelector, and
+            ' Retrieve the value entered by the user on the WCD_WCur_ID ASP:DropDownList, and
             ' save it into the WCD_WCur_ID field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc record.
                         
             ' Custom validation should be performed in Validate, not here.
@@ -7488,7 +8902,7 @@ Public Class BaseWCAR_Doc1RecordControl
                 
         Public Overridable Sub GetWCD_WDT_ID()
          
-            ' Retrieve the value entered by the user on the WCD_WDT_ID ASP:QuickSelector, and
+            ' Retrieve the value entered by the user on the WCD_WDT_ID ASP:DropDownList, and
             ' save it into the WCD_WDT_ID field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc record.
                         
             ' Custom validation should be performed in Validate, not here.
@@ -7813,42 +9227,791 @@ Public Class BaseWCAR_Doc1RecordControl
     
         ' Generate set method for buttons
         
+        Public Overridable Sub SetimbFind()                
+              
+   
+        End Sub
+            
+        Public Overridable Sub SetimbRelated()                
+              
+   
+        End Sub
+            
+        Public Overridable Sub SetbtnChecked()                
+              
+   
+        End Sub
+            
+        Public Overridable Sub SetbtnRemoveCheck()                
+              
+   
+        End Sub
+            
+        Public Overridable Sub SetbtnVoid()                
+              
+   
+        End Sub
+            
+        Public Overridable Sub SetCancelButton()                
+              
+   
+        End Sub
+            
+        Public Overridable Sub SetCancelButton1()                
+              
+   
+        End Sub
+            
+        Public Overridable Sub SetSaveButton()                
+              
+              Me.SaveButton.Button.Attributes.Add("onclick", "SubmitHRefOnce(this, """ & Me.Page.GetResourceValue("Txt:SaveRecord", "ePortalWFApproval") & """);")
+            
+   
+        End Sub
+            
+                        
+        Public Overridable Function CreateWhereClause_WCD_C_IDDropDownList() As WhereClause
+            ' By default, we simply return a new WhereClause.
+            ' Add additional where clauses to restrict the items shown in the dropdown list.
+            						
+            ' This WhereClause is for the DatabaseANFLO-WFN%dbo.sel_WF_DYNAMICS_Company table.
+            ' Examples:
+            ' wc.iAND(Sel_WF_DYNAMICS_Company1View.Company_ID, BaseFilter.ComparisonOperator.EqualsTo, "XYZ")
+            ' wc.iAND(Sel_WF_DYNAMICS_Company1View.Active, BaseFilter.ComparisonOperator.EqualsTo, "1")
+            
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+            				
+        End Function
+                  
+                        
+        Public Overridable Function CreateWhereClause_WCD_WCur_IDDropDownList() As WhereClause
+            ' By default, we simply return a new WhereClause.
+            ' Add additional where clauses to restrict the items shown in the dropdown list.
+            						
+            ' This WhereClause is for the DatabaseANFLO-WFN%dbo.WCurrency table.
+            ' Examples:
+            ' wc.iAND(WCurrency1Table.WCur_Desc, BaseFilter.ComparisonOperator.EqualsTo, "XYZ")
+            ' wc.iAND(WCurrency1Table.Active, BaseFilter.ComparisonOperator.EqualsTo, "1")
+            
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+            				
+        End Function
+                  
+                        
+        Public Overridable Function CreateWhereClause_WCD_WDT_IDDropDownList() As WhereClause
+            ' By default, we simply return a new WhereClause.
+            ' Add additional where clauses to restrict the items shown in the dropdown list.
+            						
+            ' This WhereClause is for the DatabaseANFLO-WFN%dbo.WDoc_Type table.
+            ' Examples:
+            ' wc.iAND(WDoc_Type1Table.WDT_Name, BaseFilter.ComparisonOperator.EqualsTo, "XYZ")
+            ' wc.iAND(WDoc_Type1Table.Active, BaseFilter.ComparisonOperator.EqualsTo, "1")
+            
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+            				
+        End Function
+                  
+        ' Fill the WCD_C_ID list.
+        Protected Overridable Sub PopulateWCD_C_IDDropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+            		  					                
+            Me.WCD_C_ID.Items.Clear()
+            
+                    
+            ' 1. Setup the static list items        
+            
+            ' Add the Please Select item.
+            Me.WCD_C_ID.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            		  			
+            ' 2. Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCD_C_IDDropDownList function.
+            ' It is better to customize the where clause there.
+            
+            Dim wc As WhereClause = CreateWhereClause_WCD_C_IDDropDownList()
+            ' Create the ORDER BY clause to sort based on the displayed value.			
+                
+
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(Sel_WF_DYNAMICS_Company1View.Company_Short_Name, OrderByItem.OrderDir.Asc)
+
+                      Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      
+            ' 3. Read a total of maxItems from the database and insert them		
+            Dim itemValues() As Sel_WF_DYNAMICS_Company1Record = Nothing
+            Dim evaluator As New FormulaEvaluator                
+            If wc.RunQuery
+                Dim counter As Integer = 0
+                Dim pageNum As Integer = 0
+                Dim listDuplicates As New ArrayList()
+
+                Do
+                    itemValues = Sel_WF_DYNAMICS_Company1View.GetRecords(wc, orderBy, pageNum, maxItems)
+                    For each itemValue As Sel_WF_DYNAMICS_Company1Record In itemValues
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.Company_IDSpecified Then
+                            cvalue = itemValue.Company_ID.ToString() 
+                            
+                            If counter < maxItems AndAlso Me.WCD_C_ID.Items.FindByValue(cvalue) Is Nothing Then
+                            
+                                Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_C_ID)
+                                If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_C_ID.IsApplyDisplayAs Then
+                                fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_C_ID)
+                                End If
+                                If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                                fvalue = itemValue.Format(Sel_WF_DYNAMICS_Company1View.Company_ID)
+                                End If
+                              
+                                If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+
+                                If (IsNothing(fvalue)) Then
+                                   fvalue = ""
+                                End If
+
+                                fvalue = fvalue.Trim()
+
+                                If ( fvalue.Length > 50 ) Then
+                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                End If
+
+                                Dim dupItem As ListItem = Me.WCD_C_ID.Items.FindByText(fvalue)
+                          
+                                If Not IsNothing(dupItem) Then
+                                    listDuplicates.Add(fvalue)
+                                    If Not String.IsNullOrEmpty(dupItem.Value) Then
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
+                                    End If
+                                End If
+
+                                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
+                                Me.WCD_C_ID.Items.Add(newItem)
+
+                                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
+                                End If
+
+                                counter += 1			  
+                            End If
+                        End If
+                    Next
+                    pageNum += 1
+                Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
+            End If
+                            
+                    
+            ' 4. Set the selected value (insert if not already present).
+              
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.WCD_C_ID, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.WCD_C_ID, selectedValue)Then
+
+                ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.sel_WF_DYNAMICS_Company.Company_ID = selectedValue
+                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
+                Dim whereClause2 As WhereClause = New WhereClause()
+                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(Sel_WF_DYNAMICS_Company1View.Company_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
+                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
+
+                Try
+                    ' Execute the query
+                    Dim rc() As Sel_WF_DYNAMICS_Company1Record = Sel_WF_DYNAMICS_Company1View.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
+                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      ' if find a record, add it to the dropdown and set it as selected item
+                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
+                      Dim itemValue As Sel_WF_DYNAMICS_Company1Record = DirectCast(rc(0), Sel_WF_DYNAMICS_Company1Record)
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.Company_IDSpecified Then
+                            cvalue = itemValue.Company_ID.ToString() 
+                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_C_ID)
+                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_C_ID.IsApplyDisplayAs Then
+                          fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_C_ID)
+                          End If
+                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                          fvalue = itemValue.Format(Sel_WF_DYNAMICS_Company1View.Company_ID)
+                          End If
+                        
+                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+                              ResetSelectedItem(Me.WCD_C_ID, New ListItem(fvalue, cvalue))
+                            End If
+                        End If
+                Catch
+                End Try
+
+            End If					
+                        
+                
+        End Sub
+        
+              
+        ' Fill the WCD_WCur_ID list.
+        Protected Overridable Sub PopulateWCD_WCur_IDDropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+            		  					                
+            Me.WCD_WCur_ID.Items.Clear()
+            
+                    
+            ' 1. Setup the static list items        
+            
+            ' Add the Please Select item.
+            Me.WCD_WCur_ID.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            		  			
+            ' 2. Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCD_WCur_IDDropDownList function.
+            ' It is better to customize the where clause there.
+            
+            Dim wc As WhereClause = CreateWhereClause_WCD_WCur_IDDropDownList()
+            ' Create the ORDER BY clause to sort based on the displayed value.			
+                
+
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(WCurrency1Table.WCur_Desc, OrderByItem.OrderDir.Asc)
+
+                      Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      
+            ' 3. Read a total of maxItems from the database and insert them		
+            Dim itemValues() As WCurrency1Record = Nothing
+            Dim evaluator As New FormulaEvaluator                
+            If wc.RunQuery
+                Dim counter As Integer = 0
+                Dim pageNum As Integer = 0
+                Dim listDuplicates As New ArrayList()
+
+                Do
+                    itemValues = WCurrency1Table.GetRecords(wc, orderBy, pageNum, maxItems)
+                    For each itemValue As WCurrency1Record In itemValues
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.WCur_IDSpecified Then
+                            cvalue = itemValue.WCur_ID.ToString() 
+                            
+                            If counter < maxItems AndAlso Me.WCD_WCur_ID.Items.FindByValue(cvalue) Is Nothing Then
+                            
+                                Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WCur_ID)
+                                If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WCur_ID.IsApplyDisplayAs Then
+                                fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WCur_ID)
+                                End If
+                                If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                                fvalue = itemValue.Format(WCurrency1Table.WCur_Desc)
+                                End If
+                              
+                                If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+
+                                If (IsNothing(fvalue)) Then
+                                   fvalue = ""
+                                End If
+
+                                fvalue = fvalue.Trim()
+
+                                If ( fvalue.Length > 50 ) Then
+                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                End If
+
+                                Dim dupItem As ListItem = Me.WCD_WCur_ID.Items.FindByText(fvalue)
+                          
+                                If Not IsNothing(dupItem) Then
+                                    listDuplicates.Add(fvalue)
+                                    If Not String.IsNullOrEmpty(dupItem.Value) Then
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
+                                    End If
+                                End If
+
+                                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
+                                Me.WCD_WCur_ID.Items.Add(newItem)
+
+                                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
+                                End If
+
+                                counter += 1			  
+                            End If
+                        End If
+                    Next
+                    pageNum += 1
+                Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
+            End If
+                            
+                    
+            ' 4. Set the selected value (insert if not already present).
+              
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.WCD_WCur_ID, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.WCD_WCur_ID, selectedValue)Then
+
+                ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.WCurrency.WCur_ID = selectedValue
+                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
+                Dim whereClause2 As WhereClause = New WhereClause()
+                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(WCurrency1Table.WCur_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
+                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
+
+                Try
+                    ' Execute the query
+                    Dim rc() As WCurrency1Record = WCurrency1Table.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
+                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      ' if find a record, add it to the dropdown and set it as selected item
+                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
+                      Dim itemValue As WCurrency1Record = DirectCast(rc(0), WCurrency1Record)
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.WCur_IDSpecified Then
+                            cvalue = itemValue.WCur_ID.ToString() 
+                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WCur_ID)
+                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WCur_ID.IsApplyDisplayAs Then
+                          fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WCur_ID)
+                          End If
+                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                          fvalue = itemValue.Format(WCurrency1Table.WCur_Desc)
+                          End If
+                        
+                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+                              ResetSelectedItem(Me.WCD_WCur_ID, New ListItem(fvalue, cvalue))
+                            End If
+                        End If
+                Catch
+                End Try
+
+            End If					
+                        
+                
+        End Sub
+        
+              
+        ' Fill the WCD_WDT_ID list.
+        Protected Overridable Sub PopulateWCD_WDT_IDDropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+            		  					                
+            Me.WCD_WDT_ID.Items.Clear()
+            
+                    
+            ' 1. Setup the static list items        
+            
+            ' Add the Please Select item.
+            Me.WCD_WDT_ID.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            		  			
+            ' 2. Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCD_WDT_IDDropDownList function.
+            ' It is better to customize the where clause there.
+            
+            Dim wc As WhereClause = CreateWhereClause_WCD_WDT_IDDropDownList()
+            ' Create the ORDER BY clause to sort based on the displayed value.			
+                
+
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(WDoc_Type1Table.WDT_Name, OrderByItem.OrderDir.Asc)
+
+                      Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      
+            ' 3. Read a total of maxItems from the database and insert them		
+            Dim itemValues() As WDoc_Type1Record = Nothing
+            Dim evaluator As New FormulaEvaluator                
+            If wc.RunQuery
+                Dim counter As Integer = 0
+                Dim pageNum As Integer = 0
+                Dim listDuplicates As New ArrayList()
+
+                Do
+                    itemValues = WDoc_Type1Table.GetRecords(wc, orderBy, pageNum, maxItems)
+                    For each itemValue As WDoc_Type1Record In itemValues
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.WDT_IDSpecified Then
+                            cvalue = itemValue.WDT_ID.ToString() 
+                            
+                            If counter < maxItems AndAlso Me.WCD_WDT_ID.Items.FindByValue(cvalue) Is Nothing Then
+                            
+                                Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WDT_ID)
+                                If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WDT_ID.IsApplyDisplayAs Then
+                                fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WDT_ID)
+                                End If
+                                If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                                fvalue = itemValue.Format(WDoc_Type1Table.WDT_Name)
+                                End If
+                              
+                                If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+
+                                If (IsNothing(fvalue)) Then
+                                   fvalue = ""
+                                End If
+
+                                fvalue = fvalue.Trim()
+
+                                If ( fvalue.Length > 50 ) Then
+                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                End If
+
+                                Dim dupItem As ListItem = Me.WCD_WDT_ID.Items.FindByText(fvalue)
+                          
+                                If Not IsNothing(dupItem) Then
+                                    listDuplicates.Add(fvalue)
+                                    If Not String.IsNullOrEmpty(dupItem.Value) Then
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
+                                    End If
+                                End If
+
+                                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
+                                Me.WCD_WDT_ID.Items.Add(newItem)
+
+                                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
+                                End If
+
+                                counter += 1			  
+                            End If
+                        End If
+                    Next
+                    pageNum += 1
+                Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
+            End If
+                            
+                    
+            ' 4. Set the selected value (insert if not already present).
+              
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.WCD_WDT_ID, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.WCD_WDT_ID, selectedValue)Then
+
+                ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.WDoc_Type.WDT_ID = selectedValue
+                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
+                Dim whereClause2 As WhereClause = New WhereClause()
+                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(WDoc_Type1Table.WDT_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
+                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
+
+                Try
+                    ' Execute the query
+                    Dim rc() As WDoc_Type1Record = WDoc_Type1Table.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
+                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      ' if find a record, add it to the dropdown and set it as selected item
+                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
+                      Dim itemValue As WDoc_Type1Record = DirectCast(rc(0), WDoc_Type1Record)
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.WDT_IDSpecified Then
+                            cvalue = itemValue.WDT_ID.ToString() 
+                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WDT_ID)
+                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WDT_ID.IsApplyDisplayAs Then
+                          fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WDT_ID)
+                          End If
+                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                          fvalue = itemValue.Format(WDoc_Type1Table.WDT_Name)
+                          End If
+                        
+                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+                              ResetSelectedItem(Me.WCD_WDT_ID, New ListItem(fvalue, cvalue))
+                            End If
+                        End If
+                Catch
+                End Try
+
+            End If					
+                        
+                
+        End Sub
+        
+              
+        ' event handler for ImageButton
+        Public Overridable Sub imbFind_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+              
+    Try
+    
+            Catch ex As Exception
+            
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+    
+        End Sub
+        
+        ' event handler for ImageButton
+        Public Overridable Sub imbRelated_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+              
+    Try
+    
+            Catch ex As Exception
+            
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+    
+        End Sub
+        
+        ' event handler for Button
+        Public Overridable Sub btnChecked_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+    Try
+    
+            Catch ex As Exception
+            
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+    
+        End Sub
+        
+        ' event handler for Button
+        Public Overridable Sub btnRemoveCheck_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+    Try
+    
+            Catch ex As Exception
+            
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+    
+        End Sub
+        
+        ' event handler for Button
+        Public Overridable Sub btnVoid_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+    Try
+    
+            Catch ex As Exception
+            
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+    
+        End Sub
+        
+        ' event handler for Button
+        Public Overridable Sub CancelButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+
+                ' if target is specified meaning that is opened on popup or new window
+                If Page.Request("target") <> "" Then
+                    shouldRedirect = False
+                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "ClosePopup", "closePopupPage();", True)                   
+                End If
+      
+            Catch ex As Exception
+            
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.RedirectBack()
+        
+            End If
+        End Sub
+        
+        ' event handler for Button
+        Public Overridable Sub CancelButton1_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+
+                ' if target is specified meaning that is opened on popup or new window
+                If Page.Request("target") <> "" Then
+                    shouldRedirect = False
+                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "ClosePopup", "closePopupPage();", True)                   
+                End If
+      
+            Catch ex As Exception
+            
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.RedirectBack()
+        
+            End If
+        End Sub
+        
+        ' event handler for Button
+        Public Overridable Sub SaveButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+        
+              If (Not Me.Page.IsPageRefresh) Then         
+                  Me.Page.SaveData()
+              End If        
+        
+            Me.Page.CommitTransaction(sender)
+           Dim field As String = ""
+           Dim formula As String = ""
+           Dim displayFieldName As String = ""
+           Dim value As String = ""
+           Dim id As String = ""
+
+
+            ' retrieve necessary URL parameters
+            If Not String.IsNullOrEmpty(Page.Request("Target")) Then
+                target = CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("Target")
+            End If
+            If Not String.IsNullOrEmpty(Page.Request("IndexField")) Then
+                field = CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("IndexField")
+            End If
+            If Not String.IsNullOrEmpty(Page.Request("Formula")) Then
+                formula = CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("Formula")
+            End If
+            If Not String.IsNullOrEmpty(Page.Request("DFKA")) Then
+                displayFieldName = CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("DFKA")
+            End If
+            
+            If target <> "" AndAlso field <> "" Then
+          
+                  If Not Me Is Nothing AndAlso Not Me.DataSource Is Nothing Then
+                        id = Me.DataSource.GetValue(Me.DataSource.TableAccess.TableDefinition.ColumnList.GetByAnyName(field)).ToString
+                        If formula <> "" Then
+                            Dim variables as System.Collections.Generic.IDictionary(Of String, Object) = new System.Collections.Generic.Dictionary(Of String, Object)()
+                            variables.Add(Me.DataSource.TableAccess.TableDefinition.TableCodeName, Me.DataSource)
+                            value = EvaluateFormula(formula, Me.DataSource, Nothing,variables)
+                        ElseIf displayFieldName = "" Then
+                            value = id
+                        Else
+                            value = Me.DataSource.GetValue(Me.DataSource.TableAccess.TableDefinition.ColumnList.GetByAnyName(displayFieldName)).ToString
+                        End If
+                  End If
+                  If value is Nothing Then
+                      value = id
+                  End If
+                BaseClasses.Utils.MiscUtils.RegisterAddButtonScript(Me, target, id, value)
+                shouldRedirect = False
+                
+           ElseIf target <> "" Then
+                BaseClasses.Utils.MiscUtils.RegisterAddButtonScript(Me, target, Nothing, Nothing)           
+                shouldRedirect = False          
+           End If
+         
+            Catch ex As Exception
+            
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+                DbUtils.EndTransaction
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.RedirectBack()
+        
+            End If
+        End Sub
+        
         Protected Overridable Sub WCD_C_ID_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
 
+            ' for the value inserted by quick add button or large list selector, 
+            ' the value is necessary to be inserted by this event during postback 
+            Dim val As String = CType(Me.Page.Session()(WCD_C_ID.ClientID & "_SelectedValue"), String)
+            Dim displayText As String = CType(Me.Page.Session()(WCD_C_ID.ClientID & "_SelectedDisplayText"), String)
+            If displayText <> "" AndAlso val <> "" Then
+                Me.WCD_C_ID.Items.Add(New ListItem(displayText, val))
+                Me.WCD_C_ID.SelectedIndex = Me.WCD_C_ID.Items.Count - 1
+                Me.Page.Session.Remove(WCD_C_ID.ClientID & "_SelectedValue")
+                Me.Page.Session.Remove(WCD_C_ID.ClientID & "_SelectedDisplayText")
+            End If
 
           									
                 
                 
         End Sub
-                      
-                    
-        Protected Overridable Sub WCD_U_ID_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-
-          									
-                
-                
-        End Sub
-                      
-                    
+            
         Protected Overridable Sub WCD_WCur_ID_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
 
+            ' for the value inserted by quick add button or large list selector, 
+            ' the value is necessary to be inserted by this event during postback 
+            Dim val As String = CType(Me.Page.Session()(WCD_WCur_ID.ClientID & "_SelectedValue"), String)
+            Dim displayText As String = CType(Me.Page.Session()(WCD_WCur_ID.ClientID & "_SelectedDisplayText"), String)
+            If displayText <> "" AndAlso val <> "" Then
+                Me.WCD_WCur_ID.Items.Add(New ListItem(displayText, val))
+                Me.WCD_WCur_ID.SelectedIndex = Me.WCD_WCur_ID.Items.Count - 1
+                Me.Page.Session.Remove(WCD_WCur_ID.ClientID & "_SelectedValue")
+                Me.Page.Session.Remove(WCD_WCur_ID.ClientID & "_SelectedDisplayText")
+            End If
 
           									
                 
                 
         End Sub
-                      
-                    
+            
         Protected Overridable Sub WCD_WDT_ID_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
 
+            ' for the value inserted by quick add button or large list selector, 
+            ' the value is necessary to be inserted by this event during postback 
+            Dim val As String = CType(Me.Page.Session()(WCD_WDT_ID.ClientID & "_SelectedValue"), String)
+            Dim displayText As String = CType(Me.Page.Session()(WCD_WDT_ID.ClientID & "_SelectedDisplayText"), String)
+            If displayText <> "" AndAlso val <> "" Then
+                Me.WCD_WDT_ID.Items.Add(New ListItem(displayText, val))
+                Me.WCD_WDT_ID.SelectedIndex = Me.WCD_WDT_ID.Items.Count - 1
+                Me.Page.Session.Remove(WCD_WDT_ID.ClientID & "_SelectedValue")
+                Me.Page.Session.Remove(WCD_WDT_ID.ClientID & "_SelectedDisplayText")
+            End If
 
           									
                 
                 
         End Sub
-                      
-                    
+            
         Protected Overridable Sub WCD_Proj_Inc_ACB_CheckedChanged(ByVal sender As Object, ByVal args As EventArgs)                
              
 
@@ -7863,10 +10026,6 @@ Public Class BaseWCAR_Doc1RecordControl
              
 
         End Sub
-            
-        Protected Overridable Sub WCD_Created_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
-                    
-              End Sub
             
         Protected Overridable Sub WCD_Exp_Budget_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
                     
@@ -7906,14 +10065,10 @@ Public Class BaseWCAR_Doc1RecordControl
             
         Protected Overridable Sub WCD_Project_Title_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
                     
-                ' this event handler is not supported since WCD_Project_Title is an Ajax HTML Editor.
-              
               End Sub
             
         Protected Overridable Sub WCD_Remark_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
                     
-                ' this event handler is not supported since WCD_Remark is an Ajax HTML Editor.
-              
               End Sub
             
         Protected Overridable Sub WCD_Request_Date_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
@@ -7932,10 +10087,18 @@ Public Class BaseWCAR_Doc1RecordControl
                     
               End Sub
             
-        Protected Overridable Sub WCD_Unit_Location_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+        Protected Overridable Sub WCD_U_ID_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
                     
               End Sub
             
+        Protected Overridable Sub WCD_Unit_Location_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            		
+        Protected Overridable Sub txtCoRequestRem_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+             
+        End Sub
+                    
    
         Private _PreviousUIData As New Hashtable
         Public Overridable Property PreviousUIData() As Hashtable
@@ -8036,33 +10199,297 @@ Public Class BaseWCAR_Doc1RecordControl
 
 #Region "Helper Properties"
         
+        Public ReadOnly Property btnChecked() As ePortalWFApproval.UI.IThemeButton
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnChecked"), ePortalWFApproval.UI.IThemeButton)
+          End Get
+          End Property
+        
+        Public ReadOnly Property btnRemoveCheck() As ePortalWFApproval.UI.IThemeButton
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnRemoveCheck"), ePortalWFApproval.UI.IThemeButton)
+          End Get
+          End Property
+        
+        Public ReadOnly Property btnVoid() As ePortalWFApproval.UI.IThemeButton
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnVoid"), ePortalWFApproval.UI.IThemeButton)
+          End Get
+          End Property
+        
+        Public ReadOnly Property CancelButton() As ePortalWFApproval.UI.IThemeButton
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "CancelButton"), ePortalWFApproval.UI.IThemeButton)
+          End Get
+          End Property
+        
+        Public ReadOnly Property CancelButton1() As ePortalWFApproval.UI.IThemeButton
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "CancelButton1"), ePortalWFApproval.UI.IThemeButton)
+          End Get
+          End Property
+        
+        Public ReadOnly Property imbFind() As System.Web.UI.WebControls.ImageButton
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "imbFind"), System.Web.UI.WebControls.ImageButton)
+            End Get
+        End Property
+        
+        Public ReadOnly Property imbRelated() As System.Web.UI.WebControls.ImageButton
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "imbRelated"), System.Web.UI.WebControls.ImageButton)
+            End Get
+        End Property
+        
+        Public ReadOnly Property lblTotal1() As System.Web.UI.WebControls.Label
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "lblTotal1"), System.Web.UI.WebControls.Label)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal1() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal1"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal10() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal10"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal11() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal11"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal12() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal12"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal13() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal13"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal14() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal14"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal15() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal15"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal16() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal16"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal17() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal17"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal18() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal18"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal19() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal19"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal2() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal2"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal20() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal20"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal21() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal21"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal22() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal22"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal23() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal23"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal24() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal24"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal25() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal25"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal26() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal26"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal27() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal27"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal28() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal28"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal29() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal29"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal3() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal3"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal30() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal30"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal32() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal32"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal4() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal4"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal5() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal5"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal6() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal6"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal7() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal7"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal8() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal8"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal9() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal9"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property SaveButton() As ePortalWFApproval.UI.IThemeButton
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SaveButton"), ePortalWFApproval.UI.IThemeButton)
+          End Get
+          End Property
+        
         Public ReadOnly Property Title0() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Title0"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
         
-              Public ReadOnly Property WCD_C_ID() As BaseClasses.Web.UI.WebControls.QuickSelector
-                  Get
-                      Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_C_ID"), BaseClasses.Web.UI.WebControls.QuickSelector)
-              End Get
-              End Property
+        Public ReadOnly Property txtCoRequestRem() As System.Web.UI.WebControls.TextBox
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "txtCoRequestRem"), System.Web.UI.WebControls.TextBox)
+            End Get
+        End Property
+        
+        Public ReadOnly Property WCAR_Doc_Attach1TableControl() As WCAR_Doc_Attach1TableControl
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_Doc_Attach1TableControl"), WCAR_Doc_Attach1TableControl)
+            End Get
+        End Property
+        
+        Public ReadOnly Property WCAR_Doc_Checker1TableControl() As WCAR_Doc_Checker1TableControl
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
+            End Get
+        End Property
+        
+        Public ReadOnly Property WCAR_Doc1TabContainer() As AjaxControlToolkit.TabContainer
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_Doc1TabContainer"), AjaxControlToolkit.TabContainer)
+            End Get
+        End Property
+        
+        Public ReadOnly Property WCAR_DocRecordControlTabContainer() As AjaxControlToolkit.TabContainer
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_DocRecordControlTabContainer"), AjaxControlToolkit.TabContainer)
+            End Get
+        End Property
+        
+        Public ReadOnly Property WCD_C_ID() As System.Web.UI.WebControls.DropDownList
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_C_ID"), System.Web.UI.WebControls.DropDownList)
+            End Get
+        End Property
             
         Public ReadOnly Property WCD_C_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_C_IDLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property WCD_Created() As System.Web.UI.WebControls.TextBox
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Created"), System.Web.UI.WebControls.TextBox)
-            End Get
-        End Property
-            
-        Public ReadOnly Property WCD_CreatedLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_CreatedLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
         
@@ -8150,6 +10577,12 @@ Public Class BaseWCAR_Doc1RecordControl
             End Get
         End Property
         
+        Public ReadOnly Property WCD_ID() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_ID"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+            
         Public ReadOnly Property WCD_No() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_No"), System.Web.UI.WebControls.TextBox)
@@ -8186,11 +10619,11 @@ Public Class BaseWCAR_Doc1RecordControl
             End Get
         End Property
         
-              Public ReadOnly Property WCD_Project_Title() As AjaxControlToolkit.HTMLEditor.Editor
-              Get
-              Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Project_Title"), AjaxControlToolkit.HTMLEditor.Editor)
-              End Get
-              End Property
+        Public ReadOnly Property WCD_Project_Title() As System.Web.UI.WebControls.TextBox
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Project_Title"), System.Web.UI.WebControls.TextBox)
+            End Get
+        End Property
             
         Public ReadOnly Property WCD_Project_TitleLabel() As System.Web.UI.WebControls.Literal
             Get
@@ -8198,11 +10631,11 @@ Public Class BaseWCAR_Doc1RecordControl
             End Get
         End Property
         
-              Public ReadOnly Property WCD_Remark() As AjaxControlToolkit.HTMLEditor.Editor
-              Get
-              Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Remark"), AjaxControlToolkit.HTMLEditor.Editor)
-              End Get
-              End Property
+        Public ReadOnly Property WCD_Remark() As System.Web.UI.WebControls.TextBox
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Remark"), System.Web.UI.WebControls.TextBox)
+            End Get
+        End Property
             
         Public ReadOnly Property WCD_RemarkLabel() As System.Web.UI.WebControls.Literal
             Get
@@ -8258,42 +10691,18 @@ Public Class BaseWCAR_Doc1RecordControl
             End Get
         End Property
             
-        Public ReadOnly Property WCD_Supplementary_ManualLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Supplementary_ManualLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
         Public ReadOnly Property WCD_Supplementary_WCD_ID() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Supplementary_WCD_ID"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
             
-        Public ReadOnly Property WCD_Supplementary_WCD_IDLabel() As System.Web.UI.WebControls.Literal
+        Public ReadOnly Property WCD_U_ID() As System.Web.UI.WebControls.TextBox
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Supplementary_WCD_IDLabel"), System.Web.UI.WebControls.Literal)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_U_ID"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-        
-        Public ReadOnly Property WCD_SupplementaryLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_SupplementaryLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-              Public ReadOnly Property WCD_U_ID() As BaseClasses.Web.UI.WebControls.QuickSelector
-                  Get
-                      Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_U_ID"), BaseClasses.Web.UI.WebControls.QuickSelector)
-              End Get
-              End Property
             
-        Public ReadOnly Property WCD_U_IDLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_U_IDLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
         Public ReadOnly Property WCD_Unit_Location() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Unit_Location"), System.Web.UI.WebControls.TextBox)
@@ -8306,11 +10715,11 @@ Public Class BaseWCAR_Doc1RecordControl
             End Get
         End Property
         
-              Public ReadOnly Property WCD_WCur_ID() As BaseClasses.Web.UI.WebControls.QuickSelector
-                  Get
-                      Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_WCur_ID"), BaseClasses.Web.UI.WebControls.QuickSelector)
-              End Get
-              End Property
+        Public ReadOnly Property WCD_WCur_ID() As System.Web.UI.WebControls.DropDownList
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_WCur_ID"), System.Web.UI.WebControls.DropDownList)
+            End Get
+        End Property
             
         Public ReadOnly Property WCD_WCur_IDLabel() As System.Web.UI.WebControls.Literal
             Get
@@ -8318,11 +10727,11 @@ Public Class BaseWCAR_Doc1RecordControl
             End Get
         End Property
         
-              Public ReadOnly Property WCD_WDT_ID() As BaseClasses.Web.UI.WebControls.QuickSelector
-                  Get
-                      Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_WDT_ID"), BaseClasses.Web.UI.WebControls.QuickSelector)
-              End Get
-              End Property
+        Public ReadOnly Property WCD_WDT_ID() As System.Web.UI.WebControls.DropDownList
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_WDT_ID"), System.Web.UI.WebControls.DropDownList)
+            End Get
+        End Property
             
         Public ReadOnly Property WCD_WDT_IDLabel() As System.Web.UI.WebControls.Literal
             Get

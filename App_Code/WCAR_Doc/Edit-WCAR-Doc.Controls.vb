@@ -168,21 +168,53 @@ Public Class WCAR_DocRecordControl
 
         Protected Overrides Sub PopulateWCD_C_IDDropDownList(ByVal selectedValue As String, ByVal maxItems As Integer)
 
+            'Dim wc As WhereClause = New WhereClause
+            'wc.iAND(Sel_WASS_User_Dynamics_CompanyView.SSUC_SSU_UserName, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString())
+
+            'Dim orderBy As OrderBy = New OrderBy(False, True)
+            ''orderBy.Add(Sel_WASS_User_Dynamics_CompanyView.SSC_CompanyName, BaseClasses.Data.OrderByItem.OrderDir.Asc)
+            'orderBy.Add(Sel_WASS_User_Dynamics_CompanyView.SSUC_isDefault, BaseClasses.Data.OrderByItem.OrderDir.Desc)
+            'Me.WCD_C_ID.Items.Clear()
+            'Dim itemValue As Sel_WASS_User_Dynamics_CompanyRecord
+
+            'For Each itemValue In Sel_WASS_User_Dynamics_CompanyView.GetRecords(wc, orderBy, 0, maxItems)
+            '    Dim cvalue As String = itemValue.CMPANYID.ToString()
+            '    Dim fvalue As String = itemValue.SSC_Description 'itemValue.Format(Sel_W_User_DYNAMICS_CompanyView.Company_Short_Name)
+            '    If fvalue Is Nothing Then
+            '        fvalue = itemValue.SSC_CompanyName
+            '    End If
+            '    Dim item As ListItem = New ListItem(fvalue, cvalue)
+            '    Me.WCD_C_ID.Items.Add(item)
+            'Next
+
+            'If Not selectedValue Is Nothing AndAlso _
+            'selectedValue.Trim <> "" AndAlso _
+            '    Not SetSelectedValue(Me.WCD_C_ID, selectedValue) Then
+            '    Dim sWhere As String = Sel_WASS_User_Dynamics_CompanyView.CMPANYID.UniqueName & " = " & selectedValue
+            '    Dim sCompany As String = ""
+            '    For Each itemValue1 As Sel_WASS_User_Dynamics_CompanyRecord In Sel_WASS_User_Dynamics_CompanyView.GetRecords(sWhere, Nothing, 0, 5)
+            '        sCompany = itemValue1.Company_Short_Name
+            '    Next
+            '    Dim fvalue As String = Sel_WASS_User_Dynamics_CompanyView.CMPANYID.Format(selectedValue)
+            '    Dim item As ListItem = New ListItem(sCompany, selectedValue)
+            '    item.Selected = True
+            '    'Me.WCD_C_ID.Items.Insert(0, item)
+            'End If
+
+            ''Me.WCD_C_ID.Items.Insert(0, New ListItem(Page.GetResourceValue("** PLEASE_SELECT **", "CAR"), "--PLEASE_SELECT--"))
+
             Dim wc As WhereClause = New WhereClause
-            wc.iAND(Sel_WASS_User_Dynamics_CompanyView.SSUC_SSU_UserName, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString())
+            wc.iAND(Sel_W_User_DYNAMICS_CompanyView.W_U_User_Name, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString())
 
             Dim orderBy As OrderBy = New OrderBy(False, True)
-            'orderBy.Add(Sel_WASS_User_Dynamics_CompanyView.SSC_CompanyName, BaseClasses.Data.OrderByItem.OrderDir.Asc)
-            orderBy.Add(Sel_WASS_User_Dynamics_CompanyView.SSUC_isDefault, BaseClasses.Data.OrderByItem.OrderDir.Desc)
-            Me.WCD_C_ID.Items.Clear()
-            Dim itemValue As Sel_WASS_User_Dynamics_CompanyRecord
+            orderBy.Add(Sel_W_User_DYNAMICS_CompanyView.Company_Short_Name, BaseClasses.Data.OrderByItem.OrderDir.Asc)
 
-            For Each itemValue In Sel_WASS_User_Dynamics_CompanyView.GetRecords(wc, orderBy, 0, maxItems)
-                Dim cvalue As String = itemValue.CMPANYID.ToString()
-                Dim fvalue As String = itemValue.SSC_Description 'itemValue.Format(Sel_W_User_DYNAMICS_CompanyView.Company_Short_Name)
-                If fvalue Is Nothing Then
-                    fvalue = itemValue.SSC_CompanyName
-                End If
+            Me.WCD_C_ID.Items.Clear()
+            Dim itemValue As Sel_W_User_DYNAMICS_CompanyRecord
+
+            For Each itemValue In Sel_W_User_DYNAMICS_CompanyView.GetRecords(wc, orderBy, 0, maxItems)
+                Dim cvalue As String = itemValue.Company_ID.ToString()
+                Dim fvalue As String = itemValue.Company_Short_Name 'itemValue.Format(Sel_W_User_DYNAMICS_CompanyView.Company_Short_Name)
                 Dim item As ListItem = New ListItem(fvalue, cvalue)
                 Me.WCD_C_ID.Items.Add(item)
             Next
@@ -190,18 +222,20 @@ Public Class WCAR_DocRecordControl
             If Not selectedValue Is Nothing AndAlso _
             selectedValue.Trim <> "" AndAlso _
                 Not SetSelectedValue(Me.WCD_C_ID, selectedValue) Then
-                Dim sWhere As String = Sel_WASS_User_Dynamics_CompanyView.CMPANYID.UniqueName & " = " & selectedValue
+                Dim sWhere As String = Sel_W_User_DYNAMICS_CompanyView.Company_ID.UniqueName & " = " & selectedValue
                 Dim sCompany As String = ""
-                For Each itemValue1 As Sel_WASS_User_Dynamics_CompanyRecord In Sel_WASS_User_Dynamics_CompanyView.GetRecords(sWhere, Nothing, 0, 5)
+                For Each itemValue1 As Sel_W_User_DYNAMICS_CompanyRecord In Sel_W_User_DYNAMICS_CompanyView.GetRecords(sWhere, Nothing, 0, 5)
                     sCompany = itemValue1.Company_Short_Name
                 Next
-                Dim fvalue As String = Sel_WASS_User_Dynamics_CompanyView.CMPANYID.Format(selectedValue)
+                Dim fvalue As String = Sel_W_User_DYNAMICS_CompanyView.Company_ID.Format(selectedValue)
                 Dim item As ListItem = New ListItem(sCompany, selectedValue)
                 item.Selected = True
-                'Me.WCD_C_ID.Items.Insert(0, item)
+                Me.WCD_C_ID.Items.Insert(0, item)
             End If
 
-            'Me.WCD_C_ID.Items.Insert(0, New ListItem(Page.GetResourceValue("** PLEASE_SELECT **", "CAR"), "--PLEASE_SELECT--"))
+            Me.WCD_C_ID.Items.Insert(0, New ListItem(Page.GetResourceValue("Txt:PleaseSelect", "EPORTAL"), "--PLEASE_SELECT--"))
+
+
         End Sub
 
         Public Overrides Function CreateWhereClause_WCD_WDT_IDDropDownList() As WhereClause

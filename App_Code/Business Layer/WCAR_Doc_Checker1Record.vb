@@ -29,7 +29,52 @@ Namespace ePortalWFApproval.Business
 	Public Sub New()
 		MyBase.New()
 	End Sub
-	
+
+
+        Public Shared Sub AddRecord(ByVal WCD_ID As String, ByVal U_ID As String)
+
+            Dim rec As New WCAR_Doc_Checker1Record
+
+            Try
+                Utils.DbUtils.StartTransaction()
+
+                rec.WCDC_WCD_ID = WCD_ID
+                rec.WCDC_U_ID = U_ID
+                rec.Save()
+
+                Utils.DbUtils.CommitTransaction()
+            Catch ex As Exception
+                Utils.DbUtils.RollBackTransaction()
+            End Try
+        End Sub
+
+        Public Shared Sub UpdateRecord(ByVal WCD_ID As String, ByVal U_ID As String, ByVal Status As String, Optional ByVal Remark As String = "")
+
+            Dim ws As String = "WCDC_WCD_ID = " & WCD_ID & " And WCDC_U_ID = " & U_ID
+            Dim rec As New WCAR_Doc_Checker1Record
+            rec = WCAR_Doc_Checker1Table.GetRecord(ws)
+
+            If Not rec Is Nothing Then
+                Dim WCDC_ID As String = rec.WCDC_ID.ToString()
+                Utils.DbUtils.StartTransaction()
+                Try
+                    rec = WCAR_Doc_Checker1Table.GetRecord(WCDC_ID, True)
+                    rec.WCDC_Status = Status
+                    rec.WCDC_Rem = rec.WCDC_Rem & vbcrlf & Status & ": " & Remark
+
+                    rec.Save()
+                    Utils.DbUtils.CommitTransaction()
+                Catch ex As Exception
+                    Utils.DbUtils.RollBackTransaction()
+                End Try
+            End If
+
+            'rec = WCAR_ActivityTable.GetRecord(WCA_ID, True)
+
+            'rec.WCA_Status = WCA_Status
+            'rec.Save()         				
+        End Sub
+
 	
 
 	
