@@ -1,6 +1,6 @@
 ﻿
-' This file implements the code-behind class for Show-SelWFReassign-Table.aspx.
-' App_Code\MyPage1.Controls.vb contains the Table, Row and Record control classes
+' This file implements the code-behind class for Show_SelWFReassign_Table1.aspx.
+' App_Code\Show_SelWFReassign_Table1.Controls.vb contains the Table, Row and Record control classes
 ' for the page.  Best practices calls for overriding methods in the Row or Record control classes.
 
 #Region "Imports statements"
@@ -32,9 +32,9 @@ Imports ePortalWFApproval.Data
   
 Namespace ePortalWFApproval.UI
   
-Partial Public Class Show_SelWFReassign_Table
+Partial Public Class Show_SelWFReassign_Table1
         Inherits BaseApplicationPage
-' Code-behind class for the Show_SelWFReassign_Table page.
+' Code-behind class for the Show_SelWFReassign_Table1 page.
 ' Place your customizations in Section 1. Do not modify Section 2.
         
 #Region "Section 1: Place your customizations here."
@@ -167,6 +167,10 @@ Partial Public Class Show_SelWFReassign_Table
     
 
         ' Write out the Set methods
+        
+'        Public Sub SetSelWFReassign1TableControl()
+'            SetSelWFReassign1TableControl_Base() 
+'        End Sub
                      
         
         ' Write out the methods for DataSource
@@ -241,7 +245,7 @@ Public Sub SetSelWFReassignTableControl()
             End If
         
         
-            Page.Title = "PO Workflow Reassign (South)"
+            Page.Title = "PO Workflow Reassign (North)"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If

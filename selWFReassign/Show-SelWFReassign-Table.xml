@@ -790,7 +790,7 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>PO Reassign Task</Value>
+          <Value>PO Workflow Reassign (South)</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>
@@ -1308,7 +1308,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>PO Workflow Reassign Task</Value>
+          <Value>PO Workflow Reassign Task (South)</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>SelWFReassignTableControl</InsideControl>
