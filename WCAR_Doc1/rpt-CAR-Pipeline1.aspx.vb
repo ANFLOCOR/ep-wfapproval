@@ -53,7 +53,7 @@ Partial Public Class rpt_CAR_Pipeline1
           ' Customize by adding code before or after the call to LoadData_Base()
           ' or replace the call to LoadData_Base().
             LoadData_Base()
-            Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServer")
+            Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServerN")
             Dim sParam As String = System.Web.HttpContext.Current.Session("UserIDNorth").ToString()
 
             Dim sUrl As String = ""
@@ -244,7 +244,7 @@ Public Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
             ' Check if user has access to this page.  Redirects to either sign-in page
             ' or 'no access' page if not. Does not do anything if role-based security
             ' is not turned on, but you can override to add your own security.
-            Me.Authorize("")
+            Me.Authorize("NOT_ANONYMOUS")
     
             If (Not Me.IsPostBack) Then
             
@@ -262,7 +262,7 @@ Public Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
             End If
         
         
-            Page.Title = "Blank page"
+            Page.Title = "ePortal Workflow Approval - CAR Approval Pipeline (North)"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If

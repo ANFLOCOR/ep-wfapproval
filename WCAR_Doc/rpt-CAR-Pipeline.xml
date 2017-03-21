@@ -14,6 +14,7 @@
     <Layout>WCAR_Doc\rpt-CAR-Pipeline.xml</Layout>
     <DisplayName>rpt-CAR-Pipeline</DisplayName>
     <Description>This is a blank page.</Description>
+    <LoginRequired>&lt;PRoles&gt;NOT_ANONYMOUS&lt;/PRoles&gt;</LoginRequired>
     <CheckSum>2075310717-1283</CheckSum>
   </Self>
   <ComposedOf>
@@ -98,7 +99,7 @@
     &lt;/Row&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;asp:literal id="Literal1" runat="server" text="CAR Approver Pipeline (South)"&amp;gt;&amp;lt;/asp:literal&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;b&amp;gt;&amp;lt;asp:literal id="Literal1" runat="server" text="CAR Approver Pipeline (South)"&amp;gt;&amp;lt;/asp:literal&amp;gt;&amp;lt;/b&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;

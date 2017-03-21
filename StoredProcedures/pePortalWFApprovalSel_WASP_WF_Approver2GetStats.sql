@@ -92,7 +92,7 @@ CREATE PROCEDURE pePortalWFApprovalSel_WASP_WF_Approver2GetStats
             IF @p_sort_str IS NOT NULL
                 SET @l_sort_str = 'ORDER BY ' + @p_sort_str;
             ELSE
-                SET @l_sort_str = ' '
+                SET @l_sort_str = N'ORDER BY sel_WASP_WF_Approver_.[W_U_ID] asc '
 
             -- Calculate the rows to be included in the list
             SET @l_end_gen_row_num = @p_page_number * @p_batch_size

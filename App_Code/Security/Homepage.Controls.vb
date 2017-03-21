@@ -850,7 +850,7 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControlRow
                 ' If the Date_Assigned is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_Approver_Pending_Tasks2View.Date_Assigned, "g")
+                Dim formattedValue As String = Me.DataSource.Format(Sel_Approver_Pending_Tasks2View.Date_Assigned, "d")
                               
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.Date_Assigned1.Text = formattedValue
@@ -860,7 +860,7 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControlRow
                 ' Date_Assigned is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.Date_Assigned1.Text = Sel_Approver_Pending_Tasks2View.Date_Assigned.Format(Sel_Approver_Pending_Tasks2View.Date_Assigned.DefaultValue, "g")
+                 Me.Date_Assigned1.Text = Sel_Approver_Pending_Tasks2View.Date_Assigned.Format(Sel_Approver_Pending_Tasks2View.Date_Assigned.DefaultValue, "d")
                         		
                 End If
                  
@@ -2957,19 +2957,46 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControl
         ' event handler for Button
         Public Overridable Sub NorthRedirectorButtonRePO_Click(ByVal sender As Object, ByVal args As EventArgs)
               
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
+                  Dim url As String = "../selWFReassign1/Show-SelWFReassign-Table1.aspx"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
     Try
     
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
             
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
                 Me.Page.ErrorOnPage = True
     
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
     
             Finally
-    
+                DbUtils.EndTransaction
             End Try
-    
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
         End Sub
         
         ' event handler for Button
@@ -3500,7 +3527,7 @@ Public Class BaseSel_Approver_Pending_TasksTableControlRow
                 ' If the Date_Assigned is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_Approver_Pending_TasksView.Date_Assigned, "g")
+                Dim formattedValue As String = Me.DataSource.Format(Sel_Approver_Pending_TasksView.Date_Assigned, "d")
                               
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.Date_Assigned.Text = formattedValue
@@ -3510,7 +3537,7 @@ Public Class BaseSel_Approver_Pending_TasksTableControlRow
                 ' Date_Assigned is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.Date_Assigned.Text = Sel_Approver_Pending_TasksView.Date_Assigned.Format(Sel_Approver_Pending_TasksView.Date_Assigned.DefaultValue, "g")
+                 Me.Date_Assigned.Text = Sel_Approver_Pending_TasksView.Date_Assigned.Format(Sel_Approver_Pending_TasksView.Date_Assigned.DefaultValue, "d")
                         		
                 End If
                  

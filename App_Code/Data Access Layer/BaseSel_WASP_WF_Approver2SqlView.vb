@@ -1,8 +1,8 @@
 ﻿' This class is "generated" and will be overwritten.
-' Your customizations should be made in Sel_WASP_WF_Approver2SqlView.vb  
+' Your customizations should be made in Sel_WASP_WF_Approver2SqlView.vb 
 
-Imports BaseClasses
 Imports BaseClasses.Data
+Imports BaseClasses
 Imports BaseClasses.Data.SqlProvider
 
 
@@ -22,8 +22,9 @@ Public Class BaseSel_WASP_WF_Approver2SqlView
 	Inherits StoredProceduresSQLServerAdapter
 	
 	Public Sub New()
+		MyBase.New()
 	End Sub
-	
+
 	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
 		MyBase.New(connectionName, applicationName)
 	End Sub

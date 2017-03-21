@@ -14,6 +14,7 @@
     <Layout>WCAR_Doc1\EditWCAR-Doc-Approval1.xml</Layout>
     <DisplayName>EditWCAR-Doc-Approval1</DisplayName>
     <Description>Standard record panel.</Description>
+    <LoginRequired>&lt;PRoles&gt;NOT_ANONYMOUS&lt;/PRoles&gt;</LoginRequired>
     <CheckSum>-1196011890-88917</CheckSum>
   </Self>
   <ComposedOf>

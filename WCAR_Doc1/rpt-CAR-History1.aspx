@@ -19,7 +19,7 @@
 		<asp:UpdatePanel runat="server" id="UpdatePanel1" UpdateMode="Conditional">
 			<ContentTemplate>
 
-                <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td class="dfv"><ePortalWFApproval:ThemeButton runat="server" id="btnBack" button-causesvalidation="False" button-commandname="Redirect" button-text="Back" button-tooltip="Back"></ePortalWFApproval:ThemeButton></td></tr><tr><td class="dfv"><asp:literal id="Literal1" runat="server" text="CAR Approver History (South)"></asp:literal></td></tr><tr><td style="white-space:nowrap; width: 100%" class="thcnb"><iframe id="frm" runat="server" width="1000" height="500" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""></iframe></td></tr></table>
+                <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td class="dfv"><ePortalWFApproval:ThemeButton runat="server" id="btnBack" button-causesvalidation="False" button-commandname="Redirect" button-text="Back" button-tooltip="Back"></ePortalWFApproval:ThemeButton></td></tr><tr><td class="dfv"><b><asp:literal id="Literal1" runat="server" text="CAR Approver History (North)"></asp:literal></b></td></tr><tr><td style="white-space:nowrap; width: 100%" class="thcnb"><b><iframe id="frm" runat="server" width="1000" height="500" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""></iframe></b></td></tr></table>
       </ContentTemplate>
 </asp:UpdatePanel>
 
