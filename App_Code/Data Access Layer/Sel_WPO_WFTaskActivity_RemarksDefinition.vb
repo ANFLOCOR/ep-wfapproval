@@ -1,0 +1,160 @@
+﻿Namespace ePortalWFApproval.Business
+''' <summary>
+''' Contains embedded schema and configuration data that is used by the 
+''' <see cref="Sel_WPO_WFTaskActivity_RemarksView">ePortalWFApproval.Sel_WPO_WFTaskActivity_RemarksView</see> class
+''' to initialize the class's TableDefinition.
+''' </summary>
+''' <seealso cref="Sel_WPO_WFTaskActivity_RemarksView"></seealso>
+
+Public Class Sel_WPO_WFTaskActivity_RemarksDefinition
+
+#Region "Definition (XML) for Sel_WPO_WFTaskActivity_RemarksDefinition table"
+	'Next 127 lines contain Table Definition (XML) for table "Sel_WPO_WFTaskActivity_RemarksDefinition"
+	Private Shared _DefinitionString As String = ""
+#End Region
+	
+	''' <summary>
+	''' Gets the embedded schema and configuration data for the  
+	''' <see cref="Sel_WPO_WFTaskActivity_RemarksView"></see>
+	''' class's TableDefinition.
+	''' </summary>
+	''' <remarks>This function is only called once at runtime.</remarks>
+	''' <returns>An XML string.</returns>
+	Public Shared Function GetXMLString() As String
+		If _DefinitionString = "" Then
+			         Dim tbf As System.Text.StringBuilder = New System.Text.StringBuilder()
+         tbf.Append("<XMLDefinition Generator=""Iron Speed Designer"" Version=""12.1"" Type=""VIEW"">")
+         tbf.Append(  "<ColumnDefinition>")
+         tbf.Append(    "<Column InternalName=""0"" Priority=""1"" ColumnNum=""0"">")
+         tbf.Append(      "<columnName>WPOP_PONMBR</columnName>")
+         tbf.Append(      "<columnUIName Source=""User"">Wpop Ponmbr</columnUIName>")
+         tbf.Append(      "<columnType>String</columnType>")
+         tbf.Append(      "<columnDBType>nvarchar</columnDBType>")
+         tbf.Append(      "<columnLengthSet>20</columnLengthSet>")
+         tbf.Append(      "<columnDefault></columnDefault>")
+         tbf.Append(      "<columnDBDefault Source=""User""></columnDBDefault>")
+         tbf.Append(      "<columnIndex>N</columnIndex>")
+         tbf.Append(      "<columnUnique>N</columnUnique>")
+         tbf.Append(      "<columnFunction></columnFunction>")
+         tbf.Append(      "<columnDBFormat></columnDBFormat>")
+         tbf.Append(      "<columnPK>Y</columnPK>")
+         tbf.Append(      "<columnPermanent>N</columnPermanent>")
+         tbf.Append(      "<columnComputed Source=""User"">N</columnComputed>")
+         tbf.Append(      "<columnIdentity Source=""User"">N</columnIdentity>")
+         tbf.Append(      "<columnReadOnly Source=""User"">N</columnReadOnly>")
+         tbf.Append(      "<columnRequired>N</columnRequired>")
+         tbf.Append(      "<columnNotNull>N</columnNotNull>")
+         tbf.Append(      "<columnCaseSensitive Source=""User"">Y</columnCaseSensitive>")
+         tbf.Append(      "<columnCollation>Latin1_General_BIN</columnCollation>")
+         tbf.Append(      "<columnFullText Source=""User"">N</columnFullText>")
+         tbf.Append(      "<columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>")
+         tbf.Append(      "<columnTableAliasName></columnTableAliasName>")
+         tbf.Append(      "<applyLabelText>Y</applyLabelText>")
+         tbf.Append(      "<InternalName>0</InternalName>")
+         tbf.Append(      "<columnTableClassName></columnTableClassName>")
+         tbf.Append(      "<applyInitializeReadingRecord>N</applyInitializeReadingRecord>")
+         tbf.Append(      "<applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>")
+         tbf.Append(      "<applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>")
+         tbf.Append(      "<applyValidateInsertingRecord>N</applyValidateInsertingRecord>")
+         tbf.Append(      "<applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>")
+         tbf.Append(      "<applyDefaultValue>N</applyDefaultValue>")
+         tbf.Append(      "<applyDFKA>N</applyDFKA>")
+         tbf.Append(      "<readingRecordFormula></readingRecordFormula>")
+         tbf.Append(      "<insertingRecordFormula></insertingRecordFormula>")
+         tbf.Append(      "<updatingRecordFormula></updatingRecordFormula>")
+         tbf.Append(      "<insertingFormula></insertingFormula>")
+         tbf.Append(      "<updatingFormula></updatingFormula>")
+         tbf.Append(      "<columnVirtualPK Source=""User"">Y</columnVirtualPK>")
+         tbf.Append(    "</Column>")
+         tbf.Append(    "<Column InternalName=""1"" Priority=""2"" ColumnNum=""1"">")
+         tbf.Append(      "<columnName>WPOP_C_ID</columnName>")
+         tbf.Append(      "<columnUIName>Wpop C</columnUIName>")
+         tbf.Append(      "<columnType>Number</columnType>")
+         tbf.Append(      "<columnDBType>int</columnDBType>")
+         tbf.Append(      "<columnLengthSet>10.0</columnLengthSet>")
+         tbf.Append(      "<columnDefault></columnDefault>")
+         tbf.Append(      "<columnDBDefault Source=""User""></columnDBDefault>")
+         tbf.Append(      "<columnIndex>N</columnIndex>")
+         tbf.Append(      "<columnUnique>N</columnUnique>")
+         tbf.Append(      "<columnFunction></columnFunction>")
+         tbf.Append(      "<columnDBFormat></columnDBFormat>")
+         tbf.Append(      "<columnPK>Y</columnPK>")
+         tbf.Append(      "<columnPermanent>N</columnPermanent>")
+         tbf.Append(      "<columnComputed Source=""User"">N</columnComputed>")
+         tbf.Append(      "<columnIdentity Source=""User"">N</columnIdentity>")
+         tbf.Append(      "<columnReadOnly Source=""User"">N</columnReadOnly>")
+         tbf.Append(      "<columnRequired>Y</columnRequired>")
+         tbf.Append(      "<columnNotNull>N</columnNotNull>")
+         tbf.Append(      "<columnCaseSensitive Source=""User"">N</columnCaseSensitive>")
+         tbf.Append(      "<columnCollation></columnCollation>")
+         tbf.Append(      "<columnFullText Source=""User"">N</columnFullText>")
+         tbf.Append(      "<columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>")
+         tbf.Append(      "<columnTableAliasName></columnTableAliasName>")
+         tbf.Append(      "<applyLabelText>Y</applyLabelText>")
+         tbf.Append(      "<InternalName>1</InternalName>")
+         tbf.Append(      "<columnTableClassName></columnTableClassName>")
+         tbf.Append(      "<applyInitializeReadingRecord>N</applyInitializeReadingRecord>")
+         tbf.Append(      "<applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>")
+         tbf.Append(      "<applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>")
+         tbf.Append(      "<applyValidateInsertingRecord>N</applyValidateInsertingRecord>")
+         tbf.Append(      "<applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>")
+         tbf.Append(      "<applyDefaultValue>N</applyDefaultValue>")
+         tbf.Append(      "<applyDFKA>N</applyDFKA>")
+         tbf.Append(      "<readingRecordFormula></readingRecordFormula>")
+         tbf.Append(      "<insertingRecordFormula></insertingRecordFormula>")
+         tbf.Append(      "<updatingRecordFormula></updatingRecordFormula>")
+         tbf.Append(      "<insertingFormula></insertingFormula>")
+         tbf.Append(      "<updatingFormula></updatingFormula>")
+         tbf.Append(      "<columnVirtualPK Source=""User"">Y</columnVirtualPK>")
+         tbf.Append(    "</Column>")
+         tbf.Append(    "<Column InternalName=""2"" Priority=""3"" ColumnNum=""2"">")
+         tbf.Append(      "<columnName>WPO_Remark</columnName>")
+         tbf.Append(      "<columnUIName>WPO Remark</columnUIName>")
+         tbf.Append(      "<columnType>Very Large String</columnType>")
+         tbf.Append(      "<columnDBType>nvarchar(max)</columnDBType>")
+         tbf.Append(      "<columnLengthSet>1073741823</columnLengthSet>")
+         tbf.Append(      "<columnDefault></columnDefault>")
+         tbf.Append(      "<columnDBDefault></columnDBDefault>")
+         tbf.Append(      "<columnIndex>N</columnIndex>")
+         tbf.Append(      "<columnUnique>N</columnUnique>")
+         tbf.Append(      "<columnFunction></columnFunction>")
+         tbf.Append(      "<columnDBFormat></columnDBFormat>")
+         tbf.Append(      "<columnPK>N</columnPK>")
+         tbf.Append(      "<columnPermanent>N</columnPermanent>")
+         tbf.Append(      "<columnComputed>N</columnComputed>")
+         tbf.Append(      "<columnIdentity>N</columnIdentity>")
+         tbf.Append(      "<columnReadOnly>N</columnReadOnly>")
+         tbf.Append(      "<columnRequired>N</columnRequired>")
+         tbf.Append(      "<columnNotNull>N</columnNotNull>")
+         tbf.Append(      "<columnCaseSensitive Source=""Database"">Y</columnCaseSensitive>")
+         tbf.Append(      "<columnCollation>Latin1_General_BIN</columnCollation>")
+         tbf.Append(      "<columnFullText>N</columnFullText>")
+         tbf.Append(      "<columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>")
+         tbf.Append(      "<columnTableAliasName></columnTableAliasName>")
+         tbf.Append(      "<applyLabelText>Y</applyLabelText>")
+         tbf.Append(    "</Column>")
+         tbf.Append(  "</ColumnDefinition>")
+         tbf.Append(  "<TableName>sel_WPO_WFTaskActivity_Remarks</TableName>")
+         tbf.Append(  "<Version></Version>")
+         tbf.Append(  "<Owner>dbo</Owner>")
+         tbf.Append(  "<TableAliasName>Sel_WPO_WFTaskActivi792457005_</TableAliasName>")
+         tbf.Append(  "<ConnectionName>DatabaseANFLO-WFN</ConnectionName>")
+         tbf.Append(  "<canCreateRecords Source=""User"">N</canCreateRecords>")
+         tbf.Append(  "<canEditRecords Source=""User"">N</canEditRecords>")
+         tbf.Append(  "<canDeleteRecords Source=""User"">N</canDeleteRecords>")
+         tbf.Append(  "<canViewRecords Source=""User"">Y</canViewRecords>")
+         tbf.Append(  "<AppShortName>ePortalWFApproval</AppShortName>")
+         tbf.Append(  "<FolderName>sel_WPO_WFTaskActivity_Remarks</FolderName>")
+         tbf.Append(  "<MenuName>WPO WFTask Activity Remarks</MenuName>")
+         tbf.Append(  "<QSPath>../sel_WPO_WFTaskActivity_Remarks/Sel-WPO-WFTaskActivity-Remarks-QuickSelector.aspx</QSPath>")
+         tbf.Append(  "<TableCodeName>Sel_WPO_WFTaskActivity_Remarks</TableCodeName>")
+         tbf.Append(  "<TableStoredProcPrefix>pePortalWFApprovalSel_WPO_WFTaskActivity_Remarks</TableStoredProcPrefix>")
+         tbf.Append("</XMLDefinition>")
+         _DefinitionString = tbf.ToString()
+
+		End	If	
+		Return _DefinitionString		
+	End Function
+
+End Class
+End Namespace

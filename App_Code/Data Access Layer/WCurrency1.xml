@@ -101,7 +101,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WCurrency_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
   <canDeleteRecords Source="Database">Y</canDeleteRecords>

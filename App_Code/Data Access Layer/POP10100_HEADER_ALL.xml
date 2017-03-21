@@ -514,7 +514,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>POP10100_HEADER_ALL_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -525,4 +524,5 @@
   <MenuName>Pop 10100 Header All</MenuName>
   <QSPath>../POP10100_HEADER_ALL/POP10100-HEADER-ALL-QuickSelector.aspx</QSPath>
   <TableCodeName>POP10100_HEADER_ALL</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalPOP10100_HEADER_ALL</TableStoredProcPrefix>
 </XMLDefinition>

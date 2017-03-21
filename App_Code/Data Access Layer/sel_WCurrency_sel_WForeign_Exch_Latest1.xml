@@ -102,8 +102,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>sel_WCurrency_sel_WForeign_Exch_Latest_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
-  <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
   <canDeleteRecords Source="Database">N</canDeleteRecords>
@@ -113,4 +111,5 @@
   <MenuName>WCurrency SEL WForeign Exch Latest1</MenuName>
   <QSPath>../sel_WCurrency_sel_WForeign_Exch_Latest1/Sel-WCurrency-sel-WForeign-Exch-Latest-QuickSelector1.aspx</QSPath>
   <TableCodeName>Sel_WCurrency_sel_WForeign_Exch_Latest1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalSel_WCurrency_sel_WForeign_Exch_Latest1</TableStoredProcPrefix>
 </XMLDefinition>

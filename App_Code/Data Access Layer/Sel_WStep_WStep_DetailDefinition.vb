@@ -9,7 +9,7 @@
 Public Class Sel_WStep_WStep_DetailDefinition
 
 #Region "Definition (XML) for Sel_WStep_WStep_DetailDefinition table"
-	'Next 313 lines contain Table Definition (XML) for table "Sel_WStep_WStep_DetailDefinition"
+	'Next 312 lines contain Table Definition (XML) for table "Sel_WStep_WStep_DetailDefinition"
 	Private Shared _DefinitionString As String = ""
 #End Region
 	
@@ -324,10 +324,9 @@ Public Class Sel_WStep_WStep_DetailDefinition
          tbf.Append(  "<Owner>dbo</Owner>")
          tbf.Append(  "<TableAliasName>sel_WStep_WStep_Detail_</TableAliasName>")
          tbf.Append(  "<ConnectionName>DatabaseANFLO-WF</ConnectionName>")
-         tbf.Append(  "<PagingMethod>RowNum</PagingMethod>")
-         tbf.Append(  "<canCreateRecords Source=""User"">Y</canCreateRecords>")
-         tbf.Append(  "<canEditRecords Source=""User"">Y</canEditRecords>")
-         tbf.Append(  "<canDeleteRecords Source=""User"">Y</canDeleteRecords>")
+         tbf.Append(  "<canCreateRecords Source=""User"">N</canCreateRecords>")
+         tbf.Append(  "<canEditRecords Source=""User"">N</canEditRecords>")
+         tbf.Append(  "<canDeleteRecords Source=""User"">N</canDeleteRecords>")
          tbf.Append(  "<canViewRecords Source=""Database"">Y</canViewRecords>")
          tbf.Append(  "<AppShortName>ePortalWFApproval</AppShortName>")
          tbf.Append(  "<FolderName>sel_WStep_WStep_Detail</FolderName>")

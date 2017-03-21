@@ -410,7 +410,7 @@ Partial Public Class WPO_WFTask
             End If
         
         
-            Page.Title = "PO Workflow Tasks"
+            Page.Title = "Purchase Order Approval (South)"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If

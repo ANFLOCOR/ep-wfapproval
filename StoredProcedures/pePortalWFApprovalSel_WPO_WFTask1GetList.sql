@@ -34,8 +34,6 @@ DECLARE
     @l_temp_cols nvarchar(max),
     @l_temp_colsWithAlias nvarchar(max),
     @l_query_select nvarchar(max),
-    @l_query_select2 nvarchar(max),
-    @l_query_rownum nvarchar(max),
     @l_query_from nvarchar(max),
     @l_query_where nvarchar(max),
     @l_query_cols nvarchar(max),
@@ -81,15 +79,37 @@ BEGIN
         IF @p_sort_str IS NOT NULL
             SET @l_sort_str = 'ORDER BY ' + @p_sort_str
         ELSE
-            SET @l_sort_str = ' '
+            SET @l_sort_str = N'ORDER BY sel_WPO_WFTask_.[PONUMBER],sel_WPO_WFTask_.[CompanyID] asc '
 
         -- Calculate the rows to be included in the list
         SET @l_end_gen_row_num = @p_page_number * @p_batch_size;
         SET @l_start_gen_row_num = @l_end_gen_row_num - (@p_batch_size-1);
 
+        -- Create a table variable to keep row numbering
+        SET @l_temp_table = 'DECLARE @IS_TEMP_T_GETLIST TABLE
+        (
+        IS_ROWNUM_COL int identity(1,1),
+                [PONUMBER] char(17) COLLATE Latin1_General_BIN,    [CompanyID] int
+        ); '
+
+        -- Copy column data into table variable
+        SET @l_temp_insert = 
+            'INSERT INTO @IS_TEMP_T_GETLIST ('
+        SET @l_temp_cols = 
+            N'[PONUMBER],[CompanyID]'
+        SET @l_temp_select = 
+            ') ' + 
+            'SELECT ' + 
+            'TOP ' + convert(varchar, @l_end_gen_row_num) + ' '
+        SET @l_temp_colsWithAlias = 
+            N'sel_WPO_WFTask_.[PONUMBER],sel_WPO_WFTask_.[CompanyID]'
+        SET @l_temp_from = 
+            ' FROM ' + @l_from_str + ' ' + @l_join_str + ' ' + 
+            @l_where_str + ' ' + 
+            @l_sort_str
+
         -- Construct the main query
-        SET @l_query_select = 'WITH sel_WPO_WFTask_ AS ( SELECT  '
-        SET @l_query_rownum = 'ROW_NUMBER() OVER(' + @l_sort_str + ') AS IS_ROWNUM_COL,'
+        SET @l_query_select = 'SELECT '
         SET @l_query_cols = 
             N'sel_WPO_WFTask_.[PONUMBER],
             sel_WPO_WFTask_.[POSTATUS],
@@ -106,14 +126,22 @@ BEGIN
             sel_WPO_WFTask_.[FRTAMNT],
             sel_WPO_WFTask_.[MSCCHAMT],
             sel_WPO_WFTask_.[TAXAMNT],
-            sel_WPO_WFTask_.[isINC]'
+            sel_WPO_WFTask_.[isINC],
+            CAST(BINARY_CHECKSUM(sel_WPO_WFTask_.[PONUMBER],sel_WPO_WFTask_.[POSTATUS],sel_WPO_WFTask_.[DOCDATE],sel_WPO_WFTask_.[TOTAL],sel_WPO_WFTask_.[VENDORID],sel_WPO_WFTask_.[VENDNAME],sel_WPO_WFTask_.[BUYERID],sel_WPO_WFTask_.[Workflow_Approval_Status],sel_WPO_WFTask_.[CompanyID],sel_WPO_WFTask_.[COMMENTS],sel_WPO_WFTask_.[SUBTOTAL],sel_WPO_WFTask_.[TRDISAMT],sel_WPO_WFTask_.[FRTAMNT],sel_WPO_WFTask_.[MSCCHAMT],sel_WPO_WFTask_.[TAXAMNT],sel_WPO_WFTask_.[isINC]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
+        SET @l_query_from = 
+            ' FROM ( ' +
+                N'SELECT TOP 100 PERCENT IS_ROWNUM_COL, [PONUMBER],[CompanyID] from @IS_TEMP_T_GETLIST ' +
+                'WHERE IS_ROWNUM_COL >= '+ convert(varchar, @l_start_gen_row_num) + 
+                ') IS_ALIAS LEFT JOIN ' +
+                @l_from_str + ' ';
 
-        SET @l_query_from = 'FROM ' + @l_from_str + ' ' + @l_join_str + + ' ' + @l_where_str + ') '
-        SET @l_query_select2 = 'SELECT * FROM sel_WPO_WFTask_ '
-        SET @l_query_where = 'WHERE IS_ROWNUM_COL BETWEEN ' + convert(varchar, @l_start_gen_row_num) + ' AND ' + convert(varchar, @l_end_gen_row_num) +  ';'
+        SET @l_query_where = 
+            N'ON sel_WPO_WFTask_.[PONUMBER] = IS_ALIAS.[PONUMBER] AND sel_WPO_WFTask_.[CompanyID] = IS_ALIAS.[CompanyID] ' 
+
+        SET @l_final_sort = 'ORDER BY IS_ROWNUM_COL Asc '
 
         -- Run the query
-        EXECUTE (@l_query_select + @l_query_rownum + @l_query_cols + @l_query_from + @l_query_select2 + @l_query_where)
+        EXECUTE (@l_temp_table + @l_temp_insert + @l_temp_cols + @l_temp_select + @l_temp_colsWithAlias + @l_temp_from + '; ' + @l_query_select + @l_query_cols + @l_query_from + @l_query_where + @l_final_sort)
 
     END
     ELSE
@@ -136,7 +164,8 @@ BEGIN
             sel_WPO_WFTask_.[FRTAMNT],
             sel_WPO_WFTask_.[MSCCHAMT],
             sel_WPO_WFTask_.[TAXAMNT],
-            sel_WPO_WFTask_.[isINC]'
+            sel_WPO_WFTask_.[isINC],
+            CAST(BINARY_CHECKSUM(sel_WPO_WFTask_.[PONUMBER],sel_WPO_WFTask_.[POSTATUS],sel_WPO_WFTask_.[DOCDATE],sel_WPO_WFTask_.[TOTAL],sel_WPO_WFTask_.[VENDORID],sel_WPO_WFTask_.[VENDNAME],sel_WPO_WFTask_.[BUYERID],sel_WPO_WFTask_.[Workflow_Approval_Status],sel_WPO_WFTask_.[CompanyID],sel_WPO_WFTask_.[COMMENTS],sel_WPO_WFTask_.[SUBTOTAL],sel_WPO_WFTask_.[TRDISAMT],sel_WPO_WFTask_.[FRTAMNT],sel_WPO_WFTask_.[MSCCHAMT],sel_WPO_WFTask_.[TAXAMNT],sel_WPO_WFTask_.[isINC]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
         SET @l_query_from = 
             ' FROM [dbo].[sel_WPO_WFTask] sel_WPO_WFTask_ ' + 
             'WHERE 1=2;'

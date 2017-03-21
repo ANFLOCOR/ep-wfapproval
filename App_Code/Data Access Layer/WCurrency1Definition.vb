@@ -9,7 +9,7 @@
 Public Class WCurrency1Definition
 
 #Region "Definition (XML) for WCurrency1Definition table"
-	'Next 99 lines contain Table Definition (XML) for table "WCurrency1Definition"
+	'Next 98 lines contain Table Definition (XML) for table "WCurrency1Definition"
 	Private Shared _DefinitionString As String = ""
 #End Region
 	
@@ -109,7 +109,6 @@ Public Class WCurrency1Definition
          tbf.Append(  "<Owner>dbo</Owner>")
          tbf.Append(  "<TableAliasName>WCurrency_</TableAliasName>")
          tbf.Append(  "<ConnectionName>DatabaseANFLO-WFN</ConnectionName>")
-         tbf.Append(  "<PagingMethod>RowNum</PagingMethod>")
          tbf.Append(  "<canCreateRecords Source=""Database"">Y</canCreateRecords>")
          tbf.Append(  "<canEditRecords Source=""Database"">Y</canEditRecords>")
          tbf.Append(  "<canDeleteRecords Source=""Database"">Y</canDeleteRecords>")

@@ -38,6 +38,8 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "AllVendors" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "All_SysPages" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "All_SysUserInfo_view" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "All_SysUserInfo_view" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "Applications" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "Applications" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "Applications" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "APR000020" %AUTHENTICATION%
@@ -501,6 +503,7 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_DYNAMICS_Company" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_Dynamics_Company" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_DYNAMICS_Company" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_Dynamics_Company" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_Dynamics_CompanyAll" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_DYNAMICS_Company_Bak" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_DYNAMICS_Company_FS" %AUTHENTICATION%
@@ -685,7 +688,10 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_SysSetupCompany_Spiceworks" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_SysSetupUser" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_SysSetupUsers_Email" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_SysSetupUsers_Email" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_SysSetupUsers_UserRoles" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_SysSetupUsers_UserRoles" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_SysSetupUsers_UserRolesGrouped" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_SysSetupUsers_UserRolesGrouped" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_TMS_tk_company" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_TMS_tk_department" %AUTHENTICATION%
@@ -741,9 +747,11 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_Wass_Approver_PR" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_Wass_Approver_PR" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_WASS_Dynamics_Companies" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_WASS_Dynamics_Companies" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_WASS_SysSetupCompany" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_WASS_User" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_WASS_User" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_WASS_User_Dynamics_Company" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_WASS_User_Dynamics_Company" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_WASS_User_Dynamics_Company_GP" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "sel_WASS_User_MbfUserWindowsIdentity" %AUTHENTICATION%
@@ -1225,6 +1233,7 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysPages" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysPages" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysPages" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysPages" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysPagesAcces" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysPagesAcces" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysPagesAccess_SSRS" %AUTHENTICATION%
@@ -1238,17 +1247,22 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupCompany" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupCompany" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupCompany" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupCompany" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupRole" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupRole" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupRole" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUser" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserApplication" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserApplication" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserApplication" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserApplication_view" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserCompany" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserCompany" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserCompany" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserCompanyAccess" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserCompany_view" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserCompany_view" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserEmail" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserEmail" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserEmail" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserPermission" %AUTHENTICATION%
@@ -1256,6 +1270,8 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserPermission_view" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUsers" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUsers" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUsers" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupWASSEmail" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupWASSEmail" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysUserPrefPages" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SYUPDATE" %AUTHENTICATION%
@@ -1406,6 +1422,7 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "W200006" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "WASS_Dynamics_Comp_Eq" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "WASS_Dynamics_Comp_Eq" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "WASS_Email_Default" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "WASS_Email_Default" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "WAttach_Type" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "WAttach_Type" %AUTHENTICATION%

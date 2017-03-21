@@ -364,7 +364,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WPO_Step_Detail_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -376,4 +375,5 @@
   <MenuName>WPO Step Detail1</MenuName>
   <QSPath>../WPO_Step_Detail1/WPO-Step-Detail-QuickSelector1.aspx</QSPath>
   <TableCodeName>WPO_Step_Detail1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWPO_Step_Detail1</TableStoredProcPrefix>
 </XMLDefinition>
