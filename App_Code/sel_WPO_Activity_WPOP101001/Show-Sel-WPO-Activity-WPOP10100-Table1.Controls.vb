@@ -387,50 +387,7 @@ Public Class Sel_WPO_Activity_WPOP101001TableControlRow
 
         End Sub
 
-        Public Overrides Sub ImageButton1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            ' The redirect URL is set on the Properties, Bindings.
-            ' The ModifyRedirectURL call resolves the parameters before the
-            ' Response.Redirect redirects the page to the URL.  
-            ' Any code after the Response.Redirect call will not be executed, since the page is
-            ' redirected to the URL.
-            Dim url As String = "../wf_pr/ShowWPR_Doc_WPO1.aspx?WPR_Doc=" & Me.WPRD_ID.Text ' & "}"
-            'throw new Exception(url)
-            Dim shouldRedirect As Boolean = True
-            Dim TargetKey As String = Nothing
-            Dim DFKA As String = Nothing
-            Dim id As String = Nothing
-            Dim value As String = Nothing
-            Try
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                url = Me.ModifyRedirectUrl(url, "", False)
-                url = Me.Page.ModifyRedirectUrl(url, "", False)
-                Me.Page.CommitTransaction(sender)
-
-            Catch ex As Exception
-                ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                shouldRedirect = False
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-            Finally
-                DbUtils.EndTransaction()
-            End Try
-            If shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-            ElseIf Not TargetKey Is Nothing AndAlso _
-                        Not shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.CloseWindow(True)
-
-            End If
-        End Sub
-
+		
 
     End Class
     Public Class WPO_CARNo_QWF1TableControl
@@ -11584,19 +11541,46 @@ Public Class BaseWPO_PRNo_QWF1TableControlRow
         ' event handler for ImageButton
         Public Overridable Sub ImageButton1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
               
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
+                  Dim url As String = "../WPR_Doc/Show-WPR-Doc1.aspx?WPR_Doc1={WPO_PRNo_QWF1TableControlRow:FV:WPRD_ID}"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
     Try
     
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
             
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
                 Me.Page.ErrorOnPage = True
     
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
     
             Finally
-    
+                DbUtils.EndTransaction
             End Try
-    
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
         End Sub
         
    

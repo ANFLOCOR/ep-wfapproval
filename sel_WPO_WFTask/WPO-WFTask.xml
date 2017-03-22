@@ -1446,15 +1446,15 @@
         </Attribute>
         <Attribute>
           <Name>ImageUrl</Name>
-          <Value>../Images/icon-open.png</Value>
+          <Value>../Images/icon-view.png</Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/icon-open.png'</Value>
+          <Value>this.src='../Images/icon-view.png'</Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon-open-over.png'</Value>
+          <Value>this.src='../Images/icon-view-over.png'</Value>
         </Attribute>
         <Attribute>
           <Name>RedirectURL</Name>
@@ -1528,15 +1528,15 @@
         </Attribute>
         <Attribute>
           <Name>ImageUrl</Name>
-          <Value>../Images/icon-open.png</Value>
+          <Value>../Images/icon-view.png</Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/icon-open.png'</Value>
+          <Value>this.src='../Images/icon-view.png'</Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon-open-over.png'</Value>
+          <Value>this.src='../Images/icon-view-over.png'</Value>
         </Attribute>
         <Attribute>
           <Name>RedirectURL</Name>

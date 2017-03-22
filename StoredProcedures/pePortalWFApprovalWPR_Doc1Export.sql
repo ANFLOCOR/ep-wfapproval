@@ -69,11 +69,11 @@ CREATE PROCEDURE pePortalWFApprovalWPR_Doc1Export
                 N'IsNULL(Convert(nvarchar, WPR_Doc_.[WPRD_ID]), '''') + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WPR_Doc_.[WPRD_C_ID]), '''') + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WPR_Doc_.[WPRD_WDT_ID]), '''') + ''' + @p_separator_str + ''' +' +
-                N'N''"'' + REPLACE(IsNULL( t0.[WDT_Name], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
+                N'N''"'' + REPLACE(IsNULL( t1.[WDT_Name], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WPR_Doc_.[WPRD_WCD_ID]), '''') + ''' + @p_separator_str + ''' +' +
-                N'N''"'' + REPLACE(IsNULL( t1.[WCD_No], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
+                N'N''"'' + REPLACE(IsNULL( t2.[WCD_No], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WPR_Doc_.[WPRD_WCur_ID]), '''') + ''' + @p_separator_str + ''' +' +
-                N'N''"'' + REPLACE(IsNULL( t2.[WCur_Desc], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
+                N'N''"'' + REPLACE(IsNULL( t3.[WCur_Desc], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WPR_Doc_.[WPRD_U_ID]), '''') + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WPR_Doc_.[WPRD_U_ID_Modify]), '''') + ''' + @p_separator_str + ''' +' +
                 N'N''"'' + REPLACE(IsNULL(WPR_Doc_.[WPRD_No], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
@@ -82,14 +82,14 @@ CREATE PROCEDURE pePortalWFApprovalWPR_Doc1Export
                 N'IsNULL(Convert(nvarchar, WPR_Doc_.[WPRD_Total]), '''') + ''' + @p_separator_str + ''' +' +
                 N'N''"'' + REPLACE(IsNULL(WPR_Doc_.[WPRD_Comment], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WPR_Doc_.[WPRD_WPRDS_ID]), '''') + ''' + @p_separator_str + ''' +' +
-                N'N''"'' + REPLACE(IsNULL( t3.[WPRDS_Desc], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
+                N'N''"'' + REPLACE(IsNULL( t6.[WPRDS_Desc], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
                 N'N''"'' + IsNULL(Convert(nvarchar, WPR_Doc_.[WPRD_Submit]), '''') + N''"'' + ''' + @p_separator_str + ''' +' +
                 N'N''"'' + REPLACE(IsNULL(WPR_Doc_.[WPRD_Title], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
                 N'N''"'' + IsNULL(Convert(nvarchar, WPR_Doc_.[WPRD_Contract]), '''') + N''"'' + '' ''';
             END
 
         -- Set up the from string (with table alias) and the join string
-        SET @l_from_str = '[dbo].[WPR_Doc] WPR_Doc_ LEFT OUTER JOIN [dbo].[WDoc_Type] t0 ON (WPR_Doc_.[WPRD_WDT_ID] =  t0.[WDT_ID]) LEFT OUTER JOIN [dbo].[WCAR_Doc] t1 ON (WPR_Doc_.[WPRD_WCD_ID] =  t1.[WCD_ID]) LEFT OUTER JOIN [dbo].[WCurrency] t2 ON (WPR_Doc_.[WPRD_WCur_ID] =  t2.[WCur_ID]) LEFT OUTER JOIN [dbo].[WPR_Doc_Status] t3 ON (WPR_Doc_.[WPRD_WPRDS_ID] =  t3.[WPRDS_ID])';
+        SET @l_from_str = '[dbo].[WPR_Doc] WPR_Doc_ LEFT OUTER JOIN [dbo].[WDoc_Type] t1 ON (WPR_Doc_.[WPRD_WDT_ID] =  t1.[WDT_ID]) LEFT OUTER JOIN [dbo].[WCAR_Doc] t2 ON (WPR_Doc_.[WPRD_WCD_ID] =  t2.[WCD_ID]) LEFT OUTER JOIN [dbo].[WCurrency] t3 ON (WPR_Doc_.[WPRD_WCur_ID] =  t3.[WCur_ID]) LEFT OUTER JOIN [dbo].[WPR_Doc_Status] t6 ON (WPR_Doc_.[WPRD_WPRDS_ID] =  t6.[WPRDS_ID])';
 
         SET @l_join_str = @p_join_str
         if @p_join_str is null

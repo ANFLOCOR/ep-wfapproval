@@ -173,8 +173,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WCanvass_Quotation_Internal_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <InUse>N</InUse>
-  <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
   <canDeleteRecords Source="Database">Y</canDeleteRecords>
@@ -185,4 +183,5 @@
   <MenuName>WCanvass Quotation Internal</MenuName>
   <QSPath>../WCanvass_Quotation_Internal/WCanvass-Quotation-Internal-QuickSelector.aspx</QSPath>
   <TableCodeName>WCanvass_Quotation_Internal</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWCanvass_Quotation_Internal</TableStoredProcPrefix>
 </XMLDefinition>

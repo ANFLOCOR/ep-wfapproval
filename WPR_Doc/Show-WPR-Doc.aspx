@@ -29,7 +29,7 @@
 
                         <ePortalWFApproval:WPR_DocRecordControl runat="server" id="WPR_DocRecordControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelT"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dhtr" valign="middle"><asp:Literal runat="server" id="WPR_DocTitle" Text="PR Document (View)">	</asp:Literal></td></tr></table>
 </td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
-</td></tr><tr><td class="recordPanelButtonsAlignment" style="text-align:right;"><table cellpadding="0" cellspacing="0" border="0"><tr><td></td><td><ePortalWFApproval:ThemeButton runat="server" id="OKButton" button-causesvalidation="False" button-commandname="Redirect" button-text="&lt;%# GetResourceValue(&quot;Done&quot;, &quot;ePortalWFApproval&quot;) %>" button-tooltip="&lt;%# GetResourceValue(&quot;Done&quot;, &quot;ePortalWFApproval&quot;) %>"></ePortalWFApproval:ThemeButton></td></tr></table>
+</td></tr><tr><td class="recordPanelButtonsAlignment" style="text-align:right;"><table cellpadding="0" cellspacing="0" border="0"><tr><td></td><td><ePortalWFApproval:ThemeButton runat="server" id="OKButton" button-causesvalidation="False" button-commandname="Redirect" button-text="&lt;%# GetResourceValue(&quot;Back&quot;, &quot;ePortalWFApproval&quot;) %>" button-tooltip="&lt;%# GetResourceValue(&quot;Back&quot;, &quot;ePortalWFApproval&quot;) %>"></ePortalWFApproval:ThemeButton></td></tr></table>
 </td></tr><tr><td>
                   <asp:panel id="WPR_DocRecordControlCollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>
                     <asp:panel id="WPR_DocRecordControlPanel" runat="server"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="fls" rowspan="9"><asp:literal id="Literal1" runat="server" text="&nbsp;" /></td><td class="dfv" colspan="4"><asp:literal id="Literal" runat="server" text="&nbsp;" /></td><td class="tableCellValue"></td></tr><tr><td class="fls" style="text-align:right;"><asp:Literal runat="server" id="WPRD_C_IDLabel" Text="Company">	</asp:Literal></td><td class="dfv" style="text-align:left;">&nbsp;</td><td class="dfv" style="text-align:left;"><span style="white-space:nowrap;">
@@ -55,7 +55,7 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td style="padding-right: 5px; vertical-align:top">
-<asp:TextBox runat="server" id="WPRD_Total" Columns="20" MaxLength="26" borderstyle="None" cssclass="field_input" htmlencodevalue="Default" readonly="True" textformat="{0}"></asp:TextBox></td>
+<asp:TextBox runat="server" id="WPRD_Total" Columns="20" MaxLength="26" borderstyle="None" cssclass="field_input" dataformat="#,#.00" htmlencodevalue="Default" readonly="True" textformat="{0}"></asp:TextBox></td>
 <td>
 &nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WPRD_TotalTextBoxMaxLengthValidator" ControlToValidate="WPRD_Total" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WPRD Total&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td>

@@ -573,15 +573,19 @@
         </Attribute>
         <Attribute>
           <Name>ImageUrl</Name>
-          <Value>../Images/icon-open.png</Value>
+          <Value>../Images/icon-view.png</Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/icon-open.png'</Value>
+          <Value>this.src='../Images/icon-view.png'</Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon-open-over.png'</Value>
+          <Value>this.src='../Images/icon-view-over.png'</Value>
+        </Attribute>
+        <Attribute>
+          <Name>RedirectURL</Name>
+          <Value>../WPR_Doc/Show-WPR-Doc1.aspx?WPR_Doc1={WPO_PRNo_QWF1TableControlRow:FV:WPRD_ID}</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -1505,7 +1509,15 @@
         </Attribute>
         <Attribute>
           <Name>ImageUrl</Name>
-          <Value>../Images/icon_view.gif</Value>
+          <Value>../Images/icon-view.png</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnMouseOut</Name>
+          <Value>this.src='./Images/icon-view.png'</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnMouseOver</Name>
+          <Value>this.src='./Images/icon-view-over.png'</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>View_WCPO_Canvass11TableControl</InsideControl>

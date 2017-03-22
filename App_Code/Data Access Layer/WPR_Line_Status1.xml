@@ -102,7 +102,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WPR_Line_Status_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -114,4 +113,5 @@
   <MenuName>WPR Line Status1</MenuName>
   <QSPath>../WPR_Line_Status1/WPR-Line-Status-QuickSelector1.aspx</QSPath>
   <TableCodeName>WPR_Line_Status1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWPR_Line_Status1</TableStoredProcPrefix>
 </XMLDefinition>

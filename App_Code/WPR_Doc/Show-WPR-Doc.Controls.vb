@@ -6410,19 +6410,19 @@ Public Class BaseWPR_LineTableControlRow
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_LineTable.WPRL_Ext_Price, "#,#.0000")
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRL_Ext_Price.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_Ext_Price is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_Ext_Price.Text = WPR_LineTable.WPRL_Ext_Price.Format(WPR_LineTable.WPRL_Ext_Price.DefaultValue, "#,#.0000")
-
-            End If
-
+        
+                 Me.WPRL_Ext_Price.Text = WPR_LineTable.WPRL_Ext_Price.Format(WPR_LineTable.WPRL_Ext_Price.DefaultValue, "#,#.0000")
+                        		
+                End If
+                 
             ' If the WPRL_Ext_Price is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_Ext_Price.Text Is Nothing _
@@ -6430,56 +6430,56 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_Ext_Price.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_GL00101_Acct_Indx()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_GL00101_Acct_Indx Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_GL00101_Acct_Indx is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_GL00101_Acct_Indx()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_GL00101_Acct_IndxSpecified Then
-
+                				
                 ' If the WPRL_GL00101_Acct_Indx is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WPR_LineTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WPR_LineTable.WPRL_GL00101_Acct_Indx)
                 If _isExpandableNonCompositeForeignKey AndAlso WPR_LineTable.WPRL_GL00101_Acct_Indx.IsApplyDisplayAs Then
-
-                    formattedValue = WPR_LineTable.GetDFKA(Me.DataSource.WPRL_GL00101_Acct_Indx.ToString(), WPR_LineTable.WPRL_GL00101_Acct_Indx, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WPR_LineTable.WPRL_GL00101_Acct_Indx)
-                    End If
+                                  
+                       formattedValue = WPR_LineTable.GetDFKA(Me.DataSource.WPRL_GL00101_Acct_Indx.ToString(),WPR_LineTable.WPRL_GL00101_Acct_Indx, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WPR_LineTable.WPRL_GL00101_Acct_Indx)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WPRL_GL00101_Acct_Indx.ToString()
+                       formattedValue = Me.DataSource.WPRL_GL00101_Acct_Indx.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRL_GL00101_Acct_Indx.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_GL00101_Acct_Indx is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_GL00101_Acct_Indx.Text = WPR_LineTable.WPRL_GL00101_Acct_Indx.Format(WPR_LineTable.WPRL_GL00101_Acct_Indx.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRL_GL00101_Acct_Indx.Text = WPR_LineTable.WPRL_GL00101_Acct_Indx.Format(WPR_LineTable.WPRL_GL00101_Acct_Indx.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRL_GL00101_Acct_Indx is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_GL00101_Acct_Indx.Text Is Nothing _
@@ -6487,89 +6487,89 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_GL00101_Acct_Indx.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_Item_Comment()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_Item_Comment Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_Item_Comment is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_Item_Comment()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_Item_CommentSpecified Then
-
+                				
                 ' If the WPRL_Item_Comment is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_LineTable.WPRL_Item_Comment)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                If Not formattedValue Is Nothing Then
-                    Dim popupThreshold As Integer = CType(300, Integer)
-
-                    Dim maxLength As Integer = Len(formattedValue)
+                If Not formattedValue is Nothing Then
+                    Dim popupThreshold as Integer = CType(300, Integer)
+                              
+                    Dim maxLength as Integer = Len(formattedValue)
                     Dim originalLength As Integer = maxLength
                     If (maxLength >= CType(300, Integer)) Then
                         ' Truncate based on FieldMaxLength on Properties.
                         maxLength = CType(300, Integer)
                         'First strip of all html tags:
-                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)
-
+                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)                       
+                                      
                     End If
-
+                                
                     ' For fields values larger than the PopupTheshold on Properties, display a popup.
                     If originalLength >= popupThreshold Then
-
+                      
                         Dim name As String = HttpUtility.HtmlEncode(WPR_LineTable.WPRL_Item_Comment.Name)
 
                         If Not HttpUtility.HtmlEncode("%ISD_DEFAULT%").Equals("%ISD_DEFAULT%") Then
-                            name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
+                           name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
                         End If
 
+                        
 
-
-                        formattedValue = "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
+                        formattedValue= "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
                             & "onmouseover='SaveMousePosition(event); delayRolloverPopup(""PageMethods.GetRecordFieldValue(\""ePortalWFApproval.Business.WPR_LineTable, App_Code\"",\""" _
-                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\", "\\\\") & "\"", \""WPRL_Item_Comment\"", \""WPRL_Item_Comment\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
-                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" & NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
-
+                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\","\\\\") & "\"", \""WPRL_Item_Comment\"", \""WPRL_Item_Comment\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
+                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" &  NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
+                      
                         If (maxLength = CType(300, Integer)) Then
                             formattedValue = formattedValue & "..." & "</a>"
                         Else
                             formattedValue = formattedValue & "</a>"
-
+                        
                         End If
                     Else
                         If maxLength = CType(300, Integer) Then
-                            formattedValue = NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0, MaxLength))
+                            formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,MaxLength))
                             formattedValue = formattedValue & "..."
-
+                        
                         End If
                     End If
-                End If
-
+                End If  
+                
                 Me.WPRL_Item_Comment.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_Item_Comment is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_Item_Comment.Text = WPR_LineTable.WPRL_Item_Comment.Format(WPR_LineTable.WPRL_Item_Comment.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRL_Item_Comment.Text = WPR_LineTable.WPRL_Item_Comment.Format(WPR_LineTable.WPRL_Item_Comment.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRL_Item_Comment is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_Item_Comment.Text Is Nothing _
@@ -6577,89 +6577,89 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_Item_Comment.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_Item_Desc()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_Item_Desc Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_Item_Desc is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_Item_Desc()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_Item_DescSpecified Then
-
+                				
                 ' If the WPRL_Item_Desc is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_LineTable.WPRL_Item_Desc)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                If Not formattedValue Is Nothing Then
-                    Dim popupThreshold As Integer = CType(300, Integer)
-
-                    Dim maxLength As Integer = Len(formattedValue)
+                If Not formattedValue is Nothing Then
+                    Dim popupThreshold as Integer = CType(300, Integer)
+                              
+                    Dim maxLength as Integer = Len(formattedValue)
                     Dim originalLength As Integer = maxLength
                     If (maxLength >= CType(300, Integer)) Then
                         ' Truncate based on FieldMaxLength on Properties.
                         maxLength = CType(300, Integer)
                         'First strip of all html tags:
-                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)
-
+                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)                       
+                                      
                     End If
-
+                                
                     ' For fields values larger than the PopupTheshold on Properties, display a popup.
                     If originalLength >= popupThreshold Then
-
+                      
                         Dim name As String = HttpUtility.HtmlEncode(WPR_LineTable.WPRL_Item_Desc.Name)
 
                         If Not HttpUtility.HtmlEncode("%ISD_DEFAULT%").Equals("%ISD_DEFAULT%") Then
-                            name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
+                           name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
                         End If
 
+                        
 
-
-                        formattedValue = "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
+                        formattedValue= "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
                             & "onmouseover='SaveMousePosition(event); delayRolloverPopup(""PageMethods.GetRecordFieldValue(\""ePortalWFApproval.Business.WPR_LineTable, App_Code\"",\""" _
-                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\", "\\\\") & "\"", \""WPRL_Item_Desc\"", \""WPRL_Item_Desc\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
-                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" & NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
-
+                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\","\\\\") & "\"", \""WPRL_Item_Desc\"", \""WPRL_Item_Desc\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
+                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" &  NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
+                      
                         If (maxLength = CType(300, Integer)) Then
                             formattedValue = formattedValue & "..." & "</a>"
                         Else
                             formattedValue = formattedValue & "</a>"
-
+                        
                         End If
                     Else
                         If maxLength = CType(300, Integer) Then
-                            formattedValue = NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0, MaxLength))
+                            formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,MaxLength))
                             formattedValue = formattedValue & "..."
-
+                        
                         End If
                     End If
-                End If
-
+                End If  
+                
                 Me.WPRL_Item_Desc.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_Item_Desc is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_Item_Desc.Text = WPR_LineTable.WPRL_Item_Desc.Format(WPR_LineTable.WPRL_Item_Desc.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRL_Item_Desc.Text = WPR_LineTable.WPRL_Item_Desc.Format(WPR_LineTable.WPRL_Item_Desc.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRL_Item_Desc is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_Item_Desc.Text Is Nothing _
@@ -6667,89 +6667,89 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_Item_Desc.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_Item_Non_Inv()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_Item_Non_Inv Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_Item_Non_Inv is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_Item_Non_Inv()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_Item_Non_InvSpecified Then
-
+                				
                 ' If the WPRL_Item_Non_Inv is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_LineTable.WPRL_Item_Non_Inv)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                If Not formattedValue Is Nothing Then
-                    Dim popupThreshold As Integer = CType(300, Integer)
-
-                    Dim maxLength As Integer = Len(formattedValue)
+                If Not formattedValue is Nothing Then
+                    Dim popupThreshold as Integer = CType(300, Integer)
+                              
+                    Dim maxLength as Integer = Len(formattedValue)
                     Dim originalLength As Integer = maxLength
                     If (maxLength >= CType(300, Integer)) Then
                         ' Truncate based on FieldMaxLength on Properties.
                         maxLength = CType(300, Integer)
                         'First strip of all html tags:
-                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)
-
+                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)                       
+                                      
                     End If
-
+                                
                     ' For fields values larger than the PopupTheshold on Properties, display a popup.
                     If originalLength >= popupThreshold Then
-
+                      
                         Dim name As String = HttpUtility.HtmlEncode(WPR_LineTable.WPRL_Item_Non_Inv.Name)
 
                         If Not HttpUtility.HtmlEncode("%ISD_DEFAULT%").Equals("%ISD_DEFAULT%") Then
-                            name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
+                           name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
                         End If
 
+                        
 
-
-                        formattedValue = "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
+                        formattedValue= "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
                             & "onmouseover='SaveMousePosition(event); delayRolloverPopup(""PageMethods.GetRecordFieldValue(\""ePortalWFApproval.Business.WPR_LineTable, App_Code\"",\""" _
-                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\", "\\\\") & "\"", \""WPRL_Item_Non_Inv\"", \""WPRL_Item_Non_Inv\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
-                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" & NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
-
+                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\","\\\\") & "\"", \""WPRL_Item_Non_Inv\"", \""WPRL_Item_Non_Inv\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
+                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" &  NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
+                      
                         If (maxLength = CType(300, Integer)) Then
                             formattedValue = formattedValue & "..." & "</a>"
                         Else
                             formattedValue = formattedValue & "</a>"
-
+                        
                         End If
                     Else
                         If maxLength = CType(300, Integer) Then
-                            formattedValue = NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0, MaxLength))
+                            formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,MaxLength))
                             formattedValue = formattedValue & "..."
-
+                        
                         End If
                     End If
-                End If
-
+                End If  
+                
                 Me.WPRL_Item_Non_Inv.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_Item_Non_Inv is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_Item_Non_Inv.Text = WPR_LineTable.WPRL_Item_Non_Inv.Format(WPR_LineTable.WPRL_Item_Non_Inv.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRL_Item_Non_Inv.Text = WPR_LineTable.WPRL_Item_Non_Inv.Format(WPR_LineTable.WPRL_Item_Non_Inv.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRL_Item_Non_Inv is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_Item_Non_Inv.Text Is Nothing _
@@ -6757,45 +6757,45 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_Item_Non_Inv.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_Item_Non_Inv_UOM()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_Item_Non_Inv_UOM Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_Item_Non_Inv_UOM is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_Item_Non_Inv_UOM()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_Item_Non_Inv_UOMSpecified Then
-
+                				
                 ' If the WPRL_Item_Non_Inv_UOM is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_LineTable.WPRL_Item_Non_Inv_UOM)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRL_Item_Non_Inv_UOM.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_Item_Non_Inv_UOM is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_Item_Non_Inv_UOM.Text = WPR_LineTable.WPRL_Item_Non_Inv_UOM.Format(WPR_LineTable.WPRL_Item_Non_Inv_UOM.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRL_Item_Non_Inv_UOM.Text = WPR_LineTable.WPRL_Item_Non_Inv_UOM.Format(WPR_LineTable.WPRL_Item_Non_Inv_UOM.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRL_Item_Non_Inv_UOM is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_Item_Non_Inv_UOM.Text Is Nothing _
@@ -6803,89 +6803,89 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_Item_Non_Inv_UOM.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_Item_Text()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_Item_Text Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_Item_Text is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_Item_Text()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_Item_TextSpecified Then
-
+                				
                 ' If the WPRL_Item_Text is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_LineTable.WPRL_Item_Text)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                If Not formattedValue Is Nothing Then
-                    Dim popupThreshold As Integer = CType(300, Integer)
-
-                    Dim maxLength As Integer = Len(formattedValue)
+                If Not formattedValue is Nothing Then
+                    Dim popupThreshold as Integer = CType(300, Integer)
+                              
+                    Dim maxLength as Integer = Len(formattedValue)
                     Dim originalLength As Integer = maxLength
                     If (maxLength >= CType(300, Integer)) Then
                         ' Truncate based on FieldMaxLength on Properties.
                         maxLength = CType(300, Integer)
                         'First strip of all html tags:
-                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)
-
+                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)                       
+                                      
                     End If
-
+                                
                     ' For fields values larger than the PopupTheshold on Properties, display a popup.
                     If originalLength >= popupThreshold Then
-
+                      
                         Dim name As String = HttpUtility.HtmlEncode(WPR_LineTable.WPRL_Item_Text.Name)
 
                         If Not HttpUtility.HtmlEncode("%ISD_DEFAULT%").Equals("%ISD_DEFAULT%") Then
-                            name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
+                           name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
                         End If
 
+                        
 
-
-                        formattedValue = "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
+                        formattedValue= "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
                             & "onmouseover='SaveMousePosition(event); delayRolloverPopup(""PageMethods.GetRecordFieldValue(\""ePortalWFApproval.Business.WPR_LineTable, App_Code\"",\""" _
-                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\", "\\\\") & "\"", \""WPRL_Item_Text\"", \""WPRL_Item_Text\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
-                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" & NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
-
+                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\","\\\\") & "\"", \""WPRL_Item_Text\"", \""WPRL_Item_Text\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
+                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" &  NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
+                      
                         If (maxLength = CType(300, Integer)) Then
                             formattedValue = formattedValue & "..." & "</a>"
                         Else
                             formattedValue = formattedValue & "</a>"
-
+                        
                         End If
                     Else
                         If maxLength = CType(300, Integer) Then
-                            formattedValue = NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0, MaxLength))
+                            formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,MaxLength))
                             formattedValue = formattedValue & "..."
-
+                        
                         End If
                     End If
-                End If
-
+                End If  
+                
                 Me.WPRL_Item_Text.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_Item_Text is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_Item_Text.Text = WPR_LineTable.WPRL_Item_Text.Format(WPR_LineTable.WPRL_Item_Text.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRL_Item_Text.Text = WPR_LineTable.WPRL_Item_Text.Format(WPR_LineTable.WPRL_Item_Text.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRL_Item_Text is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_Item_Text.Text Is Nothing _
@@ -6893,56 +6893,56 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_Item_Text.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_IV00101_Item_No()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_IV00101_Item_No Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_IV00101_Item_No is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_IV00101_Item_No()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_IV00101_Item_NoSpecified Then
-
+                				
                 ' If the WPRL_IV00101_Item_No is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WPR_LineTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WPR_LineTable.WPRL_IV00101_Item_No)
                 If _isExpandableNonCompositeForeignKey AndAlso WPR_LineTable.WPRL_IV00101_Item_No.IsApplyDisplayAs Then
-
-                    formattedValue = WPR_LineTable.GetDFKA(Me.DataSource.WPRL_IV00101_Item_No.ToString(), WPR_LineTable.WPRL_IV00101_Item_No, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WPR_LineTable.WPRL_IV00101_Item_No)
-                    End If
+                                  
+                       formattedValue = WPR_LineTable.GetDFKA(Me.DataSource.WPRL_IV00101_Item_No.ToString(),WPR_LineTable.WPRL_IV00101_Item_No, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WPR_LineTable.WPRL_IV00101_Item_No)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WPRL_IV00101_Item_No.ToString()
+                       formattedValue = Me.DataSource.WPRL_IV00101_Item_No.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRL_IV00101_Item_No.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_IV00101_Item_No is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_IV00101_Item_No.Text = WPR_LineTable.WPRL_IV00101_Item_No.Format(WPR_LineTable.WPRL_IV00101_Item_No.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRL_IV00101_Item_No.Text = WPR_LineTable.WPRL_IV00101_Item_No.Format(WPR_LineTable.WPRL_IV00101_Item_No.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRL_IV00101_Item_No is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_IV00101_Item_No.Text Is Nothing _
@@ -6950,45 +6950,45 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_IV00101_Item_No.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_IV00101_Prchs_UOM()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_IV00101_Prchs_UOM Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_IV00101_Prchs_UOM is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_IV00101_Prchs_UOM()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_IV00101_Prchs_UOMSpecified Then
-
+                				
                 ' If the WPRL_IV00101_Prchs_UOM is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_LineTable.WPRL_IV00101_Prchs_UOM)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRL_IV00101_Prchs_UOM.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_IV00101_Prchs_UOM is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_IV00101_Prchs_UOM.Text = WPR_LineTable.WPRL_IV00101_Prchs_UOM.Format(WPR_LineTable.WPRL_IV00101_Prchs_UOM.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRL_IV00101_Prchs_UOM.Text = WPR_LineTable.WPRL_IV00101_Prchs_UOM.Format(WPR_LineTable.WPRL_IV00101_Prchs_UOM.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRL_IV00101_Prchs_UOM is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_IV00101_Prchs_UOM.Text Is Nothing _
@@ -6996,56 +6996,56 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_IV00101_Prchs_UOM.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_IV40700_Locn_Code()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_IV40700_Locn_Code Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_IV40700_Locn_Code is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_IV40700_Locn_Code()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_IV40700_Locn_CodeSpecified Then
-
+                				
                 ' If the WPRL_IV40700_Locn_Code is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WPR_LineTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WPR_LineTable.WPRL_IV40700_Locn_Code)
                 If _isExpandableNonCompositeForeignKey AndAlso WPR_LineTable.WPRL_IV40700_Locn_Code.IsApplyDisplayAs Then
-
-                    formattedValue = WPR_LineTable.GetDFKA(Me.DataSource.WPRL_IV40700_Locn_Code.ToString(), WPR_LineTable.WPRL_IV40700_Locn_Code, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WPR_LineTable.WPRL_IV40700_Locn_Code)
-                    End If
+                                  
+                       formattedValue = WPR_LineTable.GetDFKA(Me.DataSource.WPRL_IV40700_Locn_Code.ToString(),WPR_LineTable.WPRL_IV40700_Locn_Code, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WPR_LineTable.WPRL_IV40700_Locn_Code)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WPRL_IV40700_Locn_Code.ToString()
+                       formattedValue = Me.DataSource.WPRL_IV40700_Locn_Code.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRL_IV40700_Locn_Code.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_IV40700_Locn_Code is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_IV40700_Locn_Code.Text = WPR_LineTable.WPRL_IV40700_Locn_Code.Format(WPR_LineTable.WPRL_IV40700_Locn_Code.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRL_IV40700_Locn_Code.Text = WPR_LineTable.WPRL_IV40700_Locn_Code.Format(WPR_LineTable.WPRL_IV40700_Locn_Code.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRL_IV40700_Locn_Code is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_IV40700_Locn_Code.Text Is Nothing _
@@ -7053,92 +7053,92 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_IV40700_Locn_Code.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_Line_Seq_No()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.WPRL_Line_Seq_No.ID) Then
-
+            
                 Me.WPRL_Line_Seq_No.Text = Me.PreviousUIData(Me.WPRL_Line_Seq_No.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the WPRL_Line_Seq_No TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_Line_Seq_No is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_Line_Seq_No()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_Line_Seq_NoSpecified Then
-
+                				
                 ' If the WPRL_Line_Seq_No is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_LineTable.WPRL_Line_Seq_No)
-
+                              
                 Me.WPRL_Line_Seq_No.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_Line_Seq_No is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_Line_Seq_No.Text = WPR_LineTable.WPRL_Line_Seq_No.Format(WPR_LineTable.WPRL_Line_Seq_No.DefaultValue)
-
-            End If
-
-            AddHandler Me.WPRL_Line_Seq_No.TextChanged, AddressOf WPRL_Line_Seq_No_TextChanged
-
+        
+                 Me.WPRL_Line_Seq_No.Text = WPR_LineTable.WPRL_Line_Seq_No.Format(WPR_LineTable.WPRL_Line_Seq_No.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WPRL_Line_Seq_No.TextChanged, AddressOf WPRL_Line_Seq_No_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWPRL_Qty()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_Qty Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_Qty is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_Qty()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_QtySpecified Then
-
+                				
                 ' If the WPRL_Qty is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_LineTable.WPRL_Qty, "#,#.00")
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRL_Qty.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_Qty is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_Qty.Text = WPR_LineTable.WPRL_Qty.Format(WPR_LineTable.WPRL_Qty.DefaultValue, "#,#.00")
-
-            End If
-
+        
+                 Me.WPRL_Qty.Text = WPR_LineTable.WPRL_Qty.Format(WPR_LineTable.WPRL_Qty.DefaultValue, "#,#.00")
+                        		
+                End If
+                 
             ' If the WPRL_Qty is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_Qty.Text Is Nothing _
@@ -7146,45 +7146,45 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_Qty.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_Required_Date()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_Required_Date Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_Required_Date is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_Required_Date()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_Required_DateSpecified Then
-
+                				
                 ' If the WPRL_Required_Date is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_LineTable.WPRL_Required_Date, "d")
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRL_Required_Date.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_Required_Date is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_Required_Date.Text = WPR_LineTable.WPRL_Required_Date.Format(WPR_LineTable.WPRL_Required_Date.DefaultValue, "d")
-
-            End If
-
+        
+                 Me.WPRL_Required_Date.Text = WPR_LineTable.WPRL_Required_Date.Format(WPR_LineTable.WPRL_Required_Date.DefaultValue, "d")
+                        		
+                End If
+                 
             ' If the WPRL_Required_Date is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_Required_Date.Text Is Nothing _
@@ -7192,45 +7192,45 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_Required_Date.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRL_Unit_Price()
 
-
-
-
+                  
+            
+        
             ' Set the WPRL_Unit_Price Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Line database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Line record retrieved from the database.
             ' Me.WPRL_Unit_Price is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRL_Unit_Price()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRL_Unit_PriceSpecified Then
-
+                				
                 ' If the WPRL_Unit_Price is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_LineTable.WPRL_Unit_Price, "#,#.00")
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRL_Unit_Price.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRL_Unit_Price is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRL_Unit_Price.Text = WPR_LineTable.WPRL_Unit_Price.Format(WPR_LineTable.WPRL_Unit_Price.DefaultValue, "#,#.00")
-
-            End If
-
+        
+                 Me.WPRL_Unit_Price.Text = WPR_LineTable.WPRL_Unit_Price.Format(WPR_LineTable.WPRL_Unit_Price.DefaultValue, "#,#.00")
+                        		
+                End If
+                 
             ' If the WPRL_Unit_Price is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRL_Unit_Price.Text Is Nothing _
@@ -7238,9 +7238,9 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRL_Unit_Price.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
@@ -7248,10 +7248,10 @@ Public Class BaseWPR_LineTableControlRow
             If e Is Nothing Then
                 e = New FormulaEvaluator()
             End If
-
+            
             e.Variables.Clear()
 
-
+            
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -7260,11 +7260,11 @@ Public Class BaseWPR_LineTableControlRow
                 End While
             End If
 
-            If includeDS Then
-
-            End If
-
-
+            If includeDS
+                
+            End IF
+            
+            
             ' Other variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -7290,22 +7290,22 @@ Public Class BaseWPR_LineTableControlRow
             Else
                 Return resultObj.ToString()
             End If
-        End Function
+        End Function      
+        
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
+        End Function        
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
-        End Function
-
-
+        
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
-        End Function
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
+        End Function        
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -7313,7 +7313,7 @@ Public Class BaseWPR_LineTableControlRow
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -7322,13 +7322,13 @@ Public Class BaseWPR_LineTableControlRow
         End Function
 
 
-        Public Overridable Sub RegisterPostback()
-
-
+        Public Overridable Sub RegisterPostback()       
+        
+        
         End Sub
 
-
-
+      
+        
         ' To customize, override this method in WPR_LineTableControlRow.
         Public Overridable Sub SaveData()
             ' Saves the associated record in the database.
@@ -7338,30 +7338,30 @@ Public Class BaseWPR_LineTableControlRow
             ' 1. Load the existing record from the database. Since we save the entire record, this ensures 
             ' that fields that are not displayed are also properly initialized.
             Me.LoadData()
-
+        
             ' The checksum is used to ensure the record was not changed by another user.
             If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
                 If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
                     Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "ePortalWFApproval"))
                 End If
             End If
-
-            Dim parentCtrl As WPR_DocRecordControl
-
-
-            parentCtrl = DirectCast(MiscUtils.GetParentControlObject(Me, "WPR_DocRecordControl"), WPR_DocRecordControl)
-
-            If (Not IsNothing(parentCtrl) AndAlso IsNothing(parentCtrl.DataSource)) Then
+        
+        Dim parentCtrl As WPR_DocRecordControl
+          
+          				  
+          parentCtrl = DirectCast(MiscUtils.GetParentControlObject(Me, "WPR_DocRecordControl"), WPR_DocRecordControl)				  
+              
+          If (Not IsNothing(parentCtrl) AndAlso IsNothing(parentCtrl.DataSource)) 
                 ' Load the record if it is not loaded yet.
                 parentCtrl.LoadData()
             End If
-            If (IsNothing(parentCtrl) OrElse IsNothing(parentCtrl.DataSource)) Then
+            If (IsNothing(parentCtrl) OrElse IsNothing(parentCtrl.DataSource)) 
                 ' Get the error message from the application resource file.
                 Throw New Exception(Page.GetResourceValue("Err:NoParentRecId", "ePortalWFApproval"))
             End If
-
+            
             Me.DataSource.WPRL_WPRD_ID = parentCtrl.DataSource.WPRD_ID
-
+              
             ' 2. Perform any custom validation.
             Me.Validate()
 
@@ -7372,29 +7372,29 @@ Public Class BaseWPR_LineTableControlRow
             ' 4. Save in the database.
             ' We should not save the record if the data did not change. This
             ' will save a database hit and avoid triggering any database triggers.
-
+             
             If Me.DataSource.IsAnyValueChanged Then
                 ' Save record to database but do not commit yet.
                 ' Auto generated ids are available after saving for use by child (dependent) records.
                 Me.DataSource.Save()
-
+              
                 DirectCast(GetParentControlObject(Me, "WPR_LineTableControl"), WPR_LineTableControl).DataChanged = True
                 DirectCast(GetParentControlObject(Me, "WPR_LineTableControl"), WPR_LineTableControl).ResetData = True
             End If
-
-
+            
+      
             ' update session or cookie by formula
-
-
+                                    
+      
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-
+            
             Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
-
+          
         End Sub
 
         ' To customize, override this method in WPR_LineTableControlRow.
@@ -7404,9 +7404,9 @@ Public Class BaseWPR_LineTableControlRow
             ' To do this, it calls the Get methods for each of the field displayed on 
             ' the webpage.  It is better to make changes in the Get methods, rather 
             ' than making changes here.
-
+      
             ' Call the Get methods for each of the user interface controls.
-
+        
             GetWPRL_Account()
             GetWPRL_Ext_Price()
             GetWPRL_GL00101_Acct_Indx()
@@ -7423,91 +7423,91 @@ Public Class BaseWPR_LineTableControlRow
             GetWPRL_Required_Date()
             GetWPRL_Unit_Price()
         End Sub
-
-
+        
+        
         Public Overridable Sub GetWPRL_Account()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_Ext_Price()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_GL00101_Acct_Indx()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_Item_Comment()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_Item_Desc()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_Item_Non_Inv()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_Item_Non_Inv_UOM()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_Item_Text()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_IV00101_Item_No()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_IV00101_Prchs_UOM()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_IV40700_Locn_Code()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_Line_Seq_No()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_Qty()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_Required_Date()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRL_Unit_Price()
-
+            
         End Sub
-
-
+                
+      
         ' To customize, override this method in WPR_LineTableControlRow.
-
+        
         Public Overridable Function CreateWhereClause() As WhereClause
-
-            Dim hasFiltersWCAR_Doc_AttachTableControl As Boolean = False
-
-            Dim hasFiltersWPR_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWPR_Doc_AttachTableControl As Boolean = False
-
-            Dim hasFiltersWPR_DocRecordControl As Boolean = False
-
-            Dim hasFiltersWPR_LineTableControl As Boolean = False
-
+        
+        Dim hasFiltersWCAR_Doc_AttachTableControl As Boolean = False
+      
+        Dim hasFiltersWPR_ActivityTableControl As Boolean = False
+      
+        Dim hasFiltersWPR_Doc_AttachTableControl As Boolean = False
+      
+        Dim hasFiltersWPR_DocRecordControl As Boolean = False
+      
+        Dim hasFiltersWPR_LineTableControl As Boolean = False
+      
             Return Nothing
-
+            
         End Function
-
-
+        
+    
 
         ' To customize, override this method in WPR_LineTableControlRow.
-        Public Overridable Sub Validate()
+        Public Overridable Sub Validate() 
             ' Add custom validation for any control within this panel.
             ' Example.  If you have a State ASP:Textbox control
             ' If Me.State.Text <> "CA" Then
@@ -7517,19 +7517,19 @@ Public Class BaseWPR_LineTableControlRow
             ' The Validate method is common across all controls within
             ' this panel so you can validate multiple fields, but report
             ' one error message.
-
-
+            
+                
         End Sub
 
         Public Overridable Sub Delete()
-
+        
             If Me.IsNewRecord() Then
                 Return
             End If
 
             Dim pkValue As KeyValue = KeyValue.XmlToKey(Me.RecordUniqueId)
-            WPR_LineTable.DeleteRecord(pkValue)
-
+          WPR_LineTable.DeleteRecord(pkValue)
+          
             DirectCast(GetParentControlObject(Me, "WPR_LineTableControl"), WPR_LineTableControl).DataChanged = True
             DirectCast(GetParentControlObject(Me, "WPR_LineTableControl"), WPR_LineTableControl).ResetData = True
         End Sub
@@ -7541,41 +7541,41 @@ Public Class BaseWPR_LineTableControlRow
                 Me.RegisterPostback()
 
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-
-
+                  
+                
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
                     Me.LoadData()
-                    Me.DataBind()
+                    Me.DataBind()			
                 End If
-
-
+                                
+                						
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
                 DbUtils.EndTransaction()
             End Try
         End Sub
-
-
+        
+            
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
-
-
+        
+    
             'Save pagination state to session.
-
+          
         End Sub
-
-
-
+        
+        
+    
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
-
+        
 
             ' Clear pagination state from session.
-
+        
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
@@ -7584,36 +7584,36 @@ Public Class BaseWPR_LineTableControlRow
             If Not isNewRecord Is Nothing AndAlso isNewRecord.Trim <> "" Then
                 Me.IsNewRecord = Boolean.Parse(isNewRecord)
             End If
-
+            
             Dim myCheckSum As String = CType(ViewState("CheckSum"), String)
             If Not myCheckSum Is Nothing AndAlso myCheckSum.Trim <> "" Then
                 Me.CheckSum = myCheckSum
             End If
-
-
+            
+    
             ' Load view state for pagination control.
-
+                 
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
             ViewState("IsNewRecord") = Me.IsNewRecord.ToString()
             ViewState("CheckSum") = Me.CheckSum
-
-
+            
+    
             ' Load view state for pagination control.
-
+                  
             Return MyBase.SaveViewState()
         End Function
-
-
-
+        
+        
+    
         ' Generate set method for buttons
-
-        Protected Overridable Sub WPRL_Line_Seq_No_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-
+        
+        Protected Overridable Sub WPRL_Line_Seq_No_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+   
         Private _PreviousUIData As New Hashtable
         Public Overridable Property PreviousUIData() As Hashtable
             Get
@@ -7622,9 +7622,9 @@ Public Class BaseWPR_LineTableControlRow
             Set(ByVal value As Hashtable)
                 _PreviousUIData = value
             End Set
-        End Property
+        End Property   
 
-
+        
         Public Property RecordUniqueId() As String
             Get
                 Return CType(Me.ViewState("BaseWPR_LineTableControlRow_Rec"), String)
@@ -7633,7 +7633,7 @@ Public Class BaseWPR_LineTableControlRow
                 Me.ViewState("BaseWPR_LineTableControlRow_Rec") = value
             End Set
         End Property
-
+            
         Public Property DataSource() As WPR_LineRecord
             Get
                 Return DirectCast(MyBase._DataSource, WPR_LineRecord)
@@ -7643,7 +7643,7 @@ Public Class BaseWPR_LineTableControlRow
             End Set
         End Property
 
-
+        
         Private _checkSum As String
         Public Overridable Property CheckSum() As String
             Get
@@ -7653,7 +7653,7 @@ Public Class BaseWPR_LineTableControlRow
                 Me._checkSum = value
             End Set
         End Property
-
+        
         Private _TotalPages As Integer
         Public Property TotalPages() As Integer
             Get
@@ -7663,7 +7663,7 @@ Public Class BaseWPR_LineTableControlRow
                 Me._TotalPages = value
             End Set
         End Property
-
+        
         Private _PageIndex As Integer
         Public Property PageIndex() As Integer
             Get
@@ -7674,7 +7674,7 @@ Public Class BaseWPR_LineTableControlRow
                 Me._PageIndex = value
             End Set
         End Property
-
+    
         Private _DisplayLastPage As Boolean
         Public Property DisplayLastPage() As Boolean
             Get
@@ -7684,118 +7684,118 @@ Public Class BaseWPR_LineTableControlRow
                 Me._DisplayLastPage = value
             End Set
         End Property
-
-
+        
+        
 
 #Region "Helper Properties"
-
+        
         Public ReadOnly Property WPRL_Account() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Account"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_Ext_Price() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Ext_Price"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_GL00101_Acct_Indx() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_GL00101_Acct_Indx"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_Item_Comment() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Item_Comment"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_Item_Desc() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Item_Desc"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_Item_Non_Inv() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Item_Non_Inv"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_Item_Non_Inv_UOM() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Item_Non_Inv_UOM"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_Item_Text() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Item_Text"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_IV00101_Item_No() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_IV00101_Item_No"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_IV00101_Prchs_UOM() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_IV00101_Prchs_UOM"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_IV40700_Locn_Code() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_IV40700_Locn_Code"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_Line_Seq_No() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Line_Seq_No"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_Qty() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Qty"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_Required_Date() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Required_Date"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRL_Unit_Price() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Unit_Price"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
 #End Region
 
 #Region "Helper Functions"
 
-        Public Overloads Overrides Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+        Public Overrides Overloads Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
+        End Function
+        
+        Public Overrides Overloads Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
             Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
 
-        Public Overloads Overrides Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
-        End Function
-
-        Public Overloads Overrides Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
-
+        Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+            
             Dim rec As WPR_LineRecord = Nothing
-
-
+             
+        
             Try
                 rec = Me.GetRecord()
             Catch ex As Exception
@@ -7804,18 +7804,18 @@ Public Class BaseWPR_LineTableControlRow
 
             If rec Is Nothing AndAlso url.IndexOf("{") >= 0 Then
                 ' Localization.
-
-                Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
-
+                
+            Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
+                    
             End If
             Return EvaluateExpressions(url, arg, rec, bEncrypt)
         End Function
 
-        Public Overloads Overrides Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-
+        Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean,ByVal includeSession as Boolean) As String
+            
             Dim rec As WPR_LineRecord = Nothing
-
-
+             
+        
             Try
                 rec = Me.GetRecord()
             Catch ex As Exception
@@ -7824,33 +7824,33 @@ Public Class BaseWPR_LineTableControlRow
 
             If rec Is Nothing AndAlso url.IndexOf("{") >= 0 Then
                 ' Localization.
-
-                Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
-
+                
+            Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
+                    
             End If
-            If includeSession Then
+            If includeSession  Then
                 Return EvaluateExpressions(url, arg, rec, bEncrypt)
             Else
-                Return EvaluateExpressions(url, arg, rec, bEncrypt, False)
+                Return EvaluateExpressions(url, arg, rec, bEncrypt,False)  
             End If
         End Function
 
-
+         
         Public Overridable Function GetRecord() As WPR_LineRecord
             If Not Me.DataSource Is Nothing Then
                 Return Me.DataSource
             End If
-
+            
             If Not Me.RecordUniqueId Is Nothing Then
-
+                
                 Return WPR_LineTable.GetRecord(Me.RecordUniqueId, True)
-
+                
             End If
-
+            
             ' Localization.
-
+            
             Return Nothing
-
+                
         End Function
 
         Public Shadows ReadOnly Property Page() As BaseApplicationPage
@@ -7861,71 +7861,71 @@ Public Class BaseWPR_LineTableControlRow
 
 #End Region
 
-    End Class
+End Class
 
+  
 
-
-    ' Base class for the WPR_LineTableControl control on the Show_WPR_Doc page.
-    ' Do not modify this class. Instead override any method in WPR_LineTableControl.
-    Public Class BaseWPR_LineTableControl
+' Base class for the WPR_LineTableControl control on the Show_WPR_Doc page.
+' Do not modify this class. Instead override any method in WPR_LineTableControl.
+Public Class BaseWPR_LineTableControl
         Inherits ePortalWFApproval.UI.BaseApplicationTableControl
 
-
+        
         Protected Overridable Sub Control_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Init
+  
+      
+    
+           ' Setup the filter and search.
+        
 
-
-
-            ' Setup the filter and search.
-
-
-
-
+      
+      
             ' Control Initializations.
             ' Initialize the table's current sort order.
             If Me.InSession(Me, "Order_By") Then
                 Me.CurrentSortOrder = OrderBy.FromXmlString(Me.GetFromSession(Me, "Order_By", Nothing))
-
+         
             Else
-
+                   
                 Me.CurrentSortOrder = New OrderBy(True, False)
+            
+        End If
 
-            End If
+    
 
-
-
-            ' Setup default pagination settings.
-
+    ' Setup default pagination settings.
+    
             Me.PageSize = CInt(Me.GetFromSession(Me, "Page_Size", "10"))
             Me.PageIndex = CInt(Me.GetFromSession(Me, "Page_Index", "0"))
-
-
+        
+            
         End Sub
 
         Protected Overridable Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        
             SaveControlsToSession_Ajax()
-
+        
             ' Setup the pagination events.
-
+                        
             Dim url As String = ""  'to avoid warning in VS 
             url = "" 'to avoid warning in VS 
             ' Setup the sorting events.
-
+          
             ' Setup the button events.
-
-
-            ' Setup events for others
-
+                  
+        
+          ' Setup events for others
+                
         End Sub
-
-
-        Public Overridable Sub LoadData()
-
+        
+        
+        Public Overridable Sub LoadData()        
+        
             ' Read data from database. Returns an array of records that can be assigned
             ' to the DataSource table control property.
-            Try
+            Try	
                 Dim joinFilter As CompoundFilter = CreateCompoundJoinFilter()
-
+                
                 ' The WHERE clause will be empty when displaying all records in table.
                 Dim wc As WhereClause = CreateWhereClause()
                 If wc IsNot Nothing AndAlso Not wc.RunQuery Then
@@ -7942,18 +7942,18 @@ Public Class BaseWPR_LineTableControlRow
                 ' Call OrderBy to determine the order - either use the order defined
                 ' on the Query Wizard, or specified by user (by clicking on column heading)
                 Dim orderBy As OrderBy = CreateOrderBy()
-
+                
                 ' Get the pagesize from the pagesize control.
                 Me.GetPageSize()
-
+                               
                 If Me.DisplayLastPage Then
                     Dim totalRecords As Integer = If(Me._TotalRecords < 0, GetRecordCount(CreateCompoundJoinFilter(), CreateWhereClause()), Me._TotalRecords)
-
-                    Dim totalPages As Integer = CInt(Math.Ceiling(totalRecords / Me.PageSize))
-
+                     
+                      Dim totalPages As Integer = CInt(Math.Ceiling(totalRecords / Me.PageSize))
+                    
                     Me.PageIndex = totalPages - 1
-                End If
-
+                End If                               
+                
                 ' Make sure PageIndex (current page) and PageSize are within bounds.
                 If Me.PageIndex < 0 Then
                     Me.PageIndex = 0
@@ -7961,41 +7961,41 @@ Public Class BaseWPR_LineTableControlRow
                 If Me.PageSize < 1 Then
                     Me.PageSize = 1
                 End If
-
+                
                 ' Retrieve the records and set the table DataSource.
                 ' Only PageSize records are fetched starting at PageIndex (zero based).
                 If Me.AddNewRecord > 0 Then
-                    ' Make sure to preserve the previously entered data on new rows.
+                ' Make sure to preserve the previously entered data on new rows.
                     Dim postdata As New ArrayList
                     For Each rc As WPR_LineTableControlRow In Me.GetRecordControls()
                         If Not rc.IsNewRecord Then
                             rc.DataSource = rc.GetRecord()
                             rc.GetUIData()
                             postdata.Add(rc.DataSource)
-                            UIData.Add(rc.PreservedUIData())
+                            UIData.Add(rc.PreservedUIData())							
                         End If
                     Next
                     Me.DataSource = DirectCast(postdata.ToArray(GetType(WPR_LineRecord)), WPR_LineRecord())
                 Else  ' Get the records from the database	
-
-                    Me.DataSource = GetRecords(joinFilter, wc, orderBy, Me.PageIndex, Me.PageSize)
-
+                      
+                        Me.DataSource = GetRecords(joinFilter, wc, orderBy, Me.PageIndex, Me.PageSize)
+                      
                 End If
-
+                
                 ' if the datasource contains no records contained in database, then load the last page.
                 If (DbUtils.GetCreatedRecords(Me.DataSource).Length = 0 AndAlso Not Me.DisplayLastPage) Then
-                    Me.DisplayLastPage = True
-                    LoadData()
+                      Me.DisplayLastPage = True
+                      LoadData()
                 Else
-
+                
                     ' Add any new rows desired by the user.
                     Me.AddNewRecords()
-
+                       
 
                     ' Initialize the page and grand totals. now
-
+                
                 End If
-
+    
             Catch ex As Exception
                 ' Report the error message to the end user
                 Dim msg As String = ex.Message
@@ -8005,61 +8005,61 @@ Public Class BaseWPR_LineTableControlRow
                 Throw New Exception(msg, ex.InnerException)
             End Try
         End Sub
-
+        
         Public Overridable Function GetRecords( _
             ByVal join As BaseFilter, _
             ByVal where As WhereClause, _
             ByVal orderBy As OrderBy, _
             ByVal pageIndex As Integer, _
             ByVal pageSize As Integer) As WPR_LineRecord()
-
+            
             ' By default, Select * will be executed to get a list of records.  If you want to run Select Distinct with certain column only, add the column to selCols
-            Dim selCols As New ColumnList
+            Dim selCols As New ColumnList     
+                        
 
-
-
+    
             ' If you want to specify certain columns to be in the select statement, you can write code similar to the following:
             ' However, if you don't specify PK, row button click might show an error message.
             ' And make sure you write similar code in GetRecordCount as well
             ' selCols.Add(WPR_LineTable.Column1, True)         
             ' selCols.Add(WPR_LineTable.Column2, True)          
             ' selCols.Add(WPR_LineTable.Column3, True)    
-
-
-
+   
+            
+            
             ' If the parameters doesn't specify specific columns in the Select statement, then run Select *
             ' Alternatively, if the parameters specifies to include PK, also run Select *
-
-            If selCols.Count = 0 Then
-
+            
+            If selCols.Count = 0 Then                    
+              
                 Return WPR_LineTable.GetRecords(join, where, orderBy, Me.PageIndex, Me.PageSize)
-
+                 
             Else
                 Dim databaseTable As New WPR_LineTable
                 databaseTable.SelectedColumns.Clear()
                 databaseTable.SelectedColumns.AddRange(selCols)
-
+                
                 ' Stored Procedures provided by Iron Speed Designer specifies to query all columns, in order to query a subset of columns, it is necessary to disable stored procedures                  
-                databaseTable.DataAdapter.DisableStoredProcedures = True
-
-
-
+                databaseTable.DataAdapter.DisableStoredProcedures = True 
+                
+            
+                
                 Dim recList As ArrayList
                 orderBy.ExpandForeignKeyColums = False
                 recList = databaseTable.GetRecordList(join, where.GetFilter(), Nothing, orderBy, pageIndex, pageSize)
                 Return CType(recList.ToArray(GetType(WPR_LineRecord)), WPR_LineRecord())
-            End If
-
-        End Function
-
-
+            End If            
+            
+        End Function        
+        
+        
         Public Overridable Function GetRecordCount(ByVal join As BaseFilter, ByVal where As WhereClause) As Integer
 
 
             ' By default, Select * will be executed to get a list of records.  If you want to run Select Distinct with certain column only, add the column to selCols
-            Dim selCols As New ColumnList
-
-
+            Dim selCols As New ColumnList                 
+               
+    
             ' If you want to specify certain columns to be in the select statement, you can write code similar to the following:
             ' However, if you don't specify PK, row button click might show an error message.
             ' And make sure you write similar code in GetRecordCount as well
@@ -8070,148 +8070,148 @@ Public Class BaseWPR_LineTableControlRow
 
             ' If the parameters doesn't specify specific columns in the Select statement, then run Select *
             ' Alternatively, if the parameters specifies to include PK, also run Select *
-
-            If selCols.Count = 0 Then
-
+            
+            If selCols.Count = 0 Then                    
+                     
                 Return WPR_LineTable.GetRecordCount(join, where)
 
             Else
                 Dim databaseTable As New WPR_LineTable
                 databaseTable.SelectedColumns.Clear()
-                databaseTable.SelectedColumns.AddRange(selCols)
-
+                databaseTable.SelectedColumns.AddRange(selCols)           
+                
                 ' Stored Procedures provided by Iron Speed Designer specifies to query all columns, in order to query a subset of columns, it is necessary to disable stored procedures                  
-                databaseTable.DataAdapter.DisableStoredProcedures = True
-
-
+                databaseTable.DataAdapter.DisableStoredProcedures = True 
+                
+                
                 Return CInt(databaseTable.GetRecordListCount(join, where.GetFilter(), Nothing, Nothing))
             End If
 
-        End Function
-
-
-
+        End Function        
+        
+      
+    
         Public Overrides Sub DataBind()
             ' The DataBind method binds the user interface controls to the values
             ' from the database record for each row in the table.  To do this, it calls the
             ' DataBind for each of the rows.
             ' DataBind also populates any filters above the table, and sets the pagination
             ' control to the correct number of records and the current page number.
-
-
-            MyBase.DataBind()
-
-
-            Me.ClearControlsFromSession()
+            
+            
+              MyBase.DataBind()
+            
+    
+            Me.ClearControlsFromSession()    
 
             ' Make sure that the DataSource is initialized.
             If Me.DataSource Is Nothing Then
                 Return
             End If
-
+            
             'LoadData for DataSource for chart and report if they exist
-
-            ' Improve performance by prefetching display as records.
-            Me.PreFetchForeignKeyValues()
-
+          
+          ' Improve performance by prefetching display as records.
+          Me.PreFetchForeignKeyValues()
+             
             ' Setup the pagination controls.
             BindPaginationControls()
 
+      
 
-
-
-
-            ' Bind the repeater with the list of records to expand the UI.
-
-            Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPR_LineTableControlRepeater"), System.Web.UI.WebControls.Repeater)
-            If rep Is Nothing Then Return
-            rep.DataSource = DataSource()
-            rep.DataBind()
-
-            Dim index As Integer = 0
-
-            For Each repItem As System.Web.UI.WebControls.RepeaterItem In rep.Items
-
-                ' Loop through all rows in the table, set its DataSource and call DataBind().
-                Dim recControl As WPR_LineTableControlRow = DirectCast(repItem.FindControl("WPR_LineTableControlRow"), WPR_LineTableControlRow)
-                recControl.DataSource = Me.DataSource(index)
-                If Me.UIData.Count > index Then
-                    recControl.PreviousUIData = Me.UIData(index)
-                End If
-                recControl.DataBind()
-
-                recControl.Visible = Not Me.InDeletedRecordIds(recControl)
-
-                index += 1
-            Next
-
+    
+        
+          ' Bind the repeater with the list of records to expand the UI.
+          
+          Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPR_LineTableControlRepeater"), System.Web.UI.WebControls.Repeater)
+          If rep Is Nothing Then Return
+          rep.DataSource = DataSource()
+          rep.DataBind()
+                  
+          Dim index As Integer = 0
+          
+          For Each repItem As System.Web.UI.WebControls.RepeaterItem In rep.Items
+          
+            ' Loop through all rows in the table, set its DataSource and call DataBind().
+            Dim recControl As WPR_LineTableControlRow = DirectCast(repItem.FindControl("WPR_LineTableControlRow"), WPR_LineTableControlRow)
+            recControl.DataSource = Me.DataSource(index)          
+            If Me.UIData.Count > index Then
+              recControl.PreviousUIData = Me.UIData(index)
+            End If
+            recControl.DataBind()
+          
+            recControl.Visible = Not Me.InDeletedRecordIds(recControl)
+          
+            index += 1
+          Next
+                 
             ' Call the Set methods for each controls on the panel
-
-            SetWPRL_AccountLabel()
-            SetWPRL_Ext_PriceLabel()
-            SetWPRL_Item_CommentLabel()
-            SetWPRL_Item_Non_Inv_UOMLabel()
-            SetWPRL_Item_Non_InvLabel()
-            SetWPRL_Item_TextLabel()
-            SetWPRL_IV00101_Item_NoLabel()
-            SetWPRL_IV00101_Prchs_UOMLabel()
-            SetWPRL_IV40700_Locn_CodeLabel()
-            SetWPRL_Line_Seq_NoLabel()
-            SetWPRL_QtyLabel()
-            SetWPRL_Required_DateLabel()
-            SetWPRL_Unit_PriceLabel()
+        
+                SetWPRL_AccountLabel()
+                SetWPRL_Ext_PriceLabel()
+                SetWPRL_Item_CommentLabel()
+                SetWPRL_Item_Non_Inv_UOMLabel()
+                SetWPRL_Item_Non_InvLabel()
+                SetWPRL_Item_TextLabel()
+                SetWPRL_IV00101_Item_NoLabel()
+                SetWPRL_IV00101_Prchs_UOMLabel()
+                SetWPRL_IV40700_Locn_CodeLabel()
+                SetWPRL_Line_Seq_NoLabel()
+                SetWPRL_QtyLabel()
+                SetWPRL_Required_DateLabel()
+                SetWPRL_Unit_PriceLabel()
             ' setting the state of expand or collapse alternative rows
-
-
+      
+    
             ' Load data for each record and table UI control.
             ' Ordering is important because child controls get 
             ' their parent ids from their parent UI controls.
-
-
+                
+      
             ' this method calls the set method for controls with special formula like running total, sum, rank, etc
             SetFormulaControls()
-
-
-
-        End Sub
-
+            
+                    
+            
+      End Sub
+      
         Public Overridable Sub SetFormulaControls()
             ' this method calls Set methods for the control that has special formula
+        
+        
 
+    End Sub
 
-
-        End Sub
-
-
-        Public Sub PreFetchForeignKeyValues()
-            If (IsNothing(Me.DataSource)) Then
-                Return
-            End If
-
+    
+          Public Sub PreFetchForeignKeyValues()
+          If (IsNothing(Me.DataSource))
+            Return
+          End If
+          
             Me.Page.PregetDfkaRecords(WPR_LineTable.WPRL_GL00101_Acct_Indx, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WPR_LineTable.WPRL_IV00101_Item_No, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WPR_LineTable.WPRL_IV40700_Locn_Code, Me.DataSource)
-
-        End Sub
-
-
+          
+          End Sub
+        
+      
         Public Overridable Sub RegisterPostback()
-
-
+        
+        
         End Sub
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean, ByVal e As FormulaEvaluator) As String
-            If e Is Nothing Then
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean, ByVal e as FormulaEvaluator) As String
+            If e Is Nothing
                 e = New FormulaEvaluator()
             End If
-
+            
             e.Variables.Clear()
-
-
+            
+            
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -8219,11 +8219,11 @@ Public Class BaseWPR_LineTableControlRow
                     e.Variables.Add(enumerator.Current.Key, enumerator.Current.Value)
                 End While
             End If
-
-            If includeDS Then
-
+            
+            If includeDS
+                
             End If
-
+            
             ' All variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -8237,28 +8237,28 @@ Public Class BaseWPR_LineTableControlRow
             If resultObj Is Nothing Then
                 Return ""
             End If
-
+            
             If Not String.IsNullOrEmpty(format) AndAlso (String.IsNullOrEmpty(formula) OrElse formula.IndexOf("Format(") < 0) Then
                 Return FormulaUtils.Format(resultObj, format)
             Else
                 Return resultObj.ToString()
             End If
-        End Function
+        End Function			
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
-        End Function
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
+        End Function        
 
-
+        
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
-        End Function
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
+        End Function        
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -8266,7 +8266,7 @@ Public Class BaseWPR_LineTableControlRow
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -8279,45 +8279,45 @@ Public Class BaseWPR_LineTableControlRow
 
         Public Overridable Sub ResetControl()
 
-
+            
             Me.CurrentSortOrder.Reset()
             If (Me.InSession(Me, "Order_By")) Then
                 Me.CurrentSortOrder = OrderBy.FromXmlString(Me.GetFromSession(Me, "Order_By", Nothing))
-
+            
             Else
                 Me.CurrentSortOrder = New OrderBy(True, False)
-
+                
             End If
-
+                
             Me.PageIndex = 0
         End Sub
 
         Public Overridable Sub ResetPageControl()
             Me.PageIndex = 0
         End Sub
-
+        
         Protected Overridable Sub BindPaginationControls()
             ' Setup the pagination controls.
 
             ' Bind the pagination labels.
-
+        
 
             ' Bind the buttons for WPR_LineTableControl pagination.
-
+        
 
 
         End Sub
 
-
-
+   
+    
         Public Overridable Sub SaveData()
             ' Save the data from the entire table.  Calls each row's Save Data
             ' to save their data.  This function is called by the Click handler of the
             ' Save button.  The button handler should Start/Commit/End a transaction.
-
+            
             Dim recCtl As WPR_LineTableControlRow
             For Each recCtl In Me.GetRecordControls()
-
+        
                 If Me.InDeletedRecordIds(recCtl) Then
                     ' Delete any pending deletes. 
                     recCtl.Delete()
@@ -8326,134 +8326,134 @@ Public Class BaseWPR_LineTableControlRow
                         recCtl.SaveData()
                     End If
                 End If
-
+          
             Next
-
-
-
-
+            
+            
+          
+    
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-
+          
             ' Set IsNewRecord to False for all records - since everything has been saved and is no longer "new"
             For Each recCtl In Me.GetRecordControls()
                 recCtl.IsNewRecord = False
             Next
-
-
+    
+      
             ' Set DeletedRecordsIds to Nothing since we have deleted all pending deletes.
             Me.DeletedRecordIds = Nothing
-
+      
         End Sub
 
         Public Overridable Function CreateCompoundJoinFilter() As CompoundFilter
             Dim jFilter As CompoundFilter = New CompoundFilter()
-
+         
             Return jFilter
         End Function
 
-
-        Public Overridable Function CreateOrderBy() As OrderBy
-            ' The CurrentSortOrder is initialized to the sort order on the
-            ' Query Wizard.  It may be modified by the Click handler for any of
-            ' the column heading to sort or reverse sort by that column.
-            ' You can add your own sort order, or modify it on the Query Wizard.
-            Return Me.CurrentSortOrder
-        End Function
-
+      
+          Public Overridable Function CreateOrderBy() As OrderBy
+          ' The CurrentSortOrder is initialized to the sort order on the
+          ' Query Wizard.  It may be modified by the Click handler for any of
+          ' the column heading to sort or reverse sort by that column.
+          ' You can add your own sort order, or modify it on the Query Wizard.
+          Return Me.CurrentSortOrder
+          End Function
+      
         Public Overridable Function CreateWhereClause() As WhereClause
             'This CreateWhereClause is used for loading the data.
             WPR_LineTable.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
-
-            Dim hasFiltersWCAR_Doc_AttachTableControl As Boolean = False
-
-            Dim hasFiltersWPR_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWPR_Doc_AttachTableControl As Boolean = False
-
-            Dim hasFiltersWPR_DocRecordControl As Boolean = False
-
-            Dim hasFiltersWPR_LineTableControl As Boolean = False
-
+            
+        Dim hasFiltersWCAR_Doc_AttachTableControl As Boolean = False
+      
+        Dim hasFiltersWPR_ActivityTableControl As Boolean = False
+      
+        Dim hasFiltersWPR_Doc_AttachTableControl As Boolean = False
+      
+        Dim hasFiltersWPR_DocRecordControl As Boolean = False
+      
+        Dim hasFiltersWPR_LineTableControl As Boolean = False
+      
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
             ' 2. User selected search criteria.
             ' 3. User selected filter criteria.
 
+              
+      Dim selectedRecordKeyValue as KeyValue = New KeyValue()
+    
+              Dim wPR_DocRecordControlObj as WPR_DocRecordControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WPR_DocRecordControl") ,WPR_DocRecordControl)
+                              
+                If (Not IsNothing(wPR_DocRecordControlObj) AndAlso Not IsNothing(wPR_DocRecordControlObj.GetRecord()) AndAlso wPR_DocRecordControlObj.GetRecord().IsCreated AndAlso Not IsNothing(wPR_DocRecordControlObj.GetRecord().WPRD_ID))
+                    wc.iAND(WPR_LineTable.WPRL_WPRD_ID, BaseFilter.ComparisonOperator.EqualsTo, wPR_DocRecordControlObj.GetRecord().WPRD_ID.ToString())
+                    selectedRecordKeyValue.AddElement(WPR_LineTable.WPRL_WPRD_ID.InternalName, wPR_DocRecordControlObj.GetRecord().WPRD_ID.ToString())
+                Else
+                    wc.RunQuery = False
+                    Return wc                    
+                End If          
+              
+      HttpContext.Current.Session("WPR_LineTableControlWhereClause") = selectedRecordKeyValue.ToXmlString()
+      
+    
+    Return wc
+    End Function
 
-            Dim selectedRecordKeyValue As KeyValue = New KeyValue()
-
-            Dim wPR_DocRecordControlObj As WPR_DocRecordControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WPR_DocRecordControl"), WPR_DocRecordControl)
-
-            If (Not IsNothing(wPR_DocRecordControlObj) AndAlso Not IsNothing(wPR_DocRecordControlObj.GetRecord()) AndAlso wPR_DocRecordControlObj.GetRecord().IsCreated AndAlso Not IsNothing(wPR_DocRecordControlObj.GetRecord().WPRD_ID)) Then
-                wc.iAND(WPR_LineTable.WPRL_WPRD_ID, BaseFilter.ComparisonOperator.EqualsTo, wPR_DocRecordControlObj.GetRecord().WPRD_ID.ToString())
-                selectedRecordKeyValue.AddElement(WPR_LineTable.WPRL_WPRD_ID.InternalName, wPR_DocRecordControlObj.GetRecord().WPRD_ID.ToString())
-            Else
-                wc.RunQuery = False
-                Return wc
-            End If
-
-            HttpContext.Current.Session("WPR_LineTableControlWhereClause") = selectedRecordKeyValue.ToXmlString()
-
-
-            Return wc
-        End Function
-
-
-        Public Overridable Function CreateWhereClause(ByVal searchText As String, ByVal fromSearchControl As String, ByVal AutoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String) As WhereClause
+    
+        Public Overridable Function CreateWhereClause(ByVal searchText as String, ByVal fromSearchControl as String, ByVal AutoTypeAheadSearch as String, ByVal AutoTypeAheadWordSeparators as String) As WhereClause
             ' This CreateWhereClause is used for loading list of suggestions for Auto Type-Ahead feature.
             WPR_LineTable.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
+        
+          Dim hasFiltersWCAR_Doc_AttachTableControl As Boolean = False
+        
+          Dim hasFiltersWPR_ActivityTableControl As Boolean = False
+        
+          Dim hasFiltersWPR_Doc_AttachTableControl As Boolean = False
+        
+          Dim hasFiltersWPR_DocRecordControl As Boolean = False
+        
+          Dim hasFiltersWPR_LineTableControl As Boolean = False
+        
+      ' Compose the WHERE clause consist of:
+      ' 1. Static clause defined at design time.
+      ' 2. User selected search criteria.
+      ' 3. User selected filter criteria.
 
-            Dim hasFiltersWCAR_Doc_AttachTableControl As Boolean = False
-
-            Dim hasFiltersWPR_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWPR_Doc_AttachTableControl As Boolean = False
-
-            Dim hasFiltersWPR_DocRecordControl As Boolean = False
-
-            Dim hasFiltersWPR_LineTableControl As Boolean = False
-
-            ' Compose the WHERE clause consist of:
-            ' 1. Static clause defined at design time.
-            ' 2. User selected search criteria.
-            ' 3. User selected filter criteria.
-
-            Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
-
-            Dim selectedRecordInWPR_DocRecordControl As String = DirectCast(HttpContext.Current.Session("WPR_LineTableControlWhereClause"), String)
-
+      Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
+      
+            Dim selectedRecordInWPR_DocRecordControl as String = DirectCast(HttpContext.Current.Session("WPR_LineTableControlWhereClause"), String)
+            
             If Not selectedRecordInWPR_DocRecordControl Is Nothing AndAlso KeyValue.IsXmlKey(selectedRecordInWPR_DocRecordControl) Then
-                Dim selectedRecordKeyValue As KeyValue = KeyValue.XmlToKey(selectedRecordInWPR_DocRecordControl)
-
-                If Not IsNothing(selectedRecordKeyValue) AndAlso selectedRecordKeyValue.ContainsColumn(WPR_LineTable.WPRL_WPRD_ID) Then
-                    wc.iAND(WPR_LineTable.WPRL_WPRD_ID, BaseFilter.ComparisonOperator.EqualsTo, selectedRecordKeyValue.GetColumnValue(WPR_LineTable.WPRL_WPRD_ID).ToString())
-                End If
-
+                Dim selectedRecordKeyValue as KeyValue = KeyValue.XmlToKey(selectedRecordInWPR_DocRecordControl)
+                
+       If Not IsNothing(selectedRecordKeyValue) AndAlso selectedRecordKeyValue.ContainsColumn(WPR_LineTable.WPRL_WPRD_ID) Then
+            wc.iAND(WPR_LineTable.WPRL_WPRD_ID, BaseFilter.ComparisonOperator.EqualsTo, selectedRecordKeyValue.GetColumnValue(WPR_LineTable.WPRL_WPRD_ID).ToString())
+       End If
+      
             End If
-
+          
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
-
-
-
+          
+      
+      
             Return wc
         End Function
 
+      
 
-
-        Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
-                                        ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
-                                        ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
-                                        ByVal resultList As ArrayList) As Boolean
-            Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
-                                     autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
-                                     resultList, False)
-        End Function
+         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
+                                         ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
+                                         ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
+                                         ByVal resultList As ArrayList) As Boolean
+              Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
+                                       autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
+                                       resultList, False)
+         End Function
 
         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
                                                ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
@@ -8502,10 +8502,10 @@ Public Class BaseWPR_LineTableControlRow
                     If Len(resultItem) - index <= columnLength Then
                         If index = 0 Then
                             itemToAdd = resultItem
-                        Else
+                        Else                            
                             itemToAdd = resultItem.Substring(index)
                         End If
-                    Else
+                    Else                       
                         itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, index, index + columnLength, StringUtils.Direction.forward)
                     End If
                 ElseIf InvariantLCase(AutoTypeAheadDisplayFoundText).equals("inmiddleofmatchedstring") Then
@@ -8515,7 +8515,7 @@ Public Class BaseWPR_LineTableControlRow
                     Else
                         ' Sanity check at end of the string
                         If index + Len(prefixText) >= Len(resultItem) - 1 OrElse _
-                        Len(resultItem) - index < subStringBeginIndex Then
+                        Len(resultItem) - index < subStringBeginIndex Then                           
                             itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, Len(resultItem) - 1 - columnLength, Len(resultItem) - 1, StringUtils.Direction.backward)
                         ElseIf index <= subStringBeginIndex Then
                             ' Sanity check at beginning of the string                          
@@ -8569,45 +8569,45 @@ Public Class BaseWPR_LineTableControlRow
                 End If
 
                 If Not String.IsNullOrEmpty(itemToAdd) AndAlso Not resultList.Contains(itemToAdd) Then
-
+                   
                     resultList.Add(itemToAdd)
-
+          				
                     isAdded = True
                 End If
             End If
             Return isAdded
         End Function
-
-
+        
+    
         Protected Overridable Sub GetPageSize()
-
+        
         End Sub
 
         Protected Overridable Sub AddNewRecords()
-
+          
             Dim newRecordList As ArrayList = New ArrayList()
+          
+    Dim newUIDataList As System.Collections.Generic.List(Of Hashtable) = New System.Collections.Generic.List(Of Hashtable)()
 
-            Dim newUIDataList As System.Collections.Generic.List(Of Hashtable) = New System.Collections.Generic.List(Of Hashtable)()
+    ' Loop though all the record controls and if the record control
+    ' does not have a unique record id set, then create a record
+    ' and add to the list.
+    If Not Me.ResetData Then
+    Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPR_LineTableControlRepeater"), System.Web.UI.WebControls.Repeater)
+    If rep Is Nothing Then Return
 
-            ' Loop though all the record controls and if the record control
-            ' does not have a unique record id set, then create a record
-            ' and add to the list.
-            If Not Me.ResetData Then
-                Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPR_LineTableControlRepeater"), System.Web.UI.WebControls.Repeater)
-                If rep Is Nothing Then Return
-
-
-                Dim repItem As System.Web.UI.WebControls.RepeaterItem
-                For Each repItem In rep.Items
-
-                    ' Loop through all rows in the table, set its DataSource and call DataBind().
-
-                    Dim recControl As WPR_LineTableControlRow = DirectCast(repItem.FindControl("WPR_LineTableControlRow"), WPR_LineTableControlRow)
-
+    
+    Dim repItem As System.Web.UI.WebControls.RepeaterItem
+    For Each repItem In rep.Items
+      
+    ' Loop through all rows in the table, set its DataSource and call DataBind().
+    
+    Dim recControl As WPR_LineTableControlRow = DirectCast(repItem.FindControl("WPR_LineTableControlRow"), WPR_LineTableControlRow)
+    
 
                     If recControl.Visible AndAlso recControl.IsNewRecord() Then
                         Dim rec As WPR_LineRecord = New WPR_LineRecord()
-
+        
                         If recControl.WPRL_Account.Text <> "" Then
                             rec.Parse(recControl.WPRL_Account.Text, WPR_LineTable.WPRL_Account)
                         End If
@@ -8653,41 +8653,41 @@ Public Class BaseWPR_LineTableControlRow
                         If recControl.WPRL_Unit_Price.Text <> "" Then
                             rec.Parse(recControl.WPRL_Unit_Price.Text, WPR_LineTable.WPRL_Unit_Price)
                         End If
-                        newUIDataList.Add(recControl.PreservedUIData())
+                        newUIDataList.Add(recControl.PreservedUIData())	  
                         newRecordList.Add(rec)
                     End If
                 Next
             End If
-
-
+            
+    
             ' Add any new record to the list.
             Dim index As Integer = 0
             For index = 1 To Me.AddNewRecord
-
+              
                 newRecordList.Insert(0, New WPR_LineRecord())
-                newUIDataList.Insert(0, New Hashtable())
-
+                newUIDataList.Insert(0, New Hashtable())				
+              
             Next
             Me.AddNewRecord = 0
 
             ' Finally, add any new records to the DataSource.
             If newRecordList.Count > 0 Then
-
+              
                 Dim finalList As ArrayList = New ArrayList(Me.DataSource)
                 finalList.InsertRange(0, newRecordList)
 
                 Me.DataSource = DirectCast(finalList.ToArray(GetType(WPR_LineRecord)), WPR_LineRecord())
-
+              
             End If
-
+            
             ' Add the existing UI data to this hash table
             If newUIDataList.Count > 0 Then
                 Me.UIData.InsertRange(0, newUIDataList)
             End If
-
+            
         End Sub
 
-
+        
         Public Sub AddToDeletedRecordIds(ByVal rec As WPR_LineTableControlRow)
             If rec.IsNewRecord() Then
                 Return
@@ -8717,236 +8717,236 @@ Public Class BaseWPR_LineTableControlRow
                 Me._DeletedRecordIds = value
             End Set
         End Property
-
-
+        
+      
         ' Create Set, WhereClause, and Populate Methods
-
+        
         Public Overridable Sub SetWPRL_AccountLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_AccountLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_AccountLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_Ext_PriceLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_Ext_PriceLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_Ext_PriceLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_Item_CommentLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_Item_CommentLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_Item_CommentLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_Item_Non_Inv_UOMLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_Item_Non_Inv_UOMLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_Item_Non_Inv_UOMLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_Item_Non_InvLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_Item_Non_InvLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_Item_Non_InvLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_Item_TextLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_Item_TextLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_Item_TextLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_IV00101_Item_NoLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_IV00101_Item_NoLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_IV00101_Item_NoLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_IV00101_Prchs_UOMLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_IV00101_Prchs_UOMLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_IV00101_Prchs_UOMLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_IV40700_Locn_CodeLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_IV40700_Locn_CodeLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_IV40700_Locn_CodeLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_Line_Seq_NoLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_Line_Seq_NoLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_Line_Seq_NoLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_QtyLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_QtyLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_QtyLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_Required_DateLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_Required_DateLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_Required_DateLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRL_Unit_PriceLabel()
 
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRL_Unit_PriceLabel.Text = "Some value"
+                    
+                  End Sub
+                
 
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRL_Unit_PriceLabel.Text = "Some value"
-
-        End Sub
-
-
-
-
+    
+    
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
             ' PreRender event is raised just before page is being displayed.
             Try
-                DbUtils.StartTransaction()
+                DbUtils.StartTransaction
                 Me.RegisterPostback()
-
+                
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-
-
+                  
+                
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
-
+                    
                     Me.LoadData()
                     Me.DataBind()
-
+                    
                 End If
-
-
-
+                
+               
+                				
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
         End Sub
-
-
+        
+        
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
 
             ' Save filter controls to values to session.
-
-
+        
+        
             'Save pagination state to session.
-
-
+         
+            
             ' Save table control properties to the session.
-
-            If Not Me.CurrentSortOrder Is Nothing Then
+            
+ If Not Me.CurrentSortOrder Is Nothing Then
                 If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then
                     Me.SaveToSession(Me, "Order_By", Me.CurrentSortOrder.ToXmlString())
                 End If
-            End If
+            End If            
             Me.SaveToSession(Me, "Page_Index", Me.PageIndex.ToString())
             Me.SaveToSession(Me, "Page_Size", Me.PageSize.ToString())
-
-            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)
-
+        
+            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)  
+        
         End Sub
-
-        Protected Sub SaveControlsToSession_Ajax()
+        
+        Protected  Sub SaveControlsToSession_Ajax()
             ' Save filter controls to values to session.
-
+          
             HttpContext.Current.Session("AppRelativeVirtualPath") = Me.Page.AppRelativeVirtualPath
-
+         
         End Sub
-
+        
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
             ' Clear filter controls values from the session.
-
-
+        
+    
             ' Clear pagination state from session.
-
-
-            ' Clear table properties from the session.
-            Me.RemoveFromSession(Me, "Order_By")
-            Me.RemoveFromSession(Me, "Page_Index")
-            Me.RemoveFromSession(Me, "Page_Size")
-
-            Me.RemoveFromSession(Me, "DeletedRecordIds")
-
+         
+    
+    ' Clear table properties from the session.
+    Me.RemoveFromSession(Me, "Order_By")
+    Me.RemoveFromSession(Me, "Page_Index")
+    Me.RemoveFromSession(Me, "Page_Size")
+    
+            Me.RemoveFromSession(Me, "DeletedRecordIds")  
+            
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
             MyBase.LoadViewState(savedState)
 
             Dim orderByStr As String = CType(ViewState("WPR_LineTableControl_OrderBy"), String)
-
+          
             If orderByStr IsNot Nothing AndAlso orderByStr.Trim <> "" Then
                 Me.CurrentSortOrder = BaseClasses.Data.OrderBy.FromXmlString(orderByStr)
-
-            Else
+            
+            Else 
                 Me.CurrentSortOrder = New OrderBy(True, False)
-
+            
             End If
-
-
+            
+            
             Dim Pagination As Control = Me.FindControl("")
-            Dim PaginationType As String = ""
-            If Not (Pagination Is Nothing) Then
+             Dim PaginationType As String = ""
+             If Not (Pagination Is Nothing) Then
                 Dim Summary As Control = Pagination.FindControl("_Summary")
                 If Not (Summary Is Nothing) Then
                     If (DirectCast(Summary, System.Web.UI.WebControls.TextBox).Text.Equals("Infinite Pagination")) Then
@@ -8954,100 +8954,100 @@ Public Class BaseWPR_LineTableControlRow
                     End If
                     If (DirectCast(Summary, System.Web.UI.WebControls.TextBox).Text.Equals("Infinite Pagination Mobile")) Then
                         PaginationType = "Infinite Pagination Mobile"
-                    End If
                 End If
-            End If
+             End If
+             End If
 
-            If Not (PaginationType.Equals("Infinite Pagination")) Then
-                If Not Me.Page.ClientQueryString.Contains("InfiIframe") AndAlso PaginationType.Equals("Infinite Pagination Mobile") Then
+            If Not (PaginationType.Equals("Infinite Pagination")) Then 
+              If Not Me.Page.ClientQueryString.Contains("InfiIframe") AndAlso PaginationType.Equals("Infinite Pagination Mobile") Then
                     Me.ViewState("Page_Index") = 0
                 End If
-                Dim pageIndex As String = CType(ViewState("Page_Index"), String)
-                If pageIndex IsNot Nothing Then
-                    Me.PageIndex = CInt(pageIndex)
-                End If
+              Dim pageIndex As String = CType(ViewState("Page_Index"), String)
+              If pageIndex IsNot Nothing Then
+                Me.PageIndex = CInt(pageIndex)
+              End If
             End If
 
             Dim pageSize As String = CType(ViewState("Page_Size"), String)
             If Not pageSize Is Nothing Then
-                Me.PageSize = CInt(pageSize)
+              Me.PageSize = CInt(pageSize)
             End If
 
-
-
+            
+    
             ' Load view state for pagination control.
-
+        
             Me.DeletedRecordIds = CType(Me.ViewState("DeletedRecordIds"), String)
-
+        
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
-
+          
             If Me.CurrentSortOrder IsNot Nothing Then
                 Me.ViewState("WPR_LineTableControl_OrderBy") = Me.CurrentSortOrder.ToXmlString()
             End If
-
+                      
             Me.ViewState("Page_Index") = Me.PageIndex
             Me.ViewState("Page_Size") = Me.PageSize
-
+            
             Me.ViewState("DeletedRecordIds") = Me.DeletedRecordIds
-
-
+        
+    
             ' Load view state for pagination control.
-
-
+          
+    
             Return MyBase.SaveViewState()
         End Function
-
+        
         ' Generate set method for buttons
-
+                
 
         ' Generate the event handling functions for pagination events.
-
+        
 
         ' Generate the event handling functions for sorting events.
-
+        
 
         ' Generate the event handling functions for button events.
-
-
+        
+      
 
         ' Generate the event handling functions for filter and search events.
-
-
+        
+    
         ' Generate the event handling functions for others
-
-
+        
+      
 
 
         Protected _TotalRecords As Integer = -1
         Public Property TotalRecords() As Integer
             Get
-                If _TotalRecords < 0 Then
+                If _TotalRecords < 0 
                     _TotalRecords = WPR_LineTable.GetRecordCount(CreateCompoundJoinFilter(), CreateWhereClause())
                 End If
                 Return Me._TotalRecords
             End Get
             Set(ByVal value As Integer)
                 If Me.PageSize > 0 Then
-
+                
                     Me.TotalPages = CInt(Math.Ceiling(value / Me.PageSize))
-
+                  
                 End If
                 Me._TotalRecords = value
             End Set
         End Property
 
-
-
+        
+    
         Protected _TotalPages As Integer = -1
         Public Property TotalPages() As Integer
             Get
                 If _TotalPages < 0 Then
-
+                
                     Me.TotalPages = CInt(Math.Ceiling(TotalRecords / Me.PageSize))
-
-                End If
+                  
+                End If                
                 Return Me._TotalPages
             End Get
             Set(ByVal value As Integer)
@@ -9066,120 +9066,120 @@ Public Class BaseWPR_LineTableControlRow
         End Property
 
 
-
+          
         Private _CurrentSortOrder As OrderBy = Nothing
         Public Property CurrentSortOrder() As OrderBy
             Get
                 Return Me._CurrentSortOrder
             End Get
-            Set(ByVal value As OrderBy)
+            Set(ByVal value As BaseClasses.Data.OrderBy)
                 Me._CurrentSortOrder = value
             End Set
         End Property
-
-        Public Property DataSource() As WPR_LineRecord()
+        
+        Public Property DataSource() As WPR_LineRecord ()
             Get
                 Return DirectCast(MyBase._DataSource, WPR_LineRecord())
             End Get
-            Set(ByVal value As WPR_LineRecord())
+            Set(ByVal value() As WPR_LineRecord)
                 Me._DataSource = value
             End Set
         End Property
-
+       
 #Region "Helper Properties"
-
+        
         Public ReadOnly Property WPRL_AccountLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_AccountLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_Ext_PriceLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Ext_PriceLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_Item_CommentLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Item_CommentLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_Item_Non_Inv_UOMLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Item_Non_Inv_UOMLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_Item_Non_InvLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Item_Non_InvLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_Item_TextLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Item_TextLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_IV00101_Item_NoLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_IV00101_Item_NoLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_IV00101_Prchs_UOMLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_IV00101_Prchs_UOMLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_IV40700_Locn_CodeLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_IV40700_Locn_CodeLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_Line_Seq_NoLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Line_Seq_NoLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_QtyLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_QtyLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_Required_DateLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Required_DateLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRL_Unit_PriceLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRL_Unit_PriceLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
 #End Region
 
 #Region "Helper Functions"
-
-        Public Overloads Overrides Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean) As String
+        
+        Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean) As String
             Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
-
-
-        Public Overloads Overrides Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me, includeSession)
+      
+      
+        Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me,includeSession)
         End Function
-
-        Public Overloads Overrides Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean) As String
+        
+        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean) As String
             Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
             If (needToProcess) Then
                 Dim recCtl As WPR_LineTableControlRow = Me.GetSelectedRecordControl()
@@ -9187,7 +9187,7 @@ Public Class BaseWPR_LineTableControlRow
                     ' Localization.
                     Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
                 End If
-                Dim rec As WPR_LineRecord = Nothing
+                Dim rec As WPR_LineRecord = Nothing     
                 If recCtl IsNot Nothing Then
                     rec = recCtl.GetRecord()
                 End If
@@ -9195,8 +9195,8 @@ Public Class BaseWPR_LineTableControlRow
             End If
             Return url
         End Function
-
-        Public Overloads Overrides Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
+        
+        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
             Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
             If (needToProcess) Then
                 Dim recCtl As WPR_LineTableControlRow = Me.GetSelectedRecordControl()
@@ -9204,29 +9204,29 @@ Public Class BaseWPR_LineTableControlRow
                     ' Localization.
                     Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
                 End If
-                Dim rec As WPR_LineRecord = Nothing
+                Dim rec As WPR_LineRecord = Nothing     
                 If recCtl IsNot Nothing Then
                     rec = recCtl.GetRecord()
                 End If
-                If includeSession Then
+                If includeSession then
                     Return EvaluateExpressions(url, arg, rec, bEncrypt)
                 Else
-                    Return EvaluateExpressions(url, arg, rec, bEncrypt, False)
+                    Return EvaluateExpressions(url, arg, rec, bEncrypt,False)
                 End If
             End If
             Return url
         End Function
-
-
+        
+          
         Public Overridable Function GetSelectedRecordControl() As WPR_LineTableControlRow
             Return Nothing
-
+          
         End Function
 
         Public Overridable Function GetSelectedRecordControls() As WPR_LineTableControlRow()
-
-            Return DirectCast((New ArrayList()).ToArray(GetType(WPR_LineTableControlRow)), WPR_LineTableControlRow())
-
+        
+            Return DirectCast((new ArrayList()).ToArray(GetType(WPR_LineTableControlRow)), WPR_LineTableControlRow())
+          
         End Function
 
         Public Overridable Sub DeleteSelectedRecords(ByVal deferDeletion As Boolean)
@@ -9235,27 +9235,27 @@ Public Class BaseWPR_LineTableControlRow
                 ' Localization.
                 Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
             End If
-
+            
             Dim recCtl As WPR_LineTableControlRow
             For Each recCtl In recList
                 If deferDeletion Then
                     If Not recCtl.IsNewRecord Then
-
+                
                         Me.AddToDeletedRecordIds(recCtl)
-
+                  
                     End If
                     recCtl.Visible = False
-
+                
                 Else
-
+                
                     recCtl.Delete()
-
+                    
                     ' Setting the DataChanged to True results in the page being refreshed with
                     ' the most recent data from the database.  This happens in PreRender event
                     ' based on the current sort, search and filter criteria.
                     Me.DataChanged = True
                     Me.ResetData = True
-
+                  
                 End If
             Next
         End Sub
@@ -9274,109 +9274,109 @@ Public Class BaseWPR_LineTableControlRow
                 Return DirectCast(MyBase.Page, BaseApplicationPage)
             End Get
         End Property
-
+                
 
 
 #End Region
 
 
 
-    End Class
+End Class
 
-
-    ' Base class for the WPR_DocRecordControl control on the Show_WPR_Doc page.
-    ' Do not modify this class. Instead override any method in WPR_DocRecordControl.
-    Public Class BaseWPR_DocRecordControl
+  
+' Base class for the WPR_DocRecordControl control on the Show_WPR_Doc page.
+' Do not modify this class. Instead override any method in WPR_DocRecordControl.
+Public Class BaseWPR_DocRecordControl
         Inherits ePortalWFApproval.UI.BaseApplicationRecordControl
 
         '  To customize, override this method in WPR_DocRecordControl.
         Protected Overridable Sub Control_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Init
 
-
+      
             ' Setup the filter and search events.
-
+            
         End Sub
 
         '  To customize, override this method in WPR_DocRecordControl.
         Protected Overridable Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-            ' Setup the pagination events.	  
-
-
-            ' Register the event handlers.
-
-            AddHandler Me.OKButton.Button.Click, AddressOf OKButton_Click
-
-            AddHandler Me.WPRD_Comment.TextChanged, AddressOf WPRD_Comment_TextChanged
-
-            AddHandler Me.WPRD_No.TextChanged, AddressOf WPRD_No_TextChanged
-
-            AddHandler Me.WPRD_Submit.TextChanged, AddressOf WPRD_Submit_TextChanged
-
-            AddHandler Me.WPRD_Total.TextChanged, AddressOf WPRD_Total_TextChanged
-
-
+         
+              ' Setup the pagination events.	  
+                     
+        
+              ' Register the event handlers.
+          
+              AddHandler Me.OKButton.Button.Click, AddressOf OKButton_Click
+                        
+              AddHandler Me.WPRD_Comment.TextChanged, AddressOf WPRD_Comment_TextChanged
+            
+              AddHandler Me.WPRD_No.TextChanged, AddressOf WPRD_No_TextChanged
+            
+              AddHandler Me.WPRD_Submit.TextChanged, AddressOf WPRD_Submit_TextChanged
+            
+              AddHandler Me.WPRD_Total.TextChanged, AddressOf WPRD_Total_TextChanged
+            
+    
         End Sub
 
-
-        Public Overridable Sub LoadData()
-
+        
+        Public Overridable Sub LoadData()        
+                
             ' Load the data from the database into the DataSource DatabaseANFLO-WF%dbo.WPR_Doc record.
             ' It is better to make changes to functions called by LoadData such as
             ' CreateWhereClause, rather than making changes here.
-
+    
             ' The RecordUniqueId is set the first time a record is loaded, and is
             ' used during a PostBack to load the record.
-
+          
             If Me.RecordUniqueId IsNot Nothing AndAlso Me.RecordUniqueId.Trim <> "" Then
                 Me.DataSource = WPR_DocTable.GetRecord(Me.RecordUniqueId, True)
-
+          
                 Return
             End If
-
+        
             ' This is the first time a record is being retrieved from the database.
             ' So create a Where Clause based on the staic Where clause specified
             ' on the Query wizard and the dynamic part specified by the end user
             ' on the search and filter controls (if any).
-
+            
             Dim wc As WhereClause = Me.CreateWhereClause()
-
+          
             Dim Panel As System.Web.UI.WebControls.Panel = CType(MiscUtils.FindControlRecursively(Me, "WPR_DocRecordControlPanel"), System.Web.UI.WebControls.Panel)
-            If Not Panel Is Nothing Then
+            If Not Panel is Nothing Then
                 Panel.visible = True
             End If
-
+            
             ' If there is no Where clause, then simply create a new, blank record.
-
+             
             If wc Is Nothing OrElse Not wc.RunQuery Then
                 Me.DataSource = New WPR_DocRecord()
-
-                If Not Panel Is Nothing Then
+            
+                If Not Panel is Nothing Then
                     Panel.visible = False
                 End If
-
+                
                 Return
             End If
-
+          
             ' Retrieve the record from the database.  It is possible
-
+            
             Dim recList() As WPR_DocRecord = WPR_DocTable.GetRecords(wc, Nothing, 0, 2)
             If recList.Length = 0 Then
                 ' There is no data for this Where clause.
                 wc.RunQuery = False
-
-                If Not Panel Is Nothing Then
+                
+                If Not Panel is Nothing Then
                     Panel.visible = False
                 End If
-
+                
                 Return
             End If
-
+            
             ' Set DataSource based on record retrieved from the database.
             Me.DataSource = WPR_DocTable.GetRecord(recList(0).GetID.ToXmlString(), True)
-
-
-
+                  
+    
+    
         End Sub
 
         ' Populate the UI controls using the DataSource.  To customize, override this method in WPR_DocRecordControl.
@@ -9385,157 +9385,157 @@ Public Class BaseWPR_LineTableControlRow
             ' from the database record.  To do this, it calls the Set methods for 
             ' each of the field displayed on the webpage.  It is better to make 
             ' changes in the Set methods, rather than making changes here.
-
+            
             MyBase.DataBind()
             Me.ClearControlsFromSession()
 
             ' Make sure that the DataSource is initialized.
             If Me.DataSource Is Nothing Then
-
+              
                 Return
             End If
-
-
+             
+   
             'LoadData for DataSource for chart and report if they exist
-
+          
             ' Store the checksum. The checksum is used to
             ' ensure the record was not changed by another user.
-            If Not Me.DataSource.GetCheckSumValue() Is Nothing Then
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing
                 Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
             End If
-
-
-
+            
+      
+      
             ' Call the Set methods for each controls on the panel
-
-            SetLiteral()
-            SetLiteral1()
-            SetLiteral11()
-            SetLiteral2()
-            SetLiteral3()
-            SetLiteral8()
-            SetLiteral9()
-            SetlitLabel()
-
-
-
-
-
-
-            SetWPR_DocTabContainer()
-
-
-
-
-            SetWPRD_C_ID()
-            SetWPRD_C_IDLabel()
-            SetWPRD_Comment()
-            SetWPRD_CommentLabel()
-            SetWPRD_No()
-            SetWPRD_NoLabel()
-            SetWPRD_Submit()
-            SetWPRD_SubmitLabel()
-            SetWPRD_Total()
-            SetWPRD_TotalLabel()
-            SetWPRD_U_ID()
-            SetWPRD_WCD_ID()
-            SetWPRD_WCD_IDLabel()
-            SetWPRD_WCur_ID()
-            SetWPRD_WCur_IDLabel()
-            SetWPRD_WDT_ID()
-            SetWPRD_WDT_IDLabel()
-            SetWPRD_WPRDS_ID()
-            SetWPRD_WPRDS_IDLabel()
-            SetOKButton()
-
-
-
+        
+                SetLiteral()
+                SetLiteral1()
+                SetLiteral11()
+                SetLiteral2()
+                SetLiteral3()
+                SetLiteral8()
+                SetLiteral9()
+                SetlitLabel()
+                
+                
+                
+                
+                
+                
+                SetWPR_DocTabContainer()
+                
+                
+                
+                
+                SetWPRD_C_ID()
+                SetWPRD_C_IDLabel()
+                SetWPRD_Comment()
+                SetWPRD_CommentLabel()
+                SetWPRD_No()
+                SetWPRD_NoLabel()
+                SetWPRD_Submit()
+                SetWPRD_SubmitLabel()
+                SetWPRD_Total()
+                SetWPRD_TotalLabel()
+                SetWPRD_U_ID()
+                SetWPRD_WCD_ID()
+                SetWPRD_WCD_IDLabel()
+                SetWPRD_WCur_ID()
+                SetWPRD_WCur_IDLabel()
+                SetWPRD_WDT_ID()
+                SetWPRD_WDT_IDLabel()
+                SetWPRD_WPRDS_ID()
+                SetWPRD_WPRDS_IDLabel()
+                SetOKButton()
+              
+      
+      
             Me.IsNewRecord = True
-
+            
             If Me.DataSource.IsCreated Then
                 Me.IsNewRecord = False
-
+                
                 If Me.DataSource.GetID IsNot Nothing Then
                     Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
                 End If
-
+                
             End If
-
+            
             ' Now load data for each record and table child UI controls.
             ' Ordering is important because child controls get 
             ' their parent ids from their parent UI controls.
             Dim shouldResetControl As Boolean = False
-
-            SetWCAR_Doc_AttachTableControl()
-
-            If (shouldResetControl OrElse Me.Page.IsPageRefresh) Then
-                WPR_ActivityTableControl.ResetControl()
-            End If
-
-            SetWPR_ActivityTableControl()
-
-            If (shouldResetControl OrElse Me.Page.IsPageRefresh) Then
-                WPR_Doc_AttachTableControl.ResetControl()
-            End If
-
-            SetWPR_Doc_AttachTableControl()
-
-            If (shouldResetControl OrElse Me.Page.IsPageRefresh) Then
-                WPR_LineTableControl.ResetControl()
-            End If
-
-            SetWPR_LineTableControl()
-
+            
+        SetWCAR_Doc_AttachTableControl()
+        
+            If (shouldResetControl OrElse Me.Page.IsPageRefresh)
+              WPR_ActivityTableControl.ResetControl()
+            End IF
+                    
+        SetWPR_ActivityTableControl()
+        
+            If (shouldResetControl OrElse Me.Page.IsPageRefresh)
+              WPR_Doc_AttachTableControl.ResetControl()
+            End IF
+                    
+        SetWPR_Doc_AttachTableControl()
+        
+            If (shouldResetControl OrElse Me.Page.IsPageRefresh)
+              WPR_LineTableControl.ResetControl()
+            End IF
+                    
+        SetWPR_LineTableControl()
+        
         End Sub
-
-
+        
+        
         Public Overridable Sub SetWPRD_C_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WPRD_C_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Doc record retrieved from the database.
             ' Me.WPRD_C_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRD_C_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRD_C_IDSpecified Then
-
+                				
                 ' If the WPRD_C_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WPR_DocTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WPR_DocTable.WPRD_C_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WPR_DocTable.WPRD_C_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_C_ID.ToString(), WPR_DocTable.WPRD_C_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_C_ID)
-                    End If
+                                  
+                       formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_C_ID.ToString(),WPR_DocTable.WPRD_C_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_C_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WPRD_C_ID.ToString()
+                       formattedValue = Me.DataSource.WPRD_C_ID.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRD_C_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRD_C_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRD_C_ID.Text = WPR_DocTable.WPRD_C_ID.Format(WPR_DocTable.WPRD_C_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRD_C_ID.Text = WPR_DocTable.WPRD_C_ID.Format(WPR_DocTable.WPRD_C_ID.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRD_C_ID is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRD_C_ID.Text Is Nothing _
@@ -9543,212 +9543,212 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRD_C_ID.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRD_Comment()
 
-
-
-
+                  
+            
+        
             ' Set the WPRD_Comment TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Doc record retrieved from the database.
             ' Me.WPRD_Comment is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRD_Comment()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRD_CommentSpecified Then
-
+                				
                 ' If the WPRD_Comment is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_DocTable.WPRD_Comment)
-
+                              
                 Me.WPRD_Comment.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRD_Comment is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRD_Comment.Text = WPR_DocTable.WPRD_Comment.Format(WPR_DocTable.WPRD_Comment.DefaultValue)
-
-            End If
-
-            AddHandler Me.WPRD_Comment.TextChanged, AddressOf WPRD_Comment_TextChanged
-
+        
+                 Me.WPRD_Comment.Text = WPR_DocTable.WPRD_Comment.Format(WPR_DocTable.WPRD_Comment.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WPRD_Comment.TextChanged, AddressOf WPRD_Comment_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWPRD_No()
 
-
-
-
+                  
+            
+        
             ' Set the WPRD_No TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Doc record retrieved from the database.
             ' Me.WPRD_No is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRD_No()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRD_NoSpecified Then
-
+                				
                 ' If the WPRD_No is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_DocTable.WPRD_No)
-
+                              
                 Me.WPRD_No.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRD_No is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRD_No.Text = WPR_DocTable.WPRD_No.Format(WPR_DocTable.WPRD_No.DefaultValue)
-
-            End If
-
-            AddHandler Me.WPRD_No.TextChanged, AddressOf WPRD_No_TextChanged
-
+        
+                 Me.WPRD_No.Text = WPR_DocTable.WPRD_No.Format(WPR_DocTable.WPRD_No.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WPRD_No.TextChanged, AddressOf WPRD_No_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWPRD_Submit()
 
-
-
-
+                  
+            
+        
             ' Set the WPRD_Submit TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Doc record retrieved from the database.
             ' Me.WPRD_Submit is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRD_Submit()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRD_SubmitSpecified Then
-
+                				
                 ' If the WPRD_Submit is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WPR_DocTable.WPRD_Submit)
-
+                              
                 Me.WPRD_Submit.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRD_Submit is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRD_Submit.Text = WPR_DocTable.WPRD_Submit.Format(WPR_DocTable.WPRD_Submit.DefaultValue)
-
-            End If
-
-            AddHandler Me.WPRD_Submit.TextChanged, AddressOf WPRD_Submit_TextChanged
-
+        
+                 Me.WPRD_Submit.Text = WPR_DocTable.WPRD_Submit.Format(WPR_DocTable.WPRD_Submit.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WPRD_Submit.TextChanged, AddressOf WPRD_Submit_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWPRD_Total()
 
-
-
-
+                  
+            
+        
             ' Set the WPRD_Total TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Doc record retrieved from the database.
             ' Me.WPRD_Total is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRD_Total()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRD_TotalSpecified Then
-
+                				
                 ' If the WPRD_Total is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WPR_DocTable.WPRD_Total)
-
+                Dim formattedValue As String = Me.DataSource.Format(WPR_DocTable.WPRD_Total, "#,#.00")
+                              
                 Me.WPRD_Total.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRD_Total is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRD_Total.Text = WPR_DocTable.WPRD_Total.Format(WPR_DocTable.WPRD_Total.DefaultValue)
-
-            End If
-
-            AddHandler Me.WPRD_Total.TextChanged, AddressOf WPRD_Total_TextChanged
-
+        
+                 Me.WPRD_Total.Text = WPR_DocTable.WPRD_Total.Format(WPR_DocTable.WPRD_Total.DefaultValue, "#,#.00")
+                        		
+                End If
+                 
+              AddHandler Me.WPRD_Total.TextChanged, AddressOf WPRD_Total_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWPRD_U_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WPRD_U_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Doc record retrieved from the database.
             ' Me.WPRD_U_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRD_U_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRD_U_IDSpecified Then
-
+                				
                 ' If the WPRD_U_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WPR_DocTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WPR_DocTable.WPRD_U_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WPR_DocTable.WPRD_U_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_U_ID.ToString(), WPR_DocTable.WPRD_U_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_U_ID)
-                    End If
+                                  
+                       formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_U_ID.ToString(),WPR_DocTable.WPRD_U_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_U_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WPRD_U_ID.ToString()
+                       formattedValue = Me.DataSource.WPRD_U_ID.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRD_U_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRD_U_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRD_U_ID.Text = WPR_DocTable.WPRD_U_ID.Format(WPR_DocTable.WPRD_U_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRD_U_ID.Text = WPR_DocTable.WPRD_U_ID.Format(WPR_DocTable.WPRD_U_ID.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRD_U_ID is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRD_U_ID.Text Is Nothing _
@@ -9756,105 +9756,105 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRD_U_ID.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRD_WCD_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WPRD_WCD_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Doc record retrieved from the database.
             ' Me.WPRD_WCD_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRD_WCD_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRD_WCD_IDSpecified Then
-
+                				
                 ' If the WPRD_WCD_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WPR_DocTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WPR_DocTable.WPRD_WCD_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WPR_DocTable.WPRD_WCD_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_WCD_ID.ToString(), WPR_DocTable.WPRD_WCD_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_WCD_ID)
-                    End If
+                                  
+                       formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_WCD_ID.ToString(),WPR_DocTable.WPRD_WCD_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_WCD_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WPRD_WCD_ID.ToString()
+                       formattedValue = Me.DataSource.WPRD_WCD_ID.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRD_WCD_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRD_WCD_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRD_WCD_ID.Text = WPR_DocTable.WPRD_WCD_ID.Format(WPR_DocTable.WPRD_WCD_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRD_WCD_ID.Text = WPR_DocTable.WPRD_WCD_ID.Format(WPR_DocTable.WPRD_WCD_ID.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWPRD_WCur_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WPRD_WCur_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Doc record retrieved from the database.
             ' Me.WPRD_WCur_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRD_WCur_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRD_WCur_IDSpecified Then
-
+                				
                 ' If the WPRD_WCur_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WPR_DocTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WPR_DocTable.WPRD_WCur_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WPR_DocTable.WPRD_WCur_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_WCur_ID.ToString(), WPR_DocTable.WPRD_WCur_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_WCur_ID)
-                    End If
+                                  
+                       formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_WCur_ID.ToString(),WPR_DocTable.WPRD_WCur_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_WCur_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WPRD_WCur_ID.ToString()
+                       formattedValue = Me.DataSource.WPRD_WCur_ID.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRD_WCur_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRD_WCur_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRD_WCur_ID.Text = WPR_DocTable.WPRD_WCur_ID.Format(WPR_DocTable.WPRD_WCur_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRD_WCur_ID.Text = WPR_DocTable.WPRD_WCur_ID.Format(WPR_DocTable.WPRD_WCur_ID.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRD_WCur_ID is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRD_WCur_ID.Text Is Nothing _
@@ -9862,56 +9862,56 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRD_WCur_ID.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRD_WDT_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WPRD_WDT_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Doc record retrieved from the database.
             ' Me.WPRD_WDT_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRD_WDT_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRD_WDT_IDSpecified Then
-
+                				
                 ' If the WPRD_WDT_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WPR_DocTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WPR_DocTable.WPRD_WDT_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WPR_DocTable.WPRD_WDT_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_WDT_ID.ToString(), WPR_DocTable.WPRD_WDT_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_WDT_ID)
-                    End If
+                                  
+                       formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_WDT_ID.ToString(),WPR_DocTable.WPRD_WDT_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_WDT_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WPRD_WDT_ID.ToString()
+                       formattedValue = Me.DataSource.WPRD_WDT_ID.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRD_WDT_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRD_WDT_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRD_WDT_ID.Text = WPR_DocTable.WPRD_WDT_ID.Format(WPR_DocTable.WPRD_WDT_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRD_WDT_ID.Text = WPR_DocTable.WPRD_WDT_ID.Format(WPR_DocTable.WPRD_WDT_ID.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRD_WDT_ID is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRD_WDT_ID.Text Is Nothing _
@@ -9919,56 +9919,56 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRD_WDT_ID.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWPRD_WPRDS_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WPRD_WPRDS_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WPR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WPR_Doc record retrieved from the database.
             ' Me.WPRD_WPRDS_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWPRD_WPRDS_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WPRD_WPRDS_IDSpecified Then
-
+                				
                 ' If the WPRD_WPRDS_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WPR_DocTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WPR_DocTable.WPRD_WPRDS_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WPR_DocTable.WPRD_WPRDS_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_WPRDS_ID.ToString(), WPR_DocTable.WPRD_WPRDS_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_WPRDS_ID)
-                    End If
+                                  
+                       formattedValue = WPR_DocTable.GetDFKA(Me.DataSource.WPRD_WPRDS_ID.ToString(),WPR_DocTable.WPRD_WPRDS_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WPR_DocTable.WPRD_WPRDS_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WPRD_WPRDS_ID.ToString()
+                       formattedValue = Me.DataSource.WPRD_WPRDS_ID.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WPRD_WPRDS_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WPRD_WPRDS_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WPRD_WPRDS_ID.Text = WPR_DocTable.WPRD_WPRDS_ID.Format(WPR_DocTable.WPRD_WPRDS_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WPRD_WPRDS_ID.Text = WPR_DocTable.WPRD_WPRDS_ID.Format(WPR_DocTable.WPRD_WPRDS_ID.DefaultValue)
+                        		
+                End If
+                 
             ' If the WPRD_WPRDS_ID is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WPRD_WPRDS_ID.Text Is Nothing _
@@ -9976,203 +9976,203 @@ Public Class BaseWPR_LineTableControlRow
                 ' Set the value specified on the Properties.
                 Me.WPRD_WPRDS_ID.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetLiteral()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral1()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral11()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral2()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral3()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral8()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral9()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetlitLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.litLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.litLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRD_C_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRD_C_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRD_C_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRD_CommentLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRD_CommentLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRD_CommentLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRD_NoLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRD_NoLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRD_NoLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRD_SubmitLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRD_SubmitLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRD_SubmitLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRD_TotalLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRD_TotalLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRD_TotalLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRD_WCD_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRD_WCD_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRD_WCD_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRD_WCur_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRD_WCur_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRD_WCur_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRD_WDT_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRD_WDT_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRD_WDT_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWPRD_WPRDS_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WPRD_WPRDS_IDLabel.Text = "Some value"
-
-        End Sub
-
-        Public Overridable Sub SetWPR_DocTabContainer()
-
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WPRD_WPRDS_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetWPR_DocTabContainer()           
+                        
+                   
             If EvaluateFormula("URL(""TabVisible"")").ToLower() = "true" Then
                 MiscUtils.FindControlRecursively(Me, "WPR_DocTabContainer").Visible = True
             ElseIf EvaluateFormula("URL(""TabVisible"")").ToLower() = "false" Then
                 MiscUtils.FindControlRecursively(Me, "WPR_DocTabContainer").Visible = False
             End If
-
-
-        End Sub
-
-        Public Overridable Sub SetWCAR_Doc_AttachTableControl()
-
-
+         
+  
+        End Sub        
+      
+        Public Overridable Sub SetWCAR_Doc_AttachTableControl()           
+        
+        
             If WCAR_Doc_AttachTableControl.Visible Then
                 WCAR_Doc_AttachTableControl.LoadData()
                 WCAR_Doc_AttachTableControl.DataBind()
             End If
-        End Sub
-
-        Public Overridable Sub SetWPR_ActivityTableControl()
-
-
+        End Sub        
+      
+        Public Overridable Sub SetWPR_ActivityTableControl()           
+        
+        
             If WPR_ActivityTableControl.Visible Then
                 WPR_ActivityTableControl.LoadData()
                 WPR_ActivityTableControl.DataBind()
             End If
-        End Sub
-
-        Public Overridable Sub SetWPR_Doc_AttachTableControl()
-
-
+        End Sub        
+      
+        Public Overridable Sub SetWPR_Doc_AttachTableControl()           
+        
+        
             If WPR_Doc_AttachTableControl.Visible Then
                 WPR_Doc_AttachTableControl.LoadData()
                 WPR_Doc_AttachTableControl.DataBind()
             End If
-        End Sub
-
-        Public Overridable Sub SetWPR_LineTableControl()
-
-
+        End Sub        
+      
+        Public Overridable Sub SetWPR_LineTableControl()           
+        
+        
             If WPR_LineTableControl.Visible Then
                 WPR_LineTableControl.LoadData()
                 WPR_LineTableControl.DataBind()
             End If
-        End Sub
-
+        End Sub        
+      
         Public Overridable Sub ResetControl()
-
+          
         End Sub
-
+        
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
@@ -10180,10 +10180,10 @@ Public Class BaseWPR_LineTableControlRow
             If e Is Nothing Then
                 e = New FormulaEvaluator()
             End If
-
+            
             e.Variables.Clear()
 
-
+            
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -10192,11 +10192,11 @@ Public Class BaseWPR_LineTableControlRow
                 End While
             End If
 
-            If includeDS Then
-
-            End If
-
-
+            If includeDS
+                
+            End IF
+            
+            
             ' Other variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -10222,22 +10222,22 @@ Public Class BaseWPR_LineTableControlRow
             Else
                 Return resultObj.ToString()
             End If
-        End Function
+        End Function      
+        
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
+        End Function        
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
-        End Function
-
-
+        
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
-        End Function
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
+        End Function        
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -10245,7 +10245,7 @@ Public Class BaseWPR_LineTableControlRow
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -10254,13 +10254,13 @@ Public Class BaseWPR_LineTableControlRow
         End Function
 
 
-        Public Overridable Sub RegisterPostback()
-
-
+        Public Overridable Sub RegisterPostback()       
+        
+        
         End Sub
 
-
-
+      
+        
         ' To customize, override this method in WPR_DocRecordControl.
         Public Overridable Sub SaveData()
             ' Saves the associated record in the database.
@@ -10270,21 +10270,21 @@ Public Class BaseWPR_LineTableControlRow
             ' 1. Load the existing record from the database. Since we save the entire record, this ensures 
             ' that fields that are not displayed are also properly initialized.
             Me.LoadData()
-
+        
             ' The checksum is used to ensure the record was not changed by another user.
             If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
                 If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
                     Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "ePortalWFApproval"))
                 End If
             End If
+        
+          Dim Panel As System.Web.UI.WebControls.Panel = CType(MiscUtils.FindControlRecursively(Me, "WPR_DocRecordControlPanel"), System.Web.UI.WebControls.Panel)
 
-            Dim Panel As System.Web.UI.WebControls.Panel = CType(MiscUtils.FindControlRecursively(Me, "WPR_DocRecordControlPanel"), System.Web.UI.WebControls.Panel)
-
-            If ((Not IsNothing(Panel)) AndAlso (Not Panel.Visible)) OrElse IsNothing(Me.DataSource) Then
-                Return
-            End If
-
-
+          If ((Not IsNothing(Panel)) AndAlso (Not Panel.Visible)) OrElse IsNothing(Me.DataSource) Then
+              Return
+          End If
+          
+              
             ' 2. Perform any custom validation.
             Me.Validate()
 
@@ -10295,39 +10295,39 @@ Public Class BaseWPR_LineTableControlRow
             ' 4. Save in the database.
             ' We should not save the record if the data did not change. This
             ' will save a database hit and avoid triggering any database triggers.
-
+             
             If Me.DataSource.IsAnyValueChanged Then
                 ' Save record to database but do not commit yet.
                 ' Auto generated ids are available after saving for use by child (dependent) records.
                 Me.DataSource.Save()
-
+              
             End If
-
-
+            
+      
             ' update session or cookie by formula
-
-
+                                    
+      
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-
+            
             Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
-
-            Dim recWCAR_Doc_AttachTableControl As WCAR_Doc_AttachTableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_AttachTableControl"), WCAR_Doc_AttachTableControl)
-            recWCAR_Doc_AttachTableControl.SaveData()
-
-            Dim recWPR_ActivityTableControl As WPR_ActivityTableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WPR_ActivityTableControl"), WPR_ActivityTableControl)
-            recWPR_ActivityTableControl.SaveData()
-
-            Dim recWPR_Doc_AttachTableControl As WPR_Doc_AttachTableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WPR_Doc_AttachTableControl"), WPR_Doc_AttachTableControl)
-            recWPR_Doc_AttachTableControl.SaveData()
-
-            Dim recWPR_LineTableControl As WPR_LineTableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WPR_LineTableControl"), WPR_LineTableControl)
-            recWPR_LineTableControl.SaveData()
-
+          
+        Dim recWCAR_Doc_AttachTableControl as WCAR_Doc_AttachTableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WCAR_Doc_AttachTableControl"), WCAR_Doc_AttachTableControl)
+        recWCAR_Doc_AttachTableControl.SaveData()
+          
+        Dim recWPR_ActivityTableControl as WPR_ActivityTableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WPR_ActivityTableControl"), WPR_ActivityTableControl)
+        recWPR_ActivityTableControl.SaveData()
+          
+        Dim recWPR_Doc_AttachTableControl as WPR_Doc_AttachTableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WPR_Doc_AttachTableControl"), WPR_Doc_AttachTableControl)
+        recWPR_Doc_AttachTableControl.SaveData()
+          
+        Dim recWPR_LineTableControl as WPR_LineTableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WPR_LineTableControl"), WPR_LineTableControl)
+        recWPR_LineTableControl.SaveData()
+          
         End Sub
 
         ' To customize, override this method in WPR_DocRecordControl.
@@ -10337,9 +10337,9 @@ Public Class BaseWPR_LineTableControlRow
             ' To do this, it calls the Get methods for each of the field displayed on 
             ' the webpage.  It is better to make changes in the Get methods, rather 
             ' than making changes here.
-
+      
             ' Call the Get methods for each of the user interface controls.
-
+        
             GetWPRD_C_ID()
             GetWPRD_Comment()
             GetWPRD_No()
@@ -10351,142 +10351,142 @@ Public Class BaseWPR_LineTableControlRow
             GetWPRD_WDT_ID()
             GetWPRD_WPRDS_ID()
         End Sub
-
-
+        
+        
         Public Overridable Sub GetWPRD_C_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRD_Comment()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRD_No()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRD_Submit()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRD_Total()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRD_U_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRD_WCD_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRD_WCur_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRD_WDT_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWPRD_WPRDS_ID()
-
+            
         End Sub
-
-
+                
+      
         ' To customize, override this method in WPR_DocRecordControl.
-
+        
         Public Overridable Function CreateWhereClause() As WhereClause
-
-            Dim hasFiltersWCAR_Doc_AttachTableControl As Boolean = False
-
-            Dim hasFiltersWPR_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWPR_Doc_AttachTableControl As Boolean = False
-
-            Dim hasFiltersWPR_DocRecordControl As Boolean = False
-
-            Dim hasFiltersWPR_LineTableControl As Boolean = False
-
+        
+        Dim hasFiltersWCAR_Doc_AttachTableControl As Boolean = False
+      
+        Dim hasFiltersWPR_ActivityTableControl As Boolean = False
+      
+        Dim hasFiltersWPR_Doc_AttachTableControl As Boolean = False
+      
+        Dim hasFiltersWPR_DocRecordControl As Boolean = False
+      
+        Dim hasFiltersWPR_LineTableControl As Boolean = False
+      
             Dim wc As WhereClause
             WPR_DocTable.Instance.InnerFilter = Nothing
             wc = New WhereClause()
-
+            
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
             ' 2. User selected filter criteria.
             ' 3. User selected search criteria.
 
-
+            
             ' Retrieve the record id from the URL parameter.
-
-            Dim recId As String = DirectCast(Me.Page, BaseApplicationPage).Decrypt(Me.Page.Request.QueryString.Item("WPR_Doc"))
-
+              
+                  Dim recId As String = DirectCast(Me.Page, BaseApplicationPage).Decrypt(Me.Page.Request.QueryString.Item("WPR_Doc"))
+                
             If recId Is Nothing OrElse recId.Trim = "" Then
                 ' Get the error message from the application resource file.
                 Throw New Exception(Page.GetResourceValue("Err:UrlParamMissing", "ePortalWFApproval").Replace("{URL}", "WPR_Doc"))
             End If
             HttpContext.Current.Session("QueryString in Show-WPR-Doc") = recId
-
+              
             If KeyValue.IsXmlKey(recId) Then
                 ' Keys are typically passed as XML structures to handle composite keys.
                 ' If XML, then add a Where clause based on the Primary Key in the XML.
                 Dim pkValue As KeyValue = KeyValue.XmlToKey(recId)
-
+                
                 wc.iAND(WPR_DocTable.WPRD_ID, BaseFilter.ComparisonOperator.EqualsTo, pkValue.GetColumnValueString(WPR_DocTable.WPRD_ID))
-
+        
             Else
                 ' The URL parameter contains the actual value, not an XML structure.
-
+                
                 wc.iAND(WPR_DocTable.WPRD_ID, BaseFilter.ComparisonOperator.EqualsTo, recId)
-
+        
             End If
-
+              
             Return wc
-
+          
         End Function
-
+        
         ' This CreateWhereClause is used for loading list of suggestions for Auto Type-Ahead feature.
-
+        
         Public Overridable Function CreateWhereClause(ByVal searchText As String, ByVal fromSearchControl As String, ByVal AutoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String) As WhereClause
             WPR_DocTable.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
-
-            Dim hasFiltersWCAR_Doc_AttachTableControl As Boolean = False
-
-            Dim hasFiltersWPR_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWPR_Doc_AttachTableControl As Boolean = False
-
-            Dim hasFiltersWPR_DocRecordControl As Boolean = False
-
-            Dim hasFiltersWPR_LineTableControl As Boolean = False
-
+        
+                Dim hasFiltersWCAR_Doc_AttachTableControl As Boolean = False
+              
+                Dim hasFiltersWPR_ActivityTableControl As Boolean = False
+              
+                Dim hasFiltersWPR_Doc_AttachTableControl As Boolean = False
+              
+                Dim hasFiltersWPR_DocRecordControl As Boolean = False
+              
+                Dim hasFiltersWPR_LineTableControl As Boolean = False
+              
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
             ' 2. User selected filter criteria.
             ' 3. User selected search criteria.
             Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
 
-
+            
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
-
-
-
+          
+       
+          
             Return wc
         End Function
 
-
-
-        Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
-                                        ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
-                                        ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
-                                        ByVal resultList As ArrayList) As Boolean
-            Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
-                                     autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
-                                     resultList, False)
-        End Function
-
+        
+         
+         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
+                                         ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
+                                         ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
+                                         ByVal resultList As ArrayList) As Boolean
+              Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
+                                       autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
+                                       resultList, False)
+         End Function                                       
+         
         'Formats the resultItem and adds it to the list of suggestions.
         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
                                                ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
@@ -10535,10 +10535,10 @@ Public Class BaseWPR_LineTableControlRow
                     If Len(resultItem) - index <= columnLength Then
                         If index = 0 Then
                             itemToAdd = resultItem
-                        Else
+                        Else                            
                             itemToAdd = resultItem.Substring(index)
                         End If
-                    Else
+                    Else                       
                         itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, index, index + columnLength, StringUtils.Direction.forward)
                     End If
                 ElseIf InvariantLCase(AutoTypeAheadDisplayFoundText).equals("inmiddleofmatchedstring") Then
@@ -10548,7 +10548,7 @@ Public Class BaseWPR_LineTableControlRow
                     Else
                         ' Sanity check at end of the string
                         If index + Len(prefixText) >= Len(resultItem) - 1 OrElse _
-                        Len(resultItem) - index < subStringBeginIndex Then
+                        Len(resultItem) - index < subStringBeginIndex Then                           
                             itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, Len(resultItem) - 1 - columnLength, Len(resultItem) - 1, StringUtils.Direction.backward)
                         ElseIf index <= subStringBeginIndex Then
                             ' Sanity check at beginning of the string                          
@@ -10608,11 +10608,11 @@ Public Class BaseWPR_LineTableControlRow
             End If
             Return isAdded
         End Function
-
-
+        
+    
 
         ' To customize, override this method in WPR_DocRecordControl.
-        Public Overridable Sub Validate()
+        Public Overridable Sub Validate() 
             ' Add custom validation for any control within this panel.
             ' Example.  If you have a State ASP:Textbox control
             ' If Me.State.Text <> "CA" Then
@@ -10622,19 +10622,19 @@ Public Class BaseWPR_LineTableControlRow
             ' The Validate method is common across all controls within
             ' this panel so you can validate multiple fields, but report
             ' one error message.
-
-
+            
+                
         End Sub
 
         Public Overridable Sub Delete()
-
+        
             If Me.IsNewRecord() Then
                 Return
             End If
 
             Dim pkValue As KeyValue = KeyValue.XmlToKey(Me.RecordUniqueId)
-            WPR_DocTable.DeleteRecord(pkValue)
-
+          WPR_DocTable.DeleteRecord(pkValue)
+          
         End Sub
 
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
@@ -10644,41 +10644,41 @@ Public Class BaseWPR_LineTableControlRow
                 Me.RegisterPostback()
 
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-
-
+                  
+                
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
                     Me.LoadData()
-                    Me.DataBind()
+                    Me.DataBind()			
                 End If
-
-
+                                
+                						
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
                 DbUtils.EndTransaction()
             End Try
         End Sub
-
-
+        
+            
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
-
-
+        
+    
             'Save pagination state to session.
-
+          
         End Sub
-
-
-
+        
+        
+    
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
-
+        
 
             ' Clear pagination state from session.
-
+        
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
@@ -10687,103 +10687,91 @@ Public Class BaseWPR_LineTableControlRow
             If Not isNewRecord Is Nothing AndAlso isNewRecord.Trim <> "" Then
                 Me.IsNewRecord = Boolean.Parse(isNewRecord)
             End If
-
+            
             Dim myCheckSum As String = CType(ViewState("CheckSum"), String)
             If Not myCheckSum Is Nothing AndAlso myCheckSum.Trim <> "" Then
                 Me.CheckSum = myCheckSum
             End If
-
-
+            
+    
             ' Load view state for pagination control.
-
+                 
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
             ViewState("IsNewRecord") = Me.IsNewRecord.ToString()
             ViewState("CheckSum") = Me.CheckSum
-
-
+            
+    
             ' Load view state for pagination control.
-
+                  
             Return MyBase.SaveViewState()
         End Function
-
-
+        
+        
         ' Generate the event handling functions for pagination events.
-
-
+            
+      
         ' Generate the event handling functions for filter and search events.
-
-
+            
+    
         ' Generate set method for buttons
-
-        Public Overridable Sub SetOKButton()
-
-
+        
+        Public Overridable Sub SetOKButton()                
+              
+   
         End Sub
-
+            
         ' event handler for Button
         Public Overridable Sub OKButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
 
-            ' The redirect URL is set on the Properties, Custom Properties or Actions.
-            ' The ModifyRedirectURL call resolves the parameters before the
-            ' Response.Redirect redirects the page to the URL.  
-            ' Any code after the Response.Redirect call will not be executed, since the page is
-            ' redirected to the URL.
-
-
-            Dim url As String = "../wf_PO/ShowSel_WPO_Activity_WPOP10100Table.aspx"
-
-            If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
-
-            Dim shouldRedirect As Boolean = True
-            Dim target As String = ""
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                url = Me.ModifyRedirectUrl(url, "", True)
-                url = Me.Page.ModifyRedirectUrl(url, "", True)
-
+                ' if target is specified meaning that is opened on popup or new window
+                If Page.Request("target") <> "" Then
+                    shouldRedirect = False
+                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "ClosePopup", "closePopupPage();", True)                   
+                End If
+      
             Catch ex As Exception
-
-                ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
+            
                 shouldRedirect = False
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-                DbUtils.EndTransaction()
+    
             End Try
             If shouldRedirect Then
                 Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-
+      Me.Page.RedirectBack()
+        
             End If
         End Sub
-
-        Protected Overridable Sub WPRD_Comment_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WPRD_No_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WPRD_Submit_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WPRD_Total_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-
+        
+        Protected Overridable Sub WPRD_Comment_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WPRD_No_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WPRD_Submit_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WPRD_Total_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+   
         Private _PreviousUIData As New Hashtable
         Public Overridable Property PreviousUIData() As Hashtable
             Get
@@ -10792,9 +10780,9 @@ Public Class BaseWPR_LineTableControlRow
             Set(ByVal value As Hashtable)
                 _PreviousUIData = value
             End Set
-        End Property
+        End Property   
 
-
+        
         Public Property RecordUniqueId() As String
             Get
                 Return CType(Me.ViewState("BaseWPR_DocRecordControl_Rec"), String)
@@ -10803,7 +10791,7 @@ Public Class BaseWPR_LineTableControlRow
                 Me.ViewState("BaseWPR_DocRecordControl_Rec") = value
             End Set
         End Property
-
+            
         Public Property DataSource() As WPR_DocRecord
             Get
                 Return DirectCast(MyBase._DataSource, WPR_DocRecord)
@@ -10813,7 +10801,7 @@ Public Class BaseWPR_LineTableControlRow
             End Set
         End Property
 
-
+        
         Private _checkSum As String
         Public Overridable Property CheckSum() As String
             Get
@@ -10823,7 +10811,7 @@ Public Class BaseWPR_LineTableControlRow
                 Me._checkSum = value
             End Set
         End Property
-
+        
         Private _TotalPages As Integer
         Public Property TotalPages() As Integer
             Get
@@ -10833,7 +10821,7 @@ Public Class BaseWPR_LineTableControlRow
                 Me._TotalPages = value
             End Set
         End Property
-
+        
         Private _PageIndex As Integer
         Public Property PageIndex() As Integer
             Get
@@ -10844,7 +10832,7 @@ Public Class BaseWPR_LineTableControlRow
                 Me._PageIndex = value
             End Set
         End Property
-
+    
         Private _PageSize As Integer
         Public Property PageSize() As Integer
             Get
@@ -10854,7 +10842,7 @@ Public Class BaseWPR_LineTableControlRow
                 Me._PageSize = value
             End Set
         End Property
-
+    
         Private _TotalRecords As Integer
         Public Property TotalRecords() As Integer
             Get
@@ -10868,7 +10856,7 @@ Public Class BaseWPR_LineTableControlRow
                 Me._TotalRecords = value
             End Set
         End Property
-
+        
         Private _DisplayLastPage As Boolean
         Public Property DisplayLastPage() As Boolean
             Get
@@ -10878,232 +10866,232 @@ Public Class BaseWPR_LineTableControlRow
                 Me._DisplayLastPage = value
             End Set
         End Property
-
-
+        
+        
 
 #Region "Helper Properties"
-
+        
         Public ReadOnly Property Literal() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal11() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal11"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal2() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal2"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal3() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal3"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal8() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal8"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal9() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal9"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property litLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "litLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property OKButton() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "OKButton"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property WCAR_Doc_AttachTableControl() As WCAR_Doc_AttachTableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_Doc_AttachTableControl"), WCAR_Doc_AttachTableControl)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPR_ActivityTableControl() As WPR_ActivityTableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPR_ActivityTableControl"), WPR_ActivityTableControl)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPR_Doc_AttachTableControl() As WPR_Doc_AttachTableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPR_Doc_AttachTableControl"), WPR_Doc_AttachTableControl)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPR_DocTabContainer() As AjaxControlToolkit.TabContainer
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPR_DocTabContainer"), AjaxControlToolkit.TabContainer)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPR_DocTitle() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPR_DocTitle"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPR_LineTableControl() As WPR_LineTableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPR_LineTableControl"), WPR_LineTableControl)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRD_C_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_C_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRD_C_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_C_IDLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRD_Comment() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_Comment"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRD_CommentLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_CommentLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRD_No() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_No"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRD_NoLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_NoLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRD_Submit() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_Submit"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRD_SubmitLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_SubmitLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRD_Total() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_Total"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRD_TotalLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_TotalLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRD_U_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_U_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRD_WCD_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_WCD_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRD_WCD_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_WCD_IDLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRD_WCur_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_WCur_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRD_WCur_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_WCur_IDLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRD_WDT_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_WDT_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRD_WDT_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_WDT_IDLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WPRD_WPRDS_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_WPRDS_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WPRD_WPRDS_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPRD_WPRDS_IDLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
 #End Region
 
 #Region "Helper Functions"
 
-        Public Overloads Overrides Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+        Public Overrides Overloads Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
+        End Function
+        
+        Public Overrides Overloads Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
             Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
 
-        Public Overloads Overrides Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
-        End Function
-
-        Public Overloads Overrides Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
-
+        Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+            
             Dim rec As WPR_DocRecord = Nothing
-
-
+             
+        
             Try
                 rec = Me.GetRecord()
             Catch ex As Exception
@@ -11112,18 +11100,18 @@ Public Class BaseWPR_LineTableControlRow
 
             If rec Is Nothing AndAlso url.IndexOf("{") >= 0 Then
                 ' Localization.
-
-                Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
-
+                
+            Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
+                    
             End If
             Return EvaluateExpressions(url, arg, rec, bEncrypt)
         End Function
 
-        Public Overloads Overrides Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-
+        Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean,ByVal includeSession as Boolean) As String
+            
             Dim rec As WPR_DocRecord = Nothing
-
-
+             
+        
             Try
                 rec = Me.GetRecord()
             Catch ex As Exception
@@ -11132,33 +11120,33 @@ Public Class BaseWPR_LineTableControlRow
 
             If rec Is Nothing AndAlso url.IndexOf("{") >= 0 Then
                 ' Localization.
-
-                Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
-
+                
+            Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
+                    
             End If
-            If includeSession Then
+            If includeSession  Then
                 Return EvaluateExpressions(url, arg, rec, bEncrypt)
             Else
-                Return EvaluateExpressions(url, arg, rec, bEncrypt, False)
+                Return EvaluateExpressions(url, arg, rec, bEncrypt,False)  
             End If
         End Function
 
-
+         
         Public Overridable Function GetRecord() As WPR_DocRecord
             If Not Me.DataSource Is Nothing Then
                 Return Me.DataSource
             End If
-
+            
             If Not Me.RecordUniqueId Is Nothing Then
-
+                
                 Return WPR_DocTable.GetRecord(Me.RecordUniqueId, True)
-
+                
             End If
-
+            
             ' Localization.
-
+            
             Throw New Exception(Page.GetResourceValue("Err:RetrieveRec", "ePortalWFApproval"))
-
+                
         End Function
 
         Public Shadows ReadOnly Property Page() As BaseApplicationPage
@@ -11169,7 +11157,7 @@ Public Class BaseWPR_LineTableControlRow
 
 #End Region
 
-    End Class
+End Class
 
   
 

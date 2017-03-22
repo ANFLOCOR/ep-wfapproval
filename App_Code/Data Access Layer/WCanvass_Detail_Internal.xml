@@ -80,7 +80,7 @@
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -90,19 +90,47 @@
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>2</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WCanvass_Detail_Internal_WCDI_WPRL_ID_1</columnFKName>
+        <columnFKTable>WPR_Line</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>WPRL_ID</columnFKColumn>
+        <columnFKColumnDisplay>=WPR_Line.WPRL_ID</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="3" Priority="4" ColumnNum="3">
       <columnName>WCDI_PM00200_Vendor_ID1</columnName>
@@ -112,28 +140,55 @@
       <columnLengthSet>15</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
+      <columnFunction>notrim,</columnFunction>
       <columnDBFormat>
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="Database">Y</columnCaseSensitive>
+      <columnCaseSensitive Source="User">Y</columnCaseSensitive>
       <columnCollation>Latin1_General_BIN</columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>3</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WCanvass_Detail_Internal_WCDI_PM00200_Vendor_ID1_1</columnFKName>
+        <columnFKTable>sel_PM00200</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>VENDORID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_PM00200.VENDNAME</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="4" Priority="5" ColumnNum="4">
       <columnName>WCDI_PM00200_Vendor_ID2</columnName>
@@ -143,28 +198,55 @@
       <columnLengthSet>15</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
+      <columnFunction>notrim,</columnFunction>
       <columnDBFormat>
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="Database">Y</columnCaseSensitive>
+      <columnCaseSensitive Source="User">Y</columnCaseSensitive>
       <columnCollation>Latin1_General_BIN</columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>4</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WCanvass_Detail_Internal_WCDI_PM00200_Vendor_ID2_1</columnFKName>
+        <columnFKTable>sel_PM00200</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>VENDORID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_PM00200.VENDNAME</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="5" Priority="6" ColumnNum="5">
       <columnName>WCDI_PM00200_Vendor_ID3</columnName>
@@ -174,28 +256,55 @@
       <columnLengthSet>15</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
+      <columnFunction>notrim,</columnFunction>
       <columnDBFormat>
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="Database">Y</columnCaseSensitive>
+      <columnCaseSensitive Source="User">Y</columnCaseSensitive>
       <columnCollation>Latin1_General_BIN</columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>5</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WCanvass_Detail_Internal_WCDI_PM00200_Vendor_ID3_1</columnFKName>
+        <columnFKTable>sel_PM00200</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>VENDORID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_PM00200.VENDNAME</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="6" Priority="7" ColumnNum="6">
       <columnName>WCDI_PM00200_Vendor_ID4</columnName>
@@ -205,28 +314,55 @@
       <columnLengthSet>15</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
+      <columnFunction>notrim,</columnFunction>
       <columnDBFormat>
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="Database">Y</columnCaseSensitive>
+      <columnCaseSensitive Source="User">Y</columnCaseSensitive>
       <columnCollation>Latin1_General_BIN</columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>6</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WCanvass_Detail_Internal_WCDI_PM00200_Vendor_ID4_1</columnFKName>
+        <columnFKTable>sel_PM00200</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>VENDORID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_PM00200.VENDNAME</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="7" Priority="8" ColumnNum="7">
       <columnName>WCDI_PM00200_Vendor_ID5</columnName>
@@ -236,28 +372,55 @@
       <columnLengthSet>15</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
+      <columnFunction>notrim,</columnFunction>
       <columnDBFormat>
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="Database">Y</columnCaseSensitive>
+      <columnCaseSensitive Source="User">Y</columnCaseSensitive>
       <columnCollation>Latin1_General_BIN</columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>7</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WCanvass_Detail_Internal_WCDI_PM00200_Vendor_ID5_1</columnFKName>
+        <columnFKTable>sel_PM00200</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>VENDORID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_PM00200.VENDNAME</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="8" Priority="9" ColumnNum="8">
       <columnName>WCDI_PM00200_Vendor_ID6</columnName>
@@ -267,28 +430,55 @@
       <columnLengthSet>15</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
+      <columnFunction>notrim,</columnFunction>
       <columnDBFormat>
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="Database">Y</columnCaseSensitive>
+      <columnCaseSensitive Source="User">Y</columnCaseSensitive>
       <columnCollation>Latin1_General_BIN</columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>8</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WCanvass_Detail_Internal_WCDI_PM00200_Vendor_ID6_1</columnFKName>
+        <columnFKTable>sel_PM00200</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>VENDORID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_PM00200.VENDNAME</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="9" Priority="10" ColumnNum="9">
       <columnName>WCDI_Bid1</columnName>
@@ -781,28 +971,55 @@
       <columnLengthSet>15</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
+      <columnFunction>notrim,</columnFunction>
       <columnDBFormat>
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="Database">Y</columnCaseSensitive>
+      <columnCaseSensitive Source="User">Y</columnCaseSensitive>
       <columnCollation>Latin1_General_BIN</columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>24</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WCanvass_Detail_Internal_WCDI_PM00200_Vendor_ID7_1</columnFKName>
+        <columnFKTable>sel_PM00200</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>VENDORID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_PM00200.VENDNAME</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="25" Priority="26" ColumnNum="25">
       <columnName>WCDI_PM00200_Vendor_ID8</columnName>
@@ -812,28 +1029,55 @@
       <columnLengthSet>15</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
+      <columnFunction>notrim,</columnFunction>
       <columnDBFormat>
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="Database">Y</columnCaseSensitive>
+      <columnCaseSensitive Source="User">Y</columnCaseSensitive>
       <columnCollation>Latin1_General_BIN</columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>25</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WCanvass_Detail_Internal_WCDI_PM00200_Vendor_ID8_1</columnFKName>
+        <columnFKTable>sel_PM00200</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>VENDORID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_PM00200.VENDNAME</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="26" Priority="27" ColumnNum="26">
       <columnName>WCDI_PM00200_Vendor_ID9</columnName>
@@ -843,28 +1087,55 @@
       <columnLengthSet>15</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
+      <columnFunction>notrim,</columnFunction>
       <columnDBFormat>
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="Database">Y</columnCaseSensitive>
+      <columnCaseSensitive Source="User">Y</columnCaseSensitive>
       <columnCollation>Latin1_General_BIN</columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>26</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WCanvass_Detail_Internal_WCDI_PM00200_Vendor_ID9_1</columnFKName>
+        <columnFKTable>sel_PM00200</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>VENDORID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_PM00200.VENDNAME</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="27" Priority="28" ColumnNum="27">
       <columnName>WCDI_PM00200_Vendor_ID10</columnName>
@@ -874,28 +1145,55 @@
       <columnLengthSet>15</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>
-      </columnFunction>
+      <columnFunction>notrim,</columnFunction>
       <columnDBFormat>
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive Source="Database">Y</columnCaseSensitive>
+      <columnCaseSensitive Source="User">Y</columnCaseSensitive>
       <columnCollation>Latin1_General_BIN</columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>27</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WCanvass_Detail_Internal_WCDI_PM00200_Vendor_ID10_1</columnFKName>
+        <columnFKTable>sel_PM00200</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>VENDORID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_PM00200.VENDNAME</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="28" Priority="29" ColumnNum="28">
       <columnName>WCDI_Bid7</columnName>
@@ -3104,8 +3402,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WCanvass_Detail_Internal_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <InUse>N</InUse>
-  <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
   <canDeleteRecords Source="Database">Y</canDeleteRecords>
@@ -3116,4 +3412,5 @@
   <MenuName>WCanvass Detail Internal</MenuName>
   <QSPath>../WCanvass_Detail_Internal/WCanvass-Detail-Internal-QuickSelector.aspx</QSPath>
   <TableCodeName>WCanvass_Detail_Internal</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWCanvass_Detail_Internal</TableStoredProcPrefix>
 </XMLDefinition>

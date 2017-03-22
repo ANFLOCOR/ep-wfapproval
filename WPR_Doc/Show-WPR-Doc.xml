@@ -135,16 +135,16 @@
         </Attribute>
         <Attribute>
           <Name>Button-RedirectURL</Name>
-          <Value>../wf_PO/ShowSel_WPO_Activity_WPOP10100Table.aspx</Value>
+          <Value>Back</Value>
         </Attribute>
         <Attribute>
           <Name>Button-Text</Name>
-          <Value>Done</Value>
+          <Value>Back</Value>
           <Type>ResourceReference</Type>
         </Attribute>
         <Attribute>
           <Name>Button-ToolTip</Name>
-          <Value>Done</Value>
+          <Value>Back</Value>
           <Type>ResourceReference</Type>
         </Attribute>
       </PassthroughAttributes>
@@ -1491,6 +1491,10 @@
         <Attribute>
           <Name>CssClass</Name>
           <Value>field_input</Value>
+        </Attribute>
+        <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,#.00</Value>
         </Attribute>
         <Attribute>
           <Name>HTMLEncodeValue</Name>

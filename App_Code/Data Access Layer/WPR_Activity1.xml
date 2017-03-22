@@ -160,7 +160,7 @@
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -170,19 +170,47 @@
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>4</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WPR_Activity_WPRA_W_U_ID_1</columnFKName>
+        <columnFKTable>sel_WASP_User</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>W_U_ID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_WASP_User1.W_U_Full_Name</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="5" Priority="6" ColumnNum="5">
       <columnName>WPRA_W_U_ID_Delegate</columnName>
@@ -289,67 +317,109 @@
     </Column>
     <Column InternalName="8" Priority="9" ColumnNum="8">
       <columnName>WPRA_Date_Assign</columnName>
-      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnUIName Source="User">%ISD_DEFAULT%</columnUIName>
       <columnType>Date</columnType>
       <columnDBType>smalldatetime</columnDBType>
       <columnLengthSet>
       </columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>notrim</columnFunction>
-      <columnFormat>g</columnFormat>
-      <columnDBFormat>g</columnDBFormat>
+      <columnFunction>
+      </columnFunction>
+      <columnFormat Source="User">d</columnFormat>
+      <columnDBFormat>d</columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>8</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>N</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
     </Column>
     <Column InternalName="9" Priority="10" ColumnNum="9">
       <columnName>WPRA_Date_Action</columnName>
-      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnUIName Source="User">%ISD_DEFAULT%</columnUIName>
       <columnType>Date</columnType>
       <columnDBType>smalldatetime</columnDBType>
       <columnLengthSet>
       </columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
-      <columnFunction>notrim</columnFunction>
-      <columnFormat>g</columnFormat>
-      <columnDBFormat>g</columnDBFormat>
+      <columnFunction>
+      </columnFunction>
+      <columnFormat Source="User">d</columnFormat>
+      <columnDBFormat>d</columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>9</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>N</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
     </Column>
     <Column InternalName="10" Priority="11" ColumnNum="10">
       <columnName>WPRA_Remark</columnName>
@@ -422,7 +492,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WPR_Activity_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -434,4 +503,5 @@
   <MenuName>WPR Activity2</MenuName>
   <QSPath>../WPR_Activity1/WPR-Activity-QuickSelector1.aspx</QSPath>
   <TableCodeName>WPR_Activity1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWPR_Activity1</TableStoredProcPrefix>
 </XMLDefinition>

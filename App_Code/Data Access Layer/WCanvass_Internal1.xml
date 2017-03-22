@@ -400,7 +400,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WCanvass_Internal_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -412,4 +411,5 @@
   <MenuName>WCanvass Internal1</MenuName>
   <QSPath>../WCanvass_Internal1/WCanvass-Internal-QuickSelector1.aspx</QSPath>
   <TableCodeName>WCanvass_Internal1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWCanvass_Internal1</TableStoredProcPrefix>
 </XMLDefinition>
