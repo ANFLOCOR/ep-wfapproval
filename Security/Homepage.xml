@@ -328,6 +328,10 @@
       <Table>DatabaseANFLO-WF%dbo.sel_Approver_Pending_Tasks</Table>
       <PassthroughAttributes>
         <Attribute>
+          <Name>DataFormat</Name>
+          <Value>d</Value>
+        </Attribute>
+        <Attribute>
           <Name>FieldMaxLength</Name>
           <Value>Default</Value>
         </Attribute>
@@ -390,6 +394,10 @@
       <FieldValueStyle>Literal</FieldValueStyle>
       <Table>DatabaseANFLO-WFN%dbo.sel_Approver_Pending_Tasks</Table>
       <PassthroughAttributes>
+        <Attribute>
+          <Name>DataFormat</Name>
+          <Value>d</Value>
+        </Attribute>
         <Attribute>
           <Name>FieldMaxLength</Name>
           <Value>Default</Value>

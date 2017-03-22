@@ -243,7 +243,7 @@ Public Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
             ' Check if user has access to this page.  Redirects to either sign-in page
             ' or 'no access' page if not. Does not do anything if role-based security
             ' is not turned on, but you can override to add your own security.
-            Me.Authorize("")
+            Me.Authorize("NOT_ANONYMOUS")
     
             If (Not Me.IsPostBack) Then
             

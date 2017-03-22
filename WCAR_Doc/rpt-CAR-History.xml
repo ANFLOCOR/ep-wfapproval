@@ -99,7 +99,7 @@
     &lt;/Row&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;asp:literal id="Literal1" runat="server" text="CAR Approver History (South)"&amp;gt;&amp;lt;/asp:literal&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;b&amp;gt;&amp;lt;asp:literal id="Literal1" runat="server" text="CAR Approver History (South)"&amp;gt;&amp;lt;/asp:literal&amp;gt;&amp;lt;/b&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;

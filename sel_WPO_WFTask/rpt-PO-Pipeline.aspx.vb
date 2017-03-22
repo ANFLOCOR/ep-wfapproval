@@ -1,6 +1,6 @@
 ﻿
-' This file implements the code-behind class for rpt_CAR_Pipeline1.aspx.
-' App_Code\rpt_CAR_Pipeline1.Controls.vb contains the Table, Row and Record control classes
+' This file implements the code-behind class for rpt_PO_Pipeline.aspx.
+' App_Code\rpt_PO_Pipeline.Controls.vb contains the Table, Row and Record control classes
 ' for the page.  Best practices calls for overriding methods in the Row or Record control classes.
 
 #Region "Imports statements"
@@ -32,9 +32,9 @@ Imports ePortalWFApproval.Data
   
 Namespace ePortalWFApproval.UI
   
-Partial Public Class rpt_CAR_Pipeline1
+Partial Public Class rpt_PO_Pipeline
         Inherits BaseApplicationPage
-' Code-behind class for the rpt_CAR_Pipeline1 page.
+' Code-behind class for the rpt_PO_Pipeline page.
 ' Place your customizations in Section 1. Do not modify Section 2.
         
 #Region "Section 1: Place your customizations here."
@@ -52,9 +52,9 @@ Partial Public Class rpt_CAR_Pipeline1
           ' LoadData reads database data and assigns it to UI controls.
           ' Customize by adding code before or after the call to LoadData_Base()
           ' or replace the call to LoadData_Base().
-            LoadData_Base()
-            Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServerN")
-            Dim sParam As String = System.Web.HttpContext.Current.Session("UserIDNorth").ToString()
+          LoadData_Base()
+		 Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServer")
+            Dim sParam As String = System.Web.HttpContext.Current.Session("UserId").ToString()
 
             Dim sUrl As String = ""
 
@@ -62,7 +62,7 @@ Partial Public Class rpt_CAR_Pipeline1
                 sParam = sParam.Replace("*", "&")
             End If
 
-            sUrl = "http://" & sWebServer & "/reportserver?%2fWORKFLOW%2fCAR+Approver+Pipeline&rs:Command=Render&UserID=" & _
+            sUrl = "http://" & sWebServer & "/reportserver?%2fWORKFLOW%2fPO+Approver+Pipeline&rs:Command=Render&UserID=" & _
       sParam & "&rc:Parameters=false"
 
             frm.Attributes("src") = sUrl
@@ -178,23 +178,25 @@ Partial Public Class rpt_CAR_Pipeline1
 
     ' Page Event Handlers - buttons, sort, links
     
-
-        ' Write out the Set methods
-                     
-        
-        ' Write out the methods for DataSource
-        
-   
-
-Public Sub SetbtnBack()
-            SetbtnBack_Base() 
-        End Sub              
-Public Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
+        Public Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
           ' Click handler for btnBack.
           ' Customize by adding code before the call or replace the call to the Base function with your own code.
           btnBack_Click_Base(sender, args)
           ' NOTE: If the Base function redirects to another page, any code here will not be executed.
         End Sub
+            
+
+        ' Write out the Set methods
+        
+        Public Sub SetbtnBack()
+            SetbtnBack_Base() 
+        End Sub              
+                         
+        
+        ' Write out the methods for DataSource
+        
+   
+
 #End Region
 
 #Region "Section 2: Do not modify this section."
@@ -262,7 +264,7 @@ Public Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
             End If
         
         
-            Page.Title = "ePortal Workflow Approval - CAR Approval Pipeline (North)"
+            Page.Title = "ePortal Workflow Approval  - PO Approval Pipeline (South)"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If
