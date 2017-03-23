@@ -68,14 +68,14 @@ CREATE PROCEDURE pePortalWFApprovalWCanvass_Internal1Export
                 N'IsNULL(Convert(nvarchar, WCanvass_Internal_.[WCI_Vendors]), '''') + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WCanvass_Internal_.[WCI_U_ID]), '''') + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WCanvass_Internal_.[WCI_WClass_ID]), '''') + ''' + @p_separator_str + ''' +' +
-                N'N''"'' + REPLACE(IsNULL( t0.[WClass_Name], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
+                N'N''"'' + REPLACE(IsNULL( t2.[WClass_Name], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
                 N'N''"'' + IsNULL(Convert(nvarchar, WCanvass_Internal_.[WCI_Contract_Done]), '''') + N''"'' + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WCanvass_Internal_.[WCI_Contract_Closed], 21), '''') + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WCanvass_Internal_.[WCI_Contract_U_ID]), '''') + '' ''';
             END
 
         -- Set up the from string (with table alias) and the join string
-        SET @l_from_str = '[dbo].[WCanvass_Internal] WCanvass_Internal_ LEFT OUTER JOIN [dbo].[WClassification] t0 ON (WCanvass_Internal_.[WCI_WClass_ID] =  t0.[WClass_ID])';
+        SET @l_from_str = '[dbo].[WCanvass_Internal] WCanvass_Internal_ LEFT OUTER JOIN [dbo].[WClassification] t2 ON (WCanvass_Internal_.[WCI_WClass_ID] =  t2.[WClass_ID])';
 
         SET @l_join_str = @p_join_str
         if @p_join_str is null

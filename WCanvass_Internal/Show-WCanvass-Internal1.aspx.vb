@@ -152,25 +152,25 @@ Partial Public Class Show_WCanvass_Internal1
             Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
         End Function
     
-      <System.Web.Services.WebMethod()> _
-      Public Shared Function GetAutoCompletionList_Sel_WCanvass_Detail_Internal_WPR_Line1SearchText(ByVal prefixText As String, ByVal count As Integer) As String()
-      ' GetSel_WCanvass_Detail_Internal_WPR_Line1SearchTextCompletionList gets the list of suggestions from the database.
-      ' prefixText is the search text typed by the user .
-      ' count specifies the number of suggestions to be returned.
-      ' Customize by adding code before or after the call to  GetAutoCompletionList_Sel_WCanvass_Detail_Internal_WPR_Line1SearchText()
-      ' or replace the call to GetAutoCompletionList_Sel_WCanvass_Detail_Internal_WPR_Line1SearchText().
-      Return GetAutoCompletionList_Sel_WCanvass_Detail_Internal_WPR_Line1SearchText_Base(prefixText, count)
-      End Function
+'      <System.Web.Services.WebMethod()> _
+'      Public Shared Function GetAutoCompletionList_Sel_WCanvass_Detail_Internal_WPR_Line1SearchText(ByVal prefixText As String, ByVal count As Integer) As String()
+'      ' GetSel_WCanvass_Detail_Internal_WPR_Line1SearchTextCompletionList gets the list of suggestions from the database.
+'      ' prefixText is the search text typed by the user .
+'      ' count specifies the number of suggestions to be returned.
+'      ' Customize by adding code before or after the call to  GetAutoCompletionList_Sel_WCanvass_Detail_Internal_WPR_Line1SearchText()
+'      ' or replace the call to GetAutoCompletionList_Sel_WCanvass_Detail_Internal_WPR_Line1SearchText().
+'      Return GetAutoCompletionList_Sel_WCanvass_Detail_Internal_WPR_Line1SearchText_Base(prefixText, count)
+'      End Function
     
-      <System.Web.Services.WebMethod()> _
-      Public Shared Function GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText(ByVal prefixText As String, ByVal count As Integer) As String()
-      ' GetWCanvass_Quotation_Internal1SearchTextCompletionList gets the list of suggestions from the database.
-      ' prefixText is the search text typed by the user .
-      ' count specifies the number of suggestions to be returned.
-      ' Customize by adding code before or after the call to  GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText()
-      ' or replace the call to GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText().
-      Return GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText_Base(prefixText, count)
-      End Function
+'      <System.Web.Services.WebMethod()> _
+'      Public Shared Function GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText(ByVal prefixText As String, ByVal count As Integer) As String()
+'      ' GetWCanvass_Quotation_Internal1SearchTextCompletionList gets the list of suggestions from the database.
+'      ' prefixText is the search text typed by the user .
+'      ' count specifies the number of suggestions to be returned.
+'      ' Customize by adding code before or after the call to  GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText()
+'      ' or replace the call to GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText().
+'      Return GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText_Base(prefixText, count)
+'      End Function
     
       Protected Overloads Overrides Sub BasePage_PreRender(ByVal sender As Object, ByVal e As EventArgs)
           MyBase.BasePage_PreRender(sender, e)
@@ -464,28 +464,6 @@ Public Sub SetWCanvass_InternalRecordControl()
       End Sub  
       
         
-        Public Shared Function GetAutoCompletionList_Sel_WCanvass_Detail_Internal_WPR_Line1SearchText_Base(ByVal prefixText As String, ByVal count As Integer) As String()
-            ' Since this method is a shared/static method it does not maintain information about page or controls within the page.
-            ' Hence we can not invoke any method associated with any controls.
-            ' So, if we need to use any control in the page we need to instantiate it.
-            Dim control as ePortalWFApproval.UI.Controls.Show_WCanvass_Internal1.Sel_WCanvass_Detail_Internal_WPR_Line1TableControl 
-            control = new ePortalWFApproval.UI.Controls.Show_WCanvass_Internal1.Sel_WCanvass_Detail_Internal_WPR_Line1TableControl()
-            
-            Return control.GetAutoCompletionList_Sel_WCanvass_Detail_Internal_WPR_Line1SearchText(prefixText, count)
-              
-        End Function
-          
-        Public Shared Function GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText_Base(ByVal prefixText As String, ByVal count As Integer) As String()
-            ' Since this method is a shared/static method it does not maintain information about page or controls within the page.
-            ' Hence we can not invoke any method associated with any controls.
-            ' So, if we need to use any control in the page we need to instantiate it.
-            Dim control as ePortalWFApproval.UI.Controls.Show_WCanvass_Internal1.WCanvass_Quotation_Internal1TableControl 
-            control = new ePortalWFApproval.UI.Controls.Show_WCanvass_Internal1.WCanvass_Quotation_Internal1TableControl()
-            
-            Return control.GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText(prefixText, count)
-              
-        End Function
-          
         ' Load data from database into UI controls.
         ' Modify LoadData in Section 1 above to customize.  Or override DataBind() in
         ' the individual table and record controls to customize.

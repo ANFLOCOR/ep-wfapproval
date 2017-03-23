@@ -1479,6 +1479,10 @@
           <Name>ImageUrl</Name>
           <Value>../Images/icon_view.gif</Value>
         </Attribute>
+        <Attribute>
+          <Name>RedirectURL</Name>
+          <Value>../WCanvass_Internal/Show-WCanvass-Internal1.aspx?WCanvass_Internal={View_WCPO_Canvass1TableControlRow:FV:WCI_ID}</Value>
+        </Attribute>
       </PassthroughAttributes>
       <InsideControl>View_WCPO_Canvass1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>

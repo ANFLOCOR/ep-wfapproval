@@ -18,50 +18,6 @@
   </Self>
   <ComposedOf>
     <ContainedComponent>
-      <Name>CancelButton</Name>
-      <Type>Button</Type>
-      <Layout>..\Shared\ThemeButton.html</Layout>
-      <PassthroughAttributes>
-        <Attribute>
-          <Name>Button-CausesValidation</Name>
-          <Value>False</Value>
-        </Attribute>
-        <Attribute>
-          <Name>Button-CommandName</Name>
-          <Value>Redirect</Value>
-        </Attribute>
-        <Attribute>
-          <Name>Button-RedirectURL</Name>
-          <Value>Back</Value>
-        </Attribute>
-        <Attribute>
-          <Name>Button-Text</Name>
-          <Value>Btn:Cancel</Value>
-          <Type>ResourceReference</Type>
-        </Attribute>
-        <Attribute>
-          <Name>Button-ToolTip</Name>
-          <Value>Btn:Cancel</Value>
-          <Type>ResourceReference</Type>
-        </Attribute>
-      </PassthroughAttributes>
-    </ContainedComponent>
-    <ContainedComponent>
-      <Name>DialogTitle</Name>
-      <Type>Html</Type>
-      <PassthroughAttributes>
-        <Attribute>
-          <Name>HtmlEncodeWhiteSpace</Name>
-          <Value>True</Value>
-        </Attribute>
-        <Attribute>
-          <Name>Text</Name>
-          <Value>Txt:SignIn</Value>
-          <Type>ResourceReference</Type>
-        </Attribute>
-      </PassthroughAttributes>
-    </ContainedComponent>
-    <ContainedComponent>
       <Name>EmailLinkButton</Name>
       <Type>LinkButton</Type>
       <PassthroughAttributes>
@@ -127,6 +83,10 @@
           <Value>Login</Value>
         </Attribute>
         <Attribute>
+          <Name>Button-Height</Name>
+          <Value>20px</Value>
+        </Attribute>
+        <Attribute>
           <Name>Button-Text</Name>
           <Value>Btn:OK</Value>
           <Type>ResourceReference</Type>
@@ -135,6 +95,10 @@
           <Name>Button-ToolTip</Name>
           <Value>Btn:OK</Value>
           <Type>ResourceReference</Type>
+        </Attribute>
+        <Attribute>
+          <Name>Button-Width</Name>
+          <Value>40px</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>
@@ -331,40 +295,6 @@
   &lt;/Layout&gt;
   &lt;Layout Name="SignInPanelHeaderGroup"&gt;
     &lt;Prolog /&gt;
-    &lt;Row&gt;
-      &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" alt=""/&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;dhel&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:HTML NAME="DialogTitle" /&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;dht&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;valign&lt;/Name&gt;
-            &lt;AttributeValue&gt;middle&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" alt=""/&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;dher&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;RowAttributes /&gt;
-    &lt;/Row&gt;
     &lt;Epilog /&gt;
     &lt;TableAttributes&gt;
       &lt;Attribute&gt;
@@ -670,11 +600,15 @@
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:BUTTON NAME="OKButton"/&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;amp;nbsp;&lt;/Value&gt;
         &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:BUTTON NAME="CancelButton"/&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;amp;nbsp;&lt;/Value&gt;
+        &lt;CellAttributes /&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:BUTTON NAME="OKButton" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
       &lt;RowAttributes /&gt;

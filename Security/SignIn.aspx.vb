@@ -302,12 +302,12 @@ Partial Public Class SignIn
           ' NOTE: If the Base function redirects to another page, any code here will not be executed.
         End Sub
             
-        Public Sub CancelButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-          ' Click handler for CancelButton.
-          ' Customize by adding code before the call or replace the call to the Base function with your own code.
-          CancelButton_Click_Base(sender, args)
-          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-        End Sub
+'        Public Sub CancelButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+'          ' Click handler for CancelButton.
+'          ' Customize by adding code before the call or replace the call to the Base function with your own code.
+'          CancelButton_Click_Base(sender, args)
+'          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+'        End Sub
             
         Public Sub OKButton_Click(ByVal sender As Object, ByVal args As EventArgs)
           ' Click handler for OKButton.
@@ -529,9 +529,9 @@ Partial Public Class SignIn
             SetEmailLinkButton_Base() 
         End Sub              
             
-        Public Sub SetCancelButton()
-            SetCancelButton_Base() 
-        End Sub              
+'        Public Sub SetCancelButton()
+'            SetCancelButton_Base() 
+'        End Sub              
             
         Public Sub SetOKButton()
             SetOKButton_Base() 
@@ -563,8 +563,6 @@ Partial Public Class SignIn
           ' Setup the pagination events.
         
               AddHandler Me.EmailLinkButton.Click, AddressOf EmailLinkButton_Click
-                        
-              AddHandler Me.CancelButton.Button.Click, AddressOf CancelButton_Click
                         
               AddHandler Me.OKButton.Button.Click, AddressOf OKButton_Click
                         
@@ -806,8 +804,6 @@ Partial Public Class SignIn
                 
                 SetEmailLinkButton()
               
-                SetCancelButton()
-              
                 SetOKButton()
               
                 
@@ -884,11 +880,6 @@ Partial Public Class SignIn
    
         End Sub
             
-        Public Sub SetCancelButton_Base()                
-              
-   
-        End Sub
-            
         Public Sub SetOKButton_Base()                
               
    
@@ -953,44 +944,6 @@ Partial Public Class SignIn
                         Not shouldRedirect Then
             Me.ShouldSaveControlsToSession = True
             Me.CloseWindow(True)
-        
-            End If
-        End Sub
-        
-        ' event handler for Button
-        Public Sub CancelButton_Click_Base(ByVal sender As Object, ByVal args As EventArgs)
-              
-        Dim shouldRedirect As Boolean = True
-        Dim target As String = ""
-      
-    Try
-    
-                Dim state As UI.SignInState = New SignInState
-                BaseClasses.Utils.NetUtils.SetCookie(NetUtils.CookieRememberName(), state.OriginalRememberUser)
-                BaseClasses.Utils.NetUtils.SetCookie(NetUtils.CookieRememberPassword(), state.OriginalRememberPassword)
-                BaseClasses.Utils.NetUtils.SetCookie(NetUtils.CookieUserName(), state.OriginalUserName)
-                BaseClasses.Utils.NetUtils.SetCookie(NetUtils.CookiePassword(), state.OriginalPassword)
-                state.IsCancelled = True     
-
-                ' if target is specified meaning that is opened on popup or new window
-                If Page.Request("target") <> "" Then
-                    shouldRedirect = False
-                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "ClosePopup", "closePopupPage();", True)                   
-                End If
-      
-            Catch ex As Exception
-            
-                shouldRedirect = False
-                Me.ErrorOnPage = True
-    
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-    
-            Finally
-    
-            End Try
-            If shouldRedirect Then
-      Me.RedirectBack()
         
             End If
         End Sub

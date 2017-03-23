@@ -1513,11 +1513,15 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='./Images/icon-view.png'</Value>
+          <Value>this.src='../Images/icon-view.png'</Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='./Images/icon-view-over.png'</Value>
+          <Value>this.src='../Images/icon-view-over.png'</Value>
+        </Attribute>
+        <Attribute>
+          <Name>RedirectURL</Name>
+          <Value>../WCanvass_Internal/Show-WCanvass-Internal1.aspx?WCanvass_Internal={View_WCPO_Canvass11TableControlRow:FV:WCI_ID}</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>View_WCPO_Canvass11TableControl</InsideControl>
