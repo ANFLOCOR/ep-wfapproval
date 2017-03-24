@@ -54,7 +54,7 @@ Partial Public Class rpt_PO_Pipeline1
           ' or replace the call to LoadData_Base().
           LoadData_Base()
 		 Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServerN")
-            Dim sParam As String = System.Web.HttpContext.Current.Session("UserId1North").ToString()
+            Dim sParam As String = System.Web.HttpContext.Current.Session("UserIdNorth").ToString()
 
             Dim sUrl As String = ""
 
@@ -62,7 +62,9 @@ Partial Public Class rpt_PO_Pipeline1
                 sParam = sParam.Replace("*", "&")
             End If
 
-            sUrl = "http://" & sWebServer & "/reportserver?%2fWORKFLOW%2fPO+Approver+Pipeline&rs:Command=Render&UserID=" & _
+            '      sUrl = "http://" & sWebServer & "/reportserver?%2fWORKFLOW%2fPO+Approver+Pipeline&rs:Command=Render&UserID=" & _
+            'sParam & "&rc:Parameters=false"
+            sUrl = "http://" & sWebServer & "/reportserver?%2fWORKFLOW%2fwf_po_approver_pipeline&rs:Command=Render&UserID=" & _
       sParam & "&rc:Parameters=false"
 
             frm.Attributes("src") = sUrl
