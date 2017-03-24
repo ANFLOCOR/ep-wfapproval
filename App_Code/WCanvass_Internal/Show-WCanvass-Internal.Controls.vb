@@ -309,123 +309,7 @@ Public Class WCanvass_InternalRecordControl
 
 End Class
 
-  
 
-'Public Class WPR_Doc_AttachTableControl
-'        Inherits BaseWPR_Doc_AttachTableControl
-'
-'    ' The BaseWPR_Doc_AttachTableControl class implements the LoadData, DataBind, CreateWhereClause
-'    ' and other methods to load and display the data in a table control.
-'
-'    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-'    ' The WPR_Doc_AttachTableControlRow class offers another place where you can customize
-'    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
-'
-'
-'		Public Overrides Function CreateWhereClause() As WhereClause
-'        WPR_Doc_AttachTable.Instance.InnerFilter = Nothing
-'        Dim wc As WhereClause = New WhereClause()
-'        Dim oHeader As WCanvass_InternalRecordControl = DirectCast(Me.Page.FindControlRecursively("WCanvass_InternalRecordControl"), WCanvass_InternalRecordControl)
-'		
-'		wc.iAND(WPR_Doc_AttachTable.WPRDA_WPRD_ID, BaseFilter.ComparisonOperator.EqualsTo, oHeader.WCI_WPRD_ID.SelectedValue.ToString())
-'
-'        Return wc
-'    End Function
-'End Class
-'
-'Public Class WPR_Doc_AttachTableControlRow
-'        Inherits BaseWPR_Doc_AttachTableControlRow
-'        ' The BaseWPR_Doc_AttachTableControlRow implements code for a ROW within the
-'        ' the WPR_Doc_AttachTableControl table.  The BaseWPR_Doc_AttachTableControlRow implements the DataBind and SaveData methods.
-'        ' The loading of data is actually performed by the LoadData method in the base class of WPR_Doc_AttachTableControl.
-'
-'        ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
-'        ' SaveData, GetUIData, and Validate methods.
-'        
-'
-'End Class
-'
-'Public Class WCAR_DocTableControl
-'        Inherits BaseWCAR_DocTableControl
-'
-'    ' The BaseWCAR_DocTableControl class implements the LoadData, DataBind, CreateWhereClause
-'    ' and other methods to load and display the data in a table control.
-'
-'    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-'    ' The WCAR_DocTableControlRow class offers another place where you can customize
-'    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
-'
-'
-'		Public Overrides Function CreateWhereClause() As WhereClause        
-'        WCAR_DocTable.Instance.InnerFilter = Nothing
-'        Dim wc As WhereClause = New WhereClause()
-'          
-'		Dim oHeader As WCanvass_InternalRecordControl = DirectCast(Me.Page.FindControlRecursively("WCanvass_InternalRecordControl"), WCanvass_InternalRecordControl)
-'		Dim sWhere As String = WPR_DocTable.WPRD_ID.UniqueName & " = " & oHeader.WCI_WPRD_ID.SelectedValue.ToString()
-'		Dim sID As String = ""
-'		
-'		For Each oPR As WPR_DocRecord In WPR_DocTable.GetRecords(sWhere, Nothing, 0, 5)
-'			sID = oPR.WPRD_WCD_ID.ToString()
-'		Next
-'	
-'		wc.iAND(WCAR_DocTable.WCD_ID, BaseFilter.ComparisonOperator.EqualsTo, sID)
-'        Return wc
-'    End Function
-'End Class
-'
-'Public Class WCAR_DocTableControlRow
-'        Inherits BaseWCAR_DocTableControlRow
-'        ' The BaseWCAR_DocTableControlRow implements code for a ROW within the
-'        ' the WCAR_DocTableControl table.  The BaseWCAR_DocTableControlRow implements the DataBind and SaveData methods.
-'        ' The loading of data is actually performed by the LoadData method in the base class of WCAR_DocTableControl.
-'
-'        ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
-'        ' SaveData, GetUIData, and Validate methods.
-'        
-'
-'End Class
-'
-'Public Class WCAR_Doc_AttachTableControl
-'        Inherits BaseWCAR_Doc_AttachTableControl
-'
-'    ' The BaseWCAR_Doc_AttachTableControl class implements the LoadData, DataBind, CreateWhereClause
-'    ' and other methods to load and display the data in a table control.
-'
-'    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-'    ' The WCAR_Doc_AttachTableControlRow class offers another place where you can customize
-'    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
-'
-'
-'		Public Overrides Function CreateWhereClause() As WhereClause        
-'        WCAR_Doc_AttachTable.Instance.InnerFilter = Nothing
-'        Dim wc As WhereClause = New WhereClause()
-'
-'		Dim oHeader As WCanvass_InternalRecordControl = DirectCast(Me.Page.FindControlRecursively("WCanvass_InternalRecordControl"), WCanvass_InternalRecordControl)
-'		Dim sWhere As String = WPR_DocTable.WPRD_ID.UniqueName & " = " & oHeader.WCI_WPRD_ID.SelectedValue.ToString()
-'		Dim sID As String = ""
-'		
-'		For Each oPR As WPR_DocRecord In WPR_DocTable.GetRecords(sWhere, Nothing, 0, 5)
-'			sID = oPR.WPRD_WCD_ID.ToString()
-'		Next
-'	
-'		wc.iAND(WCAR_Doc_AttachTable.WCDA_WCD_ID, BaseFilter.ComparisonOperator.EqualsTo, sID)
-'				
-'        Return wc
-'    End Function
-'End Class
-'
-'Public Class WCAR_Doc_AttachTableControlRow
-'        Inherits BaseWCAR_Doc_AttachTableControlRow
-'        ' The BaseWCAR_Doc_AttachTableControlRow implements code for a ROW within the
-'        ' the WCAR_Doc_AttachTableControl table.  The BaseWCAR_Doc_AttachTableControlRow implements the DataBind and SaveData methods.
-'        ' The loading of data is actually performed by the LoadData method in the base class of WCAR_Doc_AttachTableControl.
-'
-'        ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
-'        ' SaveData, GetUIData, and Validate methods.
-'        
-'
-'End Class
-'
 Public Class WCanvass_Quotation_InternalTableControl
         Inherits BaseWCanvass_Quotation_InternalTableControl
 
@@ -945,6 +829,7 @@ Public Class Sel_WCanvass_Detail_Internal_WPR_LineTableControlRow
             End If
 
             Me.Item.Attributes.Add("onClick", "OpenItemInquiry('" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.Item1.Attributes.Add("onClick", "OpenItemInquiry('" & Me.DataSource.Item.ToString() & "');return false;")
             Me.imbBid.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
             Me.imbBid1.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID2.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
             Me.imbBid2.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID4.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
@@ -955,6 +840,17 @@ Public Class Sel_WCanvass_Detail_Internal_WPR_LineTableControlRow
             Me.imbBid7.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID14.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
             Me.imbBid8.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID16.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
             Me.imbBid9.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID18.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+
+            Me.lbVendorItemHistory.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.lbVendorItemHistory1.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID2.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.lbVendorItemHistory2.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID4.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.lbVendorItemHistory3.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID6.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.lbVendorItemHistory4.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID8.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.lbVendorItemHistory5.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID10.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.lbVendorItemHistory6.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID12.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.lbVendorItemHistory7.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID14.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.lbVendorItemHistory8.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID16.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.lbVendorItemHistory9.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID18.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
 
             Dim oHeader As WCanvass_InternalRecordControl = DirectCast(Me.Page.FindControlRecursively("WCanvass_InternalRecordControl"), WCanvass_InternalRecordControl)
             Dim sWhere As String = WPR_LineTable.WPRL_ID.UniqueName & " = " & Me.WPRL_ID.Text
@@ -1011,6 +907,17 @@ Public Class Sel_WCanvass_Detail_Internal_WPR_LineTableControlRow
             Me.imbHist7.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID14.ClientID & "');return false;")
             Me.imbHist8.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID16.ClientID & "');return false;")
             Me.imbHist9.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID18.ClientID & "');return false;")
+
+            Me.lbVendorHistory.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID.ClientID & "');return false;")
+            Me.lbVendorHistory1.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID2.ClientID & "');return false;")
+            Me.lbVendorHistory2.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID4.ClientID & "');return false;")
+            Me.lbVendorHistory3.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID6.ClientID & "');return false;")
+            Me.lbVendorHistory4.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID8.ClientID & "');return false;")
+            Me.lbVendorHistory5.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID10.ClientID & "');return false;")
+            Me.lbVendorHistory6.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID12.ClientID & "');return false;")
+            Me.lbVendorHistory7.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID14.ClientID & "');return false;")
+            Me.lbVendorHistory8.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID16.ClientID & "');return false;")
+            Me.lbVendorHistory9.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID18.ClientID & "');return false;")
 
             Dim oHead As WCanvass_InternalRecordControl = DirectCast(GetParentControlObject(Me, "WCanvass_InternalRecordControl"), WCanvass_InternalRecordControl)
 

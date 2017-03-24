@@ -373,17 +373,17 @@ Public Class Sel_WCanvass_Detail_Internal_WPR_Line1TableControlRow
                 'Me.Literal13.Text = "******[&nbsp;BID&nbsp;IS&nbsp;CLOSED&nbsp;FOR&nbsp;THIS&nbsp;VENDOR&nbsp;]******"
             End If
 
-            Me.Item.Attributes.Add("onClick", "OpenItemInquiry('" & Me.DataSource.Item.ToString() & "');return false;")
-            Me.imbBid.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
-            Me.imbBid1.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID2.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
-            Me.imbBid2.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID4.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
-            Me.imbBid3.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID6.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
-            Me.imbBid4.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID8.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
-            Me.imbBid5.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID10.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
-            Me.imbBid6.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID12.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
-            Me.imbBid7.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID14.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
-            Me.imbBid8.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID16.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
-            Me.imbBid9.Attributes.Add("onClick", "OpenVendorItemInquiry('" & Me.WCDI_PM00200_Vendor_ID18.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.Item.Attributes.Add("onClick", "OpenItemInquiryN('" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.imbBid.Attributes.Add("onClick", "OpenVendorItemInquiryN('" & Me.WCDI_PM00200_Vendor_ID.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.imbBid1.Attributes.Add("onClick", "OpenVendorItemInquiryN('" & Me.WCDI_PM00200_Vendor_ID2.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.imbBid2.Attributes.Add("onClick", "OpenVendorItemInquiryN('" & Me.WCDI_PM00200_Vendor_ID4.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.imbBid3.Attributes.Add("onClick", "OpenVendorItemInquiryN('" & Me.WCDI_PM00200_Vendor_ID6.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.imbBid4.Attributes.Add("onClick", "OpenVendorItemInquiryN('" & Me.WCDI_PM00200_Vendor_ID8.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.imbBid5.Attributes.Add("onClick", "OpenVendorItemInquiryN('" & Me.WCDI_PM00200_Vendor_ID10.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.imbBid6.Attributes.Add("onClick", "OpenVendorItemInquiryN('" & Me.WCDI_PM00200_Vendor_ID12.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.imbBid7.Attributes.Add("onClick", "OpenVendorItemInquiryN('" & Me.WCDI_PM00200_Vendor_ID14.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.imbBid8.Attributes.Add("onClick", "OpenVendorItemInquiryN('" & Me.WCDI_PM00200_Vendor_ID16.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
+            Me.imbBid9.Attributes.Add("onClick", "OpenVendorItemInquiryN('" & Me.WCDI_PM00200_Vendor_ID18.ClientID & "','" & Me.DataSource.Item.ToString() & "');return false;")
         End Sub
 
         Protected Overrides Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -411,29 +411,29 @@ Public Class Sel_WCanvass_Detail_Internal_WPR_Line1TableControlRow
 
             AddHandler Me.Item.Click, AddressOf Item_Click
             'Me.Item.Attributes.Add("onClick", "OpenItemInquiry('" & Me.Item.Text & "');return false;")	
-            Me.imbHist.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID.ClientID & "');return false;")
-            Me.imbHist1.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID2.ClientID & "');return false;")
-            Me.imbHist2.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID4.ClientID & "');return false;")
-            Me.imbHist3.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID6.ClientID & "');return false;")
-            Me.imbHist4.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID8.ClientID & "');return false;")
-            Me.imbHist5.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID10.ClientID & "');return false;")
-            Me.imbHist6.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID12.ClientID & "');return false;")
-            Me.imbHist7.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID14.ClientID & "');return false;")
-            Me.imbHist8.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID16.ClientID & "');return false;")
-            Me.imbHist9.Attributes.Add("onClick", "OpenVendorInquiry('" & Me.WCDI_PM00200_Vendor_ID18.ClientID & "');return false;")
+            Me.imbHist.Attributes.Add("onClick", "OpenVendorInquiryN('" & Me.WCDI_PM00200_Vendor_ID.ClientID & "');return false;")
+            Me.imbHist1.Attributes.Add("onClick", "OpenVendorInquiryN('" & Me.WCDI_PM00200_Vendor_ID2.ClientID & "');return false;")
+            Me.imbHist2.Attributes.Add("onClick", "OpenVendorInquiryN('" & Me.WCDI_PM00200_Vendor_ID4.ClientID & "');return false;")
+            Me.imbHist3.Attributes.Add("onClick", "OpenVendorInquiryN('" & Me.WCDI_PM00200_Vendor_ID6.ClientID & "');return false;")
+            Me.imbHist4.Attributes.Add("onClick", "OpenVendorInquiryN('" & Me.WCDI_PM00200_Vendor_ID8.ClientID & "');return false;")
+            Me.imbHist5.Attributes.Add("onClick", "OpenVendorInquiryN('" & Me.WCDI_PM00200_Vendor_ID10.ClientID & "');return false;")
+            Me.imbHist6.Attributes.Add("onClick", "OpenVendorInquiryN('" & Me.WCDI_PM00200_Vendor_ID12.ClientID & "');return false;")
+            Me.imbHist7.Attributes.Add("onClick", "OpenVendorInquiryN('" & Me.WCDI_PM00200_Vendor_ID14.ClientID & "');return false;")
+            Me.imbHist8.Attributes.Add("onClick", "OpenVendorInquiryN('" & Me.WCDI_PM00200_Vendor_ID16.ClientID & "');return false;")
+            Me.imbHist9.Attributes.Add("onClick", "OpenVendorInquiryN('" & Me.WCDI_PM00200_Vendor_ID18.ClientID & "');return false;")
 
             Dim oHead As WCanvass_InternalRecordControl = DirectCast(GetParentControlObject(Me, "WCanvass_InternalRecordControl"), WCanvass_InternalRecordControl)
 
-            Me.imbAtt.Attributes.Add("onClick", "OpenAttachInquiry('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID.ClientID & "');return false;")
-            Me.imbAtt1.Attributes.Add("onClick", "OpenAttachInquiry('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID2.ClientID & "');return false;")
-            Me.imbAtt2.Attributes.Add("onClick", "OpenAttachInquiry('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID4.ClientID & "');return false;")
-            Me.imbAtt3.Attributes.Add("onClick", "OpenAttachInquiry('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID6.ClientID & "');return false;")
-            Me.imbAtt4.Attributes.Add("onClick", "OpenAttachInquiry('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID8.ClientID & "');return false;")
-            Me.imbAtt5.Attributes.Add("onClick", "OpenAttachInquiry('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID10.ClientID & "');return false;")
-            Me.imbAtt6.Attributes.Add("onClick", "OpenAttachInquiry('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID12.ClientID & "');return false;")
-            Me.imbAtt7.Attributes.Add("onClick", "OpenAttachInquiry('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID14.ClientID & "');return false;")
-            Me.imbAtt8.Attributes.Add("onClick", "OpenAttachInquiry('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID16.ClientID & "');return false;")
-            Me.imbAtt9.Attributes.Add("onClick", "OpenAttachInquiry('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID18.ClientID & "');return false;")
+            Me.imbAtt.Attributes.Add("onClick", "OpenAttachInquiryN('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID.ClientID & "');return false;")
+            Me.imbAtt1.Attributes.Add("onClick", "OpenAttachInquiryN('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID2.ClientID & "');return false;")
+            Me.imbAtt2.Attributes.Add("onClick", "OpenAttachInquiryN('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID4.ClientID & "');return false;")
+            Me.imbAtt3.Attributes.Add("onClick", "OpenAttachInquiryN('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID6.ClientID & "');return false;")
+            Me.imbAtt4.Attributes.Add("onClick", "OpenAttachInquiryN('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID8.ClientID & "');return false;")
+            Me.imbAtt5.Attributes.Add("onClick", "OpenAttachInquiryN('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID10.ClientID & "');return false;")
+            Me.imbAtt6.Attributes.Add("onClick", "OpenAttachInquiryN('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID12.ClientID & "');return false;")
+            Me.imbAtt7.Attributes.Add("onClick", "OpenAttachInquiryN('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID14.ClientID & "');return false;")
+            Me.imbAtt8.Attributes.Add("onClick", "OpenAttachInquiryN('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID16.ClientID & "');return false;")
+            Me.imbAtt9.Attributes.Add("onClick", "OpenAttachInquiryN('" & oHead.WCI_ID.Text & "','" & Me.WCDI_PM00200_Vendor_ID18.ClientID & "');return false;")
         End Sub
 
        
@@ -525,49 +525,7 @@ Public Class Sel_WCanvass_Detail_Internal_WPR_Line1TableControlRow
         Inherits BaseWCanvass_InternalRecordControl
        
 
-        Public Overrides Sub CancelButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Dim url As String = ""
-            Dim shouldRedirect As Boolean = True
-            Dim TargetKey As String = Nothing
-            Dim DFKA As String = Nothing
-            Dim id As String = Nothing
-            Dim value As String = Nothing
-
-            Dim poNum As String = CStr(System.Web.HttpContext.Current.Session("PONO"))
-
-
-            Try
-                DbUtils.StartTransaction()
-
-                url = "../sel_WPO_WFTask/WPO_WFTaskN.aspx?POP10100_PO=" & Trim(poNum) & "&POP10100_Co=" & Me.WCI_C_ID.SelectedValue.ToString
-
-
-
-                url = Me.ModifyRedirectUrl(url, "", False)
-                url = Me.Page.ModifyRedirectUrl(url, "", False)
-                Me.Page.CommitTransaction(sender)
-
-
-
-            Catch ex As Exception
-                shouldRedirect = False
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-            Finally
-
-            End Try
-            If shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-            ElseIf Not TargetKey Is Nothing AndAlso Not shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.CloseWindow(True)
-            End If
-        End Sub
-
+        
         Private Function Stuff_Zero(Num As String) As String
             Dim iLoop As Integer
             Dim sTemp As String
@@ -635,11 +593,11 @@ Public Class Sel_WCanvass_Detail_Internal_WPR_Line1TableControlRow
             control1.Attributes.Add("onFocus", "javascript:jq_toggle_col_vis2('tblVendor','" & Me.WCI_Vendors.ClientID & "');")
         End Sub
 
-        Public Overrides Sub SetWCI_C_ID()
+		Public Overrides Sub SetWCI_C_ID()
 
             If Me.DataSource.WCI_C_IDSpecified Then
-
-                System.Web.HttpContext.Current.Session("CI_C_ID") = Me.DataSource.WCI_C_ID.ToString()
+				
+				System.Web.HttpContext.Current.Session("CI_C_ID") = Me.DataSource.WCI_C_ID.ToString()
 
                 Dim wc As WhereClause = New WhereClause()
                 Dim cDesc As String = ""
@@ -658,6 +616,16 @@ Public Class Sel_WCanvass_Detail_Internal_WPR_Line1TableControlRow
                 '    Me.WCI_C_ID.Text = WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID.Format(WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID.DefaultValue)
             End If
 
+            'If Me.DataSource.WCI_C_IDSpecified Then
+            '    System.Web.HttpContext.Current.Session("CI_C_ID") = Me.DataSource.WCI_C_ID.ToString()
+            '    'Me.PopulateWCI_C_IDDropDownList(Me.DataSource.WCI_C_ID.ToString(), 100)
+            'Else
+            '    If Not Me.DataSource.IsCreated Then
+            '        'Me.PopulateWCI_C_IDDropDownList(WCanvass_InternalTable.WCI_C_ID.DefaultValue, 100)
+            '    Else
+            '        'Me.PopulateWCI_C_IDDropDownList(Nothing, 100)
+            '    End If
+            'End If
         End Sub
 
         Public Overrides Sub DataBind()
@@ -10994,7 +10962,7 @@ Public Class BaseWCanvass_InternalRecordControl
                         
               AddHandler Me.EditButton.Button.Click, AddressOf EditButton_Click
                         
-              AddHandler Me.WCI_C_ID.SelectedIndexChanged, AddressOf WCI_C_ID_SelectedIndexChanged
+              AddHandler Me.WCI_C_ID1.SelectedIndexChanged, AddressOf WCI_C_ID1_SelectedIndexChanged
             
               AddHandler Me.WCI_Vendors.SelectedIndexChanged, AddressOf WCI_Vendors_SelectedIndexChanged
             
@@ -11118,6 +11086,7 @@ Public Class BaseWCanvass_InternalRecordControl
                 
                 
                 SetWCI_C_ID()
+                SetWCI_C_ID1()
                 SetWCI_C_IDLabel()
                 SetWCI_Date()
                 SetWCI_DateLabel()
@@ -11171,6 +11140,55 @@ Public Class BaseWCanvass_InternalRecordControl
 
                   
             
+        
+            ' Set the WCI_C_ID Literal on the webpage with value from the
+            ' DatabaseANFLO-WFN%dbo.WCanvass_Internal database record.
+
+            ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCanvass_Internal record retrieved from the database.
+            ' Me.WCI_C_ID is the ASP:Literal on the webpage.
+            
+            ' You can modify this method directly, or replace it with a call to
+            '     MyBase.SetWCI_C_ID()
+            ' and add your own code before or after the call to the MyBase function.
+
+            
+                  
+            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCI_C_IDSpecified Then
+                				
+                ' If the WCI_C_ID is non-NULL, then format the value.
+
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = ""
+                Dim _isExpandableNonCompositeForeignKey As Boolean = WCanvass_Internal1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCanvass_Internal1Table.WCI_C_ID)
+                If _isExpandableNonCompositeForeignKey AndAlso WCanvass_Internal1Table.WCI_C_ID.IsApplyDisplayAs Then
+                                  
+                       formattedValue = WCanvass_Internal1Table.GetDFKA(Me.DataSource.WCI_C_ID.ToString(),WCanvass_Internal1Table.WCI_C_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WCanvass_Internal1Table.WCI_C_ID)
+                       End If
+                Else
+                       formattedValue = Me.DataSource.WCI_C_ID.ToString()
+                End If
+                                
+                formattedValue = HttpUtility.HtmlEncode(formattedValue)
+                Me.WCI_C_ID.Text = formattedValue
+                
+            Else 
+            
+                ' WCI_C_ID is NULL in the database, so use the Default Value.  
+                ' Default Value could also be NULL.
+        
+                 Me.WCI_C_ID.Text = WCanvass_Internal1Table.WCI_C_ID.Format(WCanvass_Internal1Table.WCI_C_ID.DefaultValue)
+                        		
+                End If
+                                      
+        End Sub
+                
+        Public Overridable Sub SetWCI_C_ID1()
+
+                  
+            
 
             Dim selectedValue As String = Nothing
             
@@ -11182,10 +11200,10 @@ Public Class BaseWCanvass_InternalRecordControl
             ' DatabaseANFLO-WFN%dbo.WCanvass_Internal database record.
             
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCanvass_Internal record retrieved from the database.
-            ' Me.WCI_C_ID is the ASP:DropDownList on the webpage.
+            ' Me.WCI_C_ID1 is the ASP:DropDownList on the webpage.
             
             ' You can modify this method directly, or replace it with a call to
-            '     MyBase.SetWCI_C_ID()
+            '     MyBase.SetWCI_C_ID1()
             ' and add your own code before or after the call to the MyBase function.
 
             
@@ -11210,7 +11228,7 @@ Public Class BaseWCanvass_InternalRecordControl
                   
             ' Populate the item(s) to the control
             
-            Me.PopulateWCI_C_IDDropDownList(selectedValue, 100)              
+            Me.PopulateWCI_C_ID1DropDownList(selectedValue, 100)              
                 
                   
            
@@ -11845,6 +11863,7 @@ Public Class BaseWCanvass_InternalRecordControl
             ' Call the Get methods for each of the user interface controls.
         
             GetWCI_C_ID()
+            GetWCI_C_ID1()
             GetWCI_Date()
             GetWCI_ID()
             GetWCI_Status()
@@ -11857,6 +11876,10 @@ Public Class BaseWCanvass_InternalRecordControl
         
         
         Public Overridable Sub GetWCI_C_ID()
+            
+        End Sub
+                
+        Public Overridable Sub GetWCI_C_ID1()
          
         End Sub
                 
@@ -12224,7 +12247,7 @@ Public Class BaseWCanvass_InternalRecordControl
         End Sub
             
                         
-        Public Overridable Function CreateWhereClause_WCI_C_IDDropDownList() As WhereClause
+        Public Overridable Function CreateWhereClause_WCI_C_ID1DropDownList() As WhereClause
             ' By default, we simply return a new WhereClause.
             ' Add additional where clauses to restrict the items shown in the dropdown list.
             						
@@ -12278,23 +12301,23 @@ Public Class BaseWCanvass_InternalRecordControl
             				
         End Function
                   
-        ' Fill the WCI_C_ID list.
-        Protected Overridable Sub PopulateWCI_C_IDDropDownList( _
+        ' Fill the WCI_C_ID1 list.
+        Protected Overridable Sub PopulateWCI_C_ID1DropDownList( _
                 ByVal selectedValue As String, _
                 ByVal maxItems As Integer)
             		  					                
-            Me.WCI_C_ID.Items.Clear()
+            Me.WCI_C_ID1.Items.Clear()
             
                     
             ' 1. Setup the static list items        
             
             ' Add the Please Select item.
-            Me.WCI_C_ID.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+            Me.WCI_C_ID1.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
                             		  			
-            ' 2. Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCI_C_IDDropDownList function.
+            ' 2. Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCI_C_ID1DropDownList function.
             ' It is better to customize the where clause there.
             
-            Dim wc As WhereClause = CreateWhereClause_WCI_C_IDDropDownList()
+            Dim wc As WhereClause = CreateWhereClause_WCI_C_ID1DropDownList()
             ' Create the ORDER BY clause to sort based on the displayed value.			
                 
 
@@ -12320,7 +12343,7 @@ Public Class BaseWCanvass_InternalRecordControl
                         If itemValue.Company_IDSpecified Then
                             cvalue = itemValue.Company_ID.ToString() 
                             
-                            If counter < maxItems AndAlso Me.WCI_C_ID.Items.FindByValue(cvalue) Is Nothing Then
+                            If counter < maxItems AndAlso Me.WCI_C_ID1.Items.FindByValue(cvalue) Is Nothing Then
                             
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WCanvass_Internal1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCanvass_Internal1Table.WCI_C_ID)
                                 If _isExpandableNonCompositeForeignKey AndAlso WCanvass_Internal1Table.WCI_C_ID.IsApplyDisplayAs Then
@@ -12342,7 +12365,7 @@ Public Class BaseWCanvass_InternalRecordControl
                                     fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
-                                Dim dupItem As ListItem = Me.WCI_C_ID.Items.FindByText(fvalue)
+                                Dim dupItem As ListItem = Me.WCI_C_ID1.Items.FindByText(fvalue)
                           
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
@@ -12352,7 +12375,7 @@ Public Class BaseWCanvass_InternalRecordControl
                                 End If
 
                                 Dim newItem As ListItem = New ListItem(fvalue, cvalue)
-                                Me.WCI_C_ID.Items.Add(newItem)
+                                Me.WCI_C_ID1.Items.Add(newItem)
 
                                 If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
                                     newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
@@ -12371,8 +12394,8 @@ Public Class BaseWCanvass_InternalRecordControl
               
             If Not selectedValue Is Nothing AndAlso _
                 selectedValue.Trim <> "" AndAlso _
-                Not SetSelectedValue(Me.WCI_C_ID, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.WCI_C_ID, selectedValue)Then
+                Not SetSelectedValue(Me.WCI_C_ID1, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.WCI_C_ID1, selectedValue)Then
 
                 ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.sel_WF_DYNAMICS_Company.Company_ID = selectedValue
                 Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
@@ -12401,7 +12424,7 @@ Public Class BaseWCanvass_InternalRecordControl
                           End If
                         
                               If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-                              ResetSelectedItem(Me.WCI_C_ID, New ListItem(fvalue, cvalue))
+                              ResetSelectedItem(Me.WCI_C_ID1, New ListItem(fvalue, cvalue))
                             End If
                         End If
                 Catch
@@ -12755,10 +12778,21 @@ Public Class BaseWCanvass_InternalRecordControl
         ' event handler for Button
         Public Overridable Sub CancelButton_Click(ByVal sender As Object, ByVal args As EventArgs)
               
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
     Try
     
+
+                ' if target is specified meaning that is opened on popup or new window
+                If Page.Request("target") <> "" Then
+                    shouldRedirect = False
+                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "ClosePopup", "closePopupPage();", True)                   
+                End If
+      
             Catch ex As Exception
             
+                shouldRedirect = False
                 Me.Page.ErrorOnPage = True
     
                 ' Report the error message to the end user
@@ -12767,7 +12801,11 @@ Public Class BaseWCanvass_InternalRecordControl
             Finally
     
             End Try
-    
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.RedirectBack()
+        
+            End If
         End Sub
         
         ' event handler for Button
@@ -12815,17 +12853,17 @@ Public Class BaseWCanvass_InternalRecordControl
             End If
         End Sub
         
-        Protected Overridable Sub WCI_C_ID_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
+        Protected Overridable Sub WCI_C_ID1_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
 
             ' for the value inserted by quick add button or large list selector, 
             ' the value is necessary to be inserted by this event during postback 
-            Dim val As String = CType(Me.Page.Session()(WCI_C_ID.ClientID & "_SelectedValue"), String)
-            Dim displayText As String = CType(Me.Page.Session()(WCI_C_ID.ClientID & "_SelectedDisplayText"), String)
+            Dim val As String = CType(Me.Page.Session()(WCI_C_ID1.ClientID & "_SelectedValue"), String)
+            Dim displayText As String = CType(Me.Page.Session()(WCI_C_ID1.ClientID & "_SelectedDisplayText"), String)
             If displayText <> "" AndAlso val <> "" Then
-                Me.WCI_C_ID.Items.Add(New ListItem(displayText, val))
-                Me.WCI_C_ID.SelectedIndex = Me.WCI_C_ID.Items.Count - 1
-                Me.Page.Session.Remove(WCI_C_ID.ClientID & "_SelectedValue")
-                Me.Page.Session.Remove(WCI_C_ID.ClientID & "_SelectedDisplayText")
+                Me.WCI_C_ID1.Items.Add(New ListItem(displayText, val))
+                Me.WCI_C_ID1.SelectedIndex = Me.WCI_C_ID1.Items.Count - 1
+                Me.Page.Session.Remove(WCI_C_ID1.ClientID & "_SelectedValue")
+                Me.Page.Session.Remove(WCI_C_ID1.ClientID & "_SelectedDisplayText")
             End If
 
           									
@@ -13076,9 +13114,15 @@ Public Class BaseWCanvass_InternalRecordControl
             End Get
         End Property
         
-        Public ReadOnly Property WCI_C_ID() As System.Web.UI.WebControls.DropDownList
+        Public ReadOnly Property WCI_C_ID() As System.Web.UI.WebControls.Literal
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCI_C_ID"), System.Web.UI.WebControls.DropDownList)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCI_C_ID"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+            
+        Public ReadOnly Property WCI_C_ID1() As System.Web.UI.WebControls.DropDownList
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCI_C_ID1"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
             

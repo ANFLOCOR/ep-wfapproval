@@ -619,14 +619,6 @@
           <Value>../Images/ExpirationHS.gif</Value>
         </Attribute>
         <Attribute>
-          <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
-        </Attribute>
-        <Attribute>
           <Name>ToolTip</Name>
           <Value>View Vendor-Item History</Value>
           <Type>ResourceReference</Type>
@@ -653,11 +645,13 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -686,11 +680,13 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -719,11 +715,13 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -752,11 +750,13 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -785,11 +785,13 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -818,11 +820,13 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -851,11 +855,13 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -884,11 +890,13 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -917,11 +925,13 @@
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
+          <Value>
+          </Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>

@@ -69,8 +69,12 @@
           <Value>page</Value>
         </Attribute>
         <Attribute>
+          <Name>Button-RedirectURL</Name>
+          <Value>Back</Value>
+        </Attribute>
+        <Attribute>
           <Name>Button-Text</Name>
-          <Value>Done</Value>
+          <Value>Back</Value>
         </Attribute>
         <Attribute>
           <Name>Visible</Name>
@@ -623,14 +627,6 @@
         <Attribute>
           <Name>ImageURL</Name>
           <Value>../Images/ExpirationHS.gif</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -5880,6 +5876,76 @@
       <Name>WCI_C_ID</Name>
       <Type>FieldValue</Type>
       <Field>WCI_C_ID</Field>
+      <FieldValueStyle>Literal</FieldValueStyle>
+      <Table>DatabaseANFLO-WFN%dbo.WCanvass_Internal</Table>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>Enabled</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>FieldMaxLength</Name>
+          <Value>Default</Value>
+        </Attribute>
+        <Attribute>
+          <Name>HTMLEncodeValue</Name>
+          <Value>Default</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:ApplySaveToField</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:DataSource</Name>
+          <Value>Parent</Value>
+        </Attribute>
+        <Attribute>
+          <Name>MinListItems</Name>
+          <Value>Default</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PopupDisplay</Name>
+          <Value>True</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PopupThreshold</Name>
+          <Value>Default</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PopupWindowHeight</Name>
+          <Value>200</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PopupWindowPersist</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PopupWindowScrollBar</Name>
+          <Value>True</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PopupWindowTitle</Name>
+          <Value>%ISD_DEFAULT%</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PopupWindowWidth</Name>
+          <Value>300</Value>
+        </Attribute>
+        <Attribute>
+          <Name>WCI_C_IDRequiredFieldValidator:Enabled</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Width</Name>
+          <Value>320px</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WCanvass_InternalRecordControl</InsideControl>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>WCI_C_ID1</Name>
+      <Type>FieldValue</Type>
+      <Field>WCI_C_ID</Field>
       <FieldValueStyle>DropDownList</FieldValueStyle>
       <Table>DatabaseANFLO-WFN%dbo.WCanvass_Internal</Table>
       <PassthroughAttributes>
@@ -5908,7 +5974,11 @@
           <Value>dropDownListTypeAhead(this,false)</Value>
         </Attribute>
         <Attribute>
-          <Name>WCI_C_IDRequiredFieldValidator:Enabled</Name>
+          <Name>Visible</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>WCI_C_ID1RequiredFieldValidator:Enabled</Name>
           <Value>False</Value>
         </Attribute>
         <Attribute>
@@ -5936,7 +6006,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>Select Company</Value>
+          <Value>Company</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WCanvass_InternalRecordControl</InsideControl>
@@ -7217,7 +7287,7 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="WCI_C_ID" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="WCI_C_ID" /&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="WCI_C_ID1" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;

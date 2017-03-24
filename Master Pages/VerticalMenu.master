@@ -426,7 +426,28 @@ ISD_GeolocationInit();
   params += ', modal=yes';
 
   //var target = window.opener.document.all('<%# Request.Params("Item") %>');
-  var url = '../wf_cv/Inquiry_POP30300_POP30310_Item.aspx?ItemNo=' + Item;
+  var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Item.aspx?ItemNo=' + Item;
+  window.open(url, '', params);
+  }
+  function OpenItemInquiryN(Item)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  //var target = window.opener.document.all('<%# Request.Params("Item") %>');
+  var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Item1.aspx?ItemNo=' + Item;
   window.open(url, '', params);
   }
   function OpenItemIncidentSelector(ItemNo,ItemDesc,UoM)
@@ -953,6 +974,27 @@ ISD_GeolocationInit();
   var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Vendor.aspx?VendorNo=' + target.value;
   window.open(url, '', params);
   }
+  function OpenVendorInquiryN(Vendor)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var target = document.getElementById(Vendor);
+  var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Vendor1.aspx?VendorNo=' + target.value;
+  window.open(url, '', params);
+  }
   function OpenVendorItemInquiry(Vendor,Item)
   {
   var width  = 640;
@@ -975,6 +1017,28 @@ ISD_GeolocationInit();
   var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Vendor-Item.aspx?VendorNo=' + target1.value + '&ItemNo=' + Item;
   window.open(url, '', params);
   }
+  function OpenVendorItemInquiryN(Vendor,Item)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var target1 = document.getElementById(Vendor);
+  //var target2 = document.getElementById(Item);
+  var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Vendor-Item1.aspx?VendorNo=' + target1.value + '&ItemNo=' + Item;
+  window.open(url, '', params);
+  }
   function OpenAttachInquiry(DocPK,Vendor)
   {
   var width  = 640;
@@ -994,6 +1058,27 @@ ISD_GeolocationInit();
 
   var target = document.getElementById(Vendor);
   var url = '../WCanvass_Internal/Inquiry-WCanvass-Quotation-Internal-File.aspx?DocPK=' + DocPK + '&VendorNo=' + target.value;
+  window.open(url, '', params);
+  }
+  function OpenAttachInquiryN(DocPK,Vendor)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var target = document.getElementById(Vendor);
+  var url = '../WCanvass_Internal/Inquiry-WCanvass-Quotation-Internal-File1.aspx?DocPK=' + DocPK + '&VendorNo=' + target.value;
   window.open(url, '', params);
   }
   </script>
