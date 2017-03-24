@@ -165,25 +165,34 @@ Partial Public Class SignOut
 
     ' Page Event Handlers - buttons, sort, links
     
-        Public Sub ForgetSignInButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-          ' Click handler for ForgetSignInButton.
-          ' Customize by adding code before the call or replace the call to the Base function with your own code.
-          ForgetSignInButton_Click_Base(sender, args)
-          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-        End Sub
+'        Public Sub ForgetSignInButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+'          ' Click handler for ForgetSignInButton.
+'          ' Customize by adding code before the call or replace the call to the Base function with your own code.
+'          ForgetSignInButton_Click_Base(sender, args)
+'          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+'        End Sub
             
 
         ' Write out the Set methods
         
-        Public Sub SetForgetSignInButton()
-            SetForgetSignInButton_Base() 
-        End Sub              
+'        Public Sub SetForgetSignInButton()
+'            SetForgetSignInButton_Base() 
+'        End Sub              
                          
         
         ' Write out the methods for DataSource
         
    
 
+Public Sub SetSignInButton()
+            SetSignInButton_Base() 
+        End Sub              
+Public Sub SignInButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+          ' Click handler for SignInButton.
+          ' Customize by adding code before the call or replace the call to the Base function with your own code.
+          SignInButton_Click_Base(sender, args)
+          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        End Sub
 #End Region
 
 #Region "Section 2: Do not modify this section."
@@ -201,7 +210,7 @@ Partial Public Class SignOut
 
           ' Setup the pagination events.
         
-              AddHandler Me.ForgetSignInButton.Button.Click, AddressOf ForgetSignInButton_Click
+              AddHandler Me.SignInButton.Button.Click, AddressOf SignInButton_Click
                         
           Me.ClearControlsFromSession()
     
@@ -395,9 +404,7 @@ Partial Public Class SignOut
         
         'sec_comment - this method switches off AutoLogin cookie at sign out
         Private Sub SignOut_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
-         
-            Dim state As UI.SignInState = New SignInState
-            Me.ForgetSignInButton.Button.Enabled = (state.IsUNToRemember Or state.IsPassToRemember) 
+          
             Dim isAutoLogin As String = BaseClasses.Utils.NetUtils.GetCookie(NetUtils.CookieAutoLogin())
             If (isAutoLogin Is Nothing Or isAutoLogin = "") Then
                 Return
@@ -461,7 +468,7 @@ Partial Public Class SignOut
             
                 ' initialize aspx controls
                 
-                SetForgetSignInButton()
+                SetSignInButton()
               
                 
 
@@ -532,7 +539,7 @@ Partial Public Class SignOut
 
         ' Write out the Set methods
         
-        Public Sub SetForgetSignInButton_Base()                
+        Public Sub SetSignInButton_Base()                
               
    
         End Sub
@@ -544,28 +551,47 @@ Partial Public Class SignOut
         ' Write out event methods for the page events
         
         ' event handler for Button
-        Public Sub ForgetSignInButton_Click_Base(ByVal sender As Object, ByVal args As EventArgs)
+        Public Sub SignInButton_Click_Base(ByVal sender As Object, ByVal args As EventArgs)
               
-            Dim state As SignInState = New SignInState
-            BaseClasses.Utils.NetUtils.SetCookie(NetUtils.CookieUserName(), "")
-            BaseClasses.Utils.NetUtils.SetCookie(NetUtils.CookiePassword(), "")
-            state.IsUNToRemember = False
-            state.IsPassToRemember = False
-            BaseClasses.Utils.NetUtils.SetCookie(NetUtils.CookieRememberName(), Boolean.FalseString)
-            BaseClasses.Utils.NetUtils.SetCookie(NetUtils.CookieRememberPassword(), Boolean.FalseString)  
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
+                  Dim url As String = "../Security/SignIn.aspx"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
     Try
     
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+              
             Catch ex As Exception
             
+       ' Upon error, rollback the transaction
+                Me.RollBackTransaction(sender)
+                shouldRedirect = False
                 Me.ErrorOnPage = True
     
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
     
             Finally
-    
+                DbUtils.EndTransaction
             End Try
-    
+            If shouldRedirect Then
+                Me.ShouldSaveControlsToSession = True
+      Me.Response.Redirect(url)
+        
+            End If
         End Sub
             
     

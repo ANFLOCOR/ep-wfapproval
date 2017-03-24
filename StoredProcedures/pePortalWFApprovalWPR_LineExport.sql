@@ -89,7 +89,7 @@ CREATE PROCEDURE pePortalWFApprovalWPR_LineExport
                 N'IsNULL(Convert(nvarchar, WPR_Line_.[WPRL_Qty]), '''') + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WPR_Line_.[WPRL_Ext_Price]), '''') + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WPR_Line_.[WPRL_WPRLS_ID]), '''') + ''' + @p_separator_str + ''' +' +
-                N'N''"'' + REPLACE(IsNULL( t1.[WPRLS_Desc], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
+                N'N''"'' + REPLACE(IsNULL( t5.[WPRLS_Desc], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
                 N'N''"'' + REPLACE(IsNULL(WPR_Line_.[WPRL_PO_No], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
                 N'IsNULL(Convert(nvarchar, WPR_Line_.[WPRL_PO_Line_Seq_No]), '''') + ''' + @p_separator_str + ''' +' +
                 N'N''"'' + REPLACE(IsNULL(WPR_Line_.[WPRL_Item_Non_Inv_UOM], ''''), N''"'', N''""'') + N''"''  + ''' + @p_separator_str + ''' +' +
@@ -99,7 +99,7 @@ CREATE PROCEDURE pePortalWFApprovalWPR_LineExport
             END
 
         -- Set up the from string (with table alias) and the join string
-        SET @l_from_str = '[dbo].[WPR_Line] WPR_Line_ LEFT OUTER JOIN [dbo].[WPR_Doc] t0 ON (WPR_Line_.[WPRL_WPRD_ID] =  t0.[WPRD_ID]) LEFT OUTER JOIN [dbo].[WPR_Line_Status] t1 ON (WPR_Line_.[WPRL_WPRLS_ID] =  t1.[WPRLS_ID])';
+        SET @l_from_str = '[dbo].[WPR_Line] WPR_Line_ LEFT OUTER JOIN [dbo].[WPR_Doc] t0 ON (WPR_Line_.[WPRL_WPRD_ID] =  t0.[WPRD_ID]) LEFT OUTER JOIN [dbo].[WPR_Line_Status] t5 ON (WPR_Line_.[WPRL_WPRLS_ID] =  t5.[WPRLS_ID])';
 
         SET @l_join_str = @p_join_str
         if @p_join_str is null

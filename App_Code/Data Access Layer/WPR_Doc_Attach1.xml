@@ -182,8 +182,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WPR_Doc_Attach_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
-  <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
   <canDeleteRecords Source="Database">Y</canDeleteRecords>
@@ -194,4 +192,5 @@
   <MenuName>WPR Document Attach1</MenuName>
   <QSPath>../WPR_Doc_Attach1/WPR-Doc-Attach-QuickSelector1.aspx</QSPath>
   <TableCodeName>WPR_Doc_Attach1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWPR_Doc_Attach1</TableStoredProcPrefix>
 </XMLDefinition>

@@ -1403,7 +1403,19 @@
         </Attribute>
         <Attribute>
           <Name>ImageUrl</Name>
-          <Value>../Images/icon_view.gif</Value>
+          <Value>../Images/icon-view.png</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnMouseOut</Name>
+          <Value>this.src='../Images/icon-view.png'</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnMouseOver</Name>
+          <Value>this.src='../Images/icon-view-over.png'</Value>
+        </Attribute>
+        <Attribute>
+          <Name>RedirectURL</Name>
+          <Value>../WPR_Doc/Show-WPR-Doc.aspx?WPR_Doc={WPO_PRNo_QDetailsTableControlRow:FV:WPRD_ID}</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -1465,7 +1477,19 @@
         </Attribute>
         <Attribute>
           <Name>ImageUrl</Name>
-          <Value>../Images/icon_view.gif</Value>
+          <Value>../Images/icon-view.png</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnMouseOut</Name>
+          <Value>this.src='../Images/icon-view.png'</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnMouseOver</Name>
+          <Value>this.src='../Images/icon-view-over.png'</Value>
+        </Attribute>
+        <Attribute>
+          <Name>RedirectURL</Name>
+          <Value>../WCanvass_Internal/Show-WCanvass-Internal1.aspx?WCanvass_Internal={View_WCPO_Canvass1TableControlRow:FV:WCI_ID}</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>View_WCPO_Canvass1TableControl</InsideControl>

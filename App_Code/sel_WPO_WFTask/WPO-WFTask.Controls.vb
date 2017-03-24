@@ -1416,7 +1416,7 @@ Public Class WPO_PRNo_QDetailsTableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
-        Public Overrides Sub ImageButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+		Public Overrides Sub ImageButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
 
             ' The redirect URL is set on the Properties, Custom Properties or Actions.
             ' The ModifyRedirectURL call resolves the parameters before the
@@ -1426,7 +1426,7 @@ Public Class WPO_PRNo_QDetailsTableControlRow
 
             DbUtils.StartTransaction()
 
-            Dim url As String = "../WPR_Doc/Show-WPR-Doc-WPO-SubmitPage.aspx?WPR_Doc=" & Me.WPRD_ID.Text '{WPO_PRNo_InquiryTableControlRow:FV:WPRD_ID}"
+            Dim url As String = "../WPR_Doc/Show-WPR-Doc.aspx?WPR_Doc=" & Me.WPRD_ID.Text '{WPO_PRNo_InquiryTableControlRow:FV:WPRD_ID}"
             'Dim url As String = "../WPR_Doc/Show-WPR-Doc-WPO1.aspx?WPR_Doc=" & Me.WPRD_ID.Text '{WPO_PRNo_QDetailsTableControlRow:FV:WPRD_ID}"
 
             If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
@@ -1633,7 +1633,7 @@ Public Class View_WCPO_CanvassTableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
-        Public Overrides Sub ImageButton2_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+		Public Overrides Sub ImageButton2_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
 
             ' The redirect URL is set on the Properties, Custom Properties or Actions.
             ' The ModifyRedirectURL call resolves the parameters before the
@@ -1643,7 +1643,7 @@ Public Class View_WCPO_CanvassTableControlRow
 
             DbUtils.StartTransaction()
 
-            Dim url As String = "../WCanvass_Internal/Show-WCanvass-Internal-WPO-Submit.aspx?WCanvass_Internal=" & Me.WCI_ID.Text '{View_WCPO_Canvass1TableControlRow:FV:WCI_ID}"
+            Dim url As String = "../WCanvass_Internal/Show-WCanvass-Internal.aspx?WCanvass_Internal=" & Me.WCI_ID.Text '{View_WCPO_Canvass1TableControlRow:FV:WCI_ID}"
             'Dim url As String = "../WCanvass_Internal/Show-WCanvass-Internal-WPO1.aspx?WCanvass_Internal=" & Me.WCI_ID.Text '{View_WCPO_CanvassTableControlRow:FV:WCI_ID}"
 
             If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
@@ -1751,7 +1751,41 @@ Public Class Sel_WPO_InquireDetailsTableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
-        
+
+        Public Overrides Sub DataBind()
+
+            MyBase.DataBind()
+            Me.iComment.Attributes.Add("onclick", "window.open('../sel_WPO_WFTask/WPO-Comment.aspx?ord1=" & Me.ORD.Text & "&po1=" & Me.PONUMBER1.Text & "&com1=" & Me.CompanyID1.Text & "', '', 'menubar=no,width=640,height=240,top=(screen.height  - 240)/2,left=(screen.width  - 640)/2');return false;")
+            ' Me.imbItemHistory.Button.Attributes.Add("onclick", "window.open('../wf_po/WPO_ItemHistory.aspx?pItemNo=" & Me.ITEMNMBR.Text & "&pVendorID=0&pCompanyID=" & Me.CompanyID1.Text & "&pPONUMBR=" & Me.PONUMBER1.Text & "', '', 'scrollbars=yes,menubar=no,width=700,height=500,top=(screen.height  - 240)/2,left=(screen.width  - 640)/2');return false;")
+
+            'Me.imbItemHistory.Visible = IsInventoriedItem()
+            If IsInventoriedItem() Then
+                Me.ITEMNMBR.Attributes.Add("onclick", "window.open('../sel_WPO_WFTask/WPO-ItemHistory.aspx?pItemNo=" & Me.GetRecord.ITEMNMBR.ToString & "&pVendorID=0&pCompanyID=" & Me.GetRecord.CompanyID.ToString & "&pPONUMBR=" & Me.GetRecord.PONUMBER.ToString & "&pItemDesc=" & Me.GetRecord.ITEMDESC.ToString & "', '', 'scrollbars=yes,menubar=no,width=700,height=500,top=(screen.height  - 240)/2,left=(screen.width  - 640)/2');return false;")
+                Me.ITEMNMBR.Visible = True
+                Me.ITEMNMBR1.Visible = False
+            Else
+                Me.ITEMNMBR.Visible = False
+                Me.ITEMNMBR1.Visible = True
+            End If
+
+        End Sub
+
+        Public Function IsInventoriedItem() As Boolean
+            Dim obC As OrderBy = New OrderBy(False, False)
+            Dim rec As Sel_IV00101Record = Sel_IV00101View.GetRecord("ITEMNMBR='" & Me.ITEMNMBR.Text & "' AND Company_ID='" & Me.CompanyID1.Text & "'", obC)
+            If Not (IsNothing(rec)) Then
+                If rec.ITEMDESCSpecified Then
+                    Return True
+                Else
+                    Return False
+                End If
+            Else
+                Return False
+            End If
+
+
+        End Function
+
 
 End Class
 Public Class Sel_WPO_InquireDetails_2TableControl

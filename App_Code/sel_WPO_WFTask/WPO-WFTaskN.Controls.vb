@@ -1286,7 +1286,51 @@ Public Class WPOP10100RecordControl
         ' SaveData, GetUIData, and Validate methods.
 
 
-    End Class
+    
+		Public Overrides Sub ImageButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+              
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+                DbUtils.StartTransaction
+              
+                  Dim url As String = "../WPR_Doc/Show-WPR-Doc1.aspx?WPR_Doc1=" & Me.WPRD_ID.Text 'Me.GetRecords.WPRD_ID.ToString
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
+            Catch ex As Exception
+            
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+                DbUtils.EndTransaction
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
+        End Sub
+End Class
     Public Class WPO_Doc_AttachTableControl
         Inherits BaseWPO_Doc_AttachTableControl
 
@@ -1458,48 +1502,53 @@ Public Class WPOP10100RecordControl
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
 
-        Public Overrides Sub ImageButton2_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+		
 
-
-            Dim url As String = "../wf_cv/ShowWCanvass_Internal_WPO.aspx?WCanvass_Internal=" & Me.WCI_ID.Text ' & "}"
-            'throw new Exception(url)
-            Dim shouldRedirect As Boolean = True
-            Dim TargetKey As String = Nothing
-            Dim DFKA As String = Nothing
-            Dim id As String = Nothing
-            Dim value As String = Nothing
-            Try
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                url = Me.ModifyRedirectUrl(url, "", False)
-                url = Me.Page.ModifyRedirectUrl(url, "", False)
-                Me.Page.CommitTransaction(sender)
-
+    
+		Public Overrides Sub ImageButton2_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+              
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+                DbUtils.StartTransaction
+            
+              
+                  Dim url As String = "../WCanvass_Internal/Show-WCanvass-Internal1.aspx?WCanvass_Internal1=" & Me.WCI_ID.Text '}"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
-                ' Upon error, rollback the transaction
+            
+       ' Upon error, rollback the transaction
                 Me.Page.RollBackTransaction(sender)
                 shouldRedirect = False
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
             If shouldRedirect Then
                 Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-            ElseIf Not TargetKey Is Nothing AndAlso _
-                        Not shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.CloseWindow(True)
-
+      Me.Page.Response.Redirect(url)
+        
             End If
         End Sub
-
-
-    End Class
+End Class
     Public Class Sel_WPO_InquireDetailsTableControl
         Inherits BaseSel_WPO_InquireDetailsTableControl
 
@@ -1542,7 +1591,7 @@ Public Class Sel_WPO_InquireDetailsTableControlRow
         Public Overrides Sub DataBind()
 
             MyBase.DataBind()
-            Me.iComment.Attributes.Add("onclick", "window.open('../wf_po/WPO_Comment.aspx?ord1=" & Me.ORD.Text & "&po1=" & Me.PONUMBER1.Text & "&com1=" & Me.CompanyID1.Text & "', '', 'menubar=no,width=640,height=240,top=(screen.height  - 240)/2,left=(screen.width  - 640)/2');return false;")
+            Me.iComment.Attributes.Add("onclick", "window.open('../sel_WPO_WFTask/WPO-Comment1.aspx?ord1=" & Me.ORD.Text & "&po1=" & Me.PONUMBER1.Text & "&com1=" & Me.CompanyID1.Text & "', '', 'menubar=no,width=640,height=240,top=(screen.height  - 240)/2,left=(screen.width  - 640)/2');return false;")
         End Sub
 
 
@@ -7323,19 +7372,46 @@ Public Class BaseView_WCPO_Canvass1TableControlRow
         ' event handler for ImageButton
         Public Overridable Sub ImageButton2_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
               
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
+                  Dim url As String = "../WCanvass_Internal/Show-WCanvass-Internal1.aspx?WCanvass_Internal={View_WCPO_Canvass1TableControlRow:FV:WCI_ID}"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
     Try
     
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
             
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
                 Me.Page.ErrorOnPage = True
     
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
     
             Finally
-    
+                DbUtils.EndTransaction
             End Try
-    
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
         End Sub
         
    
@@ -13638,19 +13714,46 @@ Public Class BaseWPO_PRNo_QDetailsTableControlRow
         ' event handler for ImageButton
         Public Overridable Sub ImageButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
               
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
+                  Dim url As String = "../WPR_Doc/Show-WPR-Doc.aspx?WPR_Doc={WPO_PRNo_QDetailsTableControlRow:FV:WPRD_ID}"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
     Try
     
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
             
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
                 Me.Page.ErrorOnPage = True
     
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
     
             Finally
-    
+                DbUtils.EndTransaction
             End Try
-    
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
         End Sub
         
    
