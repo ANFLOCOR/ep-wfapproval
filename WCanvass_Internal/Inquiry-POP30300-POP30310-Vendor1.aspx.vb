@@ -250,7 +250,7 @@ Public Sub SetSel_POP30300_POP30310TableControl()
             End If
         
         
-            Page.Title = "Blank page"
+            Page.Title = "Vendor History"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If

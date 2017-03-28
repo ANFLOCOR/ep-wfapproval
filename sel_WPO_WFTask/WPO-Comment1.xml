@@ -53,6 +53,10 @@
           <Value>6</Value>
         </Attribute>
         <Attribute>
+          <Name>Style</Name>
+          <Value>white-space: inherit;</Value>
+        </Attribute>
+        <Attribute>
           <Name>TextFormat</Name>
           <Value>{0}</Value>
         </Attribute>

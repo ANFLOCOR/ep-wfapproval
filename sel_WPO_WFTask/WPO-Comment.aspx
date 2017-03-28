@@ -30,7 +30,7 @@
 
                 </td></tr><tr><td>
                   <asp:panel id="Sel_WPO_POP10550RecordControlCollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>
-                    <asp:panel id="Sel_WPO_POP10550RecordControlPanel" runat="server"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="fls" colspan="3"><asp:TextBox runat="server" id="COMMENTS" Columns="40" MaxLength="204" cssclass="field_input" htmlencodevalue="Default" readonly="True" rows="6" textformat="{0}" textmode="MultiLine"></asp:TextBox>&nbsp;
+                    <asp:panel id="Sel_WPO_POP10550RecordControlPanel" runat="server"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="fls" colspan="3"><asp:TextBox runat="server" id="COMMENTS" Columns="40" MaxLength="204" cssclass="field_input" htmlencodevalue="Default" readonly="True" rows="6" textformat="{0}" textmode="MultiLine" style="white-space: inherit;"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="COMMENTSTextBoxMaxLengthValidator" ControlToValidate="COMMENTS" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;Comments&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td></tr></table></asp:panel>
 
                   </td></tr></table>
