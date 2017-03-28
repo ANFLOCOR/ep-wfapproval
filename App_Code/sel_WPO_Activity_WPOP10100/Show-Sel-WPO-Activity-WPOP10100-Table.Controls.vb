@@ -3301,9 +3301,6 @@ Public Class BaseSel_WPO_Activity_WPOP10100TableControl
             
             ' Setup the static list items        
             
-            ' Add the All item.
-            Me.WPOP_C_IDFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-                              
 
             Dim orderBy As OrderBy = New OrderBy(false, false)			
                           orderBy.Add(Sel_WF_DYNAMICS_CompanyView.Company_ID, OrderByItem.OrderDir.Asc)
