@@ -73,66 +73,7 @@ Public Class WCanvass_InternalRecordControl
             DbUtils.EndTransaction()
         End Sub
 
-		Public Overrides Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
-            Dim url As String = ""
-            Dim shouldRedirect As Boolean = True
-            Dim TargetKey As String = Nothing
-            Dim DFKA As String = Nothing
-            Dim id As String = Nothing
-            Dim value As String = Nothing
-
-            DbUtils.StartTransaction()
-
-            Try
-                Dim role As String = BaseClasses.Utils.SecurityControls.GetCurrentUserRoles()
-                If role = "" Then
-                    CType(Me.Page, BaseApplicationPage).RedirectBack(False)
-                End If
-                Dim separator As Char() = {";"c}
-                Dim roles As String() = role.Split(separator, System.StringSplitOptions.RemoveEmptyEntries)
-
-                For Each r As String In roles
-                    If r = "45" Then 'audit
-                        url = "../sel_WCanvass_Internal_WPR_Doc_Show/Show-Sel-WCanvass-Internal-WPR-Doc-Show-Table.aspx"
-                        'Exit For
-                    ElseIf r = "46" Then 'audit
-                        url = "../WCanvass_Internal/Show-WCanvass-Internal-Table-Audit.aspx"
-                        'Exit For
-                    ElseIf r = "50" Then
-                        url = "../sel_WCanvass_Internal_WPR_Doc_Show/Show-Sel-WCanvass-Internal-WPR-Doc-Show-Table-OverAll.aspx"
-                        Exit For
-                    Else
-                        url = "../sel_WCanvass_Internal_WPR_Doc_Show/Show-Sel-WCanvass-Internal-WPR-Doc-Show-Table.aspx"
-                    End If
-                Next r
-
-                DbUtils.StartTransaction()
-
-                url = Me.ModifyRedirectUrl(url, "", False)
-                url = Me.Page.ModifyRedirectUrl(url, "", False)
-                Me.Page.CommitTransaction(sender)
-
-            Catch ex As Exception
-                Me.Page.RollBackTransaction(sender)
-                shouldRedirect = False
-                Me.Page.ErrorOnPage = True
-
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-            Finally
-                DbUtils.EndTransaction()
-            End Try
-
-            If shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-            ElseIf Not TargetKey Is Nothing AndAlso Not shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.CloseWindow(True)
-            End If
-
-            DbUtils.EndTransaction()
-        End Sub
-
+		
         Private Function Stuff_Zero(Num As String) As String
             Dim iLoop As Integer
             Dim sTemp As String
@@ -331,7 +272,31 @@ Public Class WCanvass_Quotation_InternalTableControlRow
         ' SaveData, GetUIData, and Validate methods.
         
 
-End Class
+
+
+        Public Overrides Sub SetWCQI_PM00200_Vendor_ID()
+            Dim sDesc As String = ""
+            DbUtils.StartTransaction()
+
+            If Me.DataSource.WCQI_PM00200_Vendor_IDSpecified Then
+                Dim wc As WhereClause = New WhereClause()
+                Dim oHeader As WCanvass_InternalRecordControl = DirectCast(Me.Page.FindControlRecursively("WCanvass_InternalRecordControl"), WCanvass_InternalRecordControl)
+
+                wc.iAND(Sel_PM00200View.VENDORID, BaseFilter.ComparisonOperator.EqualsTo, Me.DataSource.WCQI_PM00200_Vendor_ID.ToString())
+                wc.iAND(sel_PM00200View.Company_ID, BaseFilter.ComparisonOperator.EqualsTo, oHeader.WCI_C_ID.SelectedValue.ToString())
+
+                Dim itemValue As sel_PM00200Record
+                For Each itemValue In sel_PM00200View.GetRecords(wc, Nothing, 0, 10)
+                    sDesc = itemValue.VENDNAME
+                Next
+
+                Me.WCQI_PM00200_Vendor_ID.Text = sDesc 'formattedValue  
+            End If
+
+            Me.WCQI_PM00200_Vendor_ID.Text = sDesc
+            DbUtils.EndTransaction()
+        End Sub
+    End Class
 Public Class Sel_WCanvass_Detail_Internal_WPR_LineTableControl
         Inherits BaseSel_WCanvass_Detail_Internal_WPR_LineTableControl
 
@@ -12814,9 +12779,10 @@ Public Class BaseWCanvass_Quotation_InternalTableControlRow
                 				
                 ' If the WCQI_PM00200_Vendor_ID is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = Me.DataSource.WCQI_PM00200_Vendor_ID.ToString()
+                                
+                            
                 Me.WCQI_PM00200_Vendor_ID.Text = formattedValue
                 
             Else 
@@ -12824,8 +12790,7 @@ Public Class BaseWCanvass_Quotation_InternalTableControlRow
                 ' WCQI_PM00200_Vendor_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCQI_PM00200_Vendor_ID.Text = WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID.Format(WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID.DefaultValue)
-                        		
+                 Me.WCQI_PM00200_Vendor_ID.Text = WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID.DefaultValue		
                 End If
                  
               AddHandler Me.WCQI_PM00200_Vendor_ID.TextChanged, AddressOf WCQI_PM00200_Vendor_ID_TextChanged
@@ -12861,9 +12826,10 @@ Public Class BaseWCanvass_Quotation_InternalTableControlRow
                 				
                 ' If the WCQI_PM00200_Vendor_ID is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = Me.DataSource.WCQI_PM00200_Vendor_ID.ToString()
+                                
+                            
                 Me.WCQI_PM00200_Vendor_ID1.Text = formattedValue
                 
             Else 
@@ -12871,8 +12837,7 @@ Public Class BaseWCanvass_Quotation_InternalTableControlRow
                 ' WCQI_PM00200_Vendor_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCQI_PM00200_Vendor_ID1.Text = WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID.Format(WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID.DefaultValue)
-                        		
+                 Me.WCQI_PM00200_Vendor_ID1.Text = WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID.DefaultValue		
                 End If
                  
               AddHandler Me.WCQI_PM00200_Vendor_ID1.TextChanged, AddressOf WCQI_PM00200_Vendor_ID1_TextChanged
@@ -13693,7 +13658,10 @@ Public Class BaseWCanvass_Quotation_InternalTableControl
             End If
             
             'LoadData for DataSource for chart and report if they exist
-               
+          
+          ' Improve performance by prefetching display as records.
+          Me.PreFetchForeignKeyValues()
+             
             ' Setup the pagination controls.
             BindPaginationControls()
 
@@ -13757,6 +13725,17 @@ Public Class BaseWCanvass_Quotation_InternalTableControl
     End Sub
 
     
+          Public Sub PreFetchForeignKeyValues()
+          If (IsNothing(Me.DataSource))
+            Return
+          End If
+          
+            Me.Page.PregetDfkaRecords(WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID, Me.DataSource)
+          
+            Me.Page.PregetDfkaRecords(WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID, Me.DataSource)
+          
+          End Sub
+        
       
         Public Overridable Sub RegisterPostback()
         
@@ -16643,10 +16622,21 @@ Public Class BaseWCanvass_InternalRecordControl
         ' event handler for Button
         Public Overridable Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
               
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
     Try
     
+
+                ' if target is specified meaning that is opened on popup or new window
+                If Page.Request("target") <> "" Then
+                    shouldRedirect = False
+                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "ClosePopup", "closePopupPage();", True)                   
+                End If
+      
             Catch ex As Exception
             
+                shouldRedirect = False
                 Me.Page.ErrorOnPage = True
     
                 ' Report the error message to the end user
@@ -16655,7 +16645,11 @@ Public Class BaseWCanvass_InternalRecordControl
             Finally
     
             End Try
-    
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.RedirectBack()
+        
+            End If
         End Sub
         
         ' event handler for Button

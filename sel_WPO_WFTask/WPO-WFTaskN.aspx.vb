@@ -57,7 +57,7 @@ Partial Public Class WPO_WFTaskN
             Me.ddlMoveTo.Visible = False
 
             Dim wc As WhereClause = New WhereClause()
-            wc.iAND(Sel_POP10100_Incidental1View.Company_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.PONUMBER.Text)
+            wc.iAND(Sel_POP10100_Incidental1View.Company_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.CompanyID2.Text)
             wc.iAND(Sel_POP10100_Incidental1View.PONUMBER, BaseFilter.ComparisonOperator.EqualsTo, Me.PONUMBER.Text)
 
             ' ''Dim sWhere As String = ""
@@ -72,7 +72,7 @@ Partial Public Class WPO_WFTaskN
             'If sParam = "0" Then
             'ShowSel_WCAR_Activity_WCAR_DocTable.aspx
             If Me.Page.Request.QueryString.Item("POP10100_Co") Is Nothing Then
-                Dim url As String = "../wf_PO/ShowSel_WPO_Activity_WPOP10100Table.aspx?"
+                Dim url As String = "../sel_WPO_Activity_WPOP101001/Show-Sel-WPO-Activity-WPOP10100-Table1.aspx?"
                 'Dim url As String = "../Security/Home.aspx?"
 
                 url = Me.ModifyRedirectUrl(url, "")

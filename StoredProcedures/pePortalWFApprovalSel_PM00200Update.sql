@@ -13,6 +13,7 @@ CREATE PROCEDURE pePortalWFApprovalSel_PM00200Update
     @pk_VENDORID char(15),
     @p_VENDNAME char(65),
     @p_Company_ID int,
+    @pk_Company_ID int,
     @p_prevConValue nvarchar(max),
     @p_force_update  char(1)
 AS
@@ -22,7 +23,7 @@ DECLARE
     @l_rowcount int
 BEGIN
 -- Check whether the record still exists before doing update
-    IF NOT EXISTS (SELECT * FROM [dbo].[sel_PM00200] WHERE [VENDORID] = @pk_VENDORID)
+    IF NOT EXISTS (SELECT * FROM [dbo].[sel_PM00200] WHERE [VENDORID] = @pk_VENDORID and [Company_ID] = @pk_Company_ID)
         RAISERROR ('Concurrency Error: The record has been deleted by another user. Table [dbo].[sel_PM00200]', 16, 1)
 
     -- If user wants to force update to happen even if 
@@ -37,7 +38,7 @@ BEGIN
             [VENDORID] = @p_VENDORID,
             [VENDNAME] = @p_VENDNAME,
             [Company_ID] = @p_Company_ID
-            WHERE [VENDORID] = @pk_VENDORID
+            WHERE [VENDORID] = @pk_VENDORID and [Company_ID] = @pk_Company_ID
 
             -- Make sure only one record is affected
             SET @l_rowcount = @@ROWCOUNT
@@ -56,7 +57,7 @@ BEGIN
             -- later committed or rolled back.
             Select @l_newValue = CAST(BINARY_CHECKSUM([VENDORID],[VENDNAME],[Company_ID]) AS nvarchar(max)) 
             FROM [dbo].[sel_PM00200] with (rowlock, holdlock)
-            WHERE [VENDORID] = @pk_VENDORID
+            WHERE [VENDORID] = @pk_VENDORID and [Company_ID] = @pk_Company_ID
 
 
             -- Check concurrency by comparing the checksum values
@@ -75,7 +76,7 @@ BEGIN
                     [VENDORID] = @p_VENDORID,
                     [VENDNAME] = @p_VENDNAME,
                     [Company_ID] = @p_Company_ID
-                    WHERE [VENDORID] = @pk_VENDORID
+                    WHERE [VENDORID] = @pk_VENDORID and [Company_ID] = @pk_Company_ID
 
                     SET @l_rowcount = @@ROWCOUNT
                     IF @l_rowcount = 0

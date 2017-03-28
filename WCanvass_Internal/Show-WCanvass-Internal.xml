@@ -35,14 +35,16 @@
           <Value>page</Value>
         </Attribute>
         <Attribute>
+          <Name>Button-RedirectURL</Name>
+          <Value>Back</Value>
+        </Attribute>
+        <Attribute>
           <Name>Button-Text</Name>
-          <Value>Back to Previous Page</Value>
-          <Type>ResourceReference</Type>
+          <Value>Back</Value>
         </Attribute>
         <Attribute>
           <Name>Button-ToolTip</Name>
-          <Value>Back to Previous Page</Value>
-          <Type>ResourceReference</Type>
+          <Value>Back</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WCanvass_InternalRecordControl</InsideControl>
@@ -2982,7 +2984,7 @@
         </Attribute>
         <Attribute>
           <Name>Button-Text</Name>
-          <Value>Back to Previous Page</Value>
+          <Value>Back</Value>
           <Type>ResourceReference</Type>
         </Attribute>
         <Attribute>
@@ -9290,12 +9292,7 @@
     &lt;Row&gt;
       &lt;Cell&gt;
         &lt;Value&gt;&amp;lt;GEN:BUTTON NAME="btnBack" /&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;display:none;&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
+        &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
         &lt;Value&gt;&amp;lt;GEN:BUTTON NAME="btnPrint" /&amp;gt;&lt;/Value&gt;

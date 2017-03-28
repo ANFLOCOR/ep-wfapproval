@@ -1484,6 +1484,26 @@
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
+      <Name>litBreak30</Name>
+      <Type>Literal</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Text</Name>
+          <Value>&lt;br&gt;</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Visible</Name>
+          <Value>True</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WCanvass_Quotation_Internal1TableControl</InsideControl>
+      <InsideItemTemplate>true</InsideItemTemplate>
+    </ContainedComponent>
+    <ContainedComponent>
       <Name>litBreak5</Name>
       <Type>Literal</Type>
       <PassthroughAttributes>
@@ -1590,19 +1610,6 @@
       </PassthroughAttributes>
       <InsideControl>WCanvass_InternalRecordControl</InsideControl>
       <ControlClass>System.Web.UI.WebControls.Literal</ControlClass>
-    </ContainedComponent>
-    <ContainedComponent>
-      <Name>Literal4</Name>
-      <Type>Aspx</Type>
-      <PassthroughAttributes>
-        <Attribute>
-          <Name>InternalUse:TreatAs</Name>
-          <Value>FieldFilter</Value>
-        </Attribute>
-      </PassthroughAttributes>
-      <InsideControl>WCanvass_Quotation_Internal1TableControl</InsideControl>
-      <ControlClass>System.Web.UI.WebControls.Literal</ControlClass>
-      <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
       <Name>PageTitle</Name>
@@ -8981,19 +8988,6 @@
     &lt;Prolog /&gt;
     &lt;Row Type="Header"&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" height="1" width="1" alt="" /&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;thcnb&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;colspan&lt;/Name&gt;
-            &lt;AttributeValue&gt;1&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
         &lt;Value&gt;&amp;lt;GEN:FIELDLABEL NAME="WCQI_FileLabel" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
@@ -9029,19 +9023,6 @@
     &lt;/Row&gt;
     &lt;Row Type="Repeater"&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;asp:literal id="Literal4" runat="server" text="&amp;amp;nbsp;" /&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;ticnb&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;scope&lt;/Name&gt;
-            &lt;AttributeValue&gt;row&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
         &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="WCQI_File" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
@@ -9060,7 +9041,9 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="WCQI_PM00200_Vendor_ID" /&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="WCQI_PM00200_Vendor_ID1" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="WCQI_PM00200_Vendor_ID" /&amp;gt; 
+&amp;lt;GEN:LITERAL Name="litBreak30" /&amp;gt; 
+&amp;lt;GEN:FIELDVALUE NAME="WCQI_PM00200_Vendor_ID1" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;

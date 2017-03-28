@@ -61,6 +61,46 @@ Public Class Sel_POP30300_POP303101TableControl
     ' The Sel_POP30300_POP303101TableControlRow class offers another place where you can customize
     ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
 
+
+		Public Overrides Function CreateWhereClause() As WhereClause
+            Sel_POP30300_POP303101View.Instance.InnerFilter = Nothing
+            Dim wc As WhereClause = New WhereClause()
+            Dim sParam1 As String = CStr(Me.Page.Request.QueryString("VendorNo"))
+            Dim sParam2 As String = CStr(Me.Page.Request.QueryString("ItemNo"))
+
+            wc.iAND(Sel_POP30300_POP303101View.Company_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("CI_C_ID").ToString())
+            wc.iAND(Sel_POP30300_POP303101View.VENDORID, BaseFilter.ComparisonOperator.EqualsTo, sParam1)
+            wc.iAND(Sel_POP30300_POP303101View.ITEMNMBR, BaseFilter.ComparisonOperator.EqualsTo, sParam2)
+
+            Return wc
+        End Function
+
+		Public Overrides Sub DataBind()
+            MyBase.DataBind()
+
+            If Me.DataSource Is Nothing Then
+                Return
+            End If
+
+            BindPaginationControls()
+
+            Dim rep As System.Web.UI.WebControls.Repeater = CType(Me.FindControl("Sel_POP30300_POP303101TableControlRepeater"), System.Web.UI.WebControls.Repeater)
+            If rep Is Nothing Then Return
+            rep.DataSource = DataSource()
+            rep.DataBind()
+
+            Dim index As Integer = 0
+            For Each repItem As System.Web.UI.WebControls.RepeaterItem In rep.Items
+                ' Loop through all rows in the table, set its DataSource and call DataBind().
+                Dim recControl As Sel_POP30300_POP303101TableControlRow = DirectCast(repItem.FindControl("Sel_POP30300_POP303101TableControlRow"), Sel_POP30300_POP303101TableControlRow)
+                recControl.DataSource = Me.DataSource(index)
+                recControl.DataBind()
+                index += 1
+            Next
+
+            Me.litVendor.Text = "Vendor: " & CStr(Me.Page.Request.QueryString("VendorNo")) & _
+            "<br>Item: " & CStr(Me.Page.Request.QueryString("ItemNo"))
+        End Sub
 End Class
 
   
@@ -1913,7 +1953,7 @@ Public Class BaseSel_POP30300_POP303101TableControl
             End If
             
             
-            Dim Pagination As Control = Me.FindControl("")
+            Dim Pagination As Control = Me.FindControl("Sel_POP30300_POP30310Pagination")
              Dim PaginationType As String = ""
              If Not (Pagination Is Nothing) Then
                 Dim Summary As Control = Pagination.FindControl("_Summary")

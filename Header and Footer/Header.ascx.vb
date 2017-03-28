@@ -27,8 +27,27 @@ Partial Public Class Header
           ' Customize by adding code before or after the call to LoadData_Base()
           ' or replace the call to LoadData_Base().
           LoadData_Base()
-                  
-      End Sub
+                   UserStatusInit1()
+        End Sub
+
+        Protected Sub UserStatusInit1()
+
+            Select Case DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus()
+                Case Nothing
+                    Me._UserStatusLbl.Text = GetResourceValue("Txt:UserNotSignedIn", "EPORTAL")
+                    Me._SignIn.Visible = False
+                Case ""
+                    Me._UserStatusLbl.Text = GetResourceValue("Txt:UserNotSignedIn", "EPORTAL")
+                    Me._SignIn.Visible = True
+                Case Else
+                    Me._UserStatusLbl.Text = "Hello "
+                    Me._UserStatusLbl.Text += System.Web.HttpContext.Current.Session("UserFullName").ToString() '& _
+                    Me._SignIn.Visible = True
+                    '"<BR> User(s) Online: " & Page.Application.Item("OnlineUsers").ToString()
+                    '"<BR> User Name: " & DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString().ToLower() 
+            End Select
+
+        End Sub
       
       Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS as Boolean) As String
           Return EvaluateFormula_Base(formula, dataSourceForEvaluate, format, variables, includeDS)
