@@ -806,7 +806,7 @@ Public Class BaseSel_WCAR_Doc_Creator_Approver1TableControlRow
                 ' If the WCD_Exp_Total is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Creator_Approver1View.WCD_Exp_Total)
+                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Creator_Approver1View.WCD_Exp_Total, "#,#.00")
                               
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WCD_Exp_Total.Text = formattedValue
@@ -816,7 +816,7 @@ Public Class BaseSel_WCAR_Doc_Creator_Approver1TableControlRow
                 ' WCD_Exp_Total is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Exp_Total.Text = Sel_WCAR_Doc_Creator_Approver1View.WCD_Exp_Total.Format(Sel_WCAR_Doc_Creator_Approver1View.WCD_Exp_Total.DefaultValue)
+                 Me.WCD_Exp_Total.Text = Sel_WCAR_Doc_Creator_Approver1View.WCD_Exp_Total.Format(Sel_WCAR_Doc_Creator_Approver1View.WCD_Exp_Total.DefaultValue, "#,#.00")
                         		
                 End If
                  

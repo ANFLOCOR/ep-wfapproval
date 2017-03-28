@@ -6537,254 +6537,254 @@ Public Class BaseWCAR_DocRecordControl
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Budget, "#,#.00")
-
+                              
                 Me.WCD_Exp_Budget.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Budget is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Budget.Text = WCAR_DocTable.WCD_Exp_Budget.Format(WCAR_DocTable.WCD_Exp_Budget.DefaultValue, "#,#.00")
-
-            End If
-
-            AddHandler Me.WCD_Exp_Budget.TextChanged, AddressOf WCD_Exp_Budget_TextChanged
-
+        
+                 Me.WCD_Exp_Budget.Text = WCAR_DocTable.WCD_Exp_Budget.Format(WCAR_DocTable.WCD_Exp_Budget.DefaultValue, "#,#.00")
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Budget.TextChanged, AddressOf WCD_Exp_Budget_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Cur_Yr()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Cur_Yr TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Cur_Yr is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Cur_Yr()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_Cur_YrSpecified Then
-
+                				
                 ' If the WCD_Exp_Cur_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Cur_Yr, "#,#.00")
-
+                              
                 Me.WCD_Exp_Cur_Yr.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Cur_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Cur_Yr.Text = WCAR_DocTable.WCD_Exp_Cur_Yr.Format(WCAR_DocTable.WCD_Exp_Cur_Yr.DefaultValue, "#,#.00")
-
-            End If
-
-            AddHandler Me.WCD_Exp_Cur_Yr.TextChanged, AddressOf WCD_Exp_Cur_Yr_TextChanged
-
+        
+                 Me.WCD_Exp_Cur_Yr.Text = WCAR_DocTable.WCD_Exp_Cur_Yr.Format(WCAR_DocTable.WCD_Exp_Cur_Yr.DefaultValue, "#,#.00")
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Cur_Yr.TextChanged, AddressOf WCD_Exp_Cur_Yr_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Nxt_Yr()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Nxt_Yr TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Nxt_Yr is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Nxt_Yr()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_Nxt_YrSpecified Then
-
+                				
                 ' If the WCD_Exp_Nxt_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Nxt_Yr, "#,#.00")
-
+                              
                 Me.WCD_Exp_Nxt_Yr.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Nxt_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Nxt_Yr.Text = WCAR_DocTable.WCD_Exp_Nxt_Yr.Format(WCAR_DocTable.WCD_Exp_Nxt_Yr.DefaultValue, "#,#.00")
-
-            End If
-
-            AddHandler Me.WCD_Exp_Nxt_Yr.TextChanged, AddressOf WCD_Exp_Nxt_Yr_TextChanged
-
+        
+                 Me.WCD_Exp_Nxt_Yr.Text = WCAR_DocTable.WCD_Exp_Nxt_Yr.Format(WCAR_DocTable.WCD_Exp_Nxt_Yr.DefaultValue, "#,#.00")
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Nxt_Yr.TextChanged, AddressOf WCD_Exp_Nxt_Yr_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Prev_Total()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Prev_Total TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Prev_Total is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Prev_Total()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_Prev_TotalSpecified Then
-
+                				
                 ' If the WCD_Exp_Prev_Total is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Prev_Total, "#,#.00")
-
+                              
                 Me.WCD_Exp_Prev_Total.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Prev_Total is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Prev_Total.Text = WCAR_DocTable.WCD_Exp_Prev_Total.Format(WCAR_DocTable.WCD_Exp_Prev_Total.DefaultValue, "#,#.00")
-
-            End If
-
-            AddHandler Me.WCD_Exp_Prev_Total.TextChanged, AddressOf WCD_Exp_Prev_Total_TextChanged
-
+        
+                 Me.WCD_Exp_Prev_Total.Text = WCAR_DocTable.WCD_Exp_Prev_Total.Format(WCAR_DocTable.WCD_Exp_Prev_Total.DefaultValue, "#,#.00")
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Prev_Total.TextChanged, AddressOf WCD_Exp_Prev_Total_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Sub_Yr()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Sub_Yr TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Sub_Yr is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Sub_Yr()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_Sub_YrSpecified Then
-
+                				
                 ' If the WCD_Exp_Sub_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Sub_Yr, "#,#.00")
-
+                              
                 Me.WCD_Exp_Sub_Yr.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Sub_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Sub_Yr.Text = WCAR_DocTable.WCD_Exp_Sub_Yr.Format(WCAR_DocTable.WCD_Exp_Sub_Yr.DefaultValue, "#,#.00")
-
-            End If
-
-            AddHandler Me.WCD_Exp_Sub_Yr.TextChanged, AddressOf WCD_Exp_Sub_Yr_TextChanged
-
+        
+                 Me.WCD_Exp_Sub_Yr.Text = WCAR_DocTable.WCD_Exp_Sub_Yr.Format(WCAR_DocTable.WCD_Exp_Sub_Yr.DefaultValue, "#,#.00")
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Sub_Yr.TextChanged, AddressOf WCD_Exp_Sub_Yr_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Total()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Total TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Total is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Total()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_TotalSpecified Then
-
+                				
                 ' If the WCD_Exp_Total is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Total, "#,#.00")
-
+                              
                 Me.WCD_Exp_Total.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Total is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Total.Text = WCAR_DocTable.WCD_Exp_Total.Format(WCAR_DocTable.WCD_Exp_Total.DefaultValue, "#,#.00")
-
-            End If
-
-            AddHandler Me.WCD_Exp_Total.TextChanged, AddressOf WCD_Exp_Total_TextChanged
-
+        
+                 Me.WCD_Exp_Total.Text = WCAR_DocTable.WCD_Exp_Total.Format(WCAR_DocTable.WCD_Exp_Total.DefaultValue, "#,#.00")
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Total.TextChanged, AddressOf WCD_Exp_Total_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Under_Over_Budget()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Under_Over_Budget TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Under_Over_Budget is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Under_Over_Budget()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_Under_Over_BudgetSpecified Then
-
+                				
                 ' If the WCD_Exp_Under_Over_Budget is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Under_Over_Budget, "#,#.00")
-
+                              
                 Me.WCD_Exp_Under_Over_Budget.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Under_Over_Budget is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Under_Over_Budget.Text = WCAR_DocTable.WCD_Exp_Under_Over_Budget.Format(WCAR_DocTable.WCD_Exp_Under_Over_Budget.DefaultValue, "#,#.00")
-
-            End If
-
-            AddHandler Me.WCD_Exp_Under_Over_Budget.TextChanged, AddressOf WCD_Exp_Under_Over_Budget_TextChanged
-
+        
+                 Me.WCD_Exp_Under_Over_Budget.Text = WCAR_DocTable.WCD_Exp_Under_Over_Budget.Format(WCAR_DocTable.WCD_Exp_Under_Over_Budget.DefaultValue, "#,#.00")
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Under_Over_Budget.TextChanged, AddressOf WCD_Exp_Under_Over_Budget_TextChanged
+                                 
         End Sub
                 
         Public Overridable Sub SetWCD_ID()
