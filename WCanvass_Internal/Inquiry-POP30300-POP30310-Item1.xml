@@ -140,7 +140,7 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>Blank page</Value>
+          <Value>Item History</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>

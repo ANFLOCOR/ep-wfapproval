@@ -324,7 +324,7 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>Blank page</Value>
+          <Value>Vendor-Item History</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>

@@ -242,7 +242,7 @@ Partial Public Class Inquiry_POP30300_POP30310_Item
             End If
         
         
-            Page.Title = "Blank page"
+            Page.Title = "Item History"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If

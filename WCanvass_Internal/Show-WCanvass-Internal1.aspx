@@ -103,7 +103,7 @@
 <span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID3" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect22(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCDI_PM00200_Vendor_ID3TextBoxMaxLengthValidator" ControlToValidate="WCDI_PM00200_Vendor_ID3" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCDI PM 00200 Vendor 2&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></span>
-<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist1" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" onmouseout="this.src=&#39;../Images/ExpirationHS.gif&#39;" onmouseover="this.src=&#39;../Images/icon_view_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
+<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist1" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
 	</asp:ImageButton> 
 </td><td class="ttc" scope="row"><span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID4" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect3(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
@@ -114,7 +114,7 @@
 <span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID5" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect33(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCDI_PM00200_Vendor_ID5TextBoxMaxLengthValidator" ControlToValidate="WCDI_PM00200_Vendor_ID5" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCDI PM 00200 Vendor 3&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></span>
-<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist2" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" onmouseout="this.src=&#39;../Images/ExpirationHS.gif&#39;" onmouseover="this.src=&#39;../Images/icon_view_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
+<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist2" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
 	</asp:ImageButton> 
 </td><td class="ttc" scope="row"><span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID6" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect4(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
@@ -125,7 +125,7 @@
 <span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID7" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect44(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCDI_PM00200_Vendor_ID7TextBoxMaxLengthValidator" ControlToValidate="WCDI_PM00200_Vendor_ID7" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCDI PM 00200 Vendor 4&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></span>
-<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist3" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" onmouseout="this.src=&#39;../Images/ExpirationHS.gif&#39;" onmouseover="this.src=&#39;../Images/icon_view_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
+<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist3" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
 	</asp:ImageButton> 
 </td><td class="ttc" scope="row"><span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID8" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect5(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
@@ -136,7 +136,7 @@
 <span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID9" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect55(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCDI_PM00200_Vendor_ID9TextBoxMaxLengthValidator" ControlToValidate="WCDI_PM00200_Vendor_ID9" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCDI PM 00200 Vendor 5&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></span>
-<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist4" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" onmouseout="this.src=&#39;../Images/ExpirationHS.gif&#39;" onmouseover="this.src=&#39;../Images/icon_view_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
+<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist4" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
 	</asp:ImageButton> 
 </td><td class="ttc" scope="row"><span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID10" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect6(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
@@ -147,7 +147,7 @@
 <span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID11" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect66(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCDI_PM00200_Vendor_ID11TextBoxMaxLengthValidator" ControlToValidate="WCDI_PM00200_Vendor_ID11" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCDI PM 00200 Vendor 6&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></span>
-<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist5" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" onmouseout="this.src=&#39;../Images/ExpirationHS.gif&#39;" onmouseover="this.src=&#39;../Images/icon_view_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
+<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist5" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
 	</asp:ImageButton> 
 </td><td class="ttc" scope="row"><span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID12" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect7(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
@@ -158,7 +158,7 @@
 <span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID13" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect77(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCDI_PM00200_Vendor_ID13TextBoxMaxLengthValidator" ControlToValidate="WCDI_PM00200_Vendor_ID13" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCDI PM 00200 Vendor 7&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></span>
-<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist6" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" onmouseout="this.src=&#39;../Images/ExpirationHS.gif&#39;" onmouseover="this.src=&#39;../Images/icon_view_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
+<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist6" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
 	</asp:ImageButton> 
 </td><td class="ttc" scope="row"><span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID14" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect8(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
@@ -169,7 +169,7 @@
 <span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID15" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect88(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCDI_PM00200_Vendor_ID15TextBoxMaxLengthValidator" ControlToValidate="WCDI_PM00200_Vendor_ID15" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCDI PM 00200 Vendor 8&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></span>
-<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist7" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" onmouseout="this.src=&#39;../Images/ExpirationHS.gif&#39;" onmouseover="this.src=&#39;../Images/icon_view_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
+<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist7" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
 	</asp:ImageButton> 
 </td><td class="ttc" scope="row"><span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID16" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect9(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
@@ -180,7 +180,7 @@
 <span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID17" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect99(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCDI_PM00200_Vendor_ID17TextBoxMaxLengthValidator" ControlToValidate="WCDI_PM00200_Vendor_ID17" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCDI PM 00200 Vendor 9&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></span>
-<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist8" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" onmouseout="this.src=&#39;../Images/ExpirationHS.gif&#39;" onmouseover="this.src=&#39;../Images/icon_view_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
+<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist8" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
 	</asp:ImageButton> 
 </td><td class="ttc" scope="row"><span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID18" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect10(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
@@ -191,7 +191,7 @@
 <span style="white-space:nowrap;">
 <asp:TextBox runat="server" id="WCDI_PM00200_Vendor_ID19" Columns="15" MaxLength="15" cssclass="field_input" htmlencodevalue="Default" onchange="AutoSelect1010(this.id);" onfocus="this.blur();" textformat="{0}" width="233px"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCDI_PM00200_Vendor_ID19TextBoxMaxLengthValidator" ControlToValidate="WCDI_PM00200_Vendor_ID19" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCDI PM 00200 Vendor 10&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></span>
-<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist9" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" onmouseout="this.src=&#39;../Images/ExpirationHS.gif&#39;" onmouseover="this.src=&#39;../Images/icon_view_over.gif&#39;" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
+<asp:ImageButton CommandName="Redirect" runat="server" id="imbHist9" causesvalidation="false" imageurl="../Images/ExpirationHS.gif" tooltip="&lt;%# GetResourceValue(&quot;View Vendor-Item History&quot;, &quot;ePortalWFApproval&quot;) %>" visible="true">		
 	</asp:ImageButton> 
 </td><td class="ttc" scope="row" rowspan="3"><asp:TextBox runat="server" id="WCDI_Comment" Columns="40" MaxLength="500" cssclass="field_input" htmlencodevalue="Default" rows="8" textformat="{0}" textmode="MultiLine"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCDI_CommentTextBoxMaxLengthValidator" ControlToValidate="WCDI_Comment" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCDI Comment&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td><td class="ttc" scope="row" rowspan="3"><asp:TextBox runat="server" id="WCDI_Audit_Comment" MaxLength="500" columns="60" cssclass="field_input" enabled="False" htmlencodevalue="Default" rows="8" textformat="{0}" textmode="MultiLine"></asp:TextBox>&nbsp;
