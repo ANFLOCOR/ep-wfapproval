@@ -61,6 +61,35 @@ Public Class WCAR_DocRecordControl
             Dim sSub As String = CStr(IIf(Not IsNumeric(WCD_Exp_Sub_Yr.Text), "0", WCD_Exp_Sub_Yr.Text))
             Dim sngTotal As Single = CSng(sCur) + CSng(sNxt) + CSng(sSub)
             Me.lblTotal.Text = sngTotal.ToString("#,#.00")
+            If Not Me.WCD_Exp_Cur_Yr.Text.Trim Is Nothing Or Not Me.WCD_Exp_Cur_Yr.Text.Trim = "" Then
+                Me.WCD_Exp_Cur_Yr.Text = Convert.ToDecimal(Me.WCD_Exp_Cur_Yr.Text).ToString("#,#.00")
+                Me.WCD_Exp_Cur_Yr.Style.Add("text-align", "right")
+            End If
+            If Not Me.WCD_Exp_Nxt_Yr.Text.Trim Is Nothing And Not Me.WCD_Exp_Nxt_Yr.Text.Trim = "" Then
+                Me.WCD_Exp_Nxt_Yr.Text = Convert.ToDecimal(Me.WCD_Exp_Nxt_Yr.Text).ToString("#,#.00")
+                Me.WCD_Exp_Nxt_Yr.Style.Add("text-align", "right")
+            End If
+            If Not Me.WCD_Exp_Sub_Yr.Text.Trim Is Nothing And Not Me.WCD_Exp_Sub_Yr.Text.Trim = "" Then
+                Me.WCD_Exp_Sub_Yr.Text = Convert.ToDecimal(Me.WCD_Exp_Sub_Yr.Text).ToString("#,#.00")
+                Me.WCD_Exp_Sub_Yr.Style.Add("text-align", "right")
+            End If
+
+            If Not Me.WCD_Exp_Total.Text.Trim Is Nothing And Not Me.WCD_Exp_Total.Text.Trim = "" Then
+                Me.WCD_Exp_Total.Text = Convert.ToDecimal(Me.WCD_Exp_Total.Text).ToString("#,#.00")
+                Me.WCD_Exp_Total.Style.Add("text-align", "right")
+            End If
+            If Not Me.WCD_Exp_Prev_Total.Text.Trim Is Nothing And Not Me.WCD_Exp_Prev_Total.Text.Trim = "" Then
+                Me.WCD_Exp_Prev_Total.Text = Convert.ToDecimal(Me.WCD_Exp_Prev_Total.Text).ToString("#,#.00")
+                Me.WCD_Exp_Prev_Total.Style.Add("text-align", "right")
+            End If
+            If Not Me.WCD_Exp_Budget.Text.Trim Is Nothing And Not Me.WCD_Exp_Budget.Text.Trim = "" Then
+                Me.WCD_Exp_Budget.Text = Convert.ToDecimal(Me.WCD_Exp_Budget.Text).ToString("#,#.00")
+                Me.WCD_Exp_Budget.Style.Add("text-align", "right")
+            End If
+            If Not Me.WCD_Exp_Under_Over_Budget.Text.Trim Is Nothing And Not Me.WCD_Exp_Under_Over_Budget.Text.Trim = "" Then
+                Me.WCD_Exp_Under_Over_Budget.Text = Convert.ToDecimal(Me.WCD_Exp_Under_Over_Budget.Text).ToString("#,#.00")
+                Me.WCD_Exp_Under_Over_Budget.Style.Add("text-align", "right")
+            End If
         End Sub
 
 
@@ -6791,7 +6820,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' If the WCD_Exp_Cur_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Cur_Yr)
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Cur_Yr, "#,##0.00")
                               
                 Me.WCD_Exp_Cur_Yr.Text = formattedValue
                 
@@ -6800,7 +6829,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' WCD_Exp_Cur_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Exp_Cur_Yr.Text = WCAR_DocTable.WCD_Exp_Cur_Yr.Format(WCAR_DocTable.WCD_Exp_Cur_Yr.DefaultValue)
+                 Me.WCD_Exp_Cur_Yr.Text = WCAR_DocTable.WCD_Exp_Cur_Yr.Format(WCAR_DocTable.WCD_Exp_Cur_Yr.DefaultValue, "#,##0.00")
                         		
                 End If
                  
@@ -6830,7 +6859,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' If the WCD_Exp_Nxt_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Nxt_Yr)
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Nxt_Yr, "#,##0.00")
                               
                 Me.WCD_Exp_Nxt_Yr.Text = formattedValue
                 
@@ -6839,7 +6868,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' WCD_Exp_Nxt_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Exp_Nxt_Yr.Text = WCAR_DocTable.WCD_Exp_Nxt_Yr.Format(WCAR_DocTable.WCD_Exp_Nxt_Yr.DefaultValue)
+                 Me.WCD_Exp_Nxt_Yr.Text = WCAR_DocTable.WCD_Exp_Nxt_Yr.Format(WCAR_DocTable.WCD_Exp_Nxt_Yr.DefaultValue, "#,##0.00")
                         		
                 End If
                  
@@ -6908,7 +6937,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' If the WCD_Exp_Sub_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Sub_Yr)
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Sub_Yr, "#,##0.00")
                               
                 Me.WCD_Exp_Sub_Yr.Text = formattedValue
                 
@@ -6917,7 +6946,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' WCD_Exp_Sub_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Exp_Sub_Yr.Text = WCAR_DocTable.WCD_Exp_Sub_Yr.Format(WCAR_DocTable.WCD_Exp_Sub_Yr.DefaultValue)
+                 Me.WCD_Exp_Sub_Yr.Text = WCAR_DocTable.WCD_Exp_Sub_Yr.Format(WCAR_DocTable.WCD_Exp_Sub_Yr.DefaultValue, "#,##0.00")
                         		
                 End If
                  

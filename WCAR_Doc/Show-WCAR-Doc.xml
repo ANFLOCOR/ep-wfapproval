@@ -11,7 +11,7 @@
     <PopupMasterLayout>../Master Pages/Popup.master</PopupMasterLayout>
     <PopupCssClass>QPageSize</PopupCssClass>
     <GenerateDirectory>WCAR_Doc</GenerateDirectory>
-    <Layout>WCAR_Doc\Show-WCAR-Doc.html</Layout>
+    <Layout>WCAR_Doc\Show-WCAR-Doc.xml</Layout>
     <DisplayName>Show-WCAR-Doc</DisplayName>
     <Description>Standard record panel.</Description>
     <LoginRequired>&lt;PRoles&gt;NOT_ANONYMOUS&lt;/PRoles&gt;</LoginRequired>
@@ -687,7 +687,7 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>WCAR Document</Value>
+          <Value>ePortal Workflow Approval - CAR Document View (South)</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>
@@ -1609,6 +1609,10 @@
           <Value>field_input txtAlign-right</Value>
         </Attribute>
         <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,##0.00</Value>
+        </Attribute>
+        <Attribute>
           <Name>Enabled</Name>
           <Value>False</Value>
         </Attribute>
@@ -1672,6 +1676,10 @@
         <Attribute>
           <Name>CssClass</Name>
           <Value>field_input txtAlign-right</Value>
+        </Attribute>
+        <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,##0.00</Value>
         </Attribute>
         <Attribute>
           <Name>Enabled</Name>
@@ -1802,6 +1810,10 @@
         <Attribute>
           <Name>CssClass</Name>
           <Value>field_input txtAlign-right</Value>
+        </Attribute>
+        <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,##0.00</Value>
         </Attribute>
         <Attribute>
           <Name>Enabled</Name>

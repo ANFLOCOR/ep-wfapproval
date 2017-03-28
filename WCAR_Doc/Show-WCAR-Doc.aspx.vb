@@ -264,7 +264,7 @@ Partial Public Class Show_WCAR_Doc
             End If
         
         
-            Page.Title = "WCAR Document"
+            Page.Title = "ePortal Workflow Approval - CAR Document View (South)"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If
