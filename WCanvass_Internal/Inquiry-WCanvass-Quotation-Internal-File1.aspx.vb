@@ -250,7 +250,7 @@ Public Sub SetWCanvass_Quotation_InternalTableControl()
             End If
         
         
-            Page.Title = "Blank page"
+            Page.Title = "Attached Quotation"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If

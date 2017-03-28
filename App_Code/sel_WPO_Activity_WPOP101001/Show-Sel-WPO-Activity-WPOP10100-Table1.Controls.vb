@@ -503,6 +503,7 @@ Public Class Sel_WPO_Activity_WPOP101001TableControlRow
             Dim oDetail As Sel_WPO_Activity_WPOP101001TableControlRow = DirectCast(MiscUtils.GetParentControlObject(Me, "Sel_WPO_Activity_WPOP101001TableControlRow"), Sel_WPO_Activity_WPOP101001TableControlRow)
 
             wc.iAND(WPO_Activity1Table.WPO_PONum, BaseFilter.ComparisonOperator.EqualsTo, oDetail.GetRecord().WPO_PONum.ToString())
+            wc.iAND(WPO_Activity1Table.WPO_WDT_ID, BaseFilter.ComparisonOperator.EqualsTo, oDetail.GetRecord().WPO_WDT_ID.ToString())
 
             Return wc
         End Function

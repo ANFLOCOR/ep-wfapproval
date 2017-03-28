@@ -1128,7 +1128,7 @@ Public Class WPOP10100RecordControl
                     Next
                 End If
 
-                sEmail = "jfpimentera@anflocor.com" 'test jessy 07202016
+                ''sEmail = "jfpimentera@anflocor.com" 
 
                 If Trim(sEmail) <> "" Then
                     Dim email As New BaseClasses.Utils.MailSender

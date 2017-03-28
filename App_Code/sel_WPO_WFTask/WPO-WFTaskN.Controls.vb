@@ -439,8 +439,8 @@ Public Class WPOP10100RecordControl
                             If WPO_Activity1Table.GetRecords(wc5, Nothing, 0, 100).Length > 0 Then
                                 For Each itemValue5 As WPO_Activity1Record In WPO_Activity1Table.GetRecords(wc5, Nothing, 0, 100)
                                     'note: update Activity table (current user) -> 'Approved'
-                                    WPO_Activity1Record.UpdateRecord(itemValue5.WPO_ID.ToString(), "6")
-                                    WPO_Activity1Record.UpdateRecord_Final_Approved(itemValue5.WPO_ID.ToString())
+                                WPO_Activity1Record.UpdateRecord(itemValue5.WPO_ID.ToString(), "6")
+                                WPO_Activity1Record.UpdateRecord_Final_Approved(itemValue5.WPO_ID.ToString())
                                 Next
                             End If
                             'note: set WPOP10100 status to 'Completed - 6'
@@ -448,9 +448,9 @@ Public Class WPOP10100RecordControl
                             wc6.iAND(WPOP101001Table.WPOP_PONMBR, BaseFilter.ComparisonOperator.EqualsTo, poNum)
                             wc6.iAND(WPOP101001Table.WPOP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, coId)
                             For Each itemValue6 As WPOP101001Record In WPOP101001Table.GetRecords(wc6, Nothing, 0, 100)
-                                Update_WF_Status(CInt(ctlHeader.CompanyID2.Text), CInt("9"), poNum) 'NOTE:Change this from 6 to 9 inorder to view the po in GP
-                                Update_WPOP10100(CInt(ctlHeader.CompanyID2.Text), CInt("6"), poNum)
-                                Update_WF_HOLD(CInt(ctlHeader.CompanyID2.Text), CInt("0"), poNum) 'NOTE: Tag the hold field as "0" if completely approved 
+                            Update_WF_Status(CInt(ctlHeader.CompanyID2.Text), CInt("9"), poNum) 'NOTE:Change this from 6 to 9 inorder to view the po in GP
+                            Update_WPOP10100(CInt(ctlHeader.CompanyID2.Text), CInt("6"), poNum)
+                            Update_WF_HOLD(CInt(ctlHeader.CompanyID2.Text), CInt("0"), poNum) 'NOTE: Tag the hold field as "0" if completely approved 
                                 '##################
                                 '### EMAIL HERE ###
                                 '##################
@@ -479,7 +479,7 @@ Public Class WPOP10100RecordControl
 
                             For Each itemValue4 As WPO_Activity1Record In WPO_Activity1Table.GetRecords(wc4, Nothing, 0, 100)
                                 'note: update Activity table (other user(s) if multiple approvers) -> 'System Approved'
-                                WPO_Activity1Record.UpdateRecord(itemValue4.WPO_ID.ToString(), "11")
+                            WPO_Activity1Record.UpdateRecord(itemValue4.WPO_ID.ToString(), "11")
                             Next
 
                             Dim wc5 As WhereClause = New WhereClause
@@ -491,8 +491,8 @@ Public Class WPOP10100RecordControl
                             If WPO_Activity1Table.GetRecords(wc5, Nothing, 0, 100).Length > 0 Then
                                 For Each itemValue5 As WPO_Activity1Record In WPO_Activity1Table.GetRecords(wc5, Nothing, 0, 100)
                                     'note: update Activity table (current user) -> 'Approved'
-                                    WPO_Activity1Record.UpdateRecord(itemValue5.WPO_ID.ToString(), "6")
-                                    WPO_Activity1Record.UpdateRecord_Final_Approved(itemValue5.WPO_ID.ToString()) ''additional: to make IsDone = True
+                                WPO_Activity1Record.UpdateRecord(itemValue5.WPO_ID.ToString(), "6")
+                                WPO_Activity1Record.UpdateRecord_Final_Approved(itemValue5.WPO_ID.ToString()) ''additional: to make IsDone = True
                                 Next
                             End If
 
@@ -501,12 +501,12 @@ Public Class WPOP10100RecordControl
                             For Each itemValue6 As WPO_Step_WPO_StepDetail1Record In WPO_Step_WPO_StepDetail1View.GetRecords(wc6, Nothing, 0, 100)
                                 'note: use returned items to insert to Activity table
                                 'note: do not insert(update) delegate until task expires
-                                WPO_Activity1Record.AddRecord(itemValue6.WPO_S_ID.ToString(), itemValue6.WPO_SD_ID.ToString(), _
-                                Me.WPOP_DT_ID1.SelectedValue.ToString(), _
-                                FindDelegate(itemValue6.WPO_SD_W_U_ID.ToString()), "0", _
-                                poNum.ToString(), _
-                                DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
-                                ": " & oHeader.WPOP_Remark.Text)
+                            WPO_Activity1Record.AddRecord(itemValue6.WPO_S_ID.ToString(), itemValue6.WPO_SD_ID.ToString(), _
+                            Me.WPOP_DT_ID1.SelectedValue.ToString(), _
+                            FindDelegate(itemValue6.WPO_SD_W_U_ID.ToString()), "0", _
+                            poNum.ToString(), _
+                            DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                            ": " & oHeader.WPOP_Remark.Text)
 
                                 Dim nStep As String = itemValue6.W_U_Full_Name.ToString()
                                 sEmailContent &= vbCrLf & vbCrLf & "Next Approver: " & nStep
@@ -522,18 +522,18 @@ Public Class WPOP10100RecordControl
                                         '##################
                                         Dim sInfo As String = ""
                                         Dim sDelegate As String = FindDelegate(itemValue6.WPO_SD_W_U_ID.ToString(), sInfo)
-                                        Dim esUserRej As String = System.Web.HttpContext.Current.Session("FullName").ToString()
+                                    Dim esUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
 
-                                        sEmailContent = Content_Formatter(sDelegate, _
-             "PO Approval Needed (PO# " & poNum.Trim() & ")", CStr(coDesc.ToString()), _
-             sPODetail, CStr(deyt), "SUPPLIER: " & ctlHeader.VENDNAME.Text.Trim() & "<br>" & ctlWF.WPOP_Remark.Text, sngTotal.ToString("#,#.00") & sCurr, _
-             System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#4682b4", "wf_po/ShowSel_WPO_Activity_WPOP10100Table.aspx", poNum.Trim(), _
-             "Next Approver: " & nStep, "", "PO")
+                                    sEmailContent = Content_Formatter(sDelegate, _
+         "PO Approval Needed (PO# " & poNum.Trim() & ")", CStr(coDesc.ToString()), _
+         sPODetail, CStr(deyt), "SUPPLIER: " & ctlHeader.VENDNAME.Text.Trim() & "<br>" & ctlWF.WPOP_Remark.Text, sngTotal.ToString("#,#.00") & sCurr, _
+         System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#4682b4", "sel_WPO_Activity_WPOP101001/Show-Sel-WPO-Activity-WPOP10100-Table1.aspx", poNum.Trim(), _
+         "Next Approver: " & nStep, "", "PO")
 
 
-
-                                        Send_Email_Notification(sDelegate, "PO Approval Needed (PO# " & _
-                                                                poNum.Trim() & ")", sEmailContent)
+                                    'MsgBox(sDelegate)
+                                    Send_Email_Notification(sDelegate, "PO Approval Needed (PO# " & _
+                                                            poNum.Trim() & ")", sEmailContent)
 
                                         'Send_Email_Notification(itemValue6.WPO_SD_W_U_ID.ToString(), "PO Approval Needed (PO# " & _
                                         'poNum.ToString & ")", sEmailContent)
@@ -555,14 +555,14 @@ Public Class WPOP10100RecordControl
                         If WPO_Activity1Table.GetRecords(wc5, Nothing, 0, 100).Length > 0 Then
                             For Each itemValue5 As WPO_Activity1Record In WPO_Activity1Table.GetRecords(wc5, Nothing, 0, 100)
                                 'note: update Activity table (current user) -> 'Approved'
-                                WPO_Activity1Record.UpdateRecord(itemValue5.WPO_ID.ToString(), "6")
+                            WPO_Activity1Record.UpdateRecord(itemValue5.WPO_ID.ToString(), "6")
                                 'WPO_Activity1Record.UpdateRecord_Final_Approved(itemValue5.WPO_ID.ToString()) ''additional:to make IsDone = True ''temp hide for testing 2-12-11
                             Next
                         End If
 
-                        Update_WF_Status(CInt(ctlHeader.CompanyID2.Text), CInt("9"), poNum) 'NOTE: Change it from 6 to 9 in updating the POP10100 table
-                        'Update_WF_HOLD(CInt(ctlHeader.CompanyID2.Text), CInt("0"), poNum) 'NOTE: Tag the hold field as "0" if completely approved 
-                        Update_WPOP10100(CInt(ctlHeader.CompanyID2.Text), CInt("6"), poNum)
+                    Update_WF_Status(CInt(ctlHeader.CompanyID2.Text), CInt("9"), poNum) 'NOTE: Change it from 6 to 9 in updating the POP10100 table
+                    'Update_WF_HOLD(CInt(ctlHeader.CompanyID2.Text), CInt("0"), poNum) 'NOTE: Tag the hold field as "0" if completely approved 
+                    Update_WPOP10100(CInt(ctlHeader.CompanyID2.Text), CInt("6"), poNum)
 
                     End If
                 End If
@@ -708,7 +708,7 @@ Public Class WPOP10100RecordControl
                         '### EMAIL HERE ###
                         '##################
                         'email to Returned user
-                        Dim sUserRej As String = System.Web.HttpContext.Current.Session("FullName").ToString()
+                        Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
 
                         sEmailContent = Content_Formatter(itemValue6.WPO_SD_W_U_ID.ToString(), _
                         "PO Information Needed (PO# " & poNum.Trim() & ")", CStr(coDesc.ToString()), _
@@ -883,7 +883,7 @@ Public Class WPOP10100RecordControl
                     '##################
                     '### EMAIL HERE ###
                     '##################
-                    Dim sUserRej As String = System.Web.HttpContext.Current.Session("FullName").ToString()
+                    Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
 
                     sEmailContent = Content_Formatter(itemValue6.WPOP_U_ID.ToString(), _
                     "PO Information Needed (PO# " & poNum.Trim() & ")", CStr(coDesc.ToString()), _
@@ -1017,7 +1017,7 @@ Public Class WPOP10100RecordControl
 
                 Dim email As New BaseClasses.Utils.MailSender
 
-                sEmail = "jfpimentera@anflocor.com"
+                ''sEmail = "jfpimentera@anflocor.com"
 
                 email.AddFrom("noreply@anflocor.com")
                 email.AddTo(sEmail)

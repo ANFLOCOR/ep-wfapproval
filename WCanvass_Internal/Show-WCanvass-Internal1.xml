@@ -654,14 +654,6 @@
           <Value>../Images/ExpirationHS.gif</Value>
         </Attribute>
         <Attribute>
-          <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
-        </Attribute>
-        <Attribute>
           <Name>ToolTip</Name>
           <Value>View Vendor-Item History</Value>
           <Type>ResourceReference</Type>
@@ -685,14 +677,6 @@
         <Attribute>
           <Name>ImageURL</Name>
           <Value>../Images/ExpirationHS.gif</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -720,14 +704,6 @@
           <Value>../Images/ExpirationHS.gif</Value>
         </Attribute>
         <Attribute>
-          <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
-        </Attribute>
-        <Attribute>
           <Name>ToolTip</Name>
           <Value>View Vendor-Item History</Value>
           <Type>ResourceReference</Type>
@@ -751,14 +727,6 @@
         <Attribute>
           <Name>ImageURL</Name>
           <Value>../Images/ExpirationHS.gif</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -786,14 +754,6 @@
           <Value>../Images/ExpirationHS.gif</Value>
         </Attribute>
         <Attribute>
-          <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
-        </Attribute>
-        <Attribute>
           <Name>ToolTip</Name>
           <Value>View Vendor-Item History</Value>
           <Type>ResourceReference</Type>
@@ -817,14 +777,6 @@
         <Attribute>
           <Name>ImageURL</Name>
           <Value>../Images/ExpirationHS.gif</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -852,14 +804,6 @@
           <Value>../Images/ExpirationHS.gif</Value>
         </Attribute>
         <Attribute>
-          <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
-        </Attribute>
-        <Attribute>
           <Name>ToolTip</Name>
           <Value>View Vendor-Item History</Value>
           <Type>ResourceReference</Type>
@@ -885,14 +829,6 @@
           <Value>../Images/ExpirationHS.gif</Value>
         </Attribute>
         <Attribute>
-          <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
-        </Attribute>
-        <Attribute>
           <Name>ToolTip</Name>
           <Value>View Vendor-Item History</Value>
           <Type>ResourceReference</Type>
@@ -916,14 +852,6 @@
         <Attribute>
           <Name>ImageURL</Name>
           <Value>../Images/ExpirationHS.gif</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/ExpirationHS.gif'</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon_view_over.gif'</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
