@@ -324,7 +324,7 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>Blank page</Value>
+          <Value>Vendor-Item History</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>
@@ -559,27 +559,27 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>FirstPage-Consumers</Name>
-          <Value>Sel_POP30300_POP30310TableControl</Value>
+          <Value>Sel_POP30300_POP303101TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:TableControl</Name>
-          <Value>Sel_POP30300_POP30310TableControl</Value>
+          <Value>Sel_POP30300_POP303101TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>LastPage-Consumers</Name>
-          <Value>Sel_POP30300_POP30310TableControl</Value>
+          <Value>Sel_POP30300_POP303101TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>NextPage-Consumers</Name>
-          <Value>Sel_POP30300_POP30310TableControl</Value>
+          <Value>Sel_POP30300_POP303101TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>PageSizeButton-Consumers</Name>
-          <Value>Sel_POP30300_POP30310TableControl</Value>
+          <Value>Sel_POP30300_POP303101TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>PreviousPage-Consumers</Name>
-          <Value>Sel_POP30300_POP30310TableControl</Value>
+          <Value>Sel_POP30300_POP303101TableControl</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_POP30300_POP303101TableControl</InsideControl>
@@ -819,7 +819,7 @@
     &lt;/Prolog&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:TABLE NAME="Sel_POP30300_POP303101TableControl"/&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;GEN:TABLE NAME="Sel_POP30300_POP303101TableControl" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
       &lt;RowAttributes /&gt;

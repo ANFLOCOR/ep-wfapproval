@@ -42,7 +42,7 @@
         </Attribute>
         <Attribute>
           <Name>ReadOnly</Name>
-          <Value>True</Value>
+          <Value>False</Value>
         </Attribute>
         <Attribute>
           <Name>RichTextEditorType</Name>
@@ -413,7 +413,20 @@
       &lt;RowAttributes /&gt;
     &lt;/Row&gt;
     &lt;Epilog /&gt;
-    &lt;TableAttributes /&gt;
+    &lt;TableAttributes&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;cellspacing&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;cellpadding&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;border&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+    &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
 &lt;/LayoutDefinition&gt;]]&gt;</LayoutDefinition>
 </ComponentDefinition>

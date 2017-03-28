@@ -1557,7 +1557,7 @@ Public Class WPO_CARNo_QDetailsTableControlRow
 
             DbUtils.StartTransaction()
 
-            Dim url As String = "../WCAR_Doc/Show-WCAR-Doc-WPO-Submit.aspx?WCAR_Doc=" & Me.WCD_ID.Text '{WPO_CARNo_QDetailsTableControlRow:FV:WCD_ID}"
+            Dim url As String = "../WCAR_Doc/Show-WCAR-Doc.aspx?WCAR_Doc=" & Me.WCD_ID.Text '{WPO_CARNo_QDetailsTableControlRow:FV:WCD_ID}"
             'Dim url As String = "../WCAR_Doc/Show-WCAR-Doc-WPO.aspx?WCAR_Doc=" & Me.WCD_ID.Text '{WPO_CARNo_QDetailsTableControlRow:FV:WCD_ID}"
 
             If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
@@ -1759,8 +1759,9 @@ Public Class Sel_WPO_InquireDetailsTableControlRow
             ' Me.imbItemHistory.Button.Attributes.Add("onclick", "window.open('../wf_po/WPO_ItemHistory.aspx?pItemNo=" & Me.ITEMNMBR.Text & "&pVendorID=0&pCompanyID=" & Me.CompanyID1.Text & "&pPONUMBR=" & Me.PONUMBER1.Text & "', '', 'scrollbars=yes,menubar=no,width=700,height=500,top=(screen.height  - 240)/2,left=(screen.width  - 640)/2');return false;")
 
             'Me.imbItemHistory.Visible = IsInventoriedItem()
+
             If IsInventoriedItem() Then
-                Me.ITEMNMBR.Attributes.Add("onclick", "window.open('../sel_WPO_WFTask/WPO-ItemHistory.aspx?pItemNo=" & Me.GetRecord.ITEMNMBR.ToString & "&pVendorID=0&pCompanyID=" & Me.GetRecord.CompanyID.ToString & "&pPONUMBR=" & Me.GetRecord.PONUMBER.ToString & "&pItemDesc=" & Me.GetRecord.ITEMDESC.ToString & "', '', 'scrollbars=yes,menubar=no,width=700,height=500,top=(screen.height  - 240)/2,left=(screen.width  - 640)/2');return false;")
+                Me.ITEMNMBR.Attributes.Add("onclick", "window.open('../sel_WPO_WFTask/WPO-ItemHistory.aspx?pItemNo=" & Me.ITEMNMBR.Text & "&pVendorID=0&pCompanyID=" & Me.GetRecord.CompanyID.ToString & "&pPONUMBR=" & Me.GetRecord.PONUMBER.ToString & "&pItemDesc=" & Me.GetRecord.ITEMDESC.ToString & "', '', 'scrollbars=yes,menubar=no,width=700,height=500,top=(screen.height  - 240)/2,left=(screen.width  - 640)/2');return false;")
                 Me.ITEMNMBR.Visible = True
                 Me.ITEMNMBR1.Visible = False
             Else

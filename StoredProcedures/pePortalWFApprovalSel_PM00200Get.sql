@@ -8,7 +8,7 @@ GO
 
 -- Returns a specific record from the [dbo].[sel_PM00200] table.
 CREATE PROCEDURE pePortalWFApprovalSel_PM00200Get
-        @pk_VENDORID char(15)
+        @pk_VENDORID char(15),    @pk_Company_ID int
 AS
 DECLARE
     @l_count int
@@ -19,7 +19,7 @@ BEGIN
     -- only one row is returned
     SELECT @l_count = count(*) 
     FROM [dbo].[sel_PM00200]
-    WHERE [VENDORID] =@pk_VENDORID
+    WHERE [VENDORID] =@pk_VENDORID and [Company_ID] =@pk_Company_ID
 
     IF @l_count = 0
         RAISERROR ('The record no longer exists.', 16, 1)
@@ -34,7 +34,7 @@ BEGIN
         [Company_ID],
         CAST(BINARY_CHECKSUM([VENDORID],[VENDNAME],[Company_ID]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345
     FROM [dbo].[sel_PM00200]
-    WHERE [VENDORID] =@pk_VENDORID
+    WHERE [VENDORID] =@pk_VENDORID and [Company_ID] =@pk_Company_ID
     SET NOCOUNT OFF
 END
 

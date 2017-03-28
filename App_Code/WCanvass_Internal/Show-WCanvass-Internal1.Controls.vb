@@ -9042,7 +9042,7 @@ Public Class BaseWCanvass_Quotation_Internal1TableControlRow
       
             ' Call the Set methods for each controls on the panel
         
-                SetLiteral4()
+                SetlitBreak30()
                 SetWCQI_Desc()
                 SetWCQI_File()
                 SetWCQI_PM00200_Vendor_ID()
@@ -9229,10 +9229,14 @@ Public Class BaseWCanvass_Quotation_Internal1TableControlRow
                                  
         End Sub
                 
-        Public Overridable Sub SetLiteral4()
+        Public Overridable Sub SetlitBreak30()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.litBreak30.Text = "Some value"
+                    
                   End Sub
                 
 
@@ -9627,9 +9631,9 @@ Public Class BaseWCanvass_Quotation_Internal1TableControlRow
 
 #Region "Helper Properties"
         
-        Public ReadOnly Property Literal4() As System.Web.UI.WebControls.Literal
+        Public ReadOnly Property litBreak30() As System.Web.UI.WebControls.Literal
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal4"), System.Web.UI.WebControls.Literal)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "litBreak30"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
         

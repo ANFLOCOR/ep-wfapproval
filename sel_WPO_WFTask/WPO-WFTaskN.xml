@@ -936,6 +936,14 @@
       <Table>DatabaseANFLO-WFN%dbo.sel_WPO_WFTask</Table>
       <PassthroughAttributes>
         <Attribute>
+          <Name>CompanyID2RequiredFieldValidator:Enabled</Name>
+          <Value>True</Value>
+        </Attribute>
+        <Attribute>
+          <Name>CompanyID2RequiredFieldValidator:Text</Name>
+          <Value>*</Value>
+        </Attribute>
+        <Attribute>
           <Name>CssClass</Name>
           <Value>field_input</Value>
         </Attribute>
@@ -4955,6 +4963,10 @@
       <Table>DatabaseANFLO-WFN%dbo.sel_WPO_WFTaskActivity_Remarks</Table>
       <PassthroughAttributes>
         <Attribute>
+          <Name>BorderStyle</Name>
+          <Value>None</Value>
+        </Attribute>
+        <Attribute>
           <Name>Columns</Name>
           <Value>60</Value>
         </Attribute>
@@ -4967,12 +4979,16 @@
           <Value>False</Value>
         </Attribute>
         <Attribute>
+          <Name>InternalUse:ApplySaveToField</Name>
+          <Value>false</Value>
+        </Attribute>
+        <Attribute>
           <Name>InternalUse:DataSource</Name>
           <Value>Parent</Value>
         </Attribute>
         <Attribute>
           <Name>ReadOnly</Name>
-          <Value>True</Value>
+          <Value>False</Value>
         </Attribute>
         <Attribute>
           <Name>RichTextEditorType</Name>
@@ -4980,7 +4996,11 @@
         </Attribute>
         <Attribute>
           <Name>Rows</Name>
-          <Value>6</Value>
+          <Value>5</Value>
+        </Attribute>
+        <Attribute>
+          <Name>style</Name>
+          <Value>white-space: inherit;</Value>
         </Attribute>
         <Attribute>
           <Name>TextMode</Name>
@@ -4991,8 +5011,8 @@
           <Value>False</Value>
         </Attribute>
         <Attribute>
-          <Name>WPO_Remark1RequiredFieldValidator:Text</Name>
-          <Value>*</Value>
+          <Name>Wrap</Name>
+          <Value>True</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_WPO_WFTaskActivity_RemarksRecordControl</InsideControl>
@@ -6953,7 +6973,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;color:Black;font-family:Tahoma;text-align:left;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -8361,7 +8381,7 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;white-space: normal;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;

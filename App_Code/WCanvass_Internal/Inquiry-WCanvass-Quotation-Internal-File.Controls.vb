@@ -271,9 +271,20 @@ Public Class BaseWCanvass_Quotation_InternalTableControlRow
                 				
                 ' If the WCQI_PM00200_Vendor_ID is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = ""
+                Dim _isExpandableNonCompositeForeignKey As Boolean = WCanvass_Quotation_InternalTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID)
+                If _isExpandableNonCompositeForeignKey AndAlso WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID.IsApplyDisplayAs Then
+                                  
+                       formattedValue = WCanvass_Quotation_InternalTable.GetDFKA(Me.DataSource.WCQI_PM00200_Vendor_ID.ToString(),WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID)
+                       End If
+                Else
+                       formattedValue = Me.DataSource.WCQI_PM00200_Vendor_ID.ToString()
+                End If
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WCQI_PM00200_Vendor_ID.Text = formattedValue
                 
@@ -1013,7 +1024,10 @@ Public Class BaseWCanvass_Quotation_InternalTableControl
             End If
             
             'LoadData for DataSource for chart and report if they exist
-               
+          
+          ' Improve performance by prefetching display as records.
+          Me.PreFetchForeignKeyValues()
+             
             ' Setup the pagination controls.
             BindPaginationControls()
 
@@ -1077,6 +1091,15 @@ Public Class BaseWCanvass_Quotation_InternalTableControl
     End Sub
 
     
+          Public Sub PreFetchForeignKeyValues()
+          If (IsNothing(Me.DataSource))
+            Return
+          End If
+          
+            Me.Page.PregetDfkaRecords(WCanvass_Quotation_InternalTable.WCQI_PM00200_Vendor_ID, Me.DataSource)
+          
+          End Sub
+        
       
         Public Overridable Sub RegisterPostback()
         
