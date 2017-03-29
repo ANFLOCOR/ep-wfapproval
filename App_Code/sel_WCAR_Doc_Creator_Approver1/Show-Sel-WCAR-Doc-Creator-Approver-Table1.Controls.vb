@@ -1085,7 +1085,7 @@ Public Class BaseSel_WCAR_Doc_Creator_Approver1TableControlRow
                 ' If the WCD_Request_Date is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Creator_Approver1View.WCD_Request_Date, "g")
+                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Creator_Approver1View.WCD_Request_Date, "d")
                               
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WCD_Request_Date.Text = formattedValue
@@ -1095,7 +1095,7 @@ Public Class BaseSel_WCAR_Doc_Creator_Approver1TableControlRow
                 ' WCD_Request_Date is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Request_Date.Text = Sel_WCAR_Doc_Creator_Approver1View.WCD_Request_Date.Format(Sel_WCAR_Doc_Creator_Approver1View.WCD_Request_Date.DefaultValue, "g")
+                 Me.WCD_Request_Date.Text = Sel_WCAR_Doc_Creator_Approver1View.WCD_Request_Date.Format(Sel_WCAR_Doc_Creator_Approver1View.WCD_Request_Date.DefaultValue, "d")
                         		
                 End If
                  
