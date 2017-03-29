@@ -75,7 +75,7 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td style="padding-right: 5px; vertical-align:top">
-<asp:TextBox runat="server" id="WCD_Exp_Cur_Yr" Columns="20" MaxLength="26" cssclass="field_input txtAlign-right" enabled="False" htmlencodevalue="Default" textformat="{0}" width="268px"></asp:TextBox></td>
+<asp:TextBox runat="server" id="WCD_Exp_Cur_Yr" Columns="20" MaxLength="26" cssclass="field_input txtAlign-right" dataformat="#,##0.00" enabled="False" htmlencodevalue="Default" textformat="{0}" width="268px"></asp:TextBox></td>
 <td>
 &nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCD_Exp_Cur_YrTextBoxMaxLengthValidator" ControlToValidate="WCD_Exp_Cur_Yr" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCD Expiration CUR Year&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td>
@@ -86,7 +86,7 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td style="padding-right: 5px; vertical-align:top">
-<asp:TextBox runat="server" id="WCD_Exp_Nxt_Yr" Columns="20" MaxLength="26" cssclass="field_input txtAlign-right" enabled="False" htmlencodevalue="Default" textformat="{0}" width="268px"></asp:TextBox></td>
+<asp:TextBox runat="server" id="WCD_Exp_Nxt_Yr" Columns="20" MaxLength="26" cssclass="field_input txtAlign-right" dataformat="#,##0.00" enabled="False" htmlencodevalue="Default" textformat="{0}" width="268px"></asp:TextBox></td>
 <td>
 &nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCD_Exp_Nxt_YrTextBoxMaxLengthValidator" ControlToValidate="WCD_Exp_Nxt_Yr" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCD Expiration Next Year&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td>
@@ -97,7 +97,7 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td style="padding-right: 5px; vertical-align:top">
-<asp:TextBox runat="server" id="WCD_Exp_Sub_Yr" Columns="20" MaxLength="26" cssclass="field_input txtAlign-right" enabled="False" htmlencodevalue="Default" textformat="{0}" width="268px"></asp:TextBox></td>
+<asp:TextBox runat="server" id="WCD_Exp_Sub_Yr" Columns="20" MaxLength="26" cssclass="field_input txtAlign-right" dataformat="#,##0.00" enabled="False" htmlencodevalue="Default" textformat="{0}" width="268px"></asp:TextBox></td>
 <td>
 &nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCD_Exp_Sub_YrTextBoxMaxLengthValidator" ControlToValidate="WCD_Exp_Sub_Yr" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCD Expiration Sub Year&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td>
