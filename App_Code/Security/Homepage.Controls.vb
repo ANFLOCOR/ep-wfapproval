@@ -497,7 +497,8 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                     Case "PO CANCEL"
                         Me.Doc_Type1.Text = "<font color=red>" & Me.Doc_Type1.Text & "</font>"
                     Case Else
-                        Me.Doc_Type1.Text = "<font color=black>" & Me.Doc_Type1.Text & "</font>"
+                        Me.Doc_Type1.Text = Me.Doc_Type1.Text
+                        'Me.Doc_Type1.Text = "<font color=black>" & Me.Doc_Type1.Text & "</font>"
                 End Select
             End If
         End Sub
@@ -578,7 +579,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
 
             Select Case Me.Doc_Type1.Text
                 Case "<font color=black>CAR</font>"
-                    pubUrl = "../wf_car/EditWCAR_Doc_Approval.aspx?WCAR_Doc=" & Me.PK_ID1.Text
+                    pubUrl = "../WCAR_Doc1/EditWCAR-Doc-Approval1.aspx?WCAR_Doc1=" & Me.PK_ID1.Text
                 Case "<font color=black>PR</font>"
                     pubUrl = "../wf_pr/EditWPR_Doc_Approval.aspx?WPR_Doc=" & Me.PK_ID1.Text
                 Case "<font color=black>PO</font>"
@@ -594,7 +595,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Case "<font color=black>_CAR(RETURN)", "_PO(RETURN)</font>"
                     Me.imbDoc1.Visible = False
                 Case Else
-                    pubUrl = "../WCAR_Doc/Edit-WCAR-Doc.aspx?WCAR_Doc=" & Me.PK_ID1.Text
+                    pubUrl = "../WCAR_Doc1/Edit-WCAR-Doc1.aspx?WCAR_Doc1=" & Me.PK_ID1.Text
             End Select
             Dim url As String = pubUrl
 

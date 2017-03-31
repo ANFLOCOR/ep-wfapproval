@@ -1167,6 +1167,10 @@
       <Table>DatabaseANFLO-WFN%dbo.sel_WCAR_Doc_Creator_Approver</Table>
       <PassthroughAttributes>
         <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,#.00</Value>
+        </Attribute>
+        <Attribute>
           <Name>FieldMaxLength</Name>
           <Value>Default</Value>
         </Attribute>
@@ -1634,6 +1638,10 @@
       <FieldValueStyle>Literal</FieldValueStyle>
       <Table>DatabaseANFLO-WFN%dbo.sel_WCAR_Doc_Creator_Approver</Table>
       <PassthroughAttributes>
+        <Attribute>
+          <Name>DataFormat</Name>
+          <Value>d</Value>
+        </Attribute>
         <Attribute>
           <Name>FieldMaxLength</Name>
           <Value>Default</Value>

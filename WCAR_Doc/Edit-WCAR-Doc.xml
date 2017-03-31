@@ -1171,6 +1171,10 @@
           <Value>field_input txtAlign-right</Value>
         </Attribute>
         <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,#.00</Value>
+        </Attribute>
+        <Attribute>
           <Name>EnableIncrementDecrementButtons</Name>
           <Value>Default</Value>
         </Attribute>
@@ -1234,6 +1238,10 @@
         <Attribute>
           <Name>CssClass</Name>
           <Value>field_input txtAlign-right</Value>
+        </Attribute>
+        <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,#.00</Value>
         </Attribute>
         <Attribute>
           <Name>EnableIncrementDecrementButtons</Name>
@@ -1301,6 +1309,10 @@
           <Value>field_input txtAlign-right</Value>
         </Attribute>
         <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,#.00</Value>
+        </Attribute>
+        <Attribute>
           <Name>EnableIncrementDecrementButtons</Name>
           <Value>Default</Value>
         </Attribute>
@@ -1360,6 +1372,10 @@
         <Attribute>
           <Name>CssClass</Name>
           <Value>field_input txtAlign-right</Value>
+        </Attribute>
+        <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,#.00</Value>
         </Attribute>
         <Attribute>
           <Name>EnableIncrementDecrementButtons</Name>
@@ -1427,6 +1443,10 @@
           <Value>field_input txtAlign-right</Value>
         </Attribute>
         <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,#.00</Value>
+        </Attribute>
+        <Attribute>
           <Name>EnableIncrementDecrementButtons</Name>
           <Value>Default</Value>
         </Attribute>
@@ -1488,6 +1508,10 @@
           <Value>field_input txtAlign-right</Value>
         </Attribute>
         <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,#.00</Value>
+        </Attribute>
+        <Attribute>
           <Name>EnableIncrementDecrementButtons</Name>
           <Value>Default</Value>
         </Attribute>
@@ -1547,6 +1571,10 @@
         <Attribute>
           <Name>CssClass</Name>
           <Value>field_input txtAlign-right</Value>
+        </Attribute>
+        <Attribute>
+          <Name>DataFormat</Name>
+          <Value>#,#.00</Value>
         </Attribute>
         <Attribute>
           <Name>EnableIncrementDecrementButtons</Name>

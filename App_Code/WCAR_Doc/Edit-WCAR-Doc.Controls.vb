@@ -61,11 +61,15 @@ Public Class WCAR_DocRecordControl
             AddHandler Me.WCD_WCur_ID.SelectedIndexChanged, AddressOf WCD_WCur_ID_SelectedIndexChanged
             AddHandler Me.WCD_WDT_ID.SelectedIndexChanged, AddressOf WCD_WDT_ID_SelectedIndexChanged
 
-            Dim sCur As String = CStr(IIf(Not IsNumeric(WCD_Exp_Cur_Yr.Text), "0", WCD_Exp_Cur_Yr.Text))
-            Dim sNxt As String = CStr(IIf(Not IsNumeric(WCD_Exp_Nxt_Yr.Text), "0", WCD_Exp_Nxt_Yr.Text))
-            Dim sSub As String = CStr(IIf(Not IsNumeric(WCD_Exp_Sub_Yr.Text), "0", WCD_Exp_Sub_Yr.Text))
+            'Dim sCur As String = CStr(IIf(Not IsNumeric(WCD_Exp_Cur_Yr.Text), "0", WCD_Exp_Cur_Yr.Text))
+            'Dim sNxt As String = CStr(IIf(Not IsNumeric(WCD_Exp_Nxt_Yr.Text), "0", WCD_Exp_Nxt_Yr.Text))
+            'Dim sSub As String = CStr(IIf(Not IsNumeric(WCD_Exp_Sub_Yr.Text), "0", WCD_Exp_Sub_Yr.Text))
+            Dim sCur As String = Convert.ToDecimal(IIf(Not IsNumeric(WCD_Exp_Cur_Yr.Text), "0", WCD_Exp_Cur_Yr.Text)).ToString("#,#.00")
+            Dim sNxt As String = Convert.ToDecimal(IIf(Not IsNumeric(WCD_Exp_Nxt_Yr.Text), "0", WCD_Exp_Nxt_Yr.Text)).ToString("#,#.00")
+            Dim sSub As String = Convert.ToDecimal(IIf(Not IsNumeric(WCD_Exp_Sub_Yr.Text), "0", WCD_Exp_Sub_Yr.Text)).ToString("#,#.00")
             Dim sngTotal As Single = CSng(sCur) + CSng(sNxt) + CSng(sSub)
             Me.lblTotal1.Text = sngTotal.ToString("#,#.00")
+            Me.WCD_Exp_Total.Text = sCur
             If Page.IsPostBack Then
                 Me.WCD_Exp_Total.Text = sCur
             End If
@@ -110,7 +114,19 @@ Public Class WCAR_DocRecordControl
                 ''oTab2.WCDoc_ProjClass_ID.Enabled = False
                 'oTab3.WCDC_U_ID.Enabled = False
             End If
-
+            If Not Me.WCD_Exp_Prev_Total.Text.Trim Is Nothing And Not Me.WCD_Exp_Prev_Total.Text.Trim = "" Then
+                Me.WCD_Exp_Prev_Total.Text = Convert.ToDecimal(Me.WCD_Exp_Prev_Total.Text).ToString("#,#.00")
+                Me.WCD_Exp_Prev_Total.Style.Add("text-align", "right")
+            End If
+            If Not Me.WCD_Exp_Budget.Text.Trim Is Nothing And Not Me.WCD_Exp_Budget.Text.Trim = "" Then
+                Me.WCD_Exp_Budget.Text = Convert.ToDecimal(Me.WCD_Exp_Budget.Text).ToString("#,#.00")
+                Me.WCD_Exp_Budget.Style.Add("text-align", "right")
+            End If
+            If Not Me.WCD_Exp_Under_Over_Budget.Text.Trim Is Nothing And Not Me.WCD_Exp_Under_Over_Budget.Text.Trim = "" Then
+                Me.WCD_Exp_Under_Over_Budget.Text = Convert.ToDecimal(Me.WCD_Exp_Under_Over_Budget.Text).ToString("#,#.00")
+                Me.WCD_Exp_Under_Over_Budget.Style.Add("text-align", "right")
+            End If
+         
 
         End Sub
 
@@ -119,51 +135,53 @@ Public Class WCAR_DocRecordControl
         ByVal e As System.EventArgs) Handles MyBase.PreRender
 
             Dim script As String = "<script language=""javascript"">" & vbCrLf & _
-            "function addCommas(nStr) {" & vbcrlf & _
-            "  nStr += '';" & vbcrlf & _
-            "  x = nStr.split('.');" & vbcrlf & _
-            "  x1 = x[0];" & vbcrlf & _
-            "  x2 = x.length > 1 ? '.' + x[1] : '';" & vbcrlf & _
-            "  var rgx = /(\d+)(\d{3})/;" & vbcrlf & _
-            "  while (rgx.test(x1)) {" & vbcrlf & _
-            "    x1 = x1.replace(rgx, '$1' + ',' + '$2');" & vbcrlf & _
-            "  }" & vbcrlf & _
-            "  return x1 + x2; }" & vbcrlf & _
-            "function Supplementary(Checker,Texter,Finder,Manual) {" & vbcrlf & _
-            "  if (document.getElementById(Checker).checked) {" & vbcrlf & _
-            "    document.getElementById(Texter).disabled=false;" & vbcrlf & _
-            "    document.getElementById(Finder).disabled=false;" & vbcrlf & _
-            "    document.getElementById(Manual).disabled=false;}" & vbcrlf & _
-            "  else {" & vbcrlf & _
-            "    document.getElementById(Texter).disabled=true;" & vbcrlf & _
-            "    document.getElementById(Finder).disabled=true;" & vbcrlf & _
-            "    document.getElementById(Manual).disabled=true;" & vbcrlf & _
-            "    document.getElementById(Manual).value='';" & vbcrlf & _
-            "    document.getElementById(Texter).value='';}}" & vbcrlf & _
+            "function addCommas(nStr) {" & vbCrLf & _
+            "  nStr += '';" & vbCrLf & _
+            "  x = nStr.split('.');" & vbCrLf & _
+            "  x1 = x[0];" & vbCrLf & _
+            "  x2 = x.length > 1 ? '.' + x[1] : '';" & vbCrLf & _
+            "  var rgx = /(\d+)(\d{3})/;" & vbCrLf & _
+            "  while (rgx.test(x1)) {" & vbCrLf & _
+            "    x1 = x1.replace(rgx, '$1' + ',' + '$2');" & vbCrLf & _
+            "  }" & vbCrLf & _
+            "  return x1 + x2; }" & vbCrLf & _
+            "function Supplementary(Checker,Texter,Finder,Manual) {" & vbCrLf & _
+            "  if (document.getElementById(Checker).checked) {" & vbCrLf & _
+            "    document.getElementById(Texter).disabled=false;" & vbCrLf & _
+            "    document.getElementById(Finder).disabled=false;" & vbCrLf & _
+            "    document.getElementById(Manual).disabled=false;}" & vbCrLf & _
+            "  else {" & vbCrLf & _
+            "    document.getElementById(Texter).disabled=true;" & vbCrLf & _
+            "    document.getElementById(Finder).disabled=true;" & vbCrLf & _
+            "    document.getElementById(Manual).disabled=true;" & vbCrLf & _
+            "    document.getElementById(Manual).value='';" & vbCrLf & _
+            "    document.getElementById(Texter).value='';}}" & vbCrLf & _
             "function RefreshThisRequestSum() {" & vbCrLf & _
             "  var sum = 0;" & vbCrLf & _
             "  var numValue1 = document.getElementById('" & Me.WCD_Exp_Cur_Yr.ClientID & "').value;" & vbCrLf & _
-            "  numValue1 = numValue1.replace("","","""");" & vbcrlf & _
+            "  numValue1 = numValue1.replace("","","""");" & vbCrLf & _
             "  var numValue2 = document.getElementById('" & Me.WCD_Exp_Nxt_Yr.ClientID & "').value;" & vbCrLf & _
-            "  numValue2 = numValue2.replace("","","""");" & vbcrlf & _
+            "  numValue2 = numValue2.replace("","","""");" & vbCrLf & _
             "  var numValue3 = document.getElementById('" & Me.WCD_Exp_Sub_Yr.ClientID & "').value;" & vbCrLf & _
-            "  numValue3 = numValue3.replace("","","""");" & vbcrlf & _
-            "  if (!isNaN(numValue1)) { " & vbcrlf & _
-            "    if (numValue1.length > 0) { " & vbcrlf & _
+            "  numValue3 = numValue3.replace("","","""");" & vbCrLf & _
+            "  if (!isNaN(numValue1)) { " & vbCrLf & _
+            "    if (numValue1.length > 0) { " & vbCrLf & _
             "      sum += parseFloat(numValue1); } }" & vbCrLf & _
-            "  if (!isNaN(numValue2)) { " & vbcrlf & _
-            "    if (numValue2.length > 0) { " & vbcrlf & _
+            "  if (!isNaN(numValue2)) { " & vbCrLf & _
+            "    if (numValue2.length > 0) { " & vbCrLf & _
             "      sum += parseFloat(numValue2); } }" & vbCrLf & _
-            "  if (!isNaN(numValue3)) { " & vbcrlf & _
-            "    if (numValue3.length > 0) { " & vbcrlf & _
+            "  if (!isNaN(numValue3)) { " & vbCrLf & _
+            "    if (numValue3.length > 0) { " & vbCrLf & _
             "      sum += parseFloat(numValue3); } }" & vbCrLf & _
             "  document.getElementById('" & Me.lblTotal1.ClientID & "').innerHTML = addCommas(sum.toFixed(2));" & vbCrLf & _
-            "  document.getElementById('" & Me.WCD_Exp_Total.ClientID & "').value = numValue1;" & vbCrLf & _
+            "  document.getElementById('" & Me.WCD_Exp_Total.ClientID & "').value = addCommas(numValue1.toFixed(2));" & vbCrLf & _
             "}" & vbCrLf & _
             "" & vbCrLf & _
             "RefreshThisRequestSum();" & vbCrLf & _
             "</script>"
             Me.Page.ClientScript.RegisterStartupScript(GetType(Page), "RefreshThisRequestSum", script)
+
+          
         End Sub
 
         Protected Overrides Sub PopulateWCD_C_IDDropDownList(ByVal selectedValue As String, ByVal maxItems As Integer)
@@ -926,6 +944,7 @@ Public Class WCAR_DocRecordControl
 
             'end'
 
+           
 
         End Sub
 
@@ -6517,7 +6536,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' If the WCD_Exp_Budget is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Budget)
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Budget, "#,#.00")
                               
                 Me.WCD_Exp_Budget.Text = formattedValue
                 
@@ -6526,7 +6545,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' WCD_Exp_Budget is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Exp_Budget.Text = WCAR_DocTable.WCD_Exp_Budget.Format(WCAR_DocTable.WCD_Exp_Budget.DefaultValue)
+                 Me.WCD_Exp_Budget.Text = WCAR_DocTable.WCD_Exp_Budget.Format(WCAR_DocTable.WCD_Exp_Budget.DefaultValue, "#,#.00")
                         		
                 End If
                  
@@ -6556,7 +6575,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' If the WCD_Exp_Cur_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Cur_Yr)
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Cur_Yr, "#,#.00")
                               
                 Me.WCD_Exp_Cur_Yr.Text = formattedValue
                 
@@ -6565,7 +6584,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' WCD_Exp_Cur_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Exp_Cur_Yr.Text = WCAR_DocTable.WCD_Exp_Cur_Yr.Format(WCAR_DocTable.WCD_Exp_Cur_Yr.DefaultValue)
+                 Me.WCD_Exp_Cur_Yr.Text = WCAR_DocTable.WCD_Exp_Cur_Yr.Format(WCAR_DocTable.WCD_Exp_Cur_Yr.DefaultValue, "#,#.00")
                         		
                 End If
                  
@@ -6595,7 +6614,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' If the WCD_Exp_Nxt_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Nxt_Yr)
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Nxt_Yr, "#,#.00")
                               
                 Me.WCD_Exp_Nxt_Yr.Text = formattedValue
                 
@@ -6604,7 +6623,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' WCD_Exp_Nxt_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Exp_Nxt_Yr.Text = WCAR_DocTable.WCD_Exp_Nxt_Yr.Format(WCAR_DocTable.WCD_Exp_Nxt_Yr.DefaultValue)
+                 Me.WCD_Exp_Nxt_Yr.Text = WCAR_DocTable.WCD_Exp_Nxt_Yr.Format(WCAR_DocTable.WCD_Exp_Nxt_Yr.DefaultValue, "#,#.00")
                         		
                 End If
                  
@@ -6634,7 +6653,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' If the WCD_Exp_Prev_Total is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Prev_Total)
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Prev_Total, "#,#.00")
                               
                 Me.WCD_Exp_Prev_Total.Text = formattedValue
                 
@@ -6643,7 +6662,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' WCD_Exp_Prev_Total is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Exp_Prev_Total.Text = WCAR_DocTable.WCD_Exp_Prev_Total.Format(WCAR_DocTable.WCD_Exp_Prev_Total.DefaultValue)
+                 Me.WCD_Exp_Prev_Total.Text = WCAR_DocTable.WCD_Exp_Prev_Total.Format(WCAR_DocTable.WCD_Exp_Prev_Total.DefaultValue, "#,#.00")
                         		
                 End If
                  
@@ -6673,7 +6692,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' If the WCD_Exp_Sub_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Sub_Yr)
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Sub_Yr, "#,#.00")
                               
                 Me.WCD_Exp_Sub_Yr.Text = formattedValue
                 
@@ -6682,7 +6701,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' WCD_Exp_Sub_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Exp_Sub_Yr.Text = WCAR_DocTable.WCD_Exp_Sub_Yr.Format(WCAR_DocTable.WCD_Exp_Sub_Yr.DefaultValue)
+                 Me.WCD_Exp_Sub_Yr.Text = WCAR_DocTable.WCD_Exp_Sub_Yr.Format(WCAR_DocTable.WCD_Exp_Sub_Yr.DefaultValue, "#,#.00")
                         		
                 End If
                  
@@ -6712,7 +6731,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' If the WCD_Exp_Total is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Total)
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Total, "#,#.00")
                               
                 Me.WCD_Exp_Total.Text = formattedValue
                 
@@ -6721,7 +6740,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' WCD_Exp_Total is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Exp_Total.Text = WCAR_DocTable.WCD_Exp_Total.Format(WCAR_DocTable.WCD_Exp_Total.DefaultValue)
+                 Me.WCD_Exp_Total.Text = WCAR_DocTable.WCD_Exp_Total.Format(WCAR_DocTable.WCD_Exp_Total.DefaultValue, "#,#.00")
                         		
                 End If
                  
@@ -6751,7 +6770,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' If the WCD_Exp_Under_Over_Budget is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Under_Over_Budget)
+                Dim formattedValue As String = Me.DataSource.Format(WCAR_DocTable.WCD_Exp_Under_Over_Budget, "#,#.00")
                               
                 Me.WCD_Exp_Under_Over_Budget.Text = formattedValue
                 
@@ -6760,7 +6779,7 @@ Public Class BaseWCAR_DocRecordControl
                 ' WCD_Exp_Under_Over_Budget is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.WCD_Exp_Under_Over_Budget.Text = WCAR_DocTable.WCD_Exp_Under_Over_Budget.Format(WCAR_DocTable.WCD_Exp_Under_Over_Budget.DefaultValue)
+                 Me.WCD_Exp_Under_Over_Budget.Text = WCAR_DocTable.WCD_Exp_Under_Over_Budget.Format(WCAR_DocTable.WCD_Exp_Under_Over_Budget.DefaultValue, "#,#.00")
                         		
                 End If
                  
