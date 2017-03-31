@@ -575,24 +575,24 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
             Dim pubUrl As String
 
             ' ''MsgBox(Me.Doc_Type1.Text)
-			'
+            '
 
             Select Case Me.Doc_Type1.Text
-                Case "<font color=black>CAR</font>"
+                Case "<font color=black>CAR</font>", "CAR"
                     pubUrl = "../WCAR_Doc1/EditWCAR-Doc-Approval1.aspx?WCAR_Doc1=" & Me.PK_ID1.Text
-                Case "<font color=black>PR</font>"
+                Case "<font color=black>PR</font>", "PR"
                     pubUrl = "../wf_pr/EditWPR_Doc_Approval.aspx?WPR_Doc=" & Me.PK_ID1.Text
-                Case "<font color=black>PO</font>"
+                Case "<font color=black>PO</font>", "PO"
                     pubUrl = "../sel_WPO_WFTask/WPO-WFTaskN.aspx?POP10100_PO=" & Me.Doc_No1.Text & "&POP10100_Co=" & Me.C_ID1.Text
-                Case "<font color=black>FS</font>"
+                Case "<font color=black>FS</font>", "FS"
                     pubUrl = "../WFinRep_Head/WFin_ApproverPage_Revised.aspx?WFinRep_Head=" & Me.Doc_No1.Text
-                Case "<font color=black>FSN</font>"
+                Case "<font color=black>FSN</font>", "FSN"
                     pubUrl = "../WFinRep_Head/WFinRepNGP_Approver.aspx?WFinRepNGP_Head=" & Me.Doc_No1.Text
-                Case "<font color=black>CONSOLIDATED</font>"
+                Case "<font color=black>CONSOLIDATED</font>", "CONSOLIDATED"
                     pubUrl = "../WFinRep_Head/Conso_ReportDoc_Approver.aspx?WFinRepCon_Head=" & Me.Doc_No1.Text
-                Case "<font color=black>PO CANCEL</font>"
+                Case "<font color=black>PO CANCEL</font>", "PO CANCEL"
                     pubUrl = "../wf_cv/EditWCanvass_PO_Map.aspx?WCanvass_PO_Map=" & Me.PK_ID1.Text
-                Case "<font color=black>_CAR(RETURN)", "_PO(RETURN)</font>"
+                Case "<font color=black>_CAR(RETURN)", "_PO(RETURN)</font>", "_PO(RETURN)"
                     Me.imbDoc1.Visible = False
                 Case Else
                     pubUrl = "../WCAR_Doc1/Edit-WCAR-Doc1.aspx?WCAR_Doc1=" & Me.PK_ID1.Text
