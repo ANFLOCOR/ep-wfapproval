@@ -867,27 +867,27 @@ Public Class WPOP10100RecordControl
             End Try
 
 
-            Select Case System.Web.HttpContext.Current.Session("UserID1").ToString
-                Case "8"
-                    Dim url As String = "../Security/Homepage.aspx"
-                    url = Me.ModifyRedirectUrl(url, "", False)
-                    url = Me.Page.ModifyRedirectUrl(url, "", False)
-                    Me.Page.ShouldSaveControlsToSession = True
-                    Me.Page.Response.Redirect(url)
-                Case Else
-                    Dim url As String = "../Security/Homepage.aspx"
-                    'Dim url As String = "../Security/Home.aspx"
-                    url = Me.ModifyRedirectUrl(url, "", False)
-                    url = Me.Page.ModifyRedirectUrl(url, "", False)
-                    Me.Page.ShouldSaveControlsToSession = True
-                    Me.Page.Response.Redirect(url)
-            End Select
+            ' ''Select Case System.Web.HttpContext.Current.Session("UserID1").ToString
+            ' ''    Case "8"
+            ' ''        Dim url As String = "../Security/Homepage.aspx"
+            ' ''        url = Me.ModifyRedirectUrl(url, "", False)
+            ' ''        url = Me.Page.ModifyRedirectUrl(url, "", False)
+            ' ''        Me.Page.ShouldSaveControlsToSession = True
+            ' ''        Me.Page.Response.Redirect(url)
+            ' ''    Case Else
+            ' ''        Dim url As String = "../Security/Homepage.aspx"
+            ' ''        'Dim url As String = "../Security/Home.aspx"
+            ' ''        url = Me.ModifyRedirectUrl(url, "", False)
+            ' ''        url = Me.Page.ModifyRedirectUrl(url, "", False)
+            ' ''        Me.Page.ShouldSaveControlsToSession = True
+            ' ''        Me.Page.Response.Redirect(url)
+            ' ''End Select
 
-            'Dim url As String = "../Security/Home.aspx"
-            'url = Me.ModifyRedirectUrl(url, "", False)
-            'url = Me.Page.ModifyRedirectUrl(url, "", False)
-            'Me.Page.ShouldSaveControlsToSession = True
-            'Me.Page.Response.Redirect(url)
+            Dim url As String = "../Security/Homepage.aspx"
+            url = Me.ModifyRedirectUrl(url, "", False)
+            url = Me.Page.ModifyRedirectUrl(url, "", False)
+            Me.Page.ShouldSaveControlsToSession = True
+            Me.Page.Response.Redirect(url)
 
             DbUtils.EndTransaction()
         End Sub

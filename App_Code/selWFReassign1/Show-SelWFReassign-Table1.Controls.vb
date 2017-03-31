@@ -67,7 +67,7 @@ Public Class SelWFReassignTableControl
 
                 Dim email As New BaseClasses.Utils.MailSender
 
-                sEmail = "jfpimentera@anflocor.com"
+                ' ''sEmail = "jfpimentera@anflocor.com"
 
                 email.AddFrom("noreply@anflocor.com")
                 email.AddTo(sEmail)
@@ -89,7 +89,7 @@ Public Class SelWFReassignTableControl
                 sTemp &= "Total:    " & itemValue.POTotal.ToString() & vbCrLf
                 sTemp &= "Document Date: " & itemValue.DOCDATE & vbCrLf
             Next
-            sTemp &= vbCrLf & "http://anflonorth-web/eportal"
+            sTemp &= vbCrLf & "http://aportal.anflocor.com"
             'sTemp = "Company: " & Company & vbcrlf & vbcrlf & sTemp & vbcrlf & "Requester: " & Requester
             Return sTemp
         End Function

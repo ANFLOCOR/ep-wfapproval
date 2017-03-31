@@ -73,7 +73,7 @@ End Class
 
                 Dim email As New BaseClasses.Utils.MailSender
 
-                sEmail = "jfpimentera@anflocor.comr"
+                ' ''sEmail = "jfpimentera@anflocor.com"
 
                 email.AddFrom("noreply@anflocor.com")
                 email.AddTo(sEmail)
@@ -87,17 +87,17 @@ End Class
         End Sub
 
         Private Function Get_PR_Detail_for_Email(ByVal Act_ID As String, ByVal PrevOwner As String) As String
-            'Dim sTemp As String = "Previous Task Owner: " & PrevOwner & vbCrLf & vbCrLf
-            'Dim wc As WhereClause = New WhereClause
-            'wc.iAND(Sel_WPOActivity_selPOP10100View.WPO_ID, BaseFilter.ComparisonOperator.EqualsTo, Act_ID)
-            'For Each itemValue As Sel_WPOActivity_selPOP10100Record In Sel_WPOActivity_selPOP10100View.GetRecords(wc, Nothing, 0, 100)
-            '    sTemp &= "PO Number: " & itemValue.WPO_PONum.ToString() & vbCrLf
-            '    sTemp &= "Total:    " & itemValue.POTotal.ToString() & vbCrLf
-            '    sTemp &= "Document Date: " & itemValue.DOCDATE & vbCrLf
-            'Next
-            'sTemp &= vbCrLf & "http://eportal.anflocor.com"
-            ''sTemp = "Company: " & Company & vbcrlf & vbcrlf & sTemp & vbcrlf & "Requester: " & Requester
-            'Return sTemp
+            Dim sTemp As String = "Previous Task Owner: " & PrevOwner & vbCrLf & vbCrLf
+            Dim wc As WhereClause = New WhereClause
+            wc.iAND(Sel_WPOActivity_selPOP10100View.WPO_ID, BaseFilter.ComparisonOperator.EqualsTo, Act_ID)
+            For Each itemValue As Sel_WPOActivity_selPOP10100Record In Sel_WPOActivity_selPOP10100View.GetRecords(wc, Nothing, 0, 100)
+                sTemp &= "PO Number: " & itemValue.WPO_PONum.ToString() & vbCrLf
+                sTemp &= "Total:    " & itemValue.POTotal.ToString() & vbCrLf
+                sTemp &= "Document Date: " & itemValue.DOCDATE & vbCrLf
+            Next
+            sTemp &= vbCrLf & "http://eportal.anflocor.com"
+            'sTemp = "Company: " & Company & vbcrlf & vbcrlf & sTemp & vbcrlf & "Requester: " & Requester
+            Return sTemp
         End Function
 
         Public Overrides Function CreateWhereClause() As WhereClause
@@ -141,8 +141,8 @@ End Class
                             If recCtl.SelWFReassignRecordRowSelection.Checked Then
                                 'Get_PR_Detail_for_Email
                                 WPO_ActivityRecord.AssignTo(recCtl.WPO_ID.Text, ret.SelectedValue.ToString())
-                                'Send_Email_Notification(ret.SelectedValue.ToString(), "PO Delegated Task (PO#" & recCtl.WPO_PONum.Text & ")", _
-                                'Get_PR_Detail_for_Email(recCtl.WPO_ID.Text, recCtl.WPO_W_U_ID.Text))
+                                Send_Email_Notification(ret.SelectedValue.ToString(), "PO Delegated Task (PO#" & recCtl.WPO_PONum.Text & ")", _
+                                Get_PR_Detail_for_Email(recCtl.WPO_ID.Text, recCtl.WPO_W_U_ID.Text))
                                 'JESSY
                             End If
                         End If
