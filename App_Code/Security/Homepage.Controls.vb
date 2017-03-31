@@ -564,7 +564,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
 
 
 
-        Public Overrides Sub imbDoc1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+		Public Overrides Sub imbDoc1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
 
             ' The redirect URL is set on the Properties, Custom Properties or Actions.
             ' The ModifyRedirectURL call resolves the parameters before the
@@ -574,6 +574,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
             Dim pubUrl As String
 
             ' ''MsgBox(Me.Doc_Type1.Text)
+			'
 
             Select Case Me.Doc_Type1.Text
                 Case "<font color=black>CAR</font>"
