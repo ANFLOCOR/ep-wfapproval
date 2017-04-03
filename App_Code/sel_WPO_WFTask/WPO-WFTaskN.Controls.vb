@@ -781,150 +781,133 @@ Public Class WPOP10100RecordControl
         End Sub
 
         Public Overrides Sub btnReturn_Click(ByVal sender As Object, ByVal args As EventArgs)
-           
-            Try
-                Dim poNum As String = CStr(System.Web.HttpContext.Current.Session("PONO"))
-                Dim deyt As String = CStr(System.Web.HttpContext.Current.Session("DOCDATE"))
-                Dim coDesc As String = CStr(System.Web.HttpContext.Current.Session("CMPNYDESC"))
-                Dim xUser As String = System.Web.HttpContext.Current.Session("UserIDNorth").ToString()
+            Dim poNum As String = CStr(System.Web.HttpContext.Current.Session("PONO"))
+            Dim deyt As String = CStr(System.Web.HttpContext.Current.Session("DOCDATE"))
+            Dim coDesc As String = CStr(System.Web.HttpContext.Current.Session("CMPNYDESC"))
+            Dim xUser As String = System.Web.HttpContext.Current.Session("UserIDNorth").ToString()
 
-                Dim ctlHeader As Controls.WPO_WFTaskN.Sel_WPO_WFTaskRecordControl = DirectCast(MiscUtils.FindControlRecursively(Me, "Sel_WPO_WFTaskRecordControl"), Controls.WPO_WFTaskN.Sel_WPO_WFTaskRecordControl)
-                Dim oHeader As Controls.WPO_WFTaskN.WPOP10100RecordControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WPOP10100RecordControl"), Controls.WPO_WFTaskN.WPOP10100RecordControl)
-                Dim drop As DropDownList = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlMoveTo"), System.Web.UI.WebControls.DropDownList)
+            Dim ctlHeader As Controls.WPO_WFTaskN.Sel_WPO_WFTaskRecordControl = DirectCast(MiscUtils.FindControlRecursively(Me, "Sel_WPO_WFTaskRecordControl"), Controls.WPO_WFTaskN.Sel_WPO_WFTaskRecordControl)
+            Dim oHeader As Controls.WPO_WFTaskN.WPOP10100RecordControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WPOP10100RecordControl"), Controls.WPO_WFTaskN.WPOP10100RecordControl)
+            Dim drop As DropDownList = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlMoveTo"), System.Web.UI.WebControls.DropDownList)
 
-                '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                Dim wc3 As WhereClause = New WhereClause
-                Dim sCurStep As String
-                Dim sEmailContent As String = "Company: @C" & vbCrLf & vbCrLf & "Item Details:" & "@D" & _
-                "OrderDate: @RD" & "Comment(s): @Rem"
+            '-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            Dim wc3 As WhereClause = New WhereClause
+            Dim sCurStep As String
+            Dim sEmailContent As String = "Company: @C" & vbCrLf & vbCrLf & "Item Details:" & "@D" & _
+            "OrderDate: @RD" & "Comment(s): @Rem"
 
-                Dim ctlDetails As Controls.WPO_WFTaskN.Sel_WPO_InquireDetailsTableControlRow = DirectCast(MiscUtils.FindControlRecursively(Me, "Sel_WPO_InquireDetailsTableControlRow"), Controls.WPO_WFTaskN.Sel_WPO_InquireDetailsTableControlRow)
-                Dim sPODetail As String = " "
-                Dim ctlWF As Controls.WPO_WFTaskN.WPOP10100RecordControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WPOP10100RecordControl"), Controls.WPO_WFTaskN.WPOP10100RecordControl)
-                Dim wc As WhereClause = New WhereClause
+            Dim ctlDetails As Controls.WPO_WFTaskN.Sel_WPO_InquireDetailsTableControlRow = DirectCast(MiscUtils.FindControlRecursively(Me, "Sel_WPO_InquireDetailsTableControlRow"), Controls.WPO_WFTaskN.Sel_WPO_InquireDetailsTableControlRow)
+            Dim sPODetail As String = " "
+            Dim ctlWF As Controls.WPO_WFTaskN.WPOP10100RecordControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WPOP10100RecordControl"), Controls.WPO_WFTaskN.WPOP10100RecordControl)
+            Dim wc As WhereClause = New WhereClause
 
-                wc.iAND(Sel_WPO_InquireDetails1View.PONUMBER, BaseFilter.ComparisonOperator.EqualsTo, ctlHeader.PONUMBER.Text)
-                wc.iAND(Sel_WPO_InquireDetails1View.CompanyID, BaseFilter.ComparisonOperator.EqualsTo, ctlHeader.CompanyID2.Text)
+            wc.iAND(Sel_WPO_InquireDetails1View.PONUMBER, BaseFilter.ComparisonOperator.EqualsTo, ctlHeader.PONUMBER.Text)
+            wc.iAND(Sel_WPO_InquireDetails1View.CompanyID, BaseFilter.ComparisonOperator.EqualsTo, ctlHeader.CompanyID2.Text)
 
-                Dim sngTotal As Single = 0
+            Dim sngTotal As Single = 0
 
-                For Each recCtl As Sel_WPO_InquireDetails1Record In Sel_WPO_InquireDetails1View.GetRecords(wc, Nothing, 0, 100)
-                    sPODetail &= "PO#: " & Trim(ctlHeader.PONUMBER.Text) & vbCrLf & _
-                   "Item: " & Trim(recCtl.ITEMDESC.ToString()) & "UOFM: " & recCtl.UOFM.ToString() & " Qty Order: " & recCtl.QTYORDER.ToString() & " Unit Cost: " & recCtl.UNITCOST.ToString()
+            For Each recCtl As Sel_WPO_InquireDetails1Record In Sel_WPO_InquireDetails1View.GetRecords(wc, Nothing, 0, 100)
+                sPODetail &= "PO#: " & Trim(ctlHeader.PONUMBER.Text) & vbCrLf & _
+               "Item: " & Trim(recCtl.ITEMDESC.ToString()) & "UOFM: " & recCtl.UOFM.ToString() & " Qty Order: " & recCtl.QTYORDER.ToString() & " Unit Cost: " & recCtl.UNITCOST.ToString()
 
-                    sngTotal += CSng(recCtl.EXTDCOST.ToString())
+                sngTotal += CSng(recCtl.EXTDCOST.ToString())
+            Next
+
+            Dim sngRate As Single = 0
+            Dim sngForex As Single = 0
+            Dim sCurr As String = ""
+            Get_Currency(ctlHeader.PONUMBER.Text, ctlHeader.CompanyID2.Text, sCurr, sngRate)
+            If sngRate > 0 Then
+                sngForex = sngTotal / sngRate
+                sCurr = " (" & sCurr & " " & sngForex.ToString() & ")"
+            Else
+                sCurr = ""
+            End If
+
+            sEmailContent = Replace(sEmailContent, "@C", CStr(coDesc.ToString()))
+            sEmailContent = Replace(sEmailContent, "@D", sPODetail)
+            sEmailContent = Replace(sEmailContent, "@RD", CStr(deyt))
+            sEmailContent = Replace(sEmailContent, "@Rem", "SUPPLIER: " & ctlHeader.VENDNAME.Text.Trim() & "</br>" & ctlWF.WPOP_Remark.Text)
+
+            wc3.iAND(WPO_Activity1Table.WPO_PONum, BaseFilter.ComparisonOperator.EqualsTo, poNum)
+            wc3.iAND(WPO_Activity1Table.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+            wc3.iAND(WPO_Activity1Table.WPO_Status, BaseFilter.ComparisonOperator.EqualsTo, "4") 'NOTE:Change WFApprovalStatus from 4 to 9
+            'note: check to see if record is still submitted, if not then do not save
+            If WPO_Activity1Table.GetRecords(wc3, Nothing, 0, 100).Length > 0 Then
+                'note: get Current step to be used in wc2
+                For Each itemValue3 As WPO_Activity1Record In WPO_Activity1Table.GetRecords(wc3, Nothing, 0, 100)
+                    sCurStep = itemValue3.WPO_WS_ID.ToString()
                 Next
 
-                Dim sngRate As Single = 0
-                Dim sngForex As Single = 0
-                Dim sCurr As String = ""
-                Get_Currency(ctlHeader.PONUMBER.Text, ctlHeader.CompanyID2.Text, sCurr, sngRate)
-                If sngRate > 0 Then
-                    sngForex = sngTotal / sngRate
-                    sCurr = " (" & sCurr & " " & sngForex.ToString() & ")"
-                Else
-                    sCurr = ""
-                End If
+                Dim wc4 As WhereClause = New WhereClause
 
-                sEmailContent = Replace(sEmailContent, "@C", CStr(coDesc.ToString()))
-                sEmailContent = Replace(sEmailContent, "@D", sPODetail)
-                sEmailContent = Replace(sEmailContent, "@RD", CStr(deyt))
-                sEmailContent = Replace(sEmailContent, "@Rem", "SUPPLIER: " & ctlHeader.VENDNAME.Text.Trim() & "</br>" & ctlWF.WPOP_Remark.Text)
+                wc4.iAND(WPO_Activity1Table.WPO_PONum, BaseFilter.ComparisonOperator.EqualsTo, poNum)
+                wc4.iAND(WPO_Activity1Table.WPO_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                wc4.iAND(WPO_Activity1Table.WPO_Status, BaseFilter.ComparisonOperator.EqualsTo, "4") 'NOTE:Change WFApprovalStatus from 4 to 9
+                wc4.iAND(WPO_Activity1Table.WPO_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
 
-                wc3.iAND(WPO_Activity1Table.WPO_PONum, BaseFilter.ComparisonOperator.EqualsTo, poNum)
-                wc3.iAND(WPO_Activity1Table.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
-                wc3.iAND(WPO_Activity1Table.WPO_Status, BaseFilter.ComparisonOperator.EqualsTo, "4") 'NOTE:Change WFApprovalStatus from 4 to 9
-                'note: check to see if record is still submitted, if not then do not save
-                If WPO_Activity1Table.GetRecords(wc3, Nothing, 0, 100).Length > 0 Then
-                    'note: get Current step to be used in wc2
-                    For Each itemValue3 As WPO_Activity1Record In WPO_Activity1Table.GetRecords(wc3, Nothing, 0, 100)
-                        sCurStep = itemValue3.WPO_WS_ID.ToString()
-                    Next
+                For Each itemValue4 As WPO_Activity1Record In WPO_Activity1Table.GetRecords(wc4, Nothing, 0, 100)
+                    'note: update Activity table (other user(s) if multiple approvers) -> 'System Rejected'
+                    WPO_Activity1Record.UpdateRecord(itemValue4.WPO_ID.ToString(), "13") 'orig:12(System Rejected)
+                Next
+                'note: update current task status -> 'Rejected
+                Dim wc5 As WhereClause = New WhereClause
 
-                    Dim wc4 As WhereClause = New WhereClause
+                wc5.iAND(WPO_Activity1Table.WPO_PONum, BaseFilter.ComparisonOperator.EqualsTo, poNum)
+                wc5.iAND(WPO_Activity1Table.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                wc5.iAND(WPO_Activity1Table.WPO_Status, BaseFilter.ComparisonOperator.EqualsTo, "4") 'NOTE:Change WFApprovalStatus from 4 to 9
+                wc5.iAND(WPO_Activity1Table.WPO_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
 
-                    wc4.iAND(WPO_Activity1Table.WPO_PONum, BaseFilter.ComparisonOperator.EqualsTo, poNum)
-                    wc4.iAND(WPO_Activity1Table.WPO_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
-                    wc4.iAND(WPO_Activity1Table.WPO_Status, BaseFilter.ComparisonOperator.EqualsTo, "4") 'NOTE:Change WFApprovalStatus from 4 to 9
-                    wc4.iAND(WPO_Activity1Table.WPO_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
+                If WPO_Activity1Table.GetRecords(wc5, Nothing, 0, 100).Length > 0 Then
+                    For Each itemValue5 As WPO_Activity1Record In WPO_Activity1Table.GetRecords(wc5, Nothing, 0, 100)
+                        'note: update Activity table (current user) -> 'Rejected'
+                        WPO_Activity1Record.UpdateRecord(itemValue5.WPO_ID.ToString(), "13")
+                        Update_WF_Status(CInt(ctlHeader.CompanyID2.Text), CInt("13"), poNum) '0(orig)     'UPDATE POP10100
+                        Update_WPOP10100(CInt(ctlHeader.CompanyID2.Text), CInt("13"), poNum) '7(orig)     'UPDATE WPOP10100
 
-                    For Each itemValue4 As WPO_Activity1Record In WPO_Activity1Table.GetRecords(wc4, Nothing, 0, 100)
-                        'note: update Activity table (other user(s) if multiple approvers) -> 'System Rejected'
-                        WPO_Activity1Record.UpdateRecord(itemValue4.WPO_ID.ToString(), "13") 'orig:12(System Rejected)
-                    Next
-                    'note: update current task status -> 'Rejected
-                    Dim wc5 As WhereClause = New WhereClause
-
-                    wc5.iAND(WPO_Activity1Table.WPO_PONum, BaseFilter.ComparisonOperator.EqualsTo, poNum)
-                    wc5.iAND(WPO_Activity1Table.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
-                    wc5.iAND(WPO_Activity1Table.WPO_Status, BaseFilter.ComparisonOperator.EqualsTo, "4") 'NOTE:Change WFApprovalStatus from 4 to 9
-                    wc5.iAND(WPO_Activity1Table.WPO_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
-
-                    If WPO_Activity1Table.GetRecords(wc5, Nothing, 0, 100).Length > 0 Then
-                        For Each itemValue5 As WPO_Activity1Record In WPO_Activity1Table.GetRecords(wc5, Nothing, 0, 100)
-                            'note: update Activity table (current user) -> 'Rejected'
-                            WPO_Activity1Record.UpdateRecord(itemValue5.WPO_ID.ToString(), "13")
-                            Update_WF_Status(CInt(ctlHeader.CompanyID2.Text), CInt("13"), poNum) '0(orig)     'UPDATE POP10100
-                            Update_WPOP10100(CInt(ctlHeader.CompanyID2.Text), CInt("13"), poNum) '7(orig)     'UPDATE WPOP10100
-
-                        Next
-                    End If
-
-                    'note: insert user(s) to Activity using the chosen Return To field
-                    Dim wc6 As WhereClause = New WhereClause
-                    Dim Remarks As String = oHeader.WPOP_Remark.Text
-
-                    wc6.iAND(WPOP101001Table.WPOP_PONMBR, BaseFilter.ComparisonOperator.EqualsTo, poNum)
-                    wc6.iAND(WPOP101001Table.WPOP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, ctlHeader.CompanyID2.Text)
-                    For Each itemValue6 As WPOP101001Record In WPOP101001Table.GetRecords(wc6, Nothing, 0, 100)
-                        Update_WF_Status_Submit(ctlHeader.CompanyID2.Text, "13", "0", poNum, _
-                        DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
-                        ": " & Me.WPOP_Remark.Text) '' Use this to update the WPOP10100
-                        Update_WF_Status(CInt(ctlHeader.CompanyID2.Text), CInt("13"), poNum)                      '' Use this to update the POP10100
-                        'Update_WPOP10100(CInt(coId), CInt("7"), poNum)
-                        '##################
-                        '### EMAIL HERE ###
-                        '##################
-                        Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
-
-                        sEmailContent = Content_Formatter(itemValue6.WPOP_U_ID.ToString(), _
-                        "PO Information Needed (PO# " & poNum.Trim() & ")", CStr(coDesc.ToString()), _
-                        sPODetail, CStr(deyt), "SUPPLIER: " & ctlHeader.VENDNAME.Text.Trim() & "<br>" & ctlWF.WPOP_Remark.Text, sngTotal.ToString("#,#.00") & sCurr, _
-                        System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#f46f6f", "sel_WPO_Activity_WPOP101001/Show-Sel-WPO-Activity-WPOP10100-Table1.aspx", poNum.Trim(), _
-                        "Returned By " & sUserRej, "", "PO")
-
-                        ''MsgBox(vbNewLine & _
-                        ''       itemValue6.WPOP_U_ID.ToString() & vbNewLine & _
-                        ''poNum.Trim() & vbNewLine & _
-                        ''CStr(coDesc.ToString()) & vbNewLine & _
-                        ''sPODetail & vbNewLine & _
-                        ''CStr(deyt) & vbNewLine & _
-                        ''ctlHeader.VENDNAME.Text.Trim() & "<br>" & ctlWF.WPOP_Remark.Text & vbNewLine & _
-                        ''sngTotal.ToString("#,#.00") & sCurr & vbNewLine & _
-                        ''System.Web.HttpContext.Current.Session("UserIDNorth").ToString() & vbNewLine & _
-                        ''sUserRej
-                        '')
-
-                        Send_Email_Notification(itemValue6.WPOP_U_ID.ToString(), "PO Information Needed (PO# " & _
-                        poNum.Trim() & ")", sEmailContent)
-                        'avgrado 5/30/2016
-                        ' ''Send_Email_Notification("24", "PO Information Needed (PO# " & _
-                        ' ''poNum.Trim() & ")", sEmailContent)
                     Next
                 End If
-            Catch ex As Exception
-                MsgBox(ex.Message)
-            End Try
+
+                'note: insert user(s) to Activity using the chosen Return To field
+                Dim wc6 As WhereClause = New WhereClause
+                Dim Remarks As String = oHeader.WPOP_Remark.Text
+
+                wc6.iAND(WPOP101001Table.WPOP_PONMBR, BaseFilter.ComparisonOperator.EqualsTo, poNum)
+                wc6.iAND(WPOP101001Table.WPOP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, ctlHeader.CompanyID2.Text)
+                For Each itemValue6 As WPOP101001Record In WPOP101001Table.GetRecords(wc6, Nothing, 0, 100)
+                    Update_WF_Status_Submit(ctlHeader.CompanyID2.Text, "13", "0", poNum, _
+                    DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                    ": " & Me.WPOP_Remark.Text) '' Use this to update the WPOP10100
+                    Update_WF_Status(CInt(ctlHeader.CompanyID2.Text), CInt("13"), poNum)                      '' Use this to update the POP10100
+                    'Update_WPOP10100(CInt(coId), CInt("7"), poNum)
+                    '##################
+                    '### EMAIL HERE ###
+                    '##################
+                    Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
+
+                    sEmailContent = Content_Formatter(itemValue6.WPOP_U_ID.ToString(), _
+                    "PO Information Needed (PO# " & poNum.Trim() & ")", CStr(coDesc.ToString()), _
+                    sPODetail, CStr(deyt), "SUPPLIER: " & ctlHeader.VENDNAME.Text.Trim() & "<br>" & ctlWF.WPOP_Remark.Text, sngTotal.ToString("#,#.00") & sCurr, _
+                    System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#f46f6f", "wf_po/ShowSel_WPO_Activity_WPOP10100Table.aspx", poNum.Trim(), _
+                    "Returned By " & sUserRej, "", "PO")
+
+                    Send_Email_Notification(itemValue6.WPOP_U_ID.ToString(), "PO Information Needed (PO# " & _
+                    poNum.Trim() & ")", sEmailContent)
+                    'avgrado 5/30/2016
+                    Send_Email_Notification("24", "PO Information Needed (PO# " & _
+                    poNum.Trim() & ")", sEmailContent)
+                Next
+            End If
 
             Select Case System.Web.HttpContext.Current.Session("UserIDNorth").ToString
                 Case "8", "274", "34"
-                    Dim url As String = "../sel_WPO_Activity_WPOP101001/Show-Sel-WPO-Activity-WPOP10100-Table1.aspx"
+                    Dim url As String = "../wf_PO/ShowSel_WPO_Activity_WPOP10100Table.aspx"
                     url = Me.ModifyRedirectUrl(url, "", False)
                     url = Me.Page.ModifyRedirectUrl(url, "", False)
                     Me.Page.ShouldSaveControlsToSession = True
                     Me.Page.Response.Redirect(url)
                 Case Else
-                    Dim url As String = "../Security/Homepage.aspx"
+                    Dim url As String = "../Security/Home.aspx"
                     url = Me.ModifyRedirectUrl(url, "", False)
                     url = Me.Page.ModifyRedirectUrl(url, "", False)
                     Me.Page.ShouldSaveControlsToSession = True
@@ -1213,7 +1196,6 @@ Public Class WPOP10100RecordControl
                 ' myStoredProcedure.ErrorMessage to get the text of the error message and use RegisterJScriptAlert to report this to the user.
             End If
         End Function
-
     End Class
     Public Class WPO_WFHistory_Details_newTableControl
         Inherits BaseWPO_WFHistory_Details_newTableControl

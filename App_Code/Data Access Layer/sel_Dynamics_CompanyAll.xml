@@ -164,7 +164,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>sel_Dynamics_CompanyAll_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -175,4 +174,5 @@
   <MenuName>Dynamics Company All</MenuName>
   <QSPath>../sel_Dynamics_CompanyAll/Sel-Dynamics-CompanyAll-QuickSelector.aspx</QSPath>
   <TableCodeName>Sel_Dynamics_CompanyAll</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalSel_Dynamics_CompanyAll</TableStoredProcPrefix>
 </XMLDefinition>

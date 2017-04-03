@@ -1,47 +1,35 @@
 ﻿Failed to apply Transact-SQL code:
--- Creates a new record in the [dbo].[WPO_WFHistory_Details_new] table.
-CREATE PROCEDURE pePortalWFApprovalWPO_WFHistory_Details_new1Add
-    @p_WPO_ID int,
-    @p_WPO_W_U_ID int,
-    @p_WPO_WS_ID int,
-    @p_WPO_Status int,
-    @p_WPO_Date_Assign smalldatetime,
-    @p_WPO_Date_Action smalldatetime,
-    @p_WPO_Remark nvarchar(500),
-    @p_WPO_PONum nvarchar(20),
-    @p_WPOP_C_ID int,
-    @p_WPOP_ID int
+-- Creates a new record in the [dbo].[vw_ANFLO_DW_CompanyNonGP] table.
+CREATE PROCEDURE pePortalWFApprovalVw_ANFLO_DW_CompanyNonGPAdd
+    @p_CompanyID smallint,
+    @p_Name varchar(150),
+    @p_ShortName varchar(50),
+    @p_INTERID varchar(50),
+    @p_FULLADDRESS varchar(79),
+    @p_DWCompanyID int
 AS
 BEGIN
     INSERT
-    INTO [dbo].[WPO_WFHistory_Details_new]
+    INTO [dbo].[vw_ANFLO_DW_CompanyNonGP]
         (
-            [WPO_ID],
-            [WPO_W_U_ID],
-            [WPO_WS_ID],
-            [WPO_Status],
-            [WPO_Date_Assign],
-            [WPO_Date_Action],
-            [WPO_Remark],
-            [WPO_PONum],
-            [WPOP_C_ID],
-            [WPOP_ID]
+            [CompanyID],
+            [Name],
+            [ShortName],
+            [INTERID],
+            [FULLADDRESS],
+            [DWCompanyID]
         )
     VALUES
         (
-             @p_WPO_ID,
-             @p_WPO_W_U_ID,
-             @p_WPO_WS_ID,
-             @p_WPO_Status,
-             @p_WPO_Date_Assign,
-             @p_WPO_Date_Action,
-             @p_WPO_Remark,
-             @p_WPO_PONum,
-             @p_WPOP_C_ID,
-             @p_WPOP_ID
+             @p_CompanyID,
+             @p_Name,
+             @p_ShortName,
+             @p_INTERID,
+             @p_FULLADDRESS,
+             @p_DWCompanyID
         )
 
 END
 
-ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.WPO_WFHistory_Details_new' is not updatable because the modification affects multiple base tables.
+ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.vw_ANFLO_DW_CompanyNonGP' is not updatable because the modification affects multiple base tables.
 

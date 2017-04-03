@@ -228,7 +228,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WFinRep_DocType_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -240,4 +239,5 @@
   <MenuName>WFin Representative Document Type1</MenuName>
   <QSPath>../WFinRep_DocType1/WFinRep-DocType-QuickSelector1.aspx</QSPath>
   <TableCodeName>WFinRep_DocType1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWFinRep_DocType1</TableStoredProcPrefix>
 </XMLDefinition>

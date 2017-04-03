@@ -519,75 +519,72 @@ ISD_GeolocationInit();
   //alert(url)
   window.open(url, '', params);
   }
-  function OpenRptSelector(RptID,RptPath,RptDesc,RptType,paramCo)
-  {
-  var width  = 700;
-  var height = 400;
-  var left   = (screen.width  - width)/2;
-  var top    = (screen.height - height)/2;
-  var params = 'width='+width+', height='+height;
-  params += ', top='+top+', left='+left;
-  params += ', directories=no';
-  params += ', location=no';
-  params += ', menubar=no';
-  params += ', resizable=yes';
-  params += ', scrollbars=yes';
-  params += ', status=no';
-  params += ', toolbar=no';
-  params += ', modal=yes';
+  function OpenRptSelector(RptID, RptPath, RptDesc, RptType, paramCo) {
+      var width = 700;
+      var height = 400;
+      var left = (screen.width - width) / 2;
+      var top = (screen.height - height) / 2;
+      var params = 'width=' + width + ', height=' + height;
+      params += ', top=' + top + ', left=' + left;
+      params += ', directories=no';
+      params += ', location=no';
+      params += ', menubar=no';
+      params += ', resizable=yes';
+      params += ', scrollbars=yes';
+      params += ', status=no';
+      params += ', toolbar=no';
+      params += ', modal=yes';
 
-  var Company = document.getElementById(paramCo);
+      var Company = document.getElementById(paramCo);
 
-  var CompanyText = Company.options[Company.selectedIndex].value;
-  if (CompanyText == "DICT") { CompanyText = "DICT"; }
-  var url = '../WFinRep_Head/Select_ReportList.aspx?W_Rpt_ID=' + RptID + '&W_Rpt_Server_Path=' + RptPath  + '&W_Rpt_Desc=' + RptDesc + '&W_Rpt_Type=' + RptType + '&W_Rpt_Co=' + CompanyText;
-  window.open(url, '', params);
-
-  }
-
-  function UpdateRpt(FirstValue,SecondValue,ThirdValue)
-  {
-  var rptID = window.opener.document.all('<%# Request.Params("W_Rpt_ID")%>');
-  var rptPath = window.opener.document.all('<%# Request.Params("W_Rpt_Server_Path")%>');
-  var rptDesc = window.opener.document.all('<%# Request.Params("W_Rpt_Desc")%>');
-  rptID.value = FirstValue;
-  rptPath.value = SecondValue;
-  rptDesc.value = ThirdValue;
-  rptPath.fireEvent('onChange');
-  window.close();
-  }
-
-  function OpenRptViewer(Control1, Control2, Control3, Control4, companyCtrl, Control5 , Control6)
-  {
-  var width  = 1200;
-  var height = 700;
-  var left   = (screen.width  - width)/2;
-  var top    = (screen.height - height)/2;
-  var params = 'width='+width+', height='+height;
-  params += ', top='+top+', left='+left;
-  params += ', directories=no';
-  params += ', location=no';
-  params += ', menubar=no';
-  params += ', resizable=yes';
-  params += ', scrollbars=yes';
-  params += ', status=no';
-  params += ', toolbar=no';
-  params += ', modal=yes';
-
-  var type1 = document.getElementById(Control3);
-  var type2 = document.getElementById(Control1);
-  var type3 = document.getElementById(Control2);
-  var type4 = document.getElementById(Control4);
-  var Company = document.getElementById(companyCtrl);
-  var type5 = document.getElementById(Control5);
-  var type6 = document.getElementById(Control6);
-  var CompanyText = Company.options[Company.selectedIndex].text;
-
-
-  var url = '../WFinRep_Head/WFin_RepView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + CompanyText + '&Control5=' + type5.value + '&Control6=' + type6.value;
-  window.open(url, '', params);
+      var CompanyText = Company.options[Company.selectedIndex].value;
+      if (CompanyText == "DICT") { CompanyText = "DICT"; }
+      var url = '../WFinRep_Head/Select-ReportList.aspx?W_Rpt_ID=' + RptID + '&W_Rpt_Server_Path=' + RptPath + '&W_Rpt_Desc=' + RptDesc + '&W_Rpt_Type=' + RptType + '&W_Rpt_Co=' + CompanyText;
+      window.open(url, '', params);
 
   }
+
+  function UpdateRpt(FirstValue, SecondValue, ThirdValue) {
+      var rptID = window.opener.document.all('<%# Request.Params("W_Rpt_ID")%>');
+     var rptPath = window.opener.document.all('<%# Request.Params("W_Rpt_Server_Path")%>');
+     var rptDesc = window.opener.document.all('<%# Request.Params("W_Rpt_Desc")%>');
+     rptID.value = FirstValue;
+     rptPath.value = SecondValue;
+     rptDesc.value = ThirdValue;
+     rptPath.fireEvent('onChange');
+     window.close();
+ }
+
+      function OpenRptViewer(Control1, Control2, Control3, Control4, companyCtrl, Control5, Control6) {
+          var width = 1200;
+          var height = 700;
+          var left = (screen.width - width) / 2;
+          var top = (screen.height - height) / 2;
+          var params = 'width=' + width + ', height=' + height;
+          params += ', top=' + top + ', left=' + left;
+          params += ', directories=no';
+          params += ', location=no';
+          params += ', menubar=no';
+          params += ', resizable=yes';
+          params += ', scrollbars=yes';
+          params += ', status=no';
+          params += ', toolbar=no';
+          params += ', modal=yes';
+
+          var type1 = document.getElementById(Control3);
+          var type2 = document.getElementById(Control1);
+          var type3 = document.getElementById(Control2);
+          var type4 = document.getElementById(Control4);
+          var Company = document.getElementById(companyCtrl);
+          var type5 = document.getElementById(Control5);
+          var type6 = document.getElementById(Control6);
+          var CompanyText = Company.options[Company.selectedIndex].text;
+
+
+          var url = '../WFinRep_Head/WFin-RepView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + CompanyText + '&Control5=' + type5.value + '&Control6=' + type6.value;
+          window.open(url, '', params);
+
+      }
 
   function OpenRptViewerApp(Control1, Control2, Control3, Control4, companyCtrl)
   {
@@ -626,66 +623,64 @@ ISD_GeolocationInit();
 
   }
 
-  function OpenRptViewerApp2(Control1, Control2, Control3, Control4, companyCtrl, Control5, Control6)
-  {
+  function OpenRptViewerApp2(Control1, Control2, Control3, Control4, companyCtrl, Control5, Control6) {
 
-  var width  = 1200;
-  var height = 700;
-  var left   = (screen.width  - width)/2;
-  var top    = (screen.height - height)/2;
-  var params = 'width='+width+', height='+height;
-  params += ', top='+top+', left='+left;
-  params += ', directories=no';
-  params += ', location=no';
-  params += ', menubar=no';
-  params += ', resizable=yes';
-  params += ', scrollbars=yes';
-  params += ', status=no';
-  params += ', toolbar=no';
-  params += ', modal=yes';
+      var width = 1200;
+      var height = 700;
+      var left = (screen.width - width) / 2;
+      var top = (screen.height - height) / 2;
+      var params = 'width=' + width + ', height=' + height;
+      params += ', top=' + top + ', left=' + left;
+      params += ', directories=no';
+      params += ', location=no';
+      params += ', menubar=no';
+      params += ', resizable=yes';
+      params += ', scrollbars=yes';
+      params += ', status=no';
+      params += ', toolbar=no';
+      params += ', modal=yes';
 
 
-  var type1 = document.getElementById(Control3);
-  var type2 = document.getElementById(Control1);
-  var type3 = document.getElementById(Control2);
-  var type4 = document.getElementById(Control4);
-  var Company = document.getElementById(companyCtrl);
-  var type5 = document.getElementById(Control5);
-  var type6 = document.getElementById(Control6);
-  var url = '../WFinRep_Head/WFin_RepApproveView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value + '&Control5=' + type5.value + '&Control6=' + type6.value;
-  window.open(url, '', params);
+      var type1 = document.getElementById(Control3);
+      var type2 = document.getElementById(Control1);
+      var type3 = document.getElementById(Control2);
+      var type4 = document.getElementById(Control4);
+      var Company = document.getElementById(companyCtrl);
+      var type5 = document.getElementById(Control5);
+      var type6 = document.getElementById(Control6);
+      var url = '../WFinRep_Head/WFin-RepApproveView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value + '&Control5=' + type5.value + '&Control6=' + type6.value;
+      window.open(url, '', params);
 
   }
 
-  function OpenRptViewer2(Control1, Control2, Control3, Control4, companyCtrl, Control5, Control6)
-  {
+  function OpenRptViewer2(Control1, Control2, Control3, Control4, companyCtrl, Control5, Control6) {
 
-  var width  = 1200;
-  var height = 700;
-  var left   = (screen.width  - width)/2;
-  var top    = (screen.height - height)/2;
-  var params = 'width='+width+', height='+height;
-  params += ', top='+top+', left='+left;
-  params += ', directories=no';
-  params += ', location=no';
-  params += ', menubar=no';
-  params += ', resizable=yes';
-  params += ', scrollbars=yes';
-  params += ', status=no';
-  params += ', toolbar=no';
-  params += ', modal=yes';
+      var width = 1200;
+      var height = 700;
+      var left = (screen.width - width) / 2;
+      var top = (screen.height - height) / 2;
+      var params = 'width=' + width + ', height=' + height;
+      params += ', top=' + top + ', left=' + left;
+      params += ', directories=no';
+      params += ', location=no';
+      params += ', menubar=no';
+      params += ', resizable=yes';
+      params += ', scrollbars=yes';
+      params += ', status=no';
+      params += ', toolbar=no';
+      params += ', modal=yes';
 
 
-  var type1 = document.getElementById(Control3);
-  var type2 = document.getElementById(Control1);
-  var type3 = document.getElementById(Control2);
-  var type4 = document.getElementById(Control4);
-  var Company = document.getElementById(companyCtrl);
-  var type5 = document.getElementById(Control5);
-  var type6 = document.getElementById(Control6);
+      var type1 = document.getElementById(Control3);
+      var type2 = document.getElementById(Control1);
+      var type3 = document.getElementById(Control2);
+      var type4 = document.getElementById(Control4);
+      var Company = document.getElementById(companyCtrl);
+      var type5 = document.getElementById(Control5);
+      var type6 = document.getElementById(Control6);
 
-  var url = '../WFinRep_Head/WFin_RepInquiryView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value + '&Control5=' + type5.value + '&Control6=' + type6.value;
-  window.open(url, '', params);
+      var url = '../WFinRep_Head/WFin-RepInquiryView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value + '&Control5=' + type5.value + '&Control6=' + type6.value;
+      window.open(url, '', params);
 
   }
 
@@ -786,68 +781,65 @@ ISD_GeolocationInit();
 
   }
 
-  function OpenRptViewer_NGP(Control1, Control2, Control3, Control4, companyCtrl, Control5 , Control6)
-  {
-  var width  = 1200;
-  var height = 700;
-  var left   = (screen.width  - width)/2;
-  var top    = (screen.height - height)/2;
-  var params = 'width='+width+', height='+height;
-  params += ', top='+top+', left='+left;
-  params += ', directories=no';
-  params += ', location=no';
-  params += ', menubar=no';
-  params += ', resizable=yes';
-  params += ', scrollbars=yes';
-  params += ', status=no';
-  params += ', toolbar=no';
-  params += ', modal=yes';
+  function OpenRptViewer_NGP(Control1, Control2, Control3, Control4, companyCtrl, Control5, Control6) {
+      var width = 1200;
+      var height = 700;
+      var left = (screen.width - width) / 2;
+      var top = (screen.height - height) / 2;
+      var params = 'width=' + width + ', height=' + height;
+      params += ', top=' + top + ', left=' + left;
+      params += ', directories=no';
+      params += ', location=no';
+      params += ', menubar=no';
+      params += ', resizable=yes';
+      params += ', scrollbars=yes';
+      params += ', status=no';
+      params += ', toolbar=no';
+      params += ', modal=yes';
 
-  var type1 = document.getElementById(Control3);
-  var type2 = document.getElementById(Control1);
-  var type3 = document.getElementById(Control2);
-  var type4 = document.getElementById(Control4);
-  var type5 = document.getElementById(Control5);
-  var type6 = document.getElementById(Control6);
-  var Company = document.getElementById(companyCtrl);
-  var CompanyText = Company.options[Company.selectedIndex].value;
+      var type1 = document.getElementById(Control3);
+      var type2 = document.getElementById(Control1);
+      var type3 = document.getElementById(Control2);
+      var type4 = document.getElementById(Control4);
+      var type5 = document.getElementById(Control5);
+      var type6 = document.getElementById(Control6);
+      var Company = document.getElementById(companyCtrl);
+      var CompanyText = Company.options[Company.selectedIndex].value;
 
 
-  var url = '../WFinRep_Head/WFin_RepView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + CompanyText + '&Control5=' + type5.value + '&Control6=' + type6.value;
-  window.open(url, '', params);
+      var url = '../WFinRep_Head/WFin-RepView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + CompanyText + '&Control5=' + type5.value + '&Control6=' + type6.value;
+      window.open(url, '', params);
 
   }
 
-  function OpenRptViewer_NGP2(Control1, Control2, Control3, Control4, companyCtrl, Control5 , Control6)
-  {
-  var width  = 1200;
-  var height = 700;
-  var left   = (screen.width  - width)/2;
-  var top    = (screen.height - height)/2;
-  var params = 'width='+width+', height='+height;
-  params += ', top='+top+', left='+left;
-  params += ', directories=no';
-  params += ', location=no';
-  params += ', menubar=no';
-  params += ', resizable=yes';
-  params += ', scrollbars=yes';
-  params += ', status=no';
-  params += ', toolbar=no';
-  params += ', modal=yes';
+  function OpenRptViewer_NGP2(Control1, Control2, Control3, Control4, companyCtrl, Control5, Control6) {
+      var width = 1200;
+      var height = 700;
+      var left = (screen.width - width) / 2;
+      var top = (screen.height - height) / 2;
+      var params = 'width=' + width + ', height=' + height;
+      params += ', top=' + top + ', left=' + left;
+      params += ', directories=no';
+      params += ', location=no';
+      params += ', menubar=no';
+      params += ', resizable=yes';
+      params += ', scrollbars=yes';
+      params += ', status=no';
+      params += ', toolbar=no';
+      params += ', modal=yes';
 
-  var type1 = document.getElementById(Control3);
-  var type2 = document.getElementById(Control1);
-  var type3 = document.getElementById(Control2);
-  var type4 = document.getElementById(Control4);
-  var type5 = document.getElementById(Control5);
-  var type6 = document.getElementById(Control6);
-  var Company = document.getElementById(companyCtrl);
-
+      var type1 = document.getElementById(Control3);
+      var type2 = document.getElementById(Control1);
+      var type3 = document.getElementById(Control2);
+      var type4 = document.getElementById(Control4);
+      var type5 = document.getElementById(Control5);
+      var type6 = document.getElementById(Control6);
+      var Company = document.getElementById(companyCtrl);
 
 
-  var url = '../WFinRep_Head/WFin_RepView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value + '&Control5=' + type5.value + '&Control6=' + type6.value;
-  window.open(url, '', params);
 
+      var url = '../WFinRep_Head/WFin-RepView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value + '&Control5=' + type5.value + '&Control6=' + type6.value;
+      window.open(url, '', params);
   }
 
   function OpenRptViewer_ConsoWP(pType,pYear,pMonth,pPath,pStatus,pWFRCH_ID)
@@ -884,16 +876,16 @@ ISD_GeolocationInit();
 
   }
 
-  function GetFilePath(FileUpload,FieldValue)
-  {
-  var numValue1 = document.getElementById(FileUpload).value;
-  document.getElementById(FieldValue).value = numValue1;
+  function GetFilePath(FileUpload, FieldValue) {
+      var numValue1 = document.getElementById(FileUpload).value;
+      document.getElementById(FieldValue).value = numValue1;
 
   }
 
-  function callme(t,t1) {
-  var x = document.getElementById(t).value;
-  document.getElementById(t1).value = x;
+
+  function callme(t, t1) {
+      var x = document.getElementById(t).value;
+      document.getElementById(t1).value = x;
   }
 
   function OpenRptViewer_ItemVendorHistory(pItemNo)

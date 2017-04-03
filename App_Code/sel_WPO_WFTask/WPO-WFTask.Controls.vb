@@ -1772,26 +1772,23 @@ Public Class Sel_WPO_InquireDetailsTableControlRow
         End Sub
 
         Public Function IsInventoriedItem() As Boolean
-            Try
-                Dim obC As OrderBy = New OrderBy(False, False)
-                Dim rec As Sel_IV00101Record = Sel_IV00101View.GetRecord("ITEMNMBR='" & Me.ITEMNMBR.Text & "' AND Company_ID='" & Me.CompanyID1.Text & "'", obC)
-                If Not (IsNothing(rec)) Then
-                    If rec.ITEMDESCSpecified Then
-                        Return True
-                    Else
-                        Return False
-                    End If
+            Dim obC As OrderBy = New OrderBy(False, False)
+            Dim rec As Sel_IV00101Record = Sel_IV00101View.GetRecord("ITEMNMBR='" & Me.ITEMNMBR.Text & "' AND Company_ID='" & Me.CompanyID1.Text & "'", obC)
+            If Not (IsNothing(rec)) Then
+                If rec.ITEMDESCSpecified Then
+                    Return True
                 Else
                     Return False
                 End If
-            Catch ex As Exception
+            Else
                 Return False
-            End Try
+            End If
+
+
         End Function
 
 
-    End Class
-
+End Class
 Public Class Sel_WPO_InquireDetails_2TableControl
         Inherits BaseSel_WPO_InquireDetails_2TableControl
 

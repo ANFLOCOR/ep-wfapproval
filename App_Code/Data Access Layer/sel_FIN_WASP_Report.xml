@@ -293,7 +293,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>sel_FIN_WASP_Report_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -304,4 +303,5 @@
   <MenuName>FIN WASP Report</MenuName>
   <QSPath>../sel_FIN_WASP_Report/Sel-FIN-WASP-Report-QuickSelector.aspx</QSPath>
   <TableCodeName>Sel_FIN_WASP_Report</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalSel_FIN_WASP_Report</TableStoredProcPrefix>
 </XMLDefinition>

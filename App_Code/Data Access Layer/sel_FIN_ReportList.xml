@@ -197,7 +197,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>sel_FIN_ReportList_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -208,4 +207,5 @@
   <MenuName>FIN Report List</MenuName>
   <QSPath>../sel_FIN_ReportList/Sel-FIN-ReportList-QuickSelector.aspx</QSPath>
   <TableCodeName>Sel_FIN_ReportList</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalSel_FIN_ReportList</TableStoredProcPrefix>
 </XMLDefinition>
