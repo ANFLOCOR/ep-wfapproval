@@ -113,7 +113,7 @@ The tags are case-sensitive and should contain the following case-sensitive attr
   </siteMapNode>
 </siteMap>
 -->
-<!--
+
 <siteMap>
   <siteMapNode>
     <siteMapNode title="Home" description="Home" url="~/Security/Homepage.aspx" imageURL="" roles="1360" order="0" />
@@ -163,7 +163,8 @@ The tags are case-sensitive and should contain the following case-sensitive attr
     </siteMapNode>
   </siteMapNode>
 </siteMap> 
--->
+
+<!-- Test
 <siteMap>
   <siteMapNode>
     <siteMapNode title="Home" description="Home" url="~/Security/Homepage.aspx" imageURL="" roles="373" order="0" />
@@ -213,3 +214,4 @@ The tags are case-sensitive and should contain the following case-sensitive attr
     </siteMapNode>
   </siteMapNode>
 </siteMap>
+-->
