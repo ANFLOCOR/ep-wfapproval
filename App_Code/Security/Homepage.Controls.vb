@@ -565,7 +565,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
 
 
 
-		Public Overrides Sub imbDoc1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+        Public Overrides Sub imbDoc1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
 
             ' The redirect URL is set on the Properties, Custom Properties or Actions.
             ' The ModifyRedirectURL call resolves the parameters before the
@@ -575,24 +575,23 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
             Dim pubUrl As String
 
             ' ''MsgBox(Me.Doc_Type1.Text)
-            '
 
             Select Case Me.Doc_Type1.Text
-                Case "<font color=black>CAR</font>", "CAR"
+                Case "<font color=black>CAR</font>"
                     pubUrl = "../WCAR_Doc1/EditWCAR-Doc-Approval1.aspx?WCAR_Doc1=" & Me.PK_ID1.Text
-                Case "<font color=black>PR</font>", "PR"
+                Case "<font color=black>PR</font>"
                     pubUrl = "../wf_pr/EditWPR_Doc_Approval.aspx?WPR_Doc=" & Me.PK_ID1.Text
-                Case "<font color=black>PO</font>", "PO"
+                Case "<font color=black>PO</font>"
                     pubUrl = "../sel_WPO_WFTask/WPO-WFTaskN.aspx?POP10100_PO=" & Me.Doc_No1.Text & "&POP10100_Co=" & Me.C_ID1.Text
-                Case "<font color=black>FS</font>", "FS"
+                Case "<font color=black>FS</font>"
                     pubUrl = "../WFinRep_Head/WFin_ApproverPage_Revised.aspx?WFinRep_Head=" & Me.Doc_No1.Text
-                Case "<font color=black>FSN</font>", "FSN"
+                Case "<font color=black>FSN</font>"
                     pubUrl = "../WFinRep_Head/WFinRepNGP_Approver.aspx?WFinRepNGP_Head=" & Me.Doc_No1.Text
-                Case "<font color=black>CONSOLIDATED</font>", "CONSOLIDATED"
+                Case "<font color=black>CONSOLIDATED</font>"
                     pubUrl = "../WFinRep_Head/Conso_ReportDoc_Approver.aspx?WFinRepCon_Head=" & Me.Doc_No1.Text
-                Case "<font color=black>PO CANCEL</font>", "PO CANCEL"
+                Case "<font color=black>PO CANCEL</font>"
                     pubUrl = "../wf_cv/EditWCanvass_PO_Map.aspx?WCanvass_PO_Map=" & Me.PK_ID1.Text
-                Case "<font color=black>_CAR(RETURN)", "_PO(RETURN)</font>", "_PO(RETURN)"
+                Case "<font color=black>_CAR(RETURN)", "_PO(RETURN)</font>"
                     Me.imbDoc1.Visible = False
                 Case Else
                     pubUrl = "../WCAR_Doc1/Edit-WCAR-Doc1.aspx?WCAR_Doc1=" & Me.PK_ID1.Text

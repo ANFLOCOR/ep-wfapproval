@@ -262,7 +262,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WFinRep_Step_StepDetail_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -273,4 +272,5 @@
   <MenuName>WFin Representative Step Step~etail1</MenuName>
   <QSPath>../WFinRep_Step_StepDetail1/WFinRep-Step-StepDetail-QuickSelector1.aspx</QSPath>
   <TableCodeName>WFinRep_Step_StepDetail1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWFinRep_Step_StepDetail1</TableStoredProcPrefix>
 </XMLDefinition>

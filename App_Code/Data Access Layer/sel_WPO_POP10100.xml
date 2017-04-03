@@ -545,7 +545,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>sel_WPO_POP10100_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -556,4 +555,5 @@
   <MenuName>WPO POP 10100</MenuName>
   <QSPath>../sel_WPO_POP10100/Sel-WPO-POP10100-QuickSelector.aspx</QSPath>
   <TableCodeName>Sel_WPO_POP10100</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalSel_WPO_POP10100</TableStoredProcPrefix>
 </XMLDefinition>

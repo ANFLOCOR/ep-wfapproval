@@ -166,7 +166,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WFinRep_History_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -178,4 +177,5 @@
   <MenuName>WFin Representative History</MenuName>
   <QSPath>../WFinRep_History/WFinRep-History-QuickSelector.aspx</QSPath>
   <TableCodeName>WFinRep_History</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWFinRep_History</TableStoredProcPrefix>
 </XMLDefinition>
