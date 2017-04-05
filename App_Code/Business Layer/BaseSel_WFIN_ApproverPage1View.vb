@@ -1,5 +1,5 @@
 ﻿' This class is "generated" and will be overwritten.
-' Your customizations should be made in Sel_WFIN_ApproverPage1View.vb
+' Your customizations should be made in Sel_WFIN_ApproverPage1Record.vb
 
 Imports System.Data.SqlTypes
 Imports System.Data
@@ -25,34 +25,34 @@ Namespace ePortalWFApproval.Business
 ''' <seealso cref="Sel_WFIN_ApproverPage1View"></seealso>
 
 <Serializable()> Public Class BaseSel_WFIN_ApproverPage1View
-	Inherits KeylessTable
-	
+    Inherits PrimaryKeyTable
+    
 
-	Private ReadOnly TableDefinitionString As String = Sel_WFIN_ApproverPage1Definition.GetXMLString()
-
-
+    Private ReadOnly TableDefinitionString As String = Sel_WFIN_ApproverPage1Definition.GetXMLString()
 
 
 
 
 
-	Protected Sub New()
-		MyBase.New()
-		Me.Initialize()
-	End Sub
 
-	Protected Overridable Sub Initialize()
-		Dim def As New XmlTableDefinition(TableDefinitionString)
-		Me.TableDefinition = New TableDefinition()
-		Me.TableDefinition.TableClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Sel_WFIN_ApproverPage1View")
-		def.InitializeTableDefinition(Me.TableDefinition)
-		Me.ConnectionName = def.GetConnectionName()
-		Me.RecordClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Sel_WFIN_ApproverPage1Record")
-		Me.ApplicationName = "App_Code"
-		Me.DataAdapter = New Sel_WFIN_ApproverPage1SqlView()
-		Directcast(Me.DataAdapter, Sel_WFIN_ApproverPage1SqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, Sel_WFIN_ApproverPage1SqlView).ApplicationName = Me.ApplicationName
-		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
+
+    Protected Sub New()
+        MyBase.New()
+        Me.Initialize()
+    End Sub
+
+    Protected Overridable Sub Initialize()
+        Dim def As New XmlTableDefinition(TableDefinitionString)
+        Me.TableDefinition = New TableDefinition()
+        Me.TableDefinition.TableClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Sel_WFIN_ApproverPage1View")
+        def.InitializeTableDefinition(Me.TableDefinition)
+        Me.ConnectionName = def.GetConnectionName()
+        Me.RecordClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Sel_WFIN_ApproverPage1Record")
+        Me.ApplicationName = "App_Code"
+        Me.DataAdapter = New Sel_WFIN_ApproverPage1SqlView()
+        Directcast(Me.DataAdapter, Sel_WFIN_ApproverPage1SqlView).ConnectionName = Me.ConnectionName
+        Directcast(Me.DataAdapter, Sel_WFIN_ApproverPage1SqlView).ApplicationName = Me.ApplicationName
+        Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         AFIN_IDColumn.CodeName = "AFIN_ID"
         AFIN_WS_IDColumn.CodeName = "AFIN_WS_ID"
         AFIN_WSD_IDColumn.CodeName = "AFIN_WSD_ID"
@@ -69,13 +69,14 @@ Namespace ePortalWFApproval.Business
         FIN_MonthColumn.CodeName = "FIN_Month"
         FIn_DescriptionColumn.CodeName = "FIn_Description"
         HFIN_IDColumn.CodeName = "HFIN_ID"
-		
-	End Sub
-	
+        
+    End Sub
+
 #Region "Overriden methods"
+
     
 #End Region
-	
+
 #Region "Properties for columns"
 
     ''' <summary>
@@ -385,6 +386,7 @@ Namespace ePortalWFApproval.Business
 
 
 #End Region
+
 
 #Region "Shared helper methods"
 
@@ -890,6 +892,136 @@ Namespace ePortalWFApproval.Business
     End Function       
         
 
+    ' Convenience method for getting a record using a string-based record identifier
+    Public Shared Function GetRecord(ByVal id As String, ByVal bMutable As Boolean) As Sel_WFIN_ApproverPage1Record
+        Return CType(Sel_WFIN_ApproverPage1View.Instance.GetRecordData(id, bMutable), Sel_WFIN_ApproverPage1Record)
+    End Function
+
+    ' Convenience method for getting a record using a KeyValue record identifier
+    Public Shared Function GetRecord(ByVal id As KeyValue, ByVal bMutable As Boolean) As Sel_WFIN_ApproverPage1Record
+        Return CType(Sel_WFIN_ApproverPage1View.Instance.GetRecordData(id, bMutable), Sel_WFIN_ApproverPage1Record)
+    End Function
+
+    ' Convenience method for creating a record
+    Public Overloads Function NewRecord( _
+        ByVal AFIN_IDValue As String, _
+        ByVal AFIN_WS_IDValue As String, _
+        ByVal AFIN_WSD_IDValue As String, _
+        ByVal AFIN_WDT_IDValue As String, _
+        ByVal AFIN_W_U_IDValue As String, _
+        ByVal AFIN_StatusValue As String, _
+        ByVal AFIN_Date_AssignValue As String, _
+        ByVal AFIN_Date_ActionValue As String, _
+        ByVal AFIN_RemarkValue As String, _
+        ByVal AFIN_Is_DoneValue As String, _
+        ByVal AFIN_FinIDValue As String, _
+        ByVal HFIN_C_IDValue As String, _
+        ByVal FIN_YearValue As String, _
+        ByVal FIN_MonthValue As String, _
+        ByVal FIn_DescriptionValue As String, _
+        ByVal HFIN_IDValue As String _
+    ) As KeyValue
+        Dim rec As IPrimaryKeyRecord = CType(Me.CreateRecord(), IPrimaryKeyRecord)
+                rec.SetString(AFIN_IDValue, AFIN_IDColumn)
+        rec.SetString(AFIN_WS_IDValue, AFIN_WS_IDColumn)
+        rec.SetString(AFIN_WSD_IDValue, AFIN_WSD_IDColumn)
+        rec.SetString(AFIN_WDT_IDValue, AFIN_WDT_IDColumn)
+        rec.SetString(AFIN_W_U_IDValue, AFIN_W_U_IDColumn)
+        rec.SetString(AFIN_StatusValue, AFIN_StatusColumn)
+        rec.SetString(AFIN_Date_AssignValue, AFIN_Date_AssignColumn)
+        rec.SetString(AFIN_Date_ActionValue, AFIN_Date_ActionColumn)
+        rec.SetString(AFIN_RemarkValue, AFIN_RemarkColumn)
+        rec.SetString(AFIN_Is_DoneValue, AFIN_Is_DoneColumn)
+        rec.SetString(AFIN_FinIDValue, AFIN_FinIDColumn)
+        rec.SetString(HFIN_C_IDValue, HFIN_C_IDColumn)
+        rec.SetString(FIN_YearValue, FIN_YearColumn)
+        rec.SetString(FIN_MonthValue, FIN_MonthColumn)
+        rec.SetString(FIn_DescriptionValue, FIn_DescriptionColumn)
+        rec.SetString(HFIN_IDValue, HFIN_IDColumn)
+
+
+        rec.Create() 'update the DB so any DB-initialized fields (like autoincrement IDs) can be initialized
+
+        Dim key As KeyValue = rec.GetID()
+        Return key
+    End Function
+
+    ''' <summary>
+    '''  This method deletes a specified record
+    ''' </summary>
+    ''' <param name="kv">Keyvalue of the record to be deleted.</param>
+    Public Shared Sub DeleteRecord(ByVal kv As KeyValue)
+        Sel_WFIN_ApproverPage1View.Instance.DeleteOneRecord(kv)
+    End Sub
+
+    ''' <summary>
+    ''' This method checks if record exist in the database using the keyvalue provided.
+    ''' </summary>
+    ''' <param name="kv">Key value of the record.</param>
+    Public Shared Function DoesRecordExist(ByVal kv As KeyValue) As Boolean
+        Dim recordExist As Boolean = True
+        Try
+            Sel_WFIN_ApproverPage1View.GetRecord(kv, False)
+        Catch ex As Exception
+            recordExist = False
+        End Try
+        Return recordExist
+    End Function
+    
+    ''' <summary>
+    '''  This method returns all the primary columns in the table.
+    ''' </summary>
+    Public Shared Function GetPrimaryKeyColumns() As ColumnList
+        If (Not IsNothing(Sel_WFIN_ApproverPage1View.Instance.TableDefinition.PrimaryKey)) Then
+            Return Sel_WFIN_ApproverPage1View.Instance.TableDefinition.PrimaryKey.Columns
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    ''' <summary>
+    ''' This method takes a key and returns a keyvalue.
+    ''' </summary>
+    ''' <param name="key">key could be array of primary key values in case of composite primary key or a string containing single primary key value in case of non-composite primary key.</param>
+    Public Shared Function GetKeyValue(ByVal key As Object) As KeyValue
+        Dim kv As KeyValue = Nothing
+
+        If (Not (IsNothing(Sel_WFIN_ApproverPage1View.Instance.TableDefinition.PrimaryKey))) Then
+
+            Dim isCompositePrimaryKey As Boolean = False
+            isCompositePrimaryKey = Sel_WFIN_ApproverPage1View.Instance.TableDefinition.PrimaryKey.IsCompositeKey
+
+            If ((isCompositePrimaryKey) AndAlso (key.GetType.IsArray())) Then
+
+                ' If the key is composite, then construct a key value.
+                kv = New KeyValue
+                Dim fullKeyString As String = ""
+                Dim keyArray As Array = CType(key, Array)
+                If (Not IsNothing(keyArray)) Then
+                    Dim length As Integer = keyArray.Length
+                    Dim pkColumns As ColumnList = Sel_WFIN_ApproverPage1View.Instance.TableDefinition.PrimaryKey.Columns
+                    Dim pkColumn As BaseColumn
+                    Dim index As Integer = 0
+                    For Each pkColumn In pkColumns
+                        Dim keyString As String = CType(keyArray.GetValue(index), String)
+                        If (Sel_WFIN_ApproverPage1View.Instance.TableDefinition.TableType = BaseClasses.Data.TableDefinition.TableTypes.Virtual) Then
+                            kv.AddElement(pkColumn.UniqueName, keyString)
+                        Else
+                            kv.AddElement(pkColumn.InternalName, keyString)
+                        End If
+                        index = index + 1
+                    Next pkColumn
+                End If
+
+            Else
+                ' If the key is not composite, then get the key value.
+                kv = Sel_WFIN_ApproverPage1View.Instance.TableDefinition.PrimaryKey.ParseValue(CType(key, String))
+            End If
+        End If
+        Return kv
+    End Function    
+
+
 	 ''' <summary>
      ''' This method takes a record and a Column and returns an evaluated value of DFKA formula.
      ''' </summary>
@@ -963,7 +1095,7 @@ Namespace ePortalWFApproval.Business
             Return Nothing
         End If
     End Function
-    
+
 	''' <summary>
     ''' Evaluates the formula
     ''' </summary>
@@ -984,7 +1116,9 @@ Namespace ePortalWFApproval.Business
             Return resultObj.ToString()
         End If
     End Function
-#End Region	
+
+
+#End Region 
 
 End Class
 End Namespace

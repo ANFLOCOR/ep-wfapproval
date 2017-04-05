@@ -34,8 +34,6 @@ DECLARE
     @l_temp_cols nvarchar(max),
     @l_temp_colsWithAlias nvarchar(max),
     @l_query_select nvarchar(max),
-    @l_query_select2 nvarchar(max),
-    @l_query_rownum nvarchar(max),
     @l_query_from nvarchar(max),
     @l_query_where nvarchar(max),
     @l_query_cols nvarchar(max),
@@ -87,9 +85,31 @@ BEGIN
         SET @l_end_gen_row_num = @p_page_number * @p_batch_size;
         SET @l_start_gen_row_num = @l_end_gen_row_num - (@p_batch_size-1);
 
+        -- Create a table variable to keep row numbering
+        SET @l_temp_table = 'DECLARE @IS_TEMP_T_GETLIST TABLE
+        (
+        IS_ROWNUM_COL int identity(1,1),
+                [AFIN_ID] int
+        ); '
+
+        -- Copy column data into table variable
+        SET @l_temp_insert = 
+            'INSERT INTO @IS_TEMP_T_GETLIST ('
+        SET @l_temp_cols = 
+            N'[AFIN_ID]'
+        SET @l_temp_select = 
+            ') ' + 
+            'SELECT ' + 
+            'TOP ' + convert(varchar, @l_end_gen_row_num) + ' '
+        SET @l_temp_colsWithAlias = 
+            N'WFinRep_Activity_.[AFIN_ID]'
+        SET @l_temp_from = 
+            ' FROM ' + @l_from_str + ' ' + @l_join_str + ' ' + 
+            @l_where_str + ' ' + 
+            @l_sort_str
+
         -- Construct the main query
-        SET @l_query_select = 'WITH WFinRep_Activity_ AS ( SELECT  '
-        SET @l_query_rownum = 'ROW_NUMBER() OVER(' + @l_sort_str + ') AS IS_ROWNUM_COL,'
+        SET @l_query_select = 'SELECT '
         SET @l_query_cols = 
             N'WFinRep_Activity_.[AFIN_ID],
             WFinRep_Activity_.[AFIN_WS_ID],
@@ -106,12 +126,20 @@ BEGIN
             WFinRep_Activity_.[AFIN_FinID],
             WFinRep_Activity_.[AFIN_HFIN_ID],
             CAST(BINARY_CHECKSUM(WFinRep_Activity_.[AFIN_ID],WFinRep_Activity_.[AFIN_WS_ID],WFinRep_Activity_.[AFIN_WSD_ID],WFinRep_Activity_.[AFIN_WDT_ID],WFinRep_Activity_.[AFIN_W_U_ID],WFinRep_Activity_.[AFIN_W_U_ID_Delegate],WFinRep_Activity_.[AFIN_Status],WFinRep_Activity_.[AFIN_Date_Assign],WFinRep_Activity_.[AFIN_Date_Action],WFinRep_Activity_.[AFIN_Remark],WFinRep_Activity_.[AFIN_Is_Done],WFinRep_Activity_.[AFIN_Code],WFinRep_Activity_.[AFIN_FinID],WFinRep_Activity_.[AFIN_HFIN_ID]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
-        SET @l_query_from = ' FROM ' + @l_from_str + ' ' + @l_join_str + ' ' + @l_where_str + ') '
-        SET @l_query_select2 = 'SELECT * FROM WFinRep_Activity_ '
-        SET @l_query_where = 'WHERE IS_ROWNUM_COL BETWEEN ' + convert(varchar, @l_start_gen_row_num) + ' AND ' + convert(varchar, @l_end_gen_row_num) +  ';'
+        SET @l_query_from = 
+            ' FROM ( ' +
+                N'SELECT TOP 100 PERCENT IS_ROWNUM_COL, [AFIN_ID] from @IS_TEMP_T_GETLIST ' +
+                'WHERE IS_ROWNUM_COL >= '+ convert(varchar, @l_start_gen_row_num) + 
+                ') IS_ALIAS LEFT JOIN ' +
+                @l_from_str + ' ';
+
+        SET @l_query_where = 
+            N'ON WFinRep_Activity_.[AFIN_ID] = IS_ALIAS.[AFIN_ID] ' 
+
+        SET @l_final_sort = 'ORDER BY IS_ROWNUM_COL Asc '
 
         -- Run the query
-        EXECUTE (@l_query_select + @l_query_rownum + @l_query_cols + @l_query_from + @l_query_select2 + @l_query_where)
+        EXECUTE (@l_temp_table + @l_temp_insert + @l_temp_cols + @l_temp_select + @l_temp_colsWithAlias + @l_temp_from + '; ' + @l_query_select + @l_query_cols + @l_query_from + @l_query_where + @l_final_sort)
 
     END
     ELSE

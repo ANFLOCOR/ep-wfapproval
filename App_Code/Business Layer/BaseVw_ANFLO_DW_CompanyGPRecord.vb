@@ -19,30 +19,22 @@ Namespace ePortalWFApproval.Business
 ''' <seealso cref="Vw_ANFLO_DW_CompanyGPRecord"></seealso>
 
 <Serializable()> Public Class BaseVw_ANFLO_DW_CompanyGPRecord
-	Inherits KeylessRecord
+	Inherits PrimaryKeyRecord
 	
 
 	Public Shared Shadows ReadOnly TableUtils As Vw_ANFLO_DW_CompanyGPView = Vw_ANFLO_DW_CompanyGPView.Instance
 
 	' Constructors
-
+ 
 	Protected Sub New()
 		MyBase.New(TableUtils)
 	End Sub
 
-	Protected Sub New(ByVal record As KeylessRecord)
+	Protected Sub New(ByVal record As PrimaryKeyRecord)
 		MyBase.New(record, TableUtils)
 	End Sub
 	
-	'Evaluates Initialize when->Reading record formulas specified at the data access layer
-    Public Overridable Sub Vw_ANFLO_DW_CompanyGPRecord_ReadRecord(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ReadRecord
-        'Apply Initialize->Reading record formula only if validation is successful.
-        	        Dim Vw_ANFLO_DW_CompanyGPRec As Vw_ANFLO_DW_CompanyGPRecord = CType(sender,Vw_ANFLO_DW_CompanyGPRecord)
-        If Not Vw_ANFLO_DW_CompanyGPRec Is Nothing AndAlso Not Vw_ANFLO_DW_CompanyGPRec.IsReadOnly Then
-                End If
-    End Sub
-    
-    	'Evaluates Initialize when->Inserting record formulas specified at the data access layer
+	'Evaluates Initialize when->Inserting record formulas specified at the data access layer
     Public Overridable Sub Vw_ANFLO_DW_CompanyGPRecord_InsertingRecord(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles Me.InsertingRecord
         'Apply Initialize->Inserting record formula only if validation is successful.
         	        Dim Vw_ANFLO_DW_CompanyGPRec As Vw_ANFLO_DW_CompanyGPRecord = CType(sender,Vw_ANFLO_DW_CompanyGPRecord)
@@ -50,8 +42,25 @@ Namespace ePortalWFApproval.Business
         If Not Vw_ANFLO_DW_CompanyGPRec Is Nothing AndAlso Not Vw_ANFLO_DW_CompanyGPRec.IsReadOnly Then
                 End If
     End Sub
+
+	'Evaluates Initialize when->Updating record formulas specified at the data access layer
+    Public Overridable Sub Vw_ANFLO_DW_CompanyGPRecord_UpdatingRecord(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles Me.UpdatingRecord
+        'Apply Initialize->Updating record formula only if validation is successful.
+        	        Dim Vw_ANFLO_DW_CompanyGPRec As Vw_ANFLO_DW_CompanyGPRecord = CType(sender,Vw_ANFLO_DW_CompanyGPRecord)
+        Validate_Updating()
+        If Not Vw_ANFLO_DW_CompanyGPRec Is Nothing AndAlso Not Vw_ANFLO_DW_CompanyGPRec.IsReadOnly Then
+                End If
+    End Sub
     
-     'Evaluates Validate when->Inserting formulas specified at the data access layer
+    'Evaluates Initialize when->Reading record formulas specified at the data access layer
+    Public Overridable Sub Vw_ANFLO_DW_CompanyGPRecord_ReadRecord(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ReadRecord
+        'Apply Initialize->Reading record formula only if validation is successful.
+        	        Dim Vw_ANFLO_DW_CompanyGPRec As Vw_ANFLO_DW_CompanyGPRecord = CType(sender,Vw_ANFLO_DW_CompanyGPRecord)
+        If Not Vw_ANFLO_DW_CompanyGPRec Is Nothing AndAlso Not Vw_ANFLO_DW_CompanyGPRec.IsReadOnly Then
+                End If
+    End Sub
+    
+   'Evaluates Validate when->Inserting formulas specified at the data access layer
    Public Overridable Sub Validate_Inserting ()
 		Dim fullValidationMessage As String = ""
 		Dim validationMessage As String = ""
@@ -67,8 +76,25 @@ Namespace ePortalWFApproval.Business
 			Throw New Exception(fullValidationMessage)
 		End If 
 	End Sub
-    
-    Public Overridable Function EvaluateFormula(ByVal formula As String, Optional ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord = Nothing, Optional ByVal format As String = Nothing) As String
+	
+	'Evaluates Validate when->Updating formulas specified at the data access layer
+   Public Overridable Sub Validate_Updating ()
+		Dim fullValidationMessage As String = ""
+		Dim validationMessage As String = ""
+
+		dim formula as String = ""
+
+
+		If validationMessage <> "" AndAlso validationMessage.ToLower() <> "true" Then
+			fullValidationMessage &= validationMessage & vbCrLf
+		End If
+
+		If fullValidationMessage <> "" Then
+			Throw New Exception(fullValidationMessage)
+		End If 
+	End Sub
+ 
+	Public Overridable Function EvaluateFormula(ByVal formula As String, Optional ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord = Nothing, Optional ByVal format As String = Nothing) As String
 
 		Dim e As Data.BaseFormulaEvaluator = New Data.BaseFormulaEvaluator()
 

@@ -148,7 +148,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Case "PO"
                     pubUrl = "../sel_WPO_WFTask/WPO-WFTask.aspx?POP10100_PO=" & Me.Doc_No.Text & "&POP10100_Co=" & Me.C_ID.Text
                 Case "FS"
-                    pubUrl = "../WFinRep_Head/WFin_ApproverPage_Revised.aspx?WFinRep_Head=" & Me.Doc_No.Text
+                    pubUrl = "../WFinRep_Head/WFin-ApproverPage.aspx?WFinRep_Head=" & Me.Doc_No.Text
                 Case "FSN"
                     pubUrl = "../WFinRep_Head/WFinRepNGP_Approver.aspx?WFinRepNGP_Head=" & Me.Doc_No.Text
                 Case "CONSOLIDATED"
@@ -466,7 +466,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Throw New Exception(msg, ex.InnerException)
             End Try
         End Sub
-        
+
 
     End Class
     Public Class Sel_Approver_Pending_Tasks2TableControlRow
@@ -584,7 +584,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Case "<font color=black>PO</font>"
                     pubUrl = "../sel_WPO_WFTask/WPO-WFTaskN.aspx?POP10100_PO=" & Me.Doc_No1.Text & "&POP10100_Co=" & Me.C_ID1.Text
                 Case "<font color=black>FS</font>"
-                    pubUrl = "../WFinRep_Head/WFin_ApproverPage_Revised.aspx?WFinRep_Head=" & Me.Doc_No1.Text
+                    pubUrl = "../WFinRep_Head/WFin-ApproverPage.aspx?WFinRep_Head=" & Me.Doc_No1.Text
                 Case "<font color=black>FSN</font>"
                     pubUrl = "../WFinRep_Head/WFinRepNGP_Approver.aspx?WFinRepNGP_Head=" & Me.Doc_No1.Text
                 Case "<font color=black>CONSOLIDATED</font>"

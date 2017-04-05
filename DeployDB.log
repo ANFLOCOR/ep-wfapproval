@@ -1,35 +1,41 @@
 ﻿Failed to apply Transact-SQL code:
--- Creates a new record in the [dbo].[vw_ANFLO_DW_CompanyNonGP] table.
-CREATE PROCEDURE pePortalWFApprovalVw_ANFLO_DW_CompanyNonGPAdd
-    @p_CompanyID smallint,
-    @p_Name varchar(150),
-    @p_ShortName varchar(50),
-    @p_INTERID varchar(50),
-    @p_FULLADDRESS varchar(79),
-    @p_DWCompanyID int
+-- Creates a new record in the [dbo].[WFinRep_Step_StepDetail] table.
+CREATE PROCEDURE pePortalWFApprovalWFinRep_Step_StepDetail1Add
+    @p_WFIN_S_ID int,
+    @p_WFIN_S_WDT_ID int,
+    @p_WFIN_S_ID_Next int,
+    @p_WFIN_S_Step_Type varchar(20),
+    @p_WFIN_S_Approval_Needed smallint,
+    @p_WFIN_SD_ID int,
+    @p_WFIN_SD_W_U_ID int,
+    @p_W_U_Full_Name varchar(125)
 AS
 BEGIN
     INSERT
-    INTO [dbo].[vw_ANFLO_DW_CompanyNonGP]
+    INTO [dbo].[WFinRep_Step_StepDetail]
         (
-            [CompanyID],
-            [Name],
-            [ShortName],
-            [INTERID],
-            [FULLADDRESS],
-            [DWCompanyID]
+            [WFIN_S_ID],
+            [WFIN_S_WDT_ID],
+            [WFIN_S_ID_Next],
+            [WFIN_S_Step_Type],
+            [WFIN_S_Approval_Needed],
+            [WFIN_SD_ID],
+            [WFIN_SD_W_U_ID],
+            [W_U_Full_Name]
         )
     VALUES
         (
-             @p_CompanyID,
-             @p_Name,
-             @p_ShortName,
-             @p_INTERID,
-             @p_FULLADDRESS,
-             @p_DWCompanyID
+             @p_WFIN_S_ID,
+             @p_WFIN_S_WDT_ID,
+             @p_WFIN_S_ID_Next,
+             @p_WFIN_S_Step_Type,
+             @p_WFIN_S_Approval_Needed,
+             @p_WFIN_SD_ID,
+             @p_WFIN_SD_W_U_ID,
+             @p_W_U_Full_Name
         )
 
 END
 
-ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.vw_ANFLO_DW_CompanyNonGP' is not updatable because the modification affects multiple base tables.
+ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.WFinRep_Step_StepDetail' is not updatable because the modification affects multiple base tables.
 
