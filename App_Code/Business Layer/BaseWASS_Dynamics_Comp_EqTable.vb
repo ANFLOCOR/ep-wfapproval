@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WASS_Dynamics_Comp_EqSqlTable()
         Directcast(Me.DataAdapter, WASS_Dynamics_Comp_EqSqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WASS_Dynamics_Comp_EqSqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WDCE_IDColumn.CodeName = "WDCE_ID"
         WDCE_WASS_CompIDColumn.CodeName = "WDCE_WASS_CompID"

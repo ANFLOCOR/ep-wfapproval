@@ -113,7 +113,6 @@ The tags are case-sensitive and should contain the following case-sensitive attr
   </siteMapNode>
 </siteMap>
 -->
-
 <siteMap>
   <siteMapNode>
     <siteMapNode title="Home" description="Home" url="~/Security/Homepage.aspx" imageURL="" roles="1360" order="0" />
@@ -157,13 +156,12 @@ The tags are case-sensitive and should contain the following case-sensitive attr
         <siteMapNode title="FS Pedning Approval" description="FS Pedning Approval" url="" imageURL="" roles="1378" order="0" />
         <siteMapNode title="FS Report Inquiry" description="FS Report Inquiry" url="" imageURL="" roles="1379" order="0" />
         <siteMapNode title="FS Pending Approval (NGP)" description="FS Pending Approval (NGP)" url="" imageURL="" roles="1380" order="0" />
-        <siteMapNode title="FS Report Inquiry (NGP)" description="FS Report Inquiry (NGP)" url="" imageURL="" roles="1381" order="0" />
+        <siteMapNode title="FS Report Inquiry (NGP)" description="FS Report Inquiry (NGP)" url="~/WFinRepNGP_Head/WFinRepNGP-Inquiry.aspx" imageURL="" roles="1381" order="0" />
       </siteMapNode>
       <siteMapNode title="Task Delegation" description="Task Delegation" url="" imageURL="" roles="1399" order="0" />
     </siteMapNode>
   </siteMapNode>
-</siteMap> 
-
+</siteMap>
 <!-- Test
 <siteMap>
   <siteMapNode>

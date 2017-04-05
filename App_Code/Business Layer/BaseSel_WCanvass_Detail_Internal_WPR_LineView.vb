@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New Sel_WCanvass_Detail_Internal_WPR_LineSqlView()
 		Directcast(Me.DataAdapter, Sel_WCanvass_Detail_Internal_WPR_LineSqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, Sel_WCanvass_Detail_Internal_WPR_LineSqlView).ApplicationName = Me.ApplicationName
+		
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WPRL_WPRD_IDColumn.CodeName = "WPRL_WPRD_ID"
         WCDI_WCI_IDColumn.CodeName = "WCDI_WCI_ID"

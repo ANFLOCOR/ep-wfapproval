@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WTask_DelegationSqlTable()
         Directcast(Me.DataAdapter, WTask_DelegationSqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WTask_DelegationSqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WTD_IDColumn.CodeName = "WTD_ID"
         WTD_W_U_IDColumn.CodeName = "WTD_W_U_ID"

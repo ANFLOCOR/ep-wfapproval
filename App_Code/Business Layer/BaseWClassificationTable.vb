@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WClassificationSqlTable()
         Directcast(Me.DataAdapter, WClassificationSqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WClassificationSqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WClass_IDColumn.CodeName = "WClass_ID"
         WClass_NameColumn.CodeName = "WClass_Name"

@@ -301,7 +301,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>SysSetupUserPermission_</TableAliasName>
   <ConnectionName>DatabaseWASS</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -313,4 +312,5 @@
   <MenuName>System Setup User Permission</MenuName>
   <QSPath>../SysSetupUserPermission/SysSetupUserPermission-QuickSelector.aspx</QSPath>
   <TableCodeName>SysSetupUserPermission</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalSysSetupUserPermission</TableStoredProcPrefix>
 </XMLDefinition>

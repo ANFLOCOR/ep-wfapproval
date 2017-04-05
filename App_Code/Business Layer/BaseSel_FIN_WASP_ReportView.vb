@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New Sel_FIN_WASP_ReportSqlView()
 		Directcast(Me.DataAdapter, Sel_FIN_WASP_ReportSqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, Sel_FIN_WASP_ReportSqlView).ApplicationName = Me.ApplicationName
+		
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         W_Rpt_IDColumn.CodeName = "W_Rpt_ID"
         W_Rpt_Display_NameColumn.CodeName = "W_Rpt_Display_Name"

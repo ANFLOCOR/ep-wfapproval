@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New Vw_ANFLO_DW_CompanyGPSqlView()
 		Directcast(Me.DataAdapter, Vw_ANFLO_DW_CompanyGPSqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, Vw_ANFLO_DW_CompanyGPSqlView).ApplicationName = Me.ApplicationName
+		
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         CompanyIDColumn.CodeName = "CompanyID"
         NameColumn.CodeName = "Name"

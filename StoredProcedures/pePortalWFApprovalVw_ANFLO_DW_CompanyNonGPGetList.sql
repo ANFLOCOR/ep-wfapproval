@@ -81,7 +81,7 @@ BEGIN
         IF @p_sort_str IS NOT NULL
             SET @l_sort_str = 'ORDER BY ' + @p_sort_str
         ELSE
-            SET @l_sort_str = ' '
+            SET @l_sort_str = N'ORDER BY vw_ANFLO_DW_CompanyNonGP_.[CompanyID] asc '
 
         -- Calculate the rows to be included in the list
         SET @l_end_gen_row_num = @p_page_number * @p_batch_size;
@@ -96,9 +96,9 @@ BEGIN
             vw_ANFLO_DW_CompanyNonGP_.[ShortName],
             vw_ANFLO_DW_CompanyNonGP_.[INTERID],
             vw_ANFLO_DW_CompanyNonGP_.[FULLADDRESS],
-            vw_ANFLO_DW_CompanyNonGP_.[DWCompanyID]'
-
-        SET @l_query_from = 'FROM ' + @l_from_str + ' ' + @l_join_str + + ' ' + @l_where_str + ') '
+            vw_ANFLO_DW_CompanyNonGP_.[DWCompanyID],
+            CAST(BINARY_CHECKSUM(vw_ANFLO_DW_CompanyNonGP_.[CompanyID],vw_ANFLO_DW_CompanyNonGP_.[Name],vw_ANFLO_DW_CompanyNonGP_.[ShortName],vw_ANFLO_DW_CompanyNonGP_.[INTERID],vw_ANFLO_DW_CompanyNonGP_.[FULLADDRESS],vw_ANFLO_DW_CompanyNonGP_.[DWCompanyID]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
+        SET @l_query_from = ' FROM ' + @l_from_str + ' ' + @l_join_str + ' ' + @l_where_str + ') '
         SET @l_query_select2 = 'SELECT * FROM vw_ANFLO_DW_CompanyNonGP_ '
         SET @l_query_where = 'WHERE IS_ROWNUM_COL BETWEEN ' + convert(varchar, @l_start_gen_row_num) + ' AND ' + convert(varchar, @l_end_gen_row_num) +  ';'
 
@@ -116,7 +116,8 @@ BEGIN
             vw_ANFLO_DW_CompanyNonGP_.[ShortName],
             vw_ANFLO_DW_CompanyNonGP_.[INTERID],
             vw_ANFLO_DW_CompanyNonGP_.[FULLADDRESS],
-            vw_ANFLO_DW_CompanyNonGP_.[DWCompanyID]'
+            vw_ANFLO_DW_CompanyNonGP_.[DWCompanyID],
+            CAST(BINARY_CHECKSUM(vw_ANFLO_DW_CompanyNonGP_.[CompanyID],vw_ANFLO_DW_CompanyNonGP_.[Name],vw_ANFLO_DW_CompanyNonGP_.[ShortName],vw_ANFLO_DW_CompanyNonGP_.[INTERID],vw_ANFLO_DW_CompanyNonGP_.[FULLADDRESS],vw_ANFLO_DW_CompanyNonGP_.[DWCompanyID]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
         SET @l_query_from = 
             ' FROM [dbo].[vw_ANFLO_DW_CompanyNonGP] vw_ANFLO_DW_CompanyNonGP_ ' + 
             'WHERE 1=2;'

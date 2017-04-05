@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WCAR_MinimumSqlTable()
         Directcast(Me.DataAdapter, WCAR_MinimumSqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WCAR_MinimumSqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WCM_IDColumn.CodeName = "WCM_ID"
         WCM_C_IDColumn.CodeName = "WCM_C_ID"

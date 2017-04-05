@@ -1,35 +1,32 @@
 ﻿Failed to apply Transact-SQL code:
 -- Creates a new record in the [dbo].[vw_ANFLO_DW_CompanyNonGP] table.
-CREATE PROCEDURE pePortalWFApprovalVw_ANFLO_DW_CompanyNonGPAdd
-    @p_CompanyID smallint,
+CREATE PROCEDURE pePortalWFApprovalVw_ANFLO_DW_CompanyNonGP1Add
     @p_Name varchar(150),
     @p_ShortName varchar(50),
     @p_INTERID varchar(50),
-    @p_FULLADDRESS varchar(79),
-    @p_DWCompanyID int
+    @p_DWCompanyID int,
+    @p_DynamicsCompanyID int
 AS
 BEGIN
     INSERT
     INTO [dbo].[vw_ANFLO_DW_CompanyNonGP]
         (
-            [CompanyID],
             [Name],
             [ShortName],
             [INTERID],
-            [FULLADDRESS],
-            [DWCompanyID]
+            [DWCompanyID],
+            [DynamicsCompanyID]
         )
     VALUES
         (
-             @p_CompanyID,
              @p_Name,
              @p_ShortName,
              @p_INTERID,
-             @p_FULLADDRESS,
-             @p_DWCompanyID
+             @p_DWCompanyID,
+             @p_DynamicsCompanyID
         )
 
 END
 
-ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.vw_ANFLO_DW_CompanyNonGP' is not updatable because the modification affects multiple base tables.
+ApplyDataBaseSQLCode: Failed to apply SQL code: Login failed for user 'NT AUTHORITY\ANONYMOUS LOGON'.
 

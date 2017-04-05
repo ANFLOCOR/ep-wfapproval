@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New Sel_POP10100_IncidentalSqlView()
         Directcast(Me.DataAdapter, Sel_POP10100_IncidentalSqlView).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, Sel_POP10100_IncidentalSqlView).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         PONUMBERColumn.CodeName = "PONUMBER"
         POSTATUSColumn.CodeName = "POSTATUS"

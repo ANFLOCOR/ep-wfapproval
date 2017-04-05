@@ -95,7 +95,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Case "FS"
                     Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/WFin_ApproverTable.aspx';"",1800); return false;")
                 Case "FSN"
-                    Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/WFinRepNGP_ApproverTable.aspx';"",1800); return false;")
+                    Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRepNGP_Head/WFinRepNGP-ApproverTable.aspx';"",1800); return false;")
                 Case "CONSOLIDATED"
                     Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/Conso_ReportDoc_ApproverTable.aspx';"",1800); return false;")
                 Case "PO CANCEL"
@@ -150,7 +150,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Case "FS"
                     pubUrl = "../WFinRep_Head/WFin_ApproverPage_Revised.aspx?WFinRep_Head=" & Me.Doc_No.Text
                 Case "FSN"
-                    pubUrl = "../WFinRep_Head/WFinRepNGP_Approver.aspx?WFinRepNGP_Head=" & Me.Doc_No.Text
+                    pubUrl = "../WFinRepNGP_Head/WFinRepNGP-Approver.aspx?WFinRepNGP_Head=" & Me.Doc_No.Text
                 Case "CONSOLIDATED"
                     pubUrl = "../WFinRep_Head/Conso_ReportDoc_Approver.aspx?WFinRepCon_Head=" & Me.Doc_No.Text
                 Case "PO CANCEL"
@@ -497,8 +497,8 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                     Case "PO CANCEL"
                         Me.Doc_Type1.Text = "<font color=red>" & Me.Doc_Type1.Text & "</font>"
                     Case Else
-                        Me.Doc_Type1.Text = Me.Doc_Type1.Text
-                        'Me.Doc_Type1.Text = "<font color=black>" & Me.Doc_Type1.Text & "</font>"
+                        'Me.Doc_Type1.Text = Me.Doc_Type1.Text
+                        Me.Doc_Type1.Text = "<font color=black>" & Me.Doc_Type1.Text & "</font>"
                 End Select
             End If
         End Sub
@@ -635,6 +635,8 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
 
 
     End Class
+
+
 #End Region
 
   

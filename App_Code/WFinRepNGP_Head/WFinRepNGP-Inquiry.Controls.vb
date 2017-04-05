@@ -37,7 +37,208 @@ Namespace ePortalWFApproval.UI.Controls.WFinRepNGP_Inquiry
 #Region "Section 1: Place your customizations here."
 
     
-Public Class WFinRepNGP_HeadTableControlRow
+Public Class WFinRepNGP_ActivityTableControlRow
+        Inherits BaseWFinRepNGP_ActivityTableControlRow
+        ' The BaseWFinRepNGP_ActivityTableControlRow implements code for a ROW within the
+        ' the WFinRepNGP_ActivityTableControl table.  The BaseWFinRepNGP_ActivityTableControlRow implements the DataBind and SaveData methods.
+        ' The loading of data is actually performed by the LoadData method in the base class of WFinRepNGP_ActivityTableControl.
+
+        ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
+        ' SaveData, GetUIData, and Validate methods.
+        
+
+End Class
+
+  
+
+Public Class WFinRepNGP_ActivityTableControl
+        Inherits BaseWFinRepNGP_ActivityTableControl
+
+    ' The BaseWFinRepNGP_ActivityTableControl class implements the LoadData, DataBind, CreateWhereClause
+    ' and other methods to load and display the data in a table control.
+
+    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
+    ' The WFinRepNGP_ActivityTableControlRow class offers another place where you can customize
+    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
+
+End Class
+
+  
+Public Class WFinRepNGP_AttachmentTableControlRow
+        Inherits BaseWFinRepNGP_AttachmentTableControlRow
+        ' The BaseWFinRepNGP_AttachmentTableControlRow implements code for a ROW within the
+        ' the WFinRepNGP_AttachmentTableControl table.  The BaseWFinRepNGP_AttachmentTableControlRow implements the DataBind and SaveData methods.
+        ' The loading of data is actually performed by the LoadData method in the base class of WFinRepNGP_AttachmentTableControl.
+
+        ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
+        ' SaveData, GetUIData, and Validate methods.
+        
+
+End Class
+
+  
+
+Public Class WFinRepNGP_AttachmentTableControl
+        Inherits BaseWFinRepNGP_AttachmentTableControl
+
+    ' The BaseWFinRepNGP_AttachmentTableControl class implements the LoadData, DataBind, CreateWhereClause
+    ' and other methods to load and display the data in a table control.
+
+    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
+    ' The WFinRepNGP_AttachmentTableControlRow class offers another place where you can customize
+    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
+
+End Class
+
+  
+Public Class WFinRepNGP_DocAttachTableControlRow
+        Inherits BaseWFinRepNGP_DocAttachTableControlRow
+        ' The BaseWFinRepNGP_DocAttachTableControlRow implements code for a ROW within the
+        ' the WFinRepNGP_DocAttachTableControl table.  The BaseWFinRepNGP_DocAttachTableControlRow implements the DataBind and SaveData methods.
+        ' The loading of data is actually performed by the LoadData method in the base class of WFinRepNGP_DocAttachTableControl.
+
+        ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
+        ' SaveData, GetUIData, and Validate methods.
+        
+
+
+        Protected Overrides Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+
+            ' Register the event handlers.
+
+            AddHandler Me.btnPreview.Button.Click, AddressOf btnPreview_Click
+
+            AddHandler Me.WFRCDNGP_Company.TextChanged, AddressOf WFRCDNGP_Company_TextChanged
+
+            AddHandler Me.WFRCDNGP_File1.TextChanged, AddressOf WFRCDNGP_File1_TextChanged
+
+            AddHandler Me.WFRCDNGP_Month.TextChanged, AddressOf WFRCDNGP_Month_TextChanged
+
+            AddHandler Me.WFRCDNGP_Status.TextChanged, AddressOf WFRCDNGP_Status_TextChanged
+
+            AddHandler Me.WFRCDNGP_Type1.TextChanged, AddressOf WFRCDNGP_Type1_TextChanged
+
+            AddHandler Me.WFRCDNGP_WFRCHNGP_ID.TextChanged, AddressOf WFRCDNGP_WFRCHNGP_ID_TextChanged
+
+            AddHandler Me.WFRCDNGP_Year.TextChanged, AddressOf WFRCDNGP_Year_TextChanged
+
+            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewer2('" & Me.WFRCDNGP_Year.ClientID & "','" & Me.WFRCDNGP_Month.ClientID & "', '" & Me.WFRCDNGP_Type1.ClientID & "', '" & Me.WFRCDNGP_File1.ClientID & "', '" & Me.WFRCDNGP_Company.ClientID & "',  '" & Me.WFRCDNGP_Status.ClientID & "',  '" & Me.WFRCDNGP_WFRCHNGP_ID.ClientID & "');return false;")
+        End Sub
+
+        ' Populate the UI controls using the DataSource.  To customize, override this method in WFinRepNGP_DocAttachTableControlRow.
+        Public Overrides Sub DataBind()
+            ' The DataBind method binds the user interface controls to the values
+            ' from the database record.  To do this, it calls the Set methods for 
+            ' each of the field displayed on the webpage.  It is better to make 
+            ' changes in the Set methods, rather than making changes here.
+
+            MyBase.DataBind()
+            Me.ClearControlsFromSession()
+
+            ' Make sure that the DataSource is initialized.
+            If Me.DataSource Is Nothing Then
+
+                Return
+            End If
+
+
+            'LoadData for DataSource for chart and report if they exist
+
+            ' Store the checksum. The checksum is used to
+            ' ensure the record was not changed by another user.
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing Then
+                Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
+            End If
+
+
+
+            ' Call the Set methods for each controls on the panel
+
+
+            SetWFRCDNGP_Company()
+            SetWFRCDNGP_File1()
+            SetWFRCDNGP_Month()
+            SetWFRCDNGP_RWRem()
+            SetWFRCDNGP_Status()
+            SetWFRCDNGP_Type()
+            SetWFRCDNGP_Type1()
+            SetWFRCDNGP_WFRCHNGP_ID()
+            SetWFRCDNGP_Year()
+            SetbtnPreview()
+
+
+
+            Me.IsNewRecord = True
+
+            If Me.DataSource.IsCreated Then
+                Me.IsNewRecord = False
+
+                If Me.DataSource.GetID IsNot Nothing Then
+                    Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
+                End If
+
+            End If
+
+            ' Now load data for each record and table child UI controls.
+            ' Ordering is important because child controls get 
+            ' their parent ids from their parent UI controls.
+            Dim shouldResetControl As Boolean = False
+            Dim role As String = BaseClasses.Utils.SecurityControls.GetCurrentUserRoles()
+            Dim rolecorrect As Boolean = False
+            Dim separator As Char() = {";"c}
+            Dim roles As String() = role.Split(separator, System.StringSplitOptions.RemoveEmptyEntries)
+            Dim includes As Boolean = False
+
+            Dim wherssouth As String = Nothing
+            If Not System.Web.HttpContext.Current.Session("UserId").ToString Is Nothing And Not System.Web.HttpContext.Current.Session("UserId").ToString = "" Then
+                wherssouth = Sel_W_User_W_ModuleView.W_U_ID.UniqueName & "=" & System.Web.HttpContext.Current.Session("UserId").ToString
+            Else
+                wherssouth = Sel_W_User_W_ModuleView.W_U_ID.UniqueName & "=0"
+            End If
+            Dim obysouth As BaseClasses.Data.OrderBy = New OrderBy(False, False)
+            Dim waspsouth() As Sel_W_User_W_ModuleRecord = Nothing
+            waspsouth = Sel_W_User_W_ModuleView.GetRecords(wherssouth, obysouth)
+            For Each r As Sel_W_User_W_ModuleRecord In waspsouth
+                If r.W_MS_ID = 177 Then
+                    rolecorrect = True
+                End If
+            Next
+
+
+            'For Each r As String In roles
+            '    If r = "177" Then
+            '        rolecorrect = True
+            '    End If
+            'Next r
+            If Me.WFRCDNGP_Status.Text = "Completed" Or rolecorrect = True Then
+                Me.btnPreview.Visible = True
+            Else
+                Me.btnPreview.Visible = False
+            End If
+        End Sub
+
+
+
+
+    End Class
+
+
+
+    Public Class WFinRepNGP_DocAttachTableControl
+        Inherits BaseWFinRepNGP_DocAttachTableControl
+
+        ' The BaseWFinRepNGP_DocAttachTableControl class implements the LoadData, DataBind, CreateWhereClause
+        ' and other methods to load and display the data in a table control.
+
+        ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
+        ' The WFinRepNGP_DocAttachTableControlRow class offers another place where you can customize
+        ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
+
+    End Class
+
+
+    Public Class WFinRepNGP_HeadTableControlRow
         Inherits BaseWFinRepNGP_HeadTableControlRow
         ' The BaseWFinRepNGP_HeadTableControlRow implements code for a ROW within the
         ' the WFinRepNGP_HeadTableControl table.  The BaseWFinRepNGP_HeadTableControlRow implements the DataBind and SaveData methods.
@@ -45,7 +246,6 @@ Public Class WFinRepNGP_HeadTableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
-
 
 
         Public Overrides Sub DataBind()
@@ -56,19 +256,36 @@ Public Class WFinRepNGP_HeadTableControlRow
 
             MyBase.DataBind()
 
+
             Dim user As String = BaseClasses.Utils.SecurityControls.GetCurrentUserName()
             Dim role As String = BaseClasses.Utils.SecurityControls.GetCurrentUserRoles()
-            Dim rolecorrect As Boolean = False
+            Dim rolecorrectsouth As Boolean = False
+            Dim rolecorrectnorth As Boolean = False
             Dim separator As Char() = {";"c}
             Dim roles As String() = role.Split(separator, System.StringSplitOptions.RemoveEmptyEntries)
             Dim includes As Boolean = False
-            For Each r As String In roles
-                If r = "151" Then ' 157 - old FS Viewer
-                    rolecorrect = True
+            Dim wherssouth As String = Nothing
+            If Not System.Web.HttpContext.Current.Session("UserId").ToString Is Nothing And Not System.Web.HttpContext.Current.Session("UserId").ToString = "" Then
+                wherssouth = Sel_W_User_W_ModuleView.W_U_ID.UniqueName & "=" & System.Web.HttpContext.Current.Session("UserId").ToString
+            Else
+                wherssouth = Sel_W_User_W_ModuleView.W_U_ID.UniqueName & "=0"
+            End If
+            Dim obysouth As BaseClasses.Data.OrderBy = New OrderBy(False, False)
+            Dim waspsouth() As Sel_W_User_W_ModuleRecord = Nothing
+            waspsouth = Sel_W_User_W_ModuleView.GetRecords(wherssouth, obysouth)
+            For Each r As Sel_W_User_W_ModuleRecord In waspsouth
+                If r.W_MS_ID = 157 Then
+                    rolecorrectsouth = True
                 End If
             Next r
 
-            If Me.WFRCHNGP_Status.Text = "Completed" And rolecorrect = True Then
+            'For Each r As String In roles
+            '    If r = "157" Then ' 157 - old FS Viewer 151
+            '        rolecorrect = True
+            '    End If
+            'Next r
+
+            If Me.WFRCHNGP_Status.Text = "Completed" And rolecorrectsouth = True Then
                 'Me.imbView.Visible = True
                 Me.btnPreview1.Visible = True
                 Me.btnPreview2.Visible = True
@@ -81,11 +298,30 @@ Public Class WFinRepNGP_HeadTableControlRow
             Dim returnForRevisionRole As Boolean = False
             ' old ID  158 - FS Setup Role  = new 150 
             '         159 - FS Final Approver = new 190
-            For Each r As String In roles
-                If r = "150" Or r = "190" Then
+            'For Each r As String In roles
+            '    'If r = "150" Or r = "190" Then
+            '    If r = "158" Or r = "159" Then
+            '        returnForRevisionRole = True
+            '    End If
+            'Next r
+
+            Dim wherechecker As String = Nothing
+            If Not System.Web.HttpContext.Current.Session("UserName").ToString Is Nothing And Not System.Web.HttpContext.Current.Session("UserName").ToString = "" Then
+                wherechecker = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "='" & System.Web.HttpContext.Current.Session("UserName").ToString.Trim & "' AND " & Sel_W_User_DYNAMICS_Company_FSView.IsNonGP.UniqueName & "=1 AND " & Sel_W_User_DYNAMICS_Company_FSView.Company_ID.UniqueName & "='" & Me.WFRCHNGP_C_ID1.Text & "'"
+            Else
+                wherechecker = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "="
+            End If
+            Dim obychecker As BaseClasses.Data.OrderBy = New OrderBy(False, False)
+            'Dim checker() As Sel_W_User_DYNAMICS_Company_FSRecord = Nothing
+            Dim checker As Sel_W_User_DYNAMICS_Company_FSRecord = Sel_W_User_DYNAMICS_Company_FSView.GetRecord(wherechecker, obysouth)
+
+
+            For Each r As Sel_W_User_W_ModuleRecord In waspsouth
+                If r.W_MS_ID = 159 And Not checker Is Nothing Then
                     returnForRevisionRole = True
                 End If
             Next r
+
 
             If (returnForRevisionRole = True) And Me.WFRCHNGP_Status.Text = "Completed" Then
                 'Me.imbEdit.Visible = True
@@ -128,12 +364,12 @@ Public Class WFinRepNGP_HeadTableControlRow
             ' Set the WFRCHNGP_C_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
-            ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
-            ' Me.WFRCHNGP_C_ID is the ASP:Literal on the webpage.
+            'Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
+            'Me.WFRCHNGP_C_ID is the ASP:Literal on the webpage.
 
-            ' You can modify this method directly, or replace it with a call to
-            '     MyBase.SetWFRCHNGP_C_ID()
-            ' and add your own code before or after the call to the MyBase function.
+            'You can modify this method directly, or replace it with a call to
+            MyBase.SetWFRCHNGP_C_ID()
+            'and add your own code before or after the call to the MyBase function.
 
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_C_IDSpecified Then
 
@@ -173,7 +409,60 @@ Public Class WFinRepNGP_HeadTableControlRow
                 Me.WFRCHNGP_C_ID.Text = "&nbsp;"
             End If
 
+
+            ' If data was retrieved from UI previously, restore it
+            'If Me.PreviousUIData.ContainsKey(Me.WFRCHNGP_C_ID1.ID) Then
+
+            '    Me.WFRCHNGP_C_ID.Text = Me.PreviousUIData(Me.WFRCHNGP_C_ID.ID).ToString()
+
+            '    Return
+            'End If
+
+
+            '' Set the WFRCHNGP_C_ID TextBox on the webpage with value from the
+            '' WFinRepNGP_Head database record.
+
+            '' Me.DataSource is the WFinRepNGP_Head record retrieved from the database.
+            '' Me.WFRCHNGP_C_ID1 is the ASP:TextBox on the webpage.
+
+            '' You can modify this method directly, or replace it with a call to
+            ''     MyBase.SetWFRCHNGP_C_ID1()
+            '' and add your own code before or after the call to the MyBase function.
+
+
+
+            'If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_C_IDSpecified Then
+
+            '    ' If the WFRCHNGP_C_ID is non-NULL, then format the value.
+
+            '    ' The Format method will return the Display Foreign Key As (DFKA) value
+            '    Dim formattedValue As String = ""
+            '    Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
+            '    If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_C_ID.IsApplyDisplayAs Then
+
+            '        formattedValue = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID) 'WFinRepNGP_HeadTable.GetDFKA(Me.DataSource.WFRCHNGP_C_ID.ToString(),WFinRepNGP_HeadTable.WFRCHNGP_C_ID, Nothing)
+
+            '        If (formattedValue Is Nothing) Then
+            '            formattedValue = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
+            '        End If
+            '    Else
+            '        formattedValue = Me.DataSource.WFRCHNGP_C_ID.ToString()
+            '    End If
+
+            '    Me.WFRCHNGP_C_ID.Text = formattedValue
+
+            'Else
+
+            '    ' WFRCHNGP_C_ID is NULL in the database, so use the Default Value.  
+            '    ' Default Value could also be NULL.
+
+            '    Me.WFRCHNGP_C_ID.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
+
+            'End If
+
         End Sub
+
+
 
         Public Overrides Sub SetWFRCHNGP_Month1()
 
@@ -215,9 +504,10 @@ Public Class WFinRepNGP_HeadTableControlRow
             '                 
         End Sub
 
-        
 
-End Class
+
+
+    End Class
 
   
 
@@ -233,7 +523,7 @@ Public Class WFinRepNGP_HeadTableControl
 
 
 
-        Public Overrides Function CreateWhereClause() As WhereClause
+		Public Overrides Function CreateWhereClause() As WhereClause
             'This CreateWhereClause is used for loading the data.
             WFinRepNGP_HeadTable.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
@@ -252,15 +542,27 @@ Public Class WFinRepNGP_HeadTableControl
             ' 3. User selected filter criteria.
 
 
-            'If IsValueSelected(Me.WFRCHNGP_C_IDFromFilter) Then
+            If IsValueSelected(Me.WFRCHNGP_C_IDFilter) Then
 
-            '    hasFiltersWFinRepNGP_HeadTableControl = True
+                hasFiltersWFinRepNGP_HeadTableControl = True
 
-            '    wc.iAND(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.WFRCHNGP_C_IDFromFilter, Me.GetFromSession(Me.WFRCHNGP_C_IDFromFilter)), False, False)
+                wc.iAND(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.WFRCHNGP_C_IDFilter, Me.GetFromSession(Me.WFRCHNGP_C_IDFilter)), False, False)
+            Else
+                Dim wherssouth As String = Nothing
+                If Not System.Web.HttpContext.Current.Session("UserName").ToString Is Nothing And Not System.Web.HttpContext.Current.Session("UserName").ToString = "" Then
+                    wherssouth = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "='" & System.Web.HttpContext.Current.Session("UserName").ToString.Trim & "' AND " & Sel_W_User_DYNAMICS_Company_FSView.IsNonGP.UniqueName & "=1"
+                Else
+                    wherssouth = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "="
+                End If
+                Dim obysouth As BaseClasses.Data.OrderBy = New OrderBy(False, False)
+                Dim waspsouth() As Sel_W_User_DYNAMICS_Company_FSRecord = Nothing
+                waspsouth = Sel_W_User_DYNAMICS_Company_FSView.GetRecords(wherssouth, obysouth)
+                For Each r As Sel_W_User_DYNAMICS_Company_FSRecord In waspsouth
+                    wc.iAND(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, r.Company_ID.ToString)
+                Next
+            End If
 
-            'End If
-
-            wc.iAND(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("DynCompID").ToString)
+            'wc.iAND(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("DynCompID").ToString)
 
 
             If IsValueSelected(Me.WFRCHNGP_MonthFilter) Then
@@ -290,8 +592,7 @@ Public Class WFinRepNGP_HeadTableControl
                 wc.iAND(WFinRepNGP_HeadTable.WFRCHNGP_Year, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.WFRCHNGP_YearFromFilter, Me.GetFromSession(Me.WFRCHNGP_YearFromFilter)), False, False)
 
             End If
-            ' wc.iAND(Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString())
-
+            'wc.iAND(Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString())
             'wc.iAND("WFRCHNGP_C_ID in (SELECT CompanyID FROM vw_wass_user_company where SSUC_SSU_UserName = '" & DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & "' and SSUC_APP_ID = '" & System.Configuration.ConfigurationManager.AppSettings.Item("WebApplicationID") & "' )")
 
 
@@ -319,7 +620,7 @@ Public Class WFinRepNGP_HeadTableControl
             ' Setup the static list items        
 
             ' Add the All item.
-            Me.WFRCHNGP_StatusFilter.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Txt:All", "WebFS"), "--ANY--"))
+            Me.WFRCHNGP_StatusFilter.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Please Select", "WebFS"), "--ANY--"))
 
 
             Dim orderBy As OrderBy = New OrderBy(False, False)
@@ -329,7 +630,7 @@ Public Class WFinRepNGP_HeadTableControl
 
 
 
-            Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "WebFS")
+            Dim noValueFormat As String = Page.GetResourceValue("Other", "WebFS")
 
 
             Dim itemValues() As WFin_ApprovalStatusRecord = Nothing
@@ -416,178 +717,183 @@ Public Class WFinRepNGP_HeadTableControl
         End Function
 
 
+        Public Overrides Function CreateWhereClause_WFRCHNGP_C_IDFilter() As WhereClause
+
+            Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
+
+            Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
+
+            Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
+
+            Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
+
+            ' Create a where clause for the filter WFRCHNGP_C_IDFilter.
+            ' This function is called by the Populate method to load the items 
+            ' in the WFRCHNGP_C_IDFilterDropDownList
+
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+
+        End Function
+
+        Protected Overrides Sub PopulateWFRCHNGP_C_IDFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
+
+            'Setup the WHERE clause.
+
+            Me.WFRCHNGP_C_IDFilter.Items.Clear()
+            Dim wc As WhereClause = Me.CreateWhereClause_WFRCHNGP_C_IDFilter()
+
+            ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WFRCHNGP_C_IDFilter function.
+            ' It is better to customize the where clause there.
+
+            ' Setup the static list items        
+
+            ' Add the All item.
+            Me.WFRCHNGP_C_IDFilter.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Please Select", "ePortalWFApproval"), "--ANY--"))
 
 
-End Class
+            Dim orderBy As OrderBy = New OrderBy(False, False)
+            orderBy.Add(Vw_ANFLO_DW_CompanyNonGPView.ShortName, OrderByItem.OrderDir.Asc)
+            orderBy.Add(Vw_ANFLO_DW_CompanyNonGPView.Name, OrderByItem.OrderDir.Asc)
+
+            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+
+
+
+            Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
+
+
+            Dim itemValues() As Vw_ANFLO_DW_CompanyNonGPRecord = Nothing
+
+            If wc.RunQuery Then
+                Dim counter As Integer = 0
+                Dim pageNum As Integer = 0
+                Dim evaluator As New FormulaEvaluator
+                Dim listDuplicates As New ArrayList()
+
+                'Dim wherssouth As String = Nothing
+                'If Not System.Web.HttpContext.Current.Session("UserName").ToString Is Nothing And Not System.Web.HttpContext.Current.Session("UserName").ToString = "" Then
+                '    wherssouth = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "='" & System.Web.HttpContext.Current.Session("UserName").ToString.Trim & "' AND " & Sel_W_User_DYNAMICS_Company_FSView.IsNonGP.UniqueName & "=1"
+                'Else
+                '    wherssouth = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "="
+                'End If
+                'Dim obysouth As BaseClasses.Data.OrderBy = New OrderBy(False, False)
+                'Dim waspsouth() As Sel_W_User_DYNAMICS_Company_FSRecord = Nothing
+                'waspsouth = Sel_W_User_DYNAMICS_Company_FSView.GetRecords(wherssouth, obysouth)
+                'For Each r As Sel_W_User_DYNAMICS_Company_FSRecord In waspsouth
+                '    wc.iAND(Vw_ANFLO_DW_CompanyNonGPView.CompanyID, BaseFilter.ComparisonOperator.EqualsTo, r.Company_ID.ToString)
+                'Next
+
+
+                Do
+
+                    itemValues = Vw_ANFLO_DW_CompanyNonGPView.GetRecords(wc, orderBy, pageNum, maxItems)
+
+                    For Each itemValue As Vw_ANFLO_DW_CompanyNonGPRecord In itemValues
+                        ' Create the item and add to the list.
+                        'Dim cvalue As String = Nothing
+                        'Dim fvalue As String = Nothing
+                        'If itemValue.CompanyIDSpecified Then
+                        '    cvalue = itemValue.CompanyID.ToString()
+
+                        '    If counter < maxItems AndAlso Me.WFRCHNGP_C_IDFilter.Items.FindByValue(cvalue) Is Nothing Then
+
+                        '        Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
+                        '        If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_C_ID.IsApplyDisplayAs Then
+                        '            fvalue = WFinRepNGP_HeadTable.GetDFKA(itemValue, WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
+                        '        End If
+                        '        If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                        '            fvalue = itemValue.Format(Vw_ANFLO_DW_CompanyNonGPView.CompanyID)
+                        '        End If
+
+                        '        If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+
+                        '        If (IsNothing(fvalue)) Then
+                        '            fvalue = ""
+                        '        End If
+
+                        '        fvalue = fvalue.Trim()
+
+                        '        If (fvalue.Length > 50) Then
+                        '            fvalue = fvalue.Substring(0, 50) & "..."
+                        '        End If
+
+                        '        Dim dupItem As ListItem = Me.WFRCHNGP_C_IDFilter.Items.FindByText(fvalue)
+
+                        '        If Not IsNothing(dupItem) Then
+                        '            listDuplicates.Add(fvalue)
+                        '            If Not String.IsNullOrEmpty(dupItem.Value) Then
+                        '                dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                        '            End If
+                        '        End If
+
+                        '        Dim newItem As ListItem = New ListItem(fvalue, cvalue)
+                        '        Me.WFRCHNGP_C_IDFilter.Items.Add(newItem)
+
+                        '        If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                        '            newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                        '        End If
+
+                        '        counter += 1
+                        '    End If
+                        'End If
+
+                        Dim cvalue As String = itemValue.CompanyID.ToString()
+                        Dim fvalue As String = itemValue.Format(Vw_ANFLO_DW_CompanyNonGPView.ShortName)
+                        Dim item As ListItem = New ListItem(fvalue, cvalue)
+                        Dim wherssouth As String = Nothing
+                        If Not System.Web.HttpContext.Current.Session("UserName").ToString Is Nothing And Not System.Web.HttpContext.Current.Session("UserName").ToString = "" Then
+                            wherssouth = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "='" & System.Web.HttpContext.Current.Session("UserName").ToString.Trim & "' AND " & Sel_W_User_DYNAMICS_Company_FSView.IsNonGP.UniqueName & "=1"
+                        Else
+                            wherssouth = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "="
+                        End If
+                        Dim obysouth As BaseClasses.Data.OrderBy = New OrderBy(False, False)
+                        Dim waspsouth() As Sel_W_User_DYNAMICS_Company_FSRecord = Nothing
+                        waspsouth = Sel_W_User_DYNAMICS_Company_FSView.GetRecords(wherssouth, obysouth)
+                        For Each r As Sel_W_User_DYNAMICS_Company_FSRecord In waspsouth
+                            If r.Company_ID = itemValue.CompanyID Then
+                                Me.WFRCHNGP_C_IDFilter.Items.Add(item)
+                            End If
+                        Next
+                    Next
+                    pageNum += 1
+                Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
+            End If
+
+            If Not selectedValue Is Nothing AndAlso _
+            selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.WFRCHNGP_C_IDFilter, selectedValue) Then
+                'Dim fvalue As String = WFinRepNGP_DocAttachTable.WFRCDNGP_Company.Format(selectedValue)
+                'Dim item As ListItem = New ListItem(fvalue, selectedValue)
+                'item.Selected = True
+                'Me.WFRCHNGP_C_IDFilter.Items.Insert(0, item)
+            End If
+
+
+
+            'Try
+
+            '    ' Set the selected value.
+            '    SetSelectedValue(Me.WFRCHNGP_C_IDFilter, selectedValue)
+
+            'Catch
+            'End Try
+
+
+            'If Me.WFRCHNGP_C_IDFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_C_IDFilter.Items.FindByValue(Me.WFRCHNGP_C_IDFilter.SelectedValue) Is Nothing Then
+            '    Me.WFRCHNGP_C_IDFilter.SelectedValue = Nothing
+            'End If
+
+        End Sub
+    End Class
+
+
+
+
+
 
   
 
-Public Class WFinRepNGP_DocAttachTableControl
-        Inherits BaseWFinRepNGP_DocAttachTableControl
-
-    ' The BaseWFinRepNGP_DocAttachTableControl class implements the LoadData, DataBind, CreateWhereClause
-    ' and other methods to load and display the data in a table control.
-
-    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-    ' The WFinRepNGP_DocAttachTableControlRow class offers another place where you can customize
-    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
-
-End Class
-Public Class WFinRepNGP_DocAttachTableControlRow
-        Inherits BaseWFinRepNGP_DocAttachTableControlRow
-        ' The BaseWFinRepNGP_DocAttachTableControlRow implements code for a ROW within the
-        ' the WFinRepNGP_DocAttachTableControl table.  The BaseWFinRepNGP_DocAttachTableControlRow implements the DataBind and SaveData methods.
-        ' The loading of data is actually performed by the LoadData method in the base class of WFinRepNGP_DocAttachTableControl.
-
-        ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
-        ' SaveData, GetUIData, and Validate methods.
-        
-
-        Protected Overrides Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-
-            ' Register the event handlers.
-
-            AddHandler Me.btnPreview.Button.Click, AddressOf btnPreview_Click
-
-            AddHandler Me.WFRCDNGP_Company.TextChanged, AddressOf WFRCDNGP_Company_TextChanged
-
-            AddHandler Me.WFRCDNGP_File1.TextChanged, AddressOf WFRCDNGP_File1_TextChanged
-
-            AddHandler Me.WFRCDNGP_Month.TextChanged, AddressOf WFRCDNGP_Month_TextChanged
-
-            AddHandler Me.WFRCDNGP_Status.TextChanged, AddressOf WFRCDNGP_Status_TextChanged
-
-            AddHandler Me.WFRCDNGP_Type1.TextChanged, AddressOf WFRCDNGP_Type1_TextChanged
-
-            AddHandler Me.WFRCDNGP_WFRCHNGP_ID.TextChanged, AddressOf WFRCDNGP_WFRCHNGP_ID_TextChanged
-
-            AddHandler Me.WFRCDNGP_Year.TextChanged, AddressOf WFRCDNGP_Year_TextChanged
-
-            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewer2('" & Me.WFRCDNGP_Year.ClientID & "','" & Me.WFRCDNGP_Month.ClientID & "', '" & Me.WFRCDNGP_Type1.ClientID & "', '" & Me.WFRCDNGP_File1.ClientID & "', '" & Me.WFRCDNGP_Company.ClientID & "',  '" & Me.WFRCDNGP_Status.ClientID & "',  '" & Me.WFRCDNGP_WFRCHNGP_ID.ClientID & "');return false;")
-        End Sub
-
-
-        Public Overrides Sub DataBind()
-            ' The DataBind method binds the user interface controls to the values
-            ' from the database record.  To do this, it calls the Set methods for 
-            ' each of the field displayed on the webpage.  It is better to make 
-            ' changes in the Set methods, rather than making changes here.
-
-            MyBase.DataBind()
-            Me.ClearControlsFromSession()
-
-            ' Make sure that the DataSource is initialized.
-            If Me.DataSource Is Nothing Then
-
-                Return
-            End If
-
-
-            'LoadData for DataSource for chart and report if they exist
-
-            ' Store the checksum. The checksum is used to
-            ' ensure the record was not changed by another user.
-            If Not Me.DataSource.GetCheckSumValue() Is Nothing Then
-                Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
-            End If
-
-
-
-            ' Call the Set methods for each controls on the panel
-
-
-            SetWFRCDNGP_Company()
-            SetWFRCDNGP_File1()
-            SetWFRCDNGP_Month()
-            SetWFRCDNGP_RWRem()
-            SetWFRCDNGP_Status()
-            SetWFRCDNGP_Type()
-            SetWFRCDNGP_Type1()
-            SetWFRCDNGP_WFRCHNGP_ID()
-            SetWFRCDNGP_Year()
-            SetbtnPreview()
-
-
-
-            Me.IsNewRecord = True
-
-            If Me.DataSource.IsCreated Then
-                Me.IsNewRecord = False
-
-                If Me.DataSource.GetID IsNot Nothing Then
-                    Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
-                End If
-
-            End If
-
-            ' Now load data for each record and table child UI controls.
-            ' Ordering is important because child controls get 
-            ' their parent ids from their parent UI controls.
-            Dim shouldResetControl As Boolean = False
-            Dim role As String = BaseClasses.Utils.SecurityControls.GetCurrentUserRoles()
-            Dim rolecorrect As Boolean = False
-            Dim separator As Char() = {";"c}
-            Dim roles As String() = role.Split(separator, System.StringSplitOptions.RemoveEmptyEntries)
-            Dim includes As Boolean = False
-            For Each r As String In roles
-                If r = "177" Then
-                    rolecorrect = True
-                End If
-            Next r
-            If Me.WFRCDNGP_Status.Text = "Completed" Or rolecorrect = True Then
-                Me.btnPreview.Visible = True
-            Else
-                Me.btnPreview.Visible = False
-            End If
-        End Sub
-
-
-End Class
-Public Class WFinRepNGP_AttachmentTableControl
-        Inherits BaseWFinRepNGP_AttachmentTableControl
-
-    ' The BaseWFinRepNGP_AttachmentTableControl class implements the LoadData, DataBind, CreateWhereClause
-    ' and other methods to load and display the data in a table control.
-
-    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-    ' The WFinRepNGP_AttachmentTableControlRow class offers another place where you can customize
-    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
-
-End Class
-Public Class WFinRepNGP_AttachmentTableControlRow
-        Inherits BaseWFinRepNGP_AttachmentTableControlRow
-        ' The BaseWFinRepNGP_AttachmentTableControlRow implements code for a ROW within the
-        ' the WFinRepNGP_AttachmentTableControl table.  The BaseWFinRepNGP_AttachmentTableControlRow implements the DataBind and SaveData methods.
-        ' The loading of data is actually performed by the LoadData method in the base class of WFinRepNGP_AttachmentTableControl.
-
-        ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
-        ' SaveData, GetUIData, and Validate methods.
-        
-
-End Class
-Public Class WFinRepNGP_ActivityTableControl
-        Inherits BaseWFinRepNGP_ActivityTableControl
-
-    ' The BaseWFinRepNGP_ActivityTableControl class implements the LoadData, DataBind, CreateWhereClause
-    ' and other methods to load and display the data in a table control.
-
-    ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-    ' The WFinRepNGP_ActivityTableControlRow class offers another place where you can customize
-    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
-
-End Class
-Public Class WFinRepNGP_ActivityTableControlRow
-        Inherits BaseWFinRepNGP_ActivityTableControlRow
-        ' The BaseWFinRepNGP_ActivityTableControlRow implements code for a ROW within the
-        ' the WFinRepNGP_ActivityTableControl table.  The BaseWFinRepNGP_ActivityTableControlRow implements the DataBind and SaveData methods.
-        ' The loading of data is actually performed by the LoadData method in the base class of WFinRepNGP_ActivityTableControl.
-
-        ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
-        ' SaveData, GetUIData, and Validate methods.
-        
-
-End Class
 #End Region
 
   
@@ -9108,6 +9414,30 @@ Public Class BaseWFinRepNGP_HeadTableControl
         
             If Not Me.Page.IsPostBack Then
                 Dim initialVal As String = ""
+                If  Me.InSession(Me.WFRCHNGP_C_IDFilter) 				
+                    initialVal = Me.GetFromSession(Me.WFRCHNGP_C_IDFilter)
+                
+                Else
+                    
+                    initialVal = EvaluateFormula("URL(""WFRCHNGP_C_ID"")")
+                
+              End If
+              
+                If InvariantEquals(initialVal, "Search for", True) Or InvariantEquals(initialVal, BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing), True) Then
+                  initialVal = ""
+                End If
+              
+                If initialVal <> ""				
+                        
+                        Me.WFRCHNGP_C_IDFilter.Items.Add(New ListItem(initialVal, initialVal))
+                            
+                        Me.WFRCHNGP_C_IDFilter.SelectedValue = initialVal
+                            
+                    End If
+                
+            End If
+            If Not Me.Page.IsPostBack Then
+                Dim initialVal As String = ""
                 If  Me.InSession(Me.WFRCHNGP_MonthFilter) 				
                     initialVal = Me.GetFromSession(Me.WFRCHNGP_MonthFilter)
                 
@@ -9226,6 +9556,8 @@ Public Class BaseWFinRepNGP_HeadTableControl
           
               AddHandler Me.GoButton.Button.Click, AddressOf GoButton_Click
                         
+              AddHandler Me.WFRCHNGP_C_IDFilter.SelectedIndexChanged, AddressOf WFRCHNGP_C_IDFilter_SelectedIndexChanged
+            
               AddHandler Me.WFRCHNGP_MonthFilter.SelectedIndexChanged, AddressOf WFRCHNGP_MonthFilter_SelectedIndexChanged
             
               AddHandler Me.WFRCHNGP_StatusFilter.SelectedIndexChanged, AddressOf WFRCHNGP_StatusFilter_SelectedIndexChanged
@@ -9469,7 +9801,9 @@ Public Class BaseWFinRepNGP_HeadTableControl
                 
                 
                 
+                SetWFRCHNGP_C_IDFilter()
                 SetWFRCHNGP_C_IDLabel()
+                SetWFRCHNGP_C_IDLabel1()
                 SetWFRCHNGP_DescriptionLabel()
                 SetWFRCHNGP_MonthFilter()
                 SetWFRCHNGP_MonthLabel()
@@ -9631,6 +9965,8 @@ Public Class BaseWFinRepNGP_HeadTableControl
         Public Overridable Sub ResetControl()
 
             
+            Me.WFRCHNGP_C_IDFilter.ClearSelection()
+            
             Me.WFRCHNGP_MonthFilter.ClearSelection()
             
             Me.WFRCHNGP_StatusFilter.ClearSelection()
@@ -9767,6 +10103,16 @@ Public Class BaseWFinRepNGP_HeadTableControl
             ' 3. User selected filter criteria.
 
               
+            If IsValueSelected(Me.WFRCHNGP_C_IDFilter) Then
+    
+              hasFiltersWFinRepNGP_HeadTableControl = True            
+    
+                wc.iAND(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.WFRCHNGP_C_IDFilter, Me.GetFromSession(Me.WFRCHNGP_C_IDFilter)), False, False)
+            
+            End If
+                  
+                
+                       
             If IsValueSelected(Me.WFRCHNGP_MonthFilter) Then
     
               hasFiltersWFinRepNGP_HeadTableControl = True            
@@ -9824,6 +10170,15 @@ Public Class BaseWFinRepNGP_HeadTableControl
       
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
           
+            Dim WFRCHNGP_C_IDFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "WFRCHNGP_C_IDFilter_Ajax"), String)
+            If IsValueSelected(WFRCHNGP_C_IDFilterSelectedValue) Then
+    
+              hasFiltersWFinRepNGP_HeadTableControl = True            
+    
+                 wc.iAND(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, BaseFilter.ComparisonOperator.EqualsTo, WFRCHNGP_C_IDFilterSelectedValue, false, False)
+             
+             End If
+                      
             Dim WFRCHNGP_MonthFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "WFRCHNGP_MonthFilter_Ajax"), String)
             If IsValueSelected(WFRCHNGP_MonthFilterSelectedValue) Then
     
@@ -10146,6 +10501,16 @@ Public Class BaseWFinRepNGP_HeadTableControl
                     
                   End Sub
                 
+        Public Overridable Sub SetWFRCHNGP_C_IDLabel1()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WFRCHNGP_C_IDLabel1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWFRCHNGP_DescriptionLabel()
 
                   
@@ -10226,6 +10591,14 @@ Public Class BaseWFinRepNGP_HeadTableControl
                     
                   End Sub
                 
+        Public Overridable Sub SetWFRCHNGP_C_IDFilter()
+
+              
+            
+                Me.PopulateWFRCHNGP_C_IDFilter(GetSelectedValue(Me.WFRCHNGP_C_IDFilter,  GetFromSession(Me.WFRCHNGP_C_IDFilter)), 500)					
+                                     
+              End Sub	
+            
         Public Overridable Sub SetWFRCHNGP_MonthFilter()
 
               
@@ -10250,57 +10623,141 @@ Public Class BaseWFinRepNGP_HeadTableControl
                                      
               End Sub	
             
-        ' Get the filters' data for WFRCHNGP_MonthFilter
-        Protected Overridable Sub PopulateWFRCHNGP_MonthFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
+        ' Get the filters' data for WFRCHNGP_C_IDFilter
+        Protected Overridable Sub PopulateWFRCHNGP_C_IDFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
                     
             'Setup the WHERE clause.
             
-            Me.WFRCHNGP_MonthFilter.Items.Clear()
-            Dim wc As WhereClause = Me.CreateWhereClause_WFRCHNGP_MonthFilter()
+            Me.WFRCHNGP_C_IDFilter.Items.Clear()
+            Dim wc As WhereClause = Me.CreateWhereClause_WFRCHNGP_C_IDFilter()
             		  			
-            ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WFRCHNGP_MonthFilter function.
+            ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WFRCHNGP_C_IDFilter function.
             ' It is better to customize the where clause there.
             
             ' Setup the static list items        
-            
-            ' Add the All item.
-            Me.WFRCHNGP_MonthFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-                              
 
-            Dim orderBy As OrderBy = New OrderBy(false, false)			
-                          orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.Mo, OrderByItem.OrderDir.Asc)
-              orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.MoName, OrderByItem.OrderDir.Asc)
+            Me.WFRCHNGP_C_IDFilter.Items.Add(New ListItem(Me.Page.ExpandResourceValue("Please Select"), "--ANY--"))
+
+
+
+            Dim orderBy As OrderBy = New OrderBy(False, False)
+            orderBy.Add(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, OrderByItem.OrderDir.Asc)
+
+
+
+            Dim values(-1) As String
+            If wc.RunQuery Then
+
+                values = WFinRepNGP_HeadTable.GetValues(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, wc, orderBy, maxItems)
+
+            End If
+
+
+            Dim cvalue As String
+
+            Dim listDuplicates As New ArrayList()
+            For Each cvalue In values
+                ' Create the item and add to the list.
+                Dim fvalue As String
+                If (WFinRepNGP_HeadTable.WFRCHNGP_C_ID.IsColumnValueTypeBoolean()) Then
+                    fvalue = cvalue
+                Else
+                    fvalue = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(cvalue)
+                End If
+
+                If (IsNothing(fvalue)) Then
+                    fvalue = ""
+                End If
+
+                fvalue = fvalue.Trim()
+
+                If (fvalue.Length > 50) Then
+                    fvalue = fvalue.Substring(0, 50) & "..."
+                End If
+
+                Dim dupItem As ListItem = Me.WFRCHNGP_C_IDFilter.Items.FindByText(fvalue)
+
+                If Not IsNothing(dupItem) Then
+                    listDuplicates.Add(fvalue)
+                    If Not String.IsNullOrEmpty(dupItem.Value) Then
+                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                    End If
+                End If
+
+                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
+                Me.WFRCHNGP_C_IDFilter.Items.Add(newItem)
+
+                If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                End If
+            Next
+
+
+            Try
+
+                ' Set the selected value.
+                SetSelectedValue(Me.WFRCHNGP_C_IDFilter, selectedValue)
+
+            Catch
+            End Try
+
+
+            If Me.WFRCHNGP_C_IDFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_C_IDFilter.Items.FindByValue(Me.WFRCHNGP_C_IDFilter.SelectedValue) Is Nothing Then
+                Me.WFRCHNGP_C_IDFilter.SelectedValue = Nothing
+            End If
+
+        End Sub
+
+        ' Get the filters' data for WFRCHNGP_MonthFilter
+        Protected Overridable Sub PopulateWFRCHNGP_MonthFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
+
+            'Setup the WHERE clause.
+
+            Me.WFRCHNGP_MonthFilter.Items.Clear()
+            Dim wc As WhereClause = Me.CreateWhereClause_WFRCHNGP_MonthFilter()
+
+            ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WFRCHNGP_MonthFilter function.
+            ' It is better to customize the where clause there.
+
+            ' Setup the static list items        
+
+            Me.WFRCHNGP_MonthFilter.Items.Add(New ListItem(Me.Page.ExpandResourceValue("Please Select"), "--ANY--"))
+
+
+            Dim orderBy As OrderBy = New OrderBy(False, False)
+            orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.Mo, OrderByItem.OrderDir.Asc)
+            orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.MoName, OrderByItem.OrderDir.Asc)
 
             Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
 
-            	
+
 
             Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
-            
+
 
             Dim itemValues() As Vw_WFinRep_DocAttach_FIN_MonthRecord = Nothing
-            
-            If wc.RunQuery
+
+            If wc.RunQuery Then
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim evaluator As New FormulaEvaluator
                 Dim listDuplicates As New ArrayList()
 
-                
-                
+
+
                 Do
-                    
+
                     itemValues = Vw_WFinRep_DocAttach_FIN_MonthView.GetRecords(wc, orderBy, pageNum, maxItems)
-                                    
-                    For each itemValue As Vw_WFinRep_DocAttach_FIN_MonthRecord In itemValues
+
+                    For Each itemValue As Vw_WFinRep_DocAttach_FIN_MonthRecord In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.MoSpecified Then
                             cvalue = itemValue.Mo.ToString()
 
-                            If counter < maxItems AndAlso Me.WFRCHNGP_MonthFilter.Items.FindByValue(cvalue) Is Nothing  Then
-                            
+                            If counter < maxItems AndAlso Me.WFRCHNGP_MonthFilter.Items.FindByValue(cvalue) Is Nothing Then
+
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_Month)
                                 If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_Month.IsApplyDisplayAs Then
                                     fvalue = WFinRepNGP_HeadTable.GetDFKA(itemValue, WFinRepNGP_HeadTable.WFRCHNGP_Month)
@@ -10308,25 +10765,25 @@ Public Class BaseWFinRepNGP_HeadTableControl
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
                                     fvalue = itemValue.Format(Vw_WFinRep_DocAttach_FIN_MonthView.Mo)
                                 End If
-                                    
+
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                   fvalue = ""
+                                    fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If ( fvalue.Length > 50 ) Then
-                                   fvalue = fvalue.Substring(0, 50) & "..."
+                                If (fvalue.Length > 50) Then
+                                    fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.WFRCHNGP_MonthFilter.Items.FindByText(fvalue)
-                
+
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
                                     End If
                                 End If
 
@@ -10334,112 +10791,111 @@ Public Class BaseWFinRepNGP_HeadTableControl
                                 Me.WFRCHNGP_MonthFilter.Items.Add(newItem)
 
                                 If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
                                 End If
 
-                                counter += 1			  
+                                counter += 1
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
-            End If			
-            
+            End If
 
 
-                               
 
-            Try    
-                
+
+
+            Try
+
                 ' Set the selected value.
                 SetSelectedValue(Me.WFRCHNGP_MonthFilter, selectedValue)
-                    
+
             Catch
             End Try
-            
-                        
-            If Me.WFRCHNGP_MonthFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_MonthFilter.Items.FindByValue(Me.WFRCHNGP_MonthFilter.SelectedValue) Is Nothing
+
+
+            If Me.WFRCHNGP_MonthFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_MonthFilter.Items.FindByValue(Me.WFRCHNGP_MonthFilter.SelectedValue) Is Nothing Then
                 Me.WFRCHNGP_MonthFilter.SelectedValue = Nothing
-            End If            
-                          
+            End If
+
         End Sub
-            
+
         ' Get the filters' data for WFRCHNGP_StatusFilter
         Protected Overridable Sub PopulateWFRCHNGP_StatusFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
-                    
+
             'Setup the WHERE clause.
-            
+
             Me.WFRCHNGP_StatusFilter.Items.Clear()
             Dim wc As WhereClause = Me.CreateWhereClause_WFRCHNGP_StatusFilter()
-            		  			
+
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WFRCHNGP_StatusFilter function.
             ' It is better to customize the where clause there.
-            
-            ' Setup the static list items        
-            
-            ' Add the All item.
-            Me.WFRCHNGP_StatusFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-                              
 
-            Dim orderBy As OrderBy = New OrderBy(false, false)			
-                          orderBy.Add(WPO_ApprovalStatusTable.WPO_STAT_DESC, OrderByItem.OrderDir.Asc)
+            ' Setup the static list items        
+
+            Me.WFRCHNGP_StatusFilter.Items.Add(New ListItem(Me.Page.ExpandResourceValue("Please Select"), "--ANY--"))
+
+
+            Dim orderBy As OrderBy = New OrderBy(False, False)
+            orderBy.Add(WFin_ApprovalStatusTable.WPO_STAT_DESC, OrderByItem.OrderDir.Asc)
 
             Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
 
-            	
+
 
             Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
-            
 
-            Dim itemValues() As WPO_ApprovalStatusRecord = Nothing
-            
-            If wc.RunQuery
+
+            Dim itemValues() As WFin_ApprovalStatusRecord = Nothing
+
+            If wc.RunQuery Then
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim evaluator As New FormulaEvaluator
                 Dim listDuplicates As New ArrayList()
 
-                
-                
+
+
                 Do
-                    
-                    itemValues = WPO_ApprovalStatusTable.GetRecords(wc, orderBy, pageNum, maxItems)
-                                    
-                    For each itemValue As WPO_ApprovalStatusRecord In itemValues
+
+                    itemValues = WFin_ApprovalStatusTable.GetRecords(wc, orderBy, pageNum, maxItems)
+
+                    For Each itemValue As WFin_ApprovalStatusRecord In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.WPO_STAT_CDSpecified Then
                             cvalue = itemValue.WPO_STAT_CD.ToString()
 
-                            If counter < maxItems AndAlso Me.WFRCHNGP_StatusFilter.Items.FindByValue(cvalue) Is Nothing  Then
-                            
+                            If counter < maxItems AndAlso Me.WFRCHNGP_StatusFilter.Items.FindByValue(cvalue) Is Nothing Then
+
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_Status)
                                 If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_Status.IsApplyDisplayAs Then
                                     fvalue = WFinRepNGP_HeadTable.GetDFKA(itemValue, WFinRepNGP_HeadTable.WFRCHNGP_Status)
                                 End If
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                                    fvalue = itemValue.Format(WPO_ApprovalStatusTable.WPO_STAT_CD)
+                                    fvalue = itemValue.Format(WFin_ApprovalStatusTable.WPO_STAT_CD)
                                 End If
-                                    
+
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                   fvalue = ""
+                                    fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If ( fvalue.Length > 50 ) Then
-                                   fvalue = fvalue.Substring(0, 50) & "..."
+                                If (fvalue.Length > 50) Then
+                                    fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.WFRCHNGP_StatusFilter.Items.FindByText(fvalue)
-                
+
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
                                     End If
                                 End If
 
@@ -10447,54 +10903,53 @@ Public Class BaseWFinRepNGP_HeadTableControl
                                 Me.WFRCHNGP_StatusFilter.Items.Add(newItem)
 
                                 If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
                                 End If
 
-                                counter += 1			  
+                                counter += 1
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
-            End If			
-            
+            End If
 
 
-                               
 
-            Try    
-                
+
+
+            Try
+
                 ' Set the selected value.
                 SetSelectedValue(Me.WFRCHNGP_StatusFilter, selectedValue)
-                    
+
             Catch
             End Try
-            
-                        
-            If Me.WFRCHNGP_StatusFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_StatusFilter.Items.FindByValue(Me.WFRCHNGP_StatusFilter.SelectedValue) Is Nothing
+
+
+            If Me.WFRCHNGP_StatusFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_StatusFilter.Items.FindByValue(Me.WFRCHNGP_StatusFilter.SelectedValue) Is Nothing Then
                 Me.WFRCHNGP_StatusFilter.SelectedValue = Nothing
-            End If            
-                          
+            End If
+
         End Sub
-            
+
         ' Get the filters' data for WFRCHNGP_YearFromFilter
         Protected Overridable Sub PopulateWFRCHNGP_YearFromFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
-                    
+
             'Setup the WHERE clause.
-            
+
             Me.WFRCHNGP_YearFromFilter.Items.Clear()
             Dim wc As WhereClause = Me.CreateWhereClause_WFRCHNGP_YearFromFilter()
-            		  			
+
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WFRCHNGP_YearFromFilter function.
             ' It is better to customize the where clause there.
-            
+
             ' Setup the static list items        
-            
-            ' Add the All item.
-            Me.WFRCHNGP_YearFromFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-                              
-            
-            
+
+            Me.WFRCHNGP_YearFromFilter.Items.Add(New ListItem(Me.Page.ExpandResourceValue("Please Select"), "--ANY--"))
+
+
+
             Dim orderBy As OrderBy = New OrderBy(False, False)
             orderBy.Add(WFinRepNGP_HeadTable.WFRCHNGP_Year, OrderByItem.OrderDir.Asc)                
             
@@ -10562,6 +11017,27 @@ Public Class BaseWFinRepNGP_HeadTableControl
             End If            
                           
         End Sub
+            
+              
+
+        Public Overridable Function CreateWhereClause_WFRCHNGP_C_IDFilter() As WhereClause
+          
+              Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
+            
+            ' Create a where clause for the filter WFRCHNGP_C_IDFilter.
+            ' This function is called by the Populate method to load the items 
+            ' in the WFRCHNGP_C_IDFilterDropDownList
+            
+            Dim wc As WhereClause= New WhereClause()
+            Return wc
+            
+        End Function			
             
               
 
@@ -10662,6 +11138,8 @@ Public Class BaseWFinRepNGP_HeadTableControl
 
             ' Save filter controls to values to session.
         
+            Me.SaveToSession(Me.WFRCHNGP_C_IDFilter, Me.WFRCHNGP_C_IDFilter.SelectedValue)
+                  
             Me.SaveToSession(Me.WFRCHNGP_MonthFilter, Me.WFRCHNGP_MonthFilter.SelectedValue)
                   
             Me.SaveToSession(Me.WFRCHNGP_StatusFilter, Me.WFRCHNGP_StatusFilter.SelectedValue)
@@ -10689,6 +11167,8 @@ Public Class BaseWFinRepNGP_HeadTableControl
         Protected  Sub SaveControlsToSession_Ajax()
             ' Save filter controls to values to session.
           
+      Me.SaveToSession("WFRCHNGP_C_IDFilter_Ajax", Me.WFRCHNGP_C_IDFilter.SelectedValue)
+              
       Me.SaveToSession("WFRCHNGP_MonthFilter_Ajax", Me.WFRCHNGP_MonthFilter.SelectedValue)
               
       Me.SaveToSession("WFRCHNGP_StatusFilter_Ajax", Me.WFRCHNGP_StatusFilter.SelectedValue)
@@ -10704,6 +11184,7 @@ Public Class BaseWFinRepNGP_HeadTableControl
 
             ' Clear filter controls values from the session.
         
+            Me.RemoveFromSession(Me.WFRCHNGP_C_IDFilter)
             Me.RemoveFromSession(Me.WFRCHNGP_MonthFilter)
             Me.RemoveFromSession(Me.WFRCHNGP_StatusFilter)
             Me.RemoveFromSession(Me.WFRCHNGP_YearFromFilter)
@@ -10940,6 +11421,17 @@ Public Class BaseWFinRepNGP_HeadTableControl
         ' Generate the event handling functions for filter and search events.
         
         ' event handler for FieldFilter
+        Protected Overridable Sub WFRCHNGP_C_IDFilter_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
+           ' Setting the DataChanged to True results in the page being refreshed with
+           ' the most recent data from the database.  This happens in PreRender event
+           ' based on the current sort, search and filter criteria.
+           Me.DataChanged = True
+           
+          	                   
+              
+        End Sub
+            
+        ' event handler for FieldFilter
         Protected Overridable Sub WFRCHNGP_MonthFilter_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
            ' Setting the DataChanged to True results in the page being refreshed with
            ' the most recent data from the database.  This happens in PreRender event
@@ -11064,9 +11556,21 @@ Public Class BaseWFinRepNGP_HeadTableControl
             End Get
         End Property
         
+        Public ReadOnly Property WFRCHNGP_C_IDFilter() As System.Web.UI.WebControls.DropDownList
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_C_IDFilter"), System.Web.UI.WebControls.DropDownList)
+            End Get
+        End Property
+        
         Public ReadOnly Property WFRCHNGP_C_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_C_IDLabel"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property WFRCHNGP_C_IDLabel1() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_C_IDLabel1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
         

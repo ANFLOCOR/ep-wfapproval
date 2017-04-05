@@ -1256,6 +1256,7 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupRole" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupRole" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupRole" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupRole" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUser" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserApplication" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserApplication" %AUTHENTICATION%
@@ -1270,6 +1271,7 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserEmail" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserEmail" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserEmail" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserPermission" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserPermission" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserPermission" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "SysSetupUserPermission_view" %AUTHENTICATION%

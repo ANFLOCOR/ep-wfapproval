@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New Sel_WF_DYNAMICS_CompanySqlView()
         Directcast(Me.DataAdapter, Sel_WF_DYNAMICS_CompanySqlView).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, Sel_WF_DYNAMICS_CompanySqlView).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         Company_IDColumn.CodeName = "Company_ID"
         Company_DescColumn.CodeName = "Company_Desc"

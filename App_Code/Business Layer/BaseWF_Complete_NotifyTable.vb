@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WF_Complete_NotifySqlTable()
         Directcast(Me.DataAdapter, WF_Complete_NotifySqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WF_Complete_NotifySqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WFCN_IDColumn.CodeName = "WFCN_ID"
         WFCN_C_IDColumn.CodeName = "WFCN_C_ID"

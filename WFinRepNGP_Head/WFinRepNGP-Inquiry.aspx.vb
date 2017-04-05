@@ -178,15 +178,18 @@ Partial Public Class WFinRepNGP_Inquiry
 
         ' Write out the Set methods
         
-        Public Sub SetWFinRepNGP_HeadTableControl()
-            SetWFinRepNGP_HeadTableControl_Base() 
-        End Sub
+'        Public Sub SetWFinRepNGP_HeadTableControl()
+'            SetWFinRepNGP_HeadTableControl_Base() 
+'        End Sub
                      
         
         ' Write out the methods for DataSource
         
    
 
+Public Sub SetWFinRepNGP_HeadTableControl()
+            SetWFinRepNGP_HeadTableControl_Base() 
+        End Sub
 #End Region
 
 #Region "Section 2: Do not modify this section."
@@ -252,7 +255,7 @@ Partial Public Class WFinRepNGP_Inquiry
             End If
         
         
-            Page.Title = "WFin Representative NGP Head"
+            Page.Title = "ePortal Workflow Approval - Reports Inquiry Non-GP (South)"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If

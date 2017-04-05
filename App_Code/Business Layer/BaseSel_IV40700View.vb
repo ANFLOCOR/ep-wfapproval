@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New Sel_IV40700SqlView()
         Directcast(Me.DataAdapter, Sel_IV40700SqlView).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, Sel_IV40700SqlView).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         LOCNCODEColumn.CodeName = "LOCNCODE"
         LOCNDSCRColumn.CodeName = "LOCNDSCR"
