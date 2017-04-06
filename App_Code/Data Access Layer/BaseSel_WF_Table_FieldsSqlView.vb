@@ -19,13 +19,13 @@ Namespace ePortalWFApproval.Data
 ''' <seealso cref="Sel_WF_Table_FieldsSqlView"></seealso>
 
 Public Class BaseSel_WF_Table_FieldsSqlView
-	Inherits StoredProceduresSQLServerAdapter
+	Inherits DynamicSQLServerAdapter
 	
 	Public Sub New()
 	End Sub
 	
-	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
-		MyBase.New(connectionName, applicationName)
+	Public Sub New(ByVal connectionName As String)
+		MyBase.New(connectionName)
 	End Sub
 End Class
 End Namespace

@@ -166,7 +166,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>Sel_W_User_DYNAMIC_1089084141_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WASPN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -177,4 +176,5 @@
   <MenuName>W User DYNAMICS Company FS1</MenuName>
   <QSPath>../sel_W_User_DYNAMICS_Company_FS1/Sel-W-User-DYNAMICS-Company-FS-QuickSelector1.aspx</QSPath>
   <TableCodeName>Sel_W_User_DYNAMICS_Company_FS1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalSel_W_User_DYNAMICS_Company_FS1</TableStoredProcPrefix>
 </XMLDefinition>

@@ -19,14 +19,14 @@ Namespace ePortalWFApproval.Data
 ''' <seealso cref="WPR_Doc_StatusSqlTable"></seealso>
 
 Public Class BaseWPR_Doc_StatusSqlTable
-	Inherits StoredProceduresSQLServerAdapter
+	Inherits DynamicSQLServerAdapter
 	
 	Public Sub New()
 		MyBase.New()
 	End Sub
 
-	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
-		MyBase.New(connectionName, applicationName)
+	Public Sub New(ByVal connectionName As String)
+		MyBase.New(connectionName)
 	End Sub
 End Class
 End Namespace

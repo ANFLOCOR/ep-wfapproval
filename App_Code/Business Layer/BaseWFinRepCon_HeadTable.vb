@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WFinRepCon_HeadSqlTable()
         Directcast(Me.DataAdapter, WFinRepCon_HeadSqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WFinRepCon_HeadSqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WFRCH_IDColumn.CodeName = "WFRCH_ID"
         WFRCH_YearColumn.CodeName = "WFRCH_Year"

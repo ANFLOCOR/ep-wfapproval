@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WPR_Line_StatusSqlTable()
         Directcast(Me.DataAdapter, WPR_Line_StatusSqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WPR_Line_StatusSqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WPRLS_IDColumn.CodeName = "WPRLS_ID"
         WPRLS_DescColumn.CodeName = "WPRLS_Desc"

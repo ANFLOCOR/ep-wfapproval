@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New View_WCPO_Canvass1SqlView()
 		Directcast(Me.DataAdapter, View_WCPO_Canvass1SqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, View_WCPO_Canvass1SqlView).ApplicationName = Me.ApplicationName
+		
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         CompanyIDColumn.CodeName = "CompanyID"
         PONoColumn.CodeName = "PONo"

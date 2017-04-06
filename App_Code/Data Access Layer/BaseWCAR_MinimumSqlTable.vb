@@ -19,14 +19,14 @@ Namespace ePortalWFApproval.Data
 ''' <seealso cref="WCAR_MinimumSqlTable"></seealso>
 
 Public Class BaseWCAR_MinimumSqlTable
-	Inherits StoredProceduresSQLServerAdapter
+	Inherits DynamicSQLServerAdapter
 	
 	Public Sub New()
 		MyBase.New()
 	End Sub
 
-	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
-		MyBase.New(connectionName, applicationName)
+	Public Sub New(ByVal connectionName As String)
+		MyBase.New(connectionName)
 	End Sub
 End Class
 End Namespace

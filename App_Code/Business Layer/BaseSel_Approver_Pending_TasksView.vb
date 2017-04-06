@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New Sel_Approver_Pending_TasksSqlView()
 		Directcast(Me.DataAdapter, Sel_Approver_Pending_TasksSqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, Sel_Approver_Pending_TasksSqlView).ApplicationName = Me.ApplicationName
+		
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         Doc_TypeColumn.CodeName = "Doc_Type"
         Company_DescColumn.CodeName = "Company_Desc"

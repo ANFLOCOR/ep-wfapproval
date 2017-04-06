@@ -156,7 +156,7 @@ The tags are case-sensitive and should contain the following case-sensitive attr
         <siteMapNode title="FS Pending Approval" description="FS Pedning Approval" url="~/WFinRep_Head/WFIN-Approver-Table.aspx" imageURL="" roles="1379" order="0" />
         <siteMapNode title="FS Report Inquiry" description="FS Report Inquiry" url="~/WFinRep_Head/FSWF-Inquiry.aspx" imageURL="" roles="1379" order="0" />
         <siteMapNode title="FS Pending Approval (NGP)" description="FS Pending Approval (NGP)" url="" imageURL="" roles="1380" order="0" />
-        <siteMapNode title="FS Report Inquiry (NGP)" description="FS Report Inquiry (NGP)" url="" imageURL="" roles="1381" order="0" />
+        <siteMapNode title="FS Report Inquiry (NGP)" description="FS Report Inquiry (NGP)" url="~/WFinRepNGP_Head/WFinRepNGP-Inquiry.aspx" imageURL="" roles="1381" order="0" />
       </siteMapNode>
       <siteMapNode title="Task Delegation" description="Task Delegation" url="" imageURL="" roles="1399" order="0" />
     </siteMapNode>

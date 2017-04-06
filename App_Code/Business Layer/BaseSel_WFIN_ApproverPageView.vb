@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New Sel_WFIN_ApproverPageSqlView()
 		Directcast(Me.DataAdapter, Sel_WFIN_ApproverPageSqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, Sel_WFIN_ApproverPageSqlView).ApplicationName = Me.ApplicationName
+		
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         AFIN_IDColumn.CodeName = "AFIN_ID"
         AFIN_WS_IDColumn.CodeName = "AFIN_WS_ID"

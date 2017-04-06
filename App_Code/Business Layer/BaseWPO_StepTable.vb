@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WPO_StepSqlTable()
         Directcast(Me.DataAdapter, WPO_StepSqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WPO_StepSqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WPO_S_IDColumn.CodeName = "WPO_S_ID"
         WPO_S_WDT_IDColumn.CodeName = "WPO_S_WDT_ID"

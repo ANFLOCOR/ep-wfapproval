@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New Sel_WCurrency_sel_WForeign_Exch_LatestSqlView()
 		Directcast(Me.DataAdapter, Sel_WCurrency_sel_WForeign_Exch_LatestSqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, Sel_WCurrency_sel_WForeign_Exch_LatestSqlView).ApplicationName = Me.ApplicationName
+		
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WCur_ShortColumn.CodeName = "WCur_Short"
         WFE_Peso_RateColumn.CodeName = "WFE_Peso_Rate"

@@ -19,14 +19,14 @@ Namespace ePortalWFApproval.Data
 ''' <seealso cref="View_WCPO_CanvassSqlView"></seealso>
 
 Public Class BaseView_WCPO_CanvassSqlView
-	Inherits StoredProceduresSQLServerAdapter
+	Inherits DynamicSQLServerAdapter
 	
 	Public Sub New()
 		MyBase.New()
 	End Sub
 
-	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
-		MyBase.New(connectionName, applicationName)
+	Public Sub New(ByVal connectionName As String)
+		MyBase.New(connectionName)
 	End Sub
 End Class
 End Namespace

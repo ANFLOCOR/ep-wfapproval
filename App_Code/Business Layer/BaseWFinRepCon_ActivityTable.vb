@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WFinRepCon_ActivitySqlTable()
         Directcast(Me.DataAdapter, WFinRepCon_ActivitySqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WFinRepCon_ActivitySqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WFRCA_IDColumn.CodeName = "WFRCA_ID"
         WFRCA_WS_IDColumn.CodeName = "WFRCA_WS_ID"

@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WCAR_Doc_CheckerSqlTable()
         Directcast(Me.DataAdapter, WCAR_Doc_CheckerSqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WCAR_Doc_CheckerSqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WCDC_IDColumn.CodeName = "WCDC_ID"
         WCDC_WCD_IDColumn.CodeName = "WCDC_WCD_ID"

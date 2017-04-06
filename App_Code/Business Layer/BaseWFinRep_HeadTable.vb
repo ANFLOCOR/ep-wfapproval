@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WFinRep_HeadSqlTable()
         Directcast(Me.DataAdapter, WFinRep_HeadSqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WFinRep_HeadSqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         HFIN_IDColumn.CodeName = "HFIN_ID"
         HFIN_YearColumn.CodeName = "HFIN_Year"
