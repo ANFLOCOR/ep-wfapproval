@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New Sel_WFinRepNGP_ApproverPageSqlView()
 		Directcast(Me.DataAdapter, Sel_WFinRepNGP_ApproverPageSqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, Sel_WFinRepNGP_ApproverPageSqlView).ApplicationName = Me.ApplicationName
+		
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WFRNGPA_IDColumn.CodeName = "WFRNGPA_ID"
         WFRNGPA_WS_IDColumn.CodeName = "WFRNGPA_WS_ID"

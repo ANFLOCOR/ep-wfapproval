@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New Sel_WStep_WStep_DetailSqlView()
         Directcast(Me.DataAdapter, Sel_WStep_WStep_DetailSqlView).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, Sel_WStep_WStep_DetailSqlView).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WSD_IDColumn.CodeName = "WSD_ID"
         WS_IDColumn.CodeName = "WS_ID"

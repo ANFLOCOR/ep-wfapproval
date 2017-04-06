@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WPR_ActivitySqlTable()
         Directcast(Me.DataAdapter, WPR_ActivitySqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WPR_ActivitySqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WPRA_IDColumn.CodeName = "WPRA_ID"
         WPRA_WS_IDColumn.CodeName = "WPRA_WS_ID"

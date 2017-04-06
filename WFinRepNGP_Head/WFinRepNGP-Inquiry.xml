@@ -11,7 +11,7 @@
     <PopupMasterLayout>../Master Pages/Popup.master</PopupMasterLayout>
     <PopupCssClass>QPageSize</PopupCssClass>
     <GenerateDirectory>WFinRepNGP_Head</GenerateDirectory>
-    <Layout>WFinRepNGP_Head\WFinRepNGP-Inquiry.html</Layout>
+    <Layout>WFinRepNGP_Head\WFinRepNGP-Inquiry.xml</Layout>
     <DisplayName>WFinRepNGP-Inquiry</DisplayName>
     <Description>Table view to show or edit multiple records.</Description>
     <LoginRequired>&lt;PRoles&gt;NOT_ANONYMOUS&lt;/PRoles&gt;</LoginRequired>
@@ -308,7 +308,7 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>WFin Representative NGP Head</Value>
+          <Value>ePortal Workflow Approval - Reports Inquiry Non-GP (South)</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>
@@ -1260,6 +1260,70 @@
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
+      <Name>WFRCHNGP_C_IDFilter</Name>
+      <Type>FieldFilter</Type>
+      <FieldValueStyle>DropDownList</FieldValueStyle>
+      <SpecifiedItems>
+        <Item>
+          <Name>--ANY--</Name>
+          <Value>Please Select</Value>
+        </Item>
+      </SpecifiedItems>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>CssClass</Name>
+          <Value>Filter_Input</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Field</Name>
+          <Value>WFRCHNGP_C_ID</Value>
+        </Attribute>
+        <Attribute>
+          <Name>FilterOperator</Name>
+          <Value>=</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:ApplyInitializeFormula</Name>
+          <Value>True</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:ApplyStaticList</Name>
+          <Value>true</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:GenerateSpecificItems</Name>
+          <Value>True</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:InitializeFormula</Name>
+          <Value>URL("WFRCHNGP_C_ID")</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:Table</Name>
+          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>onkeypress</Name>
+          <Value>dropDownListTypeAhead(this,false)</Value>
+        </Attribute>
+        <Attribute>
+          <Name>SelectionMode</Name>
+          <Value>Single</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Width</Name>
+          <Value>150px</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <ControlsToFilter>
+        <ControlToFilter>
+          <Active>true</Active>
+          <ControlName>WFinRepNGP_HeadTableControl</ControlName>
+        </ControlToFilter>
+      </ControlsToFilter>
+    </ContainedComponent>
+    <ContainedComponent>
       <Name>WFRCHNGP_C_IDLabel</Name>
       <Type>Literal</Type>
       <PassthroughAttributes>
@@ -1267,6 +1331,25 @@
           <Name>Consumers</Name>
           <Value>WFinRepNGP_HeadTableControl</Value>
         </Attribute>
+        <Attribute>
+          <Name>InternalUse:Field</Name>
+          <Value>WFRCHNGP_C_ID</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:Table</Name>
+          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Text</Name>
+          <Value>Company</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>WFRCHNGP_C_IDLabel1</Name>
+      <Type>Literal</Type>
+      <PassthroughAttributes>
         <Attribute>
           <Name>InternalUse:Field</Name>
           <Value>WFRCHNGP_C_ID</Value>
@@ -1567,6 +1650,12 @@
       <Name>WFRCHNGP_MonthFilter</Name>
       <Type>FieldFilter</Type>
       <FieldValueStyle>DropDownList</FieldValueStyle>
+      <SpecifiedItems>
+        <Item>
+          <Name>--ANY--</Name>
+          <Value>Please Select</Value>
+        </Item>
+      </SpecifiedItems>
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
@@ -1586,6 +1675,14 @@
         </Attribute>
         <Attribute>
           <Name>InternalUse:ApplyInitializeFormula</Name>
+          <Value>True</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:ApplyStaticList</Name>
+          <Value>true</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:GenerateSpecificItems</Name>
           <Value>True</Value>
         </Attribute>
         <Attribute>
@@ -1847,6 +1944,12 @@
       <Name>WFRCHNGP_StatusFilter</Name>
       <Type>FieldFilter</Type>
       <FieldValueStyle>DropDownList</FieldValueStyle>
+      <SpecifiedItems>
+        <Item>
+          <Name>--ANY--</Name>
+          <Value>Please Select</Value>
+        </Item>
+      </SpecifiedItems>
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
@@ -1866,6 +1969,14 @@
         </Attribute>
         <Attribute>
           <Name>InternalUse:ApplyInitializeFormula</Name>
+          <Value>True</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:ApplyStaticList</Name>
+          <Value>true</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:GenerateSpecificItems</Name>
           <Value>True</Value>
         </Attribute>
         <Attribute>
@@ -2076,6 +2187,12 @@
       <Name>WFRCHNGP_YearFromFilter</Name>
       <Type>FieldFilter</Type>
       <FieldValueStyle>DropDownList</FieldValueStyle>
+      <SpecifiedItems>
+        <Item>
+          <Name>--ANY--</Name>
+          <Value>Please Select</Value>
+        </Item>
+      </SpecifiedItems>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -2095,6 +2212,14 @@
         </Attribute>
         <Attribute>
           <Name>InternalUse:ApplyInitializeFormula</Name>
+          <Value>True</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:ApplyStaticList</Name>
+          <Value>true</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:GenerateSpecificItems</Name>
           <Value>True</Value>
         </Attribute>
         <Attribute>
@@ -3089,9 +3214,11 @@
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:FIELDLABEL NAME="WFRCHNGP_C_IDLabel1"/&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:FIELDFILTER NAME="WFRCHNGP_C_IDFilter" /&amp;gt; &lt;/Value&gt;
         &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;

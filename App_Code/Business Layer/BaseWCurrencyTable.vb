@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WCurrencySqlTable()
         Directcast(Me.DataAdapter, WCurrencySqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WCurrencySqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WCur_IDColumn.CodeName = "WCur_ID"
         WCur_ShortColumn.CodeName = "WCur_Short"

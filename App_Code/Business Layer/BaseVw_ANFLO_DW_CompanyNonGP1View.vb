@@ -1,5 +1,5 @@
 ﻿' This class is "generated" and will be overwritten.
-' Your customizations should be made in Vw_ANFLO_DW_CompanyNonGP1View.vb
+' Your customizations should be made in Vw_ANFLO_DW_CompanyNonGP1Record.vb
 
 Imports System.Data.SqlTypes
 Imports System.Data
@@ -25,46 +25,47 @@ Namespace ePortalWFApproval.Business
 ''' <seealso cref="Vw_ANFLO_DW_CompanyNonGP1View"></seealso>
 
 <Serializable()> Public Class BaseVw_ANFLO_DW_CompanyNonGP1View
-	Inherits KeylessTable
-	
+    Inherits PrimaryKeyTable
+    
 
-	Private ReadOnly TableDefinitionString As String = Vw_ANFLO_DW_CompanyNonGP1Definition.GetXMLString()
-
-
+    Private ReadOnly TableDefinitionString As String = Vw_ANFLO_DW_CompanyNonGP1Definition.GetXMLString()
 
 
 
 
 
-	Protected Sub New()
-		MyBase.New()
-		Me.Initialize()
-	End Sub
 
-	Protected Overridable Sub Initialize()
-		Dim def As New XmlTableDefinition(TableDefinitionString)
-		Me.TableDefinition = New TableDefinition()
-		Me.TableDefinition.TableClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Vw_ANFLO_DW_CompanyNonGP1View")
-		def.InitializeTableDefinition(Me.TableDefinition)
-		Me.ConnectionName = def.GetConnectionName()
-		Me.RecordClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Vw_ANFLO_DW_CompanyNonGP1Record")
-		Me.ApplicationName = "App_Code"
-		Me.DataAdapter = New Vw_ANFLO_DW_CompanyNonGP1SqlView()
-		Directcast(Me.DataAdapter, Vw_ANFLO_DW_CompanyNonGP1SqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, Vw_ANFLO_DW_CompanyNonGP1SqlView).ApplicationName = Me.ApplicationName
-		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
+
+    Protected Sub New()
+        MyBase.New()
+        Me.Initialize()
+    End Sub
+
+    Protected Overridable Sub Initialize()
+        Dim def As New XmlTableDefinition(TableDefinitionString)
+        Me.TableDefinition = New TableDefinition()
+        Me.TableDefinition.TableClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Vw_ANFLO_DW_CompanyNonGP1View")
+        def.InitializeTableDefinition(Me.TableDefinition)
+        Me.ConnectionName = def.GetConnectionName()
+        Me.RecordClassName = System.Reflection.Assembly.CreateQualifiedName("App_Code", "ePortalWFApproval.Business.Vw_ANFLO_DW_CompanyNonGP1Record")
+        Me.ApplicationName = "App_Code"
+        Me.DataAdapter = New Vw_ANFLO_DW_CompanyNonGP1SqlView()
+        Directcast(Me.DataAdapter, Vw_ANFLO_DW_CompanyNonGP1SqlView).ConnectionName = Me.ConnectionName
+        Directcast(Me.DataAdapter, Vw_ANFLO_DW_CompanyNonGP1SqlView).ApplicationName = Me.ApplicationName
+        Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         NameColumn.CodeName = "Name"
         ShortNameColumn.CodeName = "ShortName"
         INTERIDColumn.CodeName = "INTERID"
         DWCompanyIDColumn.CodeName = "DWCompanyID"
         DynamicsCompanyIDColumn.CodeName = "DynamicsCompanyID"
-		
-	End Sub
-	
+        
+    End Sub
+
 #Region "Overriden methods"
+
     
 #End Region
-	
+
 #Region "Properties for columns"
 
     ''' <summary>
@@ -165,6 +166,7 @@ Namespace ePortalWFApproval.Business
 
 
 #End Region
+
 
 #Region "Shared helper methods"
 
@@ -670,6 +672,114 @@ Namespace ePortalWFApproval.Business
     End Function       
         
 
+    ' Convenience method for getting a record using a string-based record identifier
+    Public Shared Function GetRecord(ByVal id As String, ByVal bMutable As Boolean) As Vw_ANFLO_DW_CompanyNonGP1Record
+        Return CType(Vw_ANFLO_DW_CompanyNonGP1View.Instance.GetRecordData(id, bMutable), Vw_ANFLO_DW_CompanyNonGP1Record)
+    End Function
+
+    ' Convenience method for getting a record using a KeyValue record identifier
+    Public Shared Function GetRecord(ByVal id As KeyValue, ByVal bMutable As Boolean) As Vw_ANFLO_DW_CompanyNonGP1Record
+        Return CType(Vw_ANFLO_DW_CompanyNonGP1View.Instance.GetRecordData(id, bMutable), Vw_ANFLO_DW_CompanyNonGP1Record)
+    End Function
+
+    ' Convenience method for creating a record
+    Public Overloads Function NewRecord( _
+        ByVal NameValue As String, _
+        ByVal ShortNameValue As String, _
+        ByVal INTERIDValue As String, _
+        ByVal DWCompanyIDValue As String, _
+        ByVal DynamicsCompanyIDValue As String _
+    ) As KeyValue
+        Dim rec As IPrimaryKeyRecord = CType(Me.CreateRecord(), IPrimaryKeyRecord)
+                rec.SetString(NameValue, NameColumn)
+        rec.SetString(ShortNameValue, ShortNameColumn)
+        rec.SetString(INTERIDValue, INTERIDColumn)
+        rec.SetString(DWCompanyIDValue, DWCompanyIDColumn)
+        rec.SetString(DynamicsCompanyIDValue, DynamicsCompanyIDColumn)
+
+
+        rec.Create() 'update the DB so any DB-initialized fields (like autoincrement IDs) can be initialized
+
+        Dim key As KeyValue = rec.GetID()
+        Return key
+    End Function
+
+    ''' <summary>
+    '''  This method deletes a specified record
+    ''' </summary>
+    ''' <param name="kv">Keyvalue of the record to be deleted.</param>
+    Public Shared Sub DeleteRecord(ByVal kv As KeyValue)
+        Vw_ANFLO_DW_CompanyNonGP1View.Instance.DeleteOneRecord(kv)
+    End Sub
+
+    ''' <summary>
+    ''' This method checks if record exist in the database using the keyvalue provided.
+    ''' </summary>
+    ''' <param name="kv">Key value of the record.</param>
+    Public Shared Function DoesRecordExist(ByVal kv As KeyValue) As Boolean
+        Dim recordExist As Boolean = True
+        Try
+            Vw_ANFLO_DW_CompanyNonGP1View.GetRecord(kv, False)
+        Catch ex As Exception
+            recordExist = False
+        End Try
+        Return recordExist
+    End Function
+    
+    ''' <summary>
+    '''  This method returns all the primary columns in the table.
+    ''' </summary>
+    Public Shared Function GetPrimaryKeyColumns() As ColumnList
+        If (Not IsNothing(Vw_ANFLO_DW_CompanyNonGP1View.Instance.TableDefinition.PrimaryKey)) Then
+            Return Vw_ANFLO_DW_CompanyNonGP1View.Instance.TableDefinition.PrimaryKey.Columns
+        Else
+            Return Nothing
+        End If
+    End Function
+
+    ''' <summary>
+    ''' This method takes a key and returns a keyvalue.
+    ''' </summary>
+    ''' <param name="key">key could be array of primary key values in case of composite primary key or a string containing single primary key value in case of non-composite primary key.</param>
+    Public Shared Function GetKeyValue(ByVal key As Object) As KeyValue
+        Dim kv As KeyValue = Nothing
+
+        If (Not (IsNothing(Vw_ANFLO_DW_CompanyNonGP1View.Instance.TableDefinition.PrimaryKey))) Then
+
+            Dim isCompositePrimaryKey As Boolean = False
+            isCompositePrimaryKey = Vw_ANFLO_DW_CompanyNonGP1View.Instance.TableDefinition.PrimaryKey.IsCompositeKey
+
+            If ((isCompositePrimaryKey) AndAlso (key.GetType.IsArray())) Then
+
+                ' If the key is composite, then construct a key value.
+                kv = New KeyValue
+                Dim fullKeyString As String = ""
+                Dim keyArray As Array = CType(key, Array)
+                If (Not IsNothing(keyArray)) Then
+                    Dim length As Integer = keyArray.Length
+                    Dim pkColumns As ColumnList = Vw_ANFLO_DW_CompanyNonGP1View.Instance.TableDefinition.PrimaryKey.Columns
+                    Dim pkColumn As BaseColumn
+                    Dim index As Integer = 0
+                    For Each pkColumn In pkColumns
+                        Dim keyString As String = CType(keyArray.GetValue(index), String)
+                        If (Vw_ANFLO_DW_CompanyNonGP1View.Instance.TableDefinition.TableType = BaseClasses.Data.TableDefinition.TableTypes.Virtual) Then
+                            kv.AddElement(pkColumn.UniqueName, keyString)
+                        Else
+                            kv.AddElement(pkColumn.InternalName, keyString)
+                        End If
+                        index = index + 1
+                    Next pkColumn
+                End If
+
+            Else
+                ' If the key is not composite, then get the key value.
+                kv = Vw_ANFLO_DW_CompanyNonGP1View.Instance.TableDefinition.PrimaryKey.ParseValue(CType(key, String))
+            End If
+        End If
+        Return kv
+    End Function    
+
+
 	 ''' <summary>
      ''' This method takes a record and a Column and returns an evaluated value of DFKA formula.
      ''' </summary>
@@ -743,7 +853,7 @@ Namespace ePortalWFApproval.Business
             Return Nothing
         End If
     End Function
-    
+
 	''' <summary>
     ''' Evaluates the formula
     ''' </summary>
@@ -764,7 +874,9 @@ Namespace ePortalWFApproval.Business
             Return resultObj.ToString()
         End If
     End Function
-#End Region	
+
+
+#End Region 
 
 End Class
 End Namespace

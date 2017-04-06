@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New POP10100_HEADER_ALLSqlView()
 		Directcast(Me.DataAdapter, POP10100_HEADER_ALLSqlView).ConnectionName = Me.ConnectionName
-		Directcast(Me.DataAdapter, POP10100_HEADER_ALLSqlView).ApplicationName = Me.ApplicationName
+		
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         PONUMBERColumn.CodeName = "PONUMBER"
         POSTATUSColumn.CodeName = "POSTATUS"

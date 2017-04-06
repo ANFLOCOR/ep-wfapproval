@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WPO_CARNo_QWFSqlView()
         Directcast(Me.DataAdapter, WPO_CARNo_QWFSqlView).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WPO_CARNo_QWFSqlView).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         CompanyIDColumn.CodeName = "CompanyID"
         PONumColumn.CodeName = "PONum"

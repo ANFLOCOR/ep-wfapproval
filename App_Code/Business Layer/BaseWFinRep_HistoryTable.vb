@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WFinRep_HistorySqlTable()
         Directcast(Me.DataAdapter, WFinRep_HistorySqlTable).ConnectionName = Me.ConnectionName
-        Directcast(Me.DataAdapter, WFinRep_HistorySqlTable).ApplicationName = Me.ApplicationName
+        
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WFRHi_IDColumn.CodeName = "WFRHi_ID"
         WFRHi_WFRCH_IDColumn.CodeName = "WFRHi_WFRCH_ID"

@@ -30,7 +30,59 @@ Namespace ePortalWFApproval.Business
 		MyBase.New()
 	End Sub
 	
-	
+        Public Shared Sub UpdateStatus(ByVal xFIN_ID As String, ByVal xFIN_Status As Integer)
+
+            Dim ws As String = "WFRCDNGP_ID = " & xFIN_ID
+            Dim rec As New WFinRepNGP_DocAttachRecord
+            rec = WFinRepNGP_DocAttachTable.GetRecord(ws)
+
+
+            If Not rec Is Nothing Then
+                xFIN_ID = rec.WFRCDNGP_ID.ToString()
+                Utils.DbUtils.StartTransaction()
+                Try
+                    rec = WFinRepNGP_DocAttachTable.GetRecord(xFIN_ID, True)
+                    rec.WFRCDNGP_Status = xFIN_Status
+                    rec.Save()
+                    Utils.DbUtils.CommitTransaction()
+                Catch ex As Exception
+                    Utils.DbUtils.RollBackTransaction()
+                End Try
+            End If
+
+
+        End Sub
+
+        Public Shared Sub UpdateFinPost(ByVal xFIN_ID As String, ByVal xFIN_Post As Integer)
+
+            Dim ws As String = "WFRCDNGP_ID = " & xFIN_ID
+            Dim rec As New WFinRepNGP_DocAttachRecord
+            rec = WFinRepNGP_DocAttachTable.GetRecord(ws)
+
+            Dim postflag As Boolean = Nothing
+
+            If xFIN_Post = 0 Then
+                postflag = False
+
+            Else
+                postflag = True
+            End If
+
+            If Not rec Is Nothing Then
+                xFIN_ID = rec.WFRCDNGP_ID.ToString()
+                Utils.DbUtils.StartTransaction()
+                Try
+                    rec = WFinRepNGP_DocAttachTable.GetRecord(xFIN_ID, True)
+                    rec.WFRCDNGP_Post = postflag
+                    rec.Save()
+                    Utils.DbUtils.CommitTransaction()
+                Catch ex As Exception
+                    Utils.DbUtils.RollBackTransaction()
+                End Try
+            End If
+
+
+        End Sub
 
 	
 
