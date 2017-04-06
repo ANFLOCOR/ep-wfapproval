@@ -3,13 +3,13 @@
   <ColumnDefinition>
     <Column InternalName="0" Priority="1" ColumnNum="0">
       <columnName>WFRA_ID</columnName>
-      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnUIName Source="User">%ISD_DEFAULT%</columnUIName>
       <columnType>Number</columnType>
       <columnDBType>int</columnDBType>
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -17,21 +17,42 @@
       </columnFunction>
       <columnDBFormat>
       </columnDBFormat>
-      <columnPK>N</columnPK>
+      <columnPK>Y</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>Y</columnRequired>
       <columnNotNull>Y</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>0</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>N</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <columnVirtualPK Source="User">Y</columnVirtualPK>
     </Column>
     <Column InternalName="1" Priority="2" ColumnNum="1">
       <columnName>WFRA_FIN_ID</columnName>
@@ -199,7 +220,7 @@
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -209,19 +230,47 @@
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>6</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>N</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_vw_FS_WFinRep_Attachment_PerReportType_FIN_HFIN_ID_1</columnFKName>
+        <columnFKTable>WFinRep_Head</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>HFIN_ID</columnFKColumn>
+        <columnFKColumnDisplay>=WFinRep_Head1.HFIN_ID</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="7" Priority="8" ColumnNum="7">
       <columnName>WFRA_Doc_X</columnName>
@@ -262,15 +311,14 @@
   <Owner>dbo</Owner>
   <TableAliasName>vw_FS_WFinRep_Attachment_PerReportType_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
-  <PagingMethod>RowNum</PagingMethod>
-  <canCreateRecords Source="Database">N</canCreateRecords>
-  <canEditRecords Source="Database">N</canEditRecords>
-  <canDeleteRecords Source="Database">N</canDeleteRecords>
-  <canViewRecords Source="Database">N</canViewRecords>
+  <canCreateRecords Source="User">N</canCreateRecords>
+  <canEditRecords Source="User">N</canEditRecords>
+  <canDeleteRecords Source="User">N</canDeleteRecords>
+  <canViewRecords Source="Database">Y</canViewRecords>
   <AppShortName>ePortalWFApproval</AppShortName>
   <FolderName>vw_FS_WFinRep_Attachment_PerReportType1</FolderName>
   <MenuName>FS WFin Representative Attach~Type1</MenuName>
   <QSPath>../vw_FS_WFinRep_Attachment_PerReportType1/Vw-FS-WFinRep-Attachment-PerReportType-QuickSelector1.aspx</QSPath>
   <TableCodeName>Vw_FS_WFinRep_Attachment_PerReportType1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalVw_FS_WFinRep_Attachment_PerReportType1</TableStoredProcPrefix>
 </XMLDefinition>

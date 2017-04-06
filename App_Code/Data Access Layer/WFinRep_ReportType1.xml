@@ -101,7 +101,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WFinRep_ReportType_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -113,4 +112,5 @@
   <MenuName>WFin Representative Report Type1</MenuName>
   <QSPath>../WFinRep_ReportType1/WFinRep-ReportType-QuickSelector1.aspx</QSPath>
   <TableCodeName>WFinRep_ReportType1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWFinRep_ReportType1</TableStoredProcPrefix>
 </XMLDefinition>

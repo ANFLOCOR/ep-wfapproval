@@ -1880,7 +1880,7 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>DataReaderSortBy</Name>
-          <Value>Date_Assigned Desc</Value>
+          <Value>SortOrder Asc</Value>
         </Attribute>
         <Attribute>
           <Name>HasScrolling</Name>
@@ -1930,6 +1930,11 @@
       <OrderBys>
         <OrderBy>
           <Position>0</Position>
+          <ColumnName>SortOrder</ColumnName>
+          <Direction>Asc</Direction>
+        </OrderBy>
+        <OrderBy>
+          <Position>1</Position>
           <ColumnName>Date_Assigned</ColumnName>
           <Direction>Desc</Direction>
         </OrderBy>

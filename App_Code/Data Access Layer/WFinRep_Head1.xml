@@ -40,7 +40,7 @@
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -50,19 +50,47 @@
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>1</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WFinRep_Head_HFIN_DT_ID_1</columnFKName>
+        <columnFKTable>WFinRep_DocType</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>WFIN_DT_ID</columnFKColumn>
+        <columnFKColumnDisplay>= WFinRep_DocType1.WFIN_DT_Name</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="2" Priority="3" ColumnNum="2">
       <columnName>HFIN_Code</columnName>
@@ -136,7 +164,7 @@
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -146,19 +174,47 @@
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>4</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WFinRep_Head_HFIN_Status_1</columnFKName>
+        <columnFKTable>WFin_ApprovalStatus</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>WPO_STAT_CD</columnFKColumn>
+        <columnFKColumnDisplay>= WFin_ApprovalStatus1.WPO_STAT_DESC</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="5" Priority="6" ColumnNum="5">
       <columnName>HFIN_C_ID</columnName>
@@ -168,7 +224,7 @@
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -178,19 +234,47 @@
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>5</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WFinRep_Head_HFIN_C_ID_1</columnFKName>
+        <columnFKTable>sel_WF_DYNAMICS_Company</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>Company_ID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_WF_DYNAMICS_Company1.Company_Short_Name</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="6" Priority="7" ColumnNum="6">
       <columnName>HFIN_U_ID</columnName>
@@ -200,7 +284,7 @@
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -210,19 +294,47 @@
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>6</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WFinRep_Head_HFIN_U_ID_1</columnFKName>
+        <columnFKTable>sel_WASP_User</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>W_U_ID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_WASP_User1.W_U_User_Name</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="7" Priority="8" ColumnNum="7">
       <columnName>HFIN_Remark</columnName>
@@ -295,7 +407,7 @@
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -305,19 +417,47 @@
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>9</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WFinRep_Head_HFIN_FinID_1</columnFKName>
+        <columnFKTable>WFinRep_DocAttach</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>FIN_ID</columnFKColumn>
+        <columnFKColumnDisplay>= WFinRep_DocAttach1.FIn_Description</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="10" Priority="11" ColumnNum="10">
       <columnName>HFIN_Month</columnName>
@@ -327,7 +467,7 @@
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -337,19 +477,47 @@
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>10</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WFinRep_Head_HFIN_Month_1</columnFKName>
+        <columnFKTable>vw_WFinRep_DocAttach_FIN_Month</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>Mo</columnFKColumn>
+        <columnFKColumnDisplay>= Vw_WFinRep_DocAttach_FIN_Month1.MoName</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="11" Priority="12" ColumnNum="11">
       <columnName>HFIN_Year</columnName>
@@ -485,8 +653,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WFinRep_Head_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
-  <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
   <canDeleteRecords Source="Database">Y</canDeleteRecords>
@@ -497,4 +663,5 @@
   <MenuName>WFin Representative Head1</MenuName>
   <QSPath>../WFinRep_Head1/WFinRep-Head-QuickSelector1.aspx</QSPath>
   <TableCodeName>WFinRep_Head1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWFinRep_Head1</TableStoredProcPrefix>
 </XMLDefinition>

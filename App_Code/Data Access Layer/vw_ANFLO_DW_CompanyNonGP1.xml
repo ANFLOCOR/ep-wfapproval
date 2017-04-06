@@ -165,7 +165,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>vw_ANFLO_DW_CompanyNonGP_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -176,4 +175,5 @@
   <MenuName>ANFLO DW Company NON GP1</MenuName>
   <QSPath>../vw_ANFLO_DW_CompanyNonGP1/Vw-ANFLO-DW-CompanyNonGP-QuickSelector1.aspx</QSPath>
   <TableCodeName>Vw_ANFLO_DW_CompanyNonGP1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalVw_ANFLO_DW_CompanyNonGP1</TableStoredProcPrefix>
 </XMLDefinition>

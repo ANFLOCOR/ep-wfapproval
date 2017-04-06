@@ -70,6 +70,10 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "Box_PackingStation" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "BPConfiguration" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "CARApprovedList" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "Category" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "CFBS_CategoryMapping" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "CF_AdjustingEntry" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "Company" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "Company_View" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "CONSTANTS" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "ConstructionCAR" %AUTHENTICATION%
@@ -402,6 +406,7 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "RC_ReportCenters" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "RC_ReportSeries" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "RC_ReportSeriesCenters" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "Report" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "ReportGroup" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "Reports" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "ReqAllPO" %AUTHENTICATION%
@@ -1320,6 +1325,7 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "View_Canvass" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "View_Canvass_Vendor" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "view_DocType" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "View_DW_Company" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "View_EmpDeductions" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "view_FS_PackageForConso" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "View_FS_StatusAllCompany" %AUTHENTICATION%
@@ -1398,9 +1404,13 @@ LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_ANFLO_DW_Company_IsGP" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_ANFLO_DW_CompGrp_ExtDetails" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_ANFLO_DW_CompGrp_ExtDetails" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_Conso_BSCategories" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_Conso_CFCategories" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_FS_WFinRep_Attachment_PerReportType" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_FS_WFinRep_Attachment_PerReportType" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_GL00102" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_Trx_Summary_GroupByCompanyYearPeriod" %AUTHENTICATION%
+LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_wass_user_company" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_WCanvass_PO_Map_WPR_Doc_WPR_Line_rpt" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_WFinRepCon_DocAttach_ReportType" %AUTHENTICATION%
 LoadStoredProcedures.exe -application %APPLICATION_NAME% -directory %STORED_PROC_DIR% -server %SERVERNAME% -database %DATABASENAME% -table "vw_WFinRepCon_Ext_WFinRepCon_Head" %AUTHENTICATION%

@@ -454,7 +454,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WFinRepCon_Activity_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -466,4 +465,5 @@
   <MenuName>WFin Representative Connectio~ivity</MenuName>
   <QSPath>../WFinRepCon_Activity/WFinRepCon-Activity-QuickSelector.aspx</QSPath>
   <TableCodeName>WFinRepCon_Activity</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalWFinRepCon_Activity</TableStoredProcPrefix>
 </XMLDefinition>

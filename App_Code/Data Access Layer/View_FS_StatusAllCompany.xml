@@ -453,7 +453,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>View_FS_StatusAllCompany_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -464,4 +463,5 @@
   <MenuName>View FS Status All Company</MenuName>
   <QSPath>../View_FS_StatusAllCompany/View-FS-StatusAllCompany-QuickSelector.aspx</QSPath>
   <TableCodeName>View_FS_StatusAllCompany</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalView_FS_StatusAllCompany</TableStoredProcPrefix>
 </XMLDefinition>

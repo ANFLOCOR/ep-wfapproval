@@ -164,7 +164,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>vw_WF_DYNAMICS_Company_ALL_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -175,4 +174,5 @@
   <MenuName>Workflow DYNAMICS Company ALL</MenuName>
   <QSPath>../vw_WF_DYNAMICS_Company_ALL/Vw-WF-DYNAMICS-Company-ALL-QuickSelector.aspx</QSPath>
   <TableCodeName>Vw_WF_DYNAMICS_Company_ALL</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalVw_WF_DYNAMICS_Company_ALL</TableStoredProcPrefix>
 </XMLDefinition>
