@@ -2624,7 +2624,7 @@
       &lt;/Attribute&gt;
       &lt;Attribute&gt;
         &lt;Name&gt;width&lt;/Name&gt;
-        &lt;AttributeValue&gt;100%&lt;/AttributeValue&gt;
+        &lt;AttributeValue&gt;1200px&lt;/AttributeValue&gt;
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
