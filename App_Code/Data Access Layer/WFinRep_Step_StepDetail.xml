@@ -262,7 +262,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WFinRep_Step_StepDetail_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
-  <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
   <canDeleteRecords Source="Database">N</canDeleteRecords>

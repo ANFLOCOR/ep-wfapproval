@@ -86,7 +86,7 @@
 	</asp:Button> 
 <asp:Button runat="server" id="pReject" causesvalidation="False" commandname="Redirect" consumers="page" text="Reject">		
 	</asp:Button> 
-<asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" text="Returned">		
+<asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" text="Return for Revision">		
 	</asp:Button></td><td><asp:dropdownlist cssclass="Filter_Input" id="ddlMoveTo" runat="server" /></td></tr><tr><td><span style="white-space:nowrap;">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>

@@ -2414,7 +2414,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>Returned</Value>
+          <Value>Return for Revision</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WFinRep_HeadRecordControl</InsideControl>

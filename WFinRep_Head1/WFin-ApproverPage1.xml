@@ -1581,6 +1581,10 @@
           <Name>TextFormat</Name>
           <Value>{0}</Value>
         </Attribute>
+        <Attribute>
+          <Name>Visible</Name>
+          <Value>False</Value>
+        </Attribute>
       </PassthroughAttributes>
       <InsideControl>WFinRep_HeadTableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>

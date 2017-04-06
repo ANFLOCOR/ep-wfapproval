@@ -114,40 +114,6 @@ Public Class WFinRep_HeadRecordControl
 
         End Sub
 
-        'Public Overrides Sub SetHFIN_Month()
-
-
-        '          ' Set the HFIN_Month Literal on the webpage with value from the
-        '          ' WFinRep_Head database record.
-
-        '          ' Me.DataSource is the WFinRep_Head record retrieved from the database.
-        '          ' Me.HFIN_Month is the ASP:Literal on the webpage.
-
-        '          ' You can modify this method directly, or replace it with a call to
-        '          '     MyBase.SetHFIN_Month()
-        '          ' and add your own code before or after the call to the MyBase function.
-
-
-
-        '          If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_MonthSpecified Then
-
-        '              ' If the HFIN_Month is non-NULL, then format the value.
-
-        '              ' The Format method will return the Display Foreign Key As (DFKA) value
-
-        '              Me.HFIN_Month.Text = Me.DataSource.HFIN_Month.ToString()
-
-        '          Else
-
-        '              ' HFIN_Month is NULL in the database, so use the Default Value.  
-        '              ' Default Value could also be NULL.
-
-        '              Me.HFIN_Month.Text = WFinRep_Head1Table.HFIN_Month.Format(WFinRep_Head1Table.HFIN_Month.DefaultValue)
-
-        '          End If
-
-        '      End Sub
-
 		Public Overrides Sub SetHFIN_C_ID1()
 
 
@@ -548,16 +514,13 @@ Public Class WFinRep_HeadRecordControl
 
             Try
 
-                'Dim oRec As WFinRep_DocAttachRecordControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WFinRep_DocAttachRecordControl"), WFinRep_DocAttachRecordControl)
-
-
                 Dim sFinID As String = Me.HFIN_ID.Text ''oRec.FIN_ID.Text
                 Dim sCo1 As String = Me.HFIN_C_ID.Text ''oRec.FIN_Company1.SelectedItem.ToString
                 Dim sYr As String = Me.HFIN_Year.Text ''oRec.FIN_Year1.Text
                 Dim sMo As String = MonthName(CInt(Me.HFIN_Month2.Text)) ''MonthName(CInt(oRec.FIN_Month1.Text))
                 Dim sDesc As String = "FS PACKAGE"
                 Dim sType As String = ""
-                Dim sCo As String = Me.HFIN_C_ID.Text
+                Dim sCo As String = Me.HFIN_C_ID1.Text
 
                 Dim drop As DropDownList = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlMoveTo"), System.Web.UI.WebControls.DropDownList)
 
@@ -581,7 +544,7 @@ Public Class WFinRep_HeadRecordControl
                 Dim wc3 As WhereClause = New WhereClause
 
 
-                sEmailContent = Replace(sEmailContent, "@C", Me.HFIN_C_ID1.Text)
+                sEmailContent = Replace(sEmailContent, "@C", Me.HFIN_C_ID.Text)
                 sEmailContent = Replace(sEmailContent, "@D", sFSDetail)
                 sEmailContent = Replace(sEmailContent, "@RD", sDeyt)
                 sEmailContent = Replace(sEmailContent, "@Rem", "Report Name: " & sDesc & "</br>" & Me.txtRemarks.Text)
@@ -684,7 +647,7 @@ Public Class WFinRep_HeadRecordControl
                                   "Returned By " & sUserRej, "FS Rejected")
 
 
-                            Send_Email_Notification(CStr(itemValue6.HFIN_U_ID), "FS Approval Needed (Report Name: " & _
+                            Send_Email_Notification(CStr(itemValue6.HFIN_U_ID), "FS Information Needed (Report Name: " & _
                             sDesc & ")", sEmailContent)
 
                             ' UPDATE GL_TRANSACTIONS_SUMMARY ISPOSTED FIELD
@@ -705,19 +668,15 @@ Public Class WFinRep_HeadRecordControl
 
 
 
-
-
-
-
                 Select Case System.Web.HttpContext.Current.Session("UserIDNorth").ToString
                     Case "8"
-                        Dim url As String = "../WFinRep_Head1/WFinRep_Head1Record"
+                        Dim url As String = "../WFinRep_Head1/WFinRep-Head1Record"
                         url = Me.ModifyRedirectUrl(url, "", False)
                         url = Me.Page.ModifyRedirectUrl(url, "", False)
                         Me.Page.ShouldSaveControlsToSession = True
                         Me.Page.Response.Redirect(url)
                     Case Else
-                        Dim url As String = "../WFinRep_Head1/WFinRep-ApproverTable1.aspx"
+                        Dim url As String = "../WFinRep_Head1/WFIN-Approver-Table1.aspx"
                         url = Me.ModifyRedirectUrl(url, "", False)
                         url = Me.Page.ModifyRedirectUrl(url, "", False)
                         Me.Page.ShouldSaveControlsToSession = True
@@ -742,12 +701,12 @@ Public Class WFinRep_HeadRecordControl
             'Dim oRec As WFinRep_DocAttachRecordControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WFinRep_DocAttachRecordControl"), WFinRep_DocAttachRecordControl)
 
             Dim sFinID As String = Me.HFIN_ID.Text ''oRec.FIN_ID.Text
-            Dim sCo1 As String = Me.HFIN_C_ID1.Text ''oRec.FIN_Company1.SelectedItem.ToString
+            Dim sCo1 As String = Me.HFIN_C_ID.Text ''oRec.FIN_Company1.SelectedItem.ToString
             Dim sYr As String = Me.HFIN_Year.Text ''oRec.FIN_Year1.Text
             Dim sMo As String = MonthName(CInt(Me.HFIN_Month2.Text)) ''MonthName(CInt(oRec.FIN_Month1.Text))
             Dim sDesc As String = "FS PACKAGE"
             Dim sType As String = ""
-            Dim sCo As String = Me.HFIN_C_ID.Text
+            Dim sCo As String = Me.HFIN_C_ID1.Text
 
             Dim wc As WhereClause = New WhereClause
 
@@ -806,7 +765,7 @@ Public Class WFinRep_HeadRecordControl
 
                 Dim sEmailContent As String = "Company: @C" & vbCrLf & vbCrLf & "Report Details:" & "@D" & vbCrLf & _
                 vbCrLf & "Date: @RD" & vbCrLf & vbCrLf & "Comment(s): @Rem" & vbCrLf & "Type: @T"
-                sEmailContent = Replace(sEmailContent, "@C", Me.HFIN_C_ID1.Text)
+                sEmailContent = Replace(sEmailContent, "@C", Me.HFIN_C_ID.Text)
                 sEmailContent = Replace(sEmailContent, "@D", sFSDetail)
                 sEmailContent = Replace(sEmailContent, "@RD", sDeyt)
                 sEmailContent = Replace(sEmailContent, "@Rem", "Report Name: " & sDesc & "</br>" & Me.txtRemarks.Text)
@@ -1161,6 +1120,84 @@ Public Class WFinRep_HeadRecordControl
                 End If
                  
         End Sub
+
+        Protected Overrides Sub PopulateddlMoveToDropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+
+            Me.ddlMoveTo.Items.Clear()
+
+            Dim oHeader As WFinRep_HeadRecordControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WFinRep_HeadRecordControl"), WFinRep_HeadRecordControl)
+
+            Dim wc As WhereClause = CreateWhereClause_ddlMoveToDropDownList()
+
+
+            Dim drop As DropDownList = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlMoveTo"), System.Web.UI.WebControls.DropDownList)
+
+            drop.Enabled = True
+            drop.Items.Clear()
+            'note: this populates the Return To drop down
+            Dim wc1 As WhereClause = New WhereClause
+
+            wc1.iAND(WFinRep_Activity1Table.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.DataSource.HFIN_ID.ToString)
+            wc1.iAND(WFinRep_Activity1Table.AFIN_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+            wc1.iAND(WFinRep_Activity1Table.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+            Dim sWhere As String = WFinRep_Activity1Table.AFIN_HFIN_ID.UniqueName & "='" & Me.DataSource.HFIN_ID.ToString & "' And " & WFinRep_Activity1Table.AFIN_W_U_ID.UniqueName & _
+            " = '" & System.Web.HttpContext.Current.Session("UserIDNorth").ToString() & "' And " & WFinRep_Activity1Table.AFIN_Status.UniqueName & " = 4"
+
+            Dim itemValue1 As WFinRep_Activity1Record
+            Dim bNoParent As Boolean = False
+            Dim sStepID As String = ""
+            Dim sStepType As String = ""
+            For Each itemValue1 In WFinRep_Activity1Table.GetRecords(sWhere, Nothing, 0, 100)
+                If (itemValue1.AFIN_IDSpecified) Then
+                    sStepID = itemValue1.AFIN_WS_ID.ToString()
+
+                    Do While sStepType <> "Start"
+                        Dim wc2 As WhereClause = New WhereClause
+                        Dim itemValue2 As WFinRep_Step1Record
+                        wc2.iAND(WFinRep_Step1Table.WFIN_S_ID_Next, BaseFilter.ComparisonOperator.EqualsTo, sStepID)
+
+
+                        If WFinRep_Step1Table.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+                            For Each itemValue2 In WFinRep_Step1Table.GetRecords(wc2, Nothing, 0, 100)
+                                If itemValue2.WFIN_S_IDSpecified Then
+                                    Dim cvalue As String = Nothing
+                                    Dim fvalue As String = Nothing
+
+                                    cvalue = itemValue2.WFIN_S_ID.ToString()
+                                    fvalue = itemValue2.WFIN_S_Desc.ToString()
+                                    sStepID = cvalue
+                                    sStepType = itemValue2.WFIN_S_Step_Type
+
+                                    Dim item As ListItem = New ListItem(fvalue, cvalue)
+                                    drop.Items.Add(item)
+                                End If
+                            Next
+                        Else
+                            sStepType = "Start"
+                        End If
+                    Loop
+                End If
+
+            Next
+
+            Dim cvalue1 As String = Nothing
+            Dim fvalue1 As String = Nothing
+
+
+            cvalue1 = "0"
+            fvalue1 = "Bookeeper"
+
+            Dim item1 As ListItem = New ListItem(fvalue1, cvalue1)
+            Me.ddlMoveTo.Items.Add(item1)
+
+            If Me.ddlMoveTo.Items.Count > 0 Then
+                'note: default to first step
+                Me.ddlMoveTo.SelectedIndex = Me.ddlMoveTo.Items.Count - 1
+            End If
+
+        End Sub
 End Class
 
 
@@ -1210,49 +1247,7 @@ End Class
         End Sub
 
             
-		Public Overrides Sub SetHFIN_Month()
-            
-                  
-            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_MonthSpecified Then
-                				
-                ' If the HFIN_Month is non-NULL, then format the value.
-
-                ' The Format method will return the Display Foreign Key As (DFKA) value
-                                  Dim formattedValue As String = ""
-                                  Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_Head1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_Head1Table.HFIN_Month)
-                                  If _isExpandableNonCompositeForeignKey AndAlso WFinRep_Head1Table.HFIN_Month.IsApplyDisplayAs Then
-                                  
-                                      formattedValue = WFinRep_Head1Table.GetDFKA(Me.DataSource.HFIN_Month.ToString(),WFinRep_Head1Table.HFIN_Month, Nothing)
-                                    
-                                  if (formattedValue Is Nothing) Then
-                                  formattedValue = Me.DataSource.Format(WFinRep_Head1Table.HFIN_Month)
-                                End If
-                                Else
-                                formattedValue = Me.DataSource.HFIN_Month.ToString()
-                                  End If
-                                
-                formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                Me.HFIN_Month.Text = monthname(cint(formattedValue))
-                
-            Else 
-            
-                ' HFIN_Month is NULL in the database, so use the Default Value.  
-                ' Default Value could also be NULL.
-        
-                Me.HFIN_Month.Text = WFinRep_Head1Table.HFIN_Month.Format(WFinRep_Head1Table.HFIN_Month.DefaultValue)
-                        		
-                End If
-                 
-            ' If the HFIN_Month is NULL or blank, then use the value specified  
-            ' on Properties.
-            If Me.HFIN_Month.Text Is Nothing _
-                OrElse Me.HFIN_Month.Text.Trim() = "" Then
-                ' Set the value specified on the Properties.
-                Me.HFIN_Month.Text = "&nbsp;"
-            End If
-                  
-        End Sub
-End Class
+    End Class
     Public Class WFinRep_Activity1TableControl
         Inherits BaseWFinRep_Activity1TableControl
 

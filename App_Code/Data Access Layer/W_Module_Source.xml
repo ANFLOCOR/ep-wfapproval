@@ -141,7 +141,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>W_Module_Source_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WASP</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
@@ -153,4 +152,5 @@
   <MenuName>W Module Source</MenuName>
   <QSPath>../W_Module_Source/W-Module-Source-QuickSelector.aspx</QSPath>
   <TableCodeName>W_Module_Source</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalW_Module_Source</TableStoredProcPrefix>
 </XMLDefinition>

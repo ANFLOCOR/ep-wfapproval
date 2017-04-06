@@ -1206,6 +1206,7 @@ Public Class WFinRep_HeadRecordControl
                     If WFinRep_ActivityTable.GetRecords(wc3, Nothing, 0, 100).Length > 0 Then
                         For Each itemValue3 As WFinRep_ActivityRecord In WFinRep_ActivityTable.GetRecords(wc3, Nothing, 0, 100)
                             'note: update Activity table (current user) -> 'Rejected'
+
                             WFinRep_ActivityRecord.UpdateRecord(itemValue3.AFIN_ID.ToString, 9)
                             Update_WFinRep_Head(CInt(sCo), CInt(9), CInt(sFinID), False)
                             Update_WFinRep_DocAttach(CInt(sCo), CInt(9), CStr(sFinID)) ' UPDATE DOC_ATTACH TO NOT SUBMITTED
@@ -1241,7 +1242,7 @@ Public Class WFinRep_HeadRecordControl
                                 sEmailContent = Content_Formatter(itemValue4.WFIN_SD_W_U_ID.ToString, _
                                  "FS RETURNED FOR REVISION INFORMATION (FS Document ID#  " & sFinID & ")", CStr(sCo1), _
                                  sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
-                                 System.Web.HttpContext.Current.Session("UserID").ToString(), "#f46f6f", "WFinRep_Head/WFin_ApproverTable.aspx", sFinID, _
+                                 System.Web.HttpContext.Current.Session("UserID").ToString(), "#f46f6f", "WFinRep_Head/WFin-Approver-Table.aspx", sFinID, _
                                  "Returned By " & sUserRej, "FS Returned for Revision", "FS Creator")
 
                                 Send_Email_Notification(CStr(itemValue4.WFIN_SD_W_U_ID.ToString), "FS Returned for Revision Information (Report Name: " & Me.Description_MY.Text & _
@@ -1254,7 +1255,7 @@ Public Class WFinRep_HeadRecordControl
                     sEmailContent = Content_Formatter(Me.HFIN_U_ID.Text, _
                                  "FS RETURNED FOR REVISION INFORMATION (FS Document ID#  " & sFinID & ")", CStr(sCo1), _
                                  sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
-                                 System.Web.HttpContext.Current.Session("UserID").ToString(), "#f46f6f", "WFinRep_Head/WFin_ApproverTable1.aspx", sFinID, _
+                                 System.Web.HttpContext.Current.Session("UserID").ToString(), "#f46f6f", "WFinRep_Head/WFin-Approver-Table.aspx", sFinID, _
                                  "Returned By " & sUserRej, "FS Returned for Revision", "FS Creator")
 
                     Send_Email_Notification(CStr(Me.HFIN_U_ID.Text), "FS Returned for Revision Information (Report Name: " & Me.Description_MY.Text & _

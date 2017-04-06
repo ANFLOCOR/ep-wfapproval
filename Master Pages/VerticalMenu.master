@@ -615,13 +615,13 @@ ISD_GeolocationInit();
 
 
   if (type1.value == "BS") {
-  var url = '../WFinRep_Head/WFin_RepBSApproveView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value;
+  var url = '../WFinRep_Head1/WFin-RepBSApproveView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value;
   window.open(url, '', params);}
   else if (type1.value == "IS") {
-  var url = '../WFinRep_Head/WFin_RepISApproveView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value;
+  var url = '../WFinRep_Head1/WFin-RepISApproveView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value;
   window.open(url, '', params);}
   else{
-  var url = '../WFinRep_Head/WFin_RepCFApproveView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value;
+  var url = '../WFinRep_Head1/WFin-RepCFApproveView.aspx?Control1=' + type2.value + '&Control2=' + type3.value + '&Control3=' + type1.value + '&Control4=' + type4.value + '&compDB=' + Company.value;
   window.open(url, '', params);}
 
   }

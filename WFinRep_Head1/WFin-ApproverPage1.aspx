@@ -160,7 +160,7 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td style="padding-right: 5px; vertical-align:top">
-<asp:TextBox runat="server" id="HFIN_Month1" Columns="14" MaxLength="14" cssclass="field_input" htmlencodevalue="Default" textformat="{0}"></asp:TextBox></td>
+<asp:TextBox runat="server" id="HFIN_Month1" Columns="14" MaxLength="14" cssclass="field_input" htmlencodevalue="Default" textformat="{0}" visible="False"></asp:TextBox></td>
 <td>
 &nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="HFIN_Month1TextBoxMaxLengthValidator" ControlToValidate="HFIN_Month1" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;HFIN Month&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td>
