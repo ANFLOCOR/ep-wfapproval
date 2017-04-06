@@ -1,0 +1,458 @@
+/**********************************************************************
+ * MobileStyles.LeftToRight.css                                       *
+ *                                                                    *
+ * This file contains the mobile styles for Left to Right languages.  *
+ * This file will be copied to MobileStyles.css if you select a LTR   *
+ * language as the primary language of your application.              *
+ *                                                                    *
+ * Do not modify this file.  To override any of the styles, please    *
+ * modify the Styles.css file.                                        *
+ *                                                                    *
+ **********************************************************************/
+
+HTML { /* language direction flow of content on page */
+	direction: ltr;
+	}
+
+
+/**********************************************************************
+ * Mobile Web Page Styles                                             * 
+ **********************************************************************/
+.mobileBase { /* mobile page default settings */
+	background-color: #ffffff;
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 3.0em;
+	width: 100%;
+	}
+
+.mobileHeader { /* mobile header area */
+	background-color: #1f3541;
+	padding-left: 3%;
+	padding-right: 3%;
+	width: 100%;
+	}
+
+.mobileHeaderPagination { /* mobile header area */
+	background-color: #f1f3ec;
+	padding-left: 3%;
+	padding-right: 3%;
+	width: 100%;
+	}
+
+.mobileBody { /* mobile main content area */ 
+	padding-bottom: 4%;
+	padding-left: 2%;
+	padding-right: 2%;
+	padding-top: 2%;
+	width: 100%;
+	}
+
+.mobileBodyNoPadding { /* mobile main content area (with padding removed) */
+	padding: 0px;
+	width: 100%;
+	}
+
+.mobileBodyText { /* mobile main content area default text styles */
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 0.73em;
+	}
+
+.mobileHeaderLeft { /* mobile header area left button container */
+	text-align: left;
+	width: 10%;
+	}
+
+.mobileHeaderTitle { /* mobile header title area */
+	color: #ffffff;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 1.2em;
+	padding-bottom: 4%;
+	padding-top: 4%;
+	text-align: center;
+	}
+
+.mobileFontAdjust90 { /* mobile font downscale to 90% original size (used in <span> tag around text to be adjusted) */
+	font-size: 0.9em;
+	}
+
+.mobileFontAdjust80 { /* mobile font downscale to 80% original size (used in <span> tag around text to be adjusted) */
+	font-size: 0.8em;
+	}
+
+.mobileFontAdjust70 { /* mobile font downscale to 70% original size (used in <span> tag around text to be adjusted) */ 
+	font-size: 0.7em;
+	}
+
+.mobileFontAdjust60 { /* mobile font downscale to 60% original size (used in <span> tag around text to be adjusted) */
+	font-size: 0.6em;
+	}
+
+.mobileHeaderOptions { /* mobile header area icon button container */
+	width: 10%;
+	}
+
+.mobileHeaderRight { /* mobile header area right button container */
+	text-align: right;
+	width: 10%;
+	}
+
+.mobileSignInStatus {
+	color: #ffffff;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 0.8em;
+	text-align: right;
+	}
+
+.mobileFilterArea { /* mobile header filter area */
+	background-color: #eeeeee;
+	}
+
+.mobileFooter { /* mobile footer area */
+	border-top: 2px solid #cccccc;
+	color: #aaaaaa;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 0.6em;
+	padding-bottom: 2%;
+	padding-left: 3%;
+	padding-top: 1%;
+	width: 100%;
+	}
+
+.mobileMenu { /* mobile vertical menu item */
+	background-color: #eaeaea;
+	border-top: 2px solid #ffffff;
+	border-bottom: 2px solid #dddddd;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	color: #375e41;
+	cursor: pointer !important;
+	font-size: 1.2em;
+	font-weight: normal;
+	padding-bottom: 3%;
+	padding-left: 2%;
+	padding-right: 2%;
+	padding-top: 3%;
+	text-transform: none;
+	width: 100%;
+	}
+
+.mobileSubmenuContainer { /* submenu container (menu leaves) */
+	border: 1px solid #dbdbd7;
+	z-index: 100;
+	}
+
+.mobileSubmenu { /* mobile menu item submenu */
+	background-color: #d9dcdf;
+	color: #bbbbbb;
+	cursor: pointer !important;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 1.0em;
+	padding: 1%;
+	text-transform: none;
+	}
+
+.mobileMenuHorizontal { /* mobile horizontal menu item */
+	background-color: #eaeaea;
+	border-bottom: 2px solid #dddddd;
+	border-right: 2px solid #dddddd;
+	border-top: 2px solid #ffffff;
+	color: #375e41;
+	cursor: pointer !important;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 1.2em;
+	font-weight: normal;
+	padding-bottom: 2%;
+	padding-top: 2%;
+	text-transform: none;
+	}
+
+a.mobileButtonLink:link, a.mobileButtonLink:visited, .mobileButtonLink { /* mobile theme button link text */
+	color: #679438;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 0.87em;
+	text-decoration: none;
+	text-transform: uppercase;
+	}
+
+a.mobileLink:link, a.mobileLink:visited, .mobileLink { /* mobile link text */
+	color: #679438;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 1.0em;
+	text-decoration: underline;
+	}
+
+.mobileThemeButton {
+	-moz-border-radius: 10px;
+	-moz-box-shadow: inset 0px -2px 0px 0px #ffffff;
+	-webkit-border-radius: 10px;
+	-webkit-box-shadow: inset 0px -2px 0px 0px #ffffff;
+	background: -moz-linear-gradient( center top, #ffffff 20%, #d7d7d7 100% );
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.20, #ffffff), color-stop(1, #d7d7d7) );
+	background: -ms-linear-gradient(top, #ffffff 5%, #d7d7d7 100%);
+	box-shadow: 0px -2px 0px #ffffff inset;
+	border: 2px solid #8f8f8f;
+	border-radius: 10px;
+	display: inline-block;
+    	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', endColorStr='#d7d7d7');
+	padding: 22px 10px 22px 10px;
+	text-decoration: none;
+	text-shadow: 0px -2px 0px #ffffff;
+	white-space: nowrap;
+	}
+
+.mobileTableCellTitle { /* mobile show table cell title */
+	font-size: 1.2em;
+	font-weight: bold;
+	}
+
+.mobileTableCell { /* mobile show table cell */
+	border-bottom: 2px solid #cccccc;
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 0.9em;
+	padding: 2%;
+	}
+
+.mobileTableImageCell { /* mobile show table cell (to keep image cell narrow) */
+	border-bottom: 2px solid #cccccc;
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 0.9em;
+	padding: 2%;
+	width: 1%;
+	}
+
+.mobileChildTableContainer { /* mobile child table container */
+	border: 2px solid #cccccc;
+	margin-bottom: 2%;
+	}
+
+.mobileAccordionHeader { /* mobile accordion header area */ 
+	background-color: #1f3541;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	padding-bottom: 2%;
+	padding-left: 2%;
+	padding-top: 2%;
+	vertical-align: middle;
+	}
+
+.mobileAccordionHeaderTitle { /* mobile accordion header area title */
+	color: #ffffff;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 1.0em;
+	font-weight: normal;
+	padding-left: 1%;
+	padding-right: 1%;
+	text-decoration: none;
+	width: 100%;
+	}
+
+.mobileChildTableCellTitle { /* mobile show child table title */
+	font-size: 1.2em;
+	font-weight: bold;
+	}
+
+.mobileChildTableCell { /* mobile show child table cell */
+	background-color: #efefef;
+	border-bottom: 2px solid #b0bec7;
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 0.9em;
+	padding: 2%;	
+	}
+
+.mobileRecordPanel { /* mobile record panel area */
+	padding-bottom: 10%;
+	}
+
+.mobileFieldLabelOnTop { /* mobile record field label (above field value) */
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 0.87em;
+	padding-bottom: 1%;
+	padding-top: 3%;
+	}
+
+.mobileFieldLabelOnRight { /* mobile record field label (to right of checkbox) */
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 0.67em;
+	padding-bottom: 2%;
+	width: 100%;
+	}
+
+.mobileFieldLabelOnLeft { /* mobile record field label (checkbox) */
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 0.67em;
+	padding-bottom: 2%;
+	}
+
+.mobileFieldValueOnBottom { /* mobile record field value (below field label) */
+	color: #555555;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 1.0em;
+	padding-bottom: 2%;
+	}
+
+.mobileFieldInput { /* mobile input textbox */
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 1.0em;
+	}
+
+textarea.mobileFieldInput { /* explicitly define width of mobile textarea (work-around for compressed textarea in Live Preview) */
+	width: 86%;
+	}
+
+.mobileFilterInput { /* mobile drop-down list */
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 1.0em;
+	width: 86%;
+	}
+
+.mobilePaginationArea { /* mobile pagination area */
+	}
+
+.mobilePaginationAreaFirst { /* mobile pagination first button container */
+	text-align: left;
+	}
+
+.mobilePaginationAreaPrevious { /* mobile pagination previous button container */
+	text-align: right;
+	}
+
+.mobilePaginationAreaCurrentPage { /* mobile pagination current page text */
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 1.0em;
+	text-align: center;
+	white-space: nowrap;
+	width: 30%;
+	}
+
+.mobilePaginationAreaNext { /* mobile pagination next button container */
+	text-align: left;
+	}
+
+.mobilePaginationAreaLast { /* mobile pagination last button container */
+	text-align: right;
+	}
+
+.mobilePaginationAreaSize { /* mobile pagination page size container */
+	}
+
+.mobileCheckbox input, input.mobileCheckbox { /* mobile checkbox (accounts for <span> container around checkbox) */
+	height: 50px;
+	width: 50px;
+	}
+
+.mobileRadioButton input, input.mobileRadioButton { /* mobile radio button (accounts for <span> container around checkbox) */
+	height: 50px;
+	width: 50px;
+	}
+
+.MyCalendarMobile .ajax__calendar_container { /* mobile ajax calendar container */
+	background-color: #ffffff;
+	border: 1px solid #666666;
+	color: #666666;
+	height: 780px;
+	width: 720px;
+	z-index: 20;
+	}
+
+.MyCalendarMobile .ajax__calendar_body, .MyCalendarMobile .ajax__calendar_body table { /* mobile ajax calendar container inner table */
+	background-color: #ffffff;
+	height: 600px;
+	width: 720px;
+	}
+
+.MyCalendarMobile .ajax__calendar_header { /* mobile ajax calendar header */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 4.0em;
+	padding-bottom: 40px;
+	}
+
+.MyCalendarMobile .ajax__calendar_title { /* mobile ajax calendar title */
+	color: #bbbbbb;
+	font-size: 1.2em;
+	padding-top: 30px;
+	}
+
+.MyCalendarMobile .ajax__calendar_footer { /* mobile ajax calendar footer (today's date) */
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 3.0em;
+	padding-top: 20px;
+	}
+
+.MyCalendarMobile .ajax__calendar_prev {
+	background-image: url(../../Images/MobileButtonPrevious.ltr.png);
+	background-repeat: no-repeat;
+	height: 120px;
+	width: 100px; 
+	}
+
+.MyCalendarMobile .ajax__calendar_next {
+	background-image: url(../../Images/MobileButtonNext.ltr.png);
+	background-repeat: no-repeat;
+	height: 120px;
+	width: 100px; 
+	}
+
+.MyCalendarMobile .ajax__calendar_dayname { /* mobile ajax calendar days of week title */
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 4.0em;
+	}
+
+.MyCalendarMobile .ajax__calendar_day { /* mobile ajax calendar all days */ 
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 4.0em;
+	}
+
+.MyCalendarMobile .ajax__calendar_month, .MyCalendarMobile .ajax__calendar_year { /* mobile ajax calendar all months, years */ 
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 2.0em;
+	}
+
+.MyCalendarMobile .ajax__calendar_months, .MyCalendarMobile .ajax__calendar_years {
+	}
+
+.MyCalendarMobile .ajax__calendar_other .ajax__calendar_day,
+.MyCalendarMobile .ajax__calendar_other .ajax__calendar_month,
+.MyCalendarMobile .ajax__calendar_other .ajax__calendar_year { /* mobile ajax calendar non-current days */
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 4.0em;
+	}
+
+.MyCalendarMobile .ajax__calendar_hover .ajax__calendar_day,
+.MyCalendarMobile .ajax__calendar_hover .ajax__calendar_month,
+.MyCalendarMobile .ajax__calendar_hover .ajax__calendar_year { /* mobile ajax calendar today/selected day hover */
+	color: #bbbbbb;
+	}
+
+.MyCalendarMobile .ajax__calendar_active .ajax__calendar_day,
+.MyCalendarMobile .ajax__calendar_active .ajax__calendar_month,
+.MyCalendarMobile .ajax__calendar_active .ajax__calendar_year { /* mobile ajax calendar current day */
+	color: #bbbbbb;
+	}
+
+.mobileRecaptchaImage img { 
+	height: 300px; 
+	width: 640px; 
+	margin: 0px; 
+	padding: 0px; 
+	}
+
+.mobileRecaptchaContainer { 
+	height: 300px;
+	width: 640px;
+	margin: 0px; 
+	padding: 0px; 
+	}
+
+

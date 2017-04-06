@@ -1,0 +1,1475 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ComponentDefinition xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.ironspeed.com/designer">
+  <Generator>Iron Speed Designer</Generator>
+  <Version>12.1.0</Version>
+  <Self>
+    <Name>VerticalMenu</Name>
+    <Type>Master</Type>
+    <SubType>DotNet</SubType>
+    <PopupCssClass>QPageSize</PopupCssClass>
+    <GenerateDirectory>Master Pages</GenerateDirectory>
+    <Layout>Master Pages\VerticalMenu.html</Layout>
+    <DisplayName>VerticalMenu</DisplayName>
+    <Description>Master Page with a Vertical Menu.</Description>
+  </Self>
+  <ComposedOf>
+    <ContainedComponent>
+      <Name>MenuV</Name>
+      <Type>Menu</Type>
+      <Layout>..\Menu Panels\Menu.ascx</Layout>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>HiliteSettings</Name>
+          <Value />
+        </Attribute>
+      </PassthroughAttributes>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>PageFooter</Name>
+      <Type>Footer</Type>
+      <Layout>..\Header and Footer\Footer.ascx</Layout>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>PageHeader</Name>
+      <Type>Header</Type>
+      <Layout>..\Header and Footer\Header.ascx</Layout>
+    </ContainedComponent>
+  </ComposedOf>
+  <LayoutDefinition>&lt;![CDATA[&lt;?xml version="1.0" encoding="utf-16"?&gt;
+    &lt;LayoutDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;    
+      &lt;Layout Name="Master" Type="RootLayout"&gt;      
+        &lt;Prolog&gt;
+
+  &lt;Value&gt;&amp;lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&amp;gt;
+    &amp;lt;html xmlns="http://www.w3.org/1999/xhtml"&amp;gt;
+    &amp;lt;head id="Head1" runat="server"&amp;gt;
+    &amp;lt;meta http-equiv="X-UA-Compatible" content="IE=Edge"/&amp;gt;
+    &amp;lt;meta name="keywords" content="ePortalWFApproval"/&amp;gt;
+    &amp;lt;title&amp;gt;&amp;lt;/title&amp;gt;
+
+    &amp;lt;link type="text/css" href="../jquery/css/start/jquery-ui-1.8.1.custom.css" rel="stylesheet" /&amp;gt;
+    &amp;lt;script type="text/javascript" src="../jquery/js/jquery-1.4.2.min.js"&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;script type="text/javascript" src="../jquery/js/jquery-ui-1.8.1.custom.min.js"&amp;gt;&amp;lt;/script&amp;gt;
+    &amp;lt;OBJECT ID="RSClientPrint" CLASSID="CLSID:5554DCB0-700B-498D-9B58-4E40E5814405" CODEBASE="\\anflonorth-web\RSClientPrintControl\RSClientPrint-x86.cab" VIEWASTEXT&amp;gt;&amp;lt;/OBJECT&amp;gt;
+
+    &amp;lt;script type="text/javascript"&amp;gt;
+    //$(document).ready(function() {
+    //    $("table .ttc").css({ background: "ffffff" }).hover(
+    //        function() { $(this).css({ background: "#C1DAD7" }); },
+    //        function() { $(this).css({ background: "#ffffff" }); }
+    //        );
+    //});
+    function ShowAlert(titletext,message,note){
+    //if (e) {e.returnValue = false;}
+    titletext = titletext.replace(' ','&amp;amp;nbsp;');//&amp;amp;#32
+    var tag = "&amp;lt;div id='alerter' title=" + titletext + "&amp;gt;&amp;lt;span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;p&amp;gt;" + message + "&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;i&amp;gt;&amp;lt;b&amp;gt;Note &amp;lt;/b&amp;gt;" + note + "&amp;lt;/p&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/div&amp;gt;";
+    $('#alerter').remove();
+    $(tag).appendTo(document.body);
+    $(function(){
+    $('#alerter').dialog({
+    //autoOpen: false,
+    show: 'drop',
+    hide: 'drop',
+    width: 480,
+    height: 320,
+    modal: true,
+    buttons: {
+    "Ok": function() {
+    $(this).dialog("close");
+    }
+    }
+    })});
+    $('#alerter').dialog('open');
+    }
+
+    function RunIE() {
+    File="iexplore.exe http://agridata/gpwx";
+    WSH=new ActiveXObject("WScript.Shell");
+    WSH.run(File);
+    }
+
+    function ShowBrowserAlert(titletext,message,note){
+    titletext = titletext.replace(' ','&amp;amp;nbsp;');//&amp;amp;#32
+    var tag = "&amp;lt;div id='browseralerter' title=" + titletext + "&amp;gt;&amp;lt;span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;p&amp;gt;" + message + "&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;i&amp;gt;&amp;lt;b&amp;gt;Note &amp;lt;/b&amp;gt;" + note + "&amp;lt;/p&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/div&amp;gt;";
+    $('#browseralerter').remove();
+    $(tag).appendTo(document.body);
+    $(function(){
+    $('#browseralerter').dialog({
+    //autoOpen: false,
+    show: 'drop',
+    hide: 'drop',
+    width: 480,
+    height: 320,
+    modal: true,
+    buttons: {
+    "Ok": function() {
+    $(this).dialog("close");
+    }
+    }
+    })});
+    $('#browseralerter').dialog('open');
+    }
+    function ShowConfirm(e,titletext,message,note){
+    if (e) {e.returnValue = false;}
+    titletext = titletext.replace(' ','&amp;amp;nbsp;');//&amp;amp;#32
+    var tag = "&amp;lt;div id='dialog' title=" + titletext + "&amp;gt;&amp;lt;span class='ui-icon ui-icon-help' style='float:left; margin:0 7px 20px 0;'&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;p&amp;gt;" + message + "&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;i&amp;gt;&amp;lt;b&amp;gt;Note &amp;lt;/b&amp;gt;" + note + "&amp;lt;/p&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/div&amp;gt;";
+    $('#dialog').remove();
+    $(tag).appendTo(document.body);
+    $(function(){
+    $('#dialog').dialog({
+    autoOpen: false,
+    show: 'drop',
+    hide: 'drop',
+    width: 480,
+    height: 320,
+    modal: true,
+    buttons: {
+    "Ok": function() {
+    //var ret = $(this).dialog('option', 'srcElement');
+    //var obj = document.getElementById($(this).dialog('option', 'srcElement').name);
+    __doPostBack($(this).dialog('option', 'srcElement').name,'');
+    $(this).dialog("close");
+    },
+    "Cancel": function() {
+    $(this).dialog("close");
+    }
+    }
+    })});
+    if (e) {$('#dialog').dialog('option', 'srcElement', e.srcElement).dialog('open');}
+    else {$('#dialog').dialog('open');}
+    //$('#dialog').dialog('option', 'srcElement', e.srcElement).dialog('open');
+    }
+    function ShowConfirm2(e,titletext,message,note,SubmitFunc){
+    if (e) {e.returnValue = false;}
+    titletext = titletext.replace(' ','&amp;amp;nbsp;');
+    var tag = "&amp;lt;div id='dialog' title=" + titletext + "&amp;gt;&amp;lt;span class='ui-icon ui-icon-help' style='float:left; margin:0 7px 20px 0;'&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;p&amp;gt;" + message + "&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;i&amp;gt;&amp;lt;b&amp;gt;Note &amp;lt;/b&amp;gt;" + note + "&amp;lt;/p&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/div&amp;gt;";
+    $('#dialog').remove();
+    $(tag).appendTo(document.body);
+    $(function(){
+    $('#dialog').dialog({
+    autoOpen: false,
+    show: 'drop',
+    hide: 'drop',
+    width: 480,
+    height: 320,
+    modal: true,
+    buttons: {
+    "Ok": function() {
+    SubmitFunc();
+    __doPostBack($(this).dialog('option', 'srcElement').name,'');
+    $(this).dialog("close");
+    },
+    "Cancel": function() {
+    $(this).dialog("close");
+    }
+    }
+    })});
+    if (e) {$('#dialog').dialog('option', 'srcElement', e.srcElement).dialog('open');}
+    else {$('#dialog').dialog('open');}
+    }
+    function ShowConfirmVoid(e,titletext,message,note,message2,note2){
+    e.returnValue = false;
+    titletext = titletext.replace(' ','&amp;amp;nbsp;');//&amp;amp;#32
+    var tag1 = "&amp;lt;div id='void' title=" + titletext + "&amp;gt;&amp;lt;span class='ui-icon ui-icon-alert' style='float:left; margin:0 7px 20px 0;'&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;p&amp;gt;" + message + "&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;i&amp;gt;&amp;lt;b&amp;gt;Note &amp;lt;/b&amp;gt;" + note + "&amp;lt;/p&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/div&amp;gt;";
+    var tag2 = "&amp;lt;div id='void2' title=" + titletext + "&amp;gt;&amp;lt;span class='ui-icon ui-icon-help' style='float:left; margin:0 7px 20px 0;'&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;p&amp;gt;" + message2 + "&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;i&amp;gt;&amp;lt;b&amp;gt;Note &amp;lt;/b&amp;gt;" + note2 + "&amp;lt;/p&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/div&amp;gt;";
+    $('#void').remove();
+    $('#void2').remove();
+    $(tag1).appendTo(document.body);
+    $(tag2).appendTo(document.body);
+    $(function(){
+    $('#void2').dialog({
+    autoOpen: false,
+    show: 'drop',
+    hide: 'drop',
+    width: 480,
+    height: 320,
+    modal: true,
+    buttons: {
+    "Ok": function() {
+    var control_name = $(this).dialog('option', 'name');
+    //var obj = document.getElementById($(this).dialog('option', 'srcElement').name);
+    __doPostBack(control_name,'');
+    $(this).dialog("close");
+    },
+    "Cancel": function() {
+    $(this).dialog("close");
+    }
+    }
+    });
+    $('#void').dialog({
+    autoOpen: false,
+    show: 'drop',
+    hide: 'drop',
+    width: 480,
+    height: 320,
+    modal: true,
+    buttons: {
+    "Ok": function() {
+    //var ret = $(this).dialog('option', 'srcElement');
+    //var obj = document.getElementById($(this).dialog('option', 'srcElement').name);
+    //__doPostBack($(this).dialog('option', 'srcElement').name,'');
+    $(this).dialog("close");
+    $('#void2').dialog('option', 'name', $(this).dialog('option', 'srcElement').name).dialog('open');
+    },
+    "Cancel": function() {
+    $(this).dialog("close");
+    }
+    }
+    })});
+    $('#void').dialog('option', 'srcElement', e.srcElement).dialog('open');
+    }
+    function jq_toggle_col_vis(table,cols) {
+    cols=cols*1;
+    for (var col=3; col&amp;lt;=cols+2; col++) {
+    $('#' + table + ' tr:nth-child(' + col + '),td:nth-child(' + col + ')').show();
+    $('#' + table + ' td:nth-child(' + col + '),th:nth-child(' + col + ')').show();
+    }
+    for (var col=cols+3; col&amp;lt;=12; col++) {
+    $('#' + table + ' tr:nth-child(' + col + '),td:nth-child(' + col + ')').hide();
+    $('#' + table + ' td:nth-child(' + col + '),th:nth-child(' + col + ')').hide();
+    }
+    for (var col=cols+3; col&amp;lt;=12; col++) {
+    $('#' + table + ' td:nth-child(' + col + '),tr:nth-child(' + col + ')').show();
+    }
+    }
+    function jq_toggle_col_vis2(table,control) {
+    var target = document.getElementById(control);
+    var cols = target.value;
+    cols=cols*1;
+    for (var col=3; col&amp;lt;=cols+2; col++) {
+    $('#' + table + ' tr:nth-child(' + col + '),td:nth-child(' + col + ')').show();
+    $('#' + table + ' td:nth-child(' + col + '),th:nth-child(' + col + ')').show();
+    }
+    for (var col=cols+3; col&amp;lt;=12; col++) {
+    $('#' + table + ' tr:nth-child(' + col + '),td:nth-child(' + col + ')').hide();
+    $('#' + table + ' td:nth-child(' + col + '),th:nth-child(' + col + ')').hide();
+    }
+    for (var col=cols+3; col&amp;lt;=12; col++) {
+    $('#' + table + ' td:nth-child(' + col + '),tr:nth-child(' + col + ')').show();
+    }
+    }
+    &amp;lt;/script&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body id="Body1" runat="server" class="pBack"&amp;gt;
+        &amp;lt;form id="Form1" method="post" runat="server"&amp;gt;
+&amp;lt;script type="text/javascript"&amp;gt;
+&amp;lt;!--
+ISD_GeolocationInit();
+//--&amp;gt;
+&amp;lt;/script&amp;gt;
+&amp;lt;script type="text/javascript"  language="javascript"&amp;gt;   Sys.WebForms.PageRequestManager.getInstance().add_pageLoaded(pageLoadedHandler); &amp;lt;/script&amp;gt;
+
+  &amp;lt;script type="text/javascript"  language="javascript"&amp;gt;
+  //check first if running on localhost so that you can substitute the url
+  var sURL = document.location.href;
+  var nIndex = sURL.indexOf('localhost');
+  var nLocal = sURL.indexOf('Security');
+
+  if (navigator.userAgent.indexOf('MSIE') ==-1){
+  //ShowBrowserAlert('Browser Requirement','Some scripts are not compatible with this browser which causes the application not to work properly. Open Microsoft Internet Explorer and try accessing this site again.\nThank you.','Contact the administrator if this message still persists.');
+  }
+  else{//if using IE
+  //if (nIndex &amp;lt;= 0) {
+  //not local
+  //}
+  //else {
+  //	window.location='http://agridata/gpwx';
+  //}
+  }
+  //document.write(sURL.substr(0,nLocal+7) + '/');
+  //document.location.href=sURL.substr(0,nLocal+8) + '/SignIn.aspx';
+  //window.location.reload;
+  &amp;lt;/script&amp;gt;
+
+  &amp;lt;script type="text/javascript"  language="javascript"&amp;gt;
+  function OpenCustomerSelector(target)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var url = '../wf_pr/Selector_Reference_CAR.aspx?target=' + target; window.open(url, '', params);
+  }
+  function OpenCARSelector(target)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var url = '../wf_car/Selector_Supplementary_CAR.aspx?target=' + target; window.open(url, '', params);
+  }
+  function OpenItemSelector(ItemNo,ItemDesc,ItemCost,ItemUoM,ControlNameRefresh,TrueRefresh,Account)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var url = '../wf_pr/Selector_IV00101_Item.aspx?ItemNo=' + ItemNo + '&amp;amp;ItemDesc=' + ItemDesc + '&amp;amp;ItemCost=' + ItemCost + '&amp;amp;ItemUoM=' + ItemUoM + '&amp;amp;ControlNameRefresh=' + ControlNameRefresh + '&amp;amp;TrueRefresh=' + TrueRefresh + '&amp;amp;Account=' + Account;
+  window.open(url, '', params);
+  }
+  function OpenSubItems(ItemNo)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var url = '../wf_pr/Selector_WPR_Line_Sub.aspx?ItemNo=' + ItemNo;
+  window.open(url, '', params);
+  }
+  function OpenItemSelector3(ItemNo,ItemDesc)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var url = '../wf_pr/Selector_IV00101_Item_PR.aspx?ItemNo=' + ItemNo + '&amp;amp;ItemDesc=' + ItemDesc;
+  window.open(url, '', params);
+  }
+  function OpenVendorSelector(VendorID,VendName)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var url = '../WCanvass_Internal/Selector-PM00200-Vendor.aspx?VendorID=' + VendorID + '&amp;amp;VendName=' + VendName;
+  window.open(url, '', params);
+  }
+  function OpenAccountSelector(Account,DescX)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var url = '../wf_pr/Selector_GL00100_Account.aspx?Account=' + Account + '&amp;amp;DescX=' + DescX;
+  window.open(url, '', params);
+  }
+  function OpenPRSelector(PR)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var url = '../wf_cv/Selector_Reference_PR.aspx?PR=' + PR;
+  window.open(url, '', params);
+  }
+  function OpenItemInquiry(Item)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  //var target = window.opener.document.all('&amp;lt;%# Request.Params("Item") %&amp;gt;');
+  var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Item.aspx?ItemNo=' + Item;
+  window.open(url, '', params);
+  }
+  function OpenItemInquiryN(Item)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  //var target = window.opener.document.all('&amp;lt;%# Request.Params("Item") %&amp;gt;');
+  var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Item1.aspx?ItemNo=' + Item;
+  window.open(url, '', params);
+  }
+  function OpenItemIncidentSelector(ItemNo,ItemDesc,UoM)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var url = '../wf_set/Selector_IV00101_Item_Incidental.aspx?ItemNo=' + ItemNo + '&amp;amp;ItemDesc=' + ItemDesc + '&amp;amp;UoM=' + UoM;
+  window.open(url, '', params);
+  }
+  function OpenRelatedCAR(CAR,Company)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var tar = document.getElementById(CAR);
+  var target = document.getElementById(Company);
+  var url = '../wf_car/View_Related_CARs.aspx?CAR=' + tar.value + '&amp;amp;Company=' + target.value;
+  window.open(url, '', params);
+  }
+  function OpenItemBinCardInquiry(Site, Item,CompID)
+  {
+  var width  = 475;
+  var height = 225;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  //alert(Site)
+  //alert(Item)
+  //var target1 = document.getElementById(Site);
+  //var target2 = document.getElementById(Item);
+  //alert(target1)
+  //var url = '../wf_pr/Inquiry_IV00102_Bincard.aspx';
+  var url = '../wf_pr/Inquiry_IV00102_Bincard.aspx?Site=' + Site + '&amp;amp;ItemNo=' + Item + '&amp;amp;CompID=' + CompID;
+  //alert(url)
+  window.open(url, '', params);
+  }
+  function OpenRptSelector(RptID,RptPath,RptDesc,RptType,paramCo)
+  {
+  var width  = 700;
+  var height = 400;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var Company = document.getElementById(paramCo);
+
+  var CompanyText = Company.options[Company.selectedIndex].value;
+  if (CompanyText == "DICT") { CompanyText = "DICT"; }
+  var url = '../WFinRep_Head/Select_ReportList.aspx?W_Rpt_ID=' + RptID + '&amp;amp;W_Rpt_Server_Path=' + RptPath  + '&amp;amp;W_Rpt_Desc=' + RptDesc + '&amp;amp;W_Rpt_Type=' + RptType + '&amp;amp;W_Rpt_Co=' + CompanyText;
+  window.open(url, '', params);
+
+  }
+
+  function UpdateRpt(FirstValue,SecondValue,ThirdValue)
+  {
+  var rptID = window.opener.document.all('&amp;lt;%# Request.Params("W_Rpt_ID")%&amp;gt;');
+  var rptPath = window.opener.document.all('&amp;lt;%# Request.Params("W_Rpt_Server_Path")%&amp;gt;');
+  var rptDesc = window.opener.document.all('&amp;lt;%# Request.Params("W_Rpt_Desc")%&amp;gt;');
+  rptID.value = FirstValue;
+  rptPath.value = SecondValue;
+  rptDesc.value = ThirdValue;
+  rptPath.fireEvent('onChange');
+  window.close();
+  }
+
+  function OpenRptViewer(Control1, Control2, Control3, Control4, companyCtrl, Control5 , Control6)
+  {
+  var width  = 1200;
+  var height = 700;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var type1 = document.getElementById(Control3);
+  var type2 = document.getElementById(Control1);
+  var type3 = document.getElementById(Control2);
+  var type4 = document.getElementById(Control4);
+  var Company = document.getElementById(companyCtrl);
+  var type5 = document.getElementById(Control5);
+  var type6 = document.getElementById(Control6);
+  var CompanyText = Company.options[Company.selectedIndex].text;
+
+
+  var url = '../WFinRep_Head/WFin_RepView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + CompanyText + '&amp;amp;Control5=' + type5.value + '&amp;amp;Control6=' + type6.value;
+  window.open(url, '', params);
+
+  }
+
+  function OpenRptViewerApp(Control1, Control2, Control3, Control4, companyCtrl)
+  {
+  var width  = 1200;
+  var height = 700;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var type1 = document.getElementById(Control3);
+  var type2 = document.getElementById(Control1);
+  var type3 = document.getElementById(Control2);
+  var type4 = document.getElementById(Control4);
+  var Company = document.getElementById(companyCtrl);
+
+
+
+  if (type1.value == "BS") {
+  var url = '../WFinRep_Head1/WFin-RepBSApproveView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value;
+  window.open(url, '', params);}
+  else if (type1.value == "IS") {
+  var url = '../WFinRep_Head1/WFin-RepISApproveView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value;
+  window.open(url, '', params);}
+  else{
+  var url = '../WFinRep_Head1/WFin-RepCFApproveView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value;
+  window.open(url, '', params);}
+
+  }
+
+  function OpenRptViewerApp2(Control1, Control2, Control3, Control4, companyCtrl, Control5, Control6)
+  {
+
+  var width  = 1200;
+  var height = 700;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+
+  var type1 = document.getElementById(Control3);
+  var type2 = document.getElementById(Control1);
+  var type3 = document.getElementById(Control2);
+  var type4 = document.getElementById(Control4);
+  var Company = document.getElementById(companyCtrl);
+  var type5 = document.getElementById(Control5);
+  var type6 = document.getElementById(Control6);
+  var url = '../WFinRep_Head/WFin_RepApproveView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value + '&amp;amp;Control5=' + type5.value + '&amp;amp;Control6=' + type6.value;
+  window.open(url, '', params);
+
+  }
+
+  function OpenRptViewer2(Control1, Control2, Control3, Control4, companyCtrl, Control5, Control6)
+  {
+
+  var width  = 1200;
+  var height = 700;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+
+  var type1 = document.getElementById(Control3);
+  var type2 = document.getElementById(Control1);
+  var type3 = document.getElementById(Control2);
+  var type4 = document.getElementById(Control4);
+  var Company = document.getElementById(companyCtrl);
+  var type5 = document.getElementById(Control5);
+  var type6 = document.getElementById(Control6);
+
+  var url = '../WFinRep_Head/WFin-RepInquiryView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value + '&amp;amp;Control5=' + type5.value + '&amp;amp;Control6=' + type6.value;
+  window.open(url, '', params);
+
+  }
+
+  function OpenRptViewer_Conso(pType,pYear,pMonth,pPath,pStatus,pWFRCH_ID)
+  {
+
+  var width  = 1200;
+  var height = 700;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+
+  var varType = document.getElementById(pType);
+  var varType1 = varType.options[varType.selectedIndex].value;
+  var varYear = document.getElementById(pYear);
+  var varMonth = document.getElementById(pMonth);
+  var varPath = document.getElementById(pPath);
+  var varStatus = document.getElementById(pStatus);
+
+  var varWFRCH_ID = document.getElementById(pWFRCH_ID);
+
+  var url = '../WFinRep_Head/Conso_ReportViewer.aspx?pType=' + varType1 + '&amp;amp;pYear=' + varYear.value + '&amp;amp;pMonth=' + varMonth.value + '&amp;amp;pPath=' + varPath.value + '&amp;amp;pStatus=' + varStatus.value + '&amp;amp;pWFRCH_ID=' + varWFRCH_ID.value;
+  window.open(url, '', params);
+
+  }
+
+  function OpenRptViewer_Conso2(pType,pYear,pMonth,pPath,pStatus,pWFRCH_ID)
+  {
+
+  var width  = 1200;
+  var height = 700;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+
+  var varType = document.getElementById(pType);
+  var varYear = document.getElementById(pYear);
+  var varMonth = document.getElementById(pMonth);
+  var varPath = document.getElementById(pPath);
+  var varStatus = document.getElementById(pStatus);
+
+  var varWFRCH_ID = document.getElementById(pWFRCH_ID);
+
+  var url = '../WFinRep_Head/Conso_ReportViewer.aspx?pType=' + varType.value + '&amp;amp;pYear=' + varYear.value + '&amp;amp;pMonth=' + varMonth.value + '&amp;amp;pPath=' + varPath.value + '&amp;amp;pStatus=' + varStatus.value + '&amp;amp;pWFRCH_ID=' + varWFRCH_ID.value;
+  window.open(url, '', params);
+
+  }
+
+  function OpenRptViewer_Conso3(pType,pYear,pMonth,pPath,pStatus,pWFRCH_ID)
+  {
+
+  var width  = 1200;
+  var height = 700;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+
+  var varType = pType;
+  var varYear = pYear;
+  var varMonth = pMonth;
+  var varPath = pPath;
+  var varStatus = pStatus;
+
+  var varWFRCH_ID = pWFRCH_ID;
+
+  var url = '../WFinRep_Head/Conso_ReportViewer.aspx?pType=' + varType + '&amp;amp;pYear=' + varYear + '&amp;amp;pMonth=' + varMonth + '&amp;amp;pPath=' + varPath + '&amp;amp;pStatus=' + varStatus + '&amp;amp;pWFRCH_ID=' + varWFRCH_ID;
+  window.open(url, '', params);
+
+  }
+
+  function OpenRptViewer_NGP(Control1, Control2, Control3, Control4, companyCtrl, Control5 , Control6)
+  {
+  var width  = 1200;
+  var height = 700;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var type1 = document.getElementById(Control3);
+  var type2 = document.getElementById(Control1);
+  var type3 = document.getElementById(Control2);
+  var type4 = document.getElementById(Control4);
+  var type5 = document.getElementById(Control5);
+  var type6 = document.getElementById(Control6);
+  var Company = document.getElementById(companyCtrl);
+  var CompanyText = Company.options[Company.selectedIndex].value;
+
+
+  var url = '../WFinRep_Head/WFin_RepView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + CompanyText + '&amp;amp;Control5=' + type5.value + '&amp;amp;Control6=' + type6.value;
+  window.open(url, '', params);
+
+  }
+
+  function OpenRptViewer_NGP2(Control1, Control2, Control3, Control4, companyCtrl, Control5 , Control6)
+  {
+  var width  = 1200;
+  var height = 700;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var type1 = document.getElementById(Control3);
+  var type2 = document.getElementById(Control1);
+  var type3 = document.getElementById(Control2);
+  var type4 = document.getElementById(Control4);
+  var type5 = document.getElementById(Control5);
+  var type6 = document.getElementById(Control6);
+  var Company = document.getElementById(companyCtrl);
+
+
+
+  var url = '../WFinRep_Head/WFin_RepView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value + '&amp;amp;Control5=' + type5.value + '&amp;amp;Control6=' + type6.value;
+  window.open(url, '', params);
+
+  }
+
+  function OpenRptViewer_ConsoWP(pType,pYear,pMonth,pPath,pStatus,pWFRCH_ID)
+  {
+
+  var width  = 1200;
+  var height = 700;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=no';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+
+  var varType = document.getElementById(pType);
+  var varYear = document.getElementById(pYear);
+  var varYear_ = varYear.options[varYear.selectedIndex].value;
+  var varMonth = document.getElementById(pMonth);
+  var varMonth_ = varMonth.options[varMonth.selectedIndex].value;
+  var varPath = document.getElementById(pPath);
+  var varStatus = document.getElementById(pStatus);
+
+  var varWFRCH_ID = document.getElementById(pWFRCH_ID);
+
+  var url = '../WFinRep_Head/Conso_ReportViewer.aspx?pType=' + varType.value + '&amp;amp;pYear=' + varYear_ + '&amp;amp;pMonth=' + varMonth_ + '&amp;amp;pPath=' + varPath.value + '&amp;amp;pStatus=' + varStatus.value + '&amp;amp;pWFRCH_ID=' + varWFRCH_ID.value;
+  window.open(url, '', params);
+
+  }
+
+  function GetFilePath(FileUpload,FieldValue)
+  {
+  var numValue1 = document.getElementById(FileUpload).value;
+  document.getElementById(FieldValue).value = numValue1;
+
+  }
+
+  function callme(t,t1) {
+  var x = document.getElementById(t).value;
+  document.getElementById(t1).value = x;
+  }
+
+  function OpenRptViewer_ItemVendorHistory(pItemNo)
+  {
+
+  var width  = 1200;
+  var height = 700;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=no';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+
+  var varItemNo = document.getElementById(pItemNo);
+
+
+  var url = '../wf_PO/WPO_ItemHistory.aspx?varItemNo=' + varItemNo.value;
+  window.open(url, '', params);
+
+  }
+  function Print_SSRS(ServerPath,Parameters,ReportTitle)
+  {
+  RSClientPrint.MarginLeft = 0.3;
+  RSClientPrint.MarginTop = 0.3;
+  RSClientPrint.MarginRight = 0.3;
+  RSClientPrint.MarginBottom = 0.3;
+  //RSClientPrint.Culture = 1033;
+  //RSClientPrint.UICulture = 9;
+  RSClientPrint.Authenticate = true;
+  RSClientPrint.Print(ServerPath, Parameters, ReportTitle);
+  }
+  function OpenItemSelector2(ItemNo,ItemDesc,ItemUoM)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var url = '../sel_WIncidental_Cost_sel_IV00101/Selector-IV00101-Item-Incidental2.aspx?ItemNo=' + ItemNo + '&amp;amp;ItemDesc=' + ItemDesc + '&amp;amp;UoM=' + ItemUoM;
+  window.open(url, '', params);
+  }
+  function OpenVendorInquiry(Vendor)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var target = document.getElementById(Vendor);
+  var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Vendor.aspx?VendorNo=' + target.value;
+  window.open(url, '', params);
+  }
+  function OpenVendorInquiryN(Vendor)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var target = document.getElementById(Vendor);
+  var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Vendor1.aspx?VendorNo=' + target.value;
+  window.open(url, '', params);
+  }
+  function OpenVendorItemInquiry(Vendor,Item)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var target1 = document.getElementById(Vendor);
+  //var target2 = document.getElementById(Item);
+  var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Vendor-Item.aspx?VendorNo=' + target1.value + '&amp;amp;ItemNo=' + Item;
+  window.open(url, '', params);
+  }
+  function OpenVendorItemInquiryN(Vendor,Item)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var target1 = document.getElementById(Vendor);
+  //var target2 = document.getElementById(Item);
+  var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Vendor-Item1.aspx?VendorNo=' + target1.value + '&amp;amp;ItemNo=' + Item;
+  window.open(url, '', params);
+  }
+  function OpenAttachInquiry(DocPK,Vendor)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var target = document.getElementById(Vendor);
+  var url = '../WCanvass_Internal/Inquiry-WCanvass-Quotation-Internal-File.aspx?DocPK=' + DocPK + '&amp;amp;VendorNo=' + target.value;
+  window.open(url, '', params);
+  }
+  function OpenAttachInquiryN(DocPK,Vendor)
+  {
+  var width  = 640;
+  var height = 480;
+  var left   = (screen.width  - width)/2;
+  var top    = (screen.height - height)/2;
+  var params = 'width='+width+', height='+height;
+  params += ', top='+top+', left='+left;
+  params += ', directories=no';
+  params += ', location=no';
+  params += ', menubar=no';
+  params += ', resizable=yes';
+  params += ', scrollbars=yes';
+  params += ', status=no';
+  params += ', toolbar=no';
+  params += ', modal=yes';
+
+  var target = document.getElementById(Vendor);
+  var url = '../WCanvass_Internal/Inquiry-WCanvass-Quotation-Internal-File1.aspx?DocPK=' + DocPK + '&amp;amp;VendorNo=' + target.value;
+  window.open(url, '', params);
+  }
+  &amp;lt;/script&amp;gt;
+  &amp;lt;BaseClasses:ScrollCoordinates id="ScrollCoordinates1" runat="server"&amp;gt;&amp;lt;/BaseClasses:ScrollCoordinates&amp;gt;
+            &amp;lt;BaseClasses:BasePageSettings id="PageSettings" runat="server"&amp;gt;&amp;lt;/BaseClasses:BasePageSettings&amp;gt;
+            &amp;lt;script language="JavaScript" type="text/javascript"&amp;gt;{ScriptDirectionTemplate}&amp;lt;/script&amp;gt;
+            &amp;lt;asp:ToolkitScriptManager ID="scriptManager1" runat="server" EnablePartialRendering="True" EnablePageMethods="True" EnableScriptGlobalization="True" EnableScriptLocalization="True" &amp;gt;
+			&amp;lt;/asp:ToolkitScriptManager&amp;gt;
+            &amp;lt;script language="JavaScript" type="text/javascript"&amp;gt;avoidTabFocused();&amp;lt;/script&amp;gt;
+          &lt;/Value&gt;
+        &lt;/Prolog&gt;
+      
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:PANEL NAME="panelPageTRow" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;colspan&lt;/Name&gt;
+            &lt;AttributeValue&gt;3&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" class="pageLSpace" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pageL&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:PANEL NAME="MainPanel"/&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pageC&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" class="pageRSpace" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pageR&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:PANEL NAME="panelPageBRow" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;colspan&lt;/Name&gt;
+            &lt;AttributeValue&gt;3&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+        &lt;Epilog&gt;
+
+          &lt;Value&gt;
+        &amp;lt;/form&amp;gt;
+    &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+          &lt;/Value&gt;
+        &lt;/Epilog&gt;
+    &lt;TableAttributes&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;cellpadding&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;cellspacing&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;border&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;class&lt;/Name&gt;
+        &lt;AttributeValue&gt;pWrapper&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+    &lt;/TableAttributes&gt;
+  &lt;/Layout&gt;
+  &lt;Layout Name="panelPageTRow" Type="BlankPanel"&gt;
+    &lt;Prolog /&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" class="pageTLSpace" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pageTL&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" class="pageTSpace" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pageT&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" class="pageTRSpace" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pageTR&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Epilog /&gt;
+    &lt;TableAttributes&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;border&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;cellpadding&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;cellspacing&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;style&lt;/Name&gt;
+        &lt;AttributeValue&gt;width:100%;&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+    &lt;/TableAttributes&gt;
+  &lt;/Layout&gt;
+  &lt;Layout Name="MainPanel" Type="BlankPanel"&gt;
+    &lt;Prolog /&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;amp;nbsp;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;marginTL&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:HEADER NAME="PageHeader" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pcT&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;colspan&lt;/Name&gt;
+            &lt;AttributeValue&gt;2&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;amp;nbsp;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;marginTR&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;amp;nbsp;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;marginmL&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pcmL&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pcmC&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;amp;nbsp;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;marginmR&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;amp;nbsp;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;marginL&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:MENU NAME="MenuV" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pcL&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;asp:ContentPlaceHolder id="PageContent" Runat="server" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pcC&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;amp;nbsp;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;marginR&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;amp;nbsp;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;marginBL&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:FOOTER NAME="PageFooter" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pcB&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;colspan&lt;/Name&gt;
+            &lt;AttributeValue&gt;2&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;amp;nbsp;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;marginBR&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Epilog /&gt;
+    &lt;TableAttributes&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;border&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;cellpadding&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;cellspacing&lt;/Name&gt;
+        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;style&lt;/Name&gt;
+        &lt;AttributeValue&gt;width: 100%&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
+    &lt;/TableAttributes&gt;
+  &lt;/Layout&gt;
+  &lt;Layout Name="panelPageBRow" Type="BlankPanel"&gt;
+    &lt;Prolog /&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" class="pageBLSpace" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pageBL&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" class="pageBSpace" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pageB&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" class="pageBRSpace" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pageBR&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Epilog /&gt;
+        &lt;TableAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;cellpadding&lt;/Name&gt;
+            &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;cellspacing&lt;/Name&gt;
+            &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;border&lt;/Name&gt;
+            &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/TableAttributes&gt;
+		
+      &lt;/Layout&gt;
+    &lt;/LayoutDefinition&gt;]]&gt;</LayoutDefinition>
+</ComponentDefinition>

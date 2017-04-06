@@ -1,0 +1,2150 @@
+﻿/**********************************************************************
+ * BaseStyles.LeftToRight.css                                         *
+ *                                                                    *
+ * This file contains the desktop styles for Left to Right languages. *
+ * This file will be copied to BaseStyles.css if you select a LTR     *
+ * language as the primary language of your application.              *
+ *                                                                    *
+ * Do not modify this file.  To override any of the styles, please    *
+ * modify the Styles.css file.                                        *
+ *                                                                    *
+ **********************************************************************/
+
+HTML { /* language direction flow of content on page */
+	direction: ltr;
+	}
+
+
+/**********************************************************************
+ * Page Background Styles                                             *
+ **********************************************************************/
+.pageBackground, .pBack { /* body */
+	background-color: #c0c0c0;
+	margin-bottom: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 20px;
+	width: 100%;
+	}
+
+.pWrapper { /* page content container */
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;
+	}
+
+
+/**********************************************************************
+ * Page Container Styles                                              *
+ **********************************************************************/
+.pageTL { /* page container top left edge */
+	}
+
+.pageTLSpace { /* page container top left edge buttress */
+	display: none;
+	}
+
+.pageT { /* page container top center edge */
+	}
+
+.pageTSpace { /* page container top center edge buttress */
+	display: none;
+	}
+
+.pageTR { /* page container top right edge */
+	}
+
+.pageTRSpace { /* page container top right edge buttress */
+	display: none;
+	}	
+	
+.pageL { /* page container left middle edge */
+	}
+
+.pageLSpace { /* page container left middle edge buttress */
+	display: none;
+	}
+
+.pageC { /* page container center (contents of page container) */
+	-moz-border-radius: 6px;
+	-moz-box-shadow: 0px 0px 5px #888888;
+	-webkit-border-radius: 6px;
+	-webkit-box-shadow: 0px 0px 5px #888888;
+	background-color: #ffffff;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-radius: 6px;
+	box-shadow: 0px 0px 5px #888888;
+	vertical-align: top;
+	width: 1000px;
+	}
+
+.pageR { /* page container right middle edge */
+	}
+
+.pageRSpace { /* page container right middle edge buttress */
+	display: none;
+	}
+
+.pageBL { /* page container bottom left edge */
+	}
+
+.pageBLSpace { /* page container bottom left edge buttress */
+	display: none;
+	}
+
+.pageB { /* page container bottom center edge (footer container) */
+	}
+
+.pageBSpace { /* page container bottom center edge buttress */
+	display: none;
+	}
+
+.pageBR { /* page container bottom right edge */
+	}
+
+.pageBRSpace { /* page container bottom right edge buttress */
+	display: none;
+	}
+
+.pContent {
+	width: 100%;
+	}
+
+
+/**********************************************************************
+ * Page Margin Styles                                                 *
+ **********************************************************************/
+.marginTL { /* page centering top left margin */
+	display: none;
+	}
+
+.marginTR { /* page centering top right margin */
+	display: none;
+	}
+
+.marginmL { /* page centering left margin (horizontal menu row) */
+	display: none;
+	}
+
+.marginmR { /* page centering right margin (horizontal menu row) */
+	display: none;
+	}
+
+.marginL { /* page centering left margin */
+	display: none;
+	}
+
+.marginR { /* page centering right margin */
+	display: none;
+	}
+
+.marginBL { /* page centering bottom left margin */
+	display: none;
+	}
+
+.marginBR { /* page centering bottom right margin */
+	display: none;
+	}
+
+
+/**********************************************************************
+ * Page Center Styles                                                 *
+ **********************************************************************/
+.pcT { /* page container top center edge (header container) */
+	background-color: #1f3541;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
+	height: 30px;
+	padding-bottom: 8px;
+	padding-left: 8px;
+	padding-right: 4px;
+	padding-top: 4px;
+	}
+
+.pcmL { /* page container left middle edge (horizontal menu row) */
+	background-color: #eaeaea;
+	padding: 0px;
+	}
+
+.pcmC { /* page container center (horizontal menu container) */
+	background-color: #eaeaea;
+	padding: 0px;
+	}
+
+.pcL { /* page container left middle edge (vertical menu container) */
+	background-color: #eaeaea;
+	padding-top: 10px;
+	vertical-align: top;
+	}
+
+.pcC { /* page container center (contents of page container) */
+	background-color: #ffffff;
+	height: 698px;
+	padding: 10px;
+	text-align: center;
+	vertical-align: top;
+	width: 100%;
+	}
+
+.pcBL { /* page container bottom left edge */
+	background-color: #1f3541;
+	}
+
+.pcB { /* page container bottom center edge (footer container) */
+	background-color: #1f3541;
+	height: 40px;
+	padding-left: 13px;
+	padding-right: 13px;
+	}
+
+
+/**********************************************************************
+ * Page Header Styles                                                 *
+ **********************************************************************/
+.pHeaderT { /* page header skip navigation link container */
+	text-align: left;
+	}
+
+.pHeaderL { /* page header left edge */
+	width: 0px;
+	}
+
+.pHeaderC { /* page header logo container */
+	text-align: left;
+	vertical-align: middle;
+	width: 750px;
+	}
+
+.pHeaderR { /* page header security panel container */
+	text-align: right;
+	width: 250px;
+	}
+
+
+/**********************************************************************
+ * Button/Link Styles                                                 *
+ **********************************************************************/
+a:link, a:visited {
+	color: #679438;
+	}
+
+a:hover {
+	text-decoration: none;
+	}
+
+a.button_link,
+.bC a.button_link,
+.buttonPadding a.button_link,
+.dBody a.button_link,
+.galleryttc a.button_link,
+.popupTableCellValue a.button_link,
+.tableCellValue a.button_link,
+.thc a.button_link,
+.tic a.button_link,
+.ttc a.button_link { /* link text of buttons */ 
+	color: #679438;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 12px;
+	font-weight: bold;
+	padding-left: 4px;
+	padding-right: 4px;
+	text-align: center;
+	text-decoration: none;
+	width: 100%;
+	}
+
+.themeButton {
+	-moz-border-radius: 3px;
+	-moz-box-shadow: inset 0px -1px 0px 0px #ffffff;
+	-webkit-border-radius: 3px;
+	-webkit-box-shadow: inset 0px -1px 0px 0px #ffffff;
+	background: -moz-linear-gradient( center top, #fafaf8 5%, #e0e0d9 100% );
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fafaf8), color-stop(1, #e0e0d9) );
+	background: -ms-linear-gradient(top, #fafaf8 5%, #e0e0d9 100%);
+	background-color: #fafaf8;
+	box-shadow: inset 0px -1px 0px 0px #ffffff;
+	border: 1px solid #a9a8a8;
+	border-radius: 3px;
+	color: #679438;
+	display: inline-block;
+    	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#fafaf8', endColorStr='#e0e0d9');
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 3px 7px 3px 7px;
+	text-decoration: none;
+	text-shadow: 1px 1px 0px #ffffff;
+	white-space: nowrap;
+	}
+
+.prbggo a.button_link { /* link text of buttons within pagination row */
+	border: 0px;
+	color: #666666;
+	font-weight: normal;
+	padding-left: 4px;
+	padding-right: 4px;
+	text-transform: none;
+	white-space: nowrap;
+	}
+
+a.button_link:hover,
+.bC a.button_link:hover,
+.buttonPadding a.button_link:hover,
+.dBody a.button_link:hover,
+.galleryttc a.button_link:hover,
+.popupTableCellValue a.button_link:hover,
+.tableCellValue a.button_link:hover,
+.thc a.button_link:hover,
+.tic a.button_link:hover,
+.ttc a.button_link:hover { /* link text of buttons hover state */
+	padding-left: 4px;
+	padding-right: 4px;
+	text-decoration: none;
+	}
+
+.themeButton:hover {
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #e0e0d9), color-stop(1, #fafaf8) );
+	background: -moz-linear-gradient( center top, #e0e0d9 5%, #fafaf8 100% );
+	background: -ms-linear-gradient(top, #e0e0d9 5%, #fafaf8 100%);
+	background-color: #e0e0d9;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorStr='#e0e0d9', endColorStr='#fafaf8');
+	white-space: nowrap;
+	}
+
+.dfv a,
+.dialog_field_value a,
+.galleryttc a,
+.popupTableCellValue a,
+.tableCellValue a,
+.ttc a,
+.ttch a,
+.ttcs a { /* data grid data link text */
+	color: #679438;
+	cursor: pointer !important;
+	text-decoration: none;
+	}
+
+.dfv a:hover,
+.dialog_field_value a:hover,
+.galleryttc a:hover,
+.popupTableCellValue a:hover,
+.tableCellValue a:hover,
+.ttc a:hover,
+.ttch a:hover,
+.ttcs a:hover { /* data grid data link text hover state */
+	text-decoration: underline;
+	}
+
+a.truncatedText {
+	color: #555555;
+	text-decoration: none;
+	}
+
+a.truncatedText:hover {
+	text-decoration: underline;
+	}
+
+a.skipNavigationLinks {
+	text-decoration: none;
+	}
+
+a.skipNavigationLinks:hover {
+	text-decoration: underline;
+	}
+
+
+/**********************************************************************
+ * Multi-level Menu Styles                                            *
+ **********************************************************************/
+.MLMmenuAlign { /* horizontal menu container alignment */
+	padding-top: 6px;
+	}
+
+.MLMmenu { /* horizontal menu container */	
+	}
+
+.MLMmenusub { /* horizontal submenu container (menu leaves) */
+	border: 1px solid #8cae68;
+	z-index: 100;
+	}
+
+.MLMmC { /* horizontal menu item link text */
+	background-color: #eaeaea;
+	border-left: 1px solid #ffffff;
+	border-right: 1px solid #dddddd;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	color: #375e41;
+	font-size: 14px;
+	font-weight: normal;
+	padding-bottom: 6px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 6px;
+	text-decoration:none;
+	}
+
+.MLMmoC:hover, .MLMmoC:hover a, .MLMmoC { /* horizontal menu item link text hover state */
+	}
+
+.MLMsubmC { /* horizontal submenu item link text */	
+	background-color: #fdfff7;
+	color: #818181;
+	cursor: pointer !important;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 13px;
+	padding-bottom: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 2px;
+	text-transform: none;
+	}
+
+.MLMsubmoC { /* horizontal submenu item link text hover state */
+	background-color: #f0f2ea;
+	}
+
+.MLMmbbg { /* horizontal menu bottom trim */
+	}
+
+.MLMmenuVAlign { /* vertical menu container alignment */
+	}
+
+.MLMmenuV { /* vertical menu container */
+	position: relative;
+	width: 160px;
+	}
+
+.MLMmenuVsub { /* vertical submenu container */
+	border: 1px solid #8cae68;
+	z-index: 100;
+	}
+
+.MLMmvC { /* vertical menu item link text */
+	background-color: #eaeaea;
+	border-top: 1px solid #ffffff;
+	border-bottom: 1px solid #dddddd;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	color: #375e41;
+	font-size: 14px;
+	font-weight: normal;
+	padding-bottom: 6px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 6px;
+	text-decoration:none;
+	}
+
+.MLMmvC:hover, .MLMmvC:hover a, .MLMmvoC { /* vertical menu item link text hover state */
+	background-color: #fdfff7;
+	}
+
+.MLMsubmvC { /* vertical submenu item link text */
+	background-color: #fdfff7;
+	color: #818181;
+	cursor: pointer !important;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 13px;
+	padding-bottom: 2px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 2px;
+	text-transform: none;
+	}
+
+.MLMsubmvoC { /* vertical submenu item link text hover state */
+	background-color: #f0f2ea;
+	}
+
+.MLMmveTL { /* vertical menu top left edge */
+	}
+
+.MLMmveT { /* vertical menu top center edge */
+	}
+
+.MLMmveTR { /* vertical menu top right edge */
+	}
+
+.MLMmveBL { /* vertical menu bottom left edge */
+	}
+
+.MLMmveB { /* vertical menu bottom center edge */
+	}
+
+.MLMmveBR { /* vertical menu bottom right edge */
+	}
+
+
+/**********************************************************************
+ * Footer Styles                                            	      *
+ **********************************************************************/
+.footer { /* footer content */
+	color: #e6e6e6;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 12px;
+	padding-top: 6px;	
+	width: 100%;
+	}
+
+
+/**********************************************************************
+ * Panel Container Styles                                             *
+ **********************************************************************/
+.panelTL { /* panel container top left edge */
+	}
+
+.panelTLSpace { /* panel container top left edge buttress */
+	display: none;
+	}
+
+.panelT { /* panel container top edge */
+	}
+
+.panelTSpace { /* panel container top edge buttress */
+	display: none;
+	}
+
+
+.panelTR { /* panel container top right edge */
+	}
+
+.panelTRSpace { /* panel container top right edge buttress */
+	display: none;
+	}
+
+.panelHeaderL { /* panel container header left edge */
+	}
+
+.panelHeaderLSpace { /* panel container header left edge buttress */
+	display: none;
+	}
+
+.panelHeaderR { /* panel container header right edge */
+	}
+
+.panelHeaderRSpace { /* panel container header right edge buttress */
+	display: none;
+	}
+
+.panelL { /* panel container left edge */
+	}
+
+.panelLSpace { /* panel container left edge buttress */
+	display: none;
+	}
+
+.dialog_view, .dv, .panelC { /* panel container (includes panel header) */
+	-moz-border-radius: 4px;
+	-moz-box-shadow: 0px 0px 3px #bbbbbb;
+	-webkit-border-radius: 4px;
+	-webkit-box-shadow: 0px 0px 3px #bbbbbb;
+	background-color: #fdfdfd;
+	border-radius: 4px;
+	box-shadow: 0px 0px 3px #bbbbbb;
+	color: #818181;
+	margin-bottom: 10px;
+	padding: 0px;
+	text-align: left;
+	vertical-align: top;
+	width: 100%;
+	}
+
+.panelR { /* panel container right edge */
+	}
+	
+.panelRSpace { /* panel container right edge buttress */
+	display: none;
+	}
+
+.panelPaginationL { /* panel container pagination left edge */
+	width: 50%;
+	}
+
+.panelPaginationC { /* panel container pagination center */
+	background-color: #fdfdfd;
+	height: 30px;
+	text-align: center;
+	width: 100%;
+	}
+	
+.panelPaginationCContainer { /* pagination container table */
+        width: 100%; /* uncomment out for full panel width pagination control */
+        }
+
+.panelPaginationCContainerL { /* pagination container left cell (left margin) */
+        width: 50%; /* uncomment out for full panel width pagination control */ 
+        }
+
+.panelPaginationCContainerC { /* pagination container center cell  (current page control) */
+        width: 100%; /* uncomment out for full panel width pagination control */ 
+        }
+
+.panelPaginationCContainerR { /* pagination container right cell (page size control) */
+        width: 50%; /* uncomment out for full panel width pagination control */
+        }
+
+.panelPaginationR { /* panel container pagination right edge */
+	width: 50%;
+	}
+
+.panelBL { /* panel container bottom left edge */
+	}
+
+.panelBLSpace { /* panel container bottom left edge buttress */
+	display: none;
+	}
+
+.panelB { /* panel container bottom edge */
+	}
+
+.panelBSpace { /* panel container bottom edge buttress */
+	display: none;
+	}
+
+.panelBR { /* panel container bottom right edge */
+	}
+
+.panelBRSpace { /* panel container bottom right edge buttress */
+	display: none;
+	}
+
+.panelButtonSpacing {
+	width: 100%;
+	}
+
+.panelSearchBox {
+	background-color: #ffffff;
+	border: 1px solid #dddddd;
+	border-radius: 12px;
+	box-shadow: inset 0px 1px 0px #dddddd;
+	height: 23px;
+	padding: 0px;
+	padding-left: 8px;
+	width: 286px;
+	}
+
+.Search_Input, .si { /* search textbox */
+	border: 0px;
+	color: #555555;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 11px;
+	font-weight: normal;
+	padding: 0px;
+	width: 246px;
+	} 
+
+.Search_InputHint { /* "search for..." text inside search textbox */
+	border: 0px;
+	color: #999999;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 11px;
+	font-weight: normal;
+	padding: 0px;
+	width: 246px;
+	} 
+
+.Search_Input_Classic { /* classic style needed for LLS search textboxes */
+	border-bottom: 1px #eeeeee solid;
+	border-left: 1px #555555 solid;
+	border-right: 1px #eeeeee solid;
+	border-top: 1px #555555 solid;
+	color: #555555;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 11px;
+	margin-bottom: 4px;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding: 0px;
+	vertical-align: bottom;
+	width: 246px;
+	} 
+
+.Search_Input2, .si2 { /* search textbox (classic style needed for workflow page type) */
+	border-bottom: 1px #eeeeee solid;
+	border-left: 1px #555555 solid;
+	border-right: 1px #eeeeee solid;
+	border-top: 1px #555555 solid;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 12px;
+	margin-bottom: 4px;
+	margin-left: 2px;
+	margin-right: 2px;
+	} 
+
+.recordPanelButtonsAlignment, .rpbAlign { /* page buttons alignment */
+	padding-bottom: 5px;
+	padding-top: 5px;
+	}
+    
+.buttonPadding { /* page buttons padding */
+	margin-right: 6px;
+	}
+
+
+/**********************************************************************
+ * Panel Body Styles                                                  *
+ **********************************************************************/
+.updatePanelContent { /* panel container */
+	width: 100%;
+	}
+
+.dialogHeaderEdgeL, .dhel { /* panel header left edge */
+	width: 0px;
+	}
+
+.dialogHeaderEdgeR, .dher { /* panel header right edge */
+	width: 0px;
+	}
+
+.dialog_header, .dh { /* panel header container */
+	background-color: #f0f2ea;
+	border: 0px;
+	vertical-align: top;
+	}
+
+.dialogHeaderBackground, .dhb { /* panel header */
+	padding-bottom: 6px;
+	padding-left: 6px;
+	padding-right: 10px;
+	padding-top: 6px;
+	}
+
+.dialog_header_text, .dht { /* panel header title text */
+	color: #679438;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 16px;
+	font-weight: normal;
+	padding-left: 5px;
+	white-space: nowrap;
+	}
+
+.dheci { /* padding around panel expand/collapse icon */
+	padding-left: 10px;
+	}
+
+.dhir { /* padding between panel header title text and edit icon */
+	padding-left: 6px;
+	}
+
+.dialog_body, .dBody { /* panel content container (excludes panel header) */ 
+	color: #555555;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding: 10px;
+	text-align: left;	
+	}
+	
+.field_label, .fl { /* field label on top */
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding-top: 4px;
+	padding-right: 4px;
+	padding-bottom: 0px;
+	padding-left: 4px;
+	text-align: left;
+	vertical-align: middle;
+	white-space: nowrap;	
+	}
+
+.field_label_on_side, .fls { /* field label on side */
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	font-weight: normal; 
+	padding-top: 4px;
+	padding-right: 2px;
+	padding-bottom: 8px;
+	padding-left: 4px;
+	text-align: right;
+	vertical-align: top;
+	white-space: nowrap;	
+	}
+
+.field_value, .fv { /* field value */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding: 0px;
+	}
+
+.field_input, .fi { /* input textbox */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	vertical-align: top;
+	}
+
+.dialog_field_value, .dfv { /* panel field value text */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding-top: 4px;
+	padding-right: 4px;
+	padding-bottom: 8px;
+	padding-left: 4px;
+	vertical-align: top;
+	}
+
+.Filter_Input, .fili { /* filter drop-down list */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	margin-bottom: 4px;
+	margin-left: 2px;
+	margin-right: 2px;
+	}
+
+.filter_area, .fila { /* filter label */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding: 4px 7px 4px 7px;
+	text-align: right;
+	vertical-align: middle;
+	white-space: nowrap;	
+	}
+	
+.search_area, .sa { /* search area container */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding-top: 5px;
+	padding-bottom: 2px;
+	}
+
+.search_label, .sl { /* search label */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding: 5px;
+	vertical-align: middle;
+	white-space: nowrap;	
+	}
+
+.rangeFilterText, .rft { /* range filter label */
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding-left: 6px;
+	padding-right: 6px;
+	text-decoration: none;
+	text-transform: none;
+	}
+
+
+/**********************************************************************
+ * Dropshadow Styles                        			      * 
+ **********************************************************************/
+.imageDropshadow { /* image thumbnail dropshadow */
+	-moz-box-shadow: 4px 4px 6px #bbbbbb;
+	-webkit-box-shadow: 4px 4px 6px #bbbbbb;
+	box-shadow: 4px 4px 6px #bbbbbb;
+	}
+
+
+/**********************************************************************
+ * Auto Type Ahead (Interactive Search) Styles                        * 
+ **********************************************************************/
+.autotypeahead_completionListElement { /* textbox value */   
+	background-color: #ffffff;
+	border-bottom: 1px solid #555555;
+	border-left: 1px solid #555555;
+	border-right: 1px solid #555555;
+	border-top: 1px solid #555555;
+	left: 0px;
+	list-style-type: none;
+	margin: 0px;
+	overflow: auto;
+	padding: 0px;
+	position: absolute;
+	top: 0px;
+	visibility: hidden;
+	}
+
+.autotypeahead_highlightedListItem { /* highlighted list item */
+	background-color: #f1f3ec;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 12px;
+	padding-bottom: 1px; 
+	}
+
+.autotypeahead_listItem { /* list item */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 12px;
+	padding-bottom: 1px; 
+	}
+
+
+/**********************************************************************
+ * Table Rows Styles                                                  *
+ **********************************************************************/ 
+.header_cell,
+.header_cell_scrolling,
+.thc,
+.thcs,
+.thcnb,
+.thcwb { /* column header container (above select checkbox) */
+	background-color: #fafafa;	
+	border-bottom: 1px solid #f0f2ea;
+	color: #777777;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding-bottom: 5px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 5px;
+	text-align: left;
+	vertical-align: top;
+	}
+
+.column_header a,
+.column_header_scrolling a,
+.tch a,
+.tchs a { /* column header link text */
+	color: #666666;
+	cursor: pointer !important;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	font-weight: normal;
+	text-decoration: none;
+	} 
+	
+.column_header a:hover,
+.column_header_scrolling a:hover,
+.tch a:hover,
+.tchs a:hover { /* column header link text hover state */
+	text-decoration: underline;
+	}
+
+.icon_cell, .alt_icon_cell, .tic, .taic { /* deprecated: data grid row button container */
+	background-color: #ffffff;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.icon_cell_highlighted, .alt_icon_cell_highlighted, .tich, .taich { /* deprecated: data grid row button container highlighted state */
+	background-color: #f0f2ea;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.icon_cell_selected, .tics { /* deprecated: data grid row button container selected state */
+	background-color: #fdfff7;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.ticnb { /* data grid row button container */
+	background-color: #ffffff;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-left: 2px;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.tichnb { /* data grid row button container highlighted state */
+	background-color: #f0f2ea;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-left: 2px;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.ticsnb { /* data grid row button container selected state */
+	background-color: #fdfff7;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-left: 2px;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+	
+.ticwb { /* data grid select checkbox container */
+	background-color: #ffffff;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.tichwb { /* data grid select checkbox container highlighted state */
+	background-color: #f0f2ea;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.ticswb { /* data grid select checkbox container selected state */
+	background-color: #fdfff7;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.tichb { /* data grid right-most row button container (when no select checkbox is present) */
+	background-color: #ffffff;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.tichhb { /* data grid right-most row button container (when no select checkbox is present) highlighted state */
+	background-color: #f0f2ea;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.ticshb { /* data grid right-most row button container (when no select checkbox is present) selected state */
+	background-color: #fdfff7;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	padding-top: 3px;
+	vertical-align: top;
+	width: 16px;
+	}
+			
+.icon_cell_empty, .tice { /* data grid row button container (when no row button is present) */
+	background-color: #ffffff;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	width: 0px;
+	}
+
+.icon_cell_highlighted_empty, .tiche { /* data grid row button container (when no row button is present) highlighted state */
+	background-color: #f0f2ea;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	width: 0px;
+	}
+
+.icon_cell_selected_empty, .ticse { /* data grid row button container (when no row button is present) selected state */
+	background-color: #fdfff7;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	width: 0px;
+	}
+	
+.table_cell, .alt_table_cell, .ttc, .tatc { /* data grid data container */
+	background-color: #ffffff;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding: 5px;
+	vertical-align: top;
+	text-align: left;
+	}
+
+.table_cell_highlighted, .alt_table_cell_highlighted, .ttch, .tatch { /* data grid data container highlighted state */
+	background-color: #f0f2ea;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding: 5px;
+	vertical-align: top;
+	text-align: left;
+	}
+
+.table_cell_selected, .ttcs { /* data grid data container selected state */
+	background-color: #fdfff7;
+	border-bottom: 1px solid #d7d7d7;
+	border-top: 1px solid #ffffff;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding: 5px;
+	vertical-align: top;
+	text-align: left;
+	}
+
+.ttc .dv, .ttch .dv, .ttcs .dv { /* panel container nested within data grid */
+	margin: 0px;
+	padding: 0px;
+	}
+
+.ttc .ajax__tab_xp, .ttch .ajax__tab_xp, .ttcs .ajax__tab_xp { /* tab container nested within data grid */
+	margin: 0px;
+	padding: 0px;
+	}
+
+.totals_cell, .tpttc { /* data grid totals container */
+	background-color: #ffffff;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding: 5px;
+	text-align: left;
+	vertical-align: top;
+	width: 48px;
+	}
+
+.totals_cell_value, .tpttcv { /* data grid totals text */
+	background-color: #ffffff;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding: 5px;
+	text-align: right;
+	vertical-align: top;
+	}
+
+.page_total_label, .tptl { /* data grid page totals label */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding-left: 20px;
+	vertical-align: middle;
+	white-space: nowrap;	
+	}
+
+.page_total_value, .tptv { /* data grid page totals text */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding: 3px;
+	}
+
+.grand_total_label, .tgtl { /* data grid grand total label */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding-left: 20px;
+	vertical-align: middle;
+	white-space: nowrap;	
+	}
+
+.grand_total_value, .tgtv { /* data grid grand total text */
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 3px;
+	}
+
+.tableCellLabel {/* table cell field label text */
+	color: #bbbbbb;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 13px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 2px;
+	padding-top: 8px;
+	text-align: right;
+	vertical-align: top;
+	white-space: nowrap;	
+	}
+
+.tableCellValue { /* table cell field value text */
+	color: #555555;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 13px;
+	padding-bottom: 4px;
+	padding-left: 4px;
+	padding-right: 4px;
+	padding-top: 8px;
+	vertical-align: top;
+	}
+
+.tableRowDivider {
+	border-bottom: 1px solid #d7d7d7;
+	height: 10px;
+	}
+
+.tableRowButton {
+	padding-left: 2px;
+	padding-top: 8px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.tableRowButtonsCellHorizontal { /* table row buttons horizontal orientation */
+	vertical-align: top;
+	white-space: nowrap;
+	width: 16px;
+	}
+
+.tableRowButtonsCellHorizontal input.button_link { /* table row button (horizontal orientation) */
+	display: inline;
+	padding-left: 2px; 
+	padding-right: 2px;
+	padding-top: 8px;
+	}
+
+.tableRowButtonsCellHorizontal input.button_link:hover { /* table row button hover state (horizontal orientation) */
+	}
+
+.tableRowButtonsCellVertical { /* table row buttons vertical orientation */
+	padding-bottom: 6px;
+	padding-top: 6px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.tableRowButtonsCellVertical input.button_link { /* table row button (vertical orientation) */
+	display: block;
+	padding: 2px;
+	}
+
+.tableRowButtonsCellVertical input.button_link:hover { /* table row button hover state (vertical orientation) */
+	}
+
+.tableCellSelectCheckbox {
+	padding-left: 6px;
+	padding-top: 7px;
+	vertical-align: top;
+	width: 16px;
+	}
+
+.tableRowsEdge, .tre { /* data grid container */
+	}
+
+
+/**********************************************************************
+ * Scrolling Table Styles                                             *
+ **********************************************************************/
+div.tableContainer { /* scrolling table container */
+	clear: both;
+	height: 640px;  /* defines non-fixed header scrolling region height */
+	overflow: auto; /* enables scroll bar */
+	}
+
+div.fixedHeaderContainer .dBody {
+	padding: 0px; /* eliminate default padding of dBody */
+	}
+
+div.fixedHeaderBackground { /* wrapper of fixed header and scroll region */
+	background-color: #fafafa; /* echo background color of thc */
+	position: relative;
+	}
+
+div.fixedHeaderScrollRegion { /* wrapper of scroll region */
+	background-color: #ffffff; /* echo background color of dBody */
+	height: 640px; /* height of scroll region */
+	overflow-y: auto; /* render scroll bar if necessary */
+	}
+
+div.fixedHeaderScrollRegion .fixedHeaderRow .thc, div.fixedHeaderScrollRegion .fixedHeaderRow .thcnb, div.fixedHeaderScrollRegion .fixedHeaderRow .thcwb {
+	border: 0px; /* hide original header borders */
+	padding: 0px 10px 0px 0px; /* hide original headers behind div.fixedHeaderBackground */ 
+	}
+
+div.fixedHeader { /* wrapper of each fixed header label */
+	border-left: none; /* echo border of thc */
+	/* box-sizing: border-box; */
+	margin-left: 0px;
+	overflow: hidden; /* truncate "long" fixed header labels */
+	padding: 5px 4px 5px 4px; 
+	position: absolute; /* fix header label in place */
+	text-overflow: ellipsis;
+	top: 0px; /* fix header at 0px from top of div.fixedHeaderBackground */
+	}
+
+div.fixedHeaderSelectAllCheckboxPadding { /* fixed header select all checkbox padding */
+	padding: 4px 6px 4px 6px;
+	}
+
+
+/**********************************************************************
+ * Pagination Styles                                                  *
+ **********************************************************************/
+.pagination_row, .pr { /* button bar/pagination row container (classic style needed for workflow page type) */
+	background-color: #f1f3ec;
+	color: #679438;
+	height: 30px;
+	padding-top: 4px;
+	vertical-align: middle;
+	width: 100%;
+	}
+
+.prbbc { /* button bar button container */
+	}
+
+.prbg { /* pagination row button container */
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 12px;
+	font-weight: normal;
+	padding-left: 3px;
+	padding-right: 3px;
+	white-space: nowrap;
+	}
+
+.prbggo { /* pagination row "go" button container */
+	}
+
+.prspace { /* pagination short buttons and navigation sections spacing */
+	padding-bottom: 3px;
+	vertical-align: bottom;
+	width: 100%;
+	}
+
+.prspaceEnd { /* pagination short buttons and navigation sections spacing end */
+	display: none; /* uncomment out for full panel width pagination control */
+	/* width: 100%; */ /* comment out for full panel width pagination control */
+	}
+
+.Pagination_Input, .pri { /* pagination row input textbox */
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	box-shadow: inset 0px 1px 2px #dddddd;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 11px;
+	text-align: center;
+	}
+
+
+.menuDivider {
+	padding: 0px;
+	border-top: 1px solid #ffffff;
+	}
+
+
+/**********************************************************************
+ * Tab Control Styles                                                 *
+ **********************************************************************/
+.ajax__tab_xp { /* tab container alignment */
+	margin-bottom: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	padding: 0px;
+	text-align: left;
+	}
+
+.pContent .ajax__tab_xp .ajax__tab_body { /* tab container */
+	margin: 0px;
+	padding: 0px;
+	}
+
+.ajax__tab_xp .dialog_view, .ajax__tab_xp .dv { /* panel container within tab container */
+	box-shadow: none; 
+	margin: 0px;
+	margin-bottom: 7px;
+	padding: 0px;
+	width: 100%;
+	}
+
+.ajax__tab_xp .dBody, div.fixedHeaderContainer .ajax__tab_xp .dBody { /* panel content container (excludes panel header) within tab container */ 
+	border: 0px;
+	}
+
+.ajax__tab_xp .tre { /* data grid container within tab container */
+	}
+
+
+/**********************************************************************
+ * Sign In Bar Styles                                                 *
+ **********************************************************************/
+.signInSpacing { /* application logo and sign in bar spacing */
+	width: 100%;
+	}
+
+.signInBar { /* sign in bar */
+	color: #ffffff;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding-bottom: 10px;
+	padding-left: 3px;
+	padding-right: 3px;
+	white-space: nowrap;
+	}
+	
+.signInBar a { /* sign in bar link text */
+	color: #ffffff;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: underline;
+	white-space: nowrap;
+	}
+
+.signInBar a:hover { /* sign in bar link text hover state */
+	color: #ffffff;
+	text-decoration: None;
+	}
+
+.signInBarStatus { /* sign in bar status message text */
+	color: #ffffff;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding-left: 10px;
+	padding-right: 20px;
+	text-align: right;
+	white-space: nowrap;
+	}
+
+
+/**********************************************************************
+ * Security Forms (Sign In, Sign Out, Forgot User pages) Styles       *
+ **********************************************************************/
+.securityGraphicWrapper { /* sign in/out graphic, saluation and instruction container */
+	padding-bottom: 20px;
+	padding-top: 20px;
+	text-align: center;
+	}
+
+.securityForm {
+	padding: 16px;
+	text-align: left;
+	vertical-align: top;
+	}
+
+.QSContainer .securityGraphicWrapper .imageDropshadow { /* reduce security graphic image size so contents fit within QuickPopup */
+	width: 430px;
+	} 
+
+
+/**********************************************************************
+ * Filter/Language Popup Styles                                       *
+ **********************************************************************/
+.popupPosition {
+	z-index: 100;
+	}
+
+.popupWrapper { /* popup container */
+	-moz-border-radius: 6px;
+	-moz-box-shadow: 0px 0px 10px #999999;
+	-webkit-border-radius: 6px;
+	-webkit-box-shadow: 0px 0px 10px #999999;
+	background-color: #f0f2ea;
+	border-radius: 6px;
+	border: 1px solid #a8a7a7;
+	box-shadow: 0px 0px 10px #999999;
+	display: inline-block;
+	left: 0px;
+	padding: 10px;
+	position: absolute;
+	top: 0px;
+	visibility: hidden;
+	z-index: 10;
+	}
+
+.popupTableCellLabel {/* popup table cell field label text */
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 13px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+	padding-right: 2px;
+	padding-top: 4px;
+	text-align: left;
+	vertical-align: top;
+	white-space:nowrap;
+	}
+
+.popupTableCellValue { /* popup table cell field value text */
+	color: #555555;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 13px;
+	padding: 4px;
+	vertical-align: top;
+	white-space:nowrap;
+	}
+
+.popupTableCellValue div { /* make sure any div container (e.g., .net tab container) appears/hides with its parent, the actions/filters popup  */
+	visibility: inherit !important;
+	}
+
+
+/**********************************************************************
+ * Detail Rollover Popup Styles                                       *
+ **********************************************************************/
+.detailRolloverPopup { /* detail rollover popup container */
+	position: absolute;
+	visibility: visible;
+	z-index: 2;
+	}
+
+.detailRolloverTitle { /* detail rollover popup title */
+	color: #679438;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 13px;
+	font-weight: normal;
+	padding-bottom: 5px;
+	padding-left: 4px;
+	padding-top: 6px;
+	vertical-align: middle;
+	width: 100%;
+	}
+
+.detailRolloverTitlePadding { /* detail rollver popup title padding (work-around classic implementation) */
+	display: none;
+	}
+
+.detailRolloverPopupCloseButtonAlignment { /* detail rollover popup close button container */
+	}
+
+.detailRolloverTL { /* detail rollover popup top left edge */
+	display: none;
+	}
+
+.detailRolloverT { /* detail rollover popup top center edge */
+	}
+
+.detailRolloverTR { /* detail rollover popup top right edge */
+	display: none;
+	}
+
+.detailRolloverL { /* detail rollover popup left middle edge */
+	display: none;
+	}
+
+.detailRolloverC { /* detail rollover popup center */
+	}
+
+.detailRolloverR { /* detail rollover popup right middle edge */
+	display: none;
+	}
+
+.detailRolloverBL { /* detail rollover popup bottom left edge */
+	display: none;
+	}
+
+.detailRolloverB { /* detail rollover popup bottom center edge */
+	background-image: none;
+	font-size: 1px;
+	}
+
+.detailRolloverBR { /* detail rollover popup bottom right edge */
+	display: none;
+	}
+
+
+/**********************************************************************
+ * AJAX Calendar Styles                                               *
+ **********************************************************************/
+.MyCalendar { /* Bug 93762 - force Calendar popup to display next to Date field */
+	left: inherit !important;
+	top: inherit !important;
+        }
+
+.MyCalendar .ajax__calendar_container { /* AJAX calendar container */
+	background-color: #ffffff;
+	border: 1px solid #636563;
+	color: #000000;
+	z-index: 20;
+	}
+
+.MyCalendar .ajax__calendar_container table { /* AJAX calendar days container */
+	height: 100%;
+	width: 100%;
+	}
+
+.MyCalendar .ajax__calendar_day { /* AJAX calendar non-current day container */ 
+	border: 1px solid #ffffff;
+	}
+
+.MyCalendar .ajax__calendar_other .ajax__calendar_day,
+.MyCalendar .ajax__calendar_other .ajax__calendar_year { /* AJAX calendar non-current month day/year container */
+	border: 1px solid #ffffff;
+	color: #636563;
+	}
+
+.MyCalendar .ajax__calendar_hover .ajax__calendar_day,
+.MyCalendar .ajax__calendar_hover .ajax__calendar_month,
+.MyCalendar .ajax__calendar_hover .ajax__calendar_year { /* AJAX calendar day/month/year hover state */
+	background-color: #effbff;
+	border: 1px solid #def3ff;
+	color: #0065ce;
+	}
+
+.MyCalendar .ajax__calendar_active .ajax__calendar_day,
+.MyCalendar .ajax__calendar_active .ajax__calendar_month,
+.MyCalendar .ajax__calendar_active .ajax__calendar_year { /* AJAX calendar current day/month/year container */
+	background-color: #effbff;
+	border: 1px solid #0065ce;
+	color: #0065ce;
+	}
+
+
+/**********************************************************************
+ * AJAX Smooth Panel Update Styles                                    *
+ **********************************************************************/
+.ajaxUpdatePanel { /* AJAX smooth panel update screen overlay */
+	background-color: #000000;
+	height: 100%;
+	left: 0px;
+	opacity: 0.50;
+	padding: 0px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	z-index: 1999;
+	}
+
+div.updatingContainer { /* AJAX smooth panel update loading icon position */
+	height: 100%;
+	left: 0px;
+	padding: 0px !important;
+	position: fixed !important;
+	text-align: center;
+	top: 0px;
+	width: 100%;
+	z-index: 2000;
+	}
+
+div.updatingContainer img { /* AJAX smooth panel update loading icon */
+	position: relative;
+	top: 50%;
+	}
+
+
+/**********************************************************************
+ * AJAX Modal Popup Control Styles                                    *
+ **********************************************************************/
+.modalPopup {
+	background-color:#eeeeee;
+	border: 1px solid #000000;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 12px;
+	height: 35px;
+	padding: 10px; 
+	position:absolute;
+	text-align: center;
+	top:-1000px;
+	vertical-align: center;
+	width: 200px;
+	}
+
+
+/**********************************************************************
+ * Web Accordion Styles                                               * 
+ **********************************************************************/
+.accordionHeader { /* accordion header area */ 
+	background-color: #f1f3ec;
+	border: 1px solid #cccccc;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	vertical-align: middle;
+	}
+
+.accordionHeaderTitle { /* accordion header area title */
+	color: #333333;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	font-weight: normal;
+	text-align: left;
+	text-transform: none;
+   	vertical-align: middle;
+	width: 100%;
+	}
+
+
+/**********************************************************************
+ * Gallery Styles                                                     * 
+ **********************************************************************/
+.gallerydBody {
+	color: #555555;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	padding: 0px;
+	text-align: left;	
+	}
+
+.gallerydBody .galleryttc {
+	padding: 0px;
+	width: 180px;
+	}
+
+.galleryttc { /* gallery data grid data container */
+	font-family: Arial, Verdana, Georgia, sans-serif;
+	font-size: 12px;
+	padding: 20px;
+	text-align: center;
+	vertical-align: top;
+	}
+
+.galleryttc div { /* gallery item wrapper */
+	margin: 0px;
+	padding: 0px;
+	}
+
+.gallerytic { /* gallery data grid icon cell */
+	padding: 0px;
+	padding-left: 8px;
+	padding-top: 24px; 
+	vertical-align: top;    
+	width: 16px;       
+	}
+
+.galleryttl { /* gallery data grid page/grand totals cell */
+	font-family: Arial, Verdana, Georgia, sans-serif;
+	font-size: 12px;
+	padding: 5px;
+	text-align: left;
+	vertical-align: top;
+	}
+
+.galleryBackgroundImage { /* gallery item background image */
+	background-position: center center;
+	background-repeat: no-repeat;
+	/* background-size: 100% 100%; */ /* uncomment out to have background image scaled to fill gallery cell */
+	cursor: pointer !important;
+	}
+
+.galleryDescriptionBackground { /* gallery item description background */
+	background-image: url(../../Images/GalleryDescriptionBackground.png);
+	background-position: center bottom;
+	background-repeat: repeat-x;
+	color: #cccccc;
+	font-size: 9px;
+	height: 180px;
+	padding-bottom: 6px;
+	padding-left: 6px;
+	text-align: left;
+	text-transform: uppercase;
+	vertical-align: bottom;
+	width: 180px;
+	}
+
+.galleryDescriptionBackground a.button_link { /* gallery item description link */
+	color: #679438;
+	padding: 0px;
+	text-decoration: none;
+	}
+
+.galleryDescriptionBackground a.button_link:hover { /* gallery item description link hover state */
+	color: #679438;
+	padding: 0px;
+	text-decoration: underline;
+	}
+
+.galleryTitle { /* gallery item descripton title */
+	color: #ffffff;
+	font-size: 11px;
+	font-weight: bold;
+	}
+
+.galleryTitleCrop { /* gallery item description title truncation */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 168px;
+	}
+
+
+/**********************************************************************
+ * Configuration/Error Page Styles                                    *
+ **********************************************************************/
+.configureErrorPagesText { /* configure/error page body text */
+	color: #333333;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 14px;
+	}
+	
+
+/**********************************************************************
+ * Section 508 Compliance Styles                                      *
+ **********************************************************************/
+.skipNavigationLinks { /* skip navigation links container*/
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	color: #aaaaaa;
+	font-size: 12px;
+	}
+	
+
+/**********************************************************************
+ * .NET Trace Log                                                     *
+ **********************************************************************/
+span.tracecontent table { /* .NET trace log background color */
+	background-color: #ffffff;
+	}
+
+
+/**********************************************************************
+ * Import Wizard Styles                                               * 
+ **********************************************************************/
+.importWizardpBack { /* import wizard body */
+	}
+
+.importWizardmarginTL { /* import wizard page centering top left margin */
+	}
+
+.importWizardmarginTR { /* import wizard page centering top right margin */
+	}
+
+.importWizardmarginL { /* import wizard page centering left margin */
+	}
+
+.importWizardmarginR { /* import wizard page centering right margin */
+	}
+
+.importWizardmarginBL { /* import wizard page centering bottom left margin */
+	}
+
+.importWizardmarginBR { /* import wizard page centering bottom right margin */
+	}
+
+.importWizardpcT { /* import wizard page container top center edge (header container) */
+	}
+
+.importWizardpcC { /* import wizard page container center (contents of page container) */
+	}
+
+.importWizardpcB { /* import wizard page container bottom center edge (footer container) */
+	}
+
+.importWizarddv { /* panel container (includes panel header) */
+	background-color: #ffffff;
+	border-radius: 4px;
+	box-shadow: 0px 0px 3px #bbbbbb;
+	margin-bottom: 10px;
+	padding-bottom: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
+	padding-top: 6px;
+	text-align: left;
+	vertical-align: top;
+	}
+
+.importWizarddBody { /* panel content container (excludes panel header) */ 
+	}
+
+
+/**********************************************************************
+ * Quick Popup Styles                                                 *
+ **********************************************************************/
+.QDialog { /* quick popup container */ 
+	background-color: #ffffff;
+	border-radius: 4px;
+	box-shadow: 0px 0px 6px #333333;
+	left: 200px;
+	margin: 0px;
+	overflow: hidden;
+	position: absolute;
+	top: 300px;
+	z-index: 1000;
+	}
+
+.QpBack { /* body of page displayed within quick popup */
+	margin: 0px;
+	}
+
+/**********************************************************************
+ * Quick Selector Styles                                              *
+ **********************************************************************/
+div.modal { /* modal popup parent overlay */
+	filter: alpha(opacity=30);
+	-moz-opacity: 0.3;
+	opacity: 0.3;
+	background-color: #000000;
+	height: 100%;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	z-index: 900;
+	}
+
+.themeButtonMini { /* small theme button */
+	background: -moz-linear-gradient( center top, #fafaf8 5%, #e0e0d9 100% );
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fafaf8), color-stop(1, #e0e0d9) );
+	background: -ms-linear-gradient(top, #fafaf8 5%, #e0e0d9 100%);
+	box-shadow: 0px -1px 0px #ffffff inset;
+	border: 1px solid #a9a8a8;
+	border-radius: 3px;
+	display: inline-block;
+    	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafaf8', endColorStr='#e0e0d9');
+	padding-bottom: 2px; 
+	padding-left: 4px; 
+	padding-right: 4px; 
+	padding-top: 2px; 
+	text-shadow: 0px 1px 0px #ffffff;
+	white-space: nowrap;
+	}
+
+.themeButtonMini:hover { /* small theme button hover state */
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fafaf8), color-stop(1, #e0e0d9) );
+	background: -moz-linear-gradient( center top, #fafaf8 5%, #e0e0d9 100% );
+	background: -ms-linear-gradient(top, #fafaf8 5%, #e0e0d9 100%);
+	border: 1px solid #aaaaaa;
+	box-shadow: 0px 0px 1px #bbbbbb;
+	color: #679438;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafaf8', endColorStr='#e0e0d9');
+	white-space: nowrap;
+	}
+
+.themeButtonMini a.button_link, .themeButtonMini a.button_link:hover, .themeButtonMini a, .themeButtonMini a:hover { /* link within small theme button */ 
+	color: #679438;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 11px;
+	font-weight: normal;
+	text-decoration: none;
+	text-transform: none;
+	}
+
+.themeButtonMiniDisabled, .themeButtonMiniDisabled:hover { /* small theme button disabled */
+	background: -moz-linear-gradient( center top, #ffffff 5%, #cccccc 100% );
+	background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #cccccc) );
+	background: -ms-linear-gradient(top, #ffffff 5%, #cccccc 100%);
+	border: 1px solid #999999; 
+	box-shadow: none;
+	opacity: 0.5;
+	}
+
+.themeButtonMiniDisabled a, .themeButtonMiniDisabled a:hover, .themeButtonMiniDisabled a:visited { /* disabled link within small theme button */
+	color: #999999;
+	}
+
+.QSContainer { /* quick selector container */
+	}
+
+.QSContainer .panelSearchBox { /* quick selector search box */
+	width: 180px;
+	}
+
+.QSContainer .Search_Input { /* quick selector search box text */
+	width: 240px;
+	}
+
+.QSContainer .Search_InputHint { /* quick selector search box hint */
+	width: 240px;
+	}
+
+.QSSize { /* iframe within which quick selector is displayed */ 
+	height: 278px;
+	width: 330px;
+	}
+
+.QSdh { /* quick selector title bar */
+	background-color: #f0f2ea;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 6px;
+	height: 34px;
+	left: 0px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	z-index: 3;
+	}
+
+.QSContainer .dhb { /* padding to accommodate popup close button */
+	padding-right: 40px;
+	}
+
+.QSContainer .QSscrollRegion { /* quick selector scrolled region */
+	height: 200px;
+	left: 0px;
+	overflow: auto;
+	position: absolute;
+	top: 40px;
+	width: 100%;
+	z-index: 2;	
+	}
+
+.QSfooter { /* quick selector footer bar */
+	background-color: #f0f2ea;
+	height: 38px;
+	left: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 2px;
+	position: fixed;
+	top: 240px;
+	width: 100%;
+	z-index: 3;
+	}
+
+.QSButtonContainer { /* quick selector clear/add button container */ 
+	width: 100px;
+	}
+
+.QSButtonContainer .themeButton { /* quick selector theme button container */
+	padding: 1px;
+	}
+
+.QSCloseButtonContainer { /* quick selector close button container */
+	width: 54px;
+	}
+
+.QSPaginationContainer { /* quick selector pagination container */
+	width: 210px;
+	}
+
+.QSPageSizeButton { /* quick selector page size button */
+	display: none;
+	}
+
+.QStr { /* quick selector row */
+	background-color: #ffffff;
+	}
+
+.QStr:hover, .QStrHighlighted, .QStrHighlighted:hover, .QStrSelected:hover { /* quick selector hover/highlighted state */
+	background-color: #eef4de;
+	}
+
+.QStrSelected { /* quick selector selected state */
+	background-color: #f8faf0;
+	}
+
+.QSthc { /* quick selector header cell */
+	color: #555555;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 12px;
+	font-weight: bold;
+	overflow: hidden;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 12px;
+	text-overflow: ellipsis;
+	vertical-align: top;
+	white-space: nowrap;
+	}
+
+.QSthc a { /* link within quick selector header cell */
+	color: #679438;
+	font-weight: bold;
+	text-decoration: none;
+	}
+
+.QSthc a:hover { /* hover state of link within quick selector header cell */
+	}
+
+.QSthc a.button_link { /* link with class button_link within quick selector header cell */
+	color: #679438;
+	font-weight: bold;
+	text-decoration: none;
+	}
+
+.QSthc a.button_link:hover { /* hover state of link with class button_link within quick selector header cell */
+	}
+
+.QSttc { /* quick selector cell */
+	border-bottom: 1px dotted #eeeeee;
+	color: #666666;
+	font-family: Trebuchet MS, Arial, Verdana, Geneva, ms sans serif;
+	font-size: 12px;
+	height: 14.5px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 2px;
+	vertical-align: top;
+	white-space: nowrap;
+	}
+
+.QSttc div { /* quick selector cell content container (used for long text truncation) */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 290px;
+	}
+
+.QSttc a { /* link within quick selector cell */
+	color: #679438;
+	text-decoration: none;
+	}
+
+.QSttc a:hover { /* hover state of link within quick selector cell */
+	}
+
+.QSttc a.button_link { /* link with class button_link within quick selector cell */
+	color: #679438;
+	text-decoration: none;
+	}
+
+.QSttc a.button_link:hover { /* hover state of link with class button_link within quick selector cell */
+	}
+
+
+/**********************************************************************
+ * Quick (Add/Edit) Page Styles                                       *
+ **********************************************************************/
+.QSContainer .pContent, .QSContainer .pWrapper { /* quick page configure error page panel */
+	width: 801px;
+	}
+
+.QSContainer .dv, .QSContainer .dialog_view, .QSContainer .panelC { /* quick page panel */
+	border: none;
+	box-shadow: none;
+	width: 100%;
+	}
+
+.QSContainer .dh, .QSContainer .dialog_header { /* quick page panel header */
+	height: 32px;
+	width: 100%; 
+	z-index: 3;
+	}
+
+.QSContainer .dh2 { /* quick page top panel header */
+	background-color: #f0f2ea;
+	height: 32px;
+	left: 0px;
+	position: fixed;
+	top: 0px;
+	width: 100%; 
+	z-index: 3;
+	}
+
+.QSContainer .scrollRegion { /* quick page scrolled region */
+	height: 428px;
+	left: 0px;
+	overflow: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+	position: absolute;
+	top: 32px;
+	width: 785px;
+	z-index: 2;	
+	}
+
+.QSContainer .scrollRegion div { /* quick page scroll region margin */
+	margin: 0px;
+	}
+
+.QPageSize { /* dimensions of quick page */
+	height: 500px;
+	width: 805px;
+	}
+
+.QSContainer .scrollRegion .pageButtonsContainer { /* quick page page buttons (save, cancel) container */
+	background-color: #f0f2ea;
+	height: 40px;
+	left: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+	position: fixed;
+	top: 460px;
+	width: 100%;
+	z-index: 3;
+	}
+
+.QPCloseBarButtonContainer { /* quick page close button container */
+	position: absolute;
+	right: 0px;
+	z-index: 4;
+	}
+
+.QPCloseBarButtonPosition { /* quick page close button position */
+	padding-right: 10px;
+	padding-top: 8px;
+	}
+
+.QPContainerPanelPadding { /* quick page panel position */
+	padding: 0px;
+	}
+
+
+/**********************************************************************
+ * Hidden Control Styles                                              * 
+ **********************************************************************/
+.hide { /* hidden control (instead of using display:none), e.g., used in QuickSelector tab navigation */
+	height: 0px;
+	width: 0px;
+	}
+
