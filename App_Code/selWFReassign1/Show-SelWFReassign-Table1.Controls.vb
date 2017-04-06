@@ -309,7 +309,7 @@ Public Class SelWFReassignTableControl
         Public Overrides Sub DataBind()
 
             MyBase.DataBind()
-            Me.iComm.Attributes.Add("onclick", "window.open('../wf_po/WPO_Comment.aspx?ord1=" & Me.ORD.Text & "&po1=" & Me.PONUMBER.Text & "&com1=" & Me.CompanyID.Text & "', '', 'menubar=no,width=640,height=240,top=(screen.height  - 240)/2,left=(screen.width  - 640)/2');return false;")
+            Me.iComm.Attributes.Add("onclick", "window.open('../sel_WPO_WFTask/WPO-Comment1.aspx?ord1=" & Me.ORD.Text & "&po1=" & Me.PONUMBER.Text & "&com1=" & Me.CompanyID.Text & "', '', 'menubar=no,width=640,height=240,top=(screen.height  - 240)/2,left=(screen.width  - 640)/2');return false;")
         End Sub
 
 

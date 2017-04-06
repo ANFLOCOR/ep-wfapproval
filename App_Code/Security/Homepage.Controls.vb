@@ -141,19 +141,19 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
             ' redirected to the URL.
             Dim pubUrl As String
             Select Case Me.Doc_Type.Text
-                Case "CAR"
+                Case "CAR", "<font color=black>CAR</font>"
                     pubUrl = "../WCAR_Doc/EditWCAR-Doc-Approval.aspx?WCAR_Doc=" & Me.PK_ID.Text
-                Case "PR"
+                Case "PR", "<font color=black>PR</font>"
                     pubUrl = "../wf_pr/EditWPR_Doc_Approval.aspx?WPR_Doc=" & Me.PK_ID.Text
-                Case "PO"
+                Case "PO", "<font color=black>PO</font>"
                     pubUrl = "../sel_WPO_WFTask/WPO-WFTask.aspx?POP10100_PO=" & Me.Doc_No.Text & "&POP10100_Co=" & Me.C_ID.Text
-                Case "FS"
-                    pubUrl = "../WFinRep_Head/WFin_ApproverPage_Revised.aspx?WFinRep_Head=" & Me.Doc_No.Text
-                Case "FSN"
+                Case "FS", "<font color=black>FS</font>"
+                    pubUrl = "../WFinRep_Head/WFin-ApproverPage.aspx?WFinRep_Head=" & Me.Doc_No.Text
+                Case "FSN", "<font color=black>FSN</font>"
                     pubUrl = "../WFinRep_Head/WFinRepNGP_Approver.aspx?WFinRepNGP_Head=" & Me.Doc_No.Text
-                Case "CONSOLIDATED"
+                Case "CONSOLIDATED", "<font color=black>CONSOLIDATED</font>"
                     pubUrl = "../WFinRep_Head/Conso_ReportDoc_Approver.aspx?WFinRepCon_Head=" & Me.Doc_No.Text
-                Case "PO CANCEL"
+                Case "PO CANCEL", "<font color=black>PO CANCEL</font>"
                     pubUrl = "../wf_cv/EditWCanvass_PO_Map.aspx?WCanvass_PO_Map=" & Me.PK_ID.Text
                 Case "_CAR(RETURN)", "_PO(RETURN)"
                     Me.imbDoc.Visible = False
@@ -466,7 +466,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Throw New Exception(msg, ex.InnerException)
             End Try
         End Sub
-        
+
 
     End Class
     Public Class Sel_Approver_Pending_Tasks2TableControlRow
@@ -577,21 +577,21 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
             ' ''MsgBox(Me.Doc_Type1.Text)
 
             Select Case Me.Doc_Type1.Text
-                Case "<font color=black>CAR</font>"
+                Case "<font color=black>CAR</font>", "CAR"
                     pubUrl = "../WCAR_Doc1/EditWCAR-Doc-Approval1.aspx?WCAR_Doc1=" & Me.PK_ID1.Text
-                Case "<font color=black>PR</font>"
+                Case "<font color=black>PR</font>", "PR"
                     pubUrl = "../wf_pr/EditWPR_Doc_Approval.aspx?WPR_Doc=" & Me.PK_ID1.Text
-                Case "<font color=black>PO</font>"
+                Case "<font color=black>PO</font>", "PO"
                     pubUrl = "../sel_WPO_WFTask/WPO-WFTaskN.aspx?POP10100_PO=" & Me.Doc_No1.Text & "&POP10100_Co=" & Me.C_ID1.Text
-                Case "<font color=black>FS</font>"
-                    pubUrl = "../WFinRep_Head/WFin_ApproverPage_Revised.aspx?WFinRep_Head=" & Me.Doc_No1.Text
-                Case "<font color=black>FSN</font>"
+                Case "<font color=black>FS</font>", "FS"
+                    pubUrl = "../WFinRep_Head/WFin-ApproverPage.aspx?WFinRep_Head=" & Me.Doc_No1.Text
+                Case "<font color=black>FSN</font>", "FSN"
                     pubUrl = "../WFinRep_Head/WFinRepNGP_Approver.aspx?WFinRepNGP_Head=" & Me.Doc_No1.Text
-                Case "<font color=black>CONSOLIDATED</font>"
+                Case "<font color=black>CONSOLIDATED</font>", "CONSOLIDATED"
                     pubUrl = "../WFinRep_Head/Conso_ReportDoc_Approver.aspx?WFinRepCon_Head=" & Me.Doc_No1.Text
-                Case "<font color=black>PO CANCEL</font>"
+                Case "<font color=black>PO CANCEL</font>", "PO CANCEL"
                     pubUrl = "../wf_cv/EditWCanvass_PO_Map.aspx?WCanvass_PO_Map=" & Me.PK_ID1.Text
-                Case "<font color=black>_CAR(RETURN)", "_PO(RETURN)</font>"
+                Case "<font color=black>_CAR(RETURN)</font>", "<font color=black>_PO(RETURN)</font>", "_PO(RETURN)", "_CAR(RETURN)"
                     Me.imbDoc1.Visible = False
                 Case Else
                     pubUrl = "../WCAR_Doc1/Edit-WCAR-Doc1.aspx?WCAR_Doc1=" & Me.PK_ID1.Text
@@ -4402,6 +4402,8 @@ Public Class BaseSel_Approver_Pending_TasksTableControl
                    
                 Me.CurrentSortOrder = New OrderBy(True, False)
             
+                Me.CurrentSortOrder.Add(Sel_Approver_Pending_TasksView.SortOrder, OrderByItem.OrderDir.Asc)
+              
                 Me.CurrentSortOrder.Add(Sel_Approver_Pending_TasksView.Date_Assigned, OrderByItem.OrderDir.Desc)
               
         End If
@@ -4820,6 +4822,8 @@ Public Class BaseSel_Approver_Pending_TasksTableControl
             Else
                 Me.CurrentSortOrder = New OrderBy(True, False)
             
+                Me.CurrentSortOrder.Add(Sel_Approver_Pending_TasksView.SortOrder, OrderByItem.OrderDir.Asc)
+              
                 Me.CurrentSortOrder.Add(Sel_Approver_Pending_TasksView.Date_Assigned, OrderByItem.OrderDir.Desc)
                   
             End If

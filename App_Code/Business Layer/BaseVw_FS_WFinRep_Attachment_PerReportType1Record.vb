@@ -19,30 +19,22 @@ Namespace ePortalWFApproval.Business
 ''' <seealso cref="Vw_FS_WFinRep_Attachment_PerReportType1Record"></seealso>
 
 <Serializable()> Public Class BaseVw_FS_WFinRep_Attachment_PerReportType1Record
-	Inherits KeylessRecord
+	Inherits PrimaryKeyRecord
 	
 
 	Public Shared Shadows ReadOnly TableUtils As Vw_FS_WFinRep_Attachment_PerReportType1View = Vw_FS_WFinRep_Attachment_PerReportType1View.Instance
 
 	' Constructors
-
+ 
 	Protected Sub New()
 		MyBase.New(TableUtils)
 	End Sub
 
-	Protected Sub New(ByVal record As KeylessRecord)
+	Protected Sub New(ByVal record As PrimaryKeyRecord)
 		MyBase.New(record, TableUtils)
 	End Sub
 	
-	'Evaluates Initialize when->Reading record formulas specified at the data access layer
-    Public Overridable Sub Vw_FS_WFinRep_Attachment_PerReportType1Record_ReadRecord(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ReadRecord
-        'Apply Initialize->Reading record formula only if validation is successful.
-        	        Dim Vw_FS_WFinRep_Attachment_PerReportType1Rec As Vw_FS_WFinRep_Attachment_PerReportType1Record = CType(sender,Vw_FS_WFinRep_Attachment_PerReportType1Record)
-        If Not Vw_FS_WFinRep_Attachment_PerReportType1Rec Is Nothing AndAlso Not Vw_FS_WFinRep_Attachment_PerReportType1Rec.IsReadOnly Then
-                End If
-    End Sub
-    
-    	'Evaluates Initialize when->Inserting record formulas specified at the data access layer
+	'Evaluates Initialize when->Inserting record formulas specified at the data access layer
     Public Overridable Sub Vw_FS_WFinRep_Attachment_PerReportType1Record_InsertingRecord(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles Me.InsertingRecord
         'Apply Initialize->Inserting record formula only if validation is successful.
         	        Dim Vw_FS_WFinRep_Attachment_PerReportType1Rec As Vw_FS_WFinRep_Attachment_PerReportType1Record = CType(sender,Vw_FS_WFinRep_Attachment_PerReportType1Record)
@@ -50,8 +42,25 @@ Namespace ePortalWFApproval.Business
         If Not Vw_FS_WFinRep_Attachment_PerReportType1Rec Is Nothing AndAlso Not Vw_FS_WFinRep_Attachment_PerReportType1Rec.IsReadOnly Then
                 End If
     End Sub
+
+	'Evaluates Initialize when->Updating record formulas specified at the data access layer
+    Public Overridable Sub Vw_FS_WFinRep_Attachment_PerReportType1Record_UpdatingRecord(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs) Handles Me.UpdatingRecord
+        'Apply Initialize->Updating record formula only if validation is successful.
+        	        Dim Vw_FS_WFinRep_Attachment_PerReportType1Rec As Vw_FS_WFinRep_Attachment_PerReportType1Record = CType(sender,Vw_FS_WFinRep_Attachment_PerReportType1Record)
+        Validate_Updating()
+        If Not Vw_FS_WFinRep_Attachment_PerReportType1Rec Is Nothing AndAlso Not Vw_FS_WFinRep_Attachment_PerReportType1Rec.IsReadOnly Then
+                End If
+    End Sub
     
-     'Evaluates Validate when->Inserting formulas specified at the data access layer
+    'Evaluates Initialize when->Reading record formulas specified at the data access layer
+    Public Overridable Sub Vw_FS_WFinRep_Attachment_PerReportType1Record_ReadRecord(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.ReadRecord
+        'Apply Initialize->Reading record formula only if validation is successful.
+        	        Dim Vw_FS_WFinRep_Attachment_PerReportType1Rec As Vw_FS_WFinRep_Attachment_PerReportType1Record = CType(sender,Vw_FS_WFinRep_Attachment_PerReportType1Record)
+        If Not Vw_FS_WFinRep_Attachment_PerReportType1Rec Is Nothing AndAlso Not Vw_FS_WFinRep_Attachment_PerReportType1Rec.IsReadOnly Then
+                End If
+    End Sub
+    
+   'Evaluates Validate when->Inserting formulas specified at the data access layer
    Public Overridable Sub Validate_Inserting ()
 		Dim fullValidationMessage As String = ""
 		Dim validationMessage As String = ""
@@ -67,8 +76,25 @@ Namespace ePortalWFApproval.Business
 			Throw New Exception(fullValidationMessage)
 		End If 
 	End Sub
-    
-    Public Overridable Function EvaluateFormula(ByVal formula As String, Optional ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord = Nothing, Optional ByVal format As String = Nothing) As String
+	
+	'Evaluates Validate when->Updating formulas specified at the data access layer
+   Public Overridable Sub Validate_Updating ()
+		Dim fullValidationMessage As String = ""
+		Dim validationMessage As String = ""
+
+		dim formula as String = ""
+
+
+		If validationMessage <> "" AndAlso validationMessage.ToLower() <> "true" Then
+			fullValidationMessage &= validationMessage & vbCrLf
+		End If
+
+		If fullValidationMessage <> "" Then
+			Throw New Exception(fullValidationMessage)
+		End If 
+	End Sub
+ 
+	Public Overridable Function EvaluateFormula(ByVal formula As String, Optional ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord = Nothing, Optional ByVal format As String = Nothing) As String
 
 		Dim e As Data.BaseFormulaEvaluator = New Data.BaseFormulaEvaluator()
 

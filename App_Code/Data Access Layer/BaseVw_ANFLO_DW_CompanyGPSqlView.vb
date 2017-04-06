@@ -1,8 +1,8 @@
 ﻿' This class is "generated" and will be overwritten.
-' Your customizations should be made in Vw_ANFLO_DW_CompanyGPSqlView.vb  
+' Your customizations should be made in Vw_ANFLO_DW_CompanyGPSqlView.vb 
 
-Imports BaseClasses
 Imports BaseClasses.Data
+Imports BaseClasses
 Imports BaseClasses.Data.SqlProvider
 
 
@@ -22,8 +22,9 @@ Public Class BaseVw_ANFLO_DW_CompanyGPSqlView
 	Inherits StoredProceduresSQLServerAdapter
 	
 	Public Sub New()
+		MyBase.New()
 	End Sub
-	
+
 	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
 		MyBase.New(connectionName, applicationName)
 	End Sub

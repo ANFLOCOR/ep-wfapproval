@@ -647,13 +647,13 @@ ISD_GeolocationInit();
 
 
   if (type1.value == "BS") {
-  var url = '../WFinRep_Head/WFin_RepBSApproveView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value;
+  var url = '../WFinRep_Head1/WFin-RepBSApproveView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value;
   window.open(url, '', params);}
   else if (type1.value == "IS") {
-  var url = '../WFinRep_Head/WFin_RepISApproveView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value;
+  var url = '../WFinRep_Head1/WFin-RepISApproveView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value;
   window.open(url, '', params);}
   else{
-  var url = '../WFinRep_Head/WFin_RepCFApproveView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value;
+  var url = '../WFinRep_Head1/WFin-RepCFApproveView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value;
   window.open(url, '', params);}
 
   }
@@ -716,7 +716,7 @@ ISD_GeolocationInit();
   var type5 = document.getElementById(Control5);
   var type6 = document.getElementById(Control6);
 
-  var url = '../WFinRep_Head/WFin_RepInquiryView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value + '&amp;amp;Control5=' + type5.value + '&amp;amp;Control6=' + type6.value;
+  var url = '../WFinRep_Head/WFin-RepInquiryView.aspx?Control1=' + type2.value + '&amp;amp;Control2=' + type3.value + '&amp;amp;Control3=' + type1.value + '&amp;amp;Control4=' + type4.value + '&amp;amp;compDB=' + Company.value + '&amp;amp;Control5=' + type5.value + '&amp;amp;Control6=' + type6.value;
   window.open(url, '', params);
 
   }

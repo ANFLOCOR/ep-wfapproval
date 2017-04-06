@@ -1,35 +1,23 @@
 ﻿Failed to apply Transact-SQL code:
--- Creates a new record in the [dbo].[vw_ANFLO_DW_CompanyNonGP] table.
-CREATE PROCEDURE pePortalWFApprovalVw_ANFLO_DW_CompanyNonGPAdd
-    @p_CompanyID smallint,
-    @p_Name varchar(150),
-    @p_ShortName varchar(50),
-    @p_INTERID varchar(50),
-    @p_FULLADDRESS varchar(79),
-    @p_DWCompanyID int
+-- Creates a new record in the [dbo].[sel_W_User_W_Module] table.
+CREATE PROCEDURE pePortalWFApprovalSel_W_User_W_ModuleAdd
+    @p_W_U_ID int,
+    @p_W_MS_ID int
 AS
 BEGIN
     INSERT
-    INTO [dbo].[vw_ANFLO_DW_CompanyNonGP]
+    INTO [dbo].[sel_W_User_W_Module]
         (
-            [CompanyID],
-            [Name],
-            [ShortName],
-            [INTERID],
-            [FULLADDRESS],
-            [DWCompanyID]
+            [W_U_ID],
+            [W_MS_ID]
         )
     VALUES
         (
-             @p_CompanyID,
-             @p_Name,
-             @p_ShortName,
-             @p_INTERID,
-             @p_FULLADDRESS,
-             @p_DWCompanyID
+             @p_W_U_ID,
+             @p_W_MS_ID
         )
 
 END
 
-ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.vw_ANFLO_DW_CompanyNonGP' is not updatable because the modification affects multiple base tables.
+ApplyDataBaseSQLCode: Failed to apply SQL code: View or function 'dbo.sel_W_User_W_Module' is not updatable because the modification affects multiple base tables.
 

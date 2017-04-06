@@ -81,7 +81,7 @@ BEGIN
         IF @p_sort_str IS NOT NULL
             SET @l_sort_str = 'ORDER BY ' + @p_sort_str
         ELSE
-            SET @l_sort_str = ' '
+            SET @l_sort_str = N'ORDER BY sel_WFIN_ApproverPage_.[AFIN_ID] asc '
 
         -- Calculate the rows to be included in the list
         SET @l_end_gen_row_num = @p_page_number * @p_batch_size;
@@ -106,9 +106,9 @@ BEGIN
             sel_WFIN_ApproverPage_.[FIN_Year],
             sel_WFIN_ApproverPage_.[FIN_Month],
             sel_WFIN_ApproverPage_.[FIn_Description],
-            sel_WFIN_ApproverPage_.[HFIN_ID]'
-
-        SET @l_query_from = 'FROM ' + @l_from_str + ' ' + @l_join_str + + ' ' + @l_where_str + ') '
+            sel_WFIN_ApproverPage_.[HFIN_ID],
+            CAST(BINARY_CHECKSUM(sel_WFIN_ApproverPage_.[AFIN_ID],sel_WFIN_ApproverPage_.[AFIN_WS_ID],sel_WFIN_ApproverPage_.[AFIN_WSD_ID],sel_WFIN_ApproverPage_.[AFIN_WDT_ID],sel_WFIN_ApproverPage_.[AFIN_W_U_ID],sel_WFIN_ApproverPage_.[AFIN_Status],sel_WFIN_ApproverPage_.[AFIN_Date_Assign],sel_WFIN_ApproverPage_.[AFIN_Date_Action],sel_WFIN_ApproverPage_.[AFIN_Remark],sel_WFIN_ApproverPage_.[AFIN_Is_Done],sel_WFIN_ApproverPage_.[AFIN_FinID],sel_WFIN_ApproverPage_.[HFIN_C_ID],sel_WFIN_ApproverPage_.[FIN_Year],sel_WFIN_ApproverPage_.[FIN_Month],sel_WFIN_ApproverPage_.[FIn_Description],sel_WFIN_ApproverPage_.[HFIN_ID]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
+        SET @l_query_from = ' FROM ' + @l_from_str + ' ' + @l_join_str + ' ' + @l_where_str + ') '
         SET @l_query_select2 = 'SELECT * FROM sel_WFIN_ApproverPage_ '
         SET @l_query_where = 'WHERE IS_ROWNUM_COL BETWEEN ' + convert(varchar, @l_start_gen_row_num) + ' AND ' + convert(varchar, @l_end_gen_row_num) +  ';'
 
@@ -136,7 +136,8 @@ BEGIN
             sel_WFIN_ApproverPage_.[FIN_Year],
             sel_WFIN_ApproverPage_.[FIN_Month],
             sel_WFIN_ApproverPage_.[FIn_Description],
-            sel_WFIN_ApproverPage_.[HFIN_ID]'
+            sel_WFIN_ApproverPage_.[HFIN_ID],
+            CAST(BINARY_CHECKSUM(sel_WFIN_ApproverPage_.[AFIN_ID],sel_WFIN_ApproverPage_.[AFIN_WS_ID],sel_WFIN_ApproverPage_.[AFIN_WSD_ID],sel_WFIN_ApproverPage_.[AFIN_WDT_ID],sel_WFIN_ApproverPage_.[AFIN_W_U_ID],sel_WFIN_ApproverPage_.[AFIN_Status],sel_WFIN_ApproverPage_.[AFIN_Date_Assign],sel_WFIN_ApproverPage_.[AFIN_Date_Action],sel_WFIN_ApproverPage_.[AFIN_Remark],sel_WFIN_ApproverPage_.[AFIN_Is_Done],sel_WFIN_ApproverPage_.[AFIN_FinID],sel_WFIN_ApproverPage_.[HFIN_C_ID],sel_WFIN_ApproverPage_.[FIN_Year],sel_WFIN_ApproverPage_.[FIN_Month],sel_WFIN_ApproverPage_.[FIn_Description],sel_WFIN_ApproverPage_.[HFIN_ID]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
         SET @l_query_from = 
             ' FROM [dbo].[sel_WFIN_ApproverPage] sel_WFIN_ApproverPage_ ' + 
             'WHERE 1=2;'

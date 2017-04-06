@@ -30,7 +30,97 @@ Namespace ePortalWFApproval.Business
 		MyBase.New()
 	End Sub
 	
-	
+
+        Public Shared Sub AddRecord(ByVal AFIN_WS_ID As Integer, ByVal AFIN_WSD_ID As Integer, ByVal AFIN_WDT_ID As Integer, _
+               ByVal AFIN_W_U_ID As Integer, ByVal AFIN_W_U_ID_Delegate As Integer, ByVal AFIN_FinID As Integer, Optional ByVal AFIN_Remark As String = "")
+
+            Dim rec As New WFinRep_Activity1Record
+
+            Try
+                Utils.DbUtils.StartTransaction()
+                rec.AFIN_WS_ID = AFIN_WS_ID
+                rec.AFIN_WSD_ID = AFIN_WSD_ID
+                rec.AFIN_WDT_ID = AFIN_WDT_ID
+                rec.AFIN_W_U_ID = AFIN_W_U_ID
+                rec.AFIN_W_U_ID_Delegate = AFIN_W_U_ID_Delegate
+                rec.AFIN_HFIN_ID = AFIN_FinID 'Changed to AFIN_HFIN_ID - change of reference for FS PACKAGE
+                rec.AFIN_Status = 4 'NOTE: Change ApprovalStatus from 4 to 9
+                rec.AFIN_Date_Assign = Now().ToString() '.ToShortDateString() '.ToString()
+
+                rec.AFIN_Remark = AFIN_Remark
+                rec.AFIN_Is_Done = 0
+
+                rec.Save()
+                Utils.DbUtils.CommitTransaction()
+            Catch ex As Exception
+                Utils.DbUtils.RollBackTransaction()
+            End Try
+        End Sub
+
+
+
+        Public Shared Sub UpdateRecord(ByVal AFIN_ID As String, ByVal AFIN_Status As String)
+
+            Dim ws As String = "AFIN_ID = " & AFIN_ID
+            Dim rec As New WFinRep_Activity1Record
+            rec = WFinRep_Activity1Table.GetRecord(ws)
+
+            If Not rec Is Nothing Then
+                AFIN_ID = rec.AFIN_ID.ToString()
+                Utils.DbUtils.StartTransaction()
+                Try
+                    rec = WFinRep_Activity1Table.GetRecord(AFIN_ID, True)
+                    rec.AFIN_Status = AFIN_Status
+                    rec.AFIN_Date_Action = Now().ToString()       '.ToString() 'ToShortDateString()
+                    rec.Save()
+                    Utils.DbUtils.CommitTransaction()
+                Catch ex As Exception
+                    Utils.DbUtils.RollBackTransaction()
+                End Try
+            End If
+
+        End Sub
+
+        Public Shared Sub UpdateRecord_Final_Approved(ByVal AFIN_ID As String)
+
+            Dim ws As String = "AFIN_ID = " & AFIN_ID
+            Dim rec As New WFinRep_Activity1Record
+            rec = WFinRep_Activity1Table.GetRecord(ws)
+
+            If Not rec Is Nothing Then
+                AFIN_ID = rec.AFIN_ID.ToString()
+                Utils.DbUtils.StartTransaction()
+                Try
+                    rec = WFinRep_Activity1Table.GetRecord(AFIN_ID, True)
+                    rec.AFIN_Is_Done = "1"
+                    rec.Save()
+                    Utils.DbUtils.CommitTransaction()
+                Catch ex As Exception
+                    Utils.DbUtils.RollBackTransaction()
+                End Try
+            End If
+        End Sub
+
+        Public Shared Sub AssignTo(ByVal AFIN_ID As String, ByVal AFIN_W_U_ID As String)
+
+            Dim ws As String = "AFIN_ID = " & AFIN_ID
+            Dim rec As New WFinRep_Activity1Record
+            rec = WFinRep_Activity1Table.GetRecord(ws)
+
+            If Not rec Is Nothing Then
+                AFIN_ID = rec.AFIN_ID.ToString()
+                Utils.DbUtils.StartTransaction()
+                Try
+                    rec = WFinRep_Activity1Table.GetRecord(AFIN_ID, True)
+
+                    rec.AFIN_W_U_ID = AFIN_W_U_ID
+                    rec.Save()
+                    Utils.DbUtils.CommitTransaction()
+                Catch ex As Exception
+                    Utils.DbUtils.RollBackTransaction()
+                End Try
+            End If
+        End Sub
 
 	
 

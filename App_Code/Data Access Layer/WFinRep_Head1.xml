@@ -284,7 +284,7 @@
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -294,19 +294,47 @@
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>6</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WFinRep_Head_HFIN_U_ID_1</columnFKName>
+        <columnFKTable>sel_WASP_User</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>W_U_ID</columnFKColumn>
+        <columnFKColumnDisplay>= Sel_WASP_User1.W_U_User_Name</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="7" Priority="8" ColumnNum="7">
       <columnName>HFIN_Remark</columnName>
@@ -379,7 +407,7 @@
       <columnLengthSet>10.0</columnLengthSet>
       <columnDefault>
       </columnDefault>
-      <columnDBDefault>
+      <columnDBDefault Source="User">
       </columnDBDefault>
       <columnIndex>N</columnIndex>
       <columnUnique>N</columnUnique>
@@ -389,19 +417,47 @@
       </columnDBFormat>
       <columnPK>N</columnPK>
       <columnPermanent>N</columnPermanent>
-      <columnComputed>N</columnComputed>
-      <columnIdentity>N</columnIdentity>
-      <columnReadOnly>N</columnReadOnly>
+      <columnComputed Source="User">N</columnComputed>
+      <columnIdentity Source="User">N</columnIdentity>
+      <columnReadOnly Source="User">N</columnReadOnly>
       <columnRequired>N</columnRequired>
       <columnNotNull>N</columnNotNull>
-      <columnCaseSensitive>N</columnCaseSensitive>
+      <columnCaseSensitive Source="User">N</columnCaseSensitive>
       <columnCollation>
       </columnCollation>
-      <columnFullText>N</columnFullText>
+      <columnFullText Source="User">N</columnFullText>
       <columnVisibleWidth>%ISD_DEFAULT%</columnVisibleWidth>
       <columnTableAliasName>
       </columnTableAliasName>
       <applyLabelText>Y</applyLabelText>
+      <InternalName>9</InternalName>
+      <columnTableClassName>
+      </columnTableClassName>
+      <applyInitializeReadingRecord>N</applyInitializeReadingRecord>
+      <applyInitializeInsertingRecord>N</applyInitializeInsertingRecord>
+      <applyInitializeUpdatingRecord>N</applyInitializeUpdatingRecord>
+      <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
+      <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
+      <applyDefaultValue>N</applyDefaultValue>
+      <applyDFKA>Y</applyDFKA>
+      <readingRecordFormula>
+      </readingRecordFormula>
+      <insertingRecordFormula>
+      </insertingRecordFormula>
+      <updatingRecordFormula>
+      </updatingRecordFormula>
+      <insertingFormula>
+      </insertingFormula>
+      <updatingFormula>
+      </updatingFormula>
+      <foreignKey>
+        <columnFKName>VFK_WFinRep_Head_HFIN_FinID_1</columnFKName>
+        <columnFKTable>WFinRep_DocAttach</columnFKTable>
+        <columnFKOwner>dbo</columnFKOwner>
+        <columnFKColumn>FIN_ID</columnFKColumn>
+        <columnFKColumnDisplay>= WFinRep_DocAttach1.FIn_Description</columnFKColumnDisplay>
+        <foreignKeyType>Implicit</foreignKeyType>
+      </foreignKey>
     </Column>
     <Column InternalName="10" Priority="11" ColumnNum="10">
       <columnName>HFIN_Month</columnName>
@@ -443,7 +499,7 @@
       <applyValidateInsertingRecord>N</applyValidateInsertingRecord>
       <applyValidateUpdatingRecord>N</applyValidateUpdatingRecord>
       <applyDefaultValue>N</applyDefaultValue>
-      <applyDFKA>N</applyDFKA>
+      <applyDFKA>Y</applyDFKA>
       <readingRecordFormula>
       </readingRecordFormula>
       <insertingRecordFormula>
@@ -459,7 +515,7 @@
         <columnFKTable>vw_WFinRep_DocAttach_FIN_Month</columnFKTable>
         <columnFKOwner>dbo</columnFKOwner>
         <columnFKColumn>Mo</columnFKColumn>
-        <columnFKColumnDisplay>=Vw_WFinRep_DocAttach_FIN_Month1.Mo</columnFKColumnDisplay>
+        <columnFKColumnDisplay>= Vw_WFinRep_DocAttach_FIN_Month1.MoName</columnFKColumnDisplay>
         <foreignKeyType>Implicit</foreignKeyType>
       </foreignKey>
     </Column>
@@ -597,7 +653,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>WFinRep_Head_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">Y</canCreateRecords>
   <canEditRecords Source="Database">Y</canEditRecords>
   <canDeleteRecords Source="Database">Y</canDeleteRecords>

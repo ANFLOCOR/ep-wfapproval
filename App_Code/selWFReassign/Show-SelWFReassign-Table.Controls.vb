@@ -237,7 +237,13 @@ Public Class Sel_WPO_InquireDetailsTableControlRow
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
-        
+
+        Public Overrides Sub DataBind()
+
+            MyBase.DataBind()
+            Me.iComm.Attributes.Add("onclick", "window.open('../sel_WPO_WFTask/WPO-Comment.aspx?ord1=" & Me.ORD.Text & "&po1=" & Me.PONUMBER.Text & "&com1=" & Me.CompanyID.Text & "', '', 'menubar=no,width=640,height=240,top=(screen.height  - 240)/2,left=(screen.width  - 640)/2');return false;")
+        End Sub
+
 
 End Class
 Public Class WPO_Step_WPO_StepDetailTableControl

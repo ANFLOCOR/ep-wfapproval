@@ -9,7 +9,7 @@
 Public Class Vw_ANFLO_DW_CompanyNonGPDefinition
 
 #Region "Definition (XML) for Vw_ANFLO_DW_CompanyNonGPDefinition table"
-	'Next 191 lines contain Table Definition (XML) for table "Vw_ANFLO_DW_CompanyNonGPDefinition"
+	'Next 190 lines contain Table Definition (XML) for table "Vw_ANFLO_DW_CompanyNonGPDefinition"
 	Private Shared _DefinitionString As String = ""
 #End Region
 	
@@ -37,7 +37,7 @@ Public Class Vw_ANFLO_DW_CompanyNonGPDefinition
          tbf.Append(      "<columnUnique>N</columnUnique>")
          tbf.Append(      "<columnFunction></columnFunction>")
          tbf.Append(      "<columnDBFormat></columnDBFormat>")
-         tbf.Append(      "<columnPK>N</columnPK>")
+         tbf.Append(      "<columnPK>Y</columnPK>")
          tbf.Append(      "<columnPermanent>N</columnPermanent>")
          tbf.Append(      "<columnComputed Source=""User"">N</columnComputed>")
          tbf.Append(      "<columnIdentity Source=""User"">N</columnIdentity>")
@@ -64,7 +64,7 @@ Public Class Vw_ANFLO_DW_CompanyNonGPDefinition
          tbf.Append(      "<updatingRecordFormula></updatingRecordFormula>")
          tbf.Append(      "<insertingFormula></insertingFormula>")
          tbf.Append(      "<updatingFormula></updatingFormula>")
-         tbf.Append(      "<columnVirtualPK Source=""User"">N</columnVirtualPK>")
+         tbf.Append(      "<columnVirtualPK Source=""User"">Y</columnVirtualPK>")
          tbf.Append(    "</Column>")
          tbf.Append(    "<Column InternalName=""1"" Priority=""2"" ColumnNum=""1"">")
          tbf.Append(      "<columnName>Name</columnName>")
@@ -202,11 +202,10 @@ Public Class Vw_ANFLO_DW_CompanyNonGPDefinition
          tbf.Append(  "<Owner>dbo</Owner>")
          tbf.Append(  "<TableAliasName>vw_ANFLO_DW_CompanyNonGP_</TableAliasName>")
          tbf.Append(  "<ConnectionName>DatabaseANFLO-WF</ConnectionName>")
-         tbf.Append(  "<PagingMethod>RowNum</PagingMethod>")
-         tbf.Append(  "<canCreateRecords Source=""Database"">N</canCreateRecords>")
-         tbf.Append(  "<canEditRecords Source=""Database"">N</canEditRecords>")
-         tbf.Append(  "<canDeleteRecords Source=""Database"">N</canDeleteRecords>")
-         tbf.Append(  "<canViewRecords Source=""Database"">N</canViewRecords>")
+         tbf.Append(  "<canCreateRecords Source=""User"">N</canCreateRecords>")
+         tbf.Append(  "<canEditRecords Source=""User"">N</canEditRecords>")
+         tbf.Append(  "<canDeleteRecords Source=""User"">N</canDeleteRecords>")
+         tbf.Append(  "<canViewRecords Source=""Database"">Y</canViewRecords>")
          tbf.Append(  "<AppShortName>ePortalWFApproval</AppShortName>")
          tbf.Append(  "<FolderName>vw_ANFLO_DW_CompanyNonGP</FolderName>")
          tbf.Append(  "<MenuName>ANFLO DW Company NON GP</MenuName>")
