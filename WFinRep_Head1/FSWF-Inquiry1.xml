@@ -2646,7 +2646,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>FS Report Inquiry</Value>
+          <Value>FS Report Inquiry (North)</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WFinRep_Head1TableControl</InsideControl>

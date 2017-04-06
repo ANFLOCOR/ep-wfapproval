@@ -26,7 +26,7 @@
                 <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td>
                         <ePortalWFApproval:WFinRep_HeadTableControl runat="server" id="WFinRep_HeadTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle">
-                        <asp:Literal runat="server" id="Title0" Text="&lt;%#String.Concat(&quot;FS Report Inquiry&quot;) %>">	</asp:Literal>
+                        <asp:Literal runat="server" id="Title0" Text="&lt;%#String.Concat(&quot;FS Report Inquiry (South)&quot;) %>">	</asp:Literal>
                       </td></tr></table>
 </td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
 

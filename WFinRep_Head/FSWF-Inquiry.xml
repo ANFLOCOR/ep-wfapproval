@@ -2396,7 +2396,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>&lt;%#String.Concat("FS Report Inquiry") %&gt;</Value>
+          <Value>&lt;%#String.Concat("FS Report Inquiry (South)") %&gt;</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WFinRep_HeadTableControl</InsideControl>

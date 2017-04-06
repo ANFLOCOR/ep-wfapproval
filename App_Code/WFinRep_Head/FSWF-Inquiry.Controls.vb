@@ -7596,49 +7596,49 @@ Public Class BaseWFinRep_HeadTableControlRow
                         
               AddHandler Me.btnEdit.Button.Click, AddressOf btnEdit_Click
                         
-            AddHandler Me.btnPreview1.Button.Click, AddressOf btnPreview1_Click
-
-            AddHandler Me.btnPreview2.Button.Click, AddressOf btnPreview2_Click
-
-            AddHandler Me.HFIN_C_ID1.TextChanged, AddressOf HFIN_C_ID1_TextChanged
-
-            AddHandler Me.HFIN_Description1.TextChanged, AddressOf HFIN_Description1_TextChanged
-
-            AddHandler Me.HFIN_ID.TextChanged, AddressOf HFIN_ID_TextChanged
-
-            AddHandler Me.HFIN_Month1.TextChanged, AddressOf HFIN_Month1_TextChanged
-
-            AddHandler Me.HFIN_Status.TextChanged, AddressOf HFIN_Status_TextChanged
-
-            AddHandler Me.HFIN_Year1.TextChanged, AddressOf HFIN_Year1_TextChanged
-
-
+              AddHandler Me.btnPreview1.Button.Click, AddressOf btnPreview1_Click
+                        
+              AddHandler Me.btnPreview2.Button.Click, AddressOf btnPreview2_Click
+                        
+              AddHandler Me.HFIN_C_ID1.TextChanged, AddressOf HFIN_C_ID1_TextChanged
+            
+              AddHandler Me.HFIN_Description1.TextChanged, AddressOf HFIN_Description1_TextChanged
+            
+              AddHandler Me.HFIN_ID.TextChanged, AddressOf HFIN_ID_TextChanged
+            
+              AddHandler Me.HFIN_Month1.TextChanged, AddressOf HFIN_Month1_TextChanged
+            
+              AddHandler Me.HFIN_Status.TextChanged, AddressOf HFIN_Status_TextChanged
+            
+              AddHandler Me.HFIN_Year1.TextChanged, AddressOf HFIN_Year1_TextChanged
+            
+    
         End Sub
 
-
-        Public Overridable Sub LoadData()
-
+        
+        Public Overridable Sub LoadData()        
+                
             ' Load the data from the database into the DataSource DatabaseANFLO-WF%dbo.WFinRep_Head record.
             ' It is better to make changes to functions called by LoadData such as
             ' CreateWhereClause, rather than making changes here.
-
+    
             ' The RecordUniqueId is set the first time a record is loaded, and is
             ' used during a PostBack to load the record.
-
+          
             If Me.RecordUniqueId IsNot Nothing AndAlso Me.RecordUniqueId.Trim <> "" Then
                 Me.DataSource = WFinRep_HeadTable.GetRecord(Me.RecordUniqueId, True)
-
+          
                 Return
             End If
-
+        
             ' Since this is a row in the table, the data for this row is loaded by the 
             ' LoadData method of the BaseWFinRep_HeadTableControl when the data for the entire
             ' table is loaded.
-
+            
             Me.DataSource = New WFinRep_HeadRecord()
-
-
-
+          
+    
+    
         End Sub
 
         ' Populate the UI controls using the DataSource.  To customize, override this method in WFinRep_HeadTableControlRow.
@@ -7647,141 +7647,141 @@ Public Class BaseWFinRep_HeadTableControlRow
             ' from the database record.  To do this, it calls the Set methods for 
             ' each of the field displayed on the webpage.  It is better to make 
             ' changes in the Set methods, rather than making changes here.
-
+            
             MyBase.DataBind()
             Me.ClearControlsFromSession()
 
             ' Make sure that the DataSource is initialized.
             If Me.DataSource Is Nothing Then
-
+              
                 Return
             End If
-
-
+             
+   
             'LoadData for DataSource for chart and report if they exist
-
+          
             ' Store the checksum. The checksum is used to
             ' ensure the record was not changed by another user.
-            If Not Me.DataSource.GetCheckSumValue() Is Nothing Then
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing
                 Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
             End If
-
-
-
+            
+      
+      
             ' Call the Set methods for each controls on the panel
-
-
-
-
-
-
-            SetHFIN_C_ID()
-            SetHFIN_C_ID1()
-            SetHFIN_Description()
-            SetHFIN_Description1()
-            SetHFIN_File()
-            SetHFIN_ID()
-            SetHFIN_Month()
-            SetHFIN_Month1()
-            SetHFIN_RptCount()
-            SetHFIN_Status()
-            SetHFIN_Status1()
-            SetHFIN_Year()
-            SetHFIN_Year1()
-
-
-
-
-
-
-
-            SetWFinRep_HeadTableControlTabContainer()
-            SetEditRowButton()
-
-            SetExpandRowButton()
-
-            SetViewRowButton()
-
-            SetbtnEdit()
-
-            SetbtnPreview1()
-
-            SetbtnPreview2()
-
-
-
+        
+                
+                
+                
+                
+                
+                SetHFIN_C_ID()
+                SetHFIN_C_ID1()
+                SetHFIN_Description()
+                SetHFIN_Description1()
+                SetHFIN_File()
+                SetHFIN_ID()
+                SetHFIN_Month()
+                SetHFIN_Month1()
+                SetHFIN_RptCount()
+                SetHFIN_Status()
+                SetHFIN_Status1()
+                SetHFIN_Year()
+                SetHFIN_Year1()
+                
+                
+                
+                
+                
+                
+                
+                SetWFinRep_HeadTableControlTabContainer()
+                SetEditRowButton()
+              
+                SetExpandRowButton()
+              
+                SetViewRowButton()
+              
+                SetbtnEdit()
+              
+                SetbtnPreview1()
+              
+                SetbtnPreview2()
+              
+      
+      
             Me.IsNewRecord = True
-
+            
             If Me.DataSource.IsCreated Then
                 Me.IsNewRecord = False
-
+                
                 If Me.DataSource.GetID IsNot Nothing Then
                     Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
                 End If
-
+                
             End If
-
+            
             ' Now load data for each record and table child UI controls.
             ' Ordering is important because child controls get 
             ' their parent ids from their parent UI controls.
             Dim shouldResetControl As Boolean = False
-
-            SetVw_FS_WFinRep_Attachment_PerReportTypeTableControl()
-
-            SetWFinRep_ActivityTableControl()
-
-            SetWFinRep_DocAttachTableControl()
-
+                      
+        SetVw_FS_WFinRep_Attachment_PerReportTypeTableControl()
+                  
+        SetWFinRep_ActivityTableControl()
+                  
+        SetWFinRep_DocAttachTableControl()
+        
         End Sub
-
-
+        
+        
         Public Overridable Sub SetHFIN_C_ID()
 
-
-
-
+                  
+            
+        
             ' Set the HFIN_C_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_C_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_C_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_C_IDSpecified Then
-
+                				
                 ' If the HFIN_C_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_HeadTable.HFIN_C_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WFinRep_HeadTable.HFIN_C_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_C_ID.ToString(), WFinRep_HeadTable.HFIN_C_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_C_ID)
-                    End If
+                                  
+                       formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_C_ID.ToString(),WFinRep_HeadTable.HFIN_C_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_C_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.HFIN_C_ID.ToString()
+                       formattedValue = Me.DataSource.HFIN_C_ID.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.HFIN_C_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_C_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_C_ID.Text = WFinRep_HeadTable.HFIN_C_ID.Format(WFinRep_HeadTable.HFIN_C_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.HFIN_C_ID.Text = WFinRep_HeadTable.HFIN_C_ID.Format(WFinRep_HeadTable.HFIN_C_ID.DefaultValue)
+                        		
+                End If
+                 
             ' If the HFIN_C_ID is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.HFIN_C_ID.Text Is Nothing _
@@ -7789,103 +7789,103 @@ Public Class BaseWFinRep_HeadTableControlRow
                 ' Set the value specified on the Properties.
                 Me.HFIN_C_ID.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetHFIN_C_ID1()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.HFIN_C_ID1.ID) Then
-
+            
                 Me.HFIN_C_ID1.Text = Me.PreviousUIData(Me.HFIN_C_ID1.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the HFIN_C_ID TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_C_ID1 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_C_ID1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_C_IDSpecified Then
-
+                				
                 ' If the HFIN_C_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_HeadTable.HFIN_C_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WFinRep_HeadTable.HFIN_C_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_C_ID.ToString(), WFinRep_HeadTable.HFIN_C_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_C_ID)
-                    End If
+                                  
+                       formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_C_ID.ToString(),WFinRep_HeadTable.HFIN_C_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_C_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.HFIN_C_ID.ToString()
+                       formattedValue = Me.DataSource.HFIN_C_ID.ToString()
                 End If
-
+                                
                 Me.HFIN_C_ID1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_C_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_C_ID1.Text = WFinRep_HeadTable.HFIN_C_ID.Format(WFinRep_HeadTable.HFIN_C_ID.DefaultValue)
-
-            End If
-
-            AddHandler Me.HFIN_C_ID1.TextChanged, AddressOf HFIN_C_ID1_TextChanged
-
+        
+                 Me.HFIN_C_ID1.Text = WFinRep_HeadTable.HFIN_C_ID.Format(WFinRep_HeadTable.HFIN_C_ID.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.HFIN_C_ID1.TextChanged, AddressOf HFIN_C_ID1_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetHFIN_Description()
 
-
-
-
+                  
+            
+        
             ' Set the HFIN_Description Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_Description is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_Description()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_DescriptionSpecified Then
-
+                				
                 ' If the HFIN_Description is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Description)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.HFIN_Description.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_Description is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_Description.Text = WFinRep_HeadTable.HFIN_Description.Format(WFinRep_HeadTable.HFIN_Description.DefaultValue)
-
-            End If
-
+        
+                 Me.HFIN_Description.Text = WFinRep_HeadTable.HFIN_Description.Format(WFinRep_HeadTable.HFIN_Description.DefaultValue)
+                        		
+                End If
+                 
             ' If the HFIN_Description is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.HFIN_Description.Text Is Nothing _
@@ -7893,170 +7893,170 @@ Public Class BaseWFinRep_HeadTableControlRow
                 ' Set the value specified on the Properties.
                 Me.HFIN_Description.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetHFIN_Description1()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.HFIN_Description1.ID) Then
-
+            
                 Me.HFIN_Description1.Text = Me.PreviousUIData(Me.HFIN_Description1.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the HFIN_Description TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_Description1 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_Description1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_DescriptionSpecified Then
-
+                				
                 ' If the HFIN_Description is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Description)
-
+                              
                 Me.HFIN_Description1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_Description is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_Description1.Text = WFinRep_HeadTable.HFIN_Description.Format(WFinRep_HeadTable.HFIN_Description.DefaultValue)
-
-            End If
-
-            AddHandler Me.HFIN_Description1.TextChanged, AddressOf HFIN_Description1_TextChanged
-
+        
+                 Me.HFIN_Description1.Text = WFinRep_HeadTable.HFIN_Description.Format(WFinRep_HeadTable.HFIN_Description.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.HFIN_Description1.TextChanged, AddressOf HFIN_Description1_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetHFIN_File()
 
-
-
+                  
+                
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_FileSpecified Then
-
+                
                 Me.HFIN_File.Text = Page.GetResourceValue("Txt:OpenFile", "ePortalWFApproval")
-
+                        
                 Me.HFIN_File.OnClientClick = "window.open('../Shared/ExportFieldValue.aspx?Table=" & _
                             Me.Page.Encrypt("WFinRep_Head") & _
                             "&Field=" & Me.Page.Encrypt("HFIN_File") & _
                             "&Record=" & Me.Page.Encrypt(HttpUtility.UrlEncode(Me.DataSource.GetID().ToString())) & _
                                 "','','left=100,top=50,width=400,height=300,resizable,scrollbars=1');return false;"
-
+                   
                 Me.HFIN_File.Visible = True
             Else
                 Me.HFIN_File.Visible = False
             End If
         End Sub
-
+                
         Public Overridable Sub SetHFIN_ID()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.HFIN_ID.ID) Then
-
+            
                 Me.HFIN_ID.Text = Me.PreviousUIData(Me.HFIN_ID.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the HFIN_ID TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_ID is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_IDSpecified Then
-
+                				
                 ' If the HFIN_ID is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRep_HeadTable.HFIN_ID)
-
+                              
                 Me.HFIN_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_ID.Text = WFinRep_HeadTable.HFIN_ID.Format(WFinRep_HeadTable.HFIN_ID.DefaultValue)
-
-            End If
-
-            AddHandler Me.HFIN_ID.TextChanged, AddressOf HFIN_ID_TextChanged
-
+        
+                 Me.HFIN_ID.Text = WFinRep_HeadTable.HFIN_ID.Format(WFinRep_HeadTable.HFIN_ID.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.HFIN_ID.TextChanged, AddressOf HFIN_ID_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetHFIN_Month()
 
-
-
-
+                  
+            
+        
             ' Set the HFIN_Month Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_Month is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_Month()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_MonthSpecified Then
-
+                				
                 ' If the HFIN_Month is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_HeadTable.HFIN_Month)
                 If _isExpandableNonCompositeForeignKey AndAlso WFinRep_HeadTable.HFIN_Month.IsApplyDisplayAs Then
-
-                    formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_Month.ToString(), WFinRep_HeadTable.HFIN_Month, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Month)
-                    End If
+                                  
+                       formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_Month.ToString(),WFinRep_HeadTable.HFIN_Month, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Month)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.HFIN_Month.ToString()
+                       formattedValue = Me.DataSource.HFIN_Month.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.HFIN_Month.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_Month is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_Month.Text = WFinRep_HeadTable.HFIN_Month.Format(WFinRep_HeadTable.HFIN_Month.DefaultValue)
-
-            End If
-
+        
+                 Me.HFIN_Month.Text = WFinRep_HeadTable.HFIN_Month.Format(WFinRep_HeadTable.HFIN_Month.DefaultValue)
+                        		
+                End If
+                 
             ' If the HFIN_Month is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.HFIN_Month.Text Is Nothing _
@@ -8064,103 +8064,103 @@ Public Class BaseWFinRep_HeadTableControlRow
                 ' Set the value specified on the Properties.
                 Me.HFIN_Month.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetHFIN_Month1()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.HFIN_Month1.ID) Then
-
+            
                 Me.HFIN_Month1.Text = Me.PreviousUIData(Me.HFIN_Month1.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the HFIN_Month TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_Month1 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_Month1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_MonthSpecified Then
-
+                				
                 ' If the HFIN_Month is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_HeadTable.HFIN_Month)
                 If _isExpandableNonCompositeForeignKey AndAlso WFinRep_HeadTable.HFIN_Month.IsApplyDisplayAs Then
-
-                    formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_Month.ToString(), WFinRep_HeadTable.HFIN_Month, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Month)
-                    End If
+                                  
+                       formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_Month.ToString(),WFinRep_HeadTable.HFIN_Month, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Month)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.HFIN_Month.ToString()
+                       formattedValue = Me.DataSource.HFIN_Month.ToString()
                 End If
-
+                                
                 Me.HFIN_Month1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_Month is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_Month1.Text = WFinRep_HeadTable.HFIN_Month.Format(WFinRep_HeadTable.HFIN_Month.DefaultValue)
-
-            End If
-
-            AddHandler Me.HFIN_Month1.TextChanged, AddressOf HFIN_Month1_TextChanged
-
+        
+                 Me.HFIN_Month1.Text = WFinRep_HeadTable.HFIN_Month.Format(WFinRep_HeadTable.HFIN_Month.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.HFIN_Month1.TextChanged, AddressOf HFIN_Month1_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetHFIN_RptCount()
 
-
-
-
+                  
+            
+        
             ' Set the HFIN_RptCount Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_RptCount is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_RptCount()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_RptCountSpecified Then
-
+                				
                 ' If the HFIN_RptCount is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRep_HeadTable.HFIN_RptCount)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.HFIN_RptCount.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_RptCount is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_RptCount.Text = WFinRep_HeadTable.HFIN_RptCount.Format(WFinRep_HeadTable.HFIN_RptCount.DefaultValue)
-
-            End If
-
+        
+                 Me.HFIN_RptCount.Text = WFinRep_HeadTable.HFIN_RptCount.Format(WFinRep_HeadTable.HFIN_RptCount.DefaultValue)
+                        		
+                End If
+                 
             ' If the HFIN_RptCount is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.HFIN_RptCount.Text Is Nothing _
@@ -8168,114 +8168,114 @@ Public Class BaseWFinRep_HeadTableControlRow
                 ' Set the value specified on the Properties.
                 Me.HFIN_RptCount.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetHFIN_Status()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.HFIN_Status.ID) Then
-
+            
                 Me.HFIN_Status.Text = Me.PreviousUIData(Me.HFIN_Status.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the HFIN_Status TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_Status is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_Status()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_StatusSpecified Then
-
+                				
                 ' If the HFIN_Status is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_HeadTable.HFIN_Status)
                 If _isExpandableNonCompositeForeignKey AndAlso WFinRep_HeadTable.HFIN_Status.IsApplyDisplayAs Then
-
-                    formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_Status.ToString(), WFinRep_HeadTable.HFIN_Status, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Status)
-                    End If
+                                  
+                       formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_Status.ToString(),WFinRep_HeadTable.HFIN_Status, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Status)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.HFIN_Status.ToString()
+                       formattedValue = Me.DataSource.HFIN_Status.ToString()
                 End If
-
+                                
                 Me.HFIN_Status.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_Status is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_Status.Text = WFinRep_HeadTable.HFIN_Status.Format(WFinRep_HeadTable.HFIN_Status.DefaultValue)
-
-            End If
-
-            AddHandler Me.HFIN_Status.TextChanged, AddressOf HFIN_Status_TextChanged
-
+        
+                 Me.HFIN_Status.Text = WFinRep_HeadTable.HFIN_Status.Format(WFinRep_HeadTable.HFIN_Status.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.HFIN_Status.TextChanged, AddressOf HFIN_Status_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetHFIN_Status1()
 
-
-
-
+                  
+            
+        
             ' Set the HFIN_Status Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_Status1 is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_Status1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_StatusSpecified Then
-
+                				
                 ' If the HFIN_Status is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_HeadTable.HFIN_Status)
                 If _isExpandableNonCompositeForeignKey AndAlso WFinRep_HeadTable.HFIN_Status.IsApplyDisplayAs Then
-
-                    formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_Status.ToString(), WFinRep_HeadTable.HFIN_Status, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Status)
-                    End If
+                                  
+                       formattedValue = WFinRep_HeadTable.GetDFKA(Me.DataSource.HFIN_Status.ToString(),WFinRep_HeadTable.HFIN_Status, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Status)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.HFIN_Status.ToString()
+                       formattedValue = Me.DataSource.HFIN_Status.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.HFIN_Status1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_Status is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_Status1.Text = WFinRep_HeadTable.HFIN_Status.Format(WFinRep_HeadTable.HFIN_Status.DefaultValue)
-
-            End If
-
+        
+                 Me.HFIN_Status1.Text = WFinRep_HeadTable.HFIN_Status.Format(WFinRep_HeadTable.HFIN_Status.DefaultValue)
+                        		
+                End If
+                 
             ' If the HFIN_Status is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.HFIN_Status1.Text Is Nothing _
@@ -8283,45 +8283,45 @@ Public Class BaseWFinRep_HeadTableControlRow
                 ' Set the value specified on the Properties.
                 Me.HFIN_Status1.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetHFIN_Year()
 
-
-
-
+                  
+            
+        
             ' Set the HFIN_Year Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_Year is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_Year()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_YearSpecified Then
-
+                				
                 ' If the HFIN_Year is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Year)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.HFIN_Year.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_Year is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_Year.Text = WFinRep_HeadTable.HFIN_Year.Format(WFinRep_HeadTable.HFIN_Year.DefaultValue)
-
-            End If
-
+        
+                 Me.HFIN_Year.Text = WFinRep_HeadTable.HFIN_Year.Format(WFinRep_HeadTable.HFIN_Year.DefaultValue)
+                        		
+                End If
+                 
             ' If the HFIN_Year is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.HFIN_Year.Text Is Nothing _
@@ -8329,95 +8329,95 @@ Public Class BaseWFinRep_HeadTableControlRow
                 ' Set the value specified on the Properties.
                 Me.HFIN_Year.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetHFIN_Year1()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.HFIN_Year1.ID) Then
-
+            
                 Me.HFIN_Year1.Text = Me.PreviousUIData(Me.HFIN_Year1.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the HFIN_Year TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRep_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRep_Head record retrieved from the database.
             ' Me.HFIN_Year1 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetHFIN_Year1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_YearSpecified Then
-
+                				
                 ' If the HFIN_Year is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRep_HeadTable.HFIN_Year)
-
+                              
                 Me.HFIN_Year1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' HFIN_Year is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.HFIN_Year1.Text = WFinRep_HeadTable.HFIN_Year.Format(WFinRep_HeadTable.HFIN_Year.DefaultValue)
-
-            End If
-
-            AddHandler Me.HFIN_Year1.TextChanged, AddressOf HFIN_Year1_TextChanged
-
+        
+                 Me.HFIN_Year1.Text = WFinRep_HeadTable.HFIN_Year.Format(WFinRep_HeadTable.HFIN_Year.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.HFIN_Year1.TextChanged, AddressOf HFIN_Year1_TextChanged
+                                 
         End Sub
-
-        Public Overridable Sub SetWFinRep_HeadTableControlTabContainer()
-
-
+                
+        Public Overridable Sub SetWFinRep_HeadTableControlTabContainer()           
+                        
+                   
             If EvaluateFormula("URL(""TabVisible"")").ToLower() = "true" Then
                 MiscUtils.FindControlRecursively(Me, "WFinRep_HeadTableControlTabContainer").Visible = True
             ElseIf EvaluateFormula("URL(""TabVisible"")").ToLower() = "false" Then
                 MiscUtils.FindControlRecursively(Me, "WFinRep_HeadTableControlTabContainer").Visible = False
             End If
-
-
-        End Sub
-
-        Public Overridable Sub SetVw_FS_WFinRep_Attachment_PerReportTypeTableControl()
-
-
+         
+  
+        End Sub        
+      
+        Public Overridable Sub SetVw_FS_WFinRep_Attachment_PerReportTypeTableControl()           
+        
+        
             If Vw_FS_WFinRep_Attachment_PerReportTypeTableControl.Visible Then
                 Vw_FS_WFinRep_Attachment_PerReportTypeTableControl.LoadData()
                 Vw_FS_WFinRep_Attachment_PerReportTypeTableControl.DataBind()
             End If
-        End Sub
-
-        Public Overridable Sub SetWFinRep_ActivityTableControl()
-
-
+        End Sub        
+      
+        Public Overridable Sub SetWFinRep_ActivityTableControl()           
+        
+        
             If WFinRep_ActivityTableControl.Visible Then
                 WFinRep_ActivityTableControl.LoadData()
                 WFinRep_ActivityTableControl.DataBind()
             End If
-        End Sub
-
-        Public Overridable Sub SetWFinRep_DocAttachTableControl()
-
-
+        End Sub        
+      
+        Public Overridable Sub SetWFinRep_DocAttachTableControl()           
+        
+        
             If WFinRep_DocAttachTableControl.Visible Then
                 WFinRep_DocAttachTableControl.LoadData()
                 WFinRep_DocAttachTableControl.DataBind()
             End If
-        End Sub
-
+        End Sub        
+      
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
@@ -8425,10 +8425,10 @@ Public Class BaseWFinRep_HeadTableControlRow
             If e Is Nothing Then
                 e = New FormulaEvaluator()
             End If
-
+            
             e.Variables.Clear()
 
-
+            
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -8437,11 +8437,11 @@ Public Class BaseWFinRep_HeadTableControlRow
                 End While
             End If
 
-            If includeDS Then
-
-            End If
-
-
+            If includeDS
+                
+            End IF
+            
+            
             ' Other variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -8467,22 +8467,22 @@ Public Class BaseWFinRep_HeadTableControlRow
             Else
                 Return resultObj.ToString()
             End If
-        End Function
+        End Function      
+        
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
+        End Function        
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
-        End Function
-
-
+        
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
-        End Function
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
+        End Function        
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -8490,7 +8490,7 @@ Public Class BaseWFinRep_HeadTableControlRow
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -8499,13 +8499,13 @@ Public Class BaseWFinRep_HeadTableControlRow
         End Function
 
 
-        Public Overridable Sub RegisterPostback()
-
-
+        Public Overridable Sub RegisterPostback()       
+        
+        
         End Sub
 
-
-
+      
+        
         ' To customize, override this method in WFinRep_HeadTableControlRow.
         Public Overridable Sub SaveData()
             ' Saves the associated record in the database.
@@ -8515,15 +8515,15 @@ Public Class BaseWFinRep_HeadTableControlRow
             ' 1. Load the existing record from the database. Since we save the entire record, this ensures 
             ' that fields that are not displayed are also properly initialized.
             Me.LoadData()
-
+        
             ' The checksum is used to ensure the record was not changed by another user.
             If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
                 If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
                     Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "ePortalWFApproval"))
                 End If
             End If
-
-
+        
+              
             ' 2. Perform any custom validation.
             Me.Validate()
 
@@ -8534,38 +8534,38 @@ Public Class BaseWFinRep_HeadTableControlRow
             ' 4. Save in the database.
             ' We should not save the record if the data did not change. This
             ' will save a database hit and avoid triggering any database triggers.
-
+             
             If Me.DataSource.IsAnyValueChanged Then
                 ' Save record to database but do not commit yet.
                 ' Auto generated ids are available after saving for use by child (dependent) records.
                 Me.DataSource.Save()
-
+              
                 DirectCast(GetParentControlObject(Me, "WFinRep_HeadTableControl"), WFinRep_HeadTableControl).DataChanged = True
                 DirectCast(GetParentControlObject(Me, "WFinRep_HeadTableControl"), WFinRep_HeadTableControl).ResetData = True
             End If
-
-
+            
+      
             ' update session or cookie by formula
-
-
+                                    
+      
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-
+            
             Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
-
-            Dim recVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Vw_FS_WFinRep_Attachment_PerReportTypeTableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "Vw_FS_WFinRep_Attachment_PerReportTypeTableControl"), Vw_FS_WFinRep_Attachment_PerReportTypeTableControl)
-            recVw_FS_WFinRep_Attachment_PerReportTypeTableControl.SaveData()
-
-            Dim recWFinRep_ActivityTableControl As WFinRep_ActivityTableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRep_ActivityTableControl"), WFinRep_ActivityTableControl)
-            recWFinRep_ActivityTableControl.SaveData()
-
-            Dim recWFinRep_DocAttachTableControl As WFinRep_DocAttachTableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRep_DocAttachTableControl"), WFinRep_DocAttachTableControl)
-            recWFinRep_DocAttachTableControl.SaveData()
-
+          
+        Dim recVw_FS_WFinRep_Attachment_PerReportTypeTableControl as Vw_FS_WFinRep_Attachment_PerReportTypeTableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "Vw_FS_WFinRep_Attachment_PerReportTypeTableControl"), Vw_FS_WFinRep_Attachment_PerReportTypeTableControl)
+        recVw_FS_WFinRep_Attachment_PerReportTypeTableControl.SaveData()
+          
+        Dim recWFinRep_ActivityTableControl as WFinRep_ActivityTableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRep_ActivityTableControl"), WFinRep_ActivityTableControl)
+        recWFinRep_ActivityTableControl.SaveData()
+          
+        Dim recWFinRep_DocAttachTableControl as WFinRep_DocAttachTableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRep_DocAttachTableControl"), WFinRep_DocAttachTableControl)
+        recWFinRep_DocAttachTableControl.SaveData()
+          
         End Sub
 
         ' To customize, override this method in WFinRep_HeadTableControlRow.
@@ -8575,9 +8575,9 @@ Public Class BaseWFinRep_HeadTableControlRow
             ' To do this, it calls the Get methods for each of the field displayed on 
             ' the webpage.  It is better to make changes in the Get methods, rather 
             ' than making changes here.
-
+      
             ' Call the Get methods for each of the user interface controls.
-
+        
             GetHFIN_C_ID()
             GetHFIN_C_ID1()
             GetHFIN_Description()
@@ -8591,77 +8591,77 @@ Public Class BaseWFinRep_HeadTableControlRow
             GetHFIN_Year()
             GetHFIN_Year1()
         End Sub
-
-
+        
+        
         Public Overridable Sub GetHFIN_C_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetHFIN_C_ID1()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetHFIN_Description()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetHFIN_Description1()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetHFIN_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetHFIN_Month()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetHFIN_Month1()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetHFIN_RptCount()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetHFIN_Status()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetHFIN_Status1()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetHFIN_Year()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetHFIN_Year1()
-
+            
         End Sub
-
-
+                
+      
         ' To customize, override this method in WFinRep_HeadTableControlRow.
-
+        
         Public Overridable Function CreateWhereClause() As WhereClause
-
-            Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
-
+        
+        Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
+      
             Return Nothing
-
+            
         End Function
-
-
+        
+    
 
         ' To customize, override this method in WFinRep_HeadTableControlRow.
-        Public Overridable Sub Validate()
+        Public Overridable Sub Validate() 
             ' Add custom validation for any control within this panel.
             ' Example.  If you have a State ASP:Textbox control
             ' If Me.State.Text <> "CA" Then
@@ -8671,19 +8671,19 @@ Public Class BaseWFinRep_HeadTableControlRow
             ' The Validate method is common across all controls within
             ' this panel so you can validate multiple fields, but report
             ' one error message.
-
-
+            
+                
         End Sub
 
         Public Overridable Sub Delete()
-
+        
             If Me.IsNewRecord() Then
                 Return
             End If
 
             Dim pkValue As KeyValue = KeyValue.XmlToKey(Me.RecordUniqueId)
-            WFinRep_HeadTable.DeleteRecord(pkValue)
-
+          WFinRep_HeadTable.DeleteRecord(pkValue)
+          
             DirectCast(GetParentControlObject(Me, "WFinRep_HeadTableControl"), WFinRep_HeadTableControl).DataChanged = True
             DirectCast(GetParentControlObject(Me, "WFinRep_HeadTableControl"), WFinRep_HeadTableControl).ResetData = True
         End Sub
@@ -8695,41 +8695,41 @@ Public Class BaseWFinRep_HeadTableControlRow
                 Me.RegisterPostback()
 
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-
-
+                  
+                
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
                     Me.LoadData()
-                    Me.DataBind()
+                    Me.DataBind()			
                 End If
-
-
+                                
+                						
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
                 DbUtils.EndTransaction()
             End Try
         End Sub
-
-
+        
+            
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
-
-
+        
+    
             'Save pagination state to session.
-
+          
         End Sub
-
-
-
+        
+        
+    
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
-
+        
 
             ' Clear pagination state from session.
-
+        
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
@@ -8738,304 +8738,304 @@ Public Class BaseWFinRep_HeadTableControlRow
             If Not isNewRecord Is Nothing AndAlso isNewRecord.Trim <> "" Then
                 Me.IsNewRecord = Boolean.Parse(isNewRecord)
             End If
-
+            
             Dim myCheckSum As String = CType(ViewState("CheckSum"), String)
             If Not myCheckSum Is Nothing AndAlso myCheckSum.Trim <> "" Then
                 Me.CheckSum = myCheckSum
             End If
-
-
+            
+    
             ' Load view state for pagination control.
-
+                 
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
             ViewState("IsNewRecord") = Me.IsNewRecord.ToString()
             ViewState("CheckSum") = Me.CheckSum
-
-
+            
+    
             ' Load view state for pagination control.
-
+                  
             Return MyBase.SaveViewState()
         End Function
-
-
-
+        
+        
+    
         ' Generate set method for buttons
-
-        Public Overridable Sub SetEditRowButton()
-
-
+        
+        Public Overridable Sub SetEditRowButton()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetExpandRowButton()
-
-
+            
+        Public Overridable Sub SetExpandRowButton()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetViewRowButton()
-
-
+            
+        Public Overridable Sub SetViewRowButton()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetbtnEdit()
-
-
+            
+        Public Overridable Sub SetbtnEdit()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetbtnPreview1()
-
-
+            
+        Public Overridable Sub SetbtnPreview1()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetbtnPreview2()
-
-
+            
+        Public Overridable Sub SetbtnPreview2()                
+              
+   
         End Sub
-
+            
         ' event handler for ImageButton
         Public Overridable Sub EditRowButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
+              
             ' The redirect URL is set on the Properties, Custom Properties or Actions.
             ' The ModifyRedirectURL call resolves the parameters before the
             ' Response.Redirect redirects the page to the URL.  
             ' Any code after the Response.Redirect call will not be executed, since the page is
             ' redirected to the URL.
-
-
-            Dim url As String = "../WFinRep_Head/Edit-WFinRep-Head.aspx?WFinRep_Head={PK}"
-
-            If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
-
-            Dim shouldRedirect As Boolean = True
-            Dim target As String = ""
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                url = Me.ModifyRedirectUrl(url, "", True)
-                url = Me.Page.ModifyRedirectUrl(url, "", True)
-
+            
+              
+                  Dim url As String = "../WFinRep_Head/Edit-WFinRep-Head.aspx?WFinRep_Head={PK}"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
-
-                ' Upon error, rollback the transaction
+            
+       ' Upon error, rollback the transaction
                 Me.Page.RollBackTransaction(sender)
                 shouldRedirect = False
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
             If shouldRedirect Then
                 Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-
+      Me.Page.Response.Redirect(url)
+        
             End If
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub ExpandRowButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+              
+    Try
+    
+          Dim panelControl as WFinRep_HeadTableControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WFinRep_HeadTableControl"), WFinRep_HeadTableControl)
 
-            Try
-
-                Dim panelControl As WFinRep_HeadTableControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WFinRep_HeadTableControl"), WFinRep_HeadTableControl)
-
-                Dim repeatedRows() As WFinRep_HeadTableControlRow = panelControl.GetRecordControls()
-                For Each repeatedRow As WFinRep_HeadTableControlRow In repeatedRows
-                    Dim altRow As System.Web.UI.Control = DirectCast(MiscUtils.FindControlRecursively(repeatedRow, "WFinRep_HeadTableControlAltRow"), System.Web.UI.Control)
-                    If (altRow IsNot Nothing) Then
-                        If (sender Is repeatedRow.ExpandRowButton) Then
-                            altRow.Visible = Not altRow.Visible
-
-                        End If
-                        If (altRow.Visible) Then
-
-                            repeatedRow.ExpandRowButton.ImageUrl = "../Images/icon_expandcollapserow.gif"
-                            repeatedRow.ExpandRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over.gif'")
-                            repeatedRow.ExpandRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow.gif'")
-
-                        Else
-
-                            repeatedRow.ExpandRowButton.ImageUrl = "../Images/icon_expandcollapserow2.gif"
-                            repeatedRow.ExpandRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over2.gif'")
-                            repeatedRow.ExpandRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow2.gif'")
-
-                        End If
-                    Else
-                        Me.Page.Response.Redirect("../Shared/ConfigureCollapseExpandRowBtn.aspx")
-                    End If
-                Next
-
-
+          Dim repeatedRows() as WFinRep_HeadTableControlRow = panelControl.GetRecordControls()
+          For Each repeatedRow as WFinRep_HeadTableControlRow in repeatedRows
+              Dim altRow as System.Web.UI.Control= DirectCast(MiscUtils.FindControlRecursively(repeatedRow, "WFinRep_HeadTableControlAltRow"), System.Web.UI.Control)
+              If (altRow IsNot Nothing) Then
+                  If (sender Is repeatedRow.ExpandRowButton) Then
+                      altRow.Visible = Not altRow.Visible
+                  
+                  End If                      
+                  If (altRow.Visible) Then        
+                   
+                     repeatedRow.ExpandRowButton.ImageUrl = "../Images/icon_expandcollapserow.gif"
+                     repeatedRow.ExpandRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over.gif'")
+                     repeatedRow.ExpandRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow.gif'")
+                                     
+                  Else
+                   
+                     repeatedRow.ExpandRowButton.ImageUrl = "../Images/icon_expandcollapserow2.gif"
+                     repeatedRow.ExpandRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over2.gif'")
+                     repeatedRow.ExpandRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow2.gif'")
+                   
+                  End If
+              Else
+                  Me.Page.Response.Redirect("../Shared/ConfigureCollapseExpandRowBtn.aspx")
+              End If
+          Next
+          
+          
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub ViewRowButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
+              
             ' The redirect URL is set on the Properties, Custom Properties or Actions.
             ' The ModifyRedirectURL call resolves the parameters before the
             ' Response.Redirect redirects the page to the URL.  
             ' Any code after the Response.Redirect call will not be executed, since the page is
             ' redirected to the URL.
-
-
-            Dim url As String = "../Shared/ConfigureViewRecord.aspx"
-
-            If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
-
-            Dim shouldRedirect As Boolean = True
-            Dim target As String = ""
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                url = Me.ModifyRedirectUrl(url, "", True)
-                url = Me.Page.ModifyRedirectUrl(url, "", True)
-
+            
+              
+                  Dim url As String = "../Shared/ConfigureViewRecord.aspx"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
-
-                ' Upon error, rollback the transaction
+            
+       ' Upon error, rollback the transaction
                 Me.Page.RollBackTransaction(sender)
                 shouldRedirect = False
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
             If shouldRedirect Then
                 Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-
+      Me.Page.Response.Redirect(url)
+        
             End If
         End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub btnEdit_Click(ByVal sender As Object, ByVal args As EventArgs)
-
+              
             ' The redirect URL is set on the Properties, Custom Properties or Actions.
             ' The ModifyRedirectURL call resolves the parameters before the
             ' Response.Redirect redirects the page to the URL.  
             ' Any code after the Response.Redirect call will not be executed, since the page is
             ' redirected to the URL.
-
-
-            Dim url As String = "../WFinRep_Head/WFin-ApproverPage.aspx?WFinRep_Head={WFinRep_HeadTableControlRow:PK}"
-
-            If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
-
-            Dim shouldRedirect As Boolean = True
-            Dim target As String = ""
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                url = Me.ModifyRedirectUrl(url, "", True)
-                url = Me.Page.ModifyRedirectUrl(url, "", True)
-
+            
+              
+                  Dim url As String = "../WFinRep_Head/WFin-ApproverPage.aspx?WFinRep_Head={WFinRep_HeadTableControlRow:PK}"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
-
-                ' Upon error, rollback the transaction
+            
+       ' Upon error, rollback the transaction
                 Me.Page.RollBackTransaction(sender)
                 shouldRedirect = False
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
             If shouldRedirect Then
                 Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-
+      Me.Page.Response.Redirect(url)
+        
             End If
         End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub btnPreview1_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub btnPreview2_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
-        Protected Overridable Sub HFIN_C_ID1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub HFIN_Description1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub HFIN_ID_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub HFIN_Month1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub HFIN_Status_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub HFIN_Year1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-
+        
+        Protected Overridable Sub HFIN_C_ID1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub HFIN_Description1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub HFIN_ID_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub HFIN_Month1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub HFIN_Status_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub HFIN_Year1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+   
         Private _PreviousUIData As New Hashtable
         Public Overridable Property PreviousUIData() As Hashtable
             Get
@@ -9044,9 +9044,9 @@ Public Class BaseWFinRep_HeadTableControlRow
             Set(ByVal value As Hashtable)
                 _PreviousUIData = value
             End Set
-        End Property
+        End Property   
 
-
+        
         Public Property RecordUniqueId() As String
             Get
                 Return CType(Me.ViewState("BaseWFinRep_HeadTableControlRow_Rec"), String)
@@ -9055,7 +9055,7 @@ Public Class BaseWFinRep_HeadTableControlRow
                 Me.ViewState("BaseWFinRep_HeadTableControlRow_Rec") = value
             End Set
         End Property
-
+            
         Public Property DataSource() As WFinRep_HeadRecord
             Get
                 Return DirectCast(MyBase._DataSource, WFinRep_HeadRecord)
@@ -9065,7 +9065,7 @@ Public Class BaseWFinRep_HeadTableControlRow
             End Set
         End Property
 
-
+        
         Private _checkSum As String
         Public Overridable Property CheckSum() As String
             Get
@@ -9075,7 +9075,7 @@ Public Class BaseWFinRep_HeadTableControlRow
                 Me._checkSum = value
             End Set
         End Property
-
+        
         Private _TotalPages As Integer
         Public Property TotalPages() As Integer
             Get
@@ -9085,7 +9085,7 @@ Public Class BaseWFinRep_HeadTableControlRow
                 Me._TotalPages = value
             End Set
         End Property
-
+        
         Private _PageIndex As Integer
         Public Property PageIndex() As Integer
             Get
@@ -9096,7 +9096,7 @@ Public Class BaseWFinRep_HeadTableControlRow
                 Me._PageIndex = value
             End Set
         End Property
-
+    
         Private _DisplayLastPage As Boolean
         Public Property DisplayLastPage() As Boolean
             Get
@@ -9106,166 +9106,166 @@ Public Class BaseWFinRep_HeadTableControlRow
                 Me._DisplayLastPage = value
             End Set
         End Property
-
-
+        
+        
 
 #Region "Helper Properties"
-
+        
         Public ReadOnly Property btnEdit() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnEdit"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property btnPreview1() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnPreview1"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property btnPreview2() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnPreview2"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property EditRowButton() As System.Web.UI.WebControls.ImageButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "EditRowButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property ExpandRowButton() As System.Web.UI.WebControls.ImageButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ExpandRowButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_C_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_C_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_C_ID1() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_C_ID1"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_Description() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_Description"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_Description1() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_Description1"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_File() As System.Web.UI.WebControls.LinkButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_File"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_ID() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_ID"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_Month() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_Month"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_Month1() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_Month1"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_RptCount() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_RptCount"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_Status() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_Status"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_Status1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_Status1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_Year() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_Year"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property HFIN_Year1() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_Year1"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property ViewRowButton() As System.Web.UI.WebControls.ImageButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ViewRowButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property Vw_FS_WFinRep_Attachment_PerReportTypeTableControl() As Vw_FS_WFinRep_Attachment_PerReportTypeTableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Vw_FS_WFinRep_Attachment_PerReportTypeTableControl"), Vw_FS_WFinRep_Attachment_PerReportTypeTableControl)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFinRep_ActivityTableControl() As WFinRep_ActivityTableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRep_ActivityTableControl"), WFinRep_ActivityTableControl)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFinRep_DocAttachTableControl() As WFinRep_DocAttachTableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRep_DocAttachTableControl"), WFinRep_DocAttachTableControl)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFinRep_HeadTableControlTabContainer() As AjaxControlToolkit.TabContainer
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRep_HeadTableControlTabContainer"), AjaxControlToolkit.TabContainer)
             End Get
         End Property
-
+        
 #End Region
 
 #Region "Helper Functions"
 
-        Public Overloads Overrides Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+        Public Overrides Overloads Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
+        End Function
+        
+        Public Overrides Overloads Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
             Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
 
-        Public Overloads Overrides Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
-        End Function
-
-        Public Overloads Overrides Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
-
+        Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+            
             Dim rec As WFinRep_HeadRecord = Nothing
-
-
+             
+        
             Try
                 rec = Me.GetRecord()
             Catch ex As Exception
@@ -9274,18 +9274,18 @@ Public Class BaseWFinRep_HeadTableControlRow
 
             If rec Is Nothing AndAlso url.IndexOf("{") >= 0 Then
                 ' Localization.
-
-                Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
-
+                
+            Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
+                    
             End If
             Return EvaluateExpressions(url, arg, rec, bEncrypt)
         End Function
 
-        Public Overloads Overrides Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-
+        Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean,ByVal includeSession as Boolean) As String
+            
             Dim rec As WFinRep_HeadRecord = Nothing
-
-
+             
+        
             Try
                 rec = Me.GetRecord()
             Catch ex As Exception
@@ -9294,33 +9294,33 @@ Public Class BaseWFinRep_HeadTableControlRow
 
             If rec Is Nothing AndAlso url.IndexOf("{") >= 0 Then
                 ' Localization.
-
-                Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
-
+                
+            Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
+                    
             End If
-            If includeSession Then
+            If includeSession  Then
                 Return EvaluateExpressions(url, arg, rec, bEncrypt)
             Else
-                Return EvaluateExpressions(url, arg, rec, bEncrypt, False)
+                Return EvaluateExpressions(url, arg, rec, bEncrypt,False)  
             End If
         End Function
 
-
+         
         Public Overridable Function GetRecord() As WFinRep_HeadRecord
             If Not Me.DataSource Is Nothing Then
                 Return Me.DataSource
             End If
-
+            
             If Not Me.RecordUniqueId Is Nothing Then
-
+                
                 Return WFinRep_HeadTable.GetRecord(Me.RecordUniqueId, True)
-
+                
             End If
-
+            
             ' Localization.
-
+            
             Throw New Exception(Page.GetResourceValue("Err:RetrieveRec", "ePortalWFApproval"))
-
+                
         End Function
 
         Public Shadows ReadOnly Property Page() As BaseApplicationPage
@@ -9331,187 +9331,187 @@ Public Class BaseWFinRep_HeadTableControlRow
 
 #End Region
 
-    End Class
+End Class
 
+  
 
-
-    ' Base class for the WFinRep_HeadTableControl control on the FSWF_Inquiry page.
-    ' Do not modify this class. Instead override any method in WFinRep_HeadTableControl.
-    Public Class BaseWFinRep_HeadTableControl
+' Base class for the WFinRep_HeadTableControl control on the FSWF_Inquiry page.
+' Do not modify this class. Instead override any method in WFinRep_HeadTableControl.
+Public Class BaseWFinRep_HeadTableControl
         Inherits ePortalWFApproval.UI.BaseApplicationTableControl
 
-
+        
         Protected Overridable Sub Control_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Init
-
-
-
-            ' Setup the filter and search.
-
+  
+      
+    
+           ' Setup the filter and search.
+        
             If Not Me.Page.IsPostBack Then
                 Dim initialVal As String = ""
-                If Me.InSession(Me.HFIN_C_IDFilter) Then
+                If  Me.InSession(Me.HFIN_C_IDFilter) 				
                     initialVal = Me.GetFromSession(Me.HFIN_C_IDFilter)
-
+                
                 Else
-
+                    
                     initialVal = EvaluateFormula("URL(""HFIN_C_ID"")")
-
-                End If
-
+                
+              End If
+              
                 If InvariantEquals(initialVal, "Search for", True) Or InvariantEquals(initialVal, BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing), True) Then
-                    initialVal = ""
+                  initialVal = ""
                 End If
-
-                If initialVal <> "" Then
-
-                    Me.HFIN_C_IDFilter.Items.Add(New ListItem(initialVal, initialVal))
-
-                    Me.HFIN_C_IDFilter.SelectedValue = initialVal
-
-                End If
-
+              
+                If initialVal <> ""				
+                        
+                        Me.HFIN_C_IDFilter.Items.Add(New ListItem(initialVal, initialVal))
+                            
+                        Me.HFIN_C_IDFilter.SelectedValue = initialVal
+                            
+                    End If
+                
             End If
             If Not Me.Page.IsPostBack Then
                 Dim initialVal As String = ""
-                If Me.InSession(Me.HFIN_MonthFilter) Then
+                If  Me.InSession(Me.HFIN_MonthFilter) 				
                     initialVal = Me.GetFromSession(Me.HFIN_MonthFilter)
-
+                
                 Else
-
+                    
                     initialVal = EvaluateFormula("URL(""HFIN_Month"")")
-
-                End If
-
+                
+              End If
+              
                 If InvariantEquals(initialVal, "Search for", True) Or InvariantEquals(initialVal, BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing), True) Then
-                    initialVal = ""
+                  initialVal = ""
                 End If
-
-                If initialVal <> "" Then
-
-                    Me.HFIN_MonthFilter.Items.Add(New ListItem(initialVal, initialVal))
-
-                    Me.HFIN_MonthFilter.SelectedValue = initialVal
-
-                End If
-
+              
+                If initialVal <> ""				
+                        
+                        Me.HFIN_MonthFilter.Items.Add(New ListItem(initialVal, initialVal))
+                            
+                        Me.HFIN_MonthFilter.SelectedValue = initialVal
+                            
+                    End If
+                
             End If
             If Not Me.Page.IsPostBack Then
                 Dim initialVal As String = ""
-                If Me.InSession(Me.HFIN_StatusFilter) Then
+                If  Me.InSession(Me.HFIN_StatusFilter) 				
                     initialVal = Me.GetFromSession(Me.HFIN_StatusFilter)
-
+                
                 Else
-
+                    
                     initialVal = EvaluateFormula("URL(""HFIN_Status"")")
-
-                End If
-
+                
+              End If
+              
                 If InvariantEquals(initialVal, "Search for", True) Or InvariantEquals(initialVal, BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing), True) Then
-                    initialVal = ""
+                  initialVal = ""
                 End If
-
-                If initialVal <> "" Then
-
-                    Me.HFIN_StatusFilter.Items.Add(New ListItem(initialVal, initialVal))
-
-                    Me.HFIN_StatusFilter.SelectedValue = initialVal
-
-                End If
-
+              
+                If initialVal <> ""				
+                        
+                        Me.HFIN_StatusFilter.Items.Add(New ListItem(initialVal, initialVal))
+                            
+                        Me.HFIN_StatusFilter.SelectedValue = initialVal
+                            
+                    End If
+                
             End If
             If Not Me.Page.IsPostBack Then
                 Dim initialVal As String = ""
-                If Me.InSession(Me.HFIN_YearFromFilter) Then
+                If  Me.InSession(Me.HFIN_YearFromFilter) 				
                     initialVal = Me.GetFromSession(Me.HFIN_YearFromFilter)
-
+                
                 Else
-
+                    
                     initialVal = EvaluateFormula("URL(""HFIN_YearFrom"")")
-
-                End If
-
+                
+              End If
+              
                 If InvariantEquals(initialVal, "Search for", True) Or InvariantEquals(initialVal, BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing), True) Then
-                    initialVal = ""
+                  initialVal = ""
                 End If
-
-                If initialVal <> "" Then
-
-                    Me.HFIN_YearFromFilter.Items.Add(New ListItem(initialVal, initialVal))
-
-                    Me.HFIN_YearFromFilter.SelectedValue = initialVal
-
-                End If
-
+              
+                If initialVal <> ""				
+                        
+                        Me.HFIN_YearFromFilter.Items.Add(New ListItem(initialVal, initialVal))
+                            
+                        Me.HFIN_YearFromFilter.SelectedValue = initialVal
+                            
+                    End If
+                
             End If
 
-
-
+      
+      
             ' Control Initializations.
             ' Initialize the table's current sort order.
             If Me.InSession(Me, "Order_By") Then
                 Me.CurrentSortOrder = OrderBy.FromXmlString(Me.GetFromSession(Me, "Order_By", Nothing))
-
+         
             Else
-
+                   
                 Me.CurrentSortOrder = New OrderBy(True, False)
+            
+        End If
 
-            End If
+    
 
-
-
-            ' Setup default pagination settings.
-
+    ' Setup default pagination settings.
+    
             Me.PageSize = CInt(Me.GetFromSession(Me, "Page_Size", "12"))
             Me.PageIndex = CInt(Me.GetFromSession(Me, "Page_Index", "0"))
-
-
+        
+            
         End Sub
 
         Protected Overridable Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        
             SaveControlsToSession_Ajax()
-
+        
             ' Setup the pagination events.
-
-            AddHandler Me.Pagination.FirstPage.Click, AddressOf Pagination_FirstPage_Click
-
-            AddHandler Me.Pagination.LastPage.Click, AddressOf Pagination_LastPage_Click
-
-            AddHandler Me.Pagination.NextPage.Click, AddressOf Pagination_NextPage_Click
-
-            AddHandler Me.Pagination.PageSizeButton.Click, AddressOf Pagination_PageSizeButton_Click
-
-            AddHandler Me.Pagination.PreviousPage.Click, AddressOf Pagination_PreviousPage_Click
-
+            
+              AddHandler Me.Pagination.FirstPage.Click, AddressOf Pagination_FirstPage_Click
+                        
+              AddHandler Me.Pagination.LastPage.Click, AddressOf Pagination_LastPage_Click
+                        
+              AddHandler Me.Pagination.NextPage.Click, AddressOf Pagination_NextPage_Click
+                        
+              AddHandler Me.Pagination.PageSizeButton.Click, AddressOf Pagination_PageSizeButton_Click
+                        
+              AddHandler Me.Pagination.PreviousPage.Click, AddressOf Pagination_PreviousPage_Click
+                                    
             Dim url As String = ""  'to avoid warning in VS 
             url = "" 'to avoid warning in VS 
             ' Setup the sorting events.
-
+          
             ' Setup the button events.
-
-            AddHandler Me.GoButton.Button.Click, AddressOf GoButton_Click
-
-            AddHandler Me.HFIN_C_IDFilter.SelectedIndexChanged, AddressOf HFIN_C_IDFilter_SelectedIndexChanged
-
-            AddHandler Me.HFIN_MonthFilter.SelectedIndexChanged, AddressOf HFIN_MonthFilter_SelectedIndexChanged
-
-            AddHandler Me.HFIN_StatusFilter.SelectedIndexChanged, AddressOf HFIN_StatusFilter_SelectedIndexChanged
-
-            AddHandler Me.HFIN_YearFromFilter.SelectedIndexChanged, AddressOf HFIN_YearFromFilter_SelectedIndexChanged
-
-
-            ' Setup events for others
-
+          
+              AddHandler Me.GoButton.Button.Click, AddressOf GoButton_Click
+                        
+              AddHandler Me.HFIN_C_IDFilter.SelectedIndexChanged, AddressOf HFIN_C_IDFilter_SelectedIndexChanged
+            
+              AddHandler Me.HFIN_MonthFilter.SelectedIndexChanged, AddressOf HFIN_MonthFilter_SelectedIndexChanged
+            
+              AddHandler Me.HFIN_StatusFilter.SelectedIndexChanged, AddressOf HFIN_StatusFilter_SelectedIndexChanged
+            
+              AddHandler Me.HFIN_YearFromFilter.SelectedIndexChanged, AddressOf HFIN_YearFromFilter_SelectedIndexChanged
+                    
+        
+          ' Setup events for others
+                
         End Sub
-
-
-        Public Overridable Sub LoadData()
-
+        
+        
+        Public Overridable Sub LoadData()        
+        
             ' Read data from database. Returns an array of records that can be assigned
             ' to the DataSource table control property.
-            Try
+            Try	
                 Dim joinFilter As CompoundFilter = CreateCompoundJoinFilter()
-
+                
                 ' The WHERE clause will be empty when displaying all records in table.
                 Dim wc As WhereClause = CreateWhereClause()
                 If wc IsNot Nothing AndAlso Not wc.RunQuery Then
@@ -9528,18 +9528,18 @@ Public Class BaseWFinRep_HeadTableControlRow
                 ' Call OrderBy to determine the order - either use the order defined
                 ' on the Query Wizard, or specified by user (by clicking on column heading)
                 Dim orderBy As OrderBy = CreateOrderBy()
-
+                
                 ' Get the pagesize from the pagesize control.
                 Me.GetPageSize()
-
+                               
                 If Me.DisplayLastPage Then
                     Dim totalRecords As Integer = If(Me._TotalRecords < 0, GetRecordCount(CreateCompoundJoinFilter(), CreateWhereClause()), Me._TotalRecords)
-
-                    Dim totalPages As Integer = CInt(Math.Ceiling(totalRecords / Me.PageSize))
-
+                     
+                      Dim totalPages As Integer = CInt(Math.Ceiling(totalRecords / Me.PageSize))
+                    
                     Me.PageIndex = totalPages - 1
-                End If
-
+                End If                               
+                
                 ' Make sure PageIndex (current page) and PageSize are within bounds.
                 If Me.PageIndex < 0 Then
                     Me.PageIndex = 0
@@ -9547,41 +9547,41 @@ Public Class BaseWFinRep_HeadTableControlRow
                 If Me.PageSize < 1 Then
                     Me.PageSize = 1
                 End If
-
+                
                 ' Retrieve the records and set the table DataSource.
                 ' Only PageSize records are fetched starting at PageIndex (zero based).
                 If Me.AddNewRecord > 0 Then
-                    ' Make sure to preserve the previously entered data on new rows.
+                ' Make sure to preserve the previously entered data on new rows.
                     Dim postdata As New ArrayList
                     For Each rc As WFinRep_HeadTableControlRow In Me.GetRecordControls()
                         If Not rc.IsNewRecord Then
                             rc.DataSource = rc.GetRecord()
                             rc.GetUIData()
                             postdata.Add(rc.DataSource)
-                            UIData.Add(rc.PreservedUIData())
+                            UIData.Add(rc.PreservedUIData())							
                         End If
                     Next
                     Me.DataSource = DirectCast(postdata.ToArray(GetType(WFinRep_HeadRecord)), WFinRep_HeadRecord())
                 Else  ' Get the records from the database	
-
-                    Me.DataSource = GetRecords(joinFilter, wc, orderBy, Me.PageIndex, Me.PageSize)
-
+                      
+                        Me.DataSource = GetRecords(joinFilter, wc, orderBy, Me.PageIndex, Me.PageSize)
+                      
                 End If
-
+                
                 ' if the datasource contains no records contained in database, then load the last page.
                 If (DbUtils.GetCreatedRecords(Me.DataSource).Length = 0 AndAlso Not Me.DisplayLastPage) Then
-                    Me.DisplayLastPage = True
-                    LoadData()
+                      Me.DisplayLastPage = True
+                      LoadData()
                 Else
-
+                
                     ' Add any new rows desired by the user.
                     Me.AddNewRecords()
-
+                       
 
                     ' Initialize the page and grand totals. now
-
+                
                 End If
-
+    
             Catch ex As Exception
                 ' Report the error message to the end user
                 Dim msg As String = ex.Message
@@ -9591,61 +9591,61 @@ Public Class BaseWFinRep_HeadTableControlRow
                 Throw New Exception(msg, ex.InnerException)
             End Try
         End Sub
-
+        
         Public Overridable Function GetRecords( _
             ByVal join As BaseFilter, _
             ByVal where As WhereClause, _
             ByVal orderBy As OrderBy, _
             ByVal pageIndex As Integer, _
             ByVal pageSize As Integer) As WFinRep_HeadRecord()
-
+            
             ' By default, Select * will be executed to get a list of records.  If you want to run Select Distinct with certain column only, add the column to selCols
-            Dim selCols As New ColumnList
+            Dim selCols As New ColumnList     
+                        
 
-
-
+    
             ' If you want to specify certain columns to be in the select statement, you can write code similar to the following:
             ' However, if you don't specify PK, row button click might show an error message.
             ' And make sure you write similar code in GetRecordCount as well
             ' selCols.Add(WFinRep_HeadTable.Column1, True)         
             ' selCols.Add(WFinRep_HeadTable.Column2, True)          
             ' selCols.Add(WFinRep_HeadTable.Column3, True)    
-
-
-
+   
+            
+            
             ' If the parameters doesn't specify specific columns in the Select statement, then run Select *
             ' Alternatively, if the parameters specifies to include PK, also run Select *
-
-            If selCols.Count = 0 Then
-
+            
+            If selCols.Count = 0 Then                    
+              
                 Return WFinRep_HeadTable.GetRecords(join, where, orderBy, Me.PageIndex, Me.PageSize)
-
+                 
             Else
                 Dim databaseTable As New WFinRep_HeadTable
                 databaseTable.SelectedColumns.Clear()
                 databaseTable.SelectedColumns.AddRange(selCols)
-
+                
                 ' Stored Procedures provided by Iron Speed Designer specifies to query all columns, in order to query a subset of columns, it is necessary to disable stored procedures                  
-                databaseTable.DataAdapter.DisableStoredProcedures = True
-
-
-
+                databaseTable.DataAdapter.DisableStoredProcedures = True 
+                
+            
+                
                 Dim recList As ArrayList
                 orderBy.ExpandForeignKeyColums = False
                 recList = databaseTable.GetRecordList(join, where.GetFilter(), Nothing, orderBy, pageIndex, pageSize)
                 Return CType(recList.ToArray(GetType(WFinRep_HeadRecord)), WFinRep_HeadRecord())
-            End If
-
-        End Function
-
-
+            End If            
+            
+        End Function        
+        
+        
         Public Overridable Function GetRecordCount(ByVal join As BaseFilter, ByVal where As WhereClause) As Integer
 
 
             ' By default, Select * will be executed to get a list of records.  If you want to run Select Distinct with certain column only, add the column to selCols
-            Dim selCols As New ColumnList
-
-
+            Dim selCols As New ColumnList                 
+               
+    
             ' If you want to specify certain columns to be in the select statement, you can write code similar to the following:
             ' However, if you don't specify PK, row button click might show an error message.
             ' And make sure you write similar code in GetRecordCount as well
@@ -9656,184 +9656,184 @@ Public Class BaseWFinRep_HeadTableControlRow
 
             ' If the parameters doesn't specify specific columns in the Select statement, then run Select *
             ' Alternatively, if the parameters specifies to include PK, also run Select *
-
-            If selCols.Count = 0 Then
-
+            
+            If selCols.Count = 0 Then                    
+                     
                 Return WFinRep_HeadTable.GetRecordCount(join, where)
 
             Else
                 Dim databaseTable As New WFinRep_HeadTable
                 databaseTable.SelectedColumns.Clear()
-                databaseTable.SelectedColumns.AddRange(selCols)
-
+                databaseTable.SelectedColumns.AddRange(selCols)           
+                
                 ' Stored Procedures provided by Iron Speed Designer specifies to query all columns, in order to query a subset of columns, it is necessary to disable stored procedures                  
-                databaseTable.DataAdapter.DisableStoredProcedures = True
-
-
+                databaseTable.DataAdapter.DisableStoredProcedures = True 
+                
+                
                 Return CInt(databaseTable.GetRecordListCount(join, where.GetFilter(), Nothing, Nothing))
             End If
 
-        End Function
-
-
-
+        End Function        
+        
+      
+    
         Public Overrides Sub DataBind()
             ' The DataBind method binds the user interface controls to the values
             ' from the database record for each row in the table.  To do this, it calls the
             ' DataBind for each of the rows.
             ' DataBind also populates any filters above the table, and sets the pagination
             ' control to the correct number of records and the current page number.
-
-
-            MyBase.DataBind()
-
-
-            Me.ClearControlsFromSession()
+            
+            
+              MyBase.DataBind()
+            
+    
+            Me.ClearControlsFromSession()    
 
             ' Make sure that the DataSource is initialized.
             If Me.DataSource Is Nothing Then
                 Return
             End If
-
+            
             'LoadData for DataSource for chart and report if they exist
-
-            ' Improve performance by prefetching display as records.
-            Me.PreFetchForeignKeyValues()
-
+          
+          ' Improve performance by prefetching display as records.
+          Me.PreFetchForeignKeyValues()
+             
             ' Setup the pagination controls.
             BindPaginationControls()
 
+      
 
-
-
-
-            ' Bind the repeater with the list of records to expand the UI.
-
-            Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRep_HeadTableControlRepeater"), System.Web.UI.WebControls.Repeater)
-            If rep Is Nothing Then Return
-            rep.DataSource = DataSource()
-            rep.DataBind()
-
-            Dim index As Integer = 0
-
-            For Each repItem As System.Web.UI.WebControls.RepeaterItem In rep.Items
-
-                ' Loop through all rows in the table, set its DataSource and call DataBind().
-                Dim recControl As WFinRep_HeadTableControlRow = DirectCast(repItem.FindControl("WFinRep_HeadTableControlRow"), WFinRep_HeadTableControlRow)
-                recControl.DataSource = Me.DataSource(index)
-                If Me.UIData.Count > index Then
-                    recControl.PreviousUIData = Me.UIData(index)
-                End If
-                recControl.DataBind()
-
-                recControl.Visible = Not Me.InDeletedRecordIds(recControl)
-
-                index += 1
-            Next
-
+    
+        
+          ' Bind the repeater with the list of records to expand the UI.
+          
+          Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRep_HeadTableControlRepeater"), System.Web.UI.WebControls.Repeater)
+          If rep Is Nothing Then Return
+          rep.DataSource = DataSource()
+          rep.DataBind()
+                  
+          Dim index As Integer = 0
+          
+          For Each repItem As System.Web.UI.WebControls.RepeaterItem In rep.Items
+          
+            ' Loop through all rows in the table, set its DataSource and call DataBind().
+            Dim recControl As WFinRep_HeadTableControlRow = DirectCast(repItem.FindControl("WFinRep_HeadTableControlRow"), WFinRep_HeadTableControlRow)
+            recControl.DataSource = Me.DataSource(index)          
+            If Me.UIData.Count > index Then
+              recControl.PreviousUIData = Me.UIData(index)
+            End If
+            recControl.DataBind()
+          
+            recControl.Visible = Not Me.InDeletedRecordIds(recControl)
+          
+            index += 1
+          Next
+                 
             ' Call the Set methods for each controls on the panel
-
-
-            SetHFIN_C_IDFilter()
-            SetHFIN_C_IDLabel()
-            SetHFIN_C_IDLabel1()
-            SetHFIN_DescriptionLabel()
-            SetHFIN_MonthFilter()
-            SetHFIN_MonthLabel()
-            SetHFIN_MonthLabel1()
-            SetHFIN_RptCountLabel()
-            SetHFIN_StatusFilter()
-            SetHFIN_StatusLabel()
-            SetHFIN_StatusLabel1()
-            SetHFIN_YearFromFilter()
-            SetHFIN_YearLabel()
-            SetHFIN_YearLabel1()
-
-
-            SetGoButton()
-
+        
+                
+                SetHFIN_C_IDFilter()
+                SetHFIN_C_IDLabel()
+                SetHFIN_C_IDLabel1()
+                SetHFIN_DescriptionLabel()
+                SetHFIN_MonthFilter()
+                SetHFIN_MonthLabel()
+                SetHFIN_MonthLabel1()
+                SetHFIN_RptCountLabel()
+                SetHFIN_StatusFilter()
+                SetHFIN_StatusLabel()
+                SetHFIN_StatusLabel1()
+                SetHFIN_YearFromFilter()
+                SetHFIN_YearLabel()
+                SetHFIN_YearLabel1()
+                
+                
+                SetGoButton()
+              
             ' setting the state of expand or collapse alternative rows
-
-            Dim expandFirstRow As Boolean = False
-
+      
+            Dim expandFirstRow As Boolean= False   
+        
             Dim recControls() As WFinRep_HeadTableControlRow = Me.GetRecordControls()
-            For i As Integer = 0 To recControls.Length - 1
+            For i As Integer = 0 to recControls.Length - 1
                 Dim altRow As System.Web.UI.Control = DirectCast(MiscUtils.FindControlRecursively(recControls(i), "WFinRep_HeadTableControlAltRow"), System.Web.UI.Control)
                 If (altRow IsNot Nothing) Then
-                    If (expandFirstRow AndAlso i = 0) Then
+                    If (expandFirstRow AndAlso i = 0) Then                
                         altRow.Visible = True
-
-                        recControls(i).ExpandRowButton.ImageUrl = "../Images/icon_expandcollapserow.gif"
-                        recControls(i).ExpandRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over.gif'")
-                        recControls(i).ExpandRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow.gif'")
-
-                    Else
+                   
+                         recControls(i).ExpandRowButton.ImageUrl = "../Images/icon_expandcollapserow.gif"
+                         recControls(i).ExpandRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over.gif'")
+                         recControls(i).ExpandRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow.gif'")
+                   
+                    Else                
                         altRow.Visible = False
-
-                        recControls(i).ExpandRowButton.ImageUrl = "../Images/icon_expandcollapserow2.gif"
-                        recControls(i).ExpandRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over2.gif'")
-                        recControls(i).ExpandRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow2.gif'")
-
+                   
+                         recControls(i).ExpandRowButton.ImageUrl = "../Images/icon_expandcollapserow2.gif"
+                         recControls(i).ExpandRowButton.Attributes.Add("onmouseover", "this.src='../Images/icon_expandcollapserow_over2.gif'")
+                         recControls(i).ExpandRowButton.Attributes.Add("onmouseout", "this.src='../Images/icon_expandcollapserow2.gif'")
+                   
                     End If
                 End If
             Next
-
-
+      
+    
             ' Load data for each record and table UI control.
             ' Ordering is important because child controls get 
             ' their parent ids from their parent UI controls.
-
-
+                
+      
             ' this method calls the set method for controls with special formula like running total, sum, rank, etc
             SetFormulaControls()
-
-
-
-        End Sub
-
+            
+                    
+            
+      End Sub
+      
         Public Overridable Sub SetFormulaControls()
             ' this method calls Set methods for the control that has special formula
+        
+        
 
+    End Sub
 
-
-        End Sub
-
-
-        Public Sub PreFetchForeignKeyValues()
-            If (IsNothing(Me.DataSource)) Then
-                Return
-            End If
-
+    
+          Public Sub PreFetchForeignKeyValues()
+          If (IsNothing(Me.DataSource))
+            Return
+          End If
+          
             Me.Page.PregetDfkaRecords(WFinRep_HeadTable.HFIN_C_ID, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WFinRep_HeadTable.HFIN_C_ID, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WFinRep_HeadTable.HFIN_Month, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WFinRep_HeadTable.HFIN_Month, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WFinRep_HeadTable.HFIN_Status, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WFinRep_HeadTable.HFIN_Status, Me.DataSource)
-
-        End Sub
-
-
+          
+          End Sub
+        
+      
         Public Overridable Sub RegisterPostback()
-
-
+        
+        
         End Sub
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean, ByVal e As FormulaEvaluator) As String
-            If e Is Nothing Then
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean, ByVal e as FormulaEvaluator) As String
+            If e Is Nothing
                 e = New FormulaEvaluator()
             End If
-
+            
             e.Variables.Clear()
-
-
+            
+            
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -9841,11 +9841,11 @@ Public Class BaseWFinRep_HeadTableControlRow
                     e.Variables.Add(enumerator.Current.Key, enumerator.Current.Value)
                 End While
             End If
-
-            If includeDS Then
-
+            
+            If includeDS
+                
             End If
-
+            
             ' All variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -9859,28 +9859,28 @@ Public Class BaseWFinRep_HeadTableControlRow
             If resultObj Is Nothing Then
                 Return ""
             End If
-
+            
             If Not String.IsNullOrEmpty(format) AndAlso (String.IsNullOrEmpty(formula) OrElse formula.IndexOf("Format(") < 0) Then
                 Return FormulaUtils.Format(resultObj, format)
             Else
                 Return resultObj.ToString()
             End If
-        End Function
+        End Function			
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
-        End Function
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
+        End Function        
 
-
+        
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
-        End Function
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
+        End Function        
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -9888,7 +9888,7 @@ Public Class BaseWFinRep_HeadTableControlRow
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -9901,44 +9901,44 @@ Public Class BaseWFinRep_HeadTableControlRow
 
         Public Overridable Sub ResetControl()
 
-
+            
             Me.HFIN_C_IDFilter.ClearSelection()
-
+            
             Me.HFIN_MonthFilter.ClearSelection()
-
+            
             Me.HFIN_StatusFilter.ClearSelection()
-
+            
             Me.HFIN_YearFromFilter.ClearSelection()
-
+            
             Me.CurrentSortOrder.Reset()
             If (Me.InSession(Me, "Order_By")) Then
                 Me.CurrentSortOrder = OrderBy.FromXmlString(Me.GetFromSession(Me, "Order_By", Nothing))
-
+            
             Else
                 Me.CurrentSortOrder = New OrderBy(True, False)
-
+                
             End If
-
+                
             Me.PageIndex = 0
         End Sub
 
         Public Overridable Sub ResetPageControl()
             Me.PageIndex = 0
         End Sub
-
+        
         Protected Overridable Sub BindPaginationControls()
             ' Setup the pagination controls.
 
             ' Bind the pagination labels.
-
-            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then
-
+        
+            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then                      
+                    
                 Me.Pagination.CurrentPage.Text = (Me.PageIndex + 1).ToString()
             Else
                 Me.Pagination.CurrentPage.Text = "0"
             End If
-            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then
-
+            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then                      
+                    
                 Me.Pagination.CurrentPage.Text = (Me.PageIndex + 1).ToString()
             Else
                 Me.Pagination.CurrentPage.Text = "0"
@@ -9951,39 +9951,39 @@ Public Class BaseWFinRep_HeadTableControlRow
             Me.Pagination.TotalPages.Text = Me.TotalPages.ToString()
 
             ' Bind the buttons for WFinRep_HeadTableControl pagination.
-
+        
             Me.Pagination.FirstPage.Enabled = Not (Me.PageIndex = 0)
             If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
                 Me.Pagination.LastPage.Enabled = True
-            ElseIf Me._TotalPages = 0 Then          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.Pagination.LastPage.Enabled = False
+            ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
+                Me.Pagination.LastPage.Enabled = False            
             Else                               ' if the total pages is the last page, disable last and next buttons
                 Me.Pagination.LastPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
             End If
-
+          
             If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
                 Me.Pagination.NextPage.Enabled = True
-            ElseIf Me._TotalPages = 0 Then          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.Pagination.NextPage.Enabled = False
+            ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
+                Me.Pagination.NextPage.Enabled = False            
             Else                               ' if the total pages is the last page, disable last and next buttons
                 Me.Pagination.NextPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
             End If
-
+          
             Me.Pagination.PreviousPage.Enabled = Not (Me.PageIndex = 0)
 
 
         End Sub
 
-
-
+   
+    
         Public Overridable Sub SaveData()
             ' Save the data from the entire table.  Calls each row's Save Data
             ' to save their data.  This function is called by the Click handler of the
             ' Save button.  The button handler should Start/Commit/End a transaction.
-
+            
             Dim recCtl As WFinRep_HeadTableControlRow
             For Each recCtl In Me.GetRecordControls()
-
+        
                 If Me.InDeletedRecordIds(recCtl) Then
                     ' Delete any pending deletes. 
                     recCtl.Delete()
@@ -9992,181 +9992,181 @@ Public Class BaseWFinRep_HeadTableControlRow
                         recCtl.SaveData()
                     End If
                 End If
-
+          
             Next
-
-
-
-
+            
+            
+          
+    
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-
+          
             ' Set IsNewRecord to False for all records - since everything has been saved and is no longer "new"
             For Each recCtl In Me.GetRecordControls()
                 recCtl.IsNewRecord = False
             Next
-
-
+    
+      
             ' Set DeletedRecordsIds to Nothing since we have deleted all pending deletes.
             Me.DeletedRecordIds = Nothing
-
+      
         End Sub
 
         Public Overridable Function CreateCompoundJoinFilter() As CompoundFilter
             Dim jFilter As CompoundFilter = New CompoundFilter()
-
+         
             Return jFilter
         End Function
 
-
-        Public Overridable Function CreateOrderBy() As OrderBy
-            ' The CurrentSortOrder is initialized to the sort order on the
-            ' Query Wizard.  It may be modified by the Click handler for any of
-            ' the column heading to sort or reverse sort by that column.
-            ' You can add your own sort order, or modify it on the Query Wizard.
-            Return Me.CurrentSortOrder
-        End Function
-
+      
+          Public Overridable Function CreateOrderBy() As OrderBy
+          ' The CurrentSortOrder is initialized to the sort order on the
+          ' Query Wizard.  It may be modified by the Click handler for any of
+          ' the column heading to sort or reverse sort by that column.
+          ' You can add your own sort order, or modify it on the Query Wizard.
+          Return Me.CurrentSortOrder
+          End Function
+      
         Public Overridable Function CreateWhereClause() As WhereClause
             'This CreateWhereClause is used for loading the data.
             WFinRep_HeadTable.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
-
-            Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
-
+            
+        Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
+      
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
             ' 2. User selected search criteria.
             ' 3. User selected filter criteria.
 
-
+              
             If IsValueSelected(Me.HFIN_C_IDFilter) Then
-
-                hasFiltersWFinRep_HeadTableControl = True
-
+    
+              hasFiltersWFinRep_HeadTableControl = True            
+    
                 wc.iAND(WFinRep_HeadTable.HFIN_C_ID, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.HFIN_C_IDFilter, Me.GetFromSession(Me.HFIN_C_IDFilter)), False, False)
-
+            
             End If
-
-
-
+                  
+                
+                       
             If IsValueSelected(Me.HFIN_MonthFilter) Then
-
-                hasFiltersWFinRep_HeadTableControl = True
-
+    
+              hasFiltersWFinRep_HeadTableControl = True            
+    
                 wc.iAND(WFinRep_HeadTable.HFIN_Month, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.HFIN_MonthFilter, Me.GetFromSession(Me.HFIN_MonthFilter)), False, False)
-
+            
             End If
-
-
-
+                  
+                
+                       
             If IsValueSelected(Me.HFIN_StatusFilter) Then
-
-                hasFiltersWFinRep_HeadTableControl = True
-
+    
+              hasFiltersWFinRep_HeadTableControl = True            
+    
                 wc.iAND(WFinRep_HeadTable.HFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.HFIN_StatusFilter, Me.GetFromSession(Me.HFIN_StatusFilter)), False, False)
-
+            
             End If
-
-
-
+                  
+                
+                       
             If IsValueSelected(Me.HFIN_YearFromFilter) Then
-
-                hasFiltersWFinRep_HeadTableControl = True
-
+    
+              hasFiltersWFinRep_HeadTableControl = True            
+    
                 wc.iAND(WFinRep_HeadTable.HFIN_Year, BaseFilter.ComparisonOperator.Greater_Than_Or_Equal, MiscUtils.GetSelectedValue(Me.HFIN_YearFromFilter, Me.GetFromSession(Me.HFIN_YearFromFilter)), False, False)
-
+            
             End If
+                  
+                
+                         
+    
+    Return wc
+    End Function
 
-
-
-
-            Return wc
-        End Function
-
-
-        Public Overridable Function CreateWhereClause(ByVal searchText As String, ByVal fromSearchControl As String, ByVal AutoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String) As WhereClause
+    
+        Public Overridable Function CreateWhereClause(ByVal searchText as String, ByVal fromSearchControl as String, ByVal AutoTypeAheadSearch as String, ByVal AutoTypeAheadWordSeparators as String) As WhereClause
             ' This CreateWhereClause is used for loading list of suggestions for Auto Type-Ahead feature.
             WFinRep_HeadTable.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
+        
+          Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
+        
+          Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
+        
+          Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
+        
+          Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
+        
+      ' Compose the WHERE clause consist of:
+      ' 1. Static clause defined at design time.
+      ' 2. User selected search criteria.
+      ' 3. User selected filter criteria.
 
-            Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
-
-            ' Compose the WHERE clause consist of:
-            ' 1. Static clause defined at design time.
-            ' 2. User selected search criteria.
-            ' 3. User selected filter criteria.
-
-            Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
-
+      Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
+      
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
-
+          
             Dim HFIN_C_IDFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "HFIN_C_IDFilter_Ajax"), String)
             If IsValueSelected(HFIN_C_IDFilterSelectedValue) Then
-
-                hasFiltersWFinRep_HeadTableControl = True
-
-                wc.iAND(WFinRep_HeadTable.HFIN_C_ID, BaseFilter.ComparisonOperator.EqualsTo, HFIN_C_IDFilterSelectedValue, False, False)
-
-            End If
-
+    
+              hasFiltersWFinRep_HeadTableControl = True            
+    
+                 wc.iAND(WFinRep_HeadTable.HFIN_C_ID, BaseFilter.ComparisonOperator.EqualsTo, HFIN_C_IDFilterSelectedValue, false, False)
+             
+             End If
+                      
             Dim HFIN_MonthFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "HFIN_MonthFilter_Ajax"), String)
             If IsValueSelected(HFIN_MonthFilterSelectedValue) Then
-
-                hasFiltersWFinRep_HeadTableControl = True
-
-                wc.iAND(WFinRep_HeadTable.HFIN_Month, BaseFilter.ComparisonOperator.EqualsTo, HFIN_MonthFilterSelectedValue, False, False)
-
-            End If
-
+    
+              hasFiltersWFinRep_HeadTableControl = True            
+    
+                 wc.iAND(WFinRep_HeadTable.HFIN_Month, BaseFilter.ComparisonOperator.EqualsTo, HFIN_MonthFilterSelectedValue, false, False)
+             
+             End If
+                      
             Dim HFIN_StatusFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "HFIN_StatusFilter_Ajax"), String)
             If IsValueSelected(HFIN_StatusFilterSelectedValue) Then
-
-                hasFiltersWFinRep_HeadTableControl = True
-
-                wc.iAND(WFinRep_HeadTable.HFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, HFIN_StatusFilterSelectedValue, False, False)
-
-            End If
-
+    
+              hasFiltersWFinRep_HeadTableControl = True            
+    
+                 wc.iAND(WFinRep_HeadTable.HFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, HFIN_StatusFilterSelectedValue, false, False)
+             
+             End If
+                      
             Dim HFIN_YearFromFilterSelectedValue As String = CType(HttpContext.Current.Session()(HttpContext.Current.Session.SessionID & appRelativeVirtualPath & "HFIN_YearFromFilter_Ajax"), String)
             If IsValueSelected(HFIN_YearFromFilterSelectedValue) Then
-
-                hasFiltersWFinRep_HeadTableControl = True
-
-                wc.iAND(WFinRep_HeadTable.HFIN_Year, BaseFilter.ComparisonOperator.Greater_Than_Or_Equal, HFIN_YearFromFilterSelectedValue, False, False)
-
-            End If
-
-
-
+    
+              hasFiltersWFinRep_HeadTableControl = True            
+    
+                 wc.iAND(WFinRep_HeadTable.HFIN_Year, BaseFilter.ComparisonOperator.Greater_Than_Or_Equal, HFIN_YearFromFilterSelectedValue, false, False)
+             
+             End If
+                      
+      
+      
             Return wc
         End Function
 
+      
 
-
-        Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
-                                        ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
-                                        ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
-                                        ByVal resultList As ArrayList) As Boolean
-            Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
-                                     autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
-                                     resultList, False)
-        End Function
+         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
+                                         ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
+                                         ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
+                                         ByVal resultList As ArrayList) As Boolean
+              Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
+                                       autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
+                                       resultList, False)
+         End Function
 
         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
                                                ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
@@ -10215,10 +10215,10 @@ Public Class BaseWFinRep_HeadTableControlRow
                     If Len(resultItem) - index <= columnLength Then
                         If index = 0 Then
                             itemToAdd = resultItem
-                        Else
+                        Else                            
                             itemToAdd = resultItem.Substring(index)
                         End If
-                    Else
+                    Else                       
                         itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, index, index + columnLength, StringUtils.Direction.forward)
                     End If
                 ElseIf InvariantLCase(AutoTypeAheadDisplayFoundText).equals("inmiddleofmatchedstring") Then
@@ -10228,7 +10228,7 @@ Public Class BaseWFinRep_HeadTableControlRow
                     Else
                         ' Sanity check at end of the string
                         If index + Len(prefixText) >= Len(resultItem) - 1 OrElse _
-                        Len(resultItem) - index < subStringBeginIndex Then
+                        Len(resultItem) - index < subStringBeginIndex Then                           
                             itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, Len(resultItem) - 1 - columnLength, Len(resultItem) - 1, StringUtils.Direction.backward)
                         ElseIf index <= subStringBeginIndex Then
                             ' Sanity check at beginning of the string                          
@@ -10282,18 +10282,18 @@ Public Class BaseWFinRep_HeadTableControlRow
                 End If
 
                 If Not String.IsNullOrEmpty(itemToAdd) AndAlso Not resultList.Contains(itemToAdd) Then
-
+                   
                     resultList.Add(itemToAdd)
-
+          				
                     isAdded = True
                 End If
             End If
             Return isAdded
         End Function
-
-
+        
+    
         Protected Overridable Sub GetPageSize()
-
+        
             If Me.Pagination.PageSize.Text.Trim <> "" Then
                 Try
                     'Me.PageSize = Integer.Parse(Me.Pagination.PageSize.Text)
@@ -10309,30 +10309,30 @@ Public Class BaseWFinRep_HeadTableControlRow
         End Sub
 
         Protected Overridable Sub AddNewRecords()
-
+          
             Dim newRecordList As ArrayList = New ArrayList()
+          
+    Dim newUIDataList As System.Collections.Generic.List(Of Hashtable) = New System.Collections.Generic.List(Of Hashtable)()
 
-            Dim newUIDataList As System.Collections.Generic.List(Of Hashtable) = New System.Collections.Generic.List(Of Hashtable)()
+    ' Loop though all the record controls and if the record control
+    ' does not have a unique record id set, then create a record
+    ' and add to the list.
+    If Not Me.ResetData Then
+    Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRep_HeadTableControlRepeater"), System.Web.UI.WebControls.Repeater)
+    If rep Is Nothing Then Return
 
-            ' Loop though all the record controls and if the record control
-            ' does not have a unique record id set, then create a record
-            ' and add to the list.
-            If Not Me.ResetData Then
-                Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRep_HeadTableControlRepeater"), System.Web.UI.WebControls.Repeater)
-                If rep Is Nothing Then Return
-
-
-                Dim repItem As System.Web.UI.WebControls.RepeaterItem
-                For Each repItem In rep.Items
-
-                    ' Loop through all rows in the table, set its DataSource and call DataBind().
-
-                    Dim recControl As WFinRep_HeadTableControlRow = DirectCast(repItem.FindControl("WFinRep_HeadTableControlRow"), WFinRep_HeadTableControlRow)
-
+    
+    Dim repItem As System.Web.UI.WebControls.RepeaterItem
+    For Each repItem In rep.Items
+      
+    ' Loop through all rows in the table, set its DataSource and call DataBind().
+    
+    Dim recControl As WFinRep_HeadTableControlRow = DirectCast(repItem.FindControl("WFinRep_HeadTableControlRow"), WFinRep_HeadTableControlRow)
+    
 
                     If recControl.Visible AndAlso recControl.IsNewRecord() Then
                         Dim rec As WFinRep_HeadRecord = New WFinRep_HeadRecord()
-
+        
                         If recControl.HFIN_C_ID.Text <> "" Then
                             rec.Parse(recControl.HFIN_C_ID.Text, WFinRep_HeadTable.HFIN_C_ID)
                         End If
@@ -10372,41 +10372,41 @@ Public Class BaseWFinRep_HeadTableControlRow
                         If recControl.HFIN_Year1.Text <> "" Then
                             rec.Parse(recControl.HFIN_Year1.Text, WFinRep_HeadTable.HFIN_Year)
                         End If
-                        newUIDataList.Add(recControl.PreservedUIData())
+                        newUIDataList.Add(recControl.PreservedUIData())	  
                         newRecordList.Add(rec)
                     End If
                 Next
             End If
-
-
+            
+    
             ' Add any new record to the list.
             Dim index As Integer = 0
             For index = 1 To Me.AddNewRecord
-
+              
                 newRecordList.Insert(0, New WFinRep_HeadRecord())
-                newUIDataList.Insert(0, New Hashtable())
-
+                newUIDataList.Insert(0, New Hashtable())				
+              
             Next
             Me.AddNewRecord = 0
 
             ' Finally, add any new records to the DataSource.
             If newRecordList.Count > 0 Then
-
+              
                 Dim finalList As ArrayList = New ArrayList(Me.DataSource)
                 finalList.InsertRange(0, newRecordList)
 
                 Me.DataSource = DirectCast(finalList.ToArray(GetType(WFinRep_HeadRecord)), WFinRep_HeadRecord())
-
+              
             End If
-
+            
             ' Add the existing UI data to this hash table
             If newUIDataList.Count > 0 Then
                 Me.UIData.InsertRange(0, newUIDataList)
             End If
-
+            
         End Sub
 
-
+        
         Public Sub AddToDeletedRecordIds(ByVal rec As WFinRep_HeadTableControlRow)
             If rec.IsNewRecord() Then
                 Return
@@ -10436,192 +10436,192 @@ Public Class BaseWFinRep_HeadTableControlRow
                 Me._DeletedRecordIds = value
             End Set
         End Property
-
-
+        
+      
         ' Create Set, WhereClause, and Populate Methods
-
+        
         Public Overridable Sub SetHFIN_C_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.HFIN_C_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.HFIN_C_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetHFIN_C_IDLabel1()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.HFIN_C_IDLabel1.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.HFIN_C_IDLabel1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetHFIN_DescriptionLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.HFIN_DescriptionLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.HFIN_DescriptionLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetHFIN_MonthLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.HFIN_MonthLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.HFIN_MonthLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetHFIN_MonthLabel1()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.HFIN_MonthLabel1.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.HFIN_MonthLabel1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetHFIN_RptCountLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.HFIN_RptCountLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.HFIN_RptCountLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetHFIN_StatusLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.HFIN_StatusLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.HFIN_StatusLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetHFIN_StatusLabel1()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.HFIN_StatusLabel1.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.HFIN_StatusLabel1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetHFIN_YearLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.HFIN_YearLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.HFIN_YearLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetHFIN_YearLabel1()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.HFIN_YearLabel1.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.HFIN_YearLabel1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetHFIN_C_IDFilter()
 
-
-
-            Me.PopulateHFIN_C_IDFilter(GetSelectedValue(Me.HFIN_C_IDFilter, GetFromSession(Me.HFIN_C_IDFilter)), 500)
-
-        End Sub
-
+              
+            
+                Me.PopulateHFIN_C_IDFilter(GetSelectedValue(Me.HFIN_C_IDFilter,  GetFromSession(Me.HFIN_C_IDFilter)), 500)					
+                                     
+              End Sub	
+            
         Public Overridable Sub SetHFIN_MonthFilter()
 
-
-
-            Me.PopulateHFIN_MonthFilter(GetSelectedValue(Me.HFIN_MonthFilter, GetFromSession(Me.HFIN_MonthFilter)), 500)
-
-        End Sub
-
+              
+            
+                Me.PopulateHFIN_MonthFilter(GetSelectedValue(Me.HFIN_MonthFilter,  GetFromSession(Me.HFIN_MonthFilter)), 500)					
+                                     
+              End Sub	
+            
         Public Overridable Sub SetHFIN_StatusFilter()
 
-
-
-            Me.PopulateHFIN_StatusFilter(GetSelectedValue(Me.HFIN_StatusFilter, GetFromSession(Me.HFIN_StatusFilter)), 500)
-
-        End Sub
-
+              
+            
+                Me.PopulateHFIN_StatusFilter(GetSelectedValue(Me.HFIN_StatusFilter,  GetFromSession(Me.HFIN_StatusFilter)), 500)					
+                                     
+              End Sub	
+            
         Public Overridable Sub SetHFIN_YearFromFilter()
 
-
-
-            Me.PopulateHFIN_YearFromFilter(GetSelectedValue(Me.HFIN_YearFromFilter, GetFromSession(Me.HFIN_YearFromFilter)), 500)
-
-        End Sub
-
+              
+            
+                Me.PopulateHFIN_YearFromFilter(GetSelectedValue(Me.HFIN_YearFromFilter,  GetFromSession(Me.HFIN_YearFromFilter)), 500)					
+                                     
+              End Sub	
+            
         ' Get the filters' data for HFIN_C_IDFilter
         Protected Overridable Sub PopulateHFIN_C_IDFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
-
+                    
             'Setup the WHERE clause.
-
+            
             Me.HFIN_C_IDFilter.Items.Clear()
             Dim wc As WhereClause = Me.CreateWhereClause_HFIN_C_IDFilter()
-
+            		  			
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_HFIN_C_IDFilter function.
             ' It is better to customize the where clause there.
-
+            
             ' Setup the static list items        
-
+            
             ' Add the All item.
-            Me.HFIN_C_IDFilter.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
+            Me.HFIN_C_IDFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
+                              
 
-
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(Sel_WF_DYNAMICS_CompanyView.Company_Short_Name, OrderByItem.OrderDir.Asc)
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(Sel_WF_DYNAMICS_CompanyView.Company_Short_Name, OrderByItem.OrderDir.Asc)
 
             Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
 
-
+            	
 
             Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
-
+            
 
             Dim itemValues() As Sel_WF_DYNAMICS_CompanyRecord = Nothing
-
-            If wc.RunQuery Then
+            
+            If wc.RunQuery
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim evaluator As New FormulaEvaluator
                 Dim listDuplicates As New ArrayList()
 
-
-
+                
+                
                 Do
-
+                    
                     itemValues = Sel_WF_DYNAMICS_CompanyView.GetRecords(wc, orderBy, pageNum, maxItems)
-
-                    For Each itemValue As Sel_WF_DYNAMICS_CompanyRecord In itemValues
+                                    
+                    For each itemValue As Sel_WF_DYNAMICS_CompanyRecord In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.Company_IDSpecified Then
                             cvalue = itemValue.Company_ID.ToString()
 
-                            If counter < maxItems AndAlso Me.HFIN_C_IDFilter.Items.FindByValue(cvalue) Is Nothing Then
-
+                            If counter < maxItems AndAlso Me.HFIN_C_IDFilter.Items.FindByValue(cvalue) Is Nothing  Then
+                            
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_HeadTable.HFIN_C_ID)
                                 If _isExpandableNonCompositeForeignKey AndAlso WFinRep_HeadTable.HFIN_C_ID.IsApplyDisplayAs Then
                                     fvalue = WFinRep_HeadTable.GetDFKA(itemValue, WFinRep_HeadTable.HFIN_C_ID)
@@ -10629,25 +10629,25 @@ Public Class BaseWFinRep_HeadTableControlRow
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
                                     fvalue = itemValue.Format(Sel_WF_DYNAMICS_CompanyView.Company_ID)
                                 End If
-
+                                    
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                    fvalue = ""
+                                   fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If (fvalue.Length > 50) Then
-                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                If ( fvalue.Length > 50 ) Then
+                                   fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.HFIN_C_IDFilter.Items.FindByText(fvalue)
-
+                
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                                     End If
                                 End If
 
@@ -10655,87 +10655,87 @@ Public Class BaseWFinRep_HeadTableControlRow
                                 Me.HFIN_C_IDFilter.Items.Add(newItem)
 
                                 If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                                 End If
 
-                                counter += 1
+                                counter += 1			  
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
-            End If
+            End If			
+            
 
 
+                               
 
-
-
-            Try
-
+            Try    
+                
                 ' Set the selected value.
                 SetSelectedValue(Me.HFIN_C_IDFilter, selectedValue)
-
+                    
             Catch
             End Try
-
-
-            If Me.HFIN_C_IDFilter.SelectedValue IsNot Nothing AndAlso Me.HFIN_C_IDFilter.Items.FindByValue(Me.HFIN_C_IDFilter.SelectedValue) Is Nothing Then
+            
+                        
+            If Me.HFIN_C_IDFilter.SelectedValue IsNot Nothing AndAlso Me.HFIN_C_IDFilter.Items.FindByValue(Me.HFIN_C_IDFilter.SelectedValue) Is Nothing
                 Me.HFIN_C_IDFilter.SelectedValue = Nothing
-            End If
-
+            End If            
+                          
         End Sub
-
+            
         ' Get the filters' data for HFIN_MonthFilter
         Protected Overridable Sub PopulateHFIN_MonthFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
-
+                    
             'Setup the WHERE clause.
-
+            
             Me.HFIN_MonthFilter.Items.Clear()
             Dim wc As WhereClause = Me.CreateWhereClause_HFIN_MonthFilter()
-
+            		  			
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_HFIN_MonthFilter function.
             ' It is better to customize the where clause there.
-
+            
             ' Setup the static list items        
-
+            
             ' Add the All item.
-            Me.HFIN_MonthFilter.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
+            Me.HFIN_MonthFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
+                              
 
-
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.Mo, OrderByItem.OrderDir.Asc)
-            orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.MoName, OrderByItem.OrderDir.Asc)
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.Mo, OrderByItem.OrderDir.Asc)
+              orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.MoName, OrderByItem.OrderDir.Asc)
 
             Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
 
-
+            	
 
             Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
-
+            
 
             Dim itemValues() As Vw_WFinRep_DocAttach_FIN_MonthRecord = Nothing
-
-            If wc.RunQuery Then
+            
+            If wc.RunQuery
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim evaluator As New FormulaEvaluator
                 Dim listDuplicates As New ArrayList()
 
-
-
+                
+                
                 Do
-
+                    
                     itemValues = Vw_WFinRep_DocAttach_FIN_MonthView.GetRecords(wc, orderBy, pageNum, maxItems)
-
-                    For Each itemValue As Vw_WFinRep_DocAttach_FIN_MonthRecord In itemValues
+                                    
+                    For each itemValue As Vw_WFinRep_DocAttach_FIN_MonthRecord In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.MoSpecified Then
                             cvalue = itemValue.Mo.ToString()
 
-                            If counter < maxItems AndAlso Me.HFIN_MonthFilter.Items.FindByValue(cvalue) Is Nothing Then
-
+                            If counter < maxItems AndAlso Me.HFIN_MonthFilter.Items.FindByValue(cvalue) Is Nothing  Then
+                            
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_HeadTable.HFIN_Month)
                                 If _isExpandableNonCompositeForeignKey AndAlso WFinRep_HeadTable.HFIN_Month.IsApplyDisplayAs Then
                                     fvalue = WFinRep_HeadTable.GetDFKA(itemValue, WFinRep_HeadTable.HFIN_Month)
@@ -10743,25 +10743,25 @@ Public Class BaseWFinRep_HeadTableControlRow
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
                                     fvalue = itemValue.Format(Vw_WFinRep_DocAttach_FIN_MonthView.Mo)
                                 End If
-
+                                    
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                    fvalue = ""
+                                   fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If (fvalue.Length > 50) Then
-                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                If ( fvalue.Length > 50 ) Then
+                                   fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.HFIN_MonthFilter.Items.FindByText(fvalue)
-
+                
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                                     End If
                                 End If
 
@@ -10769,86 +10769,86 @@ Public Class BaseWFinRep_HeadTableControlRow
                                 Me.HFIN_MonthFilter.Items.Add(newItem)
 
                                 If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                                 End If
 
-                                counter += 1
+                                counter += 1			  
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
-            End If
+            End If			
+            
 
 
+                               
 
-
-
-            Try
-
+            Try    
+                
                 ' Set the selected value.
                 SetSelectedValue(Me.HFIN_MonthFilter, selectedValue)
-
+                    
             Catch
             End Try
-
-
-            If Me.HFIN_MonthFilter.SelectedValue IsNot Nothing AndAlso Me.HFIN_MonthFilter.Items.FindByValue(Me.HFIN_MonthFilter.SelectedValue) Is Nothing Then
+            
+                        
+            If Me.HFIN_MonthFilter.SelectedValue IsNot Nothing AndAlso Me.HFIN_MonthFilter.Items.FindByValue(Me.HFIN_MonthFilter.SelectedValue) Is Nothing
                 Me.HFIN_MonthFilter.SelectedValue = Nothing
-            End If
-
+            End If            
+                          
         End Sub
-
+            
         ' Get the filters' data for HFIN_StatusFilter
         Protected Overridable Sub PopulateHFIN_StatusFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
-
+                    
             'Setup the WHERE clause.
-
+            
             Me.HFIN_StatusFilter.Items.Clear()
             Dim wc As WhereClause = Me.CreateWhereClause_HFIN_StatusFilter()
-
+            		  			
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_HFIN_StatusFilter function.
             ' It is better to customize the where clause there.
-
+            
             ' Setup the static list items        
-
+            
             ' Add the All item.
-            Me.HFIN_StatusFilter.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
+            Me.HFIN_StatusFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
+                              
 
-
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(WFin_ApprovalStatusTable.WPO_STAT_DESC, OrderByItem.OrderDir.Asc)
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(WFin_ApprovalStatusTable.WPO_STAT_DESC, OrderByItem.OrderDir.Asc)
 
             Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
 
-
+            	
 
             Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
-
+            
 
             Dim itemValues() As WFin_ApprovalStatusRecord = Nothing
-
-            If wc.RunQuery Then
+            
+            If wc.RunQuery
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim evaluator As New FormulaEvaluator
                 Dim listDuplicates As New ArrayList()
 
-
-
+                
+                
                 Do
-
+                    
                     itemValues = WFin_ApprovalStatusTable.GetRecords(wc, orderBy, pageNum, maxItems)
-
-                    For Each itemValue As WFin_ApprovalStatusRecord In itemValues
+                                    
+                    For each itemValue As WFin_ApprovalStatusRecord In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.WPO_STAT_CDSpecified Then
                             cvalue = itemValue.WPO_STAT_CD.ToString()
 
-                            If counter < maxItems AndAlso Me.HFIN_StatusFilter.Items.FindByValue(cvalue) Is Nothing Then
-
+                            If counter < maxItems AndAlso Me.HFIN_StatusFilter.Items.FindByValue(cvalue) Is Nothing  Then
+                            
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_HeadTable.HFIN_Status)
                                 If _isExpandableNonCompositeForeignKey AndAlso WFinRep_HeadTable.HFIN_Status.IsApplyDisplayAs Then
                                     fvalue = WFinRep_HeadTable.GetDFKA(itemValue, WFinRep_HeadTable.HFIN_Status)
@@ -10856,25 +10856,25 @@ Public Class BaseWFinRep_HeadTableControlRow
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
                                     fvalue = itemValue.Format(WFin_ApprovalStatusTable.WPO_STAT_CD)
                                 End If
-
+                                    
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                    fvalue = ""
+                                   fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If (fvalue.Length > 50) Then
-                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                If ( fvalue.Length > 50 ) Then
+                                   fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.HFIN_StatusFilter.Items.FindByText(fvalue)
-
+                
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                                     End If
                                 End If
 
@@ -10882,74 +10882,74 @@ Public Class BaseWFinRep_HeadTableControlRow
                                 Me.HFIN_StatusFilter.Items.Add(newItem)
 
                                 If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                                 End If
 
-                                counter += 1
+                                counter += 1			  
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
-            End If
+            End If			
+            
 
 
+                               
 
-
-
-            Try
-
+            Try    
+                
                 ' Set the selected value.
                 SetSelectedValue(Me.HFIN_StatusFilter, selectedValue)
-
+                    
             Catch
             End Try
-
-
-            If Me.HFIN_StatusFilter.SelectedValue IsNot Nothing AndAlso Me.HFIN_StatusFilter.Items.FindByValue(Me.HFIN_StatusFilter.SelectedValue) Is Nothing Then
+            
+                        
+            If Me.HFIN_StatusFilter.SelectedValue IsNot Nothing AndAlso Me.HFIN_StatusFilter.Items.FindByValue(Me.HFIN_StatusFilter.SelectedValue) Is Nothing
                 Me.HFIN_StatusFilter.SelectedValue = Nothing
-            End If
-
+            End If            
+                          
         End Sub
-
+            
         ' Get the filters' data for HFIN_YearFromFilter
         Protected Overridable Sub PopulateHFIN_YearFromFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
-
+                    
             'Setup the WHERE clause.
-
+            
             Me.HFIN_YearFromFilter.Items.Clear()
             Dim wc As WhereClause = Me.CreateWhereClause_HFIN_YearFromFilter()
-
+            		  			
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_HFIN_YearFromFilter function.
             ' It is better to customize the where clause there.
-
+            
             ' Setup the static list items        
-
+            
             ' Add the All item.
-            Me.HFIN_YearFromFilter.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-
-
-
+            Me.HFIN_YearFromFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
+                              
+            
+            
             Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(WFinRep_HeadTable.HFIN_Year, OrderByItem.OrderDir.Asc)
-
-
+            orderBy.Add(WFinRep_HeadTable.HFIN_Year, OrderByItem.OrderDir.Asc)                
+            
+            	
 
             Dim values(-1) As String
             If wc.RunQuery Then
-
+            
                 values = WFinRep_HeadTable.GetValues(WFinRep_HeadTable.HFIN_Year, wc, orderBy, maxItems)
-
+            
             End If
-
-
+            
+                  
             Dim cvalue As String
-
+            
             Dim listDuplicates As New ArrayList()
             For Each cvalue In values
                 ' Create the item and add to the list.
                 Dim fvalue As String
-                If (WFinRep_HeadTable.HFIN_Year.IsColumnValueTypeBoolean()) Then
+                If ( WFinRep_HeadTable.HFIN_Year.IsColumnValueTypeBoolean()) Then
                     fvalue = cvalue
                 Else
                     fvalue = WFinRep_HeadTable.HFIN_Year.Format(cvalue)
@@ -10961,243 +10961,243 @@ Public Class BaseWFinRep_HeadTableControlRow
 
                 fvalue = fvalue.Trim()
 
-                If (fvalue.Length > 50) Then
+                If ( fvalue.Length > 50 ) Then
                     fvalue = fvalue.Substring(0, 50) & "..."
                 End If
 
                 Dim dupItem As ListItem = Me.HFIN_YearFromFilter.Items.FindByText(fvalue)
-
+                
                 If Not IsNothing(dupItem) Then
                     listDuplicates.Add(fvalue)
                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                     End If
                 End If
 
                 Dim newItem As ListItem = New ListItem(fvalue, cvalue)
                 Me.HFIN_YearFromFilter.Items.Add(newItem)
 
-                If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                 End If
             Next
+                                  
 
-
-            Try
-
+            Try    
+                
                 ' Set the selected value.
                 SetSelectedValue(Me.HFIN_YearFromFilter, selectedValue)
-
+                    
             Catch
             End Try
-
-
-            If Me.HFIN_YearFromFilter.SelectedValue IsNot Nothing AndAlso Me.HFIN_YearFromFilter.Items.FindByValue(Me.HFIN_YearFromFilter.SelectedValue) Is Nothing Then
+            
+                        
+            If Me.HFIN_YearFromFilter.SelectedValue IsNot Nothing AndAlso Me.HFIN_YearFromFilter.Items.FindByValue(Me.HFIN_YearFromFilter.SelectedValue) Is Nothing
                 Me.HFIN_YearFromFilter.SelectedValue = Nothing
-            End If
-
+            End If            
+                          
         End Sub
-
-
+            
+              
 
         Public Overridable Function CreateWhereClause_HFIN_C_IDFilter() As WhereClause
-
-            Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
-
+          
+              Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
+            
             ' Create a where clause for the filter HFIN_C_IDFilter.
             ' This function is called by the Populate method to load the items 
             ' in the HFIN_C_IDFilterDropDownList
-
-            Dim wc As WhereClause = New WhereClause()
+            
+            Dim wc As WhereClause= New WhereClause()
             Return wc
-
-        End Function
-
-
+            
+        End Function			
+            
+              
 
         Public Overridable Function CreateWhereClause_HFIN_MonthFilter() As WhereClause
-
-            Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
-
+          
+              Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
+            
             ' Create a where clause for the filter HFIN_MonthFilter.
             ' This function is called by the Populate method to load the items 
             ' in the HFIN_MonthFilterDropDownList
-
-            Dim wc As WhereClause = New WhereClause()
+            
+            Dim wc As WhereClause= New WhereClause()
             Return wc
-
-        End Function
-
-
+            
+        End Function			
+            
+              
 
         Public Overridable Function CreateWhereClause_HFIN_StatusFilter() As WhereClause
-
-            Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
-
+          
+              Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
+            
             ' Create a where clause for the filter HFIN_StatusFilter.
             ' This function is called by the Populate method to load the items 
             ' in the HFIN_StatusFilterDropDownList
-
-            Dim wc As WhereClause = New WhereClause()
+            
+            Dim wc As WhereClause= New WhereClause()
             Return wc
-
-        End Function
-
-
+            
+        End Function			
+            
+              
 
         Public Overridable Function CreateWhereClause_HFIN_YearFromFilter() As WhereClause
-
-            Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
-
+          
+              Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
+            
+              Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
+            
             ' Create a where clause for the filter HFIN_YearFromFilter.
             ' This function is called by the Populate method to load the items 
             ' in the HFIN_YearFromFilterDropDownList
-
-            Dim wc As WhereClause = New WhereClause()
+            
+            Dim wc As WhereClause= New WhereClause()
             Return wc
+            
+        End Function			
+            
 
-        End Function
-
-
-
-
+    
+    
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
             ' PreRender event is raised just before page is being displayed.
             Try
-                DbUtils.StartTransaction()
+                DbUtils.StartTransaction
                 Me.RegisterPostback()
-
+                
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-
-
+                  
+                
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
-
+                    
                     Me.LoadData()
                     Me.DataBind()
-
+                    
                 End If
-
-
-
+                
+               
+                				
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
         End Sub
-
-
+        
+        
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
 
             ' Save filter controls to values to session.
-
+        
             Me.SaveToSession(Me.HFIN_C_IDFilter, Me.HFIN_C_IDFilter.SelectedValue)
-
+                  
             Me.SaveToSession(Me.HFIN_MonthFilter, Me.HFIN_MonthFilter.SelectedValue)
-
+                  
             Me.SaveToSession(Me.HFIN_StatusFilter, Me.HFIN_StatusFilter.SelectedValue)
-
+                  
             Me.SaveToSession(Me.HFIN_YearFromFilter, Me.HFIN_YearFromFilter.SelectedValue)
-
-
+                  
+        
             'Save pagination state to session.
-
-
+         
+            
             ' Save table control properties to the session.
-
-            If Not Me.CurrentSortOrder Is Nothing Then
+            
+ If Not Me.CurrentSortOrder Is Nothing Then
                 If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then
                     Me.SaveToSession(Me, "Order_By", Me.CurrentSortOrder.ToXmlString())
                 End If
-            End If
+            End If            
             Me.SaveToSession(Me, "Page_Index", Me.PageIndex.ToString())
             Me.SaveToSession(Me, "Page_Size", Me.PageSize.ToString())
-
-            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)
-
+        
+            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)  
+        
         End Sub
-
-        Protected Sub SaveControlsToSession_Ajax()
+        
+        Protected  Sub SaveControlsToSession_Ajax()
             ' Save filter controls to values to session.
-
-            Me.SaveToSession("HFIN_C_IDFilter_Ajax", Me.HFIN_C_IDFilter.SelectedValue)
-
-            Me.SaveToSession("HFIN_MonthFilter_Ajax", Me.HFIN_MonthFilter.SelectedValue)
-
-            Me.SaveToSession("HFIN_StatusFilter_Ajax", Me.HFIN_StatusFilter.SelectedValue)
-
-            Me.SaveToSession("HFIN_YearFromFilter_Ajax", Me.HFIN_YearFromFilter.SelectedValue)
-
+          
+      Me.SaveToSession("HFIN_C_IDFilter_Ajax", Me.HFIN_C_IDFilter.SelectedValue)
+              
+      Me.SaveToSession("HFIN_MonthFilter_Ajax", Me.HFIN_MonthFilter.SelectedValue)
+              
+      Me.SaveToSession("HFIN_StatusFilter_Ajax", Me.HFIN_StatusFilter.SelectedValue)
+              
+      Me.SaveToSession("HFIN_YearFromFilter_Ajax", Me.HFIN_YearFromFilter.SelectedValue)
+              
             HttpContext.Current.Session("AppRelativeVirtualPath") = Me.Page.AppRelativeVirtualPath
-
+         
         End Sub
-
+        
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
             ' Clear filter controls values from the session.
-
+        
             Me.RemoveFromSession(Me.HFIN_C_IDFilter)
             Me.RemoveFromSession(Me.HFIN_MonthFilter)
             Me.RemoveFromSession(Me.HFIN_StatusFilter)
             Me.RemoveFromSession(Me.HFIN_YearFromFilter)
-
+    
             ' Clear pagination state from session.
-
-
-            ' Clear table properties from the session.
-            Me.RemoveFromSession(Me, "Order_By")
-            Me.RemoveFromSession(Me, "Page_Index")
-            Me.RemoveFromSession(Me, "Page_Size")
-
-            Me.RemoveFromSession(Me, "DeletedRecordIds")
-
+         
+    
+    ' Clear table properties from the session.
+    Me.RemoveFromSession(Me, "Order_By")
+    Me.RemoveFromSession(Me, "Page_Index")
+    Me.RemoveFromSession(Me, "Page_Size")
+    
+            Me.RemoveFromSession(Me, "DeletedRecordIds")  
+            
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
             MyBase.LoadViewState(savedState)
 
             Dim orderByStr As String = CType(ViewState("WFinRep_HeadTableControl_OrderBy"), String)
-
+          
             If orderByStr IsNot Nothing AndAlso orderByStr.Trim <> "" Then
                 Me.CurrentSortOrder = BaseClasses.Data.OrderBy.FromXmlString(orderByStr)
-
-            Else
+            
+            Else 
                 Me.CurrentSortOrder = New OrderBy(True, False)
-
+            
             End If
-
-
+            
+            
             Dim Pagination As Control = Me.FindControl("Pagination")
-            Dim PaginationType As String = ""
-            If Not (Pagination Is Nothing) Then
+             Dim PaginationType As String = ""
+             If Not (Pagination Is Nothing) Then
                 Dim Summary As Control = Pagination.FindControl("_Summary")
                 If Not (Summary Is Nothing) Then
                     If (DirectCast(Summary, System.Web.UI.WebControls.TextBox).Text.Equals("Infinite Pagination")) Then
@@ -11205,279 +11205,279 @@ Public Class BaseWFinRep_HeadTableControlRow
                     End If
                     If (DirectCast(Summary, System.Web.UI.WebControls.TextBox).Text.Equals("Infinite Pagination Mobile")) Then
                         PaginationType = "Infinite Pagination Mobile"
-                    End If
                 End If
-            End If
+             End If
+             End If
 
-            If Not (PaginationType.Equals("Infinite Pagination")) Then
-                If Not Me.Page.ClientQueryString.Contains("InfiIframe") AndAlso PaginationType.Equals("Infinite Pagination Mobile") Then
+            If Not (PaginationType.Equals("Infinite Pagination")) Then 
+              If Not Me.Page.ClientQueryString.Contains("InfiIframe") AndAlso PaginationType.Equals("Infinite Pagination Mobile") Then
                     Me.ViewState("Page_Index") = 0
                 End If
-                Dim pageIndex As String = CType(ViewState("Page_Index"), String)
-                If pageIndex IsNot Nothing Then
-                    Me.PageIndex = CInt(pageIndex)
-                End If
+              Dim pageIndex As String = CType(ViewState("Page_Index"), String)
+              If pageIndex IsNot Nothing Then
+                Me.PageIndex = CInt(pageIndex)
+              End If
             End If
 
             Dim pageSize As String = CType(ViewState("Page_Size"), String)
             If Not pageSize Is Nothing Then
-                Me.PageSize = CInt(pageSize)
+              Me.PageSize = CInt(pageSize)
             End If
 
-
-
+            
+    
             ' Load view state for pagination control.
-
+        
             Me.DeletedRecordIds = CType(Me.ViewState("DeletedRecordIds"), String)
-
+        
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
-
+          
             If Me.CurrentSortOrder IsNot Nothing Then
                 Me.ViewState("WFinRep_HeadTableControl_OrderBy") = Me.CurrentSortOrder.ToXmlString()
             End If
-
+                      
             Me.ViewState("Page_Index") = Me.PageIndex
             Me.ViewState("Page_Size") = Me.PageSize
-
+            
             Me.ViewState("DeletedRecordIds") = Me.DeletedRecordIds
-
-
+        
+    
             ' Load view state for pagination control.
-
-
+          
+    
             Return MyBase.SaveViewState()
         End Function
-
+        
         ' Generate set method for buttons
-
-        Public Overridable Sub SetGoButton()
-
-
+        
+        Public Overridable Sub SetGoButton()                
+              
+   
         End Sub
-
+                    
 
         ' Generate the event handling functions for pagination events.
-
+        
         ' event handler for ImageButton
         Public Overridable Sub Pagination_FirstPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                Me.PageIndex = 0
-                Me.DataChanged = True
-
+              
+    Try
+    
+            Me.PageIndex = 0
+            Me.DataChanged = True
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub Pagination_LastPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                Me.DisplayLastPage = True
-                Me.DataChanged = True
-
+              
+    Try
+    
+            Me.DisplayLastPage = True
+            Me.DataChanged = True
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub Pagination_NextPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                Me.PageIndex += 1
-                Me.DataChanged = True
-
+              
+    Try
+    
+            Me.PageIndex += 1
+            Me.DataChanged = True
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for LinkButton
         Public Overridable Sub Pagination_PageSizeButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
-                Me.DataChanged = True
-
-                Me.PageSize = Me.Pagination.GetCurrentPageSize()
-
-                Me.PageIndex = Integer.Parse(Me.Pagination.CurrentPage.Text) - 1
-
+              
+    Try
+    
+            Me.DataChanged = True
+      
+            Me.PageSize = Me.Pagination.GetCurrentPageSize()
+      
+            Me.PageIndex = Integer.Parse(Me.Pagination.CurrentPage.Text) - 1
+          
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for ImageButton
         Public Overridable Sub Pagination_PreviousPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
-                If Me.PageIndex > 0 Then
-                    Me.PageIndex -= 1
-                    Me.DataChanged = True
-                End If
-
+              
+    Try
+    
+            If Me.PageIndex > 0 Then
+                Me.PageIndex -= 1
+                Me.DataChanged = True
+            End If
+      
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
 
         ' Generate the event handling functions for sorting events.
-
+        
 
         ' Generate the event handling functions for button events.
-
+        
         ' event handler for Button
         Public Overridable Sub GoButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
-                Me.DataChanged = True
-
+              
+    Try
+    
+          Me.DataChanged = True
+          
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
-
+        
+      
 
         ' Generate the event handling functions for filter and search events.
-
+        
         ' event handler for FieldFilter
         Protected Overridable Sub HFIN_C_IDFilter_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-            ' Setting the DataChanged to True results in the page being refreshed with
-            ' the most recent data from the database.  This happens in PreRender event
-            ' based on the current sort, search and filter criteria.
-            Me.DataChanged = True
-
-
-
+           ' Setting the DataChanged to True results in the page being refreshed with
+           ' the most recent data from the database.  This happens in PreRender event
+           ' based on the current sort, search and filter criteria.
+           Me.DataChanged = True
+           
+          	                   
+              
         End Sub
-
+            
         ' event handler for FieldFilter
         Protected Overridable Sub HFIN_MonthFilter_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-            ' Setting the DataChanged to True results in the page being refreshed with
-            ' the most recent data from the database.  This happens in PreRender event
-            ' based on the current sort, search and filter criteria.
-            Me.DataChanged = True
-
-
-
+           ' Setting the DataChanged to True results in the page being refreshed with
+           ' the most recent data from the database.  This happens in PreRender event
+           ' based on the current sort, search and filter criteria.
+           Me.DataChanged = True
+           
+          	                   
+              
         End Sub
-
+            
         ' event handler for FieldFilter
         Protected Overridable Sub HFIN_StatusFilter_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-            ' Setting the DataChanged to True results in the page being refreshed with
-            ' the most recent data from the database.  This happens in PreRender event
-            ' based on the current sort, search and filter criteria.
-            Me.DataChanged = True
-
-
-
+           ' Setting the DataChanged to True results in the page being refreshed with
+           ' the most recent data from the database.  This happens in PreRender event
+           ' based on the current sort, search and filter criteria.
+           Me.DataChanged = True
+           
+          	                   
+              
         End Sub
-
+            
         ' event handler for FieldFilter
         Protected Overridable Sub HFIN_YearFromFilter_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
-            ' Setting the DataChanged to True results in the page being refreshed with
-            ' the most recent data from the database.  This happens in PreRender event
-            ' based on the current sort, search and filter criteria.
-            Me.DataChanged = True
-
-
-
+           ' Setting the DataChanged to True results in the page being refreshed with
+           ' the most recent data from the database.  This happens in PreRender event
+           ' based on the current sort, search and filter criteria.
+           Me.DataChanged = True
+           
+          	                   
+              
         End Sub
-
-
+            
+    
         ' Generate the event handling functions for others
-
-
+        
+      
 
 
         Protected _TotalRecords As Integer = -1
         Public Property TotalRecords() As Integer
             Get
-                If _TotalRecords < 0 Then
+                If _TotalRecords < 0 
                     _TotalRecords = WFinRep_HeadTable.GetRecordCount(CreateCompoundJoinFilter(), CreateWhereClause())
                 End If
                 Return Me._TotalRecords
             End Get
             Set(ByVal value As Integer)
                 If Me.PageSize > 0 Then
-
+                
                     Me.TotalPages = CInt(Math.Ceiling(value / Me.PageSize))
-
+                  
                 End If
                 Me._TotalRecords = value
             End Set
         End Property
 
-
-
+        
+    
         Protected _TotalPages As Integer = -1
         Public Property TotalPages() As Integer
             Get
                 If _TotalPages < 0 Then
-
+                
                     Me.TotalPages = CInt(Math.Ceiling(TotalRecords / Me.PageSize))
-
-                End If
+                  
+                End If                
                 Return Me._TotalPages
             End Get
             Set(ByVal value As Integer)
@@ -11496,144 +11496,144 @@ Public Class BaseWFinRep_HeadTableControlRow
         End Property
 
 
-
+          
         Private _CurrentSortOrder As OrderBy = Nothing
         Public Property CurrentSortOrder() As OrderBy
             Get
                 Return Me._CurrentSortOrder
             End Get
-            Set(ByVal value As OrderBy)
+            Set(ByVal value As BaseClasses.Data.OrderBy)
                 Me._CurrentSortOrder = value
             End Set
         End Property
-
-        Public Property DataSource() As WFinRep_HeadRecord()
+        
+        Public Property DataSource() As WFinRep_HeadRecord ()
             Get
                 Return DirectCast(MyBase._DataSource, WFinRep_HeadRecord())
             End Get
-            Set(ByVal value As WFinRep_HeadRecord())
+            Set(ByVal value() As WFinRep_HeadRecord)
                 Me._DataSource = value
             End Set
         End Property
-
+       
 #Region "Helper Properties"
-
+        
         Public ReadOnly Property GoButton() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "GoButton"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property HFIN_C_IDFilter() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_C_IDFilter"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_C_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_C_IDLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_C_IDLabel1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_C_IDLabel1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_DescriptionLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_DescriptionLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_MonthFilter() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_MonthFilter"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_MonthLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_MonthLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_MonthLabel1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_MonthLabel1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_RptCountLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_RptCountLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_StatusFilter() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_StatusFilter"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_StatusLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_StatusLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_StatusLabel1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_StatusLabel1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_YearFromFilter() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_YearFromFilter"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_YearLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_YearLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property HFIN_YearLabel1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "HFIN_YearLabel1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Pagination() As ePortalWFApproval.UI.IPagination
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Pagination"), ePortalWFApproval.UI.IPagination)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property Title0() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Title0"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
 #End Region
 
 #Region "Helper Functions"
-
-        Public Overloads Overrides Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean) As String
+        
+        Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean) As String
             Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
-
-
-        Public Overloads Overrides Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me, includeSession)
+      
+      
+        Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me,includeSession)
         End Function
-
-        Public Overloads Overrides Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean) As String
+        
+        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean) As String
             Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
             If (needToProcess) Then
                 Dim recCtl As WFinRep_HeadTableControlRow = Me.GetSelectedRecordControl()
@@ -11641,7 +11641,7 @@ Public Class BaseWFinRep_HeadTableControlRow
                     ' Localization.
                     Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
                 End If
-                Dim rec As WFinRep_HeadRecord = Nothing
+                Dim rec As WFinRep_HeadRecord = Nothing     
                 If recCtl IsNot Nothing Then
                     rec = recCtl.GetRecord()
                 End If
@@ -11649,8 +11649,8 @@ Public Class BaseWFinRep_HeadTableControlRow
             End If
             Return url
         End Function
-
-        Public Overloads Overrides Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
+        
+        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
             Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
             If (needToProcess) Then
                 Dim recCtl As WFinRep_HeadTableControlRow = Me.GetSelectedRecordControl()
@@ -11658,29 +11658,29 @@ Public Class BaseWFinRep_HeadTableControlRow
                     ' Localization.
                     Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
                 End If
-                Dim rec As WFinRep_HeadRecord = Nothing
+                Dim rec As WFinRep_HeadRecord = Nothing     
                 If recCtl IsNot Nothing Then
                     rec = recCtl.GetRecord()
                 End If
-                If includeSession Then
+                If includeSession then
                     Return EvaluateExpressions(url, arg, rec, bEncrypt)
                 Else
-                    Return EvaluateExpressions(url, arg, rec, bEncrypt, False)
+                    Return EvaluateExpressions(url, arg, rec, bEncrypt,False)
                 End If
             End If
             Return url
         End Function
-
-
+        
+          
         Public Overridable Function GetSelectedRecordControl() As WFinRep_HeadTableControlRow
             Return Nothing
-
+          
         End Function
 
         Public Overridable Function GetSelectedRecordControls() As WFinRep_HeadTableControlRow()
-
-            Return DirectCast((New ArrayList()).ToArray(GetType(WFinRep_HeadTableControlRow)), WFinRep_HeadTableControlRow())
-
+        
+            Return DirectCast((new ArrayList()).ToArray(GetType(WFinRep_HeadTableControlRow)), WFinRep_HeadTableControlRow())
+          
         End Function
 
         Public Overridable Sub DeleteSelectedRecords(ByVal deferDeletion As Boolean)
@@ -11689,27 +11689,27 @@ Public Class BaseWFinRep_HeadTableControlRow
                 ' Localization.
                 Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
             End If
-
+            
             Dim recCtl As WFinRep_HeadTableControlRow
             For Each recCtl In recList
                 If deferDeletion Then
                     If Not recCtl.IsNewRecord Then
-
+                
                         Me.AddToDeletedRecordIds(recCtl)
-
+                  
                     End If
                     recCtl.Visible = False
-
+                
                 Else
-
+                
                     recCtl.Delete()
-
+                    
                     ' Setting the DataChanged to True results in the page being refreshed with
                     ' the most recent data from the database.  This happens in PreRender event
                     ' based on the current sort, search and filter criteria.
                     Me.DataChanged = True
                     Me.ResetData = True
-
+                  
                 End If
             Next
         End Sub
@@ -11728,14 +11728,14 @@ Public Class BaseWFinRep_HeadTableControlRow
                 Return DirectCast(MyBase.Page, BaseApplicationPage)
             End Get
         End Property
-
+                
 
 
 #End Region
 
 
 
-    End Class
+End Class
 
   
 

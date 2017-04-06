@@ -130,6 +130,28 @@ Public Class WFinRep_HeadTableControlRow
         ' SaveData, GetUIData, and Validate methods.
         
 
+
+		Public Overrides Sub SetHFIN_File()
+                
+            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_FileSpecified Then
+                
+                Me.HFIN_File.Text = Page.GetResourceValue("Txt:OpenFile", "EPORTAL")
+                        
+                Me.HFIN_File.OnClientClick = "window.open('../Shared/ExportFieldValue.aspx?Table=" & _
+                            Me.Page.Encrypt("WFinRep_Head") & _
+                            "&Field=" & Me.Page.Encrypt("HFIN_File") & _
+                            "&Record=" & Me.Page.Encrypt(HttpUtility.UrlEncode(Me.DataSource.GetID().ToString())) & _
+                                "','','left=100,top=50,width=400,height=300,resizable,scrollbars=1');return false;"
+                Me.btnPreview1.Button.OnClientClick = "window.open('../Shared/ExportFieldValue.aspx?Table=" & _
+                            Me.Page.Encrypt("WFinRep_Head") & _
+                            "&Field=" & Me.Page.Encrypt("HFIN_File") & _
+                            "&Record=" & Me.Page.Encrypt(HttpUtility.UrlEncode(Me.DataSource.GetID().ToString())) & _
+                                "','','left=100,top=50,width=400,height=300,resizable,scrollbars=1');return false;"
+               ' Me.HFIN_File.Visible = True
+            Else
+              '  Me.HFIN_File.Visible = False
+            End If
+        End Sub
 End Class
 
   
@@ -4703,7 +4725,13 @@ Public Class BaseVw_WFinRep_DocAttach_ReportTypeTableControl
             ' 2. User selected search criteria.
             ' 3. User selected filter criteria.
 
-                
+              
+            ' Get the static clause defined at design time on the Table Panel Wizard
+            Dim qc As WhereClause = Me.CreateQueryClause()
+            If Not(IsNothing(qc)) Then
+                wc.iAND(qc)
+            End If
+              
     
     Return wc
     End Function
@@ -4731,6 +4759,12 @@ Public Class BaseVw_WFinRep_DocAttach_ReportTypeTableControl
 
       Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
       
+            ' Get the static clause defined at design time on the Table Panel Wizard
+            Dim qc As WhereClause = Me.CreateQueryClause()
+            If Not(IsNothing(qc)) Then
+                wc.iAND(qc)
+            End If
+          
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
           
       
@@ -4739,6 +4773,19 @@ Public Class BaseVw_WFinRep_DocAttach_ReportTypeTableControl
         End Function
 
       
+        Protected Overridable Function CreateQueryClause() As WhereClause
+            ' Create a where clause for the Static clause defined at design time.
+            Dim filter As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
+            Dim whereClause As WhereClause = New WhereClause()
+            
+            If EvaluateFormula("WFinRep_HeadTableControlRow.HFIN_ID1.Text", false) <> "" Then filter.AddFilter(New BaseClasses.Data.ColumnValueFilter(BaseClasses.Data.BaseTable.CreateInstance("ePortalWFApproval.Business.Vw_WFinRep_DocAttach_ReportTypeView, App_Code").TableDefinition.ColumnList.GetByUniqueName("vw_WFinRep_DocAttach_ReportType_.FIN_HFIN_ID"), EvaluateFormula("WFinRep_HeadTableControlRow.HFIN_ID1.Text", false), BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
+         If (EvaluateFormula("WFinRep_HeadTableControlRow.HFIN_ID1.Text", false) = "--PLEASE_SELECT--" OrElse EvaluateFormula("WFinRep_HeadTableControlRow.HFIN_ID1.Text", false) = "--ANY--") Then whereClause.RunQuery = False
+
+            whereClause.AddFilter(filter, CompoundFilter.CompoundingOperators.And_Operator)
+    
+            Return whereClause
+        End Function
+        
 
          Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
                                          ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
@@ -7818,6 +7865,9 @@ Public Class BaseWFinRep_HeadTableControlRow
         Public Overridable Sub SetHFIN_ID1()
 
                   
+            
+            ' Set AutoPostBack to true so that when the control value is changed, to refresh Vw_WFinRep_DocAttach_ReportTypeTableControl controls
+            Me.HFIN_ID1.AutoPostBack = True
             					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.HFIN_ID1.ID) Then
@@ -8687,6 +8737,27 @@ Public Class BaseWFinRep_HeadTableControlRow
             
         Protected Overridable Sub HFIN_ID1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
                     
+            Try
+                ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction()
+                ' Because Set methods will be called, it is important to initialize the data source ahead of time
+                
+                
+                If Not Me.RecordUniqueId Is Nothing Then Me.DataSource = Me.GetRecord()                                        
+                  
+                
+                
+                Me.Page.CommitTransaction(sender)
+
+
+            Catch ex As Exception
+                ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+            Finally
+                DbUtils.EndTransaction()
+            End Try			
+                            
+                        
               End Sub
             
         Protected Overridable Sub HFIN_Month2_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                

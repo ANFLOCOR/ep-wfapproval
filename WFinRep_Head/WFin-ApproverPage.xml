@@ -2607,6 +2607,28 @@
       <Type>Table</Type>
       <PanelStyle>ShowTable_DTB_Parent</PanelStyle>
       <Table>DatabaseANFLO-WF%dbo.vw_WFinRep_DocAttach_ReportType</Table>
+      <QueryDefinition>
+        <WhereClause>
+          <Position>1</Position>
+          <TableAlias>DatabaseANFLO-WF%dbo.vw_WFinRep_DocAttach_ReportType_</TableAlias>
+          <Field>[DatabaseANFLO-WF%dbo.vw_WFinRep_DocAttach_ReportType_].[FIN_HFIN_ID]</Field>
+          <Operator>=</Operator>
+          <Operand>
+            <Type>Formula</Type>
+            <Value>WFinRep_HeadTableControlRow.HFIN_ID1.Text</Value>
+          </Operand>
+          <IgnoreBlankString>Yes</IgnoreBlankString>
+        </WhereClause>
+        <Operators>
+          <Operator xsi:nil="true" />
+        </Operators>
+        <TableAliases>
+          <Alias>
+            <AliasName>DatabaseANFLO-WF%dbo.vw_WFinRep_DocAttach_ReportType_</AliasName>
+            <TableName>DatabaseANFLO-WF%dbo.vw_WFinRep_DocAttach_ReportType</TableName>
+          </Alias>
+        </TableAliases>
+      </QueryDefinition>
       <PassthroughAttributes>
         <Attribute>
           <Name>HasScrolling</Name>
@@ -2623,6 +2645,10 @@
         <Attribute>
           <Name>InternalUse:DataSource</Name>
           <Value>TableOrQuery</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:DataSourceArg</Name>
+          <Value />
         </Attribute>
         <Attribute>
           <Name>NumberOfColumns</Name>
@@ -2651,6 +2677,7 @@
       </PassthroughAttributes>
       <InsideControl>WFinRep_HeadTableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
+      <OrderBys />
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFinRep_ActivityTableControl</Name>
