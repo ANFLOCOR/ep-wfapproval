@@ -3,36 +3,27 @@
   <Generator>Iron Speed Designer</Generator>
   <Version>12.1.0</Version>
   <Self>
-    <Name>WFin-RepISApproveView1</Name>
+    <Name>WFin-RepApproveGPView</Name>
     <Type>Page</Type>
     <SubType>DotNet</SubType>
     <MasterLayout>../Master Pages/Blank.master</MasterLayout>
     <NewWindowMasterLayout>../Master Pages/Blank.master</NewWindowMasterLayout>
     <PopupMasterLayout>../Master Pages/Popup.master</PopupMasterLayout>
     <PopupCssClass>QPageSize</PopupCssClass>
-    <GenerateDirectory>WFinRep_Head1</GenerateDirectory>
-    <Layout>WFinRep_Head1\WFin-RepISApproveView1.xml</Layout>
-    <DisplayName>WFin-RepISApproveView1</DisplayName>
+    <GenerateDirectory>WFinRep_Head</GenerateDirectory>
+    <Layout>WFinRep_Head\WFin-RepApproveGPView.xml</Layout>
+    <DisplayName>WFin-RepApproveGPView</DisplayName>
     <Description>This is a blank page.</Description>
-    <CheckSum>1764337503-1289</CheckSum>
+    <CheckSum>535524799-1287</CheckSum>
   </Self>
   <ComposedOf>
-    <ContainedComponent>
-      <Name>Literal</Name>
-      <Type>Aspx</Type>
-      <ControlClass>System.Web.UI.WebControls.Literal</ControlClass>
-    </ContainedComponent>
-    <ContainedComponent>
-      <Name>Literal1</Name>
-      <Type>Literal</Type>
-    </ContainedComponent>
     <ContainedComponent>
       <Name>PageTitle</Name>
       <Type>Literal</Type>
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>Blank page</Value>
+          <Value>FS Package Preview</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>
@@ -59,28 +50,15 @@
     &lt;/Prolog&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;asp:literal id="Literal" runat="server" text="&amp;amp;nbsp;" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
       &lt;RowAttributes /&gt;
     &lt;/Row&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:BUTTON NAME="btnBack" /&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes /&gt;
-      &lt;/Cell&gt;
-      &lt;RowAttributes /&gt;
-    &lt;/Row&gt;
-    &lt;Row&gt;
-      &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:LITERAL Name="Literal1" /&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes /&gt;
-      &lt;/Cell&gt;
-      &lt;RowAttributes /&gt;
-    &lt;/Row&gt;
-    &lt;Row&gt;
-      &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;iframe id="frm" runat="server" width="1024px" height="600px" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;div style="margin-left:20px; margin-right:20px;"&amp;gt;
+	&amp;lt;iframe id="frm" runat="server" width="1200px" height="700px" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""&amp;gt;&amp;lt;/iframe&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
       &lt;RowAttributes /&gt;

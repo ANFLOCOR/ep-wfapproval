@@ -934,7 +934,7 @@ Public Class WPOP10100RecordControl
                         For Each itemValue21 As W_Email_DefaultRecord In W_Email_DefaultTable.GetRecords(wc2, Nothing, 0, 100)
                             If itemValue21.WED_IDSpecified Then
                                 sDirectory = "eportal" 'itemValue21.WE_Directory.ToString()
-                                sSite = "http://eportal.anflocor.com" 'itemValue21.WE_Site.ToString()
+                                sSite = "http://aportal.anflocor.com" 'itemValue21.WE_Site.ToString()
                                 sTemplate = itemValue21.WED_Template.ToString()
                             End If
                         Next

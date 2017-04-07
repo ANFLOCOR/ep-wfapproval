@@ -1,8 +1,10 @@
 ﻿<%@ Register Tagprefix="Selectors" Namespace="ePortalWFApproval" %>
 
-<%@ Page Language="vb" EnableEventValidation="false" AutoEventWireup="false" CodeFile="WFin-RepCFApproveView1.aspx.vb" Culture="en-US" MasterPageFile="../Master Pages/Blank.master" Inherits="ePortalWFApproval.UI.WFin_RepCFApproveView1" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<%@ Register Tagprefix="BaseClasses" Namespace="BaseClasses.Web.UI.WebControls" Assembly="BaseClasses" %><asp:Content id="PageSection" ContentPlaceHolderID="PageContent" Runat="server">
+<%@ Register Tagprefix="BaseClasses" Namespace="BaseClasses.Web.UI.WebControls" Assembly="BaseClasses" %>
+<%@ Page Language="vb" EnableEventValidation="false" AutoEventWireup="false" CodeFile="WFin-RepInquiryView1.aspx.vb" Culture="en-US" MasterPageFile="../Master Pages/Blank.master" Inherits="ePortalWFApproval.UI.WFin_RepInquiryView1" %>
+<%@ Register Tagprefix="ePortalWFApproval" TagName="ThemeButton" Src="../Shared/ThemeButton.ascx" %>
+<asp:Content id="PageSection" ContentPlaceHolderID="PageContent" Runat="server">
     <a id="StartOfPageContent"></a>
     <div id="scrollRegion" class="scrollRegion">              
       <asp:UpdateProgress runat="server" id="UpdatePanel1_UpdateProgress1" AssociatedUpdatePanelID="UpdatePanel1">
@@ -17,7 +19,7 @@
 		<asp:UpdatePanel runat="server" id="UpdatePanel1" UpdateMode="Conditional">
 			<ContentTemplate>
 
-                <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td><asp:literal id="Literal" runat="server" text="&nbsp;" /></td></tr><tr><td></td></tr><tr><td><asp:Literal runat="server" id="Literal1">	</asp:Literal></td></tr></table>
+                <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td><asp:literal id="Literal" runat="server" text="&nbsp;" /></td></tr><tr><td><ePortalWFApproval:ThemeButton runat="server" id="btnBack" button-causesvalidation="False" button-commandname="Redirect" button-text="Previous Page" button-tooltip="Previous Page" visible="True"></ePortalWFApproval:ThemeButton></td></tr><tr><td><asp:literal id="Literal1" runat="server" text="&nbsp;" /></td></tr><tr><td style="white-space:nowrap;" class="thcnb"><iframe id="frm" name="frame" runat="server" width="1024px" height="600px" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""></iframe></td></tr></table>
       </ContentTemplate>
 </asp:UpdatePanel>
 

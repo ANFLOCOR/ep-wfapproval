@@ -1,10 +1,8 @@
 ﻿<%@ Register Tagprefix="Selectors" Namespace="ePortalWFApproval" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<%@ Page Language="vb" EnableEventValidation="false" AutoEventWireup="false" CodeFile="WFin-RepBSApproveView1.aspx.vb" Culture="en-US" MasterPageFile="../Master Pages/Blank.master" Inherits="ePortalWFApproval.UI.WFin_RepBSApproveView1" %>
 <%@ Register Tagprefix="BaseClasses" Namespace="BaseClasses.Web.UI.WebControls" Assembly="BaseClasses" %>
-<%@ Register Tagprefix="ePortalWFApproval" TagName="ThemeButton" Src="../Shared/ThemeButton.ascx" %>
-<asp:Content id="PageSection" ContentPlaceHolderID="PageContent" Runat="server">
+<%@ Page Language="vb" EnableEventValidation="false" AutoEventWireup="false" CodeFile="WFin-RepApproveGPView.aspx.vb" Culture="en-US" MasterPageFile="../Master Pages/Blank.master" Inherits="ePortalWFApproval.UI.WFin_RepApproveGPView" %><asp:Content id="PageSection" ContentPlaceHolderID="PageContent" Runat="server">
     <a id="StartOfPageContent"></a>
     <div id="scrollRegion" class="scrollRegion">              
       <asp:UpdateProgress runat="server" id="UpdatePanel1_UpdateProgress1" AssociatedUpdatePanelID="UpdatePanel1">
@@ -19,7 +17,9 @@
 		<asp:UpdatePanel runat="server" id="UpdatePanel1" UpdateMode="Conditional">
 			<ContentTemplate>
 
-                <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td><asp:literal id="Literal" runat="server" text="&nbsp;" /></td></tr><tr><td><ePortalWFApproval:ThemeButton runat="server" id="btnBack" button-causesvalidation="False" button-commandname="Redirect" button-text="Previous Page" button-tooltip="Previous Page" visible="False"></ePortalWFApproval:ThemeButton></td></tr><tr><td><asp:literal id="Literal1" runat="server" text="&nbsp;" /></td></tr><tr><td style="white-space:nowrap;" class="thcnb"><iframe id="frm" runat="server" width="1024px" height="600px" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""></iframe></td></tr></table>
+                <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td></td></tr><tr><td><div style="margin-left:20px; margin-right:20px;">
+	<iframe id="frm" runat="server" width="1200px" height="700px" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""></iframe>
+</div></td></tr></table>
       </ContentTemplate>
 </asp:UpdatePanel>
 

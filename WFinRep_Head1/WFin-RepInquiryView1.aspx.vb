@@ -1,6 +1,6 @@
 ﻿
-' This file implements the code-behind class for WFin_RepCFApproveView1.aspx.
-' App_Code\WFin_RepCFApproveView.Controls.vb contains the Table, Row and Record control classes
+' This file implements the code-behind class for WFin_RepInquiryView1.aspx.
+' App_Code\WFin_RepInquiryView1.Controls.vb contains the Table, Row and Record control classes
 ' for the page.  Best practices calls for overriding methods in the Row or Record control classes.
 
 #Region "Imports statements"
@@ -32,28 +32,71 @@ Imports ePortalWFApproval.Data
   
 Namespace ePortalWFApproval.UI
   
-Partial Public Class WFin_RepCFApproveView1
+Partial Public Class WFin_RepInquiryView1
         Inherits BaseApplicationPage
-' Code-behind class for the WFin_RepCFApproveView1 page.
+' Code-behind class for the WFin_RepInquiryView1 page.
 ' Place your customizations in Section 1. Do not modify Section 2.
         
 #Region "Section 1: Place your customizations here."
     
-      Public Sub SetPageFocus()
-          'To set focus on page load to a specific control pass this control to the SetStartupFocus method. To get a hold of  a control
-          'use FindControlRecursively method. For example:
-          'Dim controlToFocus As System.Web.UI.WebControls.TextBox = DirectCast(Me.FindControlRecursively("ProductsSearch"), System.Web.UI.WebControls.TextBox)
-          'Me.SetFocusOnLoad(controlToFocus)
-          'If no control is passed or control does not exist this method will set focus on the first focusable control on the page.
-          Me.SetFocusOnLoad()  
-      End Sub
+        Public Sub SetPageFocus()
+            'load scripts to all controls on page so that they will retain focus on PostBack
+            Me.LoadFocusScripts(Me.Page)
+            'To set focus on page load to a specific control pass this control to the SetStartupFocus method. To get a hold of  a control
+            'use FindControlRecursively method. For example:
+            'Dim controlToFocus As System.Web.UI.WebControls.TextBox = DirectCast(Me.FindControlRecursively("ProductsSearch"), System.Web.UI.WebControls.TextBox)
+            'Me.SetFocusOnLoad(controlToFocus)
+            'If no control is passed or control does not exist this method will set focus on the first focusable control on the page.
+            Me.SetFocusOnLoad()
+        End Sub
        
       Public Sub LoadData()
           ' LoadData reads database data and assigns it to UI controls.
           ' Customize by adding code before or after the call to LoadData_Base()
           ' or replace the call to LoadData_Base().
           LoadData_Base()
-                  
+
+            Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServerN")
+            'Dim sParamYr As String = CStr(Me.Page.Request.QueryString("sYr"))
+            'Dim sParamMo As String = CStr(Me.Page.Request.QueryString("sMo"))
+            'Dim sParamPath As String = CStr(Me.Page.Request.QueryString("sPath"))
+
+            Dim sParamYr As String = CStr(Me.Page.Request.QueryString("Control1"))
+            Dim sParamMo As String = CStr(Me.Page.Request.QueryString("Control2"))
+            Dim sParamPath As String = CStr(Me.Page.Request.QueryString("Control3")) & " " & CStr(Me.Page.Request.QueryString("Control4"))
+            'Dim sParamRem As String = CStr(Me.Page.Request.QueryString("FIN_RWRem"))
+
+
+
+            Dim sDesc As String = "/Financial Reports/FS Viewer/"
+            Dim sYr As String = sParamYr
+            Dim sBSPath As String = sDesc & sParamPath
+            Dim cMo As String = ""
+            Dim sMo As String = ""
+            'Dim sRem as String = sParamRem
+
+            Dim sUrl As String = ""
+            Dim sTemp As String = ""
+            If sYr <> "" Or Not IsNothing(sYr) Then
+                sYr = sYr.Replace("*", "&")
+            End If
+
+            If sParamMo <> "" Or Not IsNothing(sParamMo) Then
+                cMo = sParamMo
+                sMo = cMo.Replace("*", "&")
+            End If
+
+
+
+
+            sUrl = "http://" & sWebServer & "/reportserver?" & sBSPath & "&rs:Command=Render &Year=" & sYr & "&Month=" & sMo & "&rc:Toolbar=true&rc:Parameters=collapsed&rc:LinkTarget=_self"
+            'sUrl = "http://" & sWebServer & "/reportserver?" & sBSPath & "&rs:Command=Render &Year=" & sYr & "&ToMasterDateMonth=" & sMo & "&rc:Toolbar=true&rc:Parameters=collapsed"
+
+
+
+            frm.Attributes("src") = sUrl
+
+
       End Sub
       
       Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS as Boolean) As String
@@ -173,6 +216,15 @@ Partial Public Class WFin_RepCFApproveView1
         
    
 
+Public Sub SetbtnBack()
+            SetbtnBack_Base() 
+        End Sub              
+Public Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
+          ' Click handler for btnBack.
+          ' Customize by adding code before the call or replace the call to the Base function with your own code.
+          btnBack_Click_Base(sender, args)
+          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        End Sub
 #End Region
 
 #Region "Section 2: Do not modify this section."
@@ -188,6 +240,8 @@ Partial Public Class WFin_RepCFApproveView1
 
           ' Setup the pagination events.
         
+              AddHandler Me.btnBack.Button.Click, AddressOf btnBack_Click
+                        
           Me.ClearControlsFromSession()
     
           System.Web.HttpContext.Current.Session("isd_geo_location") = "<location><error>LOCATION_ERROR_DISABLED</error></location>"
@@ -418,6 +472,8 @@ Partial Public Class WFin_RepCFApproveView1
             
                 ' initialize aspx controls
                 
+                SetbtnBack()
+              
                 
 
             Catch ex As Exception
@@ -486,12 +542,50 @@ Partial Public Class WFin_RepCFApproveView1
         
 
         ' Write out the Set methods
-            
+        
+        Public Sub SetbtnBack_Base()                
+              
+   
+        End Sub
+                
 
         ' Write out the DataSource properties and methods
                 
 
         ' Write out event methods for the page events
+        
+        ' event handler for Button
+        Public Sub btnBack_Click_Base(ByVal sender As Object, ByVal args As EventArgs)
+              
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+
+                ' if target is specified meaning that is opened on popup or new window
+                If Page.Request("target") <> "" Then
+                    shouldRedirect = False
+                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "ClosePopup", "closePopupPage();", True)                   
+                End If
+      
+            Catch ex As Exception
+            
+                shouldRedirect = False
+                Me.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+            If shouldRedirect Then
+                Me.ShouldSaveControlsToSession = True
+      Me.RedirectBack()
+        
+            End If
+        End Sub
             
     
 #End Region

@@ -3,7 +3,7 @@
   <Generator>Iron Speed Designer</Generator>
   <Version>12.1.0</Version>
   <Self>
-    <Name>WFin-RepCFApproveView1</Name>
+    <Name>WFin-RepInquiryView1</Name>
     <Type>Page</Type>
     <SubType>DotNet</SubType>
     <MasterLayout>../Master Pages/Blank.master</MasterLayout>
@@ -11,12 +11,47 @@
     <PopupMasterLayout>../Master Pages/Popup.master</PopupMasterLayout>
     <PopupCssClass>QPageSize</PopupCssClass>
     <GenerateDirectory>WFinRep_Head1</GenerateDirectory>
-    <Layout>WFinRep_Head1\WFin-RepCFApproveView1.xml</Layout>
-    <DisplayName>WFin-RepCFApproveView1</DisplayName>
+    <Layout>WFinRep_Head1\WFin-RepInquiryView1.xml</Layout>
+    <DisplayName>WFin-RepInquiryView1</DisplayName>
     <Description>This is a blank page.</Description>
     <CheckSum>1764337503-1289</CheckSum>
   </Self>
   <ComposedOf>
+    <ContainedComponent>
+      <Name>btnBack</Name>
+      <Type>Button</Type>
+      <Layout>..\Shared\ThemeButton.ascx</Layout>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>Button-CausesValidation</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Button-CommandName</Name>
+          <Value>Redirect</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Button-Consumers</Name>
+          <Value>page</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Button-RedirectURL</Name>
+          <Value>Back</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Button-Text</Name>
+          <Value>Previous Page</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Button-ToolTip</Name>
+          <Value>Previous Page</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Visible</Name>
+          <Value>True</Value>
+        </Attribute>
+      </PassthroughAttributes>
+    </ContainedComponent>
     <ContainedComponent>
       <Name>Literal</Name>
       <Type>Aspx</Type>
@@ -24,7 +59,8 @@
     </ContainedComponent>
     <ContainedComponent>
       <Name>Literal1</Name>
-      <Type>Literal</Type>
+      <Type>Aspx</Type>
+      <ControlClass>System.Web.UI.WebControls.Literal</ControlClass>
     </ContainedComponent>
     <ContainedComponent>
       <Name>PageTitle</Name>
@@ -73,8 +109,24 @@
     &lt;/Row&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:LITERAL Name="Literal1" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;asp:literal id="Literal1" runat="server" text="&amp;amp;nbsp;" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes /&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;iframe id="frm" name="frame" runat="server" width="1024px" height="600px" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" scrolling="auto" noresize=""&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;thcnb&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;RowAttributes /&gt;
     &lt;/Row&gt;

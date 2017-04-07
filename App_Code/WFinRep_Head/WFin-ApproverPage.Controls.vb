@@ -129,7 +129,17 @@ Public Class WFinRep_HeadTableControlRow
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
         
+        Protected Overrides Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+
+            AddHandler Me.btnPreview.Button.Click, AddressOf btnPreview_Click
+
+
+            'Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewer('" & Me.FIN_Year.ClientID & "','" & Me.FIN_Month.ClientID & "', '" & Me.FIN_Type.ClientID & "', '" & Me.FIN_File1.ClientID & "');return false;")
+            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewerApp2('" & Me.HFIN_Year2.ClientID & "','" & Me.HFIN_Month2.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_C_ID3.ClientID & "', '" & Me.HFIN_Status2.ClientID & "', '" & Me.HFIN_ID1.ClientID & "');return false;")
+
+
+        End Sub
 
 		Public Overrides Sub SetHFIN_File()
                 
@@ -676,7 +686,7 @@ Public Class WFinRep_HeadRecordControl
 
                 Dim email As New BaseClasses.Utils.MailSender
 
-                sEmail = "jfpimentera@anflocor.com"
+                ''sEmail = "jfpimentera@anflocor.com"
 
                 email.AddFrom("noreply@anflocor.com")
                 email.AddTo(sEmail)

@@ -1,6 +1,6 @@
 ﻿
-' This file implements the code-behind class for WFin_RepISApproveView1.aspx.
-' App_Code\WFin_RepISApproveView.Controls.vb contains the Table, Row and Record control classes
+' This file implements the code-behind class for WFin_RepApproveGPView.aspx.
+' App_Code\WFin_RepApproveGPView.Controls.vb contains the Table, Row and Record control classes
 ' for the page.  Best practices calls for overriding methods in the Row or Record control classes.
 
 #Region "Imports statements"
@@ -32,9 +32,9 @@ Imports ePortalWFApproval.Data
   
 Namespace ePortalWFApproval.UI
   
-Partial Public Class WFin_RepISApproveView1
+Partial Public Class WFin_RepApproveGPView
         Inherits BaseApplicationPage
-' Code-behind class for the WFin_RepISApproveView1 page.
+' Code-behind class for the WFin_RepApproveGPView page.
 ' Place your customizations in Section 1. Do not modify Section 2.
         
 #Region "Section 1: Place your customizations here."
@@ -53,7 +53,83 @@ Partial Public Class WFin_RepISApproveView1
           ' Customize by adding code before or after the call to LoadData_Base()
           ' or replace the call to LoadData_Base().
           LoadData_Base()
-                  
+
+            Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServer")
+            Dim sParamYr As String = CStr(Me.Page.Request.QueryString("Control1"))
+            Dim sParamMo As String = CStr(Me.Page.Request.QueryString("Control2"))
+            Dim sParamPath As String = CStr(Me.Page.Request.QueryString("Control4"))
+            Dim sParamStatus As String = CStr(Me.Page.Request.QueryString("Control5"))
+            Dim sParamDB As String = CStr(Me.Page.Request.QueryString("compDB"))
+            Dim sParamHFIN As String = CStr(Me.Page.Request.QueryString("Control6"))
+            Dim dbNameStr As String = ""
+
+            Select Case sParamDB
+                Case "ANFLOCOR"
+                    dbNameStr = "AMIC_DW"
+                Case "UNIFINANCE"
+                    dbNameStr = "UNIFC_DW"
+                Case "DAVCO"
+                    dbNameStr = "DAVC_DW"
+                Case "PITRADE"
+                    dbNameStr = "PITRD_DW"
+                Case Else
+                    If IsNumeric(sParamDB) Then
+                        ''For Non GP Companies: Get the CompanyID from Company table (ANFLOGROUP_DW)
+                        ''pepanes 10.08.2015
+                        Dim obC As OrderBy = New OrderBy(False, False)
+                        Dim compRec As Vw_ANFLO_DW_CompanyGPRecord = Vw_ANFLO_DW_CompanyGPView.GetRecord("CompanyID=" & sParamDB, obC)
+                        If Not (IsNothing(compRec)) Then
+                            dbNameStr = compRec.DynamicsCompanyID.ToString
+                        End If
+
+                    Else
+                        dbNameStr = sParamDB & "_DW"
+                    End If
+            End Select
+            Dim sBSPath As String = ""
+            Dim sDesc As String = ""
+            If sParamDB = "ANFLOCOR" Then
+                sDesc = "/Anflocor/Reports/Finance/FS Package/"
+                sBSPath = sDesc + sParamDB + " " + sParamPath
+            Else
+                If IsNumeric(sParamDB) Then
+                    ''For Non GP Companies: Get the CompanyID from Company table (ANFLOGROUP_DW)
+                    ''pepanes 10.08.2015
+                    Dim obC As OrderBy = New OrderBy(False, False)
+                    Dim compRec As Vw_ANFLO_DW_CompanyGPRecord = Vw_ANFLO_DW_CompanyGPView.GetRecord("CompanyID=" & sParamDB, obC)
+                    If Not (IsNothing(compRec)) Then
+                        sDesc = "/Anflocor/Reports/Finance/FS Package II/" & compRec.ShortName.ToString & "/"
+                    End If
+                    sBSPath = sDesc + compRec.ShortName.ToString + " " + sParamPath
+                Else
+                    sDesc = "/Anflocor/Reports/Finance/FS Package II/" & sParamDB & "/"
+                    sBSPath = sDesc + sParamDB + " " + sParamPath
+                End If
+
+            End If
+            Dim sYr As String = sParamYr
+
+            Dim cMo As String = ""
+            Dim sMo As String = ""
+            'Dim sRem as String = sParamRem
+
+            Dim sUrl As String = ""
+            Dim sTemp As String = ""
+            If sYr <> "" Or Not IsNothing(sYr) Then
+                sYr = sYr.Replace("*", "&")
+            End If
+
+            If sParamMo <> "" Or Not IsNothing(sParamMo) Then
+                cMo = sParamMo
+                sMo = cMo.Replace("*", "&")
+            End If
+
+            'sUrl = "http://" & sWebServer & "/reportserver?" & sBSPath & "&rs:Command=Render"'&Year=" & sYr & "&ToMasterDateMonth=" & sMo & "&rc:Toolbar=true&rc:Parameters=collapsed"
+            sUrl = "http://" & sWebServer & "/reportserver?" & sBSPath & "&rs:Command=Render &Year=" & sYr & "&Month=" & sMo & "&DatabaseName=" & dbNameStr & "&Status=" & sParamStatus & "&HFIN_ID=" & sParamHFIN & "&rs:ClearSession=true&rc:Toolbar=true&rc:Parameters=false"
+
+
+            frm.Attributes("src") = sUrl
+
       End Sub
       
       Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS as Boolean) As String
@@ -238,7 +314,7 @@ Partial Public Class WFin_RepISApproveView1
             End If
         
         
-            Page.Title = "Blank page"
+            Page.Title = "FS Package Preview"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If
