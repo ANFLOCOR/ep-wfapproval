@@ -123,7 +123,7 @@ Public Class WFinRepNGP_DocAttachTableControlRow
 
             AddHandler Me.WFRCDNGP_Year.TextChanged, AddressOf WFRCDNGP_Year_TextChanged
 
-            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewer2NGP('" & Me.WFRCDNGP_Year.ClientID & "','" & Me.WFRCDNGP_Month.ClientID & "', '" & Me.WFRCDNGP_Type1.ClientID & "', '" & Me.WFRCDNGP_File1.ClientID & "', '" & Me.WFRCDNGP_Company.ClientID & "',  '" & Me.WFRCDNGP_Status.ClientID & "',  '" & Me.WFRCDNGP_WFRCHNGP_ID.ClientID & "');return false;")
+            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewer2NGPSouthInq('" & Me.WFRCDNGP_Year.ClientID & "','" & Me.WFRCDNGP_Month.ClientID & "', '" & Me.WFRCDNGP_Type1.ClientID & "', '" & Me.WFRCDNGP_File1.ClientID & "', '" & Me.WFRCDNGP_Company.ClientID & "',  '" & Me.WFRCDNGP_Status.ClientID & "',  '" & Me.WFRCDNGP_WFRCHNGP_ID.ClientID & "');return false;")
         End Sub
 
         ' Populate the UI controls using the DataSource.  To customize, override this method in WFinRepNGP_DocAttachTableControlRow.
@@ -331,8 +331,8 @@ Public Class WFinRepNGP_DocAttachTableControlRow
                 Me.btnEdit.Visible = False
             End If
 
-            Me.imbView.Attributes.Add("onClick", "OpenRptViewer2NGP('" & Me.WFRCHNGP_Year1.ClientID & "','" & Me.WFRCHNGP_Month1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_C_ID1.ClientID & "', '" & Me.WFRCHNGP_Status1.ClientID & "', '" & Me.WFRCHNGP_ID.ClientID & "');return false;")
-            Me.btnPreview1.Button.Attributes.Add("onClick", "OpenRptViewer2NGP('" & Me.WFRCHNGP_Year1.ClientID & "','" & Me.WFRCHNGP_Month1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_C_ID1.ClientID & "', '" & Me.WFRCHNGP_Status1.ClientID & "', '" & Me.WFRCHNGP_ID.ClientID & "');return false;")
+            Me.imbView.Attributes.Add("onClick", "OpenRptViewer2NGPSouthInq('" & Me.WFRCHNGP_Year1.ClientID & "','" & Me.WFRCHNGP_Month1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_C_ID1.ClientID & "', '" & Me.WFRCHNGP_Status1.ClientID & "', '" & Me.WFRCHNGP_ID.ClientID & "');return false;")
+            Me.btnPreview1.Button.Attributes.Add("onClick", "OpenRptViewer2NGPSouthInq('" & Me.WFRCHNGP_Year1.ClientID & "','" & Me.WFRCHNGP_Month1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_C_ID1.ClientID & "', '" & Me.WFRCHNGP_Status1.ClientID & "', '" & Me.WFRCHNGP_ID.ClientID & "');return false;")
         End Sub
 
         Public Overrides Sub SetWFRCHNGP_File()
