@@ -1215,7 +1215,7 @@ Public Class WFinRepNGP_HeadTableControlRow
 
             AddHandler Me.WFRCHNGP_Year2.TextChanged, AddressOf WFRCHNGP_Year2_TextChanged
 
-            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewerApp2('" & Me.WFRCHNGP_Year2.ClientID & "','" & Me.WFRCHNGP_Month2.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_C_ID3.ClientID & "', '" & Me.WFRCHNGP_Status1.ClientID & "', '" & Me.WFRCHNGP_ID1.ClientID & "');return false;")
+            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewerApp2NGPSouthApp('" & Me.WFRCHNGP_Year2.ClientID & "','" & Me.WFRCHNGP_Month2.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_C_ID3.ClientID & "', '" & Me.WFRCHNGP_Status1.ClientID & "', '" & Me.WFRCHNGP_ID1.ClientID & "');return false;")
 
         End Sub
 
@@ -1376,7 +1376,85 @@ Public Class WFinRepNGP_HeadTableControlRow
 
 
 
-End Class
+
+        Public Overrides Sub SetWFRCHNGP_C_ID2()
+
+
+
+
+            ' Set the WFRCHNGP_C_ID Literal on the webpage with value from the
+            ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
+
+            ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
+            ' Me.WFRCHNGP_C_ID2 is the ASP:Literal on the webpage.
+
+            ' You can modify this method directly, or replace it with a call to
+            '     MyBase.SetWFRCHNGP_C_ID2()
+            ' and add your own code before or after the call to the MyBase function.
+
+
+            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_C_IDSpecified Then
+
+                ' If the WFRCHNGP_C_ID is non-NULL, then format the value.
+                Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
+
+                Dim sWhere As String = ""
+                Dim ordB As New OrderBy(False, False)
+
+                ordB.Add(View_DW_CompanyView.wass_C_ID, OrderByItem.OrderDir.Asc)
+                sWhere = "DynamicsCompanyID ='" & formattedValue & "'"
+
+                Dim dw_company As View_DW_CompanyRecord = View_DW_CompanyView.GetRecord(sWhere, ordB)
+
+                If IsNothing(dw_company) = False Then
+
+                    formattedValue = dw_company.ShortName
+                End If
+
+                formattedValue = HttpUtility.HtmlEncode(formattedValue)
+                Me.WFRCHNGP_C_ID2.Text = formattedValue
+
+            Else
+
+                ' WFRCHNGP_C_ID is NULL in the database, so use the Default Value.  
+                ' Default Value could also be NULL.
+
+                Me.WFRCHNGP_C_ID2.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
+
+            End If
+
+            ' If the WFRCHNGP_C_ID is NULL or blank, then use the value specified  
+            ' on Properties.
+            If Me.WFRCHNGP_C_ID2.Text Is Nothing _
+                OrElse Me.WFRCHNGP_C_ID2.Text.Trim() = "" Then
+                ' Set the value specified on the Properties.
+                Me.WFRCHNGP_C_ID2.Text = "&nbsp;"
+            End If
+
+
+
+
+            'If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_C_IDSpecified Then
+
+            ' If the WFRCHNGP_C_ID is non-NULL, then format the value.
+
+            ' The Format method will use the Display Format
+            '   Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
+
+            '  formattedValue = HttpUtility.HtmlEncode(formattedValue)
+            ' Me.WFRCHNGP_C_ID2.Text = formattedValue
+
+            'Else 
+
+            ' WFRCHNGP_C_ID is NULL in the database, so use the Default Value.  
+            ' Default Value could also be NULL.
+
+            '    Me.WFRCHNGP_C_ID2.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
+
+            '  End If
+
+        End Sub
+    End Class
 Public Class WFinRepNGP_DocAttachTableControl
         Inherits BaseWFinRepNGP_DocAttachTableControl
 
