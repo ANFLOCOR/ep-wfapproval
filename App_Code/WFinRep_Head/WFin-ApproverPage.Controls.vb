@@ -702,6 +702,7 @@ Public Class WFinRep_HeadRecordControl
 
             If Default_Type = "" Then
                 wc2.iAND(W_EmailTable.WE_U_ID, BaseFilter.ComparisonOperator.EqualsTo, User_ID)
+                wc2.iAND(W_EmailTable.WE_Directory, BaseFilter.ComparisonOperator.EqualsTo, "eportal")
 
                 If W_EmailTable.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
                     For Each itemValue2 In W_EmailTable.GetRecords(wc2, Nothing, 0, 100)

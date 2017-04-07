@@ -193,6 +193,7 @@ Public Class WFinRep_HeadRecordControl
 
             If Default_Type = "" Then
                 wc2.iAND(W_Email1Table.WE_U_ID, BaseFilter.ComparisonOperator.EqualsTo, User_ID)
+                wc2.iAND(W_Email1Table.WE_Directory, BaseFilter.ComparisonOperator.EqualsTo, "eportal")
 
                 If W_Email1Table.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
                     For Each itemValue2 In W_Email1Table.GetRecords(wc2, Nothing, 0, 100)
@@ -1224,19 +1225,19 @@ End Class
 
 
 
-        Public Overrides Sub SetHFIN_File()
+		Public Overrides Sub SetHFIN_File()
 
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_FileSpecified Then
 
                 Me.HFIN_File.Text = Page.GetResourceValue("Txt:OpenFile", "EPORTAL")
 
                 Me.HFIN_File.OnClientClick = "window.open('../Shared/ExportFieldValue.aspx?Table=" & _
-                            Me.Page.Encrypt("WFinRep_Head") & _
+                            Me.Page.Encrypt("WFinRep_Head1") & _
                             "&Field=" & Me.Page.Encrypt("HFIN_File") & _
                             "&Record=" & Me.Page.Encrypt(HttpUtility.UrlEncode(Me.DataSource.GetID().ToString())) & _
                                 "','','left=100,top=50,width=400,height=300,resizable,scrollbars=1');return false;"
                 Me.btnPreview1.Button.OnClientClick = "window.open('../Shared/ExportFieldValue.aspx?Table=" & _
-                            Me.Page.Encrypt("WFinRep_Head") & _
+                            Me.Page.Encrypt("WFinRep_Head1") & _
                             "&Field=" & Me.Page.Encrypt("HFIN_File") & _
                             "&Record=" & Me.Page.Encrypt(HttpUtility.UrlEncode(Me.DataSource.GetID().ToString())) & _
                                 "','','left=100,top=50,width=400,height=300,resizable,scrollbars=1');return false;"
