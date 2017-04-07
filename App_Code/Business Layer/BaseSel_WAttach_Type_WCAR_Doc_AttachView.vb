@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New Sel_WAttach_Type_WCAR_Doc_AttachSqlView()
 		Directcast(Me.DataAdapter, Sel_WAttach_Type_WCAR_Doc_AttachSqlView).ConnectionName = Me.ConnectionName
-		
+		Directcast(Me.DataAdapter, Sel_WAttach_Type_WCAR_Doc_AttachSqlView).ApplicationName = Me.ApplicationName
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WCDA_IDColumn.CodeName = "WCDA_ID"
         WCDA_WCD_IDColumn.CodeName = "WCDA_WCD_ID"

@@ -10635,31 +10635,31 @@ Public Class BaseWFinRepNGP_HeadTableControl
             ' It is better to customize the where clause there.
             
             ' Setup the static list items        
-
+            							
             Me.WFRCHNGP_C_IDFilter.Items.Add(New ListItem(Me.Page.ExpandResourceValue("Please Select"), "--ANY--"))
-
-
-
+                            
+            
+            
             Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, OrderByItem.OrderDir.Asc)
-
-
+            orderBy.Add(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, OrderByItem.OrderDir.Asc)                
+            
+            	
 
             Dim values(-1) As String
             If wc.RunQuery Then
-
+            
                 values = WFinRepNGP_HeadTable.GetValues(WFinRepNGP_HeadTable.WFRCHNGP_C_ID, wc, orderBy, maxItems)
-
+            
             End If
-
-
+            
+                  
             Dim cvalue As String
-
+            
             Dim listDuplicates As New ArrayList()
             For Each cvalue In values
                 ' Create the item and add to the list.
                 Dim fvalue As String
-                If (WFinRepNGP_HeadTable.WFRCHNGP_C_ID.IsColumnValueTypeBoolean()) Then
+                If ( WFinRepNGP_HeadTable.WFRCHNGP_C_ID.IsColumnValueTypeBoolean()) Then
                     fvalue = cvalue
                 Else
                     fvalue = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(cvalue)
@@ -10671,93 +10671,93 @@ Public Class BaseWFinRepNGP_HeadTableControl
 
                 fvalue = fvalue.Trim()
 
-                If (fvalue.Length > 50) Then
+                If ( fvalue.Length > 50 ) Then
                     fvalue = fvalue.Substring(0, 50) & "..."
                 End If
 
                 Dim dupItem As ListItem = Me.WFRCHNGP_C_IDFilter.Items.FindByText(fvalue)
-
+                
                 If Not IsNothing(dupItem) Then
                     listDuplicates.Add(fvalue)
                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                     End If
                 End If
 
                 Dim newItem As ListItem = New ListItem(fvalue, cvalue)
                 Me.WFRCHNGP_C_IDFilter.Items.Add(newItem)
 
-                If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                 End If
             Next
+                                  
 
-
-            Try
-
+            Try    
+                
                 ' Set the selected value.
                 SetSelectedValue(Me.WFRCHNGP_C_IDFilter, selectedValue)
-
+                    
             Catch
             End Try
-
-
-            If Me.WFRCHNGP_C_IDFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_C_IDFilter.Items.FindByValue(Me.WFRCHNGP_C_IDFilter.SelectedValue) Is Nothing Then
+            
+                        
+            If Me.WFRCHNGP_C_IDFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_C_IDFilter.Items.FindByValue(Me.WFRCHNGP_C_IDFilter.SelectedValue) Is Nothing
                 Me.WFRCHNGP_C_IDFilter.SelectedValue = Nothing
-            End If
-
+            End If            
+                          
         End Sub
-
+            
         ' Get the filters' data for WFRCHNGP_MonthFilter
         Protected Overridable Sub PopulateWFRCHNGP_MonthFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
-
+                    
             'Setup the WHERE clause.
-
+            
             Me.WFRCHNGP_MonthFilter.Items.Clear()
             Dim wc As WhereClause = Me.CreateWhereClause_WFRCHNGP_MonthFilter()
-
+            		  			
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WFRCHNGP_MonthFilter function.
             ' It is better to customize the where clause there.
-
+            
             ' Setup the static list items        
-
+            							
             Me.WFRCHNGP_MonthFilter.Items.Add(New ListItem(Me.Page.ExpandResourceValue("Please Select"), "--ANY--"))
+                            
 
-
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.Mo, OrderByItem.OrderDir.Asc)
-            orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.MoName, OrderByItem.OrderDir.Asc)
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.Mo, OrderByItem.OrderDir.Asc)
+              orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.MoName, OrderByItem.OrderDir.Asc)
 
             Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
 
-
+            	
 
             Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
-
+            
 
             Dim itemValues() As Vw_WFinRep_DocAttach_FIN_MonthRecord = Nothing
-
-            If wc.RunQuery Then
+            
+            If wc.RunQuery
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim evaluator As New FormulaEvaluator
                 Dim listDuplicates As New ArrayList()
 
-
-
+                
+                
                 Do
-
+                    
                     itemValues = Vw_WFinRep_DocAttach_FIN_MonthView.GetRecords(wc, orderBy, pageNum, maxItems)
-
-                    For Each itemValue As Vw_WFinRep_DocAttach_FIN_MonthRecord In itemValues
+                                    
+                    For each itemValue As Vw_WFinRep_DocAttach_FIN_MonthRecord In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.MoSpecified Then
                             cvalue = itemValue.Mo.ToString()
 
-                            If counter < maxItems AndAlso Me.WFRCHNGP_MonthFilter.Items.FindByValue(cvalue) Is Nothing Then
-
+                            If counter < maxItems AndAlso Me.WFRCHNGP_MonthFilter.Items.FindByValue(cvalue) Is Nothing  Then
+                            
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_Month)
                                 If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_Month.IsApplyDisplayAs Then
                                     fvalue = WFinRepNGP_HeadTable.GetDFKA(itemValue, WFinRepNGP_HeadTable.WFRCHNGP_Month)
@@ -10765,25 +10765,25 @@ Public Class BaseWFinRepNGP_HeadTableControl
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
                                     fvalue = itemValue.Format(Vw_WFinRep_DocAttach_FIN_MonthView.Mo)
                                 End If
-
+                                    
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                    fvalue = ""
+                                   fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If (fvalue.Length > 50) Then
-                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                If ( fvalue.Length > 50 ) Then
+                                   fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.WFRCHNGP_MonthFilter.Items.FindByText(fvalue)
-
+                
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                                     End If
                                 End If
 
@@ -10791,85 +10791,85 @@ Public Class BaseWFinRepNGP_HeadTableControl
                                 Me.WFRCHNGP_MonthFilter.Items.Add(newItem)
 
                                 If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                                 End If
 
-                                counter += 1
+                                counter += 1			  
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
-            End If
+            End If			
+            
 
 
+                               
 
-
-
-            Try
-
+            Try    
+                
                 ' Set the selected value.
                 SetSelectedValue(Me.WFRCHNGP_MonthFilter, selectedValue)
-
+                    
             Catch
             End Try
-
-
-            If Me.WFRCHNGP_MonthFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_MonthFilter.Items.FindByValue(Me.WFRCHNGP_MonthFilter.SelectedValue) Is Nothing Then
+            
+                        
+            If Me.WFRCHNGP_MonthFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_MonthFilter.Items.FindByValue(Me.WFRCHNGP_MonthFilter.SelectedValue) Is Nothing
                 Me.WFRCHNGP_MonthFilter.SelectedValue = Nothing
-            End If
-
+            End If            
+                          
         End Sub
-
+            
         ' Get the filters' data for WFRCHNGP_StatusFilter
         Protected Overridable Sub PopulateWFRCHNGP_StatusFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
-
+                    
             'Setup the WHERE clause.
-
+            
             Me.WFRCHNGP_StatusFilter.Items.Clear()
             Dim wc As WhereClause = Me.CreateWhereClause_WFRCHNGP_StatusFilter()
-
+            		  			
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WFRCHNGP_StatusFilter function.
             ' It is better to customize the where clause there.
-
+            
             ' Setup the static list items        
-
+            							
             Me.WFRCHNGP_StatusFilter.Items.Add(New ListItem(Me.Page.ExpandResourceValue("Please Select"), "--ANY--"))
+                            
 
-
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(WFin_ApprovalStatusTable.WPO_STAT_DESC, OrderByItem.OrderDir.Asc)
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(WFin_ApprovalStatusTable.WPO_STAT_DESC, OrderByItem.OrderDir.Asc)
 
             Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
 
-
+            	
 
             Dim noValueFormat As String = Page.GetResourceValue("Txt:Other", "ePortalWFApproval")
-
+            
 
             Dim itemValues() As WFin_ApprovalStatusRecord = Nothing
-
-            If wc.RunQuery Then
+            
+            If wc.RunQuery
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim evaluator As New FormulaEvaluator
                 Dim listDuplicates As New ArrayList()
 
-
-
+                
+                
                 Do
-
+                    
                     itemValues = WFin_ApprovalStatusTable.GetRecords(wc, orderBy, pageNum, maxItems)
-
-                    For Each itemValue As WFin_ApprovalStatusRecord In itemValues
+                                    
+                    For each itemValue As WFin_ApprovalStatusRecord In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.WPO_STAT_CDSpecified Then
                             cvalue = itemValue.WPO_STAT_CD.ToString()
 
-                            If counter < maxItems AndAlso Me.WFRCHNGP_StatusFilter.Items.FindByValue(cvalue) Is Nothing Then
-
+                            If counter < maxItems AndAlso Me.WFRCHNGP_StatusFilter.Items.FindByValue(cvalue) Is Nothing  Then
+                            
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_Status)
                                 If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_Status.IsApplyDisplayAs Then
                                     fvalue = WFinRepNGP_HeadTable.GetDFKA(itemValue, WFinRepNGP_HeadTable.WFRCHNGP_Status)
@@ -10877,25 +10877,25 @@ Public Class BaseWFinRepNGP_HeadTableControl
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
                                     fvalue = itemValue.Format(WFin_ApprovalStatusTable.WPO_STAT_CD)
                                 End If
-
+                                    
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                    fvalue = ""
+                                   fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If (fvalue.Length > 50) Then
-                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                If ( fvalue.Length > 50 ) Then
+                                   fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.WFRCHNGP_StatusFilter.Items.FindByText(fvalue)
-
+                
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                                     End If
                                 End If
 
@@ -10903,53 +10903,53 @@ Public Class BaseWFinRepNGP_HeadTableControl
                                 Me.WFRCHNGP_StatusFilter.Items.Add(newItem)
 
                                 If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                                 End If
 
-                                counter += 1
+                                counter += 1			  
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
-            End If
+            End If			
+            
 
 
+                               
 
-
-
-            Try
-
+            Try    
+                
                 ' Set the selected value.
                 SetSelectedValue(Me.WFRCHNGP_StatusFilter, selectedValue)
-
+                    
             Catch
             End Try
-
-
-            If Me.WFRCHNGP_StatusFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_StatusFilter.Items.FindByValue(Me.WFRCHNGP_StatusFilter.SelectedValue) Is Nothing Then
+            
+                        
+            If Me.WFRCHNGP_StatusFilter.SelectedValue IsNot Nothing AndAlso Me.WFRCHNGP_StatusFilter.Items.FindByValue(Me.WFRCHNGP_StatusFilter.SelectedValue) Is Nothing
                 Me.WFRCHNGP_StatusFilter.SelectedValue = Nothing
-            End If
-
+            End If            
+                          
         End Sub
-
+            
         ' Get the filters' data for WFRCHNGP_YearFromFilter
         Protected Overridable Sub PopulateWFRCHNGP_YearFromFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
-
+                    
             'Setup the WHERE clause.
-
+            
             Me.WFRCHNGP_YearFromFilter.Items.Clear()
             Dim wc As WhereClause = Me.CreateWhereClause_WFRCHNGP_YearFromFilter()
-
+            		  			
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WFRCHNGP_YearFromFilter function.
             ' It is better to customize the where clause there.
-
+            
             ' Setup the static list items        
-
+            							
             Me.WFRCHNGP_YearFromFilter.Items.Add(New ListItem(Me.Page.ExpandResourceValue("Please Select"), "--ANY--"))
-
-
-
+                            
+            
+            
             Dim orderBy As OrderBy = New OrderBy(False, False)
             orderBy.Add(WFinRepNGP_HeadTable.WFRCHNGP_Year, OrderByItem.OrderDir.Asc)                
             

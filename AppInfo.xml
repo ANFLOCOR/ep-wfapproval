@@ -23848,7 +23848,7 @@
     <converter />
   </option>
   <option name="Directory" readonly="False" feature="" displayorder="-1">
-    <value>C:\ep-wfapproval-ep-wfapproval-TestSRV</value>
+    <value>C:\ep-wfapproval</value>
     <datatype>System.String</datatype>
     <defaultvalue />
     <displayname />

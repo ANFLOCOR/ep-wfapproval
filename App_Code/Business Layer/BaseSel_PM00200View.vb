@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New Sel_PM00200SqlView()
         Directcast(Me.DataAdapter, Sel_PM00200SqlView).ConnectionName = Me.ConnectionName
-        
+        Directcast(Me.DataAdapter, Sel_PM00200SqlView).ApplicationName = Me.ApplicationName
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         VENDORIDColumn.CodeName = "VENDORID"
         VENDNAMEColumn.CodeName = "VENDNAME"

@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WCanvass_PO_Map_TempSqlTable()
         Directcast(Me.DataAdapter, WCanvass_PO_Map_TempSqlTable).ConnectionName = Me.ConnectionName
-        
+        Directcast(Me.DataAdapter, WCanvass_PO_Map_TempSqlTable).ApplicationName = Me.ApplicationName
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         Temp_IDColumn.CodeName = "Temp_ID"
         WCDI_IDColumn.CodeName = "WCDI_ID"

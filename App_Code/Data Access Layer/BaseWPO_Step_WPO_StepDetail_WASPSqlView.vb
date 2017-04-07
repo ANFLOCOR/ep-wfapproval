@@ -19,13 +19,13 @@ Namespace ePortalWFApproval.Data
 ''' <seealso cref="WPO_Step_WPO_StepDetail_WASPSqlView"></seealso>
 
 Public Class BaseWPO_Step_WPO_StepDetail_WASPSqlView
-	Inherits DynamicSQLServerAdapter
+	Inherits StoredProceduresSQLServerAdapter
 	
 	Public Sub New()
 	End Sub
 	
-	Public Sub New(ByVal connectionName As String)
-		MyBase.New(connectionName)
+	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
+		MyBase.New(connectionName, applicationName)
 	End Sub
 End Class
 End Namespace

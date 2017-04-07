@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WCanvass_Quotation_InternalSqlTable()
         Directcast(Me.DataAdapter, WCanvass_Quotation_InternalSqlTable).ConnectionName = Me.ConnectionName
-        
+        Directcast(Me.DataAdapter, WCanvass_Quotation_InternalSqlTable).ApplicationName = Me.ApplicationName
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WCQI_IDColumn.CodeName = "WCQI_ID"
         WCQI_WCI_IDColumn.CodeName = "WCQI_WCI_ID"
