@@ -527,7 +527,7 @@ Public Class WPOP10100RecordControl
                                     sEmailContent = Content_Formatter(sDelegate, _
          "PO Approval Needed (PO# " & poNum.Trim() & ")", CStr(coDesc.ToString()), _
          sPODetail, CStr(deyt), "SUPPLIER: " & ctlHeader.VENDNAME.Text.Trim() & "<br>" & ctlWF.WPOP_Remark.Text, sngTotal.ToString("#,#.00") & sCurr, _
-         System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#4682b4", "Security/Homepage.aspx", poNum.Trim(), _
+         System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#4682b4", "Security/HomePage.aspx", poNum.Trim(), _
          "Next Approver: " & nStep, "", "PO")
 
 
@@ -568,7 +568,7 @@ Public Class WPOP10100RecordControl
                 End If
 
 
-   Dim url As String = "../Security/Homepage.aspx"
+            Dim url As String = "../Security/HomePage.aspx"
             url = Me.ModifyRedirectUrl(url, "", False)
             url = Me.Page.ModifyRedirectUrl(url, "", False)
             Me.Page.ShouldSaveControlsToSession = True
@@ -881,20 +881,26 @@ Public Class WPOP10100RecordControl
                 Next
             End If
 
-            Select Case System.Web.HttpContext.Current.Session("UserIDNorth").ToString
-                Case "8", "274", "34"
-                    Dim url As String = "../wf_PO/ShowSel_WPO_Activity_WPOP10100Table.aspx"
-                    url = Me.ModifyRedirectUrl(url, "", False)
-                    url = Me.Page.ModifyRedirectUrl(url, "", False)
-                    Me.Page.ShouldSaveControlsToSession = True
-                    Me.Page.Response.Redirect(url)
-                Case Else
-                    Dim url As String = "../Security/Home.aspx"
-                    url = Me.ModifyRedirectUrl(url, "", False)
-                    url = Me.Page.ModifyRedirectUrl(url, "", False)
-                    Me.Page.ShouldSaveControlsToSession = True
-                    Me.Page.Response.Redirect(url)
-            End Select
+            ' ''Select Case System.Web.HttpContext.Current.Session("UserIDNorth").ToString
+            ' ''    Case "8", "274", "34"
+            ' ''        Dim url As String = "../wf_PO/ShowSel_WPO_Activity_WPOP10100Table.aspx"
+            ' ''        url = Me.ModifyRedirectUrl(url, "", False)
+            ' ''        url = Me.Page.ModifyRedirectUrl(url, "", False)
+            ' ''        Me.Page.ShouldSaveControlsToSession = True
+            ' ''        Me.Page.Response.Redirect(url)
+            ' ''    Case Else
+            ' ''        Dim url As String = "../Security/HomePage.aspx"
+            ' ''        url = Me.ModifyRedirectUrl(url, "", False)
+            ' ''        url = Me.Page.ModifyRedirectUrl(url, "", False)
+            ' ''        Me.Page.ShouldSaveControlsToSession = True
+            ' ''        Me.Page.Response.Redirect(url)
+            ' ''End Select
+
+            Dim url As String = "../Security/HomePage.aspx"
+            url = Me.ModifyRedirectUrl(url, "", False)
+            url = Me.Page.ModifyRedirectUrl(url, "", False)
+            Me.Page.ShouldSaveControlsToSession = True
+            Me.Page.Response.Redirect(url)
         End Sub
 
         Private Sub PopulateMoveTo()

@@ -445,7 +445,7 @@ Public Class WFinRep_HeadRecordControl
                                         sEmailContent = Content_Formatter(CStr(itemValue6.WFIN_SD_W_U_ID), _
                                         "FS Report Approval Needed (FS Document ID# " & sFinID & ")", CStr(sCo1), _
                                         sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
-                                        System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#4682b4", "WFinRep_Head1/WFin-Approver-Table1.aspx", sFinID, _
+                                        System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#4682b4", "Security/HomePage.aspx", sFinID, _
                                         "Next Approver: " & nStep, "Pending Approval")
 
 
@@ -482,21 +482,27 @@ Public Class WFinRep_HeadRecordControl
                 End If
 
 
-                Select Case System.Web.HttpContext.Current.Session("UserIDNorth").ToString
-                    Case "8"
-                        Dim url As String = "../WFinRep_Head1/WFinRep-Head1Record"
-                        url = Me.ModifyRedirectUrl(url, "", False)
-                        url = Me.Page.ModifyRedirectUrl(url, "", False)
-                        Me.Page.ShouldSaveControlsToSession = True
-                        Me.Page.Response.Redirect(url)
-                    Case Else
-                        '' ''Dim url As String = "../Security/HomePage.aspx"
-                        Dim url As String = "../WFinRep_Head1/WFin-Approver-Table1.aspx"
-                        url = Me.ModifyRedirectUrl(url, "", False)
-                        url = Me.Page.ModifyRedirectUrl(url, "", False)
-                        Me.Page.ShouldSaveControlsToSession = True
-                        Me.Page.Response.Redirect(url)
-                End Select
+                ' ''Select Case System.Web.HttpContext.Current.Session("UserIDNorth").ToString
+                ' ''    Case "8"
+                ' ''        Dim url As String = "../WFinRep_Head1/WFinRep-Head1Record"
+                ' ''        url = Me.ModifyRedirectUrl(url, "", False)
+                ' ''        url = Me.Page.ModifyRedirectUrl(url, "", False)
+                ' ''        Me.Page.ShouldSaveControlsToSession = True
+                ' ''        Me.Page.Response.Redirect(url)
+                ' ''    Case Else
+                ' ''        Dim url As String = "../Security/HomePage.aspx"
+                ' ''        ' ''Dim url As String = "../WFinRep_Head1/WFin-Approver-Table1.aspx"
+                ' ''        url = Me.ModifyRedirectUrl(url, "", False)
+                ' ''        url = Me.Page.ModifyRedirectUrl(url, "", False)
+                ' ''        Me.Page.ShouldSaveControlsToSession = True
+                ' ''        Me.Page.Response.Redirect(url)
+                ' ''End Select
+
+                Dim url As String = "../Security/HomePage.aspx"
+                url = Me.ModifyRedirectUrl(url, "", False)
+                url = Me.Page.ModifyRedirectUrl(url, "", False)
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
 
             Catch ex As Exception
                 Me.Page.ErrorOnPage = True
@@ -618,7 +624,7 @@ Public Class WFinRep_HeadRecordControl
                             sEmailContent = Content_Formatter(itemValue6.WFIN_SD_W_U_ID.ToString(), _
                                  "FS INFORMATION NEEDED (Report Description " & sDesc & ")", CStr(sCo1), _
                                  sFSDetail, sDeyt, Me.txtRemarks.Text, sType, _
-                                 System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#64d04b", "WFinRep_Head1/WFin-Approver-Table1.aspx", sFinID, _
+                                 System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#64d04b", "Security/HomePage.aspx", sFinID, _
                                  "Returned By " & sUserRej, "FS Rejected")
 
                             Send_Email_Notification(CStr(itemValue6.WFIN_SD_W_U_ID), "FS Information Needed (FS Report: " & _
@@ -644,7 +650,7 @@ Public Class WFinRep_HeadRecordControl
                             sEmailContent = Content_Formatter(itemValue6.HFIN_U_ID.ToString(), _
                                   "FS Information Needed (Report Description " & sDesc & ")", CStr(sCo1), _
                                   sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
-                                  System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#64d04b", "WFinRep_Head1/WFin-Approver-Table1.aspx", sFinID, _
+                                  System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#64d04b", "Security/HomePage.aspx", sFinID, _
                                   "Returned By " & sUserRej, "FS Rejected")
 
 
@@ -669,21 +675,26 @@ Public Class WFinRep_HeadRecordControl
 
 
 
-                Select Case System.Web.HttpContext.Current.Session("UserIDNorth").ToString
-                    Case "8"
-                        Dim url As String = "../WFinRep_Head1/WFinRep-Head1Record"
-                        url = Me.ModifyRedirectUrl(url, "", False)
-                        url = Me.Page.ModifyRedirectUrl(url, "", False)
-                        Me.Page.ShouldSaveControlsToSession = True
-                        Me.Page.Response.Redirect(url)
-                    Case Else
-                        Dim url As String = "../WFinRep_Head1/WFIN-Approver-Table1.aspx"
-                        url = Me.ModifyRedirectUrl(url, "", False)
-                        url = Me.Page.ModifyRedirectUrl(url, "", False)
-                        Me.Page.ShouldSaveControlsToSession = True
-                        Me.Page.Response.Redirect(url)
-                End Select
+                ' ''Select Case System.Web.HttpContext.Current.Session("UserIDNorth").ToString
+                ' ''    Case "8"
+                ' ''        Dim url As String = "../WFinRep_Head1/WFinRep-Head1Record"
+                ' ''        url = Me.ModifyRedirectUrl(url, "", False)
+                ' ''        url = Me.Page.ModifyRedirectUrl(url, "", False)
+                ' ''        Me.Page.ShouldSaveControlsToSession = True
+                ' ''        Me.Page.Response.Redirect(url)
+                ' ''    Case Else
+                ' ''        Dim url As String = "../WFinRep_Head1/WFIN-Approver-Table1.aspx"
+                ' ''        url = Me.ModifyRedirectUrl(url, "", False)
+                ' ''        url = Me.Page.ModifyRedirectUrl(url, "", False)
+                ' ''        Me.Page.ShouldSaveControlsToSession = True
+                ' ''        Me.Page.Response.Redirect(url)
+                ' ''End Select
 
+                Dim url As String = "../Security/HomePage.aspx"
+                url = Me.ModifyRedirectUrl(url, "", False)
+                url = Me.Page.ModifyRedirectUrl(url, "", False)
+                Me.Page.ShouldSaveControlsToSession = True
+                Me.Page.Response.Redirect(url)
 
             Catch ex As Exception
                 Me.Page.ErrorOnPage = True
@@ -785,7 +796,7 @@ Public Class WFinRep_HeadRecordControl
                             sEmailContent = Content_Formatter(itemValue4.WFIN_SD_W_U_ID.ToString, _
                              "FS RETURNED FOR REVISION INFORMATION (Report Description " & sDesc & ")", CStr(sCo1), _
                              sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
-                             System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#64d04b", "WFinRep_Head1/WFin-Approver-Table1.aspx", sFinID, _
+                             System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#64d04b", "Security/HomePage.aspx", sFinID, _
                              "Returned By " & sUserRej, "FS Returned for Revision")
 
                             Send_Email_Notification(CStr(itemValue4.WFIN_SD_W_U_ID.ToString), "FS Returned for Revision Information (FS Report: " & _
