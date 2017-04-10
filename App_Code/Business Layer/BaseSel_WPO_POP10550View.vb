@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New Sel_WPO_POP10550SqlView()
         Directcast(Me.DataAdapter, Sel_WPO_POP10550SqlView).ConnectionName = Me.ConnectionName
-        
+        Directcast(Me.DataAdapter, Sel_WPO_POP10550SqlView).ApplicationName = Me.ApplicationName
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         DOCTYPEColumn.CodeName = "DOCTYPE"
         POPNUMBEColumn.CodeName = "POPNUMBE"

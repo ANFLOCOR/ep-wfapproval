@@ -129,7 +129,17 @@ Public Class WFinRep_HeadTableControlRow
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
         
+        Protected Overrides Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+
+            AddHandler Me.btnPreview.Button.Click, AddressOf btnPreview_Click
+
+
+            'Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewer('" & Me.FIN_Year.ClientID & "','" & Me.FIN_Month.ClientID & "', '" & Me.FIN_Type.ClientID & "', '" & Me.FIN_File1.ClientID & "');return false;")
+            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewerApp2('" & Me.HFIN_Year2.ClientID & "','" & Me.HFIN_Month2.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_C_ID3.ClientID & "', '" & Me.HFIN_Status2.ClientID & "', '" & Me.HFIN_ID1.ClientID & "');return false;")
+
+
+        End Sub
 
 		Public Overrides Sub SetHFIN_File()
                 
@@ -676,7 +686,7 @@ Public Class WFinRep_HeadRecordControl
 
                 Dim email As New BaseClasses.Utils.MailSender
 
-                sEmail = "jfpimentera@anflocor.com"
+                ''sEmail = "jfpimentera@anflocor.com"
 
                 email.AddFrom("noreply@anflocor.com")
                 email.AddTo(sEmail)
@@ -702,6 +712,7 @@ Public Class WFinRep_HeadRecordControl
 
             If Default_Type = "" Then
                 wc2.iAND(W_EmailTable.WE_U_ID, BaseFilter.ComparisonOperator.EqualsTo, User_ID)
+                wc2.iAND(W_EmailTable.WE_Directory, BaseFilter.ComparisonOperator.EqualsTo, "eportal")
 
                 If W_EmailTable.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
                     For Each itemValue2 In W_EmailTable.GetRecords(wc2, Nothing, 0, 100)

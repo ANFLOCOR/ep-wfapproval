@@ -19,13 +19,13 @@ Namespace ePortalWFApproval.Data
 ''' <seealso cref="WPO_WFHistory_Details_newSqlView"></seealso>
 
 Public Class BaseWPO_WFHistory_Details_newSqlView
-	Inherits DynamicSQLServerAdapter
+	Inherits StoredProceduresSQLServerAdapter
 	
 	Public Sub New()
 	End Sub
 	
-	Public Sub New(ByVal connectionName As String)
-		MyBase.New(connectionName)
+	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
+		MyBase.New(connectionName, applicationName)
 	End Sub
 End Class
 End Namespace

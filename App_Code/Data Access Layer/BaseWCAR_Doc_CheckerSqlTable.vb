@@ -19,14 +19,14 @@ Namespace ePortalWFApproval.Data
 ''' <seealso cref="WCAR_Doc_CheckerSqlTable"></seealso>
 
 Public Class BaseWCAR_Doc_CheckerSqlTable
-	Inherits DynamicSQLServerAdapter
+	Inherits StoredProceduresSQLServerAdapter
 	
 	Public Sub New()
 		MyBase.New()
 	End Sub
 
-	Public Sub New(ByVal connectionName As String)
-		MyBase.New(connectionName)
+	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
+		MyBase.New(connectionName, applicationName)
 	End Sub
 End Class
 End Namespace

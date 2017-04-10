@@ -19,14 +19,14 @@ Namespace ePortalWFApproval.Data
 ''' <seealso cref="WCanvass_Quotation_InternalSqlTable"></seealso>
 
 Public Class BaseWCanvass_Quotation_InternalSqlTable
-	Inherits DynamicSQLServerAdapter
+	Inherits StoredProceduresSQLServerAdapter
 	
 	Public Sub New()
 		MyBase.New()
 	End Sub
 
-	Public Sub New(ByVal connectionName As String)
-		MyBase.New(connectionName)
+	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
+		MyBase.New(connectionName, applicationName)
 	End Sub
 End Class
 End Namespace

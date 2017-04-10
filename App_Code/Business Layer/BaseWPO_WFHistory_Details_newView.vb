@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New WPO_WFHistory_Details_newSqlView()
 		Directcast(Me.DataAdapter, WPO_WFHistory_Details_newSqlView).ConnectionName = Me.ConnectionName
-		
+		Directcast(Me.DataAdapter, WPO_WFHistory_Details_newSqlView).ApplicationName = Me.ApplicationName
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WPO_IDColumn.CodeName = "WPO_ID"
         WPO_W_U_IDColumn.CodeName = "WPO_W_U_ID"

@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New Vw_WFinRep_DocAttach_FIN_MonthSqlView()
         Directcast(Me.DataAdapter, Vw_WFinRep_DocAttach_FIN_MonthSqlView).ConnectionName = Me.ConnectionName
-        
+        Directcast(Me.DataAdapter, Vw_WFinRep_DocAttach_FIN_MonthSqlView).ApplicationName = Me.ApplicationName
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         MoColumn.CodeName = "Mo"
         MoNameColumn.CodeName = "MoName"

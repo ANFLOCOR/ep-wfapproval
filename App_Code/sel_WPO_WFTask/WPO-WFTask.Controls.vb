@@ -385,7 +385,7 @@ Public Class WPOP10100RecordControl
                                         sEmailContent = Content_Formatter(itemValue6.WPO_SD_W_U_ID.ToString(), _
                                         "PO Approval Needed (PO# " & poNum.Trim() & ")", CStr(coDesc.ToString()), _
                                         sPODetail, CStr(deyt), "SUPPLIER: " & ctlHeader.VENDNAME.Text.Trim() & "<br>" & ctlWF.WPOP_Remark.Text, sngTotal.ToString("#,#.00") & sCurr, _
-                                        System.Web.HttpContext.Current.Session("UserID1").ToString(), "#4682b4", "sel_WPO_Activity_WPOP10100/Show-Sel-WPO-Activity-WPOP10100-Table.aspx", poNum.Trim(), _
+                                        System.Web.HttpContext.Current.Session("UserID1").ToString(), "#4682b4", "Security/Homepage.aspx", poNum.Trim(), _
                                         "Next Approver: " & nStep, "PENDING APPROVAL", "PO")
 
                                         Send_Email_Notification(itemValue6.WPO_SD_W_U_ID.ToString(), "PO Approval Needed (PO# " & _
@@ -859,7 +859,7 @@ Public Class WPOP10100RecordControl
                                 sEmailContent = Content_Formatter(SD_W_U_ID, _
                                 "PO Information Needed (PO# " & poNum.Trim() & ")", CStr(coDesc.ToString()), _
                                 sPODetail, CStr(deyt), "SUPPLIER: " & ctlHeader.VENDNAME.Text.Trim() & "<br>" & ctlWF.WPOP_Remark.Text, sngTotal.ToString("#,#.00") & sCurr, _
-                                System.Web.HttpContext.Current.Session("UserID1").ToString(), "#f46f6f", "sel_WPO_Activity_WPOP10100/Show-Sel-WPO-Activity-WPOP10100-Table.aspx", poNum.Trim(), _
+                                System.Web.HttpContext.Current.Session("UserID1").ToString(), "#f46f6f", "Security/Homepage.aspx", poNum.Trim(), _
                                 "Rejected By " & nStep, "REJECTED", "PO")
 
                                 Send_Email_Notification(SD_W_U_ID, "PO Information Needed (PO# " & _
@@ -934,7 +934,7 @@ Public Class WPOP10100RecordControl
                         For Each itemValue21 As W_Email_DefaultRecord In W_Email_DefaultTable.GetRecords(wc2, Nothing, 0, 100)
                             If itemValue21.WED_IDSpecified Then
                                 sDirectory = "eportal" 'itemValue21.WE_Directory.ToString()
-                                sSite = "http://eportal.anflocor.com" 'itemValue21.WE_Site.ToString()
+                                sSite = "http://aportal.anflocor.com" 'itemValue21.WE_Site.ToString()
                                 sTemplate = itemValue21.WED_Template.ToString()
                             End If
                         Next
@@ -1781,18 +1781,24 @@ Public Class Sel_WPO_InquireDetailsTableControlRow
         End Sub
 
         Public Function IsInventoriedItem() As Boolean
-            Dim obC As OrderBy = New OrderBy(False, False)
-            Dim rec As Sel_IV00101Record = Sel_IV00101View.GetRecord("ITEMNMBR='" & Me.ITEMNMBR.Text & "' AND Company_ID='" & Me.CompanyID1.Text & "'", obC)
-            If Not (IsNothing(rec)) Then
-                If rec.ITEMDESCSpecified Then
-                    Return True
+
+            Try
+                Dim obC As OrderBy = New OrderBy(False, False)
+                Dim rec As Sel_IV00101Record = Sel_IV00101View.GetRecord("ITEMNMBR='" & Me.ITEMNMBR.Text & "' AND Company_ID='" & Me.CompanyID1.Text & "'", obC)
+                If Not (IsNothing(rec)) Then
+                    If rec.ITEMDESCSpecified Then
+                        Return True
+                    Else
+                        Return False
+                    End If
                 Else
                     Return False
                 End If
-            Else
-                Return False
-            End If
+            Catch ex As Exception
 
+                Return False
+
+            End Try
 
         End Function
 

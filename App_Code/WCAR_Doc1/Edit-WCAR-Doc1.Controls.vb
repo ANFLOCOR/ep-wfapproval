@@ -645,6 +645,7 @@ Public Class WCAR_Doc1RecordControl
 
             If Default_Type = "" Then
                 wc2.iAND(W_Email1Table.WE_U_ID, BaseFilter.ComparisonOperator.EqualsTo, User_ID)
+                wc2.iAND(W_Email1Table.WE_Directory, BaseFilter.ComparisonOperator.EqualsTo, "eportal")
                 'wc2.iAND(SysSetupWASSEmailTable.WE_U_ID, BaseFilter.ComparisonOperator.EqualsTo, User_ID)
 
                 If W_Email1Table.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then

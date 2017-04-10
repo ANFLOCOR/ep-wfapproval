@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New View_FS_PackageForConsoSqlView()
 		Directcast(Me.DataAdapter, View_FS_PackageForConsoSqlView).ConnectionName = Me.ConnectionName
-		
+		Directcast(Me.DataAdapter, View_FS_PackageForConsoSqlView).ApplicationName = Me.ApplicationName
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         wass_C_IDColumn.CodeName = "wass_C_ID"
         ID0Column.CodeName = "ID0"

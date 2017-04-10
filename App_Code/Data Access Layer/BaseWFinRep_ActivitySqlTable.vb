@@ -19,14 +19,14 @@ Namespace ePortalWFApproval.Data
 ''' <seealso cref="WFinRep_ActivitySqlTable"></seealso>
 
 Public Class BaseWFinRep_ActivitySqlTable
-	Inherits DynamicSQLServerAdapter
+	Inherits StoredProceduresSQLServerAdapter
 	
 	Public Sub New()
 		MyBase.New()
 	End Sub
 
-	Public Sub New(ByVal connectionName As String)
-		MyBase.New(connectionName)
+	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
+		MyBase.New(connectionName, applicationName)
 	End Sub
 End Class
 End Namespace

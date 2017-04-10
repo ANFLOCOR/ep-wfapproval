@@ -19,14 +19,14 @@ Namespace ePortalWFApproval.Data
 ''' <seealso cref="Sel_WCAR_Doc_Creator_ApproverSqlView"></seealso>
 
 Public Class BaseSel_WCAR_Doc_Creator_ApproverSqlView
-	Inherits DynamicSQLServerAdapter
+	Inherits StoredProceduresSQLServerAdapter
 	
 	Public Sub New()
 		MyBase.New()
 	End Sub
 
-	Public Sub New(ByVal connectionName As String)
-		MyBase.New(connectionName)
+	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
+		MyBase.New(connectionName, applicationName)
 	End Sub
 End Class
 End Namespace

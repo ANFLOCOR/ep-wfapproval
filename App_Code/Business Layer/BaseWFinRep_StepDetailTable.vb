@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WFinRep_StepDetailSqlTable()
         Directcast(Me.DataAdapter, WFinRep_StepDetailSqlTable).ConnectionName = Me.ConnectionName
-        
+        Directcast(Me.DataAdapter, WFinRep_StepDetailSqlTable).ApplicationName = Me.ApplicationName
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WFIN_SD_IDColumn.CodeName = "WFIN_SD_ID"
         WFIN_SD_S_IDColumn.CodeName = "WFIN_SD_S_ID"

@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WFinRepNGP_DocAttachSqlTable()
         Directcast(Me.DataAdapter, WFinRepNGP_DocAttachSqlTable).ConnectionName = Me.ConnectionName
-        
+        Directcast(Me.DataAdapter, WFinRepNGP_DocAttachSqlTable).ApplicationName = Me.ApplicationName
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WFRCDNGP_IDColumn.CodeName = "WFRCDNGP_ID"
         WFRCDNGP_YearColumn.CodeName = "WFRCDNGP_Year"

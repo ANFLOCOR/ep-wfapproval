@@ -19,13 +19,13 @@ Namespace ePortalWFApproval.Data
 ''' <seealso cref="Sel_WFIN_ApproverPageSqlView"></seealso>
 
 Public Class BaseSel_WFIN_ApproverPageSqlView
-	Inherits DynamicSQLServerAdapter
+	Inherits StoredProceduresSQLServerAdapter
 	
 	Public Sub New()
 	End Sub
 	
-	Public Sub New(ByVal connectionName As String)
-		MyBase.New(connectionName)
+	Public Sub New(ByVal connectionName As String, ByVal applicationName As String)
+		MyBase.New(connectionName, applicationName)
 	End Sub
 End Class
 End Namespace

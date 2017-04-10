@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WPO_Doc_AttachSqlTable()
         Directcast(Me.DataAdapter, WPO_Doc_AttachSqlTable).ConnectionName = Me.ConnectionName
-        
+        Directcast(Me.DataAdapter, WPO_Doc_AttachSqlTable).ApplicationName = Me.ApplicationName
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WPODA_IDColumn.CodeName = "WPODA_ID"
         WPODA_PONoColumn.CodeName = "WPODA_PONo"

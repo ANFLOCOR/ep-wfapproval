@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New Sel_WPO_InquireDetails_2SqlView()
 		Directcast(Me.DataAdapter, Sel_WPO_InquireDetails_2SqlView).ConnectionName = Me.ConnectionName
-		
+		Directcast(Me.DataAdapter, Sel_WPO_InquireDetails_2SqlView).ApplicationName = Me.ApplicationName
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         CompanyIDColumn.CodeName = "CompanyID"
         PONUMBERColumn.CodeName = "PONUMBER"
