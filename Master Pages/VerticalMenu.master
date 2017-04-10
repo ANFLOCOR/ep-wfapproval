@@ -589,41 +589,41 @@ ISD_GeolocationInit();
 
   }
 
-  function OpenRptViewerApp(Control1, Control2, Control3, Control4)
-				{
-					var width  = 1024;
-					var height = 600;
-					var left   = (screen.width  - width)/2;
-					var top    = (screen.height - height)/2;
-					var params = 'width='+width+', height='+height;
-					params += ', top='+top+', left='+left;
-					params += ', directories=no';
-					params += ', location=no';
-					params += ', menubar=no';
-					params += ', resizable=yes';
-					params += ', scrollbars=yes';
-					params += ', status=no';
-					params += ', toolbar=no';
-					params += ', modal=yes';
-					
-					var RepYear = document.getElementById(Control1);
-					var RepMo = document.getElementById(Control2);
-					var RepComp = document.getElementById(Control3);
-					var RepType = document.getElementById(Control4);
-					
-					
-					var selectedText;
+  function OpenRptViewerApp(Control1, Control2, Control3, Control4) {
+      var width = 1024;
+      var height = 600;
+      var left = (screen.width - width) / 2;
+      var top = (screen.height - height) / 2;
+      var params = 'width=' + width + ', height=' + height;
+      params += ', top=' + top + ', left=' + left;
+      params += ', directories=no';
+      params += ', location=no';
+      params += ', menubar=no';
+      params += ', resizable=yes';
+      params += ', scrollbars=yes';
+      params += ', status=no';
+      params += ', toolbar=no';
+      params += ', modal=yes';
 
-					if (RepComp.nodeName == "SELECT") {
-					 selectedText = RepComp.options[RepComp.selectedIndex].text; }
-					else {
-					 selectedText = RepComp.value
-					}
-				  	var url = '../WFinRep_Head1/WFin-RepInquiryView1.aspx?Control1=' + RepYear.value + '&Control2=' + RepMo.value + '&Control3=' + selectedText + '&Control4=' + RepType.value;
-				  	window.open(url, '', params);
-					  
-										
-				}	
+      var RepYear = document.getElementById(Control1);
+      var RepMo = document.getElementById(Control2);
+      var RepComp = document.getElementById(Control3);
+      var RepType = document.getElementById(Control4);
+
+
+      var selectedText;
+
+      if (RepComp.nodeName == "SELECT") {
+          selectedText = RepComp.options[RepComp.selectedIndex].text;
+      }
+      else {
+          selectedText = RepComp.value
+      }
+      var url = '../WFinRep_Head1/WFin-RepInquiryView1.aspx?Control1=' + RepYear.value + '&Control2=' + RepMo.value + '&Control3=' + selectedText + '&Control4=' + RepType.value;
+      window.open(url, '', params);
+
+
+  }
 
   function OpenRptViewerApp2(Control1, Control2, Control3, Control4, companyCtrl, Control5, Control6)
   {

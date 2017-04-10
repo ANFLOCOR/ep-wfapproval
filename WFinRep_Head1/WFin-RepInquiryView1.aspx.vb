@@ -216,15 +216,15 @@ Partial Public Class WFin_RepInquiryView1
         
    
 
-'Public Sub SetbtnBack()
-'            SetbtnBack_Base() 
-'        End Sub              
-'Public Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
-'          ' Click handler for btnBack.
-'          ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'          btnBack_Click_Base(sender, args)
-'          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
+Public Sub SetbtnBack()
+            SetbtnBack_Base() 
+        End Sub              
+Public Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
+          ' Click handler for btnBack.
+          ' Customize by adding code before the call or replace the call to the Base function with your own code.
+          btnBack_Click_Base(sender, args)
+          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        End Sub
 #End Region
 
 #Region "Section 2: Do not modify this section."
@@ -240,6 +240,8 @@ Partial Public Class WFin_RepInquiryView1
 
           ' Setup the pagination events.
         
+              AddHandler Me.btnBack.Button.Click, AddressOf btnBack_Click
+                        
           Me.ClearControlsFromSession()
     
           System.Web.HttpContext.Current.Session("isd_geo_location") = "<location><error>LOCATION_ERROR_DISABLED</error></location>"
@@ -290,7 +292,7 @@ Partial Public Class WFin_RepInquiryView1
             End If
         
         
-            Page.Title = "Preview Inquiry"
+            Page.Title = "Blank page"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If
@@ -470,6 +472,8 @@ Partial Public Class WFin_RepInquiryView1
             
                 ' initialize aspx controls
                 
+                SetbtnBack()
+              
                 
 
             Catch ex As Exception
@@ -538,12 +542,50 @@ Partial Public Class WFin_RepInquiryView1
         
 
         ' Write out the Set methods
-            
+        
+        Public Sub SetbtnBack_Base()                
+              
+   
+        End Sub
+                
 
         ' Write out the DataSource properties and methods
                 
 
         ' Write out event methods for the page events
+        
+        ' event handler for Button
+        Public Sub btnBack_Click_Base(ByVal sender As Object, ByVal args As EventArgs)
+              
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+
+                ' if target is specified meaning that is opened on popup or new window
+                If Page.Request("target") <> "" Then
+                    shouldRedirect = False
+                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "ClosePopup", "closePopupPage();", True)                   
+                End If
+      
+            Catch ex As Exception
+            
+                shouldRedirect = False
+                Me.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+            If shouldRedirect Then
+                Me.ShouldSaveControlsToSession = True
+      Me.RedirectBack()
+        
+            End If
+        End Sub
             
     
 #End Region

@@ -96,7 +96,7 @@ Public Class WFinRep_HeadTableControlRow
 
             Dim wherechecker As String = Nothing
             If Not System.Web.HttpContext.Current.Session("UserName").ToString Is Nothing And Not System.Web.HttpContext.Current.Session("UserName").ToString = "" Then
-                wherechecker = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "='" & System.Web.HttpContext.Current.Session("UserName").ToString.Trim & "' AND " & Sel_W_User_DYNAMICS_Company_FSView.IsNonGP.UniqueName & "=0 " 'AND " & Sel_W_User_DYNAMICS_Company_FSView.Company_ID.UniqueName & "='" & Me.DataSource.HFIN_C_ID.ToString & "'"
+                wherechecker = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "='" & System.Web.HttpContext.Current.Session("UserName").ToString.Trim & "' AND " & Sel_W_User_DYNAMICS_Company_FSView.IsNonGP.UniqueName & "=1 AND " & Sel_W_User_DYNAMICS_Company_FSView.Company_ID.UniqueName & "='" & Me.HFIN_C_ID1.Text & "'"
             Else
                 wherechecker = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "="
             End If
