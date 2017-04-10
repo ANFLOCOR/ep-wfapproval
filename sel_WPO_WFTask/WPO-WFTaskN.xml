@@ -58,6 +58,10 @@
           <Value>Approve</Value>
           <Type>ResourceReference</Type>
         </Attribute>
+        <Attribute>
+          <Name>Width</Name>
+          <Value>100px</Value>
+        </Attribute>
       </PassthroughAttributes>
       <InsideControl>WPOP10100RecordControl</InsideControl>
     </ContainedComponent>
@@ -78,6 +82,10 @@
           <Name>ToolTip</Name>
           <Value>Reject</Value>
           <Type>ResourceReference</Type>
+        </Attribute>
+        <Attribute>
+          <Name>Width</Name>
+          <Value>100px</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WPOP10100RecordControl</InsideControl>
@@ -101,6 +109,10 @@
         <Attribute>
           <Name>Text</Name>
           <Value>Return</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Width</Name>
+          <Value>100px</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WPOP10100RecordControl</InsideControl>

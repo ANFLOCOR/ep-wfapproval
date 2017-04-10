@@ -2913,7 +2913,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>FS Workflow Approval</Value>
+          <Value>FS Workflow Approval (North)</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WFinRep_HeadRecordControl</InsideControl>

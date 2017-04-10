@@ -525,9 +525,9 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Case "PO"
                     Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../wf_PO/ShowSel_WPO_Activity_WPOP10100Table.aspx';"",1800); return false;")
                 Case "FS"
-                    Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/WFin_ApproverTable.aspx';"",1800); return false;")
+                    Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head1/WFin_ApproverTable1.aspx';"",1800); return false;")
                 Case "FSN"
-                    Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/WFinRepNGP_ApproverTable.aspx';"",1800); return false;")
+                    Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head1/WFinRepNGP_ApproverTable1.aspx';"",1800); return false;")
                 Case "CONSOLIDATED"
                     Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/Conso_ReportDoc_ApproverTable.aspx';"",1800); return false;")
                 Case "PO CANCEL"
