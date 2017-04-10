@@ -23,7 +23,7 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>Blank page</Value>
+          <Value>Preview Inquiry</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>

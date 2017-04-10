@@ -290,7 +290,7 @@ Partial Public Class WFin_RepInquiryView1
             End If
         
         
-            Page.Title = "Blank page"
+            Page.Title = "Preview Inquiry"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If
