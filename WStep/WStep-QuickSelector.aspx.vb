@@ -186,42 +186,7 @@ Partial Public Class WStep_QuickSelector
         ' Write out the methods for DataSource
         
    
-
-<System.Web.Services.WebMethod()> _
-        Public Shared Function GetImage(ByVal tableName As String, _
-                                        ByVal recordID As String, _
-                                        ByVal columnName As String, _
-                                        ByVal title As String, _
-                                        ByVal closeBtnText As String, _
-                                        ByVal persist As Boolean, _
-                                        ByVal popupWindowHeight As Integer, _
-                                        ByVal popupWindowWidth As Integer, _
-                                        ByVal popupWindowScrollBar As Boolean _
-                                        ) As Object()
-            ' GetImage gets the Image url for the image in the column "columnName" and
-            ' in the record specified by recordID in data base table specified by tableName.
-            ' Customize by adding code before or after the call to  GetImage_Base()
-            ' or replace the call to  GetImage_Base().
-            Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
-        End Function
-<System.Web.Services.WebMethod()> _
-        Public Shared Function GetRecordFieldValue(ByVal tableName As String, _
-                                                  ByVal recordID As String, _
-                                                  ByVal columnName As String, _
-                                                  ByVal fieldName As String, _
-                                                  ByVal title As String, _
-                                                  ByVal closeBtnText As String, _
-                                                  ByVal persist As Boolean, _
-                                                  ByVal popupWindowHeight As Integer, _
-                                                  ByVal popupWindowWidth As Integer, _
-                                                  ByVal popupWindowScrollBar As Boolean _
-                                                  ) As Object()
-            ' GetRecordFieldValue gets the pop up window content from the column specified by
-            ' columnName in the record specified by the recordID in data base table specified by tableName.
-            ' Customize by adding code before or after the call to  GetRecordFieldValue_Base()
-            ' or replace the call to  GetRecordFieldValue_Base().
-            Return GetRecordFieldValue_Base(tableName, recordID, columnName, fieldName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
-        End Function
+         
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _
