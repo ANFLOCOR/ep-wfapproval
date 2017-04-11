@@ -2346,6 +2346,10 @@
           <Value>Black</Value>
         </Attribute>
         <Attribute>
+          <Name>OnClientClick</Name>
+          <Value>return confirm("Continue submission of this document? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.");</Value>
+        </Attribute>
+        <Attribute>
           <Name>Text</Name>
           <Value>Approve</Value>
         </Attribute>
@@ -2381,6 +2385,10 @@
           <Value>Black</Value>
         </Attribute>
         <Attribute>
+          <Name>OnClientClick</Name>
+          <Value>return confirm("Continue submission of this document with Reject action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.");</Value>
+        </Attribute>
+        <Attribute>
           <Name>Text</Name>
           <Value>Reject</Value>
         </Attribute>
@@ -2414,6 +2422,10 @@
         <Attribute>
           <Name>ForeColor</Name>
           <Value>Black</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnClientClick</Name>
+          <Value>return confirm("Continue submission of this document with Return action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.");</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
@@ -3862,6 +3874,10 @@
             &lt;Name&gt;style&lt;/Name&gt;
             &lt;AttributeValue&gt;text-align:center;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;colspan&lt;/Name&gt;
+            &lt;AttributeValue&gt;2&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;RowAttributes&gt;
@@ -3961,13 +3977,23 @@
         &lt;Value&gt;&amp;lt;table&amp;gt;
 	&amp;lt;tr&amp;gt;
 		&amp;lt;td&amp;gt;&amp;lt;GEN:BUTTON NAME="btnPreview" /&amp;gt;&amp;lt;/td&amp;gt;
-		&amp;lt;td&amp;gt;&amp;lt;GEN:BUTTON NAME="btnPreview1" /&amp;gt;&amp;lt;/td&amp;gt;
-		&amp;lt;td&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="HFIN_File" /&amp;gt;&amp;lt;/td&amp;gt;
+		&amp;lt;td&amp;gt;&amp;lt;/td&amp;gt;
+		&amp;lt;td&amp;gt;&amp;lt;/td&amp;gt;
 	&amp;lt;/tr&amp;gt;	
 &amp;lt;/table&amp;gt;
  
 
 &lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:BUTTON NAME="btnPreview1" /&amp;gt; 
+&amp;lt;GEN:FIELDVALUE NAME="HFIN_File" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -3991,7 +4017,7 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;colspan&lt;/Name&gt;
-            &lt;AttributeValue&gt;7&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;8&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;

@@ -39,21 +39,102 @@ Partial Public Class WFin_RepApproveGPView
         
 #Region "Section 1: Place your customizations here."
     
-      Public Sub SetPageFocus()
-          'To set focus on page load to a specific control pass this control to the SetStartupFocus method. To get a hold of  a control
-          'use FindControlRecursively method. For example:
-          'Dim controlToFocus As System.Web.UI.WebControls.TextBox = DirectCast(Me.FindControlRecursively("ProductsSearch"), System.Web.UI.WebControls.TextBox)
-          'Me.SetFocusOnLoad(controlToFocus)
-          'If no control is passed or control does not exist this method will set focus on the first focusable control on the page.
-          Me.SetFocusOnLoad()  
-      End Sub
+        Public Sub SetPageFocus()
+            'load scripts to all controls on page so that they will retain focus on PostBack
+            Me.LoadFocusScripts(Me.Page)
+            'To set focus on page load to a specific control pass this control to the SetStartupFocus method. To get a hold of  a control
+            'use FindControlRecursively method. For example:
+            'Dim controlToFocus As System.Web.UI.WebControls.TextBox = DirectCast(Me.FindControlRecursively("ProductsSearch"), System.Web.UI.WebControls.TextBox)
+            'Me.SetFocusOnLoad(controlToFocus)
+            'If no control is passed or control does not exist this method will set focus on the first focusable control on the page.
+            Me.SetFocusOnLoad()
+        End Sub
        
       Public Sub LoadData()
           ' LoadData reads database data and assigns it to UI controls.
           ' Customize by adding code before or after the call to LoadData_Base()
           ' or replace the call to LoadData_Base().
           LoadData_Base()
-                  
+
+            Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServer")
+            Dim sParamYr As String = CStr(Me.Page.Request.QueryString("Control1"))
+            Dim sParamMo As String = CStr(Me.Page.Request.QueryString("Control2"))
+            Dim sParamPath As String = CStr(Me.Page.Request.QueryString("Control4"))
+            Dim sParamStatus As String = CStr(Me.Page.Request.QueryString("Control5"))
+            Dim sParamDB As String = CStr(Me.Page.Request.QueryString("compDB"))
+            Dim sParamHFIN As String = CStr(Me.Page.Request.QueryString("Control6"))
+            Dim dbNameStr As String = ""
+            Dim database As String = Nothing
+            Select Case sParamDB
+                Case "ANFLOCOR"
+                    dbNameStr = "AMIC_DW"
+                Case "UNIFINANCE"
+                    dbNameStr = "UNIFC_DW"
+                Case "DAVCO"
+                    dbNameStr = "DAVC_DW"
+                Case "PITRADE"
+                    dbNameStr = "PITRD_DW"
+                Case Else
+                    If IsNumeric(sParamDB) Then
+                        ''For Non GP Companies: Get the CompanyID from Company table (ANFLOGROUP_DW)
+                        ''pepanes 10.08.2015
+                        Dim obC As OrderBy = New OrderBy(False, False)
+                        Dim compRec As Vw_ANFLO_DW_CompanyNonGPRecord = Vw_ANFLO_DW_CompanyNonGPView.GetRecord("DynamicsCompanyID=" & sParamDB, obC)
+                        If Not (IsNothing(compRec)) Then
+                            dbNameStr = compRec.DWCompanyID.ToString
+                        End If
+
+                    Else
+                        dbNameStr = sParamDB
+                    End If
+            End Select
+            Dim sBSPath As String = ""
+            Dim sDesc As String = ""
+            If sParamDB = "ANFLOCOR" Then
+                sDesc = "/Financial Reports/FS Viewer/"
+                sBSPath = sDesc + sParamDB + " " + sParamPath
+            Else
+                If IsNumeric(sParamDB) Then
+                    ''For Non GP Companies: Get the CompanyID from Company table (ANFLOGROUP_DW)
+                    ''pepanes 10.08.2015
+                    Dim obC As OrderBy = New OrderBy(False, False)
+                    Dim compRec As Vw_ANFLO_DW_CompanyNonGPRecord = Vw_ANFLO_DW_CompanyNonGPView.GetRecord("DynamicsCompanyID=" & sParamDB, obC)
+                    If Not (IsNothing(compRec)) Then
+                        sDesc = "/Financial Reports/FS Viewer/"
+                    End If
+                    sBSPath = sDesc + compRec.ShortName.ToString + " " + sParamPath.ToUpper()
+                Else
+                    sDesc = "/ANFLOCOR/REPORTS/FINANCE/FS PACKAGE II/" & dbNameStr & "/"
+                    sBSPath = sDesc + dbNameStr + " " + sParamPath.ToUpper()
+                End If
+            End If
+            Dim sYr As String = sParamYr
+
+            Dim cMo As String = ""
+            Dim sMo As String = ""
+            'Dim sRem as String = sParamRem
+
+            Dim sUrl As String = ""
+            Dim sTemp As String = ""
+            If sYr <> "" Or Not IsNothing(sYr) Then
+                sYr = sYr.Replace("*", "&")
+            End If
+
+            If sParamMo <> "" Or Not IsNothing(sParamMo) Then
+                cMo = sParamMo
+                sMo = cMo.Replace("*", "&")
+            End If
+
+
+
+
+            'sUrl = "http://" & sWebServer & "/reportserver?" & sBSPath & "&rs:Command=Render"'&Year=" & sYr & "&ToMasterDateMonth=" & sMo & "&rc:Toolbar=true&rc:Parameters=collapsed"
+            sUrl = "http://" & sWebServer & "/reportserver?" & sBSPath & "&rs:Command=Render &Year=" & sYr & "&Month=" & sMo & "&DatabaseName=" & dbNameStr & "&Status=" & sParamStatus & "&HFIN_ID=" & sParamHFIN & "&rs:ClearSession=true&rc:Toolbar=true&rc:Parameters=false"
+
+
+            frm.Attributes("src") = sUrl
+
+
       End Sub
       
       Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS as Boolean) As String

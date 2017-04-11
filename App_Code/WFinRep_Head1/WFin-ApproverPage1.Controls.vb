@@ -1234,7 +1234,26 @@ End Class
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
 
+        Protected Overrides Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+            'Call LoadFocusScripts from repeater so that onfocus attribute could be added to elements
+            Me.Page.LoadFocusScripts(Me)
+
+
+            ' Register the event handlers.
+
+            'AddHandler Me.btnPreview.Button.Click, AddressOf btnPreview_Click
+
+            AddHandler Me.HFIN_C_ID3.TextChanged, AddressOf HFIN_C_ID3_TextChanged
+
+            AddHandler Me.HFIN_Month1.TextChanged, AddressOf HFIN_Month1_TextChanged
+
+
+            Dim oHeader As WFinRep_HeadRecordControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WFinRep_HeadRecordControl"), WFinRep_HeadRecordControl)
+
+            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewerApp('" & Me.HFIN_Year1.ClientID & "','" & Me.HFIN_Month1.ClientID & "', '" & oHeader.HFIN_C_ID1.ClientID & "', '" & oHeader.HFIN_Description1.ClientID & "');return false;")
+
+        End Sub
 
 		Public Overrides Sub SetHFIN_File()
 

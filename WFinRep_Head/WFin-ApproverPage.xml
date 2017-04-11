@@ -2367,6 +2367,10 @@
           <Value>page</Value>
         </Attribute>
         <Attribute>
+          <Name>OnClientClick</Name>
+          <Value>return confirm("Continue submission of this document? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.");</Value>
+        </Attribute>
+        <Attribute>
           <Name>Text</Name>
           <Value>Approve</Value>
         </Attribute>
@@ -2390,6 +2394,10 @@
           <Value>page</Value>
         </Attribute>
         <Attribute>
+          <Name>OnClientClick</Name>
+          <Value>return confirm("Continue submission of this document with Reject action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.");</Value>
+        </Attribute>
+        <Attribute>
           <Name>Text</Name>
           <Value>Reject</Value>
         </Attribute>
@@ -2411,6 +2419,10 @@
         <Attribute>
           <Name>Consumers</Name>
           <Value>page</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnClientClick</Name>
+          <Value>return confirm("Continue submission of this document with Return action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.");</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
