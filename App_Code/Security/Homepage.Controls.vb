@@ -102,6 +102,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                     Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../wf_cv/ShowSel_WCanvass_PO_Map_AdjustmentTable.aspx';"",1800); return false;")
                 Case "_CAR(RETURN)", "_PO(RETURN)"
                     Me.imbList.Visible = False
+                    Me.imbDoc.Visible = False
                 Case Else
                     Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../sel_WCAR_Doc_Creator_Approver/Show-Sel-WCAR-Doc-Creator-Approver-Table.aspx';"",1800); return false;")
             End Select
@@ -534,6 +535,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                     Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../wf_cv/ShowSel_WCanvass_PO_Map_AdjustmentTable.aspx';"",1800); return false;")
                 Case "_CAR(RETURN)", "_PO(RETURN)"
                     Me.imbList1.Visible = False
+                    Me.imbDoc1.Visible = False
                 Case Else
                     Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../sel_WCAR_Doc_Creator_Approver/Show-Sel-WCAR-Doc-Creator-Approver-Table.aspx';"",1800); return false;")
             End Select
