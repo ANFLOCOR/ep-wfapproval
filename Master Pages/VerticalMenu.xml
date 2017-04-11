@@ -457,7 +457,6 @@ ISD_GeolocationInit();
   params += ', toolbar=no';
   params += ', modal=yes';
 
-  //var target = window.opener.document.all('&amp;lt;%# Request.Params("Item") %&amp;gt;');
   var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Item.aspx?ItemNo=' + Item;
   window.open(url, '', params);
   }
@@ -478,7 +477,6 @@ ISD_GeolocationInit();
   params += ', toolbar=no';
   params += ', modal=yes';
 
-  //var target = window.opener.document.all('&amp;lt;%# Request.Params("Item") %&amp;gt;');
   var url = '../WCanvass_Internal/Inquiry-POP30300-POP30310-Item1.aspx?ItemNo=' + Item;
   window.open(url, '', params);
   }
