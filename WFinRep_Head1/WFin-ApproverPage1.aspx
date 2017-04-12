@@ -85,7 +85,7 @@
 	</asp:Button> 
 <asp:Button runat="server" id="pReject" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" onclientclick="return confirm(&quot;Continue submission of this document with Reject action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Reject" width="100px">		
 	</asp:Button> 
-<asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" onclientclick="return confirm(&quot;Continue submission of this document with Return action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Return for Revision" width="100px">		
+<asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" onclientclick="return confirm(&quot;Continue submission of this document with Return action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Return for Revision" width="150px">		
 	</asp:Button></td><td style="text-align:left;"><asp:dropdownlist cssclass="Filter_Input" id="ddlMoveTo" runat="server" width="238px" /></td></tr><tr><td><span style="white-space:nowrap;">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>

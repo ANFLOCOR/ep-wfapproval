@@ -112,7 +112,7 @@ Public Class WFinRep_HeadTableControlRow
             Next r
 
 
-            If (returnForRevisionRole = True) And Me.HFIN_Status.Text = "Completed" Then
+            If (System.Web.HttpContext.Current.Session("UserID").ToString = "101" Or System.Web.HttpContext.Current.Session("UserID").ToString = "158" Or returnForRevisionRole = True) And Me.HFIN_Status.Text = "Completed" Then
                 'Me.imbEdit.Visible = True
                 Me.btnEdit.Visible = True
             Else

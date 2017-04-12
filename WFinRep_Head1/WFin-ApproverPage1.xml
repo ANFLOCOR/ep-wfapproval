@@ -2433,7 +2433,7 @@
         </Attribute>
         <Attribute>
           <Name>Width</Name>
-          <Value>100px</Value>
+          <Value>150px</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WFinRep_HeadRecordControl</InsideControl>
