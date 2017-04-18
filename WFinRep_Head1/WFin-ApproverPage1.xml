@@ -453,6 +453,10 @@
           <Value>page</Value>
         </Attribute>
         <Attribute>
+          <Name>Button-RedirectURL</Name>
+          <Value>../WFinRep_Head1/WFin-RepInquiryView1.aspx?Control1={WFinRep_HeadTableControlRow:FV:HFIN_Year}&amp;Control2={WFinRep_HeadTableControlRow:FV:HFIN_Month}&amp;Control3={WFinRep_HeadTableControlRow:FV:HFIN_C_ID}&amp;Control4={WFinRep_HeadTableControlRow:FV:HFIN_Description}</Value>
+        </Attribute>
+        <Attribute>
           <Name>Button-Text</Name>
           <Value>Preview</Value>
         </Attribute>

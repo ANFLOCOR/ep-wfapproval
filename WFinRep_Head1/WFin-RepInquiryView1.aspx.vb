@@ -61,13 +61,12 @@ Partial Public Class WFin_RepInquiryView1
             'Dim sParamMo As String = CStr(Me.Page.Request.QueryString("sMo"))
             'Dim sParamPath As String = CStr(Me.Page.Request.QueryString("sPath"))
 
-            Dim sParamYr As String = CStr(Me.Page.Request.QueryString("Control1"))
-            Dim sParamMo As String = CStr(Me.Page.Request.QueryString("Control2"))
-            Dim sParamPath As String = CStr(Me.Page.Request.QueryString("Control3")) & " " & CStr(Me.Page.Request.QueryString("Control4"))
+            Dim sParamYr As String = Decrypt(CStr(Me.Page.Request.QueryString("Control1")))
+            Dim sParamMo As String = Decrypt(CStr(Me.Page.Request.QueryString("Control2")))
+            Dim sParamPath As String = Decrypt(CStr(Me.Page.Request.QueryString("Control3"))) & " " & Decrypt(CStr(Me.Page.Request.QueryString("Control4")))
             'Dim sParamRem As String = CStr(Me.Page.Request.QueryString("FIN_RWRem"))
 
-
-
+            
             Dim sDesc As String = "/Financial Reports/FS Viewer/"
             Dim sYr As String = sParamYr
             Dim sBSPath As String = sDesc & sParamPath
@@ -87,7 +86,7 @@ Partial Public Class WFin_RepInquiryView1
             End If
 
 
-
+            ''MsgBox(sWebServer & vbNewLine & sBSPath & vbNewLine & sYr & vbNewLine & sMo)
 
             sUrl = "http://" & sWebServer & "/reportserver?" & sBSPath & "&rs:Command=Render &Year=" & sYr & "&Month=" & sMo & "&rc:Toolbar=true&rc:Parameters=collapsed&rc:LinkTarget=_self"
             'sUrl = "http://" & sWebServer & "/reportserver?" & sBSPath & "&rs:Command=Render &Year=" & sYr & "&ToMasterDateMonth=" & sMo & "&rc:Toolbar=true&rc:Parameters=collapsed"
@@ -292,7 +291,7 @@ Public Sub btnBack_Click(ByVal sender As Object, ByVal args As EventArgs)
             End If
         
         
-            Page.Title = "Blank page"
+            Page.Title = "Preview Inquiry"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If
