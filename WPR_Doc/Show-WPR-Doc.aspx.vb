@@ -225,7 +225,7 @@ Partial Public Class Show_WPR_Doc
 '      ' Customize by adding code before or after the call to  GetAutoCompletionList_WCAR_Doc_AttachSearchText()
 '      ' or replace the call to GetAutoCompletionList_WCAR_Doc_AttachSearchText().
 '      Return GetAutoCompletionList_WCAR_Doc_AttachSearchText_Base(prefixText, count)
-'      End Function
+'      End Function 
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

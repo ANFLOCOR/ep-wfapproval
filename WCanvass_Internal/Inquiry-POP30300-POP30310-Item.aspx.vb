@@ -138,8 +138,7 @@ Partial Public Class Inquiry_POP30300_POP30310_Item
         
         ' Write out the methods for DataSource
         
-   
-
+    
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

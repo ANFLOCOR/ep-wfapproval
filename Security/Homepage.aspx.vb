@@ -22,53 +22,53 @@ Imports BaseClasses.Data.OrderByItem.OrderDir
 Imports BaseClasses.Data.BaseFilter
 Imports BaseClasses.Data.BaseFilter.ComparisonOperator
 Imports BaseClasses.Web.UI.WebControls
-        
+
 Imports ePortalWFApproval.Business
 Imports ePortalWFApproval.Data
-        
+
 
 #End Region
 
-  
+
 Namespace ePortalWFApproval.UI
-  
-Partial Public Class Homepage
+
+    Partial Public Class Homepage
         Inherits BaseApplicationPage
-' Code-behind class for the Homepage page.
-' Place your customizations in Section 1. Do not modify Section 2.
-        
+        ' Code-behind class for the Homepage page.
+        ' Place your customizations in Section 1. Do not modify Section 2.
+
 #Region "Section 1: Place your customizations here."
-    
-      Public Sub SetPageFocus()
-          'To set focus on page load to a specific control pass this control to the SetStartupFocus method. To get a hold of  a control
-          'use FindControlRecursively method. For example:
-          'Dim controlToFocus As System.Web.UI.WebControls.TextBox = DirectCast(Me.FindControlRecursively("ProductsSearch"), System.Web.UI.WebControls.TextBox)
-          'Me.SetFocusOnLoad(controlToFocus)
-          'If no control is passed or control does not exist this method will set focus on the first focusable control on the page.
-          Me.SetFocusOnLoad()  
-      End Sub
-       
-      Public Sub LoadData()
-          ' LoadData reads database data and assigns it to UI controls.
-          ' Customize by adding code before or after the call to LoadData_Base()
-          ' or replace the call to LoadData_Base().
-          LoadData_Base()
+
+        Public Sub SetPageFocus()
+            'To set focus on page load to a specific control pass this control to the SetStartupFocus method. To get a hold of  a control
+            'use FindControlRecursively method. For example:
+            'Dim controlToFocus As System.Web.UI.WebControls.TextBox = DirectCast(Me.FindControlRecursively("ProductsSearch"), System.Web.UI.WebControls.TextBox)
+            'Me.SetFocusOnLoad(controlToFocus)
+            'If no control is passed or control does not exist this method will set focus on the first focusable control on the page.
+            Me.SetFocusOnLoad()
+        End Sub
+
+        Public Sub LoadData()
+            ' LoadData reads database data and assigns it to UI controls.
+            ' Customize by adding code before or after the call to LoadData_Base()
+            ' or replace the call to LoadData_Base().
+            LoadData_Base()
             'Me.Sel_Approver_Pending_TasksTitle.Text = "Welcome " & System.Web.HttpContext.Current.Session("FullName").ToString()
             System.Web.HttpContext.Current.Session("ActivityUserID") = System.Web.HttpContext.Current.Session("UserID").ToString()
             System.Web.HttpContext.Current.Session("ActivityUserIDN") = System.Web.HttpContext.Current.Session("UserIDNorth").ToString()
-             End Sub
+        End Sub
 
-      
-      Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS as Boolean) As String
-          Return EvaluateFormula_Base(formula, dataSourceForEvaluate, format, variables, includeDS)
-      End Function
 
-      Public Sub Page_InitializeEventHandlers(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Init
+        Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula_Base(formula, dataSourceForEvaluate, format, variables, includeDS)
+        End Function
+
+        Public Sub Page_InitializeEventHandlers(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Init
             ' Handles MyBase.Init. 
             ' Register the Event handler for any Events.
-           Me.Page_InitializeEventHandlers_Base(sender,e)
-      End Sub
-      
+            Me.Page_InitializeEventHandlers_Base(sender, e)
+        End Sub
+
         Protected Overrides Sub SaveControlsToSession()
             SaveControlsToSession_Base()
         End Sub
@@ -86,36 +86,36 @@ Partial Public Class Homepage
         Protected Overrides Function SaveViewState() As Object
             Return SaveViewState_Base()
         End Function
-      
-      Public Sub Page_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreRender
-          Me.Page_PreRender_Base(sender,e)
-      End Sub
+
+        Public Sub Page_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreRender
+            Me.Page_PreRender_Base(sender, e)
+        End Sub
 
 
-      
-      Public Overrides Sub SaveData()
-          Me.SaveData_Base()
-      End Sub
-               
-               
 
-      Public Overrides Sub SetControl(ByVal control As String)
-          Me.SetControl_Base(control)
-      End Sub    
-      
-      
-      Public Sub Page_PreInit(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreInit
-          'Override call to PreInit_Base() here to change top level master page used by this page.
-          'For example for SharePoint applications uncomment next line to use Microsoft SharePoint default master page
-          'If Not Me.Master Is Nothing Then Me.Master.MasterPageFile = Microsoft.SharePoint.SPContext.Current.Web.MasterUrl	
-          'You may change here assignment of application theme
-          Try
-              Me.PreInit_Base()
-          Catch ex As Exception
-          
-          End Try			  
-      End Sub
-      
+        Public Overrides Sub SaveData()
+            Me.SaveData_Base()
+        End Sub
+
+
+
+        Public Overrides Sub SetControl(ByVal control As String)
+            Me.SetControl_Base(control)
+        End Sub
+
+
+        Public Sub Page_PreInit(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.PreInit
+            'Override call to PreInit_Base() here to change top level master page used by this page.
+            'For example for SharePoint applications uncomment next line to use Microsoft SharePoint default master page
+            'If Not Me.Master Is Nothing Then Me.Master.MasterPageFile = Microsoft.SharePoint.SPContext.Current.Web.MasterUrl	
+            'You may change here assignment of application theme
+            Try
+                Me.PreInit_Base()
+            Catch ex As Exception
+
+            End Try
+        End Sub
+
 #Region "Ajax Functions"
 
         ' ''<System.Web.Services.WebMethod()> _
@@ -154,67 +154,67 @@ Partial Public Class Homepage
         ' ''    ' or replace the call to  GetImage_Base().
         ' ''    Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
         ' ''End Function
-    
-      Protected Overloads Overrides Sub BasePage_PreRender(ByVal sender As Object, ByVal e As EventArgs)
-          MyBase.BasePage_PreRender(sender, e)
-          Base_RegisterPostback()
-      End Sub
-      
-    
-      
+
+        Protected Overloads Overrides Sub BasePage_PreRender(ByVal sender As Object, ByVal e As EventArgs)
+            MyBase.BasePage_PreRender(sender, e)
+            Base_RegisterPostback()
+        End Sub
+
+
+
 
 
 #End Region
 
-    ' Page Event Handlers - buttons, sort, links
-    
+        ' Page Event Handlers - buttons, sort, links
+
 
         ' Write out the Set methods
-                     
-        
-        ' Write out the methods for DataSource
-        
-   
 
-'Public Sub SetSel_Approver_Pending_TasksTableControl()
-'            SetSel_Approver_Pending_TasksTableControl_Base() 
-'        End Sub
-'<System.Web.Services.WebMethod()> _
-'      Public Shared Function GetAutoCompletionList_Sel_Approver_Pending_TasksSearchText(ByVal prefixText As String, ByVal count As Integer) As String()
-'      ' GetSel_Approver_Pending_TasksSearchTextCompletionList gets the list of suggestions from the database.
-'      ' prefixText is the search text typed by the user .
-'      ' count specifies the number of suggestions to be returned.
-'      ' Customize by adding code before or after the call to  GetAutoCompletionList_Sel_Approver_Pending_TasksSearchText()
-'      ' or replace the call to GetAutoCompletionList_Sel_Approver_Pending_TasksSearchText().
-'      Return GetAutoCompletionList_Sel_Approver_Pending_TasksSearchText_Base(prefixText, count)
-'      End Function
-Public Sub SetSel_Approver_Pending_TasksTableControl()
-            SetSel_Approver_Pending_TasksTableControl_Base() 
+
+        ' Write out the methods for DataSource
+
+
+
+        'Public Sub SetSel_Approver_Pending_TasksTableControl()
+        '            SetSel_Approver_Pending_TasksTableControl_Base() 
+        '        End Sub
+        '<System.Web.Services.WebMethod()> _
+        '      Public Shared Function GetAutoCompletionList_Sel_Approver_Pending_TasksSearchText(ByVal prefixText As String, ByVal count As Integer) As String()
+        '      ' GetSel_Approver_Pending_TasksSearchTextCompletionList gets the list of suggestions from the database.
+        '      ' prefixText is the search text typed by the user .
+        '      ' count specifies the number of suggestions to be returned.
+        '      ' Customize by adding code before or after the call to  GetAutoCompletionList_Sel_Approver_Pending_TasksSearchText()
+        '      ' or replace the call to GetAutoCompletionList_Sel_Approver_Pending_TasksSearchText().
+        '      Return GetAutoCompletionList_Sel_Approver_Pending_TasksSearchText_Base(prefixText, count)
+        '      End Function
+        Public Sub SetSel_Approver_Pending_TasksTableControl()
+            SetSel_Approver_Pending_TasksTableControl_Base()
         End Sub
-'Public Sub SetSel_Approver_Pending_Tasks2TableControl()
-'            SetSel_Approver_Pending_Tasks2TableControl_Base() 
-'        End Sub
-'<System.Web.Services.WebMethod()> _
-'      Public Shared Function GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText(ByVal prefixText As String, ByVal count As Integer) As String()
-'      ' GetSel_Approver_Pending_Tasks2SearchTextCompletionList gets the list of suggestions from the database.
-'      ' prefixText is the search text typed by the user .
-'      ' count specifies the number of suggestions to be returned.
-'      ' Customize by adding code before or after the call to  GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText()
-'      ' or replace the call to GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText().
-'      Return GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText_Base(prefixText, count)
-'      End Function
-Public Sub SetSel_Approver_Pending_Tasks2TableControl()
-            SetSel_Approver_Pending_Tasks2TableControl_Base() 
+        'Public Sub SetSel_Approver_Pending_Tasks2TableControl()
+        '            SetSel_Approver_Pending_Tasks2TableControl_Base() 
+        '        End Sub
+        '<System.Web.Services.WebMethod()> _
+        '      Public Shared Function GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText(ByVal prefixText As String, ByVal count As Integer) As String()
+        '      ' GetSel_Approver_Pending_Tasks2SearchTextCompletionList gets the list of suggestions from the database.
+        '      ' prefixText is the search text typed by the user .
+        '      ' count specifies the number of suggestions to be returned.
+        '      ' Customize by adding code before or after the call to  GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText()
+        '      ' or replace the call to GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText().
+        '      Return GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText_Base(prefixText, count)
+        '      End Function
+        Public Sub SetSel_Approver_Pending_Tasks2TableControl()
+            SetSel_Approver_Pending_Tasks2TableControl_Base()
         End Sub
-'<System.Web.Services.WebMethod()> _
-'      Public Shared Function GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText(ByVal prefixText As String, ByVal count As Integer) As String()
-'      ' GetSel_Approver_Pending_Tasks2SearchTextCompletionList gets the list of suggestions from the database.
-'      ' prefixText is the search text typed by the user .
-'      ' count specifies the number of suggestions to be returned.
-'      ' Customize by adding code before or after the call to  GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText()
-'      ' or replace the call to GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText().
-'      Return GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText_Base(prefixText, count)
-'      End Function
+        '<System.Web.Services.WebMethod()> _
+        '      Public Shared Function GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText(ByVal prefixText As String, ByVal count As Integer) As String()
+        '      ' GetSel_Approver_Pending_Tasks2SearchTextCompletionList gets the list of suggestions from the database.
+        '      ' prefixText is the search text typed by the user .
+        '      ' count specifies the number of suggestions to be returned.
+        '      ' Customize by adding code before or after the call to  GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText()
+        '      ' or replace the call to GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText().
+        '      Return GetAutoCompletionList_Sel_Approver_Pending_Tasks2SearchText_Base(prefixText, count)
+        '      End Function
         'Public Sub SetLinkButton()
         '            SetLinkButton_Base() 
         '        End Sub              
@@ -245,184 +245,219 @@ Public Sub SetSel_Approver_Pending_Tasks2TableControl()
         'Public Sub SetlbAPSPO1()
         '            SetlbAPSPO1_Base() 
         '        End Sub              
-'        Public Sub SetlbAPSPO()
-'            SetlbAPSPO_Base()
-'        End Sub
+        '        Public Sub SetlbAPSPO()
+        '            SetlbAPSPO_Base()
+        '        End Sub
         'Public Sub SetlbAPSCAR1()
         '            SetlbAPSCAR1_Base() 
         '        End Sub              
-'        Public Sub SetlbAPSCAR()
-'            SetlbAPSCAR_Base()
-'        End Sub
+        '        Public Sub SetlbAPSCAR()
+        '            SetlbAPSCAR_Base()
+        '        End Sub
         'Public Sub SetlbAPNPO1()
         '            SetlbAPNPO1_Base() 
         '        End Sub              
-'        Public Sub SetlbAPNPO()
-'            SetlbAPNPO_Base()
-'        End Sub
+        '        Public Sub SetlbAPNPO()
+        '            SetlbAPNPO_Base()
+        '        End Sub
         'Public Sub SetlbAPNCAR1()
         '            SetlbAPNCAR1_Base() 
         '        End Sub              
-'        Public Sub SetlbAPNCAR()
-'            SetlbAPNCAR_Base()
-'        End Sub
+        '        Public Sub SetlbAPNCAR()
+        '            SetlbAPNCAR_Base()
+        '        End Sub
         'Public Sub lbAPSPO1_Click(ByVal sender As Object, ByVal args As EventArgs)
         '          ' Click handler for lbAPSPO1.
         '          ' Customize by adding code before the call or replace the call to the Base function with your own code.
         '          lbAPSPO1_Click_Base(sender, args)
         '          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
         '        End Sub
-'        Public Sub lbAPSPO_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAPSPO.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAPSPO_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
+        '        Public Sub lbAPSPO_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAPSPO.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAPSPO_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
         'Public Sub lbAPSCAR1_Click(ByVal sender As Object, ByVal args As EventArgs)
         '          ' Click handler for lbAPSCAR1.
         '          ' Customize by adding code before the call or replace the call to the Base function with your own code.
         '          lbAPSCAR1_Click_Base(sender, args)
         '          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
         '        End Sub
-'        Public Sub lbAPSCAR_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAPSCAR.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAPSCAR_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
+        '        Public Sub lbAPSCAR_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAPSCAR.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAPSCAR_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
         'Public Sub lbAPNPO1_Click(ByVal sender As Object, ByVal args As EventArgs)
         '          ' Click handler for lbAPNPO1.
         '          ' Customize by adding code before the call or replace the call to the Base function with your own code.
         '          lbAPNPO1_Click_Base(sender, args)
         '          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
         '        End Sub
-'        Public Sub lbAPNPO_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAPNPO.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAPNPO_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
+        '        Public Sub lbAPNPO_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAPNPO.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAPNPO_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
         'Public Sub lbAPNCAR1_Click(ByVal sender As Object, ByVal args As EventArgs)
         '          ' Click handler for lbAPNCAR1.
         '          ' Customize by adding code before the call or replace the call to the Base function with your own code.
         '          lbAPNCAR1_Click_Base(sender, args)
         '          ' NOTE: If the Base function redirects to another page, any code here will not be executed.
         '        End Sub
-'        Public Sub lbAPNCAR_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAPNCAR.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAPNCAR_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub SetlbFSSNGP()
-'            SetlbFSSNGP_Base()
-'        End Sub
-'        Public Sub SetlbFSSGP()
-'            SetlbFSSGP_Base()
-'        End Sub
-'        Public Sub SetlbFSNNGP()
-'            SetlbFSNNGP_Base()
-'        End Sub
-'        Public Sub SetlbFSNGP()
-'            SetlbFSNGP_Base()
-'        End Sub
-'        Public Sub SetlbAHSPOL()
-'            SetlbAHSPOL_Base()
-'        End Sub
-'        Public Sub SetlbAHSPO()
-'            SetlbAHSPO_Base()
-'        End Sub
-'        Public Sub SetlbAHSCARL()
-'            SetlbAHSCARL_Base()
-'        End Sub
-'        Public Sub SetlbAHSCAR()
-'            SetlbAHSCAR_Base()
-'        End Sub
-'        Public Sub SetlbAHNPOL()
-'            SetlbAHNPOL_Base()
-'        End Sub
-'        Public Sub SetlbAHNPO()
-'            SetlbAHNPO_Base()
-'        End Sub
-'        Public Sub SetlbAHNCARL()
-'            SetlbAHNCARL_Base()
-'        End Sub
-'        Public Sub SetlbAHNCAR()
-'            SetlbAHNCAR_Base()
-'        End Sub
-'        Public Sub lbFSSNGP_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbFSSNGP.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbFSSNGP_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub lbFSSGP_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbFSSGP.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbFSSGP_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub lbFSNNGP_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbFSNNGP.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbFSNNGP_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub lbFSNGP_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbFSNGP.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbFSNGP_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub lbAHSPOL_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAHSPOL.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAHSPOL_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub lbAHSPO_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAHSPO.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAHSPO_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub lbAHSCARL_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAHSCARL.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAHSCARL_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub lbAHSCAR_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAHSCAR.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAHSCAR_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub lbAHNPOL_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAHNPOL.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAHNPOL_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub lbAHNPO_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAHNPO.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAHNPO_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub lbAHNCARL_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAHNCARL.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAHNCARL_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-'        Public Sub lbAHNCAR_Click(ByVal sender As Object, ByVal args As EventArgs)
-'            ' Click handler for lbAHNCAR.
-'            ' Customize by adding code before the call or replace the call to the Base function with your own code.
-'            lbAHNCAR_Click_Base(sender, args)
-'            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
-'        End Sub
-<System.Web.Services.WebMethod()> _
+        '        Public Sub lbAPNCAR_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAPNCAR.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAPNCAR_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub SetlbFSSNGP()
+        '            SetlbFSSNGP_Base()
+        '        End Sub
+        '        Public Sub SetlbFSSGP()
+        '            SetlbFSSGP_Base()
+        '        End Sub
+        '        Public Sub SetlbFSNNGP()
+        '            SetlbFSNNGP_Base()
+        '        End Sub
+        '        Public Sub SetlbFSNGP()
+        '            SetlbFSNGP_Base()
+        '        End Sub
+        '        Public Sub SetlbAHSPOL()
+        '            SetlbAHSPOL_Base()
+        '        End Sub
+        '        Public Sub SetlbAHSPO()
+        '            SetlbAHSPO_Base()
+        '        End Sub
+        '        Public Sub SetlbAHSCARL()
+        '            SetlbAHSCARL_Base()
+        '        End Sub
+        '        Public Sub SetlbAHSCAR()
+        '            SetlbAHSCAR_Base()
+        '        End Sub
+        '        Public Sub SetlbAHNPOL()
+        '            SetlbAHNPOL_Base()
+        '        End Sub
+        '        Public Sub SetlbAHNPO()
+        '            SetlbAHNPO_Base()
+        '        End Sub
+        '        Public Sub SetlbAHNCARL()
+        '            SetlbAHNCARL_Base()
+        '        End Sub
+        '        Public Sub SetlbAHNCAR()
+        '            SetlbAHNCAR_Base()
+        '        End Sub
+        '        Public Sub lbFSSNGP_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbFSSNGP.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbFSSNGP_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub lbFSSGP_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbFSSGP.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbFSSGP_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub lbFSNNGP_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbFSNNGP.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbFSNNGP_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub lbFSNGP_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbFSNGP.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbFSNGP_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub lbAHSPOL_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAHSPOL.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAHSPOL_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub lbAHSPO_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAHSPO.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAHSPO_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub lbAHSCARL_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAHSCARL.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAHSCARL_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub lbAHSCAR_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAHSCAR.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAHSCAR_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub lbAHNPOL_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAHNPOL.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAHNPOL_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub lbAHNPO_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAHNPO.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAHNPO_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub lbAHNCARL_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAHNCARL.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAHNCARL_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '        Public Sub lbAHNCAR_Click(ByVal sender As Object, ByVal args As EventArgs)
+        '            ' Click handler for lbAHNCAR.
+        '            ' Customize by adding code before the call or replace the call to the Base function with your own code.
+        '            lbAHNCAR_Click_Base(sender, args)
+        '            ' NOTE: If the Base function redirects to another page, any code here will not be executed.
+        '        End Sub
+        '<System.Web.Services.WebMethod()> _
+        '        Public Shared Function GetImage(ByVal tableName As String, _
+        '                                        ByVal recordID As String, _
+        '                                        ByVal columnName As String, _
+        '                                        ByVal title As String, _
+        '                                        ByVal closeBtnText As String, _
+        '                                        ByVal persist As Boolean, _
+        '                                        ByVal popupWindowHeight As Integer, _
+        '                                        ByVal popupWindowWidth As Integer, _
+        '                                        ByVal popupWindowScrollBar As Boolean _
+        '                                        ) As Object()
+        '            ' GetImage gets the Image url for the image in the column "columnName" and
+        '            ' in the record specified by recordID in data base table specified by tableName.
+        '            ' Customize by adding code before or after the call to  GetImage_Base()
+        '            ' or replace the call to  GetImage_Base().
+        '            Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
+        '        End Function
+        '<System.Web.Services.WebMethod()> _
+        '        Public Shared Function GetRecordFieldValue(ByVal tableName As String, _
+        '                                                  ByVal recordID As String, _
+        '                                                  ByVal columnName As String, _
+        '                                                  ByVal fieldName As String, _
+        '                                                  ByVal title As String, _
+        '                                                  ByVal closeBtnText As String, _
+        '                                                  ByVal persist As Boolean, _
+        '                                                  ByVal popupWindowHeight As Integer, _
+        '                                                  ByVal popupWindowWidth As Integer, _
+        '                                                  ByVal popupWindowScrollBar As Boolean _
+        '                                                  ) As Object()
+        '            ' GetRecordFieldValue gets the pop up window content from the column specified by
+        '            ' columnName in the record specified by the recordID in data base table specified by tableName.
+        '            ' Customize by adding code before or after the call to  GetRecordFieldValue_Base()
+        '            ' or replace the call to  GetRecordFieldValue_Base().
+        '            Return GetRecordFieldValue_Base(tableName, recordID, columnName, fieldName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
+        'End Function
+        <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _
                                         ByVal columnName As String, _
@@ -439,7 +474,7 @@ Public Sub SetSel_Approver_Pending_Tasks2TableControl()
             ' or replace the call to  GetImage_Base().
             Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
         End Function
-<System.Web.Services.WebMethod()> _
+        <System.Web.Services.WebMethod()> _
         Public Shared Function GetRecordFieldValue(ByVal tableName As String, _
                                                   ByVal recordID As String, _
                                                   ByVal columnName As String, _
@@ -816,8 +851,7 @@ Public Sub SetSel_Approver_Pending_Tasks2TableControl()
     
 #End Region
 
-  
-End Class
-  
+
+    End Class
+
 End Namespace
-  

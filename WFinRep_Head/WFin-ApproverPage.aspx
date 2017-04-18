@@ -82,11 +82,11 @@
  
 <span style="white-space:nowrap;">
 <asp:Literal runat="server" id="HFIN_C_ID" visible="False"></asp:Literal></span>
-</td><td><asp:Button runat="server" id="pApproved" causesvalidation="False" commandname="Redirect" consumers="page" text="Approve">		
+</td><td><asp:Button runat="server" id="pApproved" causesvalidation="False" commandname="Redirect" consumers="page" onclientclick="return confirm(&quot;Continue submission of this document? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Approve">		
 	</asp:Button> 
-<asp:Button runat="server" id="pReject" causesvalidation="False" commandname="Redirect" consumers="page" text="Reject">		
+<asp:Button runat="server" id="pReject" causesvalidation="False" commandname="Redirect" consumers="page" onclientclick="return confirm(&quot;Continue submission of this document with Reject action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Reject">		
 	</asp:Button> 
-<asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" text="Return for Revision">		
+<asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" onclientclick="return confirm(&quot;Continue submission of this document with Return action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Return for Revision">		
 	</asp:Button></td><td><asp:dropdownlist cssclass="Filter_Input" id="ddlMoveTo" runat="server" /></td></tr><tr><td><span style="white-space:nowrap;">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>

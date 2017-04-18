@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
 		Me.ApplicationName = "App_Code"
 		Me.DataAdapter = New Vw_WFinRep_DocAttach_ReportTypeSqlView()
 		Directcast(Me.DataAdapter, Vw_WFinRep_DocAttach_ReportTypeSqlView).ConnectionName = Me.ConnectionName
-		
+		Directcast(Me.DataAdapter, Vw_WFinRep_DocAttach_ReportTypeSqlView).ApplicationName = Me.ApplicationName
 		Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         FIN_IDColumn.CodeName = "FIN_ID"
         FIN_YearColumn.CodeName = "FIN_Year"

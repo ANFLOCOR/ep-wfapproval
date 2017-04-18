@@ -186,7 +186,6 @@ Partial Public Class Vw_WFinRep_DocAttach_FIN_Month_QuickSelector1
         ' Write out the methods for DataSource
         
    
-
 #End Region
 
 #Region "Section 2: Do not modify this section."

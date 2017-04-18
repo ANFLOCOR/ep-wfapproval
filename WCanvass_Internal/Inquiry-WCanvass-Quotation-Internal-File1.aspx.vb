@@ -148,7 +148,7 @@ Public Sub SetWCanvass_Quotation_InternalTableControl()
 '      ' Customize by adding code before or after the call to  GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText()
 '      ' or replace the call to GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText().
 '      Return GetAutoCompletionList_WCanvass_Quotation_Internal1SearchText_Base(prefixText, count)
-'      End Function
+'      End Function 
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

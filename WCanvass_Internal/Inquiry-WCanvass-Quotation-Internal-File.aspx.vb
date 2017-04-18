@@ -138,7 +138,7 @@ Partial Public Class Inquiry_WCanvass_Quotation_Internal_File
 
 Public Sub SetWCanvass_Quotation_InternalTableControl()
             SetWCanvass_Quotation_InternalTableControl_Base() 
-        End Sub
+        End Sub 
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

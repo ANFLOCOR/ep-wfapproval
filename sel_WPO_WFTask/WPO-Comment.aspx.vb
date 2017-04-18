@@ -176,7 +176,6 @@ Partial Public Class WPO_Comment
         ' Write out the methods for DataSource
         
    
-
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

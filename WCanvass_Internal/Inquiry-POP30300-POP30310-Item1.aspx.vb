@@ -148,7 +148,7 @@ Public Sub SetSel_POP30300_POP30310TableControl()
 '      ' Customize by adding code before or after the call to  GetAutoCompletionList_Sel_POP30300_POP303101SearchText()
 '      ' or replace the call to GetAutoCompletionList_Sel_POP30300_POP303101SearchText().
 '      Return GetAutoCompletionList_Sel_POP30300_POP303101SearchText_Base(prefixText, count)
-'      End Function
+'      End Function 
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

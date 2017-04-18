@@ -185,7 +185,6 @@ Partial Public Class Sel_WAttach_Type_WCAR_Doc_Attach_QuickSelector
         
         ' Write out the methods for DataSource
         
-   
 
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _

@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New WFin_ApprovalStatusSqlTable()
         Directcast(Me.DataAdapter, WFin_ApprovalStatusSqlTable).ConnectionName = Me.ConnectionName
-        
+        Directcast(Me.DataAdapter, WFin_ApprovalStatusSqlTable).ApplicationName = Me.ApplicationName
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         WPO_STAT_CDColumn.CodeName = "WPO_STAT_CD"
         WPO_STAT_DESCColumn.CodeName = "WPO_STAT_DESC"

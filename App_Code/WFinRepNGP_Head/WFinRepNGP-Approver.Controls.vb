@@ -1215,7 +1215,7 @@ Public Class WFinRepNGP_HeadTableControlRow
 
             AddHandler Me.WFRCHNGP_Year2.TextChanged, AddressOf WFRCHNGP_Year2_TextChanged
 
-            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewerApp2('" & Me.WFRCHNGP_Year2.ClientID & "','" & Me.WFRCHNGP_Month2.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_C_ID3.ClientID & "', '" & Me.WFRCHNGP_Status1.ClientID & "', '" & Me.WFRCHNGP_ID1.ClientID & "');return false;")
+            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewerApp2NGPSouthApp('" & Me.WFRCHNGP_Year2.ClientID & "','" & Me.WFRCHNGP_Month2.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_Description1.ClientID & "', '" & Me.WFRCHNGP_C_ID3.ClientID & "', '" & Me.WFRCHNGP_Status1.ClientID & "', '" & Me.WFRCHNGP_ID1.ClientID & "');return false;")
 
         End Sub
 
@@ -1376,7 +1376,85 @@ Public Class WFinRepNGP_HeadTableControlRow
 
 
 
-End Class
+
+        Public Overrides Sub SetWFRCHNGP_C_ID2()
+
+
+
+
+            ' Set the WFRCHNGP_C_ID Literal on the webpage with value from the
+            ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
+
+            ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
+            ' Me.WFRCHNGP_C_ID2 is the ASP:Literal on the webpage.
+
+            ' You can modify this method directly, or replace it with a call to
+            '     MyBase.SetWFRCHNGP_C_ID2()
+            ' and add your own code before or after the call to the MyBase function.
+
+
+            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_C_IDSpecified Then
+
+                ' If the WFRCHNGP_C_ID is non-NULL, then format the value.
+                Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
+
+                Dim sWhere As String = ""
+                Dim ordB As New OrderBy(False, False)
+
+                ordB.Add(View_DW_CompanyView.wass_C_ID, OrderByItem.OrderDir.Asc)
+                sWhere = "DynamicsCompanyID ='" & formattedValue & "'"
+
+                Dim dw_company As View_DW_CompanyRecord = View_DW_CompanyView.GetRecord(sWhere, ordB)
+
+                If IsNothing(dw_company) = False Then
+
+                    formattedValue = dw_company.ShortName
+                End If
+
+                formattedValue = HttpUtility.HtmlEncode(formattedValue)
+                Me.WFRCHNGP_C_ID2.Text = formattedValue
+
+            Else
+
+                ' WFRCHNGP_C_ID is NULL in the database, so use the Default Value.  
+                ' Default Value could also be NULL.
+
+                Me.WFRCHNGP_C_ID2.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
+
+            End If
+
+            ' If the WFRCHNGP_C_ID is NULL or blank, then use the value specified  
+            ' on Properties.
+            If Me.WFRCHNGP_C_ID2.Text Is Nothing _
+                OrElse Me.WFRCHNGP_C_ID2.Text.Trim() = "" Then
+                ' Set the value specified on the Properties.
+                Me.WFRCHNGP_C_ID2.Text = "&nbsp;"
+            End If
+
+
+
+
+            'If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_C_IDSpecified Then
+
+            ' If the WFRCHNGP_C_ID is non-NULL, then format the value.
+
+            ' The Format method will use the Display Format
+            '   Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
+
+            '  formattedValue = HttpUtility.HtmlEncode(formattedValue)
+            ' Me.WFRCHNGP_C_ID2.Text = formattedValue
+
+            'Else 
+
+            ' WFRCHNGP_C_ID is NULL in the database, so use the Default Value.  
+            ' Default Value could also be NULL.
+
+            '    Me.WFRCHNGP_C_ID2.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
+
+            '  End If
+
+        End Sub
+    End Class
 Public Class WFinRepNGP_DocAttachTableControl
         Inherits BaseWFinRepNGP_DocAttachTableControl
 
@@ -7722,45 +7800,45 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                         
               AddHandler Me.btnPreview1.Button.Click, AddressOf btnPreview1_Click
                         
-            AddHandler Me.WFRCHNGP_C_ID3.TextChanged, AddressOf WFRCHNGP_C_ID3_TextChanged
-
-            AddHandler Me.WFRCHNGP_Description1.TextChanged, AddressOf WFRCHNGP_Description1_TextChanged
-
-            AddHandler Me.WFRCHNGP_ID1.TextChanged, AddressOf WFRCHNGP_ID1_TextChanged
-
-            AddHandler Me.WFRCHNGP_Month2.TextChanged, AddressOf WFRCHNGP_Month2_TextChanged
-
-            AddHandler Me.WFRCHNGP_Status1.TextChanged, AddressOf WFRCHNGP_Status1_TextChanged
-
-            AddHandler Me.WFRCHNGP_Year2.TextChanged, AddressOf WFRCHNGP_Year2_TextChanged
-
-
+              AddHandler Me.WFRCHNGP_C_ID3.TextChanged, AddressOf WFRCHNGP_C_ID3_TextChanged
+            
+              AddHandler Me.WFRCHNGP_Description1.TextChanged, AddressOf WFRCHNGP_Description1_TextChanged
+            
+              AddHandler Me.WFRCHNGP_ID1.TextChanged, AddressOf WFRCHNGP_ID1_TextChanged
+            
+              AddHandler Me.WFRCHNGP_Month2.TextChanged, AddressOf WFRCHNGP_Month2_TextChanged
+            
+              AddHandler Me.WFRCHNGP_Status1.TextChanged, AddressOf WFRCHNGP_Status1_TextChanged
+            
+              AddHandler Me.WFRCHNGP_Year2.TextChanged, AddressOf WFRCHNGP_Year2_TextChanged
+            
+    
         End Sub
 
-
-        Public Overridable Sub LoadData()
-
+        
+        Public Overridable Sub LoadData()        
+                
             ' Load the data from the database into the DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
             ' It is better to make changes to functions called by LoadData such as
             ' CreateWhereClause, rather than making changes here.
-
+    
             ' The RecordUniqueId is set the first time a record is loaded, and is
             ' used during a PostBack to load the record.
-
+          
             If Me.RecordUniqueId IsNot Nothing AndAlso Me.RecordUniqueId.Trim <> "" Then
                 Me.DataSource = WFinRepNGP_HeadTable.GetRecord(Me.RecordUniqueId, True)
-
+          
                 Return
             End If
-
+        
             ' Since this is a row in the table, the data for this row is loaded by the 
             ' LoadData method of the BaseWFinRepNGP_HeadTableControl when the data for the entire
             ' table is loaded.
-
+            
             Me.DataSource = New WFinRepNGP_HeadRecord()
-
-
-
+          
+    
+    
         End Sub
 
         ' Populate the UI controls using the DataSource.  To customize, override this method in WFinRepNGP_HeadTableControlRow.
@@ -7769,684 +7847,684 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             ' from the database record.  To do this, it calls the Set methods for 
             ' each of the field displayed on the webpage.  It is better to make 
             ' changes in the Set methods, rather than making changes here.
-
+            
             MyBase.DataBind()
             Me.ClearControlsFromSession()
 
             ' Make sure that the DataSource is initialized.
             If Me.DataSource Is Nothing Then
-
+              
                 Return
             End If
-
-
+             
+   
             'LoadData for DataSource for chart and report if they exist
-
+          
             ' Store the checksum. The checksum is used to
             ' ensure the record was not changed by another user.
-            If Not Me.DataSource.GetCheckSumValue() Is Nothing Then
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing
                 Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
             End If
-
-
-
+            
+      
+      
             ' Call the Set methods for each controls on the panel
-
-
-
-
-            SetWFinRepNGP_HeadTableControlTabContainer()
-            SetWFRCHNGP_C_ID2()
-            SetWFRCHNGP_C_ID3()
-            SetWFRCHNGP_Description1()
-            SetWFRCHNGP_Description2()
-            SetWFRCHNGP_File()
-            SetWFRCHNGP_ID1()
-            SetWFRCHNGP_Month1()
-            SetWFRCHNGP_Month2()
-            SetWFRCHNGP_Remark1()
-            SetWFRCHNGP_RptCount()
-            SetWFRCHNGP_Status1()
-            SetWFRCHNGP_Year1()
-            SetWFRCHNGP_Year2()
-            SetbtnPreview()
-
-            SetbtnPreview1()
-
-
-
+        
+                
+                
+                
+                SetWFinRepNGP_HeadTableControlTabContainer()
+                SetWFRCHNGP_C_ID2()
+                SetWFRCHNGP_C_ID3()
+                SetWFRCHNGP_Description1()
+                SetWFRCHNGP_Description2()
+                SetWFRCHNGP_File()
+                SetWFRCHNGP_ID1()
+                SetWFRCHNGP_Month1()
+                SetWFRCHNGP_Month2()
+                SetWFRCHNGP_Remark1()
+                SetWFRCHNGP_RptCount()
+                SetWFRCHNGP_Status1()
+                SetWFRCHNGP_Year1()
+                SetWFRCHNGP_Year2()
+                SetbtnPreview()
+              
+                SetbtnPreview1()
+              
+      
+      
             Me.IsNewRecord = True
-
+            
             If Me.DataSource.IsCreated Then
                 Me.IsNewRecord = False
-
+                
                 If Me.DataSource.GetID IsNot Nothing Then
                     Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
                 End If
-
+                
             End If
-
+            
             ' Now load data for each record and table child UI controls.
             ' Ordering is important because child controls get 
             ' their parent ids from their parent UI controls.
             Dim shouldResetControl As Boolean = False
-
-            SetWFinRepNGP_DocAttachTableControl()
-
+                      
+        SetWFinRepNGP_DocAttachTableControl()
+        
         End Sub
-
-
+        
+        
         Public Overridable Sub SetWFRCHNGP_C_ID2()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_C_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_C_ID2 is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_C_ID2()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_C_IDSpecified Then
-
+                				
                 ' If the WFRCHNGP_C_ID is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WFRCHNGP_C_ID2.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_C_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_C_ID2.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WFRCHNGP_C_ID2.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_C_ID3()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.WFRCHNGP_C_ID3.ID) Then
-
+            
                 Me.WFRCHNGP_C_ID3.Text = Me.PreviousUIData(Me.WFRCHNGP_C_ID3.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the WFRCHNGP_C_ID TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_C_ID3 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_C_ID3()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_C_IDSpecified Then
-
+                				
                 ' If the WFRCHNGP_C_ID is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
-
+                              
                 Me.WFRCHNGP_C_ID3.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_C_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_C_ID3.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
-
-            End If
-
-            AddHandler Me.WFRCHNGP_C_ID3.TextChanged, AddressOf WFRCHNGP_C_ID3_TextChanged
-
+        
+                 Me.WFRCHNGP_C_ID3.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_C_ID3.TextChanged, AddressOf WFRCHNGP_C_ID3_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Description1()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.WFRCHNGP_Description1.ID) Then
-
+            
                 Me.WFRCHNGP_Description1.Text = Me.PreviousUIData(Me.WFRCHNGP_Description1.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the WFRCHNGP_Description TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Description1 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Description1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_DescriptionSpecified Then
-
+                				
                 ' If the WFRCHNGP_Description is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Description)
-
+                              
                 Me.WFRCHNGP_Description1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Description is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Description1.Text = WFinRepNGP_HeadTable.WFRCHNGP_Description.Format(WFinRepNGP_HeadTable.WFRCHNGP_Description.DefaultValue)
-
-            End If
-
-            AddHandler Me.WFRCHNGP_Description1.TextChanged, AddressOf WFRCHNGP_Description1_TextChanged
-
+        
+                 Me.WFRCHNGP_Description1.Text = WFinRepNGP_HeadTable.WFRCHNGP_Description.Format(WFinRepNGP_HeadTable.WFRCHNGP_Description.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_Description1.TextChanged, AddressOf WFRCHNGP_Description1_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Description2()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_Description Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Description2 is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Description2()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_DescriptionSpecified Then
-
+                				
                 ' If the WFRCHNGP_Description is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Description)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WFRCHNGP_Description2.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Description is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Description2.Text = WFinRepNGP_HeadTable.WFRCHNGP_Description.Format(WFinRepNGP_HeadTable.WFRCHNGP_Description.DefaultValue)
-
-            End If
-
+        
+                 Me.WFRCHNGP_Description2.Text = WFinRepNGP_HeadTable.WFRCHNGP_Description.Format(WFinRepNGP_HeadTable.WFRCHNGP_Description.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_File()
 
-
-
+                  
+                
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_FileSpecified Then
-
+                
                 Me.WFRCHNGP_File.Text = Page.GetResourceValue("Txt:OpenFile", "ePortalWFApproval")
-
+                        
                 Me.WFRCHNGP_File.OnClientClick = "window.open('../Shared/ExportFieldValue.aspx?Table=" & _
                             Me.Page.Encrypt("WFinRepNGP_Head") & _
                             "&Field=" & Me.Page.Encrypt("WFRCHNGP_File") & _
                             "&Record=" & Me.Page.Encrypt(HttpUtility.UrlEncode(Me.DataSource.GetID().ToString())) & _
                                 "','','left=100,top=50,width=400,height=300,resizable,scrollbars=1');return false;"
-
+                   
                 Me.WFRCHNGP_File.Visible = True
             Else
                 Me.WFRCHNGP_File.Visible = False
             End If
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_ID1()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.WFRCHNGP_ID1.ID) Then
-
+            
                 Me.WFRCHNGP_ID1.Text = Me.PreviousUIData(Me.WFRCHNGP_ID1.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the WFRCHNGP_ID TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_ID1 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_ID1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_IDSpecified Then
-
+                				
                 ' If the WFRCHNGP_ID is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_ID)
-
+                              
                 Me.WFRCHNGP_ID1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_ID1.Text = WFinRepNGP_HeadTable.WFRCHNGP_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_ID.DefaultValue)
-
-            End If
-
-            AddHandler Me.WFRCHNGP_ID1.TextChanged, AddressOf WFRCHNGP_ID1_TextChanged
-
+        
+                 Me.WFRCHNGP_ID1.Text = WFinRepNGP_HeadTable.WFRCHNGP_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_ID.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_ID1.TextChanged, AddressOf WFRCHNGP_ID1_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Month1()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_Month Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Month1 is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Month1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_MonthSpecified Then
-
+                				
                 ' If the WFRCHNGP_Month is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_Month)
                 If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_Month.IsApplyDisplayAs Then
-
-                    formattedValue = WFinRepNGP_HeadTable.GetDFKA(Me.DataSource.WFRCHNGP_Month.ToString(), WFinRepNGP_HeadTable.WFRCHNGP_Month, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Month)
-                    End If
+                                  
+                       formattedValue = WFinRepNGP_HeadTable.GetDFKA(Me.DataSource.WFRCHNGP_Month.ToString(),WFinRepNGP_HeadTable.WFRCHNGP_Month, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Month)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WFRCHNGP_Month.ToString()
+                       formattedValue = Me.DataSource.WFRCHNGP_Month.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WFRCHNGP_Month1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Month is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Month1.Text = WFinRepNGP_HeadTable.WFRCHNGP_Month.Format(WFinRepNGP_HeadTable.WFRCHNGP_Month.DefaultValue)
-
-            End If
-
+        
+                 Me.WFRCHNGP_Month1.Text = WFinRepNGP_HeadTable.WFRCHNGP_Month.Format(WFinRepNGP_HeadTable.WFRCHNGP_Month.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Month2()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.WFRCHNGP_Month2.ID) Then
-
+            
                 Me.WFRCHNGP_Month2.Text = Me.PreviousUIData(Me.WFRCHNGP_Month2.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the WFRCHNGP_Month TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Month2 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Month2()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_MonthSpecified Then
-
+                				
                 ' If the WFRCHNGP_Month is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = Me.DataSource.WFRCHNGP_Month.ToString()
-
-
+                                
+                            
                 Me.WFRCHNGP_Month2.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Month is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Month2.Text = WFinRepNGP_HeadTable.WFRCHNGP_Month.DefaultValue
-            End If
-
-            AddHandler Me.WFRCHNGP_Month2.TextChanged, AddressOf WFRCHNGP_Month2_TextChanged
-
+        
+                 Me.WFRCHNGP_Month2.Text = WFinRepNGP_HeadTable.WFRCHNGP_Month.DefaultValue		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_Month2.TextChanged, AddressOf WFRCHNGP_Month2_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Remark1()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_Remark Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Remark1 is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Remark1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_RemarkSpecified Then
-
+                				
                 ' If the WFRCHNGP_Remark is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Remark)
-
-                If Not formattedValue Is Nothing Then
-                    Dim popupThreshold As Integer = CType(300, Integer)
-
-                    Dim maxLength As Integer = Len(formattedValue)
+                              
+                If Not formattedValue is Nothing Then
+                    Dim popupThreshold as Integer = CType(300, Integer)
+                              
+                    Dim maxLength as Integer = Len(formattedValue)
                     Dim originalLength As Integer = maxLength
                     If (maxLength >= CType(300, Integer)) Then
                         ' Truncate based on FieldMaxLength on Properties.
                         maxLength = CType(300, Integer)
                         'First strip of all html tags:
-                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)
-
+                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)                       
+                                      
                         formattedValue = HttpUtility.HtmlEncode(formattedValue)
-
+                          
                     End If
-
+                                
                     ' For fields values larger than the PopupTheshold on Properties, display a popup.
                     If originalLength >= popupThreshold Then
-
+                      
                         Dim name As String = HttpUtility.HtmlEncode(WFinRepNGP_HeadTable.WFRCHNGP_Remark.Name)
 
                         If Not HttpUtility.HtmlEncode("%ISD_DEFAULT%").Equals("%ISD_DEFAULT%") Then
-                            name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
+                           name = HttpUtility.HtmlEncode(Me.Page.GetResourceValue("%ISD_DEFAULT%"))
                         End If
 
+                        
 
-
-                        formattedValue = "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
+                        formattedValue= "<a onclick='gPersist=true;' class='truncatedText' onmouseout='detailRolloverPopupClose();' " _
                             & "onmouseover='SaveMousePosition(event); delayRolloverPopup(""PageMethods.GetRecordFieldValue(\""ePortalWFApproval.Business.WFinRepNGP_HeadTable, App_Code\"",\""" _
-                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\", "\\\\") & "\"", \""WFRCHNGP_Remark\"", \""WFRCHNGP_Remark1\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
-                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" & NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
-
+                            & (HttpUtility.UrlEncode(Me.DataSource.GetID.ToString())).Replace("\","\\\\") & "\"", \""WFRCHNGP_Remark\"", \""WFRCHNGP_Remark1\"", \""" & NetUtils.EncodeStringForHtmlDisplay(name.Substring(0, name.Length)) & "\"", \""" & Page.GetResourceValue("Btn:Close", "ePortalWFApproval") & "\"", false, 200," _
+                            & " 300, true, PopupDisplayWindowCallBackWith20);"", 500);'>" &  NetUtils.EncodeStringForHtmlDisplay(formattedValue.Substring(0, Math.Min(maxLength, Len(formattedValue))))
+                      
                         If (maxLength = CType(300, Integer)) Then
                             formattedValue = formattedValue & "..." & "</a>"
                         Else
                             formattedValue = formattedValue & "</a>"
-
+                        
                             formattedValue = "<table border=""0"" cellpadding=""0"" cellspacing=""0""><tr><td>" & formattedValue & "</td></tr></table>"
                         End If
                     Else
                         If maxLength = CType(300, Integer) Then
-                            formattedValue = NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0, MaxLength))
+                            formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,MaxLength))
                             formattedValue = formattedValue & "..."
-
+                        
                         Else
-
+                        
                             formattedValue = "<table border=""0"" cellpadding=""0"" cellspacing=""0""><tr><td>" & formattedValue & "</td></tr></table>"
                         End If
                     End If
-                End If
-
+                End If  
+                
                 Me.WFRCHNGP_Remark1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Remark is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Remark1.Text = WFinRepNGP_HeadTable.WFRCHNGP_Remark.Format(WFinRepNGP_HeadTable.WFRCHNGP_Remark.DefaultValue)
-
-            End If
-
+        
+                 Me.WFRCHNGP_Remark1.Text = WFinRepNGP_HeadTable.WFRCHNGP_Remark.Format(WFinRepNGP_HeadTable.WFRCHNGP_Remark.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_RptCount()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_RptCount Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_RptCount is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_RptCount()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_RptCountSpecified Then
-
+                				
                 ' If the WFRCHNGP_RptCount is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_RptCount)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WFRCHNGP_RptCount.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_RptCount is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_RptCount.Text = WFinRepNGP_HeadTable.WFRCHNGP_RptCount.Format(WFinRepNGP_HeadTable.WFRCHNGP_RptCount.DefaultValue)
-
-            End If
-
+        
+                 Me.WFRCHNGP_RptCount.Text = WFinRepNGP_HeadTable.WFRCHNGP_RptCount.Format(WFinRepNGP_HeadTable.WFRCHNGP_RptCount.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Status1()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.WFRCHNGP_Status1.ID) Then
-
+            
                 Me.WFRCHNGP_Status1.Text = Me.PreviousUIData(Me.WFRCHNGP_Status1.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the WFRCHNGP_Status TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Status1 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Status1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_StatusSpecified Then
-
+                				
                 ' If the WFRCHNGP_Status is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = Me.DataSource.WFRCHNGP_Status.ToString()
-
-
+                                
+                            
                 Me.WFRCHNGP_Status1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Status is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Status1.Text = WFinRepNGP_HeadTable.WFRCHNGP_Status.DefaultValue
-            End If
-
-            AddHandler Me.WFRCHNGP_Status1.TextChanged, AddressOf WFRCHNGP_Status1_TextChanged
-
+        
+                 Me.WFRCHNGP_Status1.Text = WFinRepNGP_HeadTable.WFRCHNGP_Status.DefaultValue		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_Status1.TextChanged, AddressOf WFRCHNGP_Status1_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Year1()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_Year Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Year1 is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Year1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_YearSpecified Then
-
+                				
                 ' If the WFRCHNGP_Year is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Year)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WFRCHNGP_Year1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Year is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Year1.Text = WFinRepNGP_HeadTable.WFRCHNGP_Year.Format(WFinRepNGP_HeadTable.WFRCHNGP_Year.DefaultValue)
-
-            End If
-
+        
+                 Me.WFRCHNGP_Year1.Text = WFinRepNGP_HeadTable.WFRCHNGP_Year.Format(WFinRepNGP_HeadTable.WFRCHNGP_Year.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Year2()
 
-
-
+                  
+            					
             ' If data was retrieved from UI previously, restore it
             If Me.PreviousUIData.ContainsKey(Me.WFRCHNGP_Year2.ID) Then
-
+            
                 Me.WFRCHNGP_Year2.Text = Me.PreviousUIData(Me.WFRCHNGP_Year2.ID).ToString()
-
+              
                 Return
             End If
-
-
+            
+        
             ' Set the WFRCHNGP_Year TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Year2 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Year2()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_YearSpecified Then
-
+                				
                 ' If the WFRCHNGP_Year is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Year)
-
+                              
                 Me.WFRCHNGP_Year2.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Year is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Year2.Text = WFinRepNGP_HeadTable.WFRCHNGP_Year.Format(WFinRepNGP_HeadTable.WFRCHNGP_Year.DefaultValue)
-
-            End If
-
-            AddHandler Me.WFRCHNGP_Year2.TextChanged, AddressOf WFRCHNGP_Year2_TextChanged
-
+        
+                 Me.WFRCHNGP_Year2.Text = WFinRepNGP_HeadTable.WFRCHNGP_Year.Format(WFinRepNGP_HeadTable.WFRCHNGP_Year.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_Year2.TextChanged, AddressOf WFRCHNGP_Year2_TextChanged
+                                 
         End Sub
-
-        Public Overridable Sub SetWFinRepNGP_HeadTableControlTabContainer()
-
-
+                
+        Public Overridable Sub SetWFinRepNGP_HeadTableControlTabContainer()           
+                        
+                   
             If EvaluateFormula("URL(""TabVisible"")").ToLower() = "true" Then
                 MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadTableControlTabContainer").Visible = True
             ElseIf EvaluateFormula("URL(""TabVisible"")").ToLower() = "false" Then
                 MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadTableControlTabContainer").Visible = False
             End If
-
-
-        End Sub
-
-        Public Overridable Sub SetWFinRepNGP_DocAttachTableControl()
-
-
+         
+  
+        End Sub        
+      
+        Public Overridable Sub SetWFinRepNGP_DocAttachTableControl()           
+        
+        
             If WFinRepNGP_DocAttachTableControl.Visible Then
                 WFinRepNGP_DocAttachTableControl.LoadData()
                 WFinRepNGP_DocAttachTableControl.DataBind()
             End If
-        End Sub
-
+        End Sub        
+      
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
@@ -8454,10 +8532,10 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             If e Is Nothing Then
                 e = New FormulaEvaluator()
             End If
-
+            
             e.Variables.Clear()
 
-
+            
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -8466,11 +8544,11 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 End While
             End If
 
-            If includeDS Then
-
-            End If
-
-
+            If includeDS
+                
+            End IF
+            
+            
             ' Other variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -8496,22 +8574,22 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             Else
                 Return resultObj.ToString()
             End If
-        End Function
+        End Function      
+        
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
+        End Function        
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
-        End Function
-
-
+        
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
-        End Function
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
+        End Function        
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -8519,7 +8597,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -8528,13 +8606,13 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
         End Function
 
 
-        Public Overridable Sub RegisterPostback()
-
-
+        Public Overridable Sub RegisterPostback()       
+        
+        
         End Sub
 
-
-
+      
+        
         ' To customize, override this method in WFinRepNGP_HeadTableControlRow.
         Public Overridable Sub SaveData()
             ' Saves the associated record in the database.
@@ -8544,15 +8622,15 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             ' 1. Load the existing record from the database. Since we save the entire record, this ensures 
             ' that fields that are not displayed are also properly initialized.
             Me.LoadData()
-
+        
             ' The checksum is used to ensure the record was not changed by another user.
             If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
                 If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
                     Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "ePortalWFApproval"))
                 End If
             End If
-
-
+        
+              
             ' 2. Perform any custom validation.
             Me.Validate()
 
@@ -8563,32 +8641,32 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             ' 4. Save in the database.
             ' We should not save the record if the data did not change. This
             ' will save a database hit and avoid triggering any database triggers.
-
+             
             If Me.DataSource.IsAnyValueChanged Then
                 ' Save record to database but do not commit yet.
                 ' Auto generated ids are available after saving for use by child (dependent) records.
                 Me.DataSource.Save()
-
+              
                 DirectCast(GetParentControlObject(Me, "WFinRepNGP_HeadTableControl"), WFinRepNGP_HeadTableControl).DataChanged = True
                 DirectCast(GetParentControlObject(Me, "WFinRepNGP_HeadTableControl"), WFinRepNGP_HeadTableControl).ResetData = True
             End If
-
-
+            
+      
             ' update session or cookie by formula
-
-
+                                    
+      
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-
+            
             Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
-
-            Dim recWFinRepNGP_DocAttachTableControl As WFinRepNGP_DocAttachTableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRepNGP_DocAttachTableControl"), WFinRepNGP_DocAttachTableControl)
-            recWFinRepNGP_DocAttachTableControl.SaveData()
-
+          
+        Dim recWFinRepNGP_DocAttachTableControl as WFinRepNGP_DocAttachTableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRepNGP_DocAttachTableControl"), WFinRepNGP_DocAttachTableControl)
+        recWFinRepNGP_DocAttachTableControl.SaveData()
+          
         End Sub
 
         ' To customize, override this method in WFinRepNGP_HeadTableControlRow.
@@ -8598,9 +8676,9 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             ' To do this, it calls the Get methods for each of the field displayed on 
             ' the webpage.  It is better to make changes in the Get methods, rather 
             ' than making changes here.
-
+      
             ' Call the Get methods for each of the user interface controls.
-
+        
             GetWFRCHNGP_C_ID2()
             GetWFRCHNGP_C_ID3()
             GetWFRCHNGP_Description1()
@@ -8614,124 +8692,124 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             GetWFRCHNGP_Year1()
             GetWFRCHNGP_Year2()
         End Sub
-
-
+        
+        
         Public Overridable Sub GetWFRCHNGP_C_ID2()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_C_ID3()
-
+            
             ' Retrieve the value entered by the user on the WFRCHNGP_C_ID ASP:TextBox, and
             ' save it into the WFRCHNGP_C_ID field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WFRCHNGP_C_ID3.Text, WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
+            Me.DataSource.Parse(Me.WFRCHNGP_C_ID3.Text, WFinRepNGP_HeadTable.WFRCHNGP_C_ID)			
 
-
+                      
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Description1()
-
+            
             ' Retrieve the value entered by the user on the WFRCHNGP_Description ASP:TextBox, and
             ' save it into the WFRCHNGP_Description field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WFRCHNGP_Description1.Text, WFinRepNGP_HeadTable.WFRCHNGP_Description)
+            Me.DataSource.Parse(Me.WFRCHNGP_Description1.Text, WFinRepNGP_HeadTable.WFRCHNGP_Description)			
 
-
+                      
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Description2()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_ID1()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Month1()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Month2()
-
+            
             ' Retrieve the value entered by the user on the WFRCHNGP_Month ASP:TextBox, and
             ' save it into the WFRCHNGP_Month field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WFRCHNGP_Month2.Text, WFinRepNGP_HeadTable.WFRCHNGP_Month)
+            Me.DataSource.Parse(Me.WFRCHNGP_Month2.Text, WFinRepNGP_HeadTable.WFRCHNGP_Month)			
 
-
+                      
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Remark1()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_RptCount()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Status1()
-
+            
             ' Retrieve the value entered by the user on the WFRCHNGP_Status ASP:TextBox, and
             ' save it into the WFRCHNGP_Status field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WFRCHNGP_Status1.Text, WFinRepNGP_HeadTable.WFRCHNGP_Status)
+            Me.DataSource.Parse(Me.WFRCHNGP_Status1.Text, WFinRepNGP_HeadTable.WFRCHNGP_Status)			
 
-
+                      
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Year1()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Year2()
-
+            
             ' Retrieve the value entered by the user on the WFRCHNGP_Year ASP:TextBox, and
             ' save it into the WFRCHNGP_Year field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WFRCHNGP_Year2.Text, WFinRepNGP_HeadTable.WFRCHNGP_Year)
+            Me.DataSource.Parse(Me.WFRCHNGP_Year2.Text, WFinRepNGP_HeadTable.WFRCHNGP_Year)			
 
-
+                      
         End Sub
-
-
+                
+      
         ' To customize, override this method in WFinRepNGP_HeadTableControlRow.
-
+        
         Public Overridable Function CreateWhereClause() As WhereClause
-
-            Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_HeadRecordControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
-
+        
+        Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_HeadRecordControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
+      
             Return Nothing
-
+            
         End Function
-
-
+        
+    
 
         ' To customize, override this method in WFinRepNGP_HeadTableControlRow.
-        Public Overridable Sub Validate()
+        Public Overridable Sub Validate() 
             ' Add custom validation for any control within this panel.
             ' Example.  If you have a State ASP:Textbox control
             ' If Me.State.Text <> "CA" Then
@@ -8741,19 +8819,19 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             ' The Validate method is common across all controls within
             ' this panel so you can validate multiple fields, but report
             ' one error message.
-
-
+            
+                
         End Sub
 
         Public Overridable Sub Delete()
-
+        
             If Me.IsNewRecord() Then
                 Return
             End If
 
             Dim pkValue As KeyValue = KeyValue.XmlToKey(Me.RecordUniqueId)
-            WFinRepNGP_HeadTable.DeleteRecord(pkValue)
-
+          WFinRepNGP_HeadTable.DeleteRecord(pkValue)
+          
             DirectCast(GetParentControlObject(Me, "WFinRepNGP_HeadTableControl"), WFinRepNGP_HeadTableControl).DataChanged = True
             DirectCast(GetParentControlObject(Me, "WFinRepNGP_HeadTableControl"), WFinRepNGP_HeadTableControl).ResetData = True
         End Sub
@@ -8765,41 +8843,41 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me.RegisterPostback()
 
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-
-
+                  
+                
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
                     Me.LoadData()
-                    Me.DataBind()
+                    Me.DataBind()			
                 End If
-
-
+                                
+                						
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
                 DbUtils.EndTransaction()
             End Try
         End Sub
-
-
+        
+            
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
-
-
+        
+    
             'Save pagination state to session.
-
+          
         End Sub
-
-
-
+        
+        
+    
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
-
+        
 
             ' Clear pagination state from session.
-
+        
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
@@ -8808,102 +8886,102 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             If Not isNewRecord Is Nothing AndAlso isNewRecord.Trim <> "" Then
                 Me.IsNewRecord = Boolean.Parse(isNewRecord)
             End If
-
+            
             Dim myCheckSum As String = CType(ViewState("CheckSum"), String)
             If Not myCheckSum Is Nothing AndAlso myCheckSum.Trim <> "" Then
                 Me.CheckSum = myCheckSum
             End If
-
-
+            
+    
             ' Load view state for pagination control.
-
+                 
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
             ViewState("IsNewRecord") = Me.IsNewRecord.ToString()
             ViewState("CheckSum") = Me.CheckSum
-
-
+            
+    
             ' Load view state for pagination control.
-
+                  
             Return MyBase.SaveViewState()
         End Function
-
-
-
+        
+        
+    
         ' Generate set method for buttons
-
-        Public Overridable Sub SetbtnPreview()
-
-
+        
+        Public Overridable Sub SetbtnPreview()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetbtnPreview1()
-
-
+            
+        Public Overridable Sub SetbtnPreview1()                
+              
+   
         End Sub
-
+            
         ' event handler for Button
         Public Overridable Sub btnPreview_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub btnPreview1_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
-        Protected Overridable Sub WFRCHNGP_C_ID3_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WFRCHNGP_Description1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WFRCHNGP_ID1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WFRCHNGP_Month2_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WFRCHNGP_Status1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WFRCHNGP_Year2_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-
+        
+        Protected Overridable Sub WFRCHNGP_C_ID3_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WFRCHNGP_Description1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WFRCHNGP_ID1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WFRCHNGP_Month2_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WFRCHNGP_Status1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WFRCHNGP_Year2_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+   
         Private _PreviousUIData As New Hashtable
         Public Overridable Property PreviousUIData() As Hashtable
             Get
@@ -8912,9 +8990,9 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             Set(ByVal value As Hashtable)
                 _PreviousUIData = value
             End Set
-        End Property
+        End Property   
 
-
+        
         Public Property RecordUniqueId() As String
             Get
                 Return CType(Me.ViewState("BaseWFinRepNGP_HeadTableControlRow_Rec"), String)
@@ -8923,7 +9001,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me.ViewState("BaseWFinRepNGP_HeadTableControlRow_Rec") = value
             End Set
         End Property
-
+            
         Public Property DataSource() As WFinRepNGP_HeadRecord
             Get
                 Return DirectCast(MyBase._DataSource, WFinRepNGP_HeadRecord)
@@ -8933,7 +9011,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             End Set
         End Property
 
-
+        
         Private _checkSum As String
         Public Overridable Property CheckSum() As String
             Get
@@ -8943,7 +9021,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me._checkSum = value
             End Set
         End Property
-
+        
         Private _TotalPages As Integer
         Public Property TotalPages() As Integer
             Get
@@ -8953,7 +9031,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me._TotalPages = value
             End Set
         End Property
-
+        
         Private _PageIndex As Integer
         Public Property PageIndex() As Integer
             Get
@@ -8964,7 +9042,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me._PageIndex = value
             End Set
         End Property
-
+    
         Private _DisplayLastPage As Boolean
         Public Property DisplayLastPage() As Boolean
             Get
@@ -8974,130 +9052,130 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me._DisplayLastPage = value
             End Set
         End Property
-
-
+        
+        
 
 #Region "Helper Properties"
-
+        
         Public ReadOnly Property btnPreview() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnPreview"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property btnPreview1() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnPreview1"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property WFinRepNGP_DocAttachTableControl() As WFinRepNGP_DocAttachTableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRepNGP_DocAttachTableControl"), WFinRepNGP_DocAttachTableControl)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFinRepNGP_HeadTableControlTabContainer() As AjaxControlToolkit.TabContainer
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadTableControlTabContainer"), AjaxControlToolkit.TabContainer)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFRCHNGP_C_ID2() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_C_ID2"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_C_ID3() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_C_ID3"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Description1() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Description1"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Description2() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Description2"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_File() As System.Web.UI.WebControls.LinkButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_File"), System.Web.UI.WebControls.LinkButton)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_ID1() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_ID1"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Month1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Month1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Month2() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Month2"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Remark1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Remark1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_RptCount() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_RptCount"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Status1() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Status1"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Year1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Year1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Year2() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Year2"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
 #End Region
 
 #Region "Helper Functions"
 
-        Public Overloads Overrides Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+        Public Overrides Overloads Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
+        End Function
+        
+        Public Overrides Overloads Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
             Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
 
-        Public Overloads Overrides Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
-        End Function
-
-        Public Overloads Overrides Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
-
+        Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+            
             Dim rec As WFinRepNGP_HeadRecord = Nothing
-
-
+             
+        
             Try
                 rec = Me.GetRecord()
             Catch ex As Exception
@@ -9106,18 +9184,18 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
 
             If rec Is Nothing AndAlso url.IndexOf("{") >= 0 Then
                 ' Localization.
-
-                Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
-
+                
+            Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
+                    
             End If
             Return EvaluateExpressions(url, arg, rec, bEncrypt)
         End Function
 
-        Public Overloads Overrides Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-
+        Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean,ByVal includeSession as Boolean) As String
+            
             Dim rec As WFinRepNGP_HeadRecord = Nothing
-
-
+             
+        
             Try
                 rec = Me.GetRecord()
             Catch ex As Exception
@@ -9126,33 +9204,33 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
 
             If rec Is Nothing AndAlso url.IndexOf("{") >= 0 Then
                 ' Localization.
-
-                Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
-
+                
+            Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
+                    
             End If
-            If includeSession Then
+            If includeSession  Then
                 Return EvaluateExpressions(url, arg, rec, bEncrypt)
             Else
-                Return EvaluateExpressions(url, arg, rec, bEncrypt, False)
+                Return EvaluateExpressions(url, arg, rec, bEncrypt,False)  
             End If
         End Function
 
-
+         
         Public Overridable Function GetRecord() As WFinRepNGP_HeadRecord
             If Not Me.DataSource Is Nothing Then
                 Return Me.DataSource
             End If
-
+            
             If Not Me.RecordUniqueId Is Nothing Then
-
+                
                 Return WFinRepNGP_HeadTable.GetRecord(Me.RecordUniqueId, True)
-
+                
             End If
-
+            
             ' Localization.
-
+            
             Throw New Exception(Page.GetResourceValue("Err:RetrieveRec", "ePortalWFApproval"))
-
+                
         End Function
 
         Public Shadows ReadOnly Property Page() As BaseApplicationPage
@@ -9163,71 +9241,71 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
 
 #End Region
 
-    End Class
+End Class
 
+  
 
-
-    ' Base class for the WFinRepNGP_HeadTableControl control on the WFinRepNGP_Approver page.
-    ' Do not modify this class. Instead override any method in WFinRepNGP_HeadTableControl.
-    Public Class BaseWFinRepNGP_HeadTableControl
+' Base class for the WFinRepNGP_HeadTableControl control on the WFinRepNGP_Approver page.
+' Do not modify this class. Instead override any method in WFinRepNGP_HeadTableControl.
+Public Class BaseWFinRepNGP_HeadTableControl
         Inherits ePortalWFApproval.UI.BaseApplicationTableControl
 
-
+        
         Protected Overridable Sub Control_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Init
+  
+      
+    
+           ' Setup the filter and search.
+        
 
-
-
-            ' Setup the filter and search.
-
-
-
-
+      
+      
             ' Control Initializations.
             ' Initialize the table's current sort order.
             If Me.InSession(Me, "Order_By") Then
                 Me.CurrentSortOrder = OrderBy.FromXmlString(Me.GetFromSession(Me, "Order_By", Nothing))
-
+         
             Else
-
+                   
                 Me.CurrentSortOrder = New OrderBy(True, False)
+            
+        End If
 
-            End If
+    
 
-
-
-            ' Setup default pagination settings.
-
+    ' Setup default pagination settings.
+    
             Me.PageSize = CInt(Me.GetFromSession(Me, "Page_Size", "10"))
             Me.PageIndex = CInt(Me.GetFromSession(Me, "Page_Index", "0"))
-
-
+        
+            
         End Sub
 
         Protected Overridable Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        
             SaveControlsToSession_Ajax()
-
+        
             ' Setup the pagination events.
-
+                        
             Dim url As String = ""  'to avoid warning in VS 
             url = "" 'to avoid warning in VS 
             ' Setup the sorting events.
-
+          
             ' Setup the button events.
-
-
-            ' Setup events for others
-
+                  
+        
+          ' Setup events for others
+                
         End Sub
-
-
-        Public Overridable Sub LoadData()
-
+        
+        
+        Public Overridable Sub LoadData()        
+        
             ' Read data from database. Returns an array of records that can be assigned
             ' to the DataSource table control property.
-            Try
+            Try	
                 Dim joinFilter As CompoundFilter = CreateCompoundJoinFilter()
-
+                
                 ' The WHERE clause will be empty when displaying all records in table.
                 Dim wc As WhereClause = CreateWhereClause()
                 If wc IsNot Nothing AndAlso Not wc.RunQuery Then
@@ -9244,18 +9322,18 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 ' Call OrderBy to determine the order - either use the order defined
                 ' on the Query Wizard, or specified by user (by clicking on column heading)
                 Dim orderBy As OrderBy = CreateOrderBy()
-
+                
                 ' Get the pagesize from the pagesize control.
                 Me.GetPageSize()
-
+                               
                 If Me.DisplayLastPage Then
                     Dim totalRecords As Integer = If(Me._TotalRecords < 0, GetRecordCount(CreateCompoundJoinFilter(), CreateWhereClause()), Me._TotalRecords)
-
-                    Dim totalPages As Integer = CInt(Math.Ceiling(totalRecords / Me.PageSize))
-
+                     
+                      Dim totalPages As Integer = CInt(Math.Ceiling(totalRecords / Me.PageSize))
+                    
                     Me.PageIndex = totalPages - 1
-                End If
-
+                End If                               
+                
                 ' Make sure PageIndex (current page) and PageSize are within bounds.
                 If Me.PageIndex < 0 Then
                     Me.PageIndex = 0
@@ -9263,41 +9341,41 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 If Me.PageSize < 1 Then
                     Me.PageSize = 1
                 End If
-
+                
                 ' Retrieve the records and set the table DataSource.
                 ' Only PageSize records are fetched starting at PageIndex (zero based).
                 If Me.AddNewRecord > 0 Then
-                    ' Make sure to preserve the previously entered data on new rows.
+                ' Make sure to preserve the previously entered data on new rows.
                     Dim postdata As New ArrayList
                     For Each rc As WFinRepNGP_HeadTableControlRow In Me.GetRecordControls()
                         If Not rc.IsNewRecord Then
                             rc.DataSource = rc.GetRecord()
                             rc.GetUIData()
                             postdata.Add(rc.DataSource)
-                            UIData.Add(rc.PreservedUIData())
+                            UIData.Add(rc.PreservedUIData())							
                         End If
                     Next
                     Me.DataSource = DirectCast(postdata.ToArray(GetType(WFinRepNGP_HeadRecord)), WFinRepNGP_HeadRecord())
                 Else  ' Get the records from the database	
-
-                    Me.DataSource = GetRecords(joinFilter, wc, orderBy, Me.PageIndex, Me.PageSize)
-
+                      
+                        Me.DataSource = GetRecords(joinFilter, wc, orderBy, Me.PageIndex, Me.PageSize)
+                      
                 End If
-
+                
                 ' if the datasource contains no records contained in database, then load the last page.
                 If (DbUtils.GetCreatedRecords(Me.DataSource).Length = 0 AndAlso Not Me.DisplayLastPage) Then
-                    Me.DisplayLastPage = True
-                    LoadData()
+                      Me.DisplayLastPage = True
+                      LoadData()
                 Else
-
+                
                     ' Add any new rows desired by the user.
                     Me.AddNewRecords()
-
+                       
 
                     ' Initialize the page and grand totals. now
-
+                
                 End If
-
+    
             Catch ex As Exception
                 ' Report the error message to the end user
                 Dim msg As String = ex.Message
@@ -9307,61 +9385,61 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Throw New Exception(msg, ex.InnerException)
             End Try
         End Sub
-
+        
         Public Overridable Function GetRecords( _
             ByVal join As BaseFilter, _
             ByVal where As WhereClause, _
             ByVal orderBy As OrderBy, _
             ByVal pageIndex As Integer, _
             ByVal pageSize As Integer) As WFinRepNGP_HeadRecord()
-
+            
             ' By default, Select * will be executed to get a list of records.  If you want to run Select Distinct with certain column only, add the column to selCols
-            Dim selCols As New ColumnList
+            Dim selCols As New ColumnList     
+                        
 
-
-
+    
             ' If you want to specify certain columns to be in the select statement, you can write code similar to the following:
             ' However, if you don't specify PK, row button click might show an error message.
             ' And make sure you write similar code in GetRecordCount as well
             ' selCols.Add(WFinRepNGP_HeadTable.Column1, True)         
             ' selCols.Add(WFinRepNGP_HeadTable.Column2, True)          
             ' selCols.Add(WFinRepNGP_HeadTable.Column3, True)    
-
-
-
+   
+            
+            
             ' If the parameters doesn't specify specific columns in the Select statement, then run Select *
             ' Alternatively, if the parameters specifies to include PK, also run Select *
-
-            If selCols.Count = 0 Then
-
+            
+            If selCols.Count = 0 Then                    
+              
                 Return WFinRepNGP_HeadTable.GetRecords(join, where, orderBy, Me.PageIndex, Me.PageSize)
-
+                 
             Else
                 Dim databaseTable As New WFinRepNGP_HeadTable
                 databaseTable.SelectedColumns.Clear()
                 databaseTable.SelectedColumns.AddRange(selCols)
-
+                
                 ' Stored Procedures provided by Iron Speed Designer specifies to query all columns, in order to query a subset of columns, it is necessary to disable stored procedures                  
-                databaseTable.DataAdapter.DisableStoredProcedures = True
-
-
-
+                databaseTable.DataAdapter.DisableStoredProcedures = True 
+                
+            
+                
                 Dim recList As ArrayList
                 orderBy.ExpandForeignKeyColums = False
                 recList = databaseTable.GetRecordList(join, where.GetFilter(), Nothing, orderBy, pageIndex, pageSize)
                 Return CType(recList.ToArray(GetType(WFinRepNGP_HeadRecord)), WFinRepNGP_HeadRecord())
-            End If
-
-        End Function
-
-
+            End If            
+            
+        End Function        
+        
+        
         Public Overridable Function GetRecordCount(ByVal join As BaseFilter, ByVal where As WhereClause) As Integer
 
 
             ' By default, Select * will be executed to get a list of records.  If you want to run Select Distinct with certain column only, add the column to selCols
-            Dim selCols As New ColumnList
-
-
+            Dim selCols As New ColumnList                 
+               
+    
             ' If you want to specify certain columns to be in the select statement, you can write code similar to the following:
             ' However, if you don't specify PK, row button click might show an error message.
             ' And make sure you write similar code in GetRecordCount as well
@@ -9372,142 +9450,142 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
 
             ' If the parameters doesn't specify specific columns in the Select statement, then run Select *
             ' Alternatively, if the parameters specifies to include PK, also run Select *
-
-            If selCols.Count = 0 Then
-
+            
+            If selCols.Count = 0 Then                    
+                     
                 Return WFinRepNGP_HeadTable.GetRecordCount(join, where)
 
             Else
                 Dim databaseTable As New WFinRepNGP_HeadTable
                 databaseTable.SelectedColumns.Clear()
-                databaseTable.SelectedColumns.AddRange(selCols)
-
+                databaseTable.SelectedColumns.AddRange(selCols)           
+                
                 ' Stored Procedures provided by Iron Speed Designer specifies to query all columns, in order to query a subset of columns, it is necessary to disable stored procedures                  
-                databaseTable.DataAdapter.DisableStoredProcedures = True
-
-
+                databaseTable.DataAdapter.DisableStoredProcedures = True 
+                
+                
                 Return CInt(databaseTable.GetRecordListCount(join, where.GetFilter(), Nothing, Nothing))
             End If
 
-        End Function
-
-
-
+        End Function        
+        
+      
+    
         Public Overrides Sub DataBind()
             ' The DataBind method binds the user interface controls to the values
             ' from the database record for each row in the table.  To do this, it calls the
             ' DataBind for each of the rows.
             ' DataBind also populates any filters above the table, and sets the pagination
             ' control to the correct number of records and the current page number.
-
-
-            MyBase.DataBind()
-
-
-            Me.ClearControlsFromSession()
+            
+            
+              MyBase.DataBind()
+            
+    
+            Me.ClearControlsFromSession()    
 
             ' Make sure that the DataSource is initialized.
             If Me.DataSource Is Nothing Then
                 Return
             End If
-
+            
             'LoadData for DataSource for chart and report if they exist
-
-            ' Improve performance by prefetching display as records.
-            Me.PreFetchForeignKeyValues()
-
+          
+          ' Improve performance by prefetching display as records.
+          Me.PreFetchForeignKeyValues()
+             
             ' Setup the pagination controls.
             BindPaginationControls()
 
+      
 
-
-
-
-            ' Bind the repeater with the list of records to expand the UI.
-
-            Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadTableControlRepeater"), System.Web.UI.WebControls.Repeater)
-            If rep Is Nothing Then Return
-            rep.DataSource = DataSource()
-            rep.DataBind()
-
-            Dim index As Integer = 0
-
-            For Each repItem As System.Web.UI.WebControls.RepeaterItem In rep.Items
-
-                ' Loop through all rows in the table, set its DataSource and call DataBind().
-                Dim recControl As WFinRepNGP_HeadTableControlRow = DirectCast(repItem.FindControl("WFinRepNGP_HeadTableControlRow"), WFinRepNGP_HeadTableControlRow)
-                recControl.DataSource = Me.DataSource(index)
-                If Me.UIData.Count > index Then
-                    recControl.PreviousUIData = Me.UIData(index)
-                End If
-                recControl.DataBind()
-
-                recControl.Visible = Not Me.InDeletedRecordIds(recControl)
-
-                index += 1
-            Next
-
+    
+        
+          ' Bind the repeater with the list of records to expand the UI.
+          
+          Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadTableControlRepeater"), System.Web.UI.WebControls.Repeater)
+          If rep Is Nothing Then Return
+          rep.DataSource = DataSource()
+          rep.DataBind()
+                  
+          Dim index As Integer = 0
+          
+          For Each repItem As System.Web.UI.WebControls.RepeaterItem In rep.Items
+          
+            ' Loop through all rows in the table, set its DataSource and call DataBind().
+            Dim recControl As WFinRepNGP_HeadTableControlRow = DirectCast(repItem.FindControl("WFinRepNGP_HeadTableControlRow"), WFinRepNGP_HeadTableControlRow)
+            recControl.DataSource = Me.DataSource(index)          
+            If Me.UIData.Count > index Then
+              recControl.PreviousUIData = Me.UIData(index)
+            End If
+            recControl.DataBind()
+          
+            recControl.Visible = Not Me.InDeletedRecordIds(recControl)
+          
+            index += 1
+          Next
+                 
             ' Call the Set methods for each controls on the panel
-
-
-            SetWFRCHNGP_C_IDLabel()
-            SetWFRCHNGP_DescriptionLabel1()
-            SetWFRCHNGP_MonthLabel()
-            SetWFRCHNGP_RemarkLabel1()
-            SetWFRCHNGP_RptCountLabel()
-            SetWFRCHNGP_YearLabel()
+        
+                
+                SetWFRCHNGP_C_IDLabel()
+                SetWFRCHNGP_DescriptionLabel1()
+                SetWFRCHNGP_MonthLabel()
+                SetWFRCHNGP_RemarkLabel1()
+                SetWFRCHNGP_RptCountLabel()
+                SetWFRCHNGP_YearLabel()
             ' setting the state of expand or collapse alternative rows
-
-
+      
+    
             ' Load data for each record and table UI control.
             ' Ordering is important because child controls get 
             ' their parent ids from their parent UI controls.
-
-
+                
+      
             ' this method calls the set method for controls with special formula like running total, sum, rank, etc
             SetFormulaControls()
-
-
-
-        End Sub
-
+            
+                    
+            
+      End Sub
+      
         Public Overridable Sub SetFormulaControls()
             ' this method calls Set methods for the control that has special formula
+        
+        
 
+    End Sub
 
-
-        End Sub
-
-
-        Public Sub PreFetchForeignKeyValues()
-            If (IsNothing(Me.DataSource)) Then
-                Return
-            End If
-
+    
+          Public Sub PreFetchForeignKeyValues()
+          If (IsNothing(Me.DataSource))
+            Return
+          End If
+          
             Me.Page.PregetDfkaRecords(WFinRepNGP_HeadTable.WFRCHNGP_Month, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WFinRepNGP_HeadTable.WFRCHNGP_Month, Me.DataSource)
-
+          
             Me.Page.PregetDfkaRecords(WFinRepNGP_HeadTable.WFRCHNGP_Status, Me.DataSource)
-
-        End Sub
-
-
+          
+          End Sub
+        
+      
         Public Overridable Sub RegisterPostback()
-
-
+        
+        
         End Sub
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean, ByVal e As FormulaEvaluator) As String
-            If e Is Nothing Then
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean, ByVal e as FormulaEvaluator) As String
+            If e Is Nothing
                 e = New FormulaEvaluator()
             End If
-
+            
             e.Variables.Clear()
-
-
+            
+            
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -9515,11 +9593,11 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                     e.Variables.Add(enumerator.Current.Key, enumerator.Current.Value)
                 End While
             End If
-
-            If includeDS Then
-
+            
+            If includeDS
+                
             End If
-
+            
             ' All variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -9533,28 +9611,28 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             If resultObj Is Nothing Then
                 Return ""
             End If
-
+            
             If Not String.IsNullOrEmpty(format) AndAlso (String.IsNullOrEmpty(formula) OrElse formula.IndexOf("Format(") < 0) Then
                 Return FormulaUtils.Format(resultObj, format)
             Else
                 Return resultObj.ToString()
             End If
-        End Function
+        End Function			
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
-        End Function
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
+        End Function        
 
-
+        
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
-        End Function
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
+        End Function        
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -9562,7 +9640,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -9575,45 +9653,45 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
 
         Public Overridable Sub ResetControl()
 
-
+            
             Me.CurrentSortOrder.Reset()
             If (Me.InSession(Me, "Order_By")) Then
                 Me.CurrentSortOrder = OrderBy.FromXmlString(Me.GetFromSession(Me, "Order_By", Nothing))
-
+            
             Else
                 Me.CurrentSortOrder = New OrderBy(True, False)
-
+                
             End If
-
+                
             Me.PageIndex = 0
         End Sub
 
         Public Overridable Sub ResetPageControl()
             Me.PageIndex = 0
         End Sub
-
+        
         Protected Overridable Sub BindPaginationControls()
             ' Setup the pagination controls.
 
             ' Bind the pagination labels.
-
+        
 
             ' Bind the buttons for WFinRepNGP_HeadTableControl pagination.
-
+        
 
 
         End Sub
 
-
-
+   
+    
         Public Overridable Sub SaveData()
             ' Save the data from the entire table.  Calls each row's Save Data
             ' to save their data.  This function is called by the Click handler of the
             ' Save button.  The button handler should Start/Commit/End a transaction.
-
+            
             Dim recCtl As WFinRepNGP_HeadTableControlRow
             For Each recCtl In Me.GetRecordControls()
-
+        
                 If Me.InDeletedRecordIds(recCtl) Then
                     ' Delete any pending deletes. 
                     recCtl.Delete()
@@ -9622,109 +9700,109 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                         recCtl.SaveData()
                     End If
                 End If
-
+          
             Next
-
-
-
-
+            
+            
+          
+    
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-
+          
             ' Set IsNewRecord to False for all records - since everything has been saved and is no longer "new"
             For Each recCtl In Me.GetRecordControls()
                 recCtl.IsNewRecord = False
             Next
-
-
+    
+      
             ' Set DeletedRecordsIds to Nothing since we have deleted all pending deletes.
             Me.DeletedRecordIds = Nothing
-
+      
         End Sub
 
         Public Overridable Function CreateCompoundJoinFilter() As CompoundFilter
             Dim jFilter As CompoundFilter = New CompoundFilter()
-
+         
             Return jFilter
         End Function
 
-
-        Public Overridable Function CreateOrderBy() As OrderBy
-            ' The CurrentSortOrder is initialized to the sort order on the
-            ' Query Wizard.  It may be modified by the Click handler for any of
-            ' the column heading to sort or reverse sort by that column.
-            ' You can add your own sort order, or modify it on the Query Wizard.
-            Return Me.CurrentSortOrder
-        End Function
-
+      
+          Public Overridable Function CreateOrderBy() As OrderBy
+          ' The CurrentSortOrder is initialized to the sort order on the
+          ' Query Wizard.  It may be modified by the Click handler for any of
+          ' the column heading to sort or reverse sort by that column.
+          ' You can add your own sort order, or modify it on the Query Wizard.
+          Return Me.CurrentSortOrder
+          End Function
+      
         Public Overridable Function CreateWhereClause() As WhereClause
             'This CreateWhereClause is used for loading the data.
             WFinRepNGP_HeadTable.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
-
-            Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_HeadRecordControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
-
+            
+        Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_HeadRecordControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
+      
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
             ' 2. User selected search criteria.
             ' 3. User selected filter criteria.
 
+                
+    
+    Return wc
+    End Function
 
-
-            Return wc
-        End Function
-
-
-        Public Overridable Function CreateWhereClause(ByVal searchText As String, ByVal fromSearchControl As String, ByVal AutoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String) As WhereClause
+    
+        Public Overridable Function CreateWhereClause(ByVal searchText as String, ByVal fromSearchControl as String, ByVal AutoTypeAheadSearch as String, ByVal AutoTypeAheadWordSeparators as String) As WhereClause
             ' This CreateWhereClause is used for loading list of suggestions for Auto Type-Ahead feature.
             WFinRepNGP_HeadTable.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
+        
+          Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
+        
+          Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
+        
+          Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
+        
+          Dim hasFiltersWFinRepNGP_HeadRecordControl As Boolean = False
+        
+          Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
+        
+      ' Compose the WHERE clause consist of:
+      ' 1. Static clause defined at design time.
+      ' 2. User selected search criteria.
+      ' 3. User selected filter criteria.
 
-            Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_HeadRecordControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
-
-            ' Compose the WHERE clause consist of:
-            ' 1. Static clause defined at design time.
-            ' 2. User selected search criteria.
-            ' 3. User selected filter criteria.
-
-            Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
-
+      Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
+      
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
-
-
-
+          
+      
+      
             Return wc
         End Function
 
+      
 
-
-        Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
-                                        ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
-                                        ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
-                                        ByVal resultList As ArrayList) As Boolean
-            Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
-                                     autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
-                                     resultList, False)
-        End Function
+         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
+                                         ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
+                                         ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
+                                         ByVal resultList As ArrayList) As Boolean
+              Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
+                                       autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
+                                       resultList, False)
+         End Function
 
         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
                                                ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
@@ -9773,10 +9851,10 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                     If Len(resultItem) - index <= columnLength Then
                         If index = 0 Then
                             itemToAdd = resultItem
-                        Else
+                        Else                            
                             itemToAdd = resultItem.Substring(index)
                         End If
-                    Else
+                    Else                       
                         itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, index, index + columnLength, StringUtils.Direction.forward)
                     End If
                 ElseIf InvariantLCase(AutoTypeAheadDisplayFoundText).equals("inmiddleofmatchedstring") Then
@@ -9786,7 +9864,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                     Else
                         ' Sanity check at end of the string
                         If index + Len(prefixText) >= Len(resultItem) - 1 OrElse _
-                        Len(resultItem) - index < subStringBeginIndex Then
+                        Len(resultItem) - index < subStringBeginIndex Then                           
                             itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, Len(resultItem) - 1 - columnLength, Len(resultItem) - 1, StringUtils.Direction.backward)
                         ElseIf index <= subStringBeginIndex Then
                             ' Sanity check at beginning of the string                          
@@ -9840,45 +9918,45 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 End If
 
                 If Not String.IsNullOrEmpty(itemToAdd) AndAlso Not resultList.Contains(itemToAdd) Then
-
+                   
                     resultList.Add(itemToAdd)
-
+          				
                     isAdded = True
                 End If
             End If
             Return isAdded
         End Function
-
-
+        
+    
         Protected Overridable Sub GetPageSize()
-
+        
         End Sub
 
         Protected Overridable Sub AddNewRecords()
-
+          
             Dim newRecordList As ArrayList = New ArrayList()
+          
+    Dim newUIDataList As System.Collections.Generic.List(Of Hashtable) = New System.Collections.Generic.List(Of Hashtable)()
 
-            Dim newUIDataList As System.Collections.Generic.List(Of Hashtable) = New System.Collections.Generic.List(Of Hashtable)()
+    ' Loop though all the record controls and if the record control
+    ' does not have a unique record id set, then create a record
+    ' and add to the list.
+    If Not Me.ResetData Then
+    Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadTableControlRepeater"), System.Web.UI.WebControls.Repeater)
+    If rep Is Nothing Then Return
 
-            ' Loop though all the record controls and if the record control
-            ' does not have a unique record id set, then create a record
-            ' and add to the list.
-            If Not Me.ResetData Then
-                Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadTableControlRepeater"), System.Web.UI.WebControls.Repeater)
-                If rep Is Nothing Then Return
-
-
-                Dim repItem As System.Web.UI.WebControls.RepeaterItem
-                For Each repItem In rep.Items
-
-                    ' Loop through all rows in the table, set its DataSource and call DataBind().
-
-                    Dim recControl As WFinRepNGP_HeadTableControlRow = DirectCast(repItem.FindControl("WFinRepNGP_HeadTableControlRow"), WFinRepNGP_HeadTableControlRow)
-
+    
+    Dim repItem As System.Web.UI.WebControls.RepeaterItem
+    For Each repItem In rep.Items
+      
+    ' Loop through all rows in the table, set its DataSource and call DataBind().
+    
+    Dim recControl As WFinRepNGP_HeadTableControlRow = DirectCast(repItem.FindControl("WFinRepNGP_HeadTableControlRow"), WFinRepNGP_HeadTableControlRow)
+    
 
                     If recControl.Visible AndAlso recControl.IsNewRecord() Then
                         Dim rec As WFinRepNGP_HeadRecord = New WFinRepNGP_HeadRecord()
-
+        
                         If recControl.WFRCHNGP_C_ID2.Text <> "" Then
                             rec.Parse(recControl.WFRCHNGP_C_ID2.Text, WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
                         End If
@@ -9918,41 +9996,41 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                         If recControl.WFRCHNGP_Year2.Text <> "" Then
                             rec.Parse(recControl.WFRCHNGP_Year2.Text, WFinRepNGP_HeadTable.WFRCHNGP_Year)
                         End If
-                        newUIDataList.Add(recControl.PreservedUIData())
+                        newUIDataList.Add(recControl.PreservedUIData())	  
                         newRecordList.Add(rec)
                     End If
                 Next
             End If
-
-
+            
+    
             ' Add any new record to the list.
             Dim index As Integer = 0
             For index = 1 To Me.AddNewRecord
-
+              
                 newRecordList.Insert(0, New WFinRepNGP_HeadRecord())
-                newUIDataList.Insert(0, New Hashtable())
-
+                newUIDataList.Insert(0, New Hashtable())				
+              
             Next
             Me.AddNewRecord = 0
 
             ' Finally, add any new records to the DataSource.
             If newRecordList.Count > 0 Then
-
+              
                 Dim finalList As ArrayList = New ArrayList(Me.DataSource)
                 finalList.InsertRange(0, newRecordList)
 
                 Me.DataSource = DirectCast(finalList.ToArray(GetType(WFinRepNGP_HeadRecord)), WFinRepNGP_HeadRecord())
-
+              
             End If
-
+            
             ' Add the existing UI data to this hash table
             If newUIDataList.Count > 0 Then
                 Me.UIData.InsertRange(0, newUIDataList)
             End If
-
+            
         End Sub
 
-
+        
         Public Sub AddToDeletedRecordIds(ByVal rec As WFinRepNGP_HeadTableControlRow)
             If rec.IsNewRecord() Then
                 Return
@@ -9982,110 +10060,110 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me._DeletedRecordIds = value
             End Set
         End Property
-
-
+        
+      
         ' Create Set, WhereClause, and Populate Methods
-
+        
         Public Overridable Sub SetWFRCHNGP_C_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WFRCHNGP_C_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WFRCHNGP_C_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWFRCHNGP_DescriptionLabel1()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WFRCHNGP_DescriptionLabel1.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WFRCHNGP_DescriptionLabel1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWFRCHNGP_MonthLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WFRCHNGP_MonthLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WFRCHNGP_MonthLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWFRCHNGP_RemarkLabel1()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WFRCHNGP_RemarkLabel1.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WFRCHNGP_RemarkLabel1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWFRCHNGP_RptCountLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WFRCHNGP_RptCountLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WFRCHNGP_RptCountLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWFRCHNGP_YearLabel()
 
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WFRCHNGP_YearLabel.Text = "Some value"
+                    
+                  End Sub
+                
 
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WFRCHNGP_YearLabel.Text = "Some value"
-
-        End Sub
-
-
-
-
+    
+    
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
             ' PreRender event is raised just before page is being displayed.
             Try
-                DbUtils.StartTransaction()
+                DbUtils.StartTransaction
                 Me.RegisterPostback()
-
+                
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-
-
+                  
+                
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
                     Dim added As Boolean = Me.AddNewRecord > 0
                     Me.LoadData()
                     Me.DataBind()
-
+                    
                     If added Then
                         Me.SetFocusToAddedRow()
                     End If
-
+                    
                 End If
-
-
-
+                
+               
+                				
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
         End Sub
-
+        
         'this function sets focus to the first editable element in the new added row in the editable table	
         Protected Overridable Sub SetFocusToAddedRow()
             Dim rep As System.Web.UI.WebControls.Repeater = CType(Me.FindControl("WFinRepNGP_HeadTableControlRepeater"), System.Web.UI.WebControls.Repeater)
             If rep Is Nothing OrElse rep.Items.Count = 0 Then Return
             Dim repItem As System.Web.UI.WebControls.RepeaterItem
-            For Each repItem In rep.Items
+            For Each repItem In rep.Items  
                 Dim recControl As WFinRepNGP_HeadTableControlRow = DirectCast(repItem.FindControl("WFinRepNGP_HeadTableControlRow"), WFinRepNGP_HeadTableControlRow)
                 If recControl.IsNewRecord Then
                     For Each field As Control In recControl.Controls
@@ -10101,73 +10179,73 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 End If
             Next
         End Sub
-
-
+        
+        
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
 
             ' Save filter controls to values to session.
-
-
+        
+        
             'Save pagination state to session.
-
-
+         
+            
             ' Save table control properties to the session.
-
-            If Not Me.CurrentSortOrder Is Nothing Then
+            
+ If Not Me.CurrentSortOrder Is Nothing Then
                 If TypeOf Me.CurrentSortOrder Is GeoOrderBy Then
                     Me.SaveToSession(Me, "Order_By", Me.CurrentSortOrder.ToXmlString())
                 End If
-            End If
+            End If            
             Me.SaveToSession(Me, "Page_Index", Me.PageIndex.ToString())
             Me.SaveToSession(Me, "Page_Size", Me.PageSize.ToString())
-
-            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)
-
+        
+            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)  
+        
         End Sub
-
-        Protected Sub SaveControlsToSession_Ajax()
+        
+        Protected  Sub SaveControlsToSession_Ajax()
             ' Save filter controls to values to session.
-
+          
             HttpContext.Current.Session("AppRelativeVirtualPath") = Me.Page.AppRelativeVirtualPath
-
+         
         End Sub
-
+        
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
             ' Clear filter controls values from the session.
-
-
+        
+    
             ' Clear pagination state from session.
-
-
-            ' Clear table properties from the session.
-            Me.RemoveFromSession(Me, "Order_By")
-            Me.RemoveFromSession(Me, "Page_Index")
-            Me.RemoveFromSession(Me, "Page_Size")
-
-            Me.RemoveFromSession(Me, "DeletedRecordIds")
-
+         
+    
+    ' Clear table properties from the session.
+    Me.RemoveFromSession(Me, "Order_By")
+    Me.RemoveFromSession(Me, "Page_Index")
+    Me.RemoveFromSession(Me, "Page_Size")
+    
+            Me.RemoveFromSession(Me, "DeletedRecordIds")  
+            
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
             MyBase.LoadViewState(savedState)
 
             Dim orderByStr As String = CType(ViewState("WFinRepNGP_HeadTableControl_OrderBy"), String)
-
+          
             If orderByStr IsNot Nothing AndAlso orderByStr.Trim <> "" Then
                 Me.CurrentSortOrder = BaseClasses.Data.OrderBy.FromXmlString(orderByStr)
-
-            Else
+            
+            Else 
                 Me.CurrentSortOrder = New OrderBy(True, False)
-
+            
             End If
-
-
+            
+            
             Dim Pagination As Control = Me.FindControl("")
-            Dim PaginationType As String = ""
-            If Not (Pagination Is Nothing) Then
+             Dim PaginationType As String = ""
+             If Not (Pagination Is Nothing) Then
                 Dim Summary As Control = Pagination.FindControl("_Summary")
                 If Not (Summary Is Nothing) Then
                     If (DirectCast(Summary, System.Web.UI.WebControls.TextBox).Text.Equals("Infinite Pagination")) Then
@@ -10175,100 +10253,100 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                     End If
                     If (DirectCast(Summary, System.Web.UI.WebControls.TextBox).Text.Equals("Infinite Pagination Mobile")) Then
                         PaginationType = "Infinite Pagination Mobile"
-                    End If
                 End If
-            End If
+             End If
+             End If
 
-            If Not (PaginationType.Equals("Infinite Pagination")) Then
-                If Not Me.Page.ClientQueryString.Contains("InfiIframe") AndAlso PaginationType.Equals("Infinite Pagination Mobile") Then
+            If Not (PaginationType.Equals("Infinite Pagination")) Then 
+              If Not Me.Page.ClientQueryString.Contains("InfiIframe") AndAlso PaginationType.Equals("Infinite Pagination Mobile") Then
                     Me.ViewState("Page_Index") = 0
                 End If
-                Dim pageIndex As String = CType(ViewState("Page_Index"), String)
-                If pageIndex IsNot Nothing Then
-                    Me.PageIndex = CInt(pageIndex)
-                End If
+              Dim pageIndex As String = CType(ViewState("Page_Index"), String)
+              If pageIndex IsNot Nothing Then
+                Me.PageIndex = CInt(pageIndex)
+              End If
             End If
 
             Dim pageSize As String = CType(ViewState("Page_Size"), String)
             If Not pageSize Is Nothing Then
-                Me.PageSize = CInt(pageSize)
+              Me.PageSize = CInt(pageSize)
             End If
 
-
-
+            
+    
             ' Load view state for pagination control.
-
+        
             Me.DeletedRecordIds = CType(Me.ViewState("DeletedRecordIds"), String)
-
+        
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
-
+          
             If Me.CurrentSortOrder IsNot Nothing Then
                 Me.ViewState("WFinRepNGP_HeadTableControl_OrderBy") = Me.CurrentSortOrder.ToXmlString()
             End If
-
+                      
             Me.ViewState("Page_Index") = Me.PageIndex
             Me.ViewState("Page_Size") = Me.PageSize
-
+            
             Me.ViewState("DeletedRecordIds") = Me.DeletedRecordIds
-
-
+        
+    
             ' Load view state for pagination control.
-
-
+          
+    
             Return MyBase.SaveViewState()
         End Function
-
+        
         ' Generate set method for buttons
-
+                
 
         ' Generate the event handling functions for pagination events.
-
+        
 
         ' Generate the event handling functions for sorting events.
-
+        
 
         ' Generate the event handling functions for button events.
-
-
+        
+      
 
         ' Generate the event handling functions for filter and search events.
-
-
+        
+    
         ' Generate the event handling functions for others
-
-
+        
+      
 
 
         Protected _TotalRecords As Integer = -1
         Public Property TotalRecords() As Integer
             Get
-                If _TotalRecords < 0 Then
+                If _TotalRecords < 0 
                     _TotalRecords = WFinRepNGP_HeadTable.GetRecordCount(CreateCompoundJoinFilter(), CreateWhereClause())
                 End If
                 Return Me._TotalRecords
             End Get
             Set(ByVal value As Integer)
                 If Me.PageSize > 0 Then
-
+                
                     Me.TotalPages = CInt(Math.Ceiling(value / Me.PageSize))
-
+                  
                 End If
                 Me._TotalRecords = value
             End Set
         End Property
 
-
-
+        
+    
         Protected _TotalPages As Integer = -1
         Public Property TotalPages() As Integer
             Get
                 If _TotalPages < 0 Then
-
+                
                     Me.TotalPages = CInt(Math.Ceiling(TotalRecords / Me.PageSize))
-
-                End If
+                  
+                End If                
                 Return Me._TotalPages
             End Get
             Set(ByVal value As Integer)
@@ -10287,78 +10365,78 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
         End Property
 
 
-
+          
         Private _CurrentSortOrder As OrderBy = Nothing
         Public Property CurrentSortOrder() As OrderBy
             Get
                 Return Me._CurrentSortOrder
             End Get
-            Set(ByVal value As OrderBy)
+            Set(ByVal value As BaseClasses.Data.OrderBy)
                 Me._CurrentSortOrder = value
             End Set
         End Property
-
-        Public Property DataSource() As WFinRepNGP_HeadRecord()
+        
+        Public Property DataSource() As WFinRepNGP_HeadRecord ()
             Get
                 Return DirectCast(MyBase._DataSource, WFinRepNGP_HeadRecord())
             End Get
-            Set(ByVal value As WFinRepNGP_HeadRecord())
+            Set(ByVal value() As WFinRepNGP_HeadRecord)
                 Me._DataSource = value
             End Set
         End Property
-
+       
 #Region "Helper Properties"
-
+        
         Public ReadOnly Property WFRCHNGP_C_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_C_IDLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFRCHNGP_DescriptionLabel1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_DescriptionLabel1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFRCHNGP_MonthLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_MonthLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFRCHNGP_RemarkLabel1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_RemarkLabel1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFRCHNGP_RptCountLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_RptCountLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFRCHNGP_YearLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_YearLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
 #End Region
 
 #Region "Helper Functions"
-
-        Public Overloads Overrides Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean) As String
+        
+        Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean) As String
             Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
-
-
-        Public Overloads Overrides Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me, includeSession)
+      
+      
+        Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me,includeSession)
         End Function
-
-        Public Overloads Overrides Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean) As String
+        
+        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean) As String
             Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
             If (needToProcess) Then
                 Dim recCtl As WFinRepNGP_HeadTableControlRow = Me.GetSelectedRecordControl()
@@ -10366,7 +10444,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                     ' Localization.
                     Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
                 End If
-                Dim rec As WFinRepNGP_HeadRecord = Nothing
+                Dim rec As WFinRepNGP_HeadRecord = Nothing     
                 If recCtl IsNot Nothing Then
                     rec = recCtl.GetRecord()
                 End If
@@ -10374,8 +10452,8 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             End If
             Return url
         End Function
-
-        Public Overloads Overrides Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
+        
+        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
             Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
             If (needToProcess) Then
                 Dim recCtl As WFinRepNGP_HeadTableControlRow = Me.GetSelectedRecordControl()
@@ -10383,29 +10461,29 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                     ' Localization.
                     Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
                 End If
-                Dim rec As WFinRepNGP_HeadRecord = Nothing
+                Dim rec As WFinRepNGP_HeadRecord = Nothing     
                 If recCtl IsNot Nothing Then
                     rec = recCtl.GetRecord()
                 End If
-                If includeSession Then
+                If includeSession then
                     Return EvaluateExpressions(url, arg, rec, bEncrypt)
                 Else
-                    Return EvaluateExpressions(url, arg, rec, bEncrypt, False)
+                    Return EvaluateExpressions(url, arg, rec, bEncrypt,False)
                 End If
             End If
             Return url
         End Function
-
-
+        
+          
         Public Overridable Function GetSelectedRecordControl() As WFinRepNGP_HeadTableControlRow
             Return Nothing
-
+          
         End Function
 
         Public Overridable Function GetSelectedRecordControls() As WFinRepNGP_HeadTableControlRow()
-
-            Return DirectCast((New ArrayList()).ToArray(GetType(WFinRepNGP_HeadTableControlRow)), WFinRepNGP_HeadTableControlRow())
-
+        
+            Return DirectCast((new ArrayList()).ToArray(GetType(WFinRepNGP_HeadTableControlRow)), WFinRepNGP_HeadTableControlRow())
+          
         End Function
 
         Public Overridable Sub DeleteSelectedRecords(ByVal deferDeletion As Boolean)
@@ -10414,27 +10492,27 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 ' Localization.
                 Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
             End If
-
+            
             Dim recCtl As WFinRepNGP_HeadTableControlRow
             For Each recCtl In recList
                 If deferDeletion Then
                     If Not recCtl.IsNewRecord Then
-
+                
                         Me.AddToDeletedRecordIds(recCtl)
-
+                  
                     End If
                     recCtl.Visible = False
-
+                
                 Else
-
+                
                     recCtl.Delete()
-
+                    
                     ' Setting the DataChanged to True results in the page being refreshed with
                     ' the most recent data from the database.  This happens in PreRender event
                     ' based on the current sort, search and filter criteria.
                     Me.DataChanged = True
                     Me.ResetData = True
-
+                  
                 End If
             Next
         End Sub
@@ -10453,125 +10531,125 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Return DirectCast(MyBase.Page, BaseApplicationPage)
             End Get
         End Property
-
+                
 
 
 #End Region
 
 
 
-    End Class
+End Class
 
-
-    ' Base class for the WFinRepNGP_HeadRecordControl control on the WFinRepNGP_Approver page.
-    ' Do not modify this class. Instead override any method in WFinRepNGP_HeadRecordControl.
-    Public Class BaseWFinRepNGP_HeadRecordControl
+  
+' Base class for the WFinRepNGP_HeadRecordControl control on the WFinRepNGP_Approver page.
+' Do not modify this class. Instead override any method in WFinRepNGP_HeadRecordControl.
+Public Class BaseWFinRepNGP_HeadRecordControl
         Inherits ePortalWFApproval.UI.BaseApplicationRecordControl
 
         '  To customize, override this method in WFinRepNGP_HeadRecordControl.
         Protected Overridable Sub Control_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Init
 
-
+      
             ' Setup the filter and search events.
-
+            
         End Sub
 
         '  To customize, override this method in WFinRepNGP_HeadRecordControl.
         Protected Overridable Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-            ' Setup the pagination events.	  
-
-
-            ' Register the event handlers.
-
-            AddHandler Me.pApproved.Click, AddressOf pApproved_Click
-
-            AddHandler Me.pReject.Click, AddressOf pReject_Click
-
-            AddHandler Me.pReturned.Click, AddressOf pReturned_Click
-
-            AddHandler Me.CancelButton.Button.Click, AddressOf CancelButton_Click
-
-            AddHandler Me.WFRCHNGP_U_ID.SelectedIndexChanged, AddressOf WFRCHNGP_U_ID_SelectedIndexChanged
-
-            AddHandler Me.WFRCHNGP_Submit.CheckedChanged, AddressOf WFRCHNGP_Submit_CheckedChanged
-
-            AddHandler Me.WFRCHNGP_C_ID.TextChanged, AddressOf WFRCHNGP_C_ID_TextChanged
-
-            AddHandler Me.WFRCHNGP_C_ID1.TextChanged, AddressOf WFRCHNGP_C_ID1_TextChanged
-
-            AddHandler Me.WFRCHNGP_Month.TextChanged, AddressOf WFRCHNGP_Month_TextChanged
-
-            AddHandler Me.WFRCHNGP_Remark.TextChanged, AddressOf WFRCHNGP_Remark_TextChanged
-
-            AddHandler Me.WFRCHNGP_U_ID1.TextChanged, AddressOf WFRCHNGP_U_ID1_TextChanged
-
-            AddHandler Me.WFRCHNGP_Year.TextChanged, AddressOf WFRCHNGP_Year_TextChanged
-
-            AddHandler Me.txtRemarks.TextChanged, AddressOf txtRemarks_TextChanged
-
-
+         
+              ' Setup the pagination events.	  
+                     
+        
+              ' Register the event handlers.
+          
+              AddHandler Me.pApproved.Click, AddressOf pApproved_Click
+                        
+              AddHandler Me.pReject.Click, AddressOf pReject_Click
+                        
+              AddHandler Me.pReturned.Click, AddressOf pReturned_Click
+                        
+              AddHandler Me.CancelButton.Button.Click, AddressOf CancelButton_Click
+                        
+              AddHandler Me.WFRCHNGP_U_ID.SelectedIndexChanged, AddressOf WFRCHNGP_U_ID_SelectedIndexChanged
+            
+              AddHandler Me.WFRCHNGP_Submit.CheckedChanged, AddressOf WFRCHNGP_Submit_CheckedChanged
+            
+              AddHandler Me.WFRCHNGP_C_ID.TextChanged, AddressOf WFRCHNGP_C_ID_TextChanged
+            
+              AddHandler Me.WFRCHNGP_C_ID1.TextChanged, AddressOf WFRCHNGP_C_ID1_TextChanged
+            
+              AddHandler Me.WFRCHNGP_Month.TextChanged, AddressOf WFRCHNGP_Month_TextChanged
+            
+              AddHandler Me.WFRCHNGP_Remark.TextChanged, AddressOf WFRCHNGP_Remark_TextChanged
+            
+              AddHandler Me.WFRCHNGP_U_ID1.TextChanged, AddressOf WFRCHNGP_U_ID1_TextChanged
+            
+              AddHandler Me.WFRCHNGP_Year.TextChanged, AddressOf WFRCHNGP_Year_TextChanged
+            					
+              AddHandler Me.txtRemarks.TextChanged, AddressOf txtRemarks_TextChanged
+                    
+    
         End Sub
 
-
-        Public Overridable Sub LoadData()
-
+        
+        Public Overridable Sub LoadData()        
+                
             ' Load the data from the database into the DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
             ' It is better to make changes to functions called by LoadData such as
             ' CreateWhereClause, rather than making changes here.
-
+    
             ' The RecordUniqueId is set the first time a record is loaded, and is
             ' used during a PostBack to load the record.
-
+          
             If Me.RecordUniqueId IsNot Nothing AndAlso Me.RecordUniqueId.Trim <> "" Then
                 Me.DataSource = WFinRepNGP_HeadTable.GetRecord(Me.RecordUniqueId, True)
-
+          
                 Return
             End If
-
+        
             ' This is the first time a record is being retrieved from the database.
             ' So create a Where Clause based on the staic Where clause specified
             ' on the Query wizard and the dynamic part specified by the end user
             ' on the search and filter controls (if any).
-
+            
             Dim wc As WhereClause = Me.CreateWhereClause()
-
+          
             Dim Panel As System.Web.UI.WebControls.Panel = CType(MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadRecordControlPanel"), System.Web.UI.WebControls.Panel)
-            If Not Panel Is Nothing Then
+            If Not Panel is Nothing Then
                 Panel.visible = True
             End If
-
+            
             ' If there is no Where clause, then simply create a new, blank record.
-
+             
             If wc Is Nothing OrElse Not wc.RunQuery Then
                 Me.DataSource = New WFinRepNGP_HeadRecord()
-
-                If Not Panel Is Nothing Then
+            
+                If Not Panel is Nothing Then
                     Panel.visible = False
                 End If
-
+                
                 Return
             End If
-
+          
             ' Retrieve the record from the database.  It is possible
-
+            
             Dim recList() As WFinRepNGP_HeadRecord = WFinRepNGP_HeadTable.GetRecords(wc, Nothing, 0, 2)
             If recList.Length = 0 Then
                 ' There is no data for this Where clause.
                 wc.RunQuery = False
-
-                If Not Panel Is Nothing Then
+                
+                If Not Panel is Nothing Then
                     Panel.visible = False
                 End If
-
+                
                 Return
             End If
-
+            
             ' Set DataSource based on record retrieved from the database.
             Me.DataSource = WFinRepNGP_HeadTable.GetRecord(recList(0).GetID.ToXmlString(), True)
-
-
-
+                  
+    
+    
         End Sub
 
         ' Populate the UI controls using the DataSource.  To customize, override this method in WFinRepNGP_HeadRecordControl.
@@ -10580,486 +10658,486 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             ' from the database record.  To do this, it calls the Set methods for 
             ' each of the field displayed on the webpage.  It is better to make 
             ' changes in the Set methods, rather than making changes here.
-
+            
             MyBase.DataBind()
             Me.ClearControlsFromSession()
 
             ' Make sure that the DataSource is initialized.
             If Me.DataSource Is Nothing Then
-
+              
                 Return
             End If
-
-
+             
+   
             'LoadData for DataSource for chart and report if they exist
-
+          
             ' Store the checksum. The checksum is used to
             ' ensure the record was not changed by another user.
-            If Not Me.DataSource.GetCheckSumValue() Is Nothing Then
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing
                 Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
             End If
-
-
-
+            
+      
+      
             ' Call the Set methods for each controls on the panel
-
-
-
-
-
-
-
-
-
-            SettxtRemarks()
-
-
-            SetWFinRepNGP_HeadRecordControlTabContainer()
-
-            SetWFRCHNGP_C_ID()
-            SetWFRCHNGP_C_ID1()
-            SetWFRCHNGP_Description()
-            SetWFRCHNGP_DescriptionLabel()
-            SetWFRCHNGP_DT_ID()
-            SetWFRCHNGP_DT_ID1()
-            SetWFRCHNGP_DT_IDLabel()
-            SetWFRCHNGP_ID()
-            SetWFRCHNGP_Month()
-            SetWFRCHNGP_Remark()
-            SetWFRCHNGP_RemarkLabel()
-            SetWFRCHNGP_Status()
-            SetWFRCHNGP_StatusLabel()
-            SetWFRCHNGP_Submit()
-            SetWFRCHNGP_U_ID()
-            SetWFRCHNGP_U_ID1()
-            SetWFRCHNGP_Year()
-            SetpApproved()
-
-            SetpReject()
-
-            SetpReturned()
-
-            SetCancelButton()
-
-
-
+        
+                
+                
+                
+                
+                
+                
+                
+                
+                SettxtRemarks()
+                
+                
+                SetWFinRepNGP_HeadRecordControlTabContainer()
+                
+                SetWFRCHNGP_C_ID()
+                SetWFRCHNGP_C_ID1()
+                SetWFRCHNGP_Description()
+                SetWFRCHNGP_DescriptionLabel()
+                SetWFRCHNGP_DT_ID()
+                SetWFRCHNGP_DT_ID1()
+                SetWFRCHNGP_DT_IDLabel()
+                SetWFRCHNGP_ID()
+                SetWFRCHNGP_Month()
+                SetWFRCHNGP_Remark()
+                SetWFRCHNGP_RemarkLabel()
+                SetWFRCHNGP_Status()
+                SetWFRCHNGP_StatusLabel()
+                SetWFRCHNGP_Submit()
+                SetWFRCHNGP_U_ID()
+                SetWFRCHNGP_U_ID1()
+                SetWFRCHNGP_Year()
+                SetpApproved()
+              
+                SetpReject()
+              
+                SetpReturned()
+              
+                SetCancelButton()
+              
+      
+      
             Me.IsNewRecord = True
-
+            
             If Me.DataSource.IsCreated Then
                 Me.IsNewRecord = False
-
+                
                 If Me.DataSource.GetID IsNot Nothing Then
                     Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
                 End If
-
+                
             End If
-
+            
             ' Now load data for each record and table child UI controls.
             ' Ordering is important because child controls get 
             ' their parent ids from their parent UI controls.
             Dim shouldResetControl As Boolean = False
-
-            If (shouldResetControl OrElse Me.Page.IsPageRefresh) Then
-                WFinRepNGP_ActivityTableControl.ResetControl()
-            End If
-
-            SetWFinRepNGP_ActivityTableControl()
-
-            If (shouldResetControl OrElse Me.Page.IsPageRefresh) Then
-                WFinRepNGP_AttachmentTableControl.ResetControl()
-            End If
-
-            SetWFinRepNGP_AttachmentTableControl()
-
-            SetWFinRepNGP_HeadTableControl()
-
+            
+            If (shouldResetControl OrElse Me.Page.IsPageRefresh)
+              WFinRepNGP_ActivityTableControl.ResetControl()
+            End IF
+                    
+        SetWFinRepNGP_ActivityTableControl()
+        
+            If (shouldResetControl OrElse Me.Page.IsPageRefresh)
+              WFinRepNGP_AttachmentTableControl.ResetControl()
+            End IF
+                    
+        SetWFinRepNGP_AttachmentTableControl()
+        
+        SetWFinRepNGP_HeadTableControl()
+        
         End Sub
-
-
+        
+        
         Public Overridable Sub SetWFRCHNGP_C_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_C_ID TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_C_ID is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_C_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_C_IDSpecified Then
-
+                				
                 ' If the WFRCHNGP_C_ID is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
-
+                              
                 Me.WFRCHNGP_C_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_C_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_C_ID.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
-
-            End If
-
-            AddHandler Me.WFRCHNGP_C_ID.TextChanged, AddressOf WFRCHNGP_C_ID_TextChanged
-
+        
+                 Me.WFRCHNGP_C_ID.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_C_ID.TextChanged, AddressOf WFRCHNGP_C_ID_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_C_ID1()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_C_ID TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_C_ID1 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_C_ID1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_C_IDSpecified Then
-
+                				
                 ' If the WFRCHNGP_C_ID is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
-
+                              
                 Me.WFRCHNGP_C_ID1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_C_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_C_ID1.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
-
-            End If
-
-            AddHandler Me.WFRCHNGP_C_ID1.TextChanged, AddressOf WFRCHNGP_C_ID1_TextChanged
-
+        
+                 Me.WFRCHNGP_C_ID1.Text = WFinRepNGP_HeadTable.WFRCHNGP_C_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_C_ID.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_C_ID1.TextChanged, AddressOf WFRCHNGP_C_ID1_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Description()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_Description Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Description is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Description()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_DescriptionSpecified Then
-
+                				
                 ' If the WFRCHNGP_Description is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Description)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WFRCHNGP_Description.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Description is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Description.Text = WFinRepNGP_HeadTable.WFRCHNGP_Description.Format(WFinRepNGP_HeadTable.WFRCHNGP_Description.DefaultValue)
-
-            End If
-
+        
+                 Me.WFRCHNGP_Description.Text = WFinRepNGP_HeadTable.WFRCHNGP_Description.Format(WFinRepNGP_HeadTable.WFRCHNGP_Description.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_DT_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_DT_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_DT_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_DT_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_DT_IDSpecified Then
-
+                				
                 ' If the WFRCHNGP_DT_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_DT_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_DT_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WFinRepNGP_HeadTable.GetDFKA(Me.DataSource.WFRCHNGP_DT_ID.ToString(), WFinRepNGP_HeadTable.WFRCHNGP_DT_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_DT_ID)
-                    End If
+                                  
+                       formattedValue = WFinRepNGP_HeadTable.GetDFKA(Me.DataSource.WFRCHNGP_DT_ID.ToString(),WFinRepNGP_HeadTable.WFRCHNGP_DT_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_DT_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WFRCHNGP_DT_ID.ToString()
+                       formattedValue = Me.DataSource.WFRCHNGP_DT_ID.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WFRCHNGP_DT_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_DT_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_DT_ID.Text = WFinRepNGP_HeadTable.WFRCHNGP_DT_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_DT_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WFRCHNGP_DT_ID.Text = WFinRepNGP_HeadTable.WFRCHNGP_DT_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_DT_ID.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_DT_ID1()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_DT_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_DT_ID1 is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_DT_ID1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_DT_IDSpecified Then
-
+                				
                 ' If the WFRCHNGP_DT_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_DT_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_DT_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WFinRepNGP_HeadTable.GetDFKA(Me.DataSource.WFRCHNGP_DT_ID.ToString(), WFinRepNGP_HeadTable.WFRCHNGP_DT_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_DT_ID)
-                    End If
+                                  
+                       formattedValue = WFinRepNGP_HeadTable.GetDFKA(Me.DataSource.WFRCHNGP_DT_ID.ToString(),WFinRepNGP_HeadTable.WFRCHNGP_DT_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_DT_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WFRCHNGP_DT_ID.ToString()
+                       formattedValue = Me.DataSource.WFRCHNGP_DT_ID.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WFRCHNGP_DT_ID1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_DT_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_DT_ID1.Text = WFinRepNGP_HeadTable.WFRCHNGP_DT_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_DT_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WFRCHNGP_DT_ID1.Text = WFinRepNGP_HeadTable.WFRCHNGP_DT_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_DT_ID.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_IDSpecified Then
-
+                				
                 ' If the WFRCHNGP_ID is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_ID)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WFRCHNGP_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_ID.Text = WFinRepNGP_HeadTable.WFRCHNGP_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WFRCHNGP_ID.Text = WFinRepNGP_HeadTable.WFRCHNGP_ID.Format(WFinRepNGP_HeadTable.WFRCHNGP_ID.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Month()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_Month TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Month is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Month()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_MonthSpecified Then
-
+                				
                 ' If the WFRCHNGP_Month is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = Me.DataSource.WFRCHNGP_Month.ToString()
-
-
+                                
+                            
                 Me.WFRCHNGP_Month.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Month is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Month.Text = WFinRepNGP_HeadTable.WFRCHNGP_Month.DefaultValue
-            End If
-
-            AddHandler Me.WFRCHNGP_Month.TextChanged, AddressOf WFRCHNGP_Month_TextChanged
-
+        
+                 Me.WFRCHNGP_Month.Text = WFinRepNGP_HeadTable.WFRCHNGP_Month.DefaultValue		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_Month.TextChanged, AddressOf WFRCHNGP_Month_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Remark()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_Remark TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Remark is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Remark()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_RemarkSpecified Then
-
+                				
                 ' If the WFRCHNGP_Remark is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Remark)
-
+                              
                 Me.WFRCHNGP_Remark.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Remark is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Remark.Text = WFinRepNGP_HeadTable.WFRCHNGP_Remark.Format(WFinRepNGP_HeadTable.WFRCHNGP_Remark.DefaultValue)
-
-            End If
-
-            AddHandler Me.WFRCHNGP_Remark.TextChanged, AddressOf WFRCHNGP_Remark_TextChanged
-
+        
+                 Me.WFRCHNGP_Remark.Text = WFinRepNGP_HeadTable.WFRCHNGP_Remark.Format(WFinRepNGP_HeadTable.WFRCHNGP_Remark.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_Remark.TextChanged, AddressOf WFRCHNGP_Remark_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Status()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_Status Literal on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Status is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Status()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_StatusSpecified Then
-
+                				
                 ' If the WFRCHNGP_Status is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_Status)
                 If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_Status.IsApplyDisplayAs Then
-
-                    formattedValue = WFinRepNGP_HeadTable.GetDFKA(Me.DataSource.WFRCHNGP_Status.ToString(), WFinRepNGP_HeadTable.WFRCHNGP_Status, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Status)
-                    End If
+                                  
+                       formattedValue = WFinRepNGP_HeadTable.GetDFKA(Me.DataSource.WFRCHNGP_Status.ToString(),WFinRepNGP_HeadTable.WFRCHNGP_Status, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Status)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WFRCHNGP_Status.ToString()
+                       formattedValue = Me.DataSource.WFRCHNGP_Status.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WFRCHNGP_Status.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Status is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Status.Text = WFinRepNGP_HeadTable.WFRCHNGP_Status.Format(WFinRepNGP_HeadTable.WFRCHNGP_Status.DefaultValue)
-
-            End If
-
+        
+                 Me.WFRCHNGP_Status.Text = WFinRepNGP_HeadTable.WFRCHNGP_Status.Format(WFinRepNGP_HeadTable.WFRCHNGP_Status.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Submit()
 
-
-
-
+                      
+            
+        
             ' Set the WFRCHNGP_Submit CheckBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
@@ -11070,53 +11148,53 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             ' MyBase.SetWFRCHNGP_Submit()
             ' and add your own code before or after the call to the MyBase function.
 
-
+                    
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_SubmitSpecified Then
-
+                									
                 ' If the WFRCHNGP_Submit is non-NULL, then format the value.
                 ' The Format method will use the Display Format
                 Me.WFRCHNGP_Submit.Checked = Me.DataSource.WFRCHNGP_Submit
             Else
-
+            
                 ' WFRCHNGP_Submit is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
                 If Not Me.DataSource.IsCreated Then
                     Me.WFRCHNGP_Submit.Checked = WFinRepNGP_HeadTable.WFRCHNGP_Submit.ParseValue(WFinRepNGP_HeadTable.WFRCHNGP_Submit.DefaultValue).ToBoolean()
                 End If
-
+                    				
             End If
-
+                
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_U_ID()
 
-
-
+                  
+            
 
             Dim selectedValue As String = Nothing
-
+            
             ' figure out the selectedValue
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_U_ID DropDownList on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
-
+            
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_U_ID is the ASP:DropDownList on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_U_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
+            
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_U_IDSpecified Then
-
+                            
                 ' If the WFRCHNGP_U_ID is non-NULL, then format the value.
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 selectedValue = Me.DataSource.WFRCHNGP_U_ID.ToString()
             Else
-
+                
                 ' WFRCHNGP_U_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
                 If Me.DataSource IsNot Nothing AndAlso Me.DataSource.IsCreated Then
@@ -11124,187 +11202,187 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Else
                     selectedValue = WFinRepNGP_HeadTable.WFRCHNGP_U_ID.DefaultValue
                 End If
-
-            End If
-
-
-
+                				
+            End If			
+                
+            
+                  
             ' Populate the item(s) to the control
-
-            Me.PopulateWFRCHNGP_U_IDDropDownList(selectedValue, 100)
-
-
-
-
+            
+            Me.PopulateWFRCHNGP_U_IDDropDownList(selectedValue, 100)              
+                
+                  
+           
+             
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_U_ID1()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_U_ID TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_U_ID1 is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_U_ID1()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_U_IDSpecified Then
-
+                				
                 ' If the WFRCHNGP_U_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = Me.DataSource.WFRCHNGP_U_ID.ToString()
-
-
+                                
+                            
                 Me.WFRCHNGP_U_ID1.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_U_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_U_ID1.Text = WFinRepNGP_HeadTable.WFRCHNGP_U_ID.DefaultValue
-            End If
-
-            AddHandler Me.WFRCHNGP_U_ID1.TextChanged, AddressOf WFRCHNGP_U_ID1_TextChanged
-
+        
+                 Me.WFRCHNGP_U_ID1.Text = WFinRepNGP_HeadTable.WFRCHNGP_U_ID.DefaultValue		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_U_ID1.TextChanged, AddressOf WFRCHNGP_U_ID1_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWFRCHNGP_Year()
 
-
-
-
+                  
+            
+        
             ' Set the WFRCHNGP_Year TextBox on the webpage with value from the
             ' DatabaseANFLO-WF%dbo.WFinRepNGP_Head database record.
 
             ' Me.DataSource is the DatabaseANFLO-WF%dbo.WFinRepNGP_Head record retrieved from the database.
             ' Me.WFRCHNGP_Year is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWFRCHNGP_Year()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WFRCHNGP_YearSpecified Then
-
+                				
                 ' If the WFRCHNGP_Year is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WFinRepNGP_HeadTable.WFRCHNGP_Year)
-
+                              
                 Me.WFRCHNGP_Year.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WFRCHNGP_Year is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WFRCHNGP_Year.Text = WFinRepNGP_HeadTable.WFRCHNGP_Year.Format(WFinRepNGP_HeadTable.WFRCHNGP_Year.DefaultValue)
-
-            End If
-
-            AddHandler Me.WFRCHNGP_Year.TextChanged, AddressOf WFRCHNGP_Year_TextChanged
-
+        
+                 Me.WFRCHNGP_Year.Text = WFinRepNGP_HeadTable.WFRCHNGP_Year.Format(WFinRepNGP_HeadTable.WFRCHNGP_Year.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WFRCHNGP_Year.TextChanged, AddressOf WFRCHNGP_Year_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SettxtRemarks()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetWFRCHNGP_DescriptionLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WFRCHNGP_DescriptionLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WFRCHNGP_DescriptionLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWFRCHNGP_DT_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WFRCHNGP_DT_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WFRCHNGP_DT_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWFRCHNGP_RemarkLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WFRCHNGP_RemarkLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WFRCHNGP_RemarkLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWFRCHNGP_StatusLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WFRCHNGP_StatusLabel.Text = "Some value"
-
-        End Sub
-
-        Public Overridable Sub SetWFinRepNGP_HeadRecordControlTabContainer()
-
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WFRCHNGP_StatusLabel.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetWFinRepNGP_HeadRecordControlTabContainer()           
+                        
+                   
             If EvaluateFormula("URL(""TabVisible"")").ToLower() = "true" Then
                 MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadRecordControlTabContainer").Visible = True
             ElseIf EvaluateFormula("URL(""TabVisible"")").ToLower() = "false" Then
                 MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadRecordControlTabContainer").Visible = False
             End If
-
-
-        End Sub
-
-        Public Overridable Sub SetWFinRepNGP_ActivityTableControl()
-
-
+         
+  
+        End Sub        
+      
+        Public Overridable Sub SetWFinRepNGP_ActivityTableControl()           
+        
+        
             If WFinRepNGP_ActivityTableControl.Visible Then
                 WFinRepNGP_ActivityTableControl.LoadData()
                 WFinRepNGP_ActivityTableControl.DataBind()
             End If
-        End Sub
-
-        Public Overridable Sub SetWFinRepNGP_AttachmentTableControl()
-
-
+        End Sub        
+      
+        Public Overridable Sub SetWFinRepNGP_AttachmentTableControl()           
+        
+        
             If WFinRepNGP_AttachmentTableControl.Visible Then
                 WFinRepNGP_AttachmentTableControl.LoadData()
                 WFinRepNGP_AttachmentTableControl.DataBind()
             End If
-        End Sub
-
-        Public Overridable Sub SetWFinRepNGP_HeadTableControl()
-
-
+        End Sub        
+      
+        Public Overridable Sub SetWFinRepNGP_HeadTableControl()           
+        
+        
             If WFinRepNGP_HeadTableControl.Visible Then
                 WFinRepNGP_HeadTableControl.LoadData()
                 WFinRepNGP_HeadTableControl.DataBind()
             End If
-        End Sub
-
+        End Sub        
+      
         Public Overridable Sub ResetControl()
-
+          
         End Sub
-
+        
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
@@ -11312,10 +11390,10 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             If e Is Nothing Then
                 e = New FormulaEvaluator()
             End If
-
+            
             e.Variables.Clear()
 
-
+            
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -11324,11 +11402,11 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 End While
             End If
 
-            If includeDS Then
-
-            End If
-
-
+            If includeDS
+                
+            End IF
+            
+            
             ' Other variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -11354,22 +11432,22 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             Else
                 Return resultObj.ToString()
             End If
-        End Function
+        End Function      
+        
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
+        End Function        
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
-        End Function
-
-
+        
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
-        End Function
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
+        End Function        
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -11377,7 +11455,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -11386,13 +11464,13 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
         End Function
 
 
-        Public Overridable Sub RegisterPostback()
-
-
+        Public Overridable Sub RegisterPostback()       
+        
+        
         End Sub
 
-
-
+      
+        
         ' To customize, override this method in WFinRepNGP_HeadRecordControl.
         Public Overridable Sub SaveData()
             ' Saves the associated record in the database.
@@ -11402,21 +11480,21 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             ' 1. Load the existing record from the database. Since we save the entire record, this ensures 
             ' that fields that are not displayed are also properly initialized.
             Me.LoadData()
-
+        
             ' The checksum is used to ensure the record was not changed by another user.
             If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
                 If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
                     Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "ePortalWFApproval"))
                 End If
             End If
+        
+          Dim Panel As System.Web.UI.WebControls.Panel = CType(MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadRecordControlPanel"), System.Web.UI.WebControls.Panel)
 
-            Dim Panel As System.Web.UI.WebControls.Panel = CType(MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadRecordControlPanel"), System.Web.UI.WebControls.Panel)
-
-            If ((Not IsNothing(Panel)) AndAlso (Not Panel.Visible)) OrElse IsNothing(Me.DataSource) Then
-                Return
-            End If
-
-
+          If ((Not IsNothing(Panel)) AndAlso (Not Panel.Visible)) OrElse IsNothing(Me.DataSource) Then
+              Return
+          End If
+          
+              
             ' 2. Perform any custom validation.
             Me.Validate()
 
@@ -11427,36 +11505,36 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             ' 4. Save in the database.
             ' We should not save the record if the data did not change. This
             ' will save a database hit and avoid triggering any database triggers.
-
+             
             If Me.DataSource.IsAnyValueChanged Then
                 ' Save record to database but do not commit yet.
                 ' Auto generated ids are available after saving for use by child (dependent) records.
                 Me.DataSource.Save()
-
+              
             End If
-
-
+            
+      
             ' update session or cookie by formula
-
-
+                                    
+      
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-
+            
             Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
-
-            Dim recWFinRepNGP_ActivityTableControl As WFinRepNGP_ActivityTableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRepNGP_ActivityTableControl"), WFinRepNGP_ActivityTableControl)
-            recWFinRepNGP_ActivityTableControl.SaveData()
-
-            Dim recWFinRepNGP_AttachmentTableControl As WFinRepNGP_AttachmentTableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRepNGP_AttachmentTableControl"), WFinRepNGP_AttachmentTableControl)
-            recWFinRepNGP_AttachmentTableControl.SaveData()
-
-            Dim recWFinRepNGP_HeadTableControl As WFinRepNGP_HeadTableControl = DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadTableControl"), WFinRepNGP_HeadTableControl)
-            recWFinRepNGP_HeadTableControl.SaveData()
-
+          
+        Dim recWFinRepNGP_ActivityTableControl as WFinRepNGP_ActivityTableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRepNGP_ActivityTableControl"), WFinRepNGP_ActivityTableControl)
+        recWFinRepNGP_ActivityTableControl.SaveData()
+          
+        Dim recWFinRepNGP_AttachmentTableControl as WFinRepNGP_AttachmentTableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRepNGP_AttachmentTableControl"), WFinRepNGP_AttachmentTableControl)
+        recWFinRepNGP_AttachmentTableControl.SaveData()
+          
+        Dim recWFinRepNGP_HeadTableControl as WFinRepNGP_HeadTableControl= DirectCast(MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadTableControl"), WFinRepNGP_HeadTableControl)
+        recWFinRepNGP_HeadTableControl.SaveData()
+          
         End Sub
 
         ' To customize, override this method in WFinRepNGP_HeadRecordControl.
@@ -11466,9 +11544,9 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             ' To do this, it calls the Get methods for each of the field displayed on 
             ' the webpage.  It is better to make changes in the Get methods, rather 
             ' than making changes here.
-
+      
             ' Call the Get methods for each of the user interface controls.
-
+        
             GetWFRCHNGP_C_ID()
             GetWFRCHNGP_C_ID1()
             GetWFRCHNGP_Description()
@@ -11483,223 +11561,223 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             GetWFRCHNGP_U_ID1()
             GetWFRCHNGP_Year()
         End Sub
-
-
+        
+        
         Public Overridable Sub GetWFRCHNGP_C_ID()
-
+            
             ' Retrieve the value entered by the user on the WFRCHNGP_C_ID ASP:TextBox, and
             ' save it into the WFRCHNGP_C_ID field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WFRCHNGP_C_ID.Text, WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
+            Me.DataSource.Parse(Me.WFRCHNGP_C_ID.Text, WFinRepNGP_HeadTable.WFRCHNGP_C_ID)			
 
-
+                      
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_C_ID1()
-
+            
             ' Retrieve the value entered by the user on the WFRCHNGP_C_ID ASP:TextBox, and
             ' save it into the WFRCHNGP_C_ID field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WFRCHNGP_C_ID1.Text, WFinRepNGP_HeadTable.WFRCHNGP_C_ID)
+            Me.DataSource.Parse(Me.WFRCHNGP_C_ID1.Text, WFinRepNGP_HeadTable.WFRCHNGP_C_ID)			
 
-
+                      
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Description()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_DT_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_DT_ID1()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Month()
-
+            
             ' Retrieve the value entered by the user on the WFRCHNGP_Month ASP:TextBox, and
             ' save it into the WFRCHNGP_Month field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WFRCHNGP_Month.Text, WFinRepNGP_HeadTable.WFRCHNGP_Month)
+            Me.DataSource.Parse(Me.WFRCHNGP_Month.Text, WFinRepNGP_HeadTable.WFRCHNGP_Month)			
 
-
+                      
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Remark()
-
+            
             ' Retrieve the value entered by the user on the WFRCHNGP_Remark ASP:TextBox, and
             ' save it into the WFRCHNGP_Remark field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WFRCHNGP_Remark.Text, WFinRepNGP_HeadTable.WFRCHNGP_Remark)
+            Me.DataSource.Parse(Me.WFRCHNGP_Remark.Text, WFinRepNGP_HeadTable.WFRCHNGP_Remark)			
 
-
+                      
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Status()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Submit()
-
-
+        
+        
             ' Retrieve the value entered by the user on the WFRCHNGP_Submit ASP:CheckBox, and
             ' save it into the WFRCHNGP_Submit field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
             ' Custom validation should be performed in Validate, not here.
-
-
+            
+            
             Me.DataSource.WFRCHNGP_Submit = Me.WFRCHNGP_Submit.Checked
-
+                    
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_U_ID()
-
+         
             ' Retrieve the value entered by the user on the WFRCHNGP_U_ID ASP:DropDownList, and
             ' save it into the WFRCHNGP_U_ID field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+                        
             ' Custom validation should be performed in Validate, not here.
-
-            Me.DataSource.Parse(GetValueSelectedPageRequest(Me.WFRCHNGP_U_ID), WFinRepNGP_HeadTable.WFRCHNGP_U_ID)
-
+            
+            Me.DataSource.Parse(GetValueSelectedPageRequest(Me.WFRCHNGP_U_ID), WFinRepNGP_HeadTable.WFRCHNGP_U_ID)				
+            
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_U_ID1()
-
+            
             ' Retrieve the value entered by the user on the WFRCHNGP_U_ID ASP:TextBox, and
             ' save it into the WFRCHNGP_U_ID field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WFRCHNGP_U_ID1.Text, WFinRepNGP_HeadTable.WFRCHNGP_U_ID)
+            Me.DataSource.Parse(Me.WFRCHNGP_U_ID1.Text, WFinRepNGP_HeadTable.WFRCHNGP_U_ID)			
 
-
+                      
         End Sub
-
+                
         Public Overridable Sub GetWFRCHNGP_Year()
-
+            
             ' Retrieve the value entered by the user on the WFRCHNGP_Year ASP:TextBox, and
             ' save it into the WFRCHNGP_Year field in DataSource DatabaseANFLO-WF%dbo.WFinRepNGP_Head record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WFRCHNGP_Year.Text, WFinRepNGP_HeadTable.WFRCHNGP_Year)
+            Me.DataSource.Parse(Me.WFRCHNGP_Year.Text, WFinRepNGP_HeadTable.WFRCHNGP_Year)			
 
-
+                      
         End Sub
-
-
+                
+      
         ' To customize, override this method in WFinRepNGP_HeadRecordControl.
-
+        
         Public Overridable Function CreateWhereClause() As WhereClause
-
-            Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_HeadRecordControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
-
+        
+        Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_HeadRecordControl As Boolean = False
+      
+        Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
+      
             Dim wc As WhereClause
             WFinRepNGP_HeadTable.Instance.InnerFilter = Nothing
             wc = New WhereClause()
-
+            
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
             ' 2. User selected filter criteria.
             ' 3. User selected search criteria.
 
-
+            
             ' Retrieve the record id from the URL parameter.
-
-            Dim recId As String = DirectCast(Me.Page, BaseApplicationPage).Decrypt(Me.Page.Request.QueryString.Item("WFinRepNGP_Head"))
-
+              
+                  Dim recId As String = DirectCast(Me.Page, BaseApplicationPage).Decrypt(Me.Page.Request.QueryString.Item("WFinRepNGP_Head"))
+                
             If recId Is Nothing OrElse recId.Trim = "" Then
                 ' Get the error message from the application resource file.
                 Throw New Exception(Page.GetResourceValue("Err:UrlParamMissing", "ePortalWFApproval").Replace("{URL}", "WFinRepNGP_Head"))
             End If
             HttpContext.Current.Session("QueryString in WFinRepNGP-Approver") = recId
-
+              
             If KeyValue.IsXmlKey(recId) Then
                 ' Keys are typically passed as XML structures to handle composite keys.
                 ' If XML, then add a Where clause based on the Primary Key in the XML.
                 Dim pkValue As KeyValue = KeyValue.XmlToKey(recId)
-
+                
                 wc.iAND(WFinRepNGP_HeadTable.WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, pkValue.GetColumnValueString(WFinRepNGP_HeadTable.WFRCHNGP_ID))
-
+        
             Else
                 ' The URL parameter contains the actual value, not an XML structure.
-
+                
                 wc.iAND(WFinRepNGP_HeadTable.WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, recId)
-
+        
             End If
-
+              
             Return wc
-
+          
         End Function
-
+        
         ' This CreateWhereClause is used for loading list of suggestions for Auto Type-Ahead feature.
-
+        
         Public Overridable Function CreateWhereClause(ByVal searchText As String, ByVal fromSearchControl As String, ByVal AutoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String) As WhereClause
             WFinRepNGP_HeadTable.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
-
-            Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_HeadRecordControl As Boolean = False
-
-            Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
-
+        
+                Dim hasFiltersWFinRepNGP_ActivityTableControl As Boolean = False
+              
+                Dim hasFiltersWFinRepNGP_AttachmentTableControl As Boolean = False
+              
+                Dim hasFiltersWFinRepNGP_DocAttachTableControl As Boolean = False
+              
+                Dim hasFiltersWFinRepNGP_HeadRecordControl As Boolean = False
+              
+                Dim hasFiltersWFinRepNGP_HeadTableControl As Boolean = False
+              
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
             ' 2. User selected filter criteria.
             ' 3. User selected search criteria.
             Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
 
-
+            
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
-
-
-
+          
+       
+          
             Return wc
         End Function
 
-
-
-        Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
-                                        ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
-                                        ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
-                                        ByVal resultList As ArrayList) As Boolean
-            Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
-                                     autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
-                                     resultList, False)
-        End Function
-
+        
+         
+         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
+                                         ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
+                                         ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
+                                         ByVal resultList As ArrayList) As Boolean
+              Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
+                                       autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
+                                       resultList, False)
+         End Function                                       
+         
         'Formats the resultItem and adds it to the list of suggestions.
         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
                                                ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
@@ -11748,10 +11826,10 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                     If Len(resultItem) - index <= columnLength Then
                         If index = 0 Then
                             itemToAdd = resultItem
-                        Else
+                        Else                            
                             itemToAdd = resultItem.Substring(index)
                         End If
-                    Else
+                    Else                       
                         itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, index, index + columnLength, StringUtils.Direction.forward)
                     End If
                 ElseIf InvariantLCase(AutoTypeAheadDisplayFoundText).equals("inmiddleofmatchedstring") Then
@@ -11761,7 +11839,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                     Else
                         ' Sanity check at end of the string
                         If index + Len(prefixText) >= Len(resultItem) - 1 OrElse _
-                        Len(resultItem) - index < subStringBeginIndex Then
+                        Len(resultItem) - index < subStringBeginIndex Then                           
                             itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, Len(resultItem) - 1 - columnLength, Len(resultItem) - 1, StringUtils.Direction.backward)
                         ElseIf index <= subStringBeginIndex Then
                             ' Sanity check at beginning of the string                          
@@ -11821,11 +11899,11 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             End If
             Return isAdded
         End Function
-
-
+        
+    
 
         ' To customize, override this method in WFinRepNGP_HeadRecordControl.
-        Public Overridable Sub Validate()
+        Public Overridable Sub Validate() 
             ' Add custom validation for any control within this panel.
             ' Example.  If you have a State ASP:Textbox control
             ' If Me.State.Text <> "CA" Then
@@ -11835,19 +11913,19 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             ' The Validate method is common across all controls within
             ' this panel so you can validate multiple fields, but report
             ' one error message.
-
-
+            
+                
         End Sub
 
         Public Overridable Sub Delete()
-
+        
             If Me.IsNewRecord() Then
                 Return
             End If
 
             Dim pkValue As KeyValue = KeyValue.XmlToKey(Me.RecordUniqueId)
-            WFinRepNGP_HeadTable.DeleteRecord(pkValue)
-
+          WFinRepNGP_HeadTable.DeleteRecord(pkValue)
+          
         End Sub
 
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
@@ -11857,41 +11935,41 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me.RegisterPostback()
 
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-
-
+                  
+                
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
                     Me.LoadData()
-                    Me.DataBind()
+                    Me.DataBind()			
                 End If
-
-
+                                
+                						
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
                 DbUtils.EndTransaction()
             End Try
         End Sub
-
-
+        
+            
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
-
-
+        
+    
             'Save pagination state to session.
-
+          
         End Sub
-
-
-
+        
+        
+    
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
-
+        
 
             ' Clear pagination state from session.
-
+        
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
@@ -11900,166 +11978,166 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             If Not isNewRecord Is Nothing AndAlso isNewRecord.Trim <> "" Then
                 Me.IsNewRecord = Boolean.Parse(isNewRecord)
             End If
-
+            
             Dim myCheckSum As String = CType(ViewState("CheckSum"), String)
             If Not myCheckSum Is Nothing AndAlso myCheckSum.Trim <> "" Then
                 Me.CheckSum = myCheckSum
             End If
-
-
+            
+    
             ' Load view state for pagination control.
-
+                 
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
             ViewState("IsNewRecord") = Me.IsNewRecord.ToString()
             ViewState("CheckSum") = Me.CheckSum
-
-
+            
+    
             ' Load view state for pagination control.
-
+                  
             Return MyBase.SaveViewState()
         End Function
-
-
+        
+        
         ' Generate the event handling functions for pagination events.
-
-
+            
+      
         ' Generate the event handling functions for filter and search events.
-
-
+            
+    
         ' Generate set method for buttons
-
-        Public Overridable Sub SetpApproved()
-
-
+        
+        Public Overridable Sub SetpApproved()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetpReject()
-
-
+            
+        Public Overridable Sub SetpReject()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetpReturned()
-
-
+            
+        Public Overridable Sub SetpReturned()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetCancelButton()
-
-
+            
+        Public Overridable Sub SetCancelButton()                
+              
+   
         End Sub
-
-
+            
+                        
         Public Overridable Function CreateWhereClause_WFRCHNGP_U_IDDropDownList() As WhereClause
             ' By default, we simply return a new WhereClause.
             ' Add additional where clauses to restrict the items shown in the dropdown list.
-
+            						
             ' This WhereClause is for the DatabaseANFLO-WF%dbo.sel_WASP_User table.
             ' Examples:
             ' wc.iAND(Sel_WASP_UserView.W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, "XYZ")
             ' wc.iAND(Sel_WASP_UserView.Active, BaseFilter.ComparisonOperator.EqualsTo, "1")
-
+            
             Dim wc As WhereClause = New WhereClause()
             Return wc
-
+            				
         End Function
-
+                  
         ' Fill the WFRCHNGP_U_ID list.
         Protected Overridable Sub PopulateWFRCHNGP_U_IDDropDownList( _
                 ByVal selectedValue As String, _
                 ByVal maxItems As Integer)
-
+            		  					                
             Me.WFRCHNGP_U_ID.Items.Clear()
-
-
+            
+                    
             ' 1. Setup the static list items        
-
+            
             ' Add the Please Select item.
-            Me.WFRCHNGP_U_ID.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
-
+            Me.WFRCHNGP_U_ID.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            		  			
             ' 2. Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WFRCHNGP_U_IDDropDownList function.
             ' It is better to customize the where clause there.
-
+            
             Dim wc As WhereClause = CreateWhereClause_WFRCHNGP_U_IDDropDownList()
             ' Create the ORDER BY clause to sort based on the displayed value.			
+                
 
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(Sel_WASP_UserView.W_U_Full_Name, OrderByItem.OrderDir.Asc)
 
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(Sel_WASP_UserView.W_U_Full_Name, OrderByItem.OrderDir.Asc)
-
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-
+                      Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      
             ' 3. Read a total of maxItems from the database and insert them		
             Dim itemValues() As Sel_WASP_UserRecord = Nothing
-            Dim evaluator As New FormulaEvaluator
-            If wc.RunQuery Then
+            Dim evaluator As New FormulaEvaluator                
+            If wc.RunQuery
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim listDuplicates As New ArrayList()
 
                 Do
                     itemValues = Sel_WASP_UserView.GetRecords(wc, orderBy, pageNum, maxItems)
-                    For Each itemValue As Sel_WASP_UserRecord In itemValues
+                    For each itemValue As Sel_WASP_UserRecord In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.W_U_IDSpecified Then
-                            cvalue = itemValue.W_U_ID.ToString()
-
+                            cvalue = itemValue.W_U_ID.ToString() 
+                            
                             If counter < maxItems AndAlso Me.WFRCHNGP_U_ID.Items.FindByValue(cvalue) Is Nothing Then
-
+                            
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_U_ID)
                                 If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_U_ID.IsApplyDisplayAs Then
-                                    fvalue = WFinRepNGP_HeadTable.GetDFKA(itemValue, WFinRepNGP_HeadTable.WFRCHNGP_U_ID)
+                                fvalue = WFinRepNGP_HeadTable.GetDFKA(itemValue, WFinRepNGP_HeadTable.WFRCHNGP_U_ID)
                                 End If
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                                    fvalue = itemValue.Format(Sel_WASP_UserView.W_U_ID)
+                                fvalue = itemValue.Format(Sel_WASP_UserView.W_U_ID)
                                 End If
-
+                              
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                    fvalue = ""
+                                   fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If (fvalue.Length > 50) Then
+                                If ( fvalue.Length > 50 ) Then
                                     fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.WFRCHNGP_U_ID.Items.FindByText(fvalue)
-
+                          
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                                     End If
                                 End If
 
                                 Dim newItem As ListItem = New ListItem(fvalue, cvalue)
                                 Me.WFRCHNGP_U_ID.Items.Add(newItem)
 
-                                If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                                 End If
 
-                                counter += 1
+                                counter += 1			  
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
             End If
-
-
+                            
+                    
             ' 4. Set the selected value (insert if not already present).
-
+              
             If Not selectedValue Is Nothing AndAlso _
                 selectedValue.Trim <> "" AndAlso _
                 Not SetSelectedValue(Me.WFRCHNGP_U_ID, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.WFRCHNGP_U_ID, selectedValue) Then
+                Not SetSelectedDisplayText(Me.WFRCHNGP_U_ID, selectedValue)Then
 
                 ' construct a whereclause to query a record with DatabaseANFLO-WF%dbo.sel_WASP_User.W_U_ID = selectedValue
                 Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
@@ -12070,135 +12148,135 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Try
                     ' Execute the query
                     Dim rc() As Sel_WASP_UserRecord = Sel_WASP_UserView.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
-                    Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-                    ' if find a record, add it to the dropdown and set it as selected item
-                    If rc IsNot Nothing AndAlso rc.Length = 1 Then
-                        Dim itemValue As Sel_WASP_UserRecord = DirectCast(rc(0), Sel_WASP_UserRecord)
+                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      ' if find a record, add it to the dropdown and set it as selected item
+                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
+                      Dim itemValue As Sel_WASP_UserRecord = DirectCast(rc(0), Sel_WASP_UserRecord)
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.W_U_IDSpecified Then
-                            cvalue = itemValue.W_U_ID.ToString()
-                            Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_U_ID)
-                            If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_U_ID.IsApplyDisplayAs Then
-                                fvalue = WFinRepNGP_HeadTable.GetDFKA(itemValue, WFinRepNGP_HeadTable.WFRCHNGP_U_ID)
+                            cvalue = itemValue.W_U_ID.ToString() 
+                          Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRepNGP_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRepNGP_HeadTable.WFRCHNGP_U_ID)
+                          If _isExpandableNonCompositeForeignKey AndAlso WFinRepNGP_HeadTable.WFRCHNGP_U_ID.IsApplyDisplayAs Then
+                          fvalue = WFinRepNGP_HeadTable.GetDFKA(itemValue, WFinRepNGP_HeadTable.WFRCHNGP_U_ID)
+                          End If
+                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                          fvalue = itemValue.Format(Sel_WASP_UserView.W_U_ID)
+                          End If
+                        
+                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+                              ResetSelectedItem(Me.WFRCHNGP_U_ID, New ListItem(fvalue, cvalue))
                             End If
-                            If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                                fvalue = itemValue.Format(Sel_WASP_UserView.W_U_ID)
-                            End If
-
-                            If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-                            ResetSelectedItem(Me.WFRCHNGP_U_ID, New ListItem(fvalue, cvalue))
                         End If
-                    End If
                 Catch
                 End Try
 
-            End If
-
-
+            End If					
+                        
+                
         End Sub
-
-
+        
+              
         ' event handler for PushButton
         Public Overridable Sub pApproved_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for PushButton
         Public Overridable Sub pReject_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for PushButton
         Public Overridable Sub pReturned_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub CancelButton_Click(ByVal sender As Object, ByVal args As EventArgs)
-
+              
             ' The redirect URL is set on the Properties, Custom Properties or Actions.
             ' The ModifyRedirectURL call resolves the parameters before the
             ' Response.Redirect redirects the page to the URL.  
             ' Any code after the Response.Redirect call will not be executed, since the page is
             ' redirected to the URL.
-
-
-            Dim url As String = "../Security/Homepage.aspx"
-
-            If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
-
-            Dim shouldRedirect As Boolean = True
-            Dim target As String = ""
-
-            Try
-
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                url = Me.ModifyRedirectUrl(url, "", True)
-                url = Me.Page.ModifyRedirectUrl(url, "", True)
-
+            
+              
+                  Dim url As String = "../Security/Homepage.aspx"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
-
-                ' Upon error, rollback the transaction
+            
+       ' Upon error, rollback the transaction
                 Me.Page.RollBackTransaction(sender)
                 shouldRedirect = False
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-                DbUtils.EndTransaction()
+                DbUtils.EndTransaction
             End Try
             If shouldRedirect Then
                 Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-
+      Me.Page.Response.Redirect(url)
+        
             End If
         End Sub
-
+        
         Protected Overridable Sub WFRCHNGP_U_ID_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
 
             ' for the value inserted by quick add button or large list selector, 
@@ -12212,45 +12290,45 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me.Page.Session.Remove(WFRCHNGP_U_ID.ClientID & "_SelectedDisplayText")
             End If
 
-
-
+          									
+                
+                
+        End Sub
+            
+        Protected Overridable Sub WFRCHNGP_Submit_CheckedChanged(ByVal sender As Object, ByVal args As EventArgs)                
+             
 
         End Sub
-
-        Protected Overridable Sub WFRCHNGP_Submit_CheckedChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-
+            
+        Protected Overridable Sub WFRCHNGP_C_ID_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WFRCHNGP_C_ID1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WFRCHNGP_Month_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WFRCHNGP_Remark_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WFRCHNGP_U_ID1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WFRCHNGP_Year_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            		
+        Protected Overridable Sub txtRemarks_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+             
         End Sub
-
-        Protected Overridable Sub WFRCHNGP_C_ID_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WFRCHNGP_C_ID1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WFRCHNGP_Month_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WFRCHNGP_Remark_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WFRCHNGP_U_ID1_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WFRCHNGP_Year_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub txtRemarks_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-
+                    
+   
         Private _PreviousUIData As New Hashtable
         Public Overridable Property PreviousUIData() As Hashtable
             Get
@@ -12259,9 +12337,9 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             Set(ByVal value As Hashtable)
                 _PreviousUIData = value
             End Set
-        End Property
+        End Property   
 
-
+        
         Public Property RecordUniqueId() As String
             Get
                 Return CType(Me.ViewState("BaseWFinRepNGP_HeadRecordControl_Rec"), String)
@@ -12270,7 +12348,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me.ViewState("BaseWFinRepNGP_HeadRecordControl_Rec") = value
             End Set
         End Property
-
+            
         Public Property DataSource() As WFinRepNGP_HeadRecord
             Get
                 Return DirectCast(MyBase._DataSource, WFinRepNGP_HeadRecord)
@@ -12280,7 +12358,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
             End Set
         End Property
 
-
+        
         Private _checkSum As String
         Public Overridable Property CheckSum() As String
             Get
@@ -12290,7 +12368,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me._checkSum = value
             End Set
         End Property
-
+        
         Private _TotalPages As Integer
         Public Property TotalPages() As Integer
             Get
@@ -12300,7 +12378,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me._TotalPages = value
             End Set
         End Property
-
+        
         Private _PageIndex As Integer
         Public Property PageIndex() As Integer
             Get
@@ -12311,7 +12389,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me._PageIndex = value
             End Set
         End Property
-
+    
         Private _PageSize As Integer
         Public Property PageSize() As Integer
             Get
@@ -12321,7 +12399,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me._PageSize = value
             End Set
         End Property
-
+    
         Private _TotalRecords As Integer
         Public Property TotalRecords() As Integer
             Get
@@ -12335,7 +12413,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me._TotalRecords = value
             End Set
         End Property
-
+        
         Private _DisplayLastPage As Boolean
         Public Property DisplayLastPage() As Boolean
             Get
@@ -12345,190 +12423,190 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
                 Me._DisplayLastPage = value
             End Set
         End Property
-
-
+        
+        
 
 #Region "Helper Properties"
-
+        
         Public ReadOnly Property CancelButton() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "CancelButton"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property pApproved() As System.Web.UI.WebControls.Button
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pApproved"), System.Web.UI.WebControls.Button)
             End Get
         End Property
-
+        
         Public ReadOnly Property pReject() As System.Web.UI.WebControls.Button
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pReject"), System.Web.UI.WebControls.Button)
             End Get
         End Property
-
+        
         Public ReadOnly Property pReturned() As System.Web.UI.WebControls.Button
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pReturned"), System.Web.UI.WebControls.Button)
             End Get
         End Property
-
+        
         Public ReadOnly Property Title0() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Title0"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property txtRemarks() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "txtRemarks"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFinRepNGP_ActivityTableControl() As WFinRepNGP_ActivityTableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRepNGP_ActivityTableControl"), WFinRepNGP_ActivityTableControl)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFinRepNGP_AttachmentTableControl() As WFinRepNGP_AttachmentTableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRepNGP_AttachmentTableControl"), WFinRepNGP_AttachmentTableControl)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFinRepNGP_HeadRecordControlTabContainer() As AjaxControlToolkit.TabContainer
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadRecordControlTabContainer"), AjaxControlToolkit.TabContainer)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFinRepNGP_HeadTableControl() As WFinRepNGP_HeadTableControl
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFinRepNGP_HeadTableControl"), WFinRepNGP_HeadTableControl)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFRCHNGP_C_ID() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_C_ID"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_C_ID1() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_C_ID1"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Description() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Description"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_DescriptionLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_DescriptionLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFRCHNGP_DT_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_DT_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_DT_ID1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_DT_ID1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_DT_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_DT_IDLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFRCHNGP_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Month() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Month"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Remark() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Remark"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_RemarkLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_RemarkLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFRCHNGP_Status() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Status"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_StatusLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_StatusLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WFRCHNGP_Submit() As System.Web.UI.WebControls.CheckBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Submit"), System.Web.UI.WebControls.CheckBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_U_ID() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_U_ID"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_U_ID1() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_U_ID1"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WFRCHNGP_Year() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WFRCHNGP_Year"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
 #End Region
 
 #Region "Helper Functions"
 
-        Public Overloads Overrides Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+        Public Overrides Overloads Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
+        End Function
+        
+        Public Overrides Overloads Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
             Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
 
-        Public Overloads Overrides Function ModifyRedirectUrl(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
-        End Function
-
-        Public Overloads Overrides Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
-
+        Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
+            
             Dim rec As WFinRepNGP_HeadRecord = Nothing
-
-
+             
+        
             Try
                 rec = Me.GetRecord()
             Catch ex As Exception
@@ -12537,18 +12615,18 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
 
             If rec Is Nothing AndAlso url.IndexOf("{") >= 0 Then
                 ' Localization.
-
-                Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
-
+                
+            Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
+                    
             End If
             Return EvaluateExpressions(url, arg, rec, bEncrypt)
         End Function
 
-        Public Overloads Overrides Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-
+        Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean,ByVal includeSession as Boolean) As String
+            
             Dim rec As WFinRepNGP_HeadRecord = Nothing
-
-
+             
+        
             Try
                 rec = Me.GetRecord()
             Catch ex As Exception
@@ -12557,33 +12635,33 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
 
             If rec Is Nothing AndAlso url.IndexOf("{") >= 0 Then
                 ' Localization.
-
-                Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
-
+                
+            Throw New Exception(Page.GetResourceValue("Err:RecDataSrcNotInitialized", "ePortalWFApproval"))
+                    
             End If
-            If includeSession Then
+            If includeSession  Then
                 Return EvaluateExpressions(url, arg, rec, bEncrypt)
             Else
-                Return EvaluateExpressions(url, arg, rec, bEncrypt, False)
+                Return EvaluateExpressions(url, arg, rec, bEncrypt,False)  
             End If
         End Function
 
-
+         
         Public Overridable Function GetRecord() As WFinRepNGP_HeadRecord
             If Not Me.DataSource Is Nothing Then
                 Return Me.DataSource
             End If
-
+            
             If Not Me.RecordUniqueId Is Nothing Then
-
+                
                 Return WFinRepNGP_HeadTable.GetRecord(Me.RecordUniqueId, True)
-
+                
             End If
-
+            
             ' Localization.
-
+            
             Throw New Exception(Page.GetResourceValue("Err:RetrieveRec", "ePortalWFApproval"))
-
+                
         End Function
 
         Public Shadows ReadOnly Property Page() As BaseApplicationPage
@@ -12594,7 +12672,7 @@ Public Class BaseWFinRepNGP_HeadTableControlRow
 
 #End Region
 
-    End Class
+End Class
 
   
 

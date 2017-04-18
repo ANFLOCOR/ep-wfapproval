@@ -40,8 +40,6 @@ Partial Public Class WFin_ApproverPage1
 #Region "Section 1: Place your customizations here."
     
         Public Sub SetPageFocus()
-            'load scripts to all controls on page so that they will retain focus on PostBack
-            Me.LoadFocusScripts(Me.Page)
             'To set focus on page load to a specific control pass this control to the SetStartupFocus method. To get a hold of  a control
             'use FindControlRecursively method. For example:
             'Dim controlToFocus As System.Web.UI.WebControls.TextBox = DirectCast(Me.FindControlRecursively("ProductsSearch"), System.Web.UI.WebControls.TextBox)
@@ -117,42 +115,42 @@ Partial Public Class WFin_ApproverPage1
       
 #Region "Ajax Functions"
 
-        <System.Web.Services.WebMethod()> _
-        Public Shared Function GetRecordFieldValue(ByVal tableName As String, _
-                                                  ByVal recordID As String, _
-                                                  ByVal columnName As String, _
-                                                  ByVal fieldName As String, _
-                                                  ByVal title As String, _
-                                                  ByVal closeBtnText As String, _
-                                                  ByVal persist As Boolean, _
-                                                  ByVal popupWindowHeight As Integer, _
-                                                  ByVal popupWindowWidth As Integer, _
-                                                  ByVal popupWindowScrollBar As Boolean _
-                                                  ) As Object()
-            ' GetRecordFieldValue gets the pop up window content from the column specified by
-            ' columnName in the record specified by the recordID in data base table specified by tableName.
-            ' Customize by adding code before or after the call to  GetRecordFieldValue_Base()
-            ' or replace the call to  GetRecordFieldValue_Base().
-            Return GetRecordFieldValue_Base(tableName, recordID, columnName, fieldName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
-        End Function
+        '<System.Web.Services.WebMethod()> _
+        'Public Shared Function GetRecordFieldValue(ByVal tableName As String, _
+        '                                          ByVal recordID As String, _
+        '                                          ByVal columnName As String, _
+        '                                          ByVal fieldName As String, _
+        '                                          ByVal title As String, _
+        '                                          ByVal closeBtnText As String, _
+        '                                          ByVal persist As Boolean, _
+        '                                          ByVal popupWindowHeight As Integer, _
+        '                                          ByVal popupWindowWidth As Integer, _
+        '                                          ByVal popupWindowScrollBar As Boolean _
+        '                                          ) As Object()
+        '    ' GetRecordFieldValue gets the pop up window content from the column specified by
+        '    ' columnName in the record specified by the recordID in data base table specified by tableName.
+        '    ' Customize by adding code before or after the call to  GetRecordFieldValue_Base()
+        '    ' or replace the call to  GetRecordFieldValue_Base().
+        '    Return GetRecordFieldValue_Base(tableName, recordID, columnName, fieldName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
+        'End Function
 
-        <System.Web.Services.WebMethod()> _
-        Public Shared Function GetImage(ByVal tableName As String, _
-                                        ByVal recordID As String, _
-                                        ByVal columnName As String, _
-                                        ByVal title As String, _
-                                        ByVal closeBtnText As String, _
-                                        ByVal persist As Boolean, _
-                                        ByVal popupWindowHeight As Integer, _
-                                        ByVal popupWindowWidth As Integer, _
-                                        ByVal popupWindowScrollBar As Boolean _
-                                        ) As Object()
-            ' GetImage gets the Image url for the image in the column "columnName" and
-            ' in the record specified by recordID in data base table specified by tableName.
-            ' Customize by adding code before or after the call to  GetImage_Base()
-            ' or replace the call to  GetImage_Base().
-            Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
-        End Function
+        '<System.Web.Services.WebMethod()> _
+        'Public Shared Function GetImage(ByVal tableName As String, _
+        '                                ByVal recordID As String, _
+        '                                ByVal columnName As String, _
+        '                                ByVal title As String, _
+        '                                ByVal closeBtnText As String, _
+        '                                ByVal persist As Boolean, _
+        '                                ByVal popupWindowHeight As Integer, _
+        '                                ByVal popupWindowWidth As Integer, _
+        '                                ByVal popupWindowScrollBar As Boolean _
+        '                                ) As Object()
+        '    ' GetImage gets the Image url for the image in the column "columnName" and
+        '    ' in the record specified by recordID in data base table specified by tableName.
+        '    ' Customize by adding code before or after the call to  GetImage_Base()
+        '    ' or replace the call to  GetImage_Base().
+        '    Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
+        'End Function
     
       Protected Overloads Overrides Sub BasePage_PreRender(ByVal sender As Object, ByVal e As EventArgs)
           MyBase.BasePage_PreRender(sender, e)
@@ -179,6 +177,41 @@ Partial Public Class WFin_ApproverPage1
         
    
 
+<System.Web.Services.WebMethod()> _
+        Public Shared Function GetImage(ByVal tableName As String, _
+                                        ByVal recordID As String, _
+                                        ByVal columnName As String, _
+                                        ByVal title As String, _
+                                        ByVal closeBtnText As String, _
+                                        ByVal persist As Boolean, _
+                                        ByVal popupWindowHeight As Integer, _
+                                        ByVal popupWindowWidth As Integer, _
+                                        ByVal popupWindowScrollBar As Boolean _
+                                        ) As Object()
+            ' GetImage gets the Image url for the image in the column "columnName" and
+            ' in the record specified by recordID in data base table specified by tableName.
+            ' Customize by adding code before or after the call to  GetImage_Base()
+            ' or replace the call to  GetImage_Base().
+            Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
+        End Function
+<System.Web.Services.WebMethod()> _
+        Public Shared Function GetRecordFieldValue(ByVal tableName As String, _
+                                                  ByVal recordID As String, _
+                                                  ByVal columnName As String, _
+                                                  ByVal fieldName As String, _
+                                                  ByVal title As String, _
+                                                  ByVal closeBtnText As String, _
+                                                  ByVal persist As Boolean, _
+                                                  ByVal popupWindowHeight As Integer, _
+                                                  ByVal popupWindowWidth As Integer, _
+                                                  ByVal popupWindowScrollBar As Boolean _
+                                                  ) As Object()
+            ' GetRecordFieldValue gets the pop up window content from the column specified by
+            ' columnName in the record specified by the recordID in data base table specified by tableName.
+            ' Customize by adding code before or after the call to  GetRecordFieldValue_Base()
+            ' or replace the call to  GetRecordFieldValue_Base().
+            Return GetRecordFieldValue_Base(tableName, recordID, columnName, fieldName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
+        End Function
 #End Region
 
 #Region "Section 2: Do not modify this section."

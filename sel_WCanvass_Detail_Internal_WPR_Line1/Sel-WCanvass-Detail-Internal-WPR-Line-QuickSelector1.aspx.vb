@@ -186,7 +186,6 @@ Partial Public Class Sel_WCanvass_Detail_Internal_WPR_Line_QuickSelector1
         ' Write out the methods for DataSource
         
    
-
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

@@ -163,7 +163,7 @@ Partial Public Class Show_WCanvass_Internal1
 
 Public Sub SetWCanvass_InternalRecordControl()
             SetWCanvass_InternalRecordControl_Base() 
-        End Sub
+        End Sub 
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

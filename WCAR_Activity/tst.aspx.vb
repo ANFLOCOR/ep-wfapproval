@@ -165,7 +165,7 @@ Partial Public Class tst
 '      End Function
 Public Sub SetSel_WStep_WStep_DetailTableControl()
             SetSel_WStep_WStep_DetailTableControl_Base() 
-        End Sub
+        End Sub 
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

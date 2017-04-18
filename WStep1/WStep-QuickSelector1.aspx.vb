@@ -185,9 +185,8 @@ Namespace ePortalWFApproval.UI
 
         ' Write out the methods for DataSource
 
-
-
-        <System.Web.Services.WebMethod()> _
+         
+<System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _
                                         ByVal columnName As String, _
@@ -204,7 +203,7 @@ Namespace ePortalWFApproval.UI
             ' or replace the call to  GetImage_Base().
             Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
         End Function
-        <System.Web.Services.WebMethod()> _
+<System.Web.Services.WebMethod()> _
         Public Shared Function GetRecordFieldValue(ByVal tableName As String, _
                                                   ByVal recordID As String, _
                                                   ByVal columnName As String, _

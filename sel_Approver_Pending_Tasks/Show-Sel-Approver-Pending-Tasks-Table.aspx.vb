@@ -186,8 +186,7 @@ Partial Public Class Show_Sel_Approver_Pending_Tasks_Table
         ' Write out the methods for DataSource
         
    
-
-<System.Web.Services.WebMethod()> _
+        <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _
                                         ByVal columnName As String, _

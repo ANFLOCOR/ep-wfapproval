@@ -22,16 +22,16 @@ Imports BaseClasses.Utils
 Imports ReportTools.ReportCreator
 Imports ReportTools.Shared
 
-  
-        
+
+
 Imports ePortalWFApproval.Business
 Imports ePortalWFApproval.Data
 Imports ePortalWFApproval.UI
-        
+
 
 #End Region
 
-  
+
 Namespace ePortalWFApproval.UI.Controls.Homepage
 
 #Region "Section 1: Place your customizations here."
@@ -95,13 +95,14 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Case "FS"
                     Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/WFin_ApproverTable.aspx';"",1800); return false;")
                 Case "FSN"
-                    Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/WFinRepNGP_ApproverTable.aspx';"",1800); return false;")
+                    Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/WFinRepNGP-ApproverTable.aspx';"",1800); return false;")
                 Case "CONSOLIDATED"
                     Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/Conso_ReportDoc_ApproverTable.aspx';"",1800); return false;")
                 Case "PO CANCEL"
                     Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../wf_cv/ShowSel_WCanvass_PO_Map_AdjustmentTable.aspx';"",1800); return false;")
                 Case "_CAR(RETURN)", "_PO(RETURN)"
                     Me.imbList.Visible = False
+                    Me.imbDoc.Visible = False
                 Case Else
                     Me.imbList.Attributes.Add("onclick", "setTimeout(""" & "window.location='../sel_WCAR_Doc_Creator_Approver/Show-Sel-WCAR-Doc-Creator-Approver-Table.aspx';"",1800); return false;")
             End Select
@@ -150,7 +151,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Case "FS", "<font color=black>FS</font>"
                     pubUrl = "../WFinRep_Head/WFin-ApproverPage.aspx?WFinRep_Head=" & Me.Doc_No.Text
                 Case "FSN", "<font color=black>FSN</font>"
-                    pubUrl = "../WFinRep_Head/WFinRepNGP_Approver.aspx?WFinRepNGP_Head=" & Me.Doc_No.Text
+                    pubUrl = "../WFinRepNGP_Head/WFinRepNGP-Approver.aspx?WFinRepNGP_Head=" & Me.Doc_No.Text
                 Case "CONSOLIDATED", "<font color=black>CONSOLIDATED</font>"
                     pubUrl = "../WFinRep_Head/Conso_ReportDoc_Approver.aspx?WFinRepCon_Head=" & Me.Doc_No.Text
                 Case "PO CANCEL", "<font color=black>PO CANCEL</font>"
@@ -525,15 +526,16 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Case "PO"
                     Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../wf_PO/ShowSel_WPO_Activity_WPOP10100Table.aspx';"",1800); return false;")
                 Case "FS"
-                    Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/WFin_ApproverTable.aspx';"",1800); return false;")
+                    Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head1/WFin_ApproverTable1.aspx';"",1800); return false;")
                 Case "FSN"
-                    Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/WFinRepNGP_ApproverTable.aspx';"",1800); return false;")
+                    Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head1/WFinRepNGP_ApproverTable1.aspx';"",1800); return false;")
                 Case "CONSOLIDATED"
                     Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../WFinRep_Head/Conso_ReportDoc_ApproverTable.aspx';"",1800); return false;")
                 Case "PO CANCEL"
                     Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../wf_cv/ShowSel_WCanvass_PO_Map_AdjustmentTable.aspx';"",1800); return false;")
                 Case "_CAR(RETURN)", "_PO(RETURN)"
                     Me.imbList1.Visible = False
+                    Me.imbDoc1.Visible = False
                 Case Else
                     Me.imbList1.Attributes.Add("onclick", "setTimeout(""" & "window.location='../sel_WCAR_Doc_Creator_Approver/Show-Sel-WCAR-Doc-Creator-Approver-Table.aspx';"",1800); return false;")
             End Select
@@ -584,9 +586,9 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Case "<font color=black>PO</font>", "PO"
                     pubUrl = "../sel_WPO_WFTask/WPO-WFTaskN.aspx?POP10100_PO=" & Me.Doc_No1.Text & "&POP10100_Co=" & Me.C_ID1.Text
                 Case "<font color=black>FS</font>", "FS"
-                    pubUrl = "../WFinRep_Head/WFin-ApproverPage.aspx?WFinRep_Head=" & Me.Doc_No1.Text
+                    pubUrl = "../WFinRep_Head1/WFin-ApproverPage1.aspx?WFinRep_Head=" & Me.Doc_No1.Text
                 Case "<font color=black>FSN</font>", "FSN"
-                    pubUrl = "../WFinRep_Head/WFinRepNGP_Approver.aspx?WFinRepNGP_Head=" & Me.Doc_No1.Text
+                    pubUrl = "../WFinRepNGP_Head1/WFinRepNGP_Approver1.aspx?WFinRepNGP_Head=" & Me.Doc_No1.Text
                 Case "<font color=black>CONSOLIDATED</font>", "CONSOLIDATED"
                     pubUrl = "../WFinRep_Head/Conso_ReportDoc_Approver.aspx?WFinRepCon_Head=" & Me.Doc_No1.Text
                 Case "<font color=black>PO CANCEL</font>", "PO CANCEL"
@@ -637,7 +639,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
     End Class
 #End Region
 
-  
+
 
 #Region "Section 2: Do not modify this section."
     
@@ -2940,19 +2942,46 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControl
         ' event handler for Button
         Public Overridable Sub NorthRedirectorButtonReCAR_Click(ByVal sender As Object, ByVal args As EventArgs)
               
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
+                  Dim url As String = "../WCAR_Activity1/Show-WCAR-Activity-Table1.aspx"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
     Try
     
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
             
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
                 Me.Page.ErrorOnPage = True
     
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
     
             Finally
-    
+                DbUtils.EndTransaction
             End Try
-    
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
         End Sub
         
         ' event handler for Button
@@ -6072,8 +6101,7 @@ End Class
   
 
 #End Region
-    
-  
+
+
 End Namespace
 
-  

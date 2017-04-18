@@ -186,7 +186,8 @@ Partial Public Class WPO_PRNo_QWF_QuickSelector1
         ' Write out the methods for DataSource
         
    
-
+         eldValue_Base(tableName, recordID, columnName, fieldName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
+        End Function
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

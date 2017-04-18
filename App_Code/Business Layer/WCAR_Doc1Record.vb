@@ -152,14 +152,14 @@ Namespace ePortalWFApproval.Business
         ByVal WCD_Submit As String, ByVal WCD_Remark As String)
 
             Dim ws As String = "WCD_ID = " & WCD_ID
-            Dim rec As New WCAR_DocRecord
-            rec = WCAR_DocTable.GetRecord(ws)
+            Dim rec As New WCAR_Doc1Record
+            rec = WCAR_Doc1Table.GetRecord(ws)
 
             If Not rec Is Nothing Then
                 WCD_ID = rec.WCD_ID.ToString()
                 Utils.DbUtils.StartTransaction()
                 Try
-                    rec = WCAR_DocTable.GetRecord(WCD_ID, True)
+                    rec = WCAR_Doc1Table.GetRecord(WCD_ID, True)
                     rec.WCD_Status = WCD_Status
                     rec.WCD_Submit = WCD_Submit
                     rec.WCD_Remark = rec.WCD_Remark & vbcrlf & WCD_Remark

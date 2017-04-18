@@ -180,6 +180,7 @@ Partial Public Class WPO_Comment1
 Public Sub SetSel_WPO_POP10550RecordControl()
             SetSel_WPO_POP10550RecordControl_Base() 
         End Sub
+
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

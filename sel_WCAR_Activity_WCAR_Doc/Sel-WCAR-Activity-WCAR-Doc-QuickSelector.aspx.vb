@@ -186,7 +186,6 @@ Partial Public Class Sel_WCAR_Activity_WCAR_Doc_QuickSelector
         ' Write out the methods for DataSource
         
    
-
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

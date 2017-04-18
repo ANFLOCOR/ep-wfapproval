@@ -138,7 +138,7 @@ Partial Public Class Inquiry_POP30300_POP30310_Vendor
 
 Public Sub SetSel_POP30300_POP30310TableControl()
             SetSel_POP30300_POP30310TableControl_Base() 
-        End Sub
+        End Sub 
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

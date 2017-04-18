@@ -185,7 +185,6 @@ Partial Public Class Sel_WCAR_Doc_Creator_Approver_QuickSelector
         
         ' Write out the methods for DataSource
         
-   
 
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _

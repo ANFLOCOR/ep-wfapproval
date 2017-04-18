@@ -51,27 +51,28 @@ Public Class WFinRep_HeadTableControlRow
             MyBase.DataBind()
             Dim user As String = BaseClasses.Utils.SecurityControls.GetCurrentUserName()
             Dim role As String = BaseClasses.Utils.SecurityControls.GetCurrentUserRoles()
-            Dim rolecorrect As Boolean = False
+            Dim rolecorrectsouth As Boolean = False
+            Dim rolecorrectnorth As Boolean = False
             Dim isAdmin As Boolean = False
             Dim separator As Char() = {";"c}
             Dim roles As String() = role.Split(separator, System.StringSplitOptions.RemoveEmptyEntries)
             Dim includes As Boolean = False
-            For Each r As String In roles
-                'If r = "151" Then '157 - old FS Viewer
-                '    rolecorrect = True
-                'End If
-                'If r = "147" Then '160 - old FS Admin
-                '    isAdmin = True
-                'End If
-                If r = "186" Then 'South FS Approver
-                    rolecorrect = True
-                End If
-                If r = "181" Then 'Admin
-                    isAdmin = True
+            Dim wherssouth As String = Nothing
+            If Not System.Web.HttpContext.Current.Session("UserId").ToString Is Nothing And Not System.Web.HttpContext.Current.Session("UserId").ToString = "" Then
+                wherssouth = Sel_W_User_W_ModuleView.W_U_ID.UniqueName & "=" & System.Web.HttpContext.Current.Session("UserId").ToString
+            Else
+                wherssouth = Sel_W_User_W_ModuleView.W_U_ID.UniqueName & "=0"
+            End If
+            Dim obysouth As BaseClasses.Data.OrderBy = New OrderBy(False, False)
+            Dim waspsouth() As Sel_W_User_W_ModuleRecord = Nothing
+            waspsouth = Sel_W_User_W_ModuleView.GetRecords(wherssouth, obysouth)
+            For Each r As Sel_W_User_W_ModuleRecord In waspsouth
+                If r.W_MS_ID = 157 Then
+                    rolecorrectsouth = True
                 End If
             Next r
 
-            If Me.HFIN_Status.Text = "Completed" And rolecorrect = True Then
+            If Me.HFIN_Status.Text = "Completed" And rolecorrectsouth = True Then
                 'Me.imbView.Visible = True
                 Me.btnPreview1.Visible = True
                 Me.btnPreview2.Visible = True
@@ -81,39 +82,37 @@ Public Class WFinRep_HeadTableControlRow
                 Me.btnPreview2.Visible = False
             End If
 
+
+
             Dim returnForRevisionRole As Boolean = False
             ' old ID  158 - FS Setup Role  = new 150 
             '         159 - FS Final Approver = new 190
+            'For Each r As String In roles
+            '    'If r = "150" Or r = "190" Then
+            '    If r = "158" Or r = "159" Then
+            '        returnForRevisionRole = True
+            '    End If
+            'Next r
 
-            For Each r As String In roles
-                If r = "181" Then
+            Dim wherechecker As String = Nothing
+            If Not System.Web.HttpContext.Current.Session("UserName").ToString Is Nothing And Not System.Web.HttpContext.Current.Session("UserName").ToString = "" Then
+                wherechecker = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "='" & System.Web.HttpContext.Current.Session("UserName").ToString.Trim & "' AND " & Sel_W_User_DYNAMICS_Company_FSView.IsNonGP.UniqueName & "=0 " 'AND " & Sel_W_User_DYNAMICS_Company_FSView.Company_ID.UniqueName & "='" & Me.HFIN_C_ID1.Text & "'"
+            Else
+                wherechecker = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "="
+            End If
+            Dim obychecker As BaseClasses.Data.OrderBy = New OrderBy(False, False)
+            'Dim checker() As Sel_W_User_DYNAMICS_Company_FSRecord = Nothing
+            Dim checker As Sel_W_User_DYNAMICS_Company_FSRecord = Sel_W_User_DYNAMICS_Company_FSView.GetRecord(wherechecker, obysouth)
+
+
+            For Each r As Sel_W_User_W_ModuleRecord In waspsouth
+                If r.W_MS_ID = 159 And Not checker Is Nothing Then
                     returnForRevisionRole = True
                 End If
             Next r
 
-            ' ''Dim wherechecker As String = Nothing
-            ' ''If Not System.Web.HttpContext.Current.Session("UserName").ToString Is Nothing And Not System.Web.HttpContext.Current.Session("UserName").ToString = "" Then
-            ' ''    wherechecker = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "='" & System.Web.HttpContext.Current.Session("UserName").ToString.Trim & "' AND " & Sel_W_User_DYNAMICS_Company_FSView.IsNonGP.UniqueName & "=1 AND " & Sel_W_User_DYNAMICS_Company_FSView.Company_ID.UniqueName & "='" & Me.WFRCHNGP_C_ID1.Text & "'"
-            ' ''Else
-            ' ''    wherechecker = Sel_W_User_DYNAMICS_Company_FSView.W_U_User_Name.UniqueName & "="
-            ' ''End If
-            ' ''Dim obychecker As BaseClasses.Data.OrderBy = New OrderBy(False, False)
-            '' ''Dim checker() As Sel_W_User_DYNAMICS_Company_FSRecord = Nothing
-            ' ''Dim checker As Sel_W_User_DYNAMICS_Company_FSRecord = Sel_W_User_DYNAMICS_Company_FSView.GetRecord(wherechecker, obysouth)
 
-
-            ' ''For Each r As Sel_W_User_W_ModuleRecord In waspsouth
-            ' ''    If r.W_MS_ID = 159 And Not checker Is Nothing Then
-            ' ''        returnForRevisionRole = True
-            ' ''    End If
-            ' ''Next r
-
-
-
-
-            ''101 OVG
-            ''158 Approver2 as Final Approver
-            If (returnForRevisionRole = True) And Me.HFIN_Status.Text = "Completed" Then
+            If (System.Web.HttpContext.Current.Session("UserID").ToString = "101" Or System.Web.HttpContext.Current.Session("UserID").ToString = "158" Or returnForRevisionRole = True) And Me.HFIN_Status.Text = "Completed" Then
                 'Me.imbEdit.Visible = True
                 Me.btnEdit.Visible = True
             Else
@@ -121,11 +120,6 @@ Public Class WFinRep_HeadTableControlRow
                 Me.btnEdit.Visible = False
             End If
 
-            'If (System.Web.HttpContext.Current.Session("UserID").ToString = "101" Or System.Web.HttpContext.Current.Session("UserID").ToString = "158" Or returnForRevisionRole = True) And Me.HFIN_Status.Text = "Completed" Then
-            '    Me.imbEdit.Visible = True
-            'Else
-            '    Me.imbEdit.Visible = False
-            'End If
             Me.ViewRowButton.Attributes.Add("onClick", "OpenRptViewer2('" & Me.HFIN_Year1.ClientID & "','" & Me.HFIN_Month1.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_C_ID1.ClientID & "', '" & Me.HFIN_Status.ClientID & "', '" & Me.HFIN_ID.ClientID & "');return false;")
             Me.btnPreview1.Button.Attributes.Add("onClick", "OpenRptViewer2('" & Me.HFIN_Year1.ClientID & "','" & Me.HFIN_Month1.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_C_ID1.ClientID & "', '" & Me.HFIN_Status.ClientID & "', '" & Me.HFIN_ID.ClientID & "');return false;")
 

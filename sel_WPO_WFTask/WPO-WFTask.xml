@@ -62,6 +62,10 @@
           <Value>Approve</Value>
           <Type>ResourceReference</Type>
         </Attribute>
+        <Attribute>
+          <Name>Width</Name>
+          <Value>120px</Value>
+        </Attribute>
       </PassthroughAttributes>
       <InsideControl>WPOP10100RecordControl</InsideControl>
     </ContainedComponent>
@@ -90,6 +94,10 @@
         <Attribute>
           <Name>Visible</Name>
           <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Width</Name>
+          <Value>120px</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WPOP10100RecordControl</InsideControl>
@@ -123,6 +131,10 @@
         <Attribute>
           <Name>Visible</Name>
           <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Width</Name>
+          <Value>120px</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WPOP10100RecordControl</InsideControl>

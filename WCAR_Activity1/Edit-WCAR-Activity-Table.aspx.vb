@@ -113,11 +113,7 @@ Partial Public Class Edit_WCAR_Activity_Table
           End Try			  
       End Sub
       
-#Region "Ajax Functions"
-<<<<<<< HEAD
-         
-=======
-
+#Region "Ajax Functions" 
         '<System.Web.Services.WebMethod()> _
         'Public Shared Function GetRecordFieldValue(ByVal tableName As String, _
         '                                          ByVal recordID As String, _
@@ -153,9 +149,7 @@ Partial Public Class Edit_WCAR_Activity_Table
         '    ' Customize by adding code before or after the call to  GetImage_Base()
         '    ' or replace the call to  GetImage_Base().
         '    Return GetImage_Base(tableName, recordID, columnName, title, closeBtnText, persist, popupWindowHeight, popupWindowWidth, popupWindowScrollBar)
-        'End Function
->>>>>>> refs/remotes/origin/CAR-FSNGP-4-3-2017
-    
+        'End Function 
       Protected Overloads Overrides Sub BasePage_PreRender(ByVal sender As Object, ByVal e As EventArgs)
           MyBase.BasePage_PreRender(sender, e)
           Base_RegisterPostback()
@@ -178,9 +172,7 @@ Partial Public Class Edit_WCAR_Activity_Table
                      
         
         ' Write out the methods for DataSource
-        
-   
-
+         
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

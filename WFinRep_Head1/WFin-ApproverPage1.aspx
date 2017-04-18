@@ -29,7 +29,7 @@
 <%= SystemUtils.GenerateEnterKeyCaptureBeginTag(FindControlRecursively("SaveAndNewButton"))%>
 <%= SystemUtils.GenerateEnterKeyCaptureBeginTag(FindControlRecursively("SaveButton"))%>
 <ePortalWFApproval:WFinRep_HeadRecordControl runat="server" id="WFinRep_HeadRecordControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="dh">
-                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle"><asp:Literal runat="server" id="WFinRep_HeadTitle" Text="FS Workflow Approval">	</asp:Literal></td></tr></table>
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle"><asp:Literal runat="server" id="WFinRep_HeadTitle" Text="FS Workflow Approval (North)">	</asp:Literal></td></tr></table>
 </td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
 
                 </td></tr><tr><td class="recordPanelButtonsAlignment" style="text-align: right"> 
@@ -81,11 +81,11 @@
 </tr>
 </table>
 </span>
-</td><td style="text-align:left;"><asp:Button runat="server" id="pApproved" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" text="Approve" width="100px">		
+</td><td style="text-align:left;"><asp:Button runat="server" id="pApproved" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" onclientclick="return confirm(&quot;Continue submission of this document? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Approve" width="100px">		
 	</asp:Button> 
-<asp:Button runat="server" id="pReject" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" text="Reject" width="100px">		
+<asp:Button runat="server" id="pReject" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" onclientclick="return confirm(&quot;Continue submission of this document with Reject action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Reject" width="100px">		
 	</asp:Button> 
-<asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" text="Return for Revision" width="100px">		
+<asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" onclientclick="return confirm(&quot;Continue submission of this document with Return action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Return for Revision" width="150px">		
 	</asp:Button></td><td style="text-align:left;"><asp:dropdownlist cssclass="Filter_Input" id="ddlMoveTo" runat="server" width="238px" /></td></tr><tr><td><span style="white-space:nowrap;">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -137,7 +137,7 @@
  <BaseClasses:TabPanel runat="server" id="TabPanel" HeaderText="Report Details">	<ContentTemplate> 
   <ePortalWFApproval:WFinRep_HeadTableControl runat="server" id="WFinRep_HeadTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelL"></td><td>
                   <asp:panel id="WFinRep_HeadTableControlCollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
-                    <table id="WFinRep_HeadTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="HFIN_C_IDLabel" Text="Company">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="HFIN_DescriptionLabel1" Text="Description">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="HFIN_MonthLabel" Text="Month">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="HFIN_YearLabel" Text="Year">	</asp:Literal></th><th class="thc" style="text-align:right;"><asp:Literal runat="server" id="HFIN_RptCountLabel" Text="Report Count">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="HFIN_RemarkLabel1" Text="Remark">	</asp:Literal></th><th class="thc" style="text-align:center;"><asp:Literal runat="server" id="HFIN_RemarkLabel2" Text="Actions">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WFinRep_HeadTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WFinRep_HeadTableControlRow runat="server" id="WFinRep_HeadTableControlRow">
+                    <table id="WFinRep_HeadTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="HFIN_C_IDLabel" Text="Company">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="HFIN_DescriptionLabel1" Text="Description">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="HFIN_MonthLabel" Text="Month">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="HFIN_YearLabel" Text="Year">	</asp:Literal></th><th class="thc" style="text-align:right;"><asp:Literal runat="server" id="HFIN_RptCountLabel" Text="Report Count">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="HFIN_RemarkLabel1" Text="Remark">	</asp:Literal></th><th class="thc" style="text-align:center;" colspan="2"><asp:Literal runat="server" id="HFIN_RemarkLabel2" Text="Actions">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WFinRep_HeadTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WFinRep_HeadTableControlRow runat="server" id="WFinRep_HeadTableControlRow">
 <tr><td class="tableCellValue" style="font-weight:bold;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="HFIN_C_ID2"></asp:Literal></span>
  
@@ -211,14 +211,15 @@
 </td><td class="tableCellValue"><table>
 	<tr>
 		<td><ePortalWFApproval:ThemeButton runat="server" id="btnPreview" button-causesvalidation="False" button-commandname="Redirect" button-text="Preview" button-tooltip="Preview"></ePortalWFApproval:ThemeButton></td>
-		<td><ePortalWFApproval:ThemeButton runat="server" id="btnPreview1" button-causesvalidation="False" button-commandname="Redirect" button-text="View As PDF" button-tooltip="
-          "></ePortalWFApproval:ThemeButton></td>
-		<td><asp:LinkButton runat="server" id="HFIN_File" CommandName="Redirect" visible="False"></asp:LinkButton></td>
+		<td></td>
+		<td></td>
 	</tr>	
 </table>
  
 
-</td></tr><tr><td class="tableCellValue" colspan="7"><BaseClasses:TabContainer runat="server" id="Wfin_HeadTabContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
+</td><td class="tableCellValue"><ePortalWFApproval:ThemeButton runat="server" id="btnPreview1" button-causesvalidation="False" button-commandname="Redirect" button-text="View As PDF" button-tooltip="
+          "></ePortalWFApproval:ThemeButton> 
+<asp:LinkButton runat="server" id="HFIN_File" CommandName="Redirect" visible="False"></asp:LinkButton></td></tr><tr><td class="tableCellValue" colspan="8"><BaseClasses:TabContainer runat="server" id="Wfin_HeadTabContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
  <BaseClasses:TabPanel runat="server" id="DocAttachTabPanel" HeaderText="Reports Included">	<ContentTemplate> 
   <ePortalWFApproval:WFinRep_DocAttachTableControl runat="server" id="WFinRep_DocAttachTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td>
                   <asp:panel id="WFinRep_DocAttachTableControlCollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">

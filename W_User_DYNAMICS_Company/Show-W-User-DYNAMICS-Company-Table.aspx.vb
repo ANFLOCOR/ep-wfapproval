@@ -139,8 +139,6 @@ Partial Public Class Show_W_User_DYNAMICS_Company_Table
         
         ' Write out the methods for DataSource
         
-   
-
 <System.Web.Services.WebMethod()> _
         Public Shared Function GetImage(ByVal tableName As String, _
                                         ByVal recordID As String, _

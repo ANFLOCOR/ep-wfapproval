@@ -51,7 +51,7 @@ Namespace ePortalWFApproval.Business
         Me.ApplicationName = "App_Code"
         Me.DataAdapter = New Sel_WPO_WFTaskSqlView()
         Directcast(Me.DataAdapter, Sel_WPO_WFTaskSqlView).ConnectionName = Me.ConnectionName
-        
+        Directcast(Me.DataAdapter, Sel_WPO_WFTaskSqlView).ApplicationName = Me.ApplicationName
         Me.TableDefinition.AdapterMetaData = Me.DataAdapter.AdapterMetaData
         PONUMBERColumn.CodeName = "PONUMBER"
         POSTATUSColumn.CodeName = "POSTATUS"

@@ -418,7 +418,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>&lt;%#String.Concat("FS Report Inquiry (Non GP)") %&gt;</Value>
+          <Value>&lt;%#String.Concat("FS Report Inquiry (South Non GP)") %&gt;</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
