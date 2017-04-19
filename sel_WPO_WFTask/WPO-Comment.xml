@@ -25,8 +25,16 @@
       <Table>DatabaseANFLO-WF%dbo.sel_WPO_POP10550</Table>
       <PassthroughAttributes>
         <Attribute>
+          <Name>Columns</Name>
+          <Value>5</Value>
+        </Attribute>
+        <Attribute>
           <Name>CssClass</Name>
           <Value>field_input</Value>
+        </Attribute>
+        <Attribute>
+          <Name>EnableIncrementDecrementButtons</Name>
+          <Value>False</Value>
         </Attribute>
         <Attribute>
           <Name>HTMLEncodeValue</Name>
@@ -42,7 +50,7 @@
         </Attribute>
         <Attribute>
           <Name>ReadOnly</Name>
-          <Value>True</Value>
+          <Value>False</Value>
         </Attribute>
         <Attribute>
           <Name>RichTextEditorType</Name>
@@ -50,11 +58,7 @@
         </Attribute>
         <Attribute>
           <Name>Rows</Name>
-          <Value>6</Value>
-        </Attribute>
-        <Attribute>
-          <Name>Style</Name>
-          <Value>white-space: inherit;</Value>
+          <Value>8</Value>
         </Attribute>
         <Attribute>
           <Name>TextFormat</Name>
@@ -63,6 +67,10 @@
         <Attribute>
           <Name>TextMode</Name>
           <Value>MultiLine</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Width</Name>
+          <Value>500px</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_WPO_POP10550RecordControl</InsideControl>
@@ -200,7 +208,12 @@
         &lt;Value&gt;
                   &amp;lt;asp:panel id="Sel_WPO_POP10550RecordControlCollapsibleRegion" runat="server"&amp;gt;&amp;lt;GEN:PANEL NAME="Sel_WPO_POP10550Panel" /&amp;gt;&amp;lt;/asp:panel&amp;gt;
                 &lt;/Value&gt;
-        &lt;CellAttributes /&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;width:500px;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;RowAttributes /&gt;
     &lt;/Row&gt;
@@ -358,6 +371,10 @@
           &lt;Attribute&gt;
             &lt;Name&gt;colspan&lt;/Name&gt;
             &lt;AttributeValue&gt;3&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;text-align:left;width:500px;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;

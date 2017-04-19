@@ -1905,9 +1905,7 @@ Public Class BaseSel_WPO_InquireDetails_2TableControlRow
                      
         
               ' Register the event handlers.
-          					
-              AddHandler Me.TextBox.TextChanged, AddressOf TextBox_TextChanged
-                    
+          
     
         End Sub
 
@@ -1955,7 +1953,6 @@ Public Class BaseSel_WPO_InquireDetails_2TableControlRow
                 SetLiteral11()
                 SetLiteral9()
                 SetPONUMBER2()
-                SetTextBox()
                 SetUNITCOST1()
                 SetVENDNAME1()
       
@@ -2133,18 +2130,6 @@ Public Class BaseSel_WPO_InquireDetails_2TableControlRow
                       'To override this property you can uncomment the following property and add your own value.
                       'Me.Literal9.Text = "Some value"
                     
-                  End Sub
-                
-        Public Overridable Sub SetTextBox()
-
-                  
-                  									
-            ' If data was retrieved from UI previously, restore it
-            If Me.PreviousUIData.ContainsKey(Me.TextBox.ID) Then
-                Me.TextBox.Text = Me.PreviousUIData(Me.TextBox.ID).ToString()
-                Return
-            End If
-            
                   End Sub
                 
 
@@ -2432,11 +2417,7 @@ Public Class BaseSel_WPO_InquireDetails_2TableControlRow
         
     
         ' Generate set method for buttons
-        		
-        Protected Overridable Sub TextBox_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
-             
-        End Sub
-                    
+        
    
         Private _PreviousUIData As New Hashtable
         Public Overridable Property PreviousUIData() As Hashtable
@@ -2528,12 +2509,6 @@ Public Class BaseSel_WPO_InquireDetails_2TableControlRow
             End Get
         End Property
             
-        Public ReadOnly Property TextBox() As System.Web.UI.WebControls.TextBox
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "TextBox"), System.Web.UI.WebControls.TextBox)
-            End Get
-        End Property
-        
         Public ReadOnly Property UNITCOST1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "UNITCOST1"), System.Web.UI.WebControls.Literal)
@@ -20907,6 +20882,8 @@ Public Class BaseWPOP10100RecordControl
                 SetLiteral13()
                 SetLiteral6()
                 SetlitMoveTo()
+                SetlitSpace()
+                SetlitSpace1()
                 SetlitStatus()
                 SetWPOP_C_ID()
                 SetWPOP_DT_ID()
@@ -21354,6 +21331,26 @@ Public Class BaseWPOP10100RecordControl
 
                   
                   
+                  End Sub
+                
+        Public Overridable Sub SetlitSpace()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.litSpace.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetlitSpace1()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.litSpace1.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetlitStatus()
@@ -22692,6 +22689,18 @@ Public Class BaseWPOP10100RecordControl
         Public ReadOnly Property litMoveTo() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "litMoveTo"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property litSpace() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "litSpace"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property litSpace1() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "litSpace1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
         

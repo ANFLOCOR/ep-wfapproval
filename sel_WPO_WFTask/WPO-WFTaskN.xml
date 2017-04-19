@@ -60,7 +60,7 @@
         </Attribute>
         <Attribute>
           <Name>Width</Name>
-          <Value>100px</Value>
+          <Value>120px</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WPOP10100RecordControl</InsideControl>
@@ -85,7 +85,7 @@
         </Attribute>
         <Attribute>
           <Name>Width</Name>
-          <Value>100px</Value>
+          <Value>120px</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WPOP10100RecordControl</InsideControl>
@@ -112,7 +112,7 @@
         </Attribute>
         <Attribute>
           <Name>Width</Name>
-          <Value>100px</Value>
+          <Value>120px</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WPOP10100RecordControl</InsideControl>
@@ -234,6 +234,10 @@
           <Value>Default</Value>
         </Attribute>
         <Attribute>
+          <Name>ForeColor</Name>
+          <Value>Black</Value>
+        </Attribute>
+        <Attribute>
           <Name>HTMLEncodeValue</Name>
           <Value>Default</Value>
         </Attribute>
@@ -291,6 +295,33 @@
         <Attribute>
           <Name>Text</Name>
           <Value>Buyer</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>Sel_WPO_WFTaskRecordControl</InsideControl>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>BUYERIDLabel1</Name>
+      <Type>Literal</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>Consumers</Name>
+          <Value>Sel_WPO_WFTaskRecordControl</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:Field</Name>
+          <Value>BUYERID</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:Table</Name>
+          <Value>DatabaseANFLO-WFN%dbo.sel_WPO_WFTask</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Text</Name>
+          <Value>Payment Terms</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_WPO_WFTaskRecordControl</InsideControl>
@@ -835,6 +866,10 @@
           <Value>Default</Value>
         </Attribute>
         <Attribute>
+          <Name>ForeColor</Name>
+          <Value>Black</Value>
+        </Attribute>
+        <Attribute>
           <Name>HTMLEncodeValue</Name>
           <Value>Default</Value>
         </Attribute>
@@ -1031,6 +1066,10 @@
         <Attribute>
           <Name>FieldMaxLength</Name>
           <Value>Default</Value>
+        </Attribute>
+        <Attribute>
+          <Name>ForeColor</Name>
+          <Value>Black</Value>
         </Attribute>
         <Attribute>
           <Name>HTMLEncodeValue</Name>
@@ -1301,6 +1340,10 @@
         <Attribute>
           <Name>FieldMaxLength</Name>
           <Value>Default</Value>
+        </Attribute>
+        <Attribute>
+          <Name>ForeColor</Name>
+          <Value>Black</Value>
         </Attribute>
         <Attribute>
           <Name>FRTAMNT1RequiredFieldValidator:Enabled</Name>
@@ -1872,21 +1915,6 @@
       <InsideControl>Sel_WPO_InquireDetailsTableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
-      <Name>Literal13</Name>
-      <Type>Literal</Type>
-      <PassthroughAttributes>
-        <Attribute>
-          <Name>InternalUse:TreatAs</Name>
-          <Value>FieldValue</Value>
-        </Attribute>
-        <Attribute>
-          <Name>Text</Name>
-          <Value>Payment Terms</Value>
-        </Attribute>
-      </PassthroughAttributes>
-      <InsideControl>Sel_WPO_WFTaskRecordControl</InsideControl>
-    </ContainedComponent>
-    <ContainedComponent>
       <Name>Literal2</Name>
       <Type>Aspx</Type>
       <PassthroughAttributes>
@@ -1984,6 +2012,48 @@
       <InsideControl>Sel_WPO_WFTaskRecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
+      <Name>litSpace</Name>
+      <Type>Aspx</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>Sel_WPO_WFTaskRecordControl</InsideControl>
+      <ControlClass>System.Web.UI.WebControls.Literal</ControlClass>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>litSpace1</Name>
+      <Type>Literal</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Text</Name>
+          <Value>&amp;nbsp;&amp;nbsp;</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WPOP10100RecordControl</InsideControl>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>litSpace2</Name>
+      <Type>Literal</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Text</Name>
+          <Value>&amp;nbsp;&amp;nbsp;</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WPOP10100RecordControl</InsideControl>
+    </ContainedComponent>
+    <ContainedComponent>
       <Name>MSCCHAMT</Name>
       <Type>FieldValue</Type>
       <Field>MSCCHAMT</Field>
@@ -1997,6 +2067,10 @@
         <Attribute>
           <Name>FieldMaxLength</Name>
           <Value>Default</Value>
+        </Attribute>
+        <Attribute>
+          <Name>ForeColor</Name>
+          <Value>Black</Value>
         </Attribute>
         <Attribute>
           <Name>HTMLEncodeValue</Name>
@@ -2197,6 +2271,10 @@
         <Attribute>
           <Name>FieldMaxLength</Name>
           <Value>Default</Value>
+        </Attribute>
+        <Attribute>
+          <Name>ForeColor</Name>
+          <Value>Black</Value>
         </Attribute>
         <Attribute>
           <Name>HTMLEncodeValue</Name>
@@ -3084,6 +3162,10 @@
           <Value>Default</Value>
         </Attribute>
         <Attribute>
+          <Name>ForeColor</Name>
+          <Value>Black</Value>
+        </Attribute>
+        <Attribute>
           <Name>HTMLEncodeValue</Name>
           <Value>Default</Value>
         </Attribute>
@@ -3171,6 +3253,10 @@
         <Attribute>
           <Name>FieldMaxLength</Name>
           <Value>Default</Value>
+        </Attribute>
+        <Attribute>
+          <Name>ForeColor</Name>
+          <Value>Black</Value>
         </Attribute>
         <Attribute>
           <Name>HTMLEncodeValue</Name>
@@ -3262,6 +3348,10 @@
           <Value>Default</Value>
         </Attribute>
         <Attribute>
+          <Name>ForeColor</Name>
+          <Value>Black</Value>
+        </Attribute>
+        <Attribute>
           <Name>HTMLEncodeValue</Name>
           <Value>Default</Value>
         </Attribute>
@@ -3349,6 +3439,10 @@
         <Attribute>
           <Name>FieldMaxLength</Name>
           <Value>Default</Value>
+        </Attribute>
+        <Attribute>
+          <Name>ForeColor</Name>
+          <Value>Black</Value>
         </Attribute>
         <Attribute>
           <Name>HTMLEncodeValue</Name>
@@ -3714,6 +3808,10 @@
         <Attribute>
           <Name>FieldMaxLength</Name>
           <Value>Default</Value>
+        </Attribute>
+        <Attribute>
+          <Name>ForeColor</Name>
+          <Value>Black</Value>
         </Attribute>
         <Attribute>
           <Name>HTMLEncodeValue</Name>
@@ -6939,7 +7037,7 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;colspan&lt;/Name&gt;
-            &lt;AttributeValue&gt;5&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;6&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -6975,13 +7073,12 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="CompanyID" /&amp;gt; 
-&amp;lt;GEN:FIELDVALUE NAME="CompanyID2" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;asp:literal id="litSpace" runat="server" text="&amp;amp;nbsp;&amp;amp;nbsp;&amp;amp;nbsp;&amp;amp;nbsp;" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -6990,7 +7087,17 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;asp:literal id="Literal1" runat="server" text="&amp;amp;nbsp" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;b&amp;gt;&amp;lt;span style="font-family:Tahoma;font-size:10pt"&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="CompanyID" /&amp;gt; 
+&amp;lt;GEN:FIELDVALUE NAME="CompanyID2" /&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/b&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;width:500px;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;asp:literal id="Literal1" runat="server" text="&amp;amp;nbsp;&amp;amp;nbsp;" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -7056,16 +7163,24 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="DOCDATE" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;b&amp;gt;&amp;lt;span style="font-family:Tahoma;font-size:10pt"&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="DOCDATE" /&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/b&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;width:500px;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7093,7 +7208,7 @@
     &lt;/Row&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;asp:literal id="Literal2" runat="server" text="&amp;amp;nbsp" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;asp:literal id="Literal2" runat="server" text="&amp;amp;nbsp;" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -7114,16 +7229,24 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="PONUMBER" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;b&amp;gt;&amp;lt;span style="font-family:Tahoma;font-size:10pt"&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="PONUMBER" /&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/b&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;width:500px;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7171,16 +7294,24 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="VENDNAME" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;b&amp;gt;&amp;lt;span style="font-family:Tahoma;font-size:10pt"&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="VENDNAME" /&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/b&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;width:500px;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7228,16 +7359,24 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="BUYERID" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;b&amp;gt;&amp;lt;span style="font-family:Tahoma;font-size:10pt"&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="BUYERID" /&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/b&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;width:500px;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7277,7 +7416,7 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:LITERAL Name="Literal13" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;GEN:FIELDLABEL NAME="BUYERIDLabel1" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -7290,11 +7429,114 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:LITERAL Name="litPaymentTerms" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;b&amp;gt;&amp;lt;span style="font-family:Tahoma;font-size:10pt"&amp;gt;&amp;lt;GEN:LITERAL NAME="litPaymentTerms" /&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;/b&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;width:500px;text-align:left;font-weight:bold;color:Black;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;dfv&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;dfv&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;fls&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;fls&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;color:Black;font-family:Tahoma;text-align:left;text-decoration:underline;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;dfv&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;dfv&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;dfv&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;fls&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;color:Black;font-family:Tahoma;text-align:left;text-decoration:underline;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7343,6 +7585,18 @@
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
             &lt;AttributeValue&gt;color:Black;font-family:Tahoma;text-align:left;text-decoration:underline;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;dfv&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7426,7 +7680,15 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7435,7 +7697,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:right;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7504,7 +7766,15 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7513,7 +7783,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:right;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7561,7 +7831,15 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7570,7 +7848,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:right;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7618,7 +7896,15 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7627,7 +7913,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:right;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7675,7 +7961,15 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7684,7 +7978,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:right;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7732,7 +8026,15 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;font-weight:bold;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -7741,7 +8043,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:right;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:right;font-weight:bold;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -8207,7 +8509,12 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="WPOP_U_ID" /&amp;gt;&amp;lt;GEN:PUSHBUTTON NAME="btnApprove" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="WPOP_U_ID" /&amp;gt;&amp;lt;GEN:PUSHBUTTON NAME="btnApprove" /&amp;gt; 
+&amp;lt;GEN:LITERAL Name="litSpace1" /&amp;gt; 
+&amp;lt;GEN:PUSHBUTTON NAME="btnReturn" /&amp;gt; 
+&amp;lt;GEN:LITERAL Name="litSpace2" /&amp;gt; 
+&amp;lt;GEN:PUSHBUTTON NAME="btnReject" /&amp;gt; 
+&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -8217,31 +8524,9 @@
             &lt;Name&gt;style&lt;/Name&gt;
             &lt;AttributeValue&gt;text-align:center;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:PUSHBUTTON NAME="btnReturn" /&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes&gt;
           &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;dfv&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:center;&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:PUSHBUTTON NAME="btnReject" /&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;dfv&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;white-space:nowrap;text-align:center;&lt;/AttributeValue&gt;
+            &lt;Name&gt;colspan&lt;/Name&gt;
+            &lt;AttributeValue&gt;3&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;

@@ -18423,6 +18423,7 @@ Public Class BaseSel_WPO_WFTaskRecordControl
                 
                 SetBUYERID()
                 SetBUYERIDLabel()
+                SetBUYERIDLabel1()
                 
                 
                 SetCompanyID()
@@ -18434,7 +18435,6 @@ Public Class BaseSel_WPO_WFTaskRecordControl
                 SetFRTAMNTLabel()
                 SetLabel()
                 SetLiteral1()
-                SetLiteral13()
                 SetLiteral2()
                 SetLiteral3()
                 SetLiteral4()
@@ -18442,6 +18442,7 @@ Public Class BaseSel_WPO_WFTaskRecordControl
                 SetLiteral7()
                 SetLiteral8()
                 SetlitPaymentTerms()
+                SetlitSpace()
                 SetMSCCHAMT()
                 SetMSCCHAMTLabel()
                 SetPODetailsContainer()
@@ -18986,6 +18987,16 @@ Public Class BaseSel_WPO_WFTaskRecordControl
                     
                   End Sub
                 
+        Public Overridable Sub SetBUYERIDLabel1()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.BUYERIDLabel1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetCompanyIDLabel()
 
                   
@@ -19026,16 +19037,6 @@ Public Class BaseSel_WPO_WFTaskRecordControl
 
                   
                   
-                  End Sub
-                
-        Public Overridable Sub SetLiteral13()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.Literal13.Text = "Some value"
-                    
                   End Sub
                 
         Public Overridable Sub SetLiteral2()
@@ -19082,6 +19083,12 @@ Public Class BaseSel_WPO_WFTaskRecordControl
                       'To override this property you can uncomment the following property and add your own value.
                       'Me.litPaymentTerms.Text = "Some value"
                     
+                  End Sub
+                
+        Public Overridable Sub SetlitSpace()
+
+                  
+                  
                   End Sub
                 
         Public Overridable Sub SetMSCCHAMTLabel()
@@ -19993,6 +20000,12 @@ Public Class BaseSel_WPO_WFTaskRecordControl
             End Get
         End Property
         
+        Public ReadOnly Property BUYERIDLabel1() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "BUYERIDLabel1"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
         Public ReadOnly Property CompanyID() As System.Web.UI.WebControls.Label
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "CompanyID"), System.Web.UI.WebControls.Label)
@@ -20047,12 +20060,6 @@ Public Class BaseSel_WPO_WFTaskRecordControl
             End Get
         End Property
         
-        Public ReadOnly Property Literal13() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal13"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
         Public ReadOnly Property Literal2() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal2"), System.Web.UI.WebControls.Literal)
@@ -20092,6 +20099,12 @@ Public Class BaseSel_WPO_WFTaskRecordControl
         Public ReadOnly Property litPaymentTerms() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "litPaymentTerms"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property litSpace() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "litSpace"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
         
@@ -20444,6 +20457,8 @@ Public Class BaseWPOP10100RecordControl
                 
                 SetddlMoveTo()
                 SetLiteral6()
+                SetlitSpace1()
+                SetlitSpace2()
                 SetWPOP_DT_ID()
                 SetWPOP_DT_ID1()
                 SetWPOP_DT_IDLabel()
@@ -20733,6 +20748,26 @@ Public Class BaseWPOP10100RecordControl
 
                   
                   
+                  End Sub
+                
+        Public Overridable Sub SetlitSpace1()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.litSpace1.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetlitSpace2()
+
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.litSpace2.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetWPOP_DT_IDLabel()
@@ -21909,6 +21944,18 @@ Public Class BaseWPOP10100RecordControl
         Public ReadOnly Property Literal6() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal6"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property litSpace1() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "litSpace1"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property litSpace2() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "litSpace2"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
         

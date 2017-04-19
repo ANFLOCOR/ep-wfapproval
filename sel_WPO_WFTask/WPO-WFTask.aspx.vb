@@ -102,30 +102,30 @@ Partial Public Class WPO_WFTask
             ''07.15.2016 jessy **
             ''Enable Return To dropdown list if action selected is "Reject" or "Return"
 
-            Select Case ddlAction.SelectedIndex
-                Case 1 'Reject
-                    btnApprove.Visible = False
-                    btnReject.Visible = True
-                    btnReturn.Visible = False
-                    litMoveTo.Visible = False
-                    ddlMoveto1.Visible = False
+            ''Select Case ddlAction.SelectedIndex
+            ''    Case 1 'Reject
+            ''        btnApprove.Visible = False
+            ''        btnReject.Visible = True
+            ''        btnReturn.Visible = False
+            ''        litMoveTo.Visible = False
+            ''        ddlMoveto1.Visible = False
 
-                Case 2 'Return
-                    btnApprove.Visible = False
-                    btnReject.Visible = False
-                    btnReturn.Visible = True
-                    litMoveTo.Visible = True
-                    ddlMoveto1.Visible = True
-                    ddlMoveto1.Enabled = True
+            ''    Case 2 'Return
+            ''        btnApprove.Visible = False
+            ''        btnReject.Visible = False
+            ''        btnReturn.Visible = True
+            ''        litMoveTo.Visible = True
+            ''        ddlMoveto1.Visible = True
+            ''        ddlMoveto1.Enabled = True
 
-                Case Else
-                    btnApprove.Visible = True
-                    btnReject.Visible = False
-                    btnReturn.Visible = False
-                    litMoveTo.Visible = False
-                    ddlMoveto1.Visible = False
-                    ddlMoveto1.Enabled = False
-            End Select
+            ''    Case Else
+            ''        btnApprove.Visible = True
+            ''        btnReject.Visible = False
+            ''        btnReturn.Visible = False
+            ''        litMoveTo.Visible = False
+            ''        ddlMoveto1.Visible = False
+            ''        ddlMoveto1.Enabled = False
+            ''End Select
 
             If ddlAction.SelectedIndex = 2 Or ddlAction.SelectedIndex = 1 Then 'RETURN
                 Try
