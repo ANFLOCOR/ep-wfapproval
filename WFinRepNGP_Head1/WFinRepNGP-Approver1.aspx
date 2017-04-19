@@ -1,13 +1,13 @@
-﻿<%@ Page Language="vb" EnableEventValidation="false" AutoEventWireup="false" CodeFile="WFinRepNGP-Approver.aspx.vb" Culture="en-US" MasterPageFile="../Master Pages/VerticalMenu.master" Inherits="ePortalWFApproval.UI.WFinRepNGP_Approver" %>
-<%@ Register Tagprefix="Selectors" Namespace="ePortalWFApproval" %>
+﻿<%@ Register Tagprefix="Selectors" Namespace="ePortalWFApproval" %>
 
-<%@ Register Tagprefix="ePortalWFApproval" Namespace="ePortalWFApproval.UI.Controls.WFinRepNGP_Approver" %>
+<%@ Register Tagprefix="ePortalWFApproval" TagName="PaginationModern" Src="../Shared/PaginationModern.ascx" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Tagprefix="ePortalWFApproval" TagName="ThemeButton" Src="../Shared/ThemeButton.ascx" %>
 
 <%@ Register Tagprefix="BaseClasses" Namespace="BaseClasses.Web.UI.WebControls" Assembly="BaseClasses" %>
-<%@ Register Tagprefix="ePortalWFApproval" TagName="Pagination" Src="../Shared/Pagination.ascx" %>
+<%@ Page Language="vb" EnableEventValidation="false" AutoEventWireup="false" CodeFile="WFinRepNGP-Approver1.aspx.vb" Culture="en-US" MasterPageFile="../Master Pages/VerticalMenu.master" Inherits="ePortalWFApproval.UI.WFinRepNGP_Approver1" %>
+<%@ Register Tagprefix="ePortalWFApproval" Namespace="ePortalWFApproval.UI.Controls.WFinRepNGP_Approver1" %>
 <asp:Content id="PageSection" ContentPlaceHolderID="PageContent" Runat="server">
     <a id="StartOfPageContent"></a>
     <div id="scrollRegion" class="scrollRegion">              
@@ -29,17 +29,17 @@
 <%= SystemUtils.GenerateEnterKeyCaptureBeginTag(FindControlRecursively("SaveAndNewButton"))%>
 <%= SystemUtils.GenerateEnterKeyCaptureBeginTag(FindControlRecursively("SaveButton"))%>
 
-                        
-            <ePortalWFApproval:WFinRepNGP_HeadRecordControl runat="server" id="WFinRepNGP_HeadRecordControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
+                        <ePortalWFApproval:WFinRepNGP_Head1RecordControl runat="server" id="WFinRepNGP_Head1RecordControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle">
-                        <asp:Literal runat="server" id="Title0" Text="&lt;%#String.Concat(&quot;Workflow Approver Page (South Non GP)&quot;) %>">	</asp:Literal>
+                        <asp:Literal runat="server" id="Title0" Text="Workflow Approver Page (North Non GP)">	</asp:Literal>
                       </td></tr></table>
 </td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
-</td><td class="panelHeaderR"></td></tr><tr><td class="panelL"></td><td>
+
+                </td><td class="panelHeaderR"></td></tr><tr><td class="panelL"></td><td>
                   <asp:panel id="CollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td style="float:right">
                     <table><tr><td></td></tr></table>
 </td></tr><tr><td><table><tr><td><ePortalWFApproval:ThemeButton runat="server" id="CancelButton" button-causesvalidation="false" button-commandname="Redirect" button-text="Back" button-tooltip="Back"></ePortalWFApproval:ThemeButton></td></tr></table>
-</td></tr><tr><td><asp:panel id="WFinRepNGP_HeadRecordControlPanel" runat="server"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tableCellLabel"></td><td class="tableCellValue"></td><td class="tableCellValue"></td><td class="tableCellValue"></td><td class="tableCellValue"></td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue"><asp:Literal runat="server" id="WFRCHNGP_DescriptionLabel" Text="Description">	</asp:Literal></td><td class="tableCellValue"><asp:Literal runat="server" id="WFRCHNGP_Description"></asp:Literal></td><td class="tableCellValue"><span style="white-space:nowrap;">
+</td></tr><tr><td><asp:panel id="WFinRepNGP_Head1RecordControlPanel" runat="server"><table><tr><td class="tableCellLabel"></td><td class="tableCellValue"></td><td class="tableCellValue"></td><td class="tableCellValue"></td><td class="tableCellValue"></td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue"><asp:Literal runat="server" id="WFRCHNGP_DescriptionLabel" Text="Description">	</asp:Literal></td><td class="tableCellValue"><asp:Literal runat="server" id="WFRCHNGP_Description"></asp:Literal></td><td class="tableCellValue"><span style="white-space:nowrap;">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td style="padding-right: 5px; vertical-align:top">
@@ -110,14 +110,15 @@
 	</asp:Button> 
 <asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" text="Return">		
 	</asp:Button></td><td class="tableCellValue"><asp:TextBox runat="server" id="WFRCHNGP_Remark" MaxLength="1073741823" columns="5" cssclass="field_input" height="350" rows="2" textmode="MultiLine" visible="False" width="640"></asp:TextBox>&nbsp;
-<BaseClasses:TextBoxMaxLengthValidator runat="server" id="WFRCHNGP_RemarkTextBoxMaxLengthValidator" ControlToValidate="WFRCHNGP_Remark" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WFRCHNGP Remark&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue" colspan="4">&nbsp;</td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue" colspan="4"><BaseClasses:TabContainer runat="server" id="WFinRepNGP_HeadRecordControlTabContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
- <BaseClasses:TabPanel runat="server" id="TabPanel" HeaderText="Document">	<ContentTemplate> 
-  <ePortalWFApproval:WFinRepNGP_HeadTableControl runat="server" id="WFinRepNGP_HeadTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
+<BaseClasses:TextBoxMaxLengthValidator runat="server" id="WFRCHNGP_RemarkTextBoxMaxLengthValidator" ControlToValidate="WFRCHNGP_Remark" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WFRCHNGP Remark&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue" colspan="4">&nbsp;</td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue" colspan="4"><asp:tabcontainer id="WFinRepNGP_Head1TabContainer" runat="server">
+  <asp:tabpanel id="TabPanel" runat="server">
+        <headertemplate>Document</headertemplate>
+        <contenttemplate><ePortalWFApproval:WFinRepNGP_Head1TableControl runat="server" id="WFinRepNGP_Head1TableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td></tr></table>
 
                 </td><td class="panelHeaderR"></td></tr><tr><td class="panelL"></td><td>
                   <asp:panel id="CollapsibleRegion3" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
-                    <table id="WFinRepNGP_HeadTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thcnb"><asp:Literal runat="server" id="WFRCHNGP_C_IDLabel" Text="Company">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCHNGP_DescriptionLabel1" Text="Description">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCHNGP_MonthLabel" Text="Month">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCHNGP_YearLabel" Text="Year">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCHNGP_RptCountLabel" Text="Report Count">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCHNGP_RemarkLabel1" Text="Remarks">	</asp:Literal></th><th class="thc"></th></tr><asp:Repeater runat="server" id="WFinRepNGP_HeadTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WFinRepNGP_HeadTableControlRow runat="server" id="WFinRepNGP_HeadTableControlRow">
+                    <table id="WFinRepNGP_Head1TableControlGrid"><tr class="tch"><th class="thcnb"><asp:Literal runat="server" id="WFRCHNGP_C_IDLabel" Text="Company">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCHNGP_DescriptionLabel1" Text="Description">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCHNGP_MonthLabel" Text="Month">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCHNGP_YearLabel" Text="Year">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCHNGP_RptCountLabel" Text="Report Count">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCHNGP_RemarkLabel1" Text="Remarks">	</asp:Literal></th><th class="thc"></th></tr><asp:Repeater runat="server" id="WFinRepNGP_Head1TableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WFinRepNGP_Head1TableControlRow runat="server" id="WFinRepNGP_Head1TableControlRow">
 <tr><td class="tableRowButtonsCellVertical"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WFRCHNGP_C_ID2"></asp:Literal></span>
  
@@ -196,18 +197,19 @@
 		<td><asp:LinkButton runat="server" id="WFRCHNGP_File" CommandName="Redirect" size="60" visible="False" style="display:none"></asp:LinkButton></td>
 	</tr>
 </table>
- </td></tr><tr><td class="tableRowButtonsCellVertical" colspan="7"><BaseClasses:TabContainer runat="server" id="WFinRepNGP_HeadTableControlTabContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
- <BaseClasses:TabPanel runat="server" id="TabPanel3" HeaderText="Reports Included">	<ContentTemplate> 
-  <ePortalWFApproval:WFinRepNGP_DocAttachTableControl runat="server" id="WFinRepNGP_DocAttachTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td></td><td></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
+ </td></tr><tr><td class="ticnb" scope="row" colspan="7"><asp:tabcontainer id="WFinRepNGP_HeadTableControlTabContainer" runat="server">
+    <asp:tabpanel id="TabPanel3" runat="server">
+        <headertemplate>Reports Included</headertemplate>
+        <contenttemplate><ePortalWFApproval:WFinRepNGP_DocAttach1TableControl runat="server" id="WFinRepNGP_DocAttach1TableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td></td><td></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle">
-                        <asp:Literal runat="server" id="Title2">	</asp:Literal>
+                        <asp:Literal runat="server" id="Title1">	</asp:Literal>
                       </td></tr></table>
 </td></tr></table>
 
                 </td></tr><tr><td></td><td>
                   <asp:panel id="CollapsibleRegion4" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
-                    <table id="WFinRepNGP_DocAttachTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="WFRCDNGP_TypeLabel" Text="Report Type">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCDNGP_DescriptionLabel" Text="Description">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCDNGP_RWRemLabel" Text="Remarks">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WFinRepNGP_DocAttachTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WFinRepNGP_DocAttachTableControlRow runat="server" id="WFinRepNGP_DocAttachTableControlRow">
-<tr><td class="tableCellValue"><asp:Literal runat="server" id="WFRCDNGP_Type"></asp:Literal></td><td class="tableCellValue"><asp:Literal runat="server" id="WFRCDNGP_Description"></asp:Literal></td><td class="tableCellValue"><asp:Literal runat="server" id="WFRCDNGP_RWRem"></asp:Literal></td></tr></ePortalWFApproval:WFinRepNGP_DocAttachTableControlRow>
+                    <table id="WFinRepNGP_DocAttach1TableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="WFRCDNGP_TypeLabel" Text="Report Type">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCDNGP_DescriptionLabel" Text="Description">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRCDNGP_RWRemLabel" Text="Remarks">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WFinRepNGP_DocAttach1TableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WFinRepNGP_DocAttach1TableControlRow runat="server" id="WFinRepNGP_DocAttach1TableControlRow">
+<tr><td class="tableCellValue"><asp:Literal runat="server" id="WFRCDNGP_Type"></asp:Literal></td><td class="tableCellValue"><asp:Literal runat="server" id="WFRCDNGP_Description"></asp:Literal></td><td class="tableCellValue"><asp:Literal runat="server" id="WFRCDNGP_RWRem"></asp:Literal></td></tr></ePortalWFApproval:WFinRepNGP_DocAttach1TableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>
@@ -219,11 +221,12 @@
                     
                     <!--To change the position of the pagination control, please search for "prspace" on the Online Help for instruction. -->
                   </td></tr></table>
-	<asp:hiddenfield id="WFinRepNGP_DocAttachTableControl_PostbackTracker" runat="server" />
-</ePortalWFApproval:WFinRepNGP_DocAttachTableControl>
- 
- </ContentTemplate></BaseClasses:TabPanel> 
-</BaseClasses:TabContainer></td></tr></ePortalWFApproval:WFinRepNGP_HeadTableControlRow>
+	<asp:hiddenfield id="WFinRepNGP_DocAttach1TableControl_PostbackTracker" runat="server" />
+</ePortalWFApproval:WFinRepNGP_DocAttach1TableControl>
+</contenttemplate>
+    </asp:tabpanel>
+</asp:tabcontainer> 
+</td></tr></ePortalWFApproval:WFinRepNGP_Head1TableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>
@@ -231,22 +234,20 @@
 
                   </td></tr></table>
 </asp:panel>
-                </td><td class="panelR"></td></tr><tr><td class="panelL"></td><td class="panelPaginationC">
-                    
-                    <!--To change the position of the pagination control, please search for "prspace" on the Online Help for instruction. -->
-                  </td><td class="panelR"></td></tr><tr><td class="panelBL"><img src="../Images/space.gif" class="panelBLSpace" alt="" /></td><td class="panelB"></td><td class="panelBR"><img src="../Images/space.gif" class="panelBRSpace" alt="" /></td></tr></table>
-	<asp:hiddenfield id="WFinRepNGP_HeadTableControl_PostbackTracker" runat="server" />
-</ePortalWFApproval:WFinRepNGP_HeadTableControl>
- 
- </ContentTemplate></BaseClasses:TabPanel> 
- <BaseClasses:TabPanel runat="server" id="TabPanel2" HeaderText="Attachments">	<ContentTemplate> 
-  <ePortalWFApproval:WFinRepNGP_AttachmentTableControl runat="server" id="WFinRepNGP_AttachmentTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
+                </td><td class="panelR"></td></tr><tr><td class="panelL"></td><td class="panelPaginationC"></td><td class="panelR"></td></tr><tr><td class="panelBL"><img src="../Images/space.gif" class="panelBLSpace" alt="" /></td><td class="panelB"></td><td class="panelBR"><img src="../Images/space.gif" class="panelBRSpace" alt="" /></td></tr></table>
+	<asp:hiddenfield id="WFinRepNGP_Head1TableControl_PostbackTracker" runat="server" />
+</ePortalWFApproval:WFinRepNGP_Head1TableControl>
+</contenttemplate>
+    </asp:tabpanel>
+    <asp:tabpanel id="TabPanel2" runat="server">
+        <headertemplate>Attachments</headertemplate>
+        <contenttemplate><ePortalWFApproval:WFinRepNGP_Attachment1TableControl runat="server" id="WFinRepNGP_Attachment1TableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td></tr></table>
 
                 </td><td class="panelHeaderR"></td></tr><tr><td class="panelL"></td><td>
                   <asp:panel id="CollapsibleRegion2" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
-                    <table id="WFinRepNGP_AttachmentTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="WFRNGPAt_DescLabel" Text="Description">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRNGPAt_DocLabel" Text="File Download">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WFinRepNGP_AttachmentTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WFinRepNGP_AttachmentTableControlRow runat="server" id="WFinRepNGP_AttachmentTableControlRow">
-<tr><td class="tableCellValue"><asp:Literal runat="server" id="WFRNGPAt_Desc"></asp:Literal></td><td class="tableCellValue"><asp:LinkButton runat="server" id="WFRNGPAt_Doc" CommandName="Redirect" size="60"></asp:LinkButton></td></tr></ePortalWFApproval:WFinRepNGP_AttachmentTableControlRow>
+                    <table id="WFinRepNGP_Attachment1TableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="WFRNGPAt_DescLabel" Text="Description">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRNGPAt_DocLabel" Text="File Download">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WFinRepNGP_Attachment1TableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WFinRepNGP_Attachment1TableControlRow runat="server" id="WFinRepNGP_Attachment1TableControlRow">
+<tr><td class="tableCellValue"><asp:Literal runat="server" id="WFRNGPAt_Desc"></asp:Literal></td><td class="tableCellValue"><asp:LinkButton runat="server" id="WFRNGPAt_Doc" CommandName="Redirect" size="60"></asp:LinkButton></td></tr></ePortalWFApproval:WFinRepNGP_Attachment1TableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>
@@ -255,23 +256,21 @@
                   </td></tr></table>
 </asp:panel>
                 </td><td class="panelR"></td></tr><tr><td class="panelL"></td><td class="panelPaginationC">
-                    <ePortalWFApproval:Pagination runat="server" id="Pagination1"></ePortalWFApproval:Pagination>
+                    <ePortalWFApproval:PaginationModern runat="server" id="Pagination1"></ePortalWFApproval:PaginationModern>
                     <!--To change the position of the pagination control, please search for "prspace" on the Online Help for instruction. -->
                   </td><td class="panelR"></td></tr><tr><td class="panelBL"><img src="../Images/space.gif" class="panelBLSpace" alt="" /></td><td class="panelB"></td><td class="panelBR"><img src="../Images/space.gif" class="panelBRSpace" alt="" /></td></tr></table>
-	<asp:hiddenfield id="WFinRepNGP_AttachmentTableControl_PostbackTracker" runat="server" />
-</ePortalWFApproval:WFinRepNGP_AttachmentTableControl>
- 
- </ContentTemplate></BaseClasses:TabPanel> 
-<BaseClasses:TabPanel runat="server" id="TabPanel1" HeaderText="Approval History">	<ContentTemplate> 
-  <ePortalWFApproval:WFinRepNGP_ActivityTableControl runat="server" id="WFinRepNGP_ActivityTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
-                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"></td><td class="dhb"></td><td>
-                          <div id="Filters1Div" runat="server" class="popupWrapper">
-                          </div>
-                        </td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
+	<asp:hiddenfield id="WFinRepNGP_Attachment1TableControl_PostbackTracker" runat="server" />
+</ePortalWFApproval:WFinRepNGP_Attachment1TableControl>
+</contenttemplate>
+    </asp:tabpanel>
+	 <asp:tabpanel id="TabPanel1" runat="server">
+        <headertemplate>Approval History</headertemplate>
+        <contenttemplate><ePortalWFApproval:WFinRepNGP_Activity1TableControl runat="server" id="WFinRepNGP_Activity1TableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td></tr></table>
 
                 </td><td class="panelHeaderR"></td></tr><tr><td class="panelL"></td><td>
                   <asp:panel id="CollapsibleRegion1" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
-                    <table id="WFinRepNGP_ActivityTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="WFRNGPA_W_U_IDLabel" Text="User Assigned">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRNGPA_StatusLabel" Text="Status">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRNGPA_Date_AssignLabel" Text="Date Assign">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRNGPA_Date_ActionLabel" Text="Date Action">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRNGPA_RemarkLabel" Text="Remarks">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WFinRepNGP_ActivityTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WFinRepNGP_ActivityTableControlRow runat="server" id="WFinRepNGP_ActivityTableControlRow">
+                    <table id="WFinRepNGP_Activity1TableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="WFRNGPA_W_U_IDLabel" Text="User Assigned">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRNGPA_StatusLabel" Text="Status">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRNGPA_Date_AssignLabel" Text="Date Assign">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRNGPA_Date_ActionLabel" Text="Date Action">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="WFRNGPA_RemarkLabel" Text="Remarks">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WFinRepNGP_Activity1TableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WFinRepNGP_Activity1TableControlRow runat="server" id="WFinRepNGP_Activity1TableControlRow">
 <tr><td class="tableCellValue"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WFRNGPA_W_U_ID"></asp:Literal></span>
 </td><td class="tableCellValue"><span style="white-space:nowrap;">
@@ -280,7 +279,7 @@
 <asp:Literal runat="server" id="WFRNGPA_Date_Assign"></asp:Literal></span>
 </td><td class="tableCellValue"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="WFRNGPA_Date_Action"></asp:Literal></span>
-</td><td class="tableCellValue"><asp:Literal runat="server" id="WFRNGPA_Remark"></asp:Literal></td></tr></ePortalWFApproval:WFinRepNGP_ActivityTableControlRow>
+</td><td class="tableCellValue"><asp:Literal runat="server" id="WFRNGPA_Remark"></asp:Literal></td></tr></ePortalWFApproval:WFinRepNGP_Activity1TableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>
@@ -289,21 +288,22 @@
                   </td></tr></table>
 </asp:panel>
                 </td><td class="panelR"></td></tr><tr><td class="panelL"></td><td class="panelPaginationC">
-                    <ePortalWFApproval:Pagination runat="server" id="Pagination"></ePortalWFApproval:Pagination>
+                    <ePortalWFApproval:PaginationModern runat="server" id="Pagination"></ePortalWFApproval:PaginationModern>
                     <!--To change the position of the pagination control, please search for "prspace" on the Online Help for instruction. -->
                   </td><td class="panelR"></td></tr><tr><td class="panelBL"><img src="../Images/space.gif" class="panelBLSpace" alt="" /></td><td class="panelB"></td><td class="panelBR"><img src="../Images/space.gif" class="panelBRSpace" alt="" /></td></tr></table>
-	<asp:hiddenfield id="WFinRepNGP_ActivityTableControl_PostbackTracker" runat="server" />
-</ePortalWFApproval:WFinRepNGP_ActivityTableControl>
- 
- </ContentTemplate></BaseClasses:TabPanel> 
-  
-</BaseClasses:TabContainer></td></tr></table></asp:panel>
+	<asp:hiddenfield id="WFinRepNGP_Activity1TableControl_PostbackTracker" runat="server" />
+</ePortalWFApproval:WFinRepNGP_Activity1TableControl>
+</ContentTemplate>
+    </asp:tabpanel>
+</asp:tabcontainer> 
+</td></tr></table></asp:panel>
 </td></tr></table>
 </asp:panel>
                 </td><td class="panelR"></td></tr><tr><td class="panelBL"><img src="../Images/space.gif" class="panelBLSpace" alt="" /></td><td class="panelB"></td><td class="panelBR"><img src="../Images/space.gif" class="panelBRSpace" alt="" /></td></tr></table>
-	<asp:hiddenfield id="WFinRepNGP_HeadRecordControl_PostbackTracker" runat="server" />
-</ePortalWFApproval:WFinRepNGP_HeadRecordControl>
-<%= SystemUtils.GenerateEnterKeyCaptureEndTag(FindControlRecursively("SaveButton"))%>
+	<asp:hiddenfield id="WFinRepNGP_Head1RecordControl_PostbackTracker" runat="server" />
+</ePortalWFApproval:WFinRepNGP_Head1RecordControl>
+
+            <%= SystemUtils.GenerateEnterKeyCaptureEndTag(FindControlRecursively("SaveButton"))%>
 <%= SystemUtils.GenerateEnterKeyCaptureEndTag(FindControlRecursively("SaveAndNewButton"))%>
 <%= SystemUtils.GenerateEnterKeyCaptureEndTag(FindControlRecursively("OKButton"))%>
 <%= SystemUtils.GenerateEnterKeyCaptureEndTag(FindControlRecursively("EditButton"))%>

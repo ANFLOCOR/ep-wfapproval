@@ -28,6 +28,6 @@ Public Class Sel_Approver_Pending_Tasks2SqlView
 	
 	'The functions below may be overridden in order to implement your own
 	'logic for running queries that return lists of records.  
-	
+
 End Class
 End Namespace

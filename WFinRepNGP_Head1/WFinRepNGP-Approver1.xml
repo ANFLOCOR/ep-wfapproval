@@ -3,19 +3,19 @@
   <Generator>Iron Speed Designer</Generator>
   <Version>12.1.0</Version>
   <Self>
-    <Name>WFinRepNGP-Approver</Name>
+    <Name>WFinRepNGP-Approver1</Name>
     <Type>Page</Type>
     <SubType>DotNet</SubType>
     <MasterLayout>../Master Pages/VerticalMenu.master</MasterLayout>
     <NewWindowMasterLayout>../Master Pages/Blank.master</NewWindowMasterLayout>
     <PopupMasterLayout>../Master Pages/Popup.master</PopupMasterLayout>
     <PopupCssClass>QPageSize</PopupCssClass>
-    <GenerateDirectory>WFinRepNGP_Head</GenerateDirectory>
-    <Layout>WFinRepNGP_Head\WFinRepNGP-Approver.xml</Layout>
-    <DisplayName>WFinRepNGP-Approver</DisplayName>
+    <GenerateDirectory>WFinRepNGP_Head1</GenerateDirectory>
+    <Layout>WFinRepNGP_Head1\WFinRepNGP-Approver1.xml</Layout>
+    <DisplayName>WFinRepNGP-Approver1</DisplayName>
     <Description>Standard record panel.</Description>
     <LoginRequired>&lt;PRoles&gt;NOT_ANONYMOUS&lt;/PRoles&gt;</LoginRequired>
-    <CheckSum>601751267-22081</CheckSum>
+    <CheckSum>426227134-67195</CheckSum>
   </Self>
   <ComposedOf>
     <ContainedComponent>
@@ -44,7 +44,7 @@
           <Value>Preview</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -73,7 +73,7 @@
           <Value>View As PDF</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -106,7 +106,7 @@
           <Value>Back</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>PageTitle</Name>
@@ -114,73 +114,73 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>ePortal Workflow Approval - Workflow Approver Page (South Non GP) </Value>
+          <Value>ePortal Workflow Approval - Workflow Approver Page (North Non GP) </Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>
     <ContainedComponent>
       <Name>Pagination</Name>
       <Type>Pagination</Type>
-      <Layout>..\Shared\Pagination.ascx</Layout>
+      <Layout>..\Shared\PaginationModern.ascx</Layout>
       <PassthroughAttributes>
         <Attribute>
           <Name>FirstPage-Consumers</Name>
-          <Value>WFinRepNGP_ActivityTableControl</Value>
+          <Value>WFinRepNGP_Activity1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:TableControl</Name>
-          <Value>WFinRepNGP_ActivityTableControl</Value>
+          <Value>WFinRepNGP_Activity1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>LastPage-Consumers</Name>
-          <Value>WFinRepNGP_ActivityTableControl</Value>
+          <Value>WFinRepNGP_Activity1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>NextPage-Consumers</Name>
-          <Value>WFinRepNGP_ActivityTableControl</Value>
+          <Value>WFinRepNGP_Activity1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>PageSizeButton-Consumers</Name>
-          <Value>WFinRepNGP_ActivityTableControl</Value>
+          <Value>WFinRepNGP_Activity1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>PreviousPage-Consumers</Name>
-          <Value>WFinRepNGP_ActivityTableControl</Value>
+          <Value>WFinRepNGP_Activity1TableControl</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_ActivityTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Activity1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>Pagination1</Name>
       <Type>Pagination</Type>
-      <Layout>..\Shared\Pagination.ascx</Layout>
+      <Layout>..\Shared\PaginationModern.ascx</Layout>
       <PassthroughAttributes>
         <Attribute>
           <Name>FirstPage-Consumers</Name>
-          <Value>WFinRepNGP_AttachmentTableControl</Value>
+          <Value>WFinRepNGP_Attachment1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:TableControl</Name>
-          <Value>WFinRepNGP_AttachmentTableControl</Value>
+          <Value>WFinRepNGP_Attachment1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>LastPage-Consumers</Name>
-          <Value>WFinRepNGP_AttachmentTableControl</Value>
+          <Value>WFinRepNGP_Attachment1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>NextPage-Consumers</Name>
-          <Value>WFinRepNGP_AttachmentTableControl</Value>
+          <Value>WFinRepNGP_Attachment1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>PageSizeButton-Consumers</Name>
-          <Value>WFinRepNGP_AttachmentTableControl</Value>
+          <Value>WFinRepNGP_Attachment1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>PreviousPage-Consumers</Name>
-          <Value>WFinRepNGP_AttachmentTableControl</Value>
+          <Value>WFinRepNGP_Attachment1TableControl</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_AttachmentTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Attachment1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>pApproved</Name>
@@ -203,7 +203,7 @@
           <Value>Approve</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>pReject</Name>
@@ -226,7 +226,7 @@
           <Value>Reject</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>pReturned</Name>
@@ -249,67 +249,56 @@
           <Value>Return</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>TabPanel</Name>
-      <Type>TabPanel</Type>
+      <Type>Aspx</Type>
       <PassthroughAttributes>
         <Attribute>
-          <Name>ParentTabContainer</Name>
-          <Value>WFinRepNGP_HeadRecordControlTabContainer</Value>
-        </Attribute>
-        <Attribute>
-          <Name>Text</Name>
-          <Value>Document</Value>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
+      <ControlClass>AjaxControlToolkit.TabPanel</ControlClass>
     </ContainedComponent>
     <ContainedComponent>
       <Name>TabPanel1</Name>
-      <Type>TabPanel</Type>
+      <Type>Aspx</Type>
       <PassthroughAttributes>
         <Attribute>
-          <Name>ParentTabContainer</Name>
-          <Value>WFinRepNGP_HeadRecordControlTabContainer</Value>
-        </Attribute>
-        <Attribute>
-          <Name>Text</Name>
-          <Value>Approval History</Value>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
+      <ControlClass>AjaxControlToolkit.TabPanel</ControlClass>
     </ContainedComponent>
     <ContainedComponent>
       <Name>TabPanel2</Name>
-      <Type>TabPanel</Type>
+      <Type>Aspx</Type>
       <PassthroughAttributes>
         <Attribute>
-          <Name>ParentTabContainer</Name>
-          <Value>WFinRepNGP_HeadRecordControlTabContainer</Value>
-        </Attribute>
-        <Attribute>
-          <Name>Text</Name>
-          <Value>Attachments</Value>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
+      <ControlClass>AjaxControlToolkit.TabPanel</ControlClass>
     </ContainedComponent>
     <ContainedComponent>
       <Name>TabPanel3</Name>
-      <Type>TabPanel</Type>
+      <Type>Aspx</Type>
       <PassthroughAttributes>
         <Attribute>
-          <Name>ParentTabContainer</Name>
-          <Value>WFinRepNGP_HeadTableControlTabContainer</Value>
-        </Attribute>
-        <Attribute>
-          <Name>Text</Name>
-          <Value>Reports Included</Value>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
+      <ControlClass>AjaxControlToolkit.TabPanel</ControlClass>
+      <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
       <Name>Title0</Name>
@@ -321,13 +310,13 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>&lt;%#String.Concat("Workflow Approver Page (South Non GP)") %&gt;</Value>
+          <Value>Workflow Approver Page (North Non GP)</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
-      <Name>Title2</Name>
+      <Name>Title1</Name>
       <Type>Html</Type>
       <PassthroughAttributes>
         <Attribute>
@@ -335,7 +324,7 @@
           <Value>True</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_DocAttachTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_DocAttach1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>txtRemarks</Name>
@@ -358,7 +347,7 @@
           <Value>MultiLine</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>UpdatePanel1</Name>
@@ -371,10 +360,10 @@
       </PassthroughAttributes>
     </ContainedComponent>
     <ContainedComponent>
-      <Name>WFinRepNGP_ActivityTableControl</Name>
+      <Name>WFinRepNGP_Activity1TableControl</Name>
       <Type>Table</Type>
       <PanelStyle>EditRec_DTB_Child</PanelStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>HasScrolling</Name>
@@ -417,17 +406,17 @@
           <Value>Pagination-TotalPages</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
       <Querys>
         <Query>
           <LeftQueryContent>
             <Type>TableField</Type>
-            <Prefix>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Prefix>
+            <Prefix>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Prefix>
             <Suffix>WFRNGPA_WFRCHNGP_ID</Suffix>
           </LeftQueryContent>
           <RightQueryContent>
             <Type>Control</Type>
-            <Prefix>WFinRepNGP_HeadRecordControl</Prefix>
+            <Prefix>WFinRepNGP_Head1RecordControl</Prefix>
             <Suffix>WFRCHNGP_ID</Suffix>
           </RightQueryContent>
           <ForeignKeyName>VFK_WFinRepNGP_Activity_WFRNGPA_WFRCHNGP_ID_1</ForeignKeyName>
@@ -435,10 +424,10 @@
       </Querys>
     </ContainedComponent>
     <ContainedComponent>
-      <Name>WFinRepNGP_AttachmentTableControl</Name>
+      <Name>WFinRepNGP_Attachment1TableControl</Name>
       <Type>Table</Type>
       <PanelStyle>EditRec_DTB_Child</PanelStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Attachment</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Attachment</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>HasScrolling</Name>
@@ -481,17 +470,17 @@
           <Value>Pagination1-TotalPages</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
       <Querys>
         <Query>
           <LeftQueryContent>
             <Type>TableField</Type>
-            <Prefix>DatabaseANFLO-WF%dbo.WFinRepNGP_Attachment</Prefix>
+            <Prefix>DatabaseANFLO-WFN%dbo.WFinRepNGP_Attachment</Prefix>
             <Suffix>WFRNGPAt_WFRCHNGP_ID</Suffix>
           </LeftQueryContent>
           <RightQueryContent>
             <Type>Control</Type>
-            <Prefix>WFinRepNGP_HeadRecordControl</Prefix>
+            <Prefix>WFinRepNGP_Head1RecordControl</Prefix>
             <Suffix>WFRCHNGP_ID</Suffix>
           </RightQueryContent>
           <ForeignKeyName>VFK_WFinRepNGP_Attachment_WFRNGPAt_WFRCHNGP_ID_1</ForeignKeyName>
@@ -499,126 +488,10 @@
       </Querys>
     </ContainedComponent>
     <ContainedComponent>
-      <Name>WFinRepNGP_DocAttachTableControl</Name>
+      <Name>WFinRepNGP_DocAttach1TableControl</Name>
       <Type>Table</Type>
-      <PanelStyle>EditTable</PanelStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_DocAttach</Table>
-      <PassthroughAttributes>
-        <Attribute>
-          <Name>HasScrolling</Name>
-          <Value>False</Value>
-        </Attribute>
-        <Attribute>
-          <Name>HideDataUntilSearched</Name>
-          <Value>False</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InitialRowDisplayStyle</Name>
-          <Value>FirstRowExpanded</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:DataSource</Name>
-          <Value>TableOrQuery</Value>
-        </Attribute>
-        <Attribute>
-          <Name>NumberOfColumns</Name>
-          <Value>3</Value>
-        </Attribute>
-        <Attribute>
-          <Name>PageSize</Name>
-          <Value>10</Value>
-        </Attribute>
-        <Attribute>
-          <Name>PaginationCurrentPage</Name>
-          <Value>Pagination3-CurrentPage</Value>
-        </Attribute>
-        <Attribute>
-          <Name>PaginationPageSize</Name>
-          <Value>Pagination3-PageSize</Value>
-        </Attribute>
-        <Attribute>
-          <Name>PaginationTotalItems</Name>
-          <Value>Pagination3-TotalItems</Value>
-        </Attribute>
-        <Attribute>
-          <Name>PaginationTotalPages</Name>
-          <Value>Pagination3-TotalPages</Value>
-        </Attribute>
-      </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
-      <InsideItemTemplate>true</InsideItemTemplate>
-      <Querys>
-        <Query>
-          <LeftQueryContent>
-            <Type>TableField</Type>
-            <Prefix>DatabaseANFLO-WF%dbo.WFinRepNGP_DocAttach</Prefix>
-            <Suffix>WFRCDNGP_WFRCHNGP_ID</Suffix>
-          </LeftQueryContent>
-          <RightQueryContent>
-            <Type>Control</Type>
-            <Prefix>WFinRepNGP_HeadTableControl</Prefix>
-            <Suffix>WFRCHNGP_ID</Suffix>
-          </RightQueryContent>
-          <ForeignKeyName>VFK_WFinRepNGP_DocAttach_WFRCDNGP_WFRCHNGP_ID_1</ForeignKeyName>
-        </Query>
-      </Querys>
-    </ContainedComponent>
-    <ContainedComponent>
-      <Name>WFinRepNGP_HeadRecordControl</Name>
-      <Type>Record</Type>
-      <PanelStyle>EditRec_DTB_Parent</PanelStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
-      <PassthroughAttributes>
-        <Attribute>
-          <Name>EnterKeyCaptureToButton</Name>
-          <Value>SaveButton,SaveAndNewButton,OKButton,EditButton,CancelButton</Value>
-        </Attribute>
-        <Attribute>
-          <Name>HideDataUntilSearched</Name>
-          <Value>False</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:DataSource</Name>
-          <Value>URL</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:DataSourceArg</Name>
-          <Value>WFinRepNGP_Head</Value>
-        </Attribute>
-        <Attribute>
-          <Name>URL</Name>
-          <Value>WFinRepNGP_Head</Value>
-        </Attribute>
-      </PassthroughAttributes>
-    </ContainedComponent>
-    <ContainedComponent>
-      <Name>WFinRepNGP_HeadRecordControlTabContainer</Name>
-      <Type>TabContainer</Type>
-      <PassthroughAttributes>
-        <Attribute>
-          <Name>InternalUse:ApplyVisibleFormula</Name>
-          <Value>True</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:VisibleFormula</Name>
-          <Value>URL("TabVisible")</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnClientActiveTabChanged</Name>
-          <Value>fixedHeaderTab</Value>
-        </Attribute>
-        <Attribute>
-          <Name>PanelLayout</Name>
-          <Value>Tabbed</Value>
-        </Attribute>
-      </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
-    </ContainedComponent>
-    <ContainedComponent>
-      <Name>WFinRepNGP_HeadTableControl</Name>
-      <Type>Table</Type>
-      <PanelStyle>EditTable</PanelStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <PanelStyle>ShowTable_DTB_Parent</PanelStyle>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_DocAttach</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>HasScrolling</Name>
@@ -661,30 +534,124 @@
           <Value>Pagination2-TotalPages</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
+      <InsideItemTemplate>true</InsideItemTemplate>
+      <Querys>
+        <Query>
+          <LeftQueryContent>
+            <Type>TableField</Type>
+            <Prefix>DatabaseANFLO-WFN%dbo.WFinRepNGP_DocAttach</Prefix>
+            <Suffix>WFRCDNGP_WFRCHNGP_ID</Suffix>
+          </LeftQueryContent>
+          <RightQueryContent>
+            <Type>Control</Type>
+            <Prefix>WFinRepNGP_Head1TableControl</Prefix>
+            <Suffix>WFRCHNGP_ID</Suffix>
+          </RightQueryContent>
+          <ForeignKeyName>VFK_WFinRepNGP_DocAttach_WFRCDNGP_WFRCHNGP_ID_1</ForeignKeyName>
+        </Query>
+      </Querys>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>WFinRepNGP_Head1RecordControl</Name>
+      <Type>Record</Type>
+      <PanelStyle>EditRec_DTB_Parent</PanelStyle>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>EnterKeyCaptureToButton</Name>
+          <Value>SaveButton,SaveAndNewButton,OKButton,EditButton,CancelButton</Value>
+        </Attribute>
+        <Attribute>
+          <Name>HideDataUntilSearched</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:DataSource</Name>
+          <Value>URL</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:DataSourceArg</Name>
+          <Value>WFinRepNGP_Head1</Value>
+        </Attribute>
+        <Attribute>
+          <Name>URL</Name>
+          <Value>WFinRepNGP_Head1</Value>
+        </Attribute>
+      </PassthroughAttributes>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>WFinRepNGP_Head1TabContainer</Name>
+      <Type>Aspx</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
+      <ControlClass>AjaxControlToolkit.TabContainer</ControlClass>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>WFinRepNGP_Head1TableControl</Name>
+      <Type>Table</Type>
+      <PanelStyle>ShowTable_DTB_Parent</PanelStyle>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>HasScrolling</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>HideDataUntilSearched</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InitialRowDisplayStyle</Name>
+          <Value>FirstRowExpanded</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:DataSource</Name>
+          <Value>TableOrQuery</Value>
+        </Attribute>
+        <Attribute>
+          <Name>NumberOfColumns</Name>
+          <Value>3</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PageSize</Name>
+          <Value>10</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PaginationCurrentPage</Name>
+          <Value>Pagination2-CurrentPage</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PaginationPageSize</Name>
+          <Value>Pagination2-PageSize</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PaginationTotalItems</Name>
+          <Value>Pagination2-TotalItems</Value>
+        </Attribute>
+        <Attribute>
+          <Name>PaginationTotalPages</Name>
+          <Value>Pagination2-TotalPages</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFinRepNGP_HeadTableControlTabContainer</Name>
-      <Type>TabContainer</Type>
+      <Type>Aspx</Type>
       <PassthroughAttributes>
         <Attribute>
-          <Name>InternalUse:ApplyVisibleFormula</Name>
-          <Value>True</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:VisibleFormula</Name>
-          <Value>URL("TabVisible")</Value>
-        </Attribute>
-        <Attribute>
-          <Name>OnClientActiveTabChanged</Name>
-          <Value>fixedHeaderTab</Value>
-        </Attribute>
-        <Attribute>
-          <Name>PanelLayout</Name>
-          <Value>Tabbed</Value>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
+      <ControlClass>AjaxControlToolkit.TabContainer</ControlClass>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -692,7 +659,7 @@
       <Type>FieldValue</Type>
       <Field>WFRCDNGP_Description</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_DocAttach</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_DocAttach</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -743,7 +710,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_DocAttachTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_DocAttach1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -752,29 +719,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_DocAttachTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCDNGP_Description</Value>
+          <Value>WFinRepNGP_DocAttach1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_DocAttach</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_DocAttach</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Description</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_DocAttachTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_DocAttach1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCDNGP_RWRem</Name>
       <Type>FieldValue</Type>
       <Field>WFRCDNGP_RWRem</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_DocAttach</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_DocAttach</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -825,7 +792,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_DocAttachTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_DocAttach1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -834,29 +801,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_DocAttachTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCDNGP_RWRem</Value>
+          <Value>WFinRepNGP_DocAttach1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_DocAttach</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_DocAttach</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Remarks</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_DocAttachTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_DocAttach1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCDNGP_Type</Name>
       <Type>FieldValue</Type>
       <Field>WFRCDNGP_Type</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_DocAttach</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_DocAttach</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -907,7 +874,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_DocAttachTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_DocAttach1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -916,29 +883,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_DocAttachTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCDNGP_Type</Value>
+          <Value>WFinRepNGP_DocAttach1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_DocAttach</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_DocAttach</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Report Type</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_DocAttachTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_DocAttach1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_C_ID</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_C_ID</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -969,14 +936,14 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_C_ID1</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_C_ID</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -1007,14 +974,14 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_C_ID2</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_C_ID</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -1069,7 +1036,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -1077,7 +1044,7 @@
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_C_ID</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -1108,7 +1075,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -1117,29 +1084,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_HeadTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCHNGP_C_ID</Value>
+          <Value>WFinRepNGP_Head1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Company</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_Description</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Description</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -1190,14 +1157,14 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_Description1</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Description</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>Columns</Name>
@@ -1240,7 +1207,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -1248,7 +1215,7 @@
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Description</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -1299,7 +1266,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -1308,22 +1275,22 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_HeadRecordControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCHNGP_Description</Value>
+          <Value>WFinRepNGP_Head1RecordControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Description</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_DescriptionLabel1</Name>
@@ -1331,29 +1298,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_HeadTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCHNGP_Description</Value>
+          <Value>WFinRepNGP_Head1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Description</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_DT_ID</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_DT_ID</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -1408,14 +1375,14 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_DT_ID1</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_DT_ID</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -1474,7 +1441,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_DT_IDLabel</Name>
@@ -1482,29 +1449,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_HeadRecordControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCHNGP_DT_ID</Value>
+          <Value>WFinRepNGP_Head1RecordControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Workflow</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_File</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_File</Field>
       <FieldValueStyle>FileDownload</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>HTMLEncodeValue</Name>
@@ -1535,7 +1502,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -1543,7 +1510,7 @@
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_ID</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -1598,14 +1565,14 @@
           <Value>False</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_ID1</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_ID</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -1632,7 +1599,7 @@
           <Value>{0}</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -1640,7 +1607,7 @@
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Month</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -1671,14 +1638,14 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_Month1</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Month</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -1733,7 +1700,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -1741,7 +1708,7 @@
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Month</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -1772,7 +1739,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -1781,29 +1748,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_HeadTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCHNGP_Month</Value>
+          <Value>WFinRepNGP_Head1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Month</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_Remark</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Remark</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>Columns</Name>
@@ -1854,14 +1821,14 @@
           <Value>640</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_Remark1</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Remark</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -1912,7 +1879,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -1921,22 +1888,22 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_HeadRecordControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCHNGP_Remark</Value>
+          <Value>WFinRepNGP_Head1RecordControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Remarks</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_RemarkLabel1</Name>
@@ -1944,29 +1911,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_HeadTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCHNGP_Remark</Value>
+          <Value>WFinRepNGP_Head1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Remarks</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_RptCount</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_RptCount</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -2017,7 +1984,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -2026,29 +1993,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_HeadTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCHNGP_RptCount</Value>
+          <Value>WFinRepNGP_Head1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Report Count</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_Status</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Status</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -2103,14 +2070,14 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_Status1</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Status</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -2141,7 +2108,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -2150,29 +2117,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_HeadRecordControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCHNGP_Status</Value>
+          <Value>WFinRepNGP_Head1RecordControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Status</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_Submit</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Submit</Field>
       <FieldValueStyle>CheckBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CheckedValue</Name>
@@ -2195,14 +2162,14 @@
           <Value>False</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_U_ID</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_U_ID</Field>
       <FieldValueStyle>DropDownList</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -2241,14 +2208,14 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_U_ID1</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_U_ID</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -2279,14 +2246,14 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_Year</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Year</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -2313,14 +2280,14 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1RecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRCHNGP_Year1</Name>
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Year</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -2371,7 +2338,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -2379,7 +2346,7 @@
       <Type>FieldValue</Type>
       <Field>WFRCHNGP_Year</Field>
       <FieldValueStyle>TextBox</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>CssClass</Name>
@@ -2406,7 +2373,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -2415,29 +2382,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_HeadTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRCHNGP_Year</Value>
+          <Value>WFinRepNGP_Head1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Head</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Head</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Year</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_HeadTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Head1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRNGPA_Date_Action</Name>
       <Type>FieldValue</Type>
       <Field>WFRNGPA_Date_Action</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -2488,7 +2455,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_ActivityTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Activity1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -2497,29 +2464,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_ActivityTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRNGPA_Date_Action</Value>
+          <Value>WFinRepNGP_Activity1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Date Action</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_ActivityTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Activity1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRNGPA_Date_Assign</Name>
       <Type>FieldValue</Type>
       <Field>WFRNGPA_Date_Assign</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -2570,7 +2537,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_ActivityTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Activity1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -2579,29 +2546,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_ActivityTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRNGPA_Date_Assign</Value>
+          <Value>WFinRepNGP_Activity1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Date Assign</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_ActivityTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Activity1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRNGPA_Remark</Name>
       <Type>FieldValue</Type>
       <Field>WFRNGPA_Remark</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -2652,7 +2619,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_ActivityTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Activity1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -2661,29 +2628,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_ActivityTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRNGPA_Remark</Value>
+          <Value>WFinRepNGP_Activity1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Remarks</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_ActivityTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Activity1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRNGPA_Status</Name>
       <Type>FieldValue</Type>
       <Field>WFRNGPA_Status</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -2738,7 +2705,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_ActivityTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Activity1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -2747,29 +2714,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_ActivityTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRNGPA_Status</Value>
+          <Value>WFinRepNGP_Activity1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Status</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_ActivityTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Activity1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRNGPA_W_U_ID</Name>
       <Type>FieldValue</Type>
       <Field>WFRNGPA_W_U_ID</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -2824,7 +2791,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_ActivityTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Activity1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -2833,29 +2800,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_ActivityTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRNGPA_W_U_ID</Value>
+          <Value>WFinRepNGP_Activity1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Activity</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Activity</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>User Assigned</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_ActivityTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Activity1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRNGPAt_Desc</Name>
       <Type>FieldValue</Type>
       <Field>WFRNGPAt_Desc</Field>
       <FieldValueStyle>Literal</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Attachment</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Attachment</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>FieldMaxLength</Name>
@@ -2906,7 +2873,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_AttachmentTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Attachment1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -2915,29 +2882,29 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_AttachmentTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRNGPAt_Desc</Value>
+          <Value>WFinRepNGP_Attachment1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Attachment</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Attachment</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>Description</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_AttachmentTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Attachment1TableControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
       <Name>WFRNGPAt_Doc</Name>
       <Type>FieldValue</Type>
       <Field>WFRNGPAt_Doc</Field>
       <FieldValueStyle>FileDownload</FieldValueStyle>
-      <Table>DatabaseANFLO-WF%dbo.WFinRepNGP_Attachment</Table>
+      <Table>DatabaseANFLO-WFN%dbo.WFinRepNGP_Attachment</Table>
       <PassthroughAttributes>
         <Attribute>
           <Name>HTMLEncodeValue</Name>
@@ -2960,7 +2927,7 @@
           <Value>*</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_AttachmentTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Attachment1TableControl</InsideControl>
       <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
@@ -2969,22 +2936,22 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Consumers</Name>
-          <Value>WFinRepNGP_AttachmentTableControl</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:Field</Name>
-          <Value>WFRNGPAt_Doc</Value>
+          <Value>WFinRepNGP_Attachment1TableControl</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:Table</Name>
-          <Value>DatabaseANFLO-WF%dbo.WFinRepNGP_Attachment</Value>
+          <Value>DatabaseANFLO-WFN%dbo.WFinRepNGP_Attachment</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
         </Attribute>
         <Attribute>
           <Name>Text</Name>
           <Value>File Download</Value>
         </Attribute>
       </PassthroughAttributes>
-      <InsideControl>WFinRepNGP_AttachmentTableControl</InsideControl>
+      <InsideControl>WFinRepNGP_Attachment1TableControl</InsideControl>
     </ContainedComponent>
   </ComposedOf>
   <LayoutDefinition>&lt;![CDATA[&lt;?xml version="1.0" encoding="utf-16"?&gt;
@@ -3000,8 +2967,8 @@
     &lt;Row&gt;
       &lt;Cell&gt;
         &lt;Value&gt;
-                        
-            &amp;lt;GEN:RECORD NAME="WFinRepNGP_HeadRecordControl"&amp;gt;&amp;lt;/GEN:RECORD&amp;gt;&lt;/Value&gt;
+                        &amp;lt;GEN:RECORD NAME="WFinRepNGP_Head1RecordControl"&amp;gt;&amp;lt;/GEN:RECORD&amp;gt;
+            &lt;/Value&gt;
         &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
       &lt;RowAttributes /&gt;
@@ -3037,7 +3004,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="WFinRepNGP_HeadRecordControl" Type="RecordPanel" PanelControlName="WFinRepNGP_HeadRecordControl"&gt;
+  &lt;Layout Name="WFinRepNGP_Head1RecordControl" Type="RecordPanel" PanelControlName="WFinRepNGP_Head1RecordControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -3079,7 +3046,8 @@
       &lt;/Cell&gt;
       &lt;Cell&gt;
         &lt;Value&gt;
-                  &amp;lt;GEN:PANEL NAME="Header" /&amp;gt;&lt;/Value&gt;
+                  &amp;lt;GEN:PANEL NAME="Header"/&amp;gt;
+                &lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -3108,7 +3076,7 @@
       &lt;/Cell&gt;
       &lt;Cell&gt;
         &lt;Value&gt;
-                  &amp;lt;asp:panel id="CollapsibleRegion" runat="server"&amp;gt;&amp;lt;GEN:PANEL NAME="Panel" /&amp;gt;&amp;lt;/asp:panel&amp;gt;
+                  &amp;lt;asp:panel id="CollapsibleRegion" runat="server"&amp;gt;&amp;lt;GEN:PANEL NAME="Panel"/&amp;gt;&amp;lt;/asp:panel&amp;gt;
                 &lt;/Value&gt;
         &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
@@ -3171,11 +3139,11 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Header" Type="PanelHeader" PanelControlName="WFinRepNGP_HeadRecordControl"&gt;
+  &lt;Layout Name="Header" Type="PanelHeader" PanelControlName="WFinRepNGP_Head1RecordControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" alt=""/&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -3184,7 +3152,7 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:PANEL NAME="TitleRegion" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;GEN:PANEL NAME="TitleRegion"/&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -3193,7 +3161,7 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" alt=""/&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -3223,12 +3191,12 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="TitleRegion" PanelControlName="WFinRepNGP_HeadRecordControl"&gt;
+  &lt;Layout Name="TitleRegion" PanelControlName="WFinRepNGP_Head1RecordControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
         &lt;Value&gt;
-                        &amp;lt;GEN:HTML NAME="Title0" /&amp;gt;
+                        &amp;lt;GEN:HTML NAME="Title0"/&amp;gt;
                       &lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
@@ -3259,7 +3227,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Panel" PanelControlName="WFinRepNGP_HeadRecordControl"&gt;
+  &lt;Layout Name="Panel" PanelControlName="WFinRepNGP_Head1RecordControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -3312,7 +3280,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Filters" Type="BlankPanel" PanelControlName="WFinRepNGP_HeadRecordControl"&gt;
+  &lt;Layout Name="Filters" Type="BlankPanel" PanelControlName="WFinRepNGP_Head1RecordControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -3323,7 +3291,7 @@
     &lt;Epilog /&gt;
     &lt;TableAttributes /&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Buttons" Type="BlankPanel" PanelControlName="WFinRepNGP_HeadRecordControl"&gt;
+  &lt;Layout Name="Buttons" Type="BlankPanel" PanelControlName="WFinRepNGP_Head1RecordControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -3335,7 +3303,7 @@
     &lt;Epilog /&gt;
     &lt;TableAttributes /&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Fields" Type="RecordGrid" PanelControlName="WFinRepNGP_HeadRecordControl"&gt;
+  &lt;Layout Name="Fields" Type="RecordGrid" PanelControlName="WFinRepNGP_Head1RecordControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -3634,18 +3602,21 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:TABCONTAINER NAME="WFinRepNGP_HeadRecordControlTabContainer"&amp;gt; 
- &amp;lt;GEN:TABPANEL NAME="TabPanel"&amp;gt; 
-  &amp;lt;GEN:TABLE NAME="WFinRepNGP_HeadTableControl" /&amp;gt; 
- &amp;lt;/GEN:TABPANEL&amp;gt; 
- &amp;lt;GEN:TABPANEL NAME="TabPanel2"&amp;gt; 
-  &amp;lt;GEN:TABLE NAME="WFinRepNGP_AttachmentTableControl" /&amp;gt; 
- &amp;lt;/GEN:TABPANEL&amp;gt; 
-&amp;lt;GEN:TABPANEL NAME="TabPanel1"&amp;gt; 
-  &amp;lt;GEN:TABLE NAME="WFinRepNGP_ActivityTableControl" /&amp;gt; 
- &amp;lt;/GEN:TABPANEL&amp;gt; 
-  
-&amp;lt;/GEN:TABCONTAINER&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;asp:tabcontainer id="WFinRepNGP_Head1TabContainer" runat="server"&amp;gt;
+  &amp;lt;asp:tabpanel id="TabPanel" runat="server"&amp;gt;
+        &amp;lt;headertemplate&amp;gt;Document&amp;lt;/headertemplate&amp;gt;
+        &amp;lt;contenttemplate&amp;gt;&amp;lt;GEN:TABLE NAME="WFinRepNGP_Head1TableControl" /&amp;gt;&amp;lt;/contenttemplate&amp;gt;
+    &amp;lt;/asp:tabpanel&amp;gt;
+    &amp;lt;asp:tabpanel id="TabPanel2" runat="server"&amp;gt;
+        &amp;lt;headertemplate&amp;gt;Attachments&amp;lt;/headertemplate&amp;gt;
+        &amp;lt;contenttemplate&amp;gt;&amp;lt;GEN:TABLE NAME="WFinRepNGP_Attachment1TableControl" /&amp;gt;&amp;lt;/contenttemplate&amp;gt;
+    &amp;lt;/asp:tabpanel&amp;gt;
+	 &amp;lt;asp:tabpanel id="TabPanel1" runat="server"&amp;gt;
+        &amp;lt;headertemplate&amp;gt;Approval History&amp;lt;/headertemplate&amp;gt;
+        &amp;lt;contenttemplate&amp;gt;&amp;lt;GEN:TABLE NAME="WFinRepNGP_Activity1TableControl" /&amp;gt;&amp;lt;/ContentTemplate&amp;gt;
+    &amp;lt;/asp:tabpanel&amp;gt;
+&amp;lt;/asp:tabcontainer&amp;gt; 
+&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -3660,26 +3631,9 @@
       &lt;RowAttributes /&gt;
     &lt;/Row&gt;
     &lt;Epilog /&gt;
-    &lt;TableAttributes&gt;
-      &lt;Attribute&gt;
-        &lt;Name&gt;cellpadding&lt;/Name&gt;
-        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
-      &lt;/Attribute&gt;
-      &lt;Attribute&gt;
-        &lt;Name&gt;cellspacing&lt;/Name&gt;
-        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
-      &lt;/Attribute&gt;
-      &lt;Attribute&gt;
-        &lt;Name&gt;border&lt;/Name&gt;
-        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
-      &lt;/Attribute&gt;
-      &lt;Attribute&gt;
-        &lt;Name&gt;width&lt;/Name&gt;
-        &lt;AttributeValue&gt;100%&lt;/AttributeValue&gt;
-      &lt;/Attribute&gt;
-    &lt;/TableAttributes&gt;
+    &lt;TableAttributes /&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="WFinRepNGP_HeadTableControl" Type="TablePanel" PanelControlName="WFinRepNGP_HeadTableControl"&gt;
+  &lt;Layout Name="WFinRepNGP_Head1TableControl" Type="TablePanel" PanelControlName="WFinRepNGP_Head1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -3721,7 +3675,7 @@
       &lt;/Cell&gt;
       &lt;Cell&gt;
         &lt;Value&gt;
-                  &amp;lt;GEN:PANEL NAME="Header3" /&amp;gt;
+                  &amp;lt;GEN:PANEL NAME="Header3"/&amp;gt;
                 &lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
@@ -3751,7 +3705,7 @@
       &lt;/Cell&gt;
       &lt;Cell&gt;
         &lt;Value&gt;
-                  &amp;lt;asp:panel id="CollapsibleRegion3" runat="server"&amp;gt;&amp;lt;GEN:PANEL NAME="Panel3" /&amp;gt;&amp;lt;/asp:panel&amp;gt;
+                  &amp;lt;asp:panel id="CollapsibleRegion3" runat="server"&amp;gt;&amp;lt;GEN:PANEL NAME="Panel3"/&amp;gt;&amp;lt;/asp:panel&amp;gt;
                 &lt;/Value&gt;
         &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
@@ -3775,10 +3729,6 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;
-                    
-                    &amp;lt;!--To change the position of the pagination control, please search for "prspace" on the Online Help for instruction. --&amp;gt;
-                  &lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -3845,11 +3795,11 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Header3" Type="PanelHeader" PanelControlName="WFinRepNGP_HeadTableControl"&gt;
+  &lt;Layout Name="Header3" Type="PanelHeader" PanelControlName="WFinRepNGP_Head1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" alt=""/&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -3879,12 +3829,12 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Panel3" PanelControlName="WFinRepNGP_HeadTableControl"&gt;
+  &lt;Layout Name="Panel3" PanelControlName="WFinRepNGP_Head1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
         &lt;Value&gt;
-                    &amp;lt;GEN:PANEL NAME="Fields3" /&amp;gt;
+                    &amp;lt;GEN:PANEL NAME="Fields3"/&amp;gt;
                   &lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
@@ -3919,7 +3869,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Fields3" Type="TableGridRegular" PanelControlName="WFinRepNGP_HeadTableControl"&gt;
+  &lt;Layout Name="Fields3" Type="TableGridRegular" PanelControlName="WFinRepNGP_Head1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row Type="Header"&gt;
       &lt;Cell&gt;
@@ -4077,15 +4027,21 @@
     &lt;/Row&gt;
     &lt;Row Type="Repeater"&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:TABCONTAINER NAME="WFinRepNGP_HeadTableControlTabContainer"&amp;gt; 
- &amp;lt;GEN:TABPANEL NAME="TabPanel3"&amp;gt; 
-  &amp;lt;GEN:TABLE NAME="WFinRepNGP_DocAttachTableControl" /&amp;gt; 
- &amp;lt;/GEN:TABPANEL&amp;gt; 
-&amp;lt;/GEN:TABCONTAINER&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;asp:tabcontainer id="WFinRepNGP_HeadTableControlTabContainer" runat="server"&amp;gt;
+    &amp;lt;asp:tabpanel id="TabPanel3" runat="server"&amp;gt;
+        &amp;lt;headertemplate&amp;gt;Reports Included&amp;lt;/headertemplate&amp;gt;
+        &amp;lt;contenttemplate&amp;gt;&amp;lt;GEN:TABLE NAME="WFinRepNGP_DocAttach1TableControl" /&amp;gt;&amp;lt;/contenttemplate&amp;gt;
+    &amp;lt;/asp:tabpanel&amp;gt;
+&amp;lt;/asp:tabcontainer&amp;gt; 
+&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableRowButtonsCellVertical&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ticnb&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;scope&lt;/Name&gt;
+            &lt;AttributeValue&gt;row&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;colspan&lt;/Name&gt;
@@ -4096,30 +4052,9 @@
       &lt;RowAttributes /&gt;
     &lt;/Row&gt;
     &lt;Epilog /&gt;
-    &lt;TableAttributes&gt;
-      &lt;Attribute&gt;
-        &lt;Name&gt;cellpadding&lt;/Name&gt;
-        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
-      &lt;/Attribute&gt;
-      &lt;Attribute&gt;
-        &lt;Name&gt;cellspacing&lt;/Name&gt;
-        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
-      &lt;/Attribute&gt;
-      &lt;Attribute&gt;
-        &lt;Name&gt;border&lt;/Name&gt;
-        &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
-      &lt;/Attribute&gt;
-      &lt;Attribute&gt;
-        &lt;Name&gt;width&lt;/Name&gt;
-        &lt;AttributeValue&gt;100%&lt;/AttributeValue&gt;
-      &lt;/Attribute&gt;
-      &lt;Attribute&gt;
-        &lt;Name&gt;onkeydown&lt;/Name&gt;
-        &lt;AttributeValue&gt;captureUpDownKey(this, event)&lt;/AttributeValue&gt;
-      &lt;/Attribute&gt;
-    &lt;/TableAttributes&gt;
+    &lt;TableAttributes /&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="WFinRepNGP_DocAttachTableControl" Type="TablePanel" PanelControlName="WFinRepNGP_DocAttachTableControl"&gt;
+  &lt;Layout Name="WFinRepNGP_DocAttach1TableControl" Type="TablePanel" PanelControlName="WFinRepNGP_DocAttach1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -4141,7 +4076,7 @@
       &lt;/Cell&gt;
       &lt;Cell&gt;
         &lt;Value&gt;
-                  &amp;lt;GEN:PANEL NAME="Header4" /&amp;gt;
+                  &amp;lt;GEN:PANEL NAME="Header4"/&amp;gt;
                 &lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
@@ -4158,7 +4093,7 @@
       &lt;/Cell&gt;
       &lt;Cell&gt;
         &lt;Value&gt;
-                  &amp;lt;asp:panel id="CollapsibleRegion4" runat="server"&amp;gt;&amp;lt;GEN:PANEL NAME="Panel4" /&amp;gt;&amp;lt;/asp:panel&amp;gt;
+                  &amp;lt;asp:panel id="CollapsibleRegion4" runat="server"&amp;gt;&amp;lt;GEN:PANEL NAME="Panel4"/&amp;gt;&amp;lt;/asp:panel&amp;gt;
                 &lt;/Value&gt;
         &lt;CellAttributes /&gt;
       &lt;/Cell&gt;
@@ -4202,11 +4137,11 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Header4" Type="PanelHeader" PanelControlName="WFinRepNGP_DocAttachTableControl"&gt;
+  &lt;Layout Name="Header4" Type="PanelHeader" PanelControlName="WFinRepNGP_DocAttach1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" alt="" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" alt=""/&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -4215,7 +4150,7 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:PANEL NAME="TitleRegion2" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;GEN:PANEL NAME="TitleRegion1"/&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -4245,12 +4180,12 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="TitleRegion2" PanelControlName="WFinRepNGP_DocAttachTableControl"&gt;
+  &lt;Layout Name="TitleRegion1" PanelControlName="WFinRepNGP_DocAttach1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
         &lt;Value&gt;
-                        &amp;lt;GEN:HTML NAME="Title2" /&amp;gt;
+                        &amp;lt;GEN:HTML NAME="Title1"/&amp;gt;
                       &lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
@@ -4281,12 +4216,12 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Panel4" PanelControlName="WFinRepNGP_DocAttachTableControl"&gt;
+  &lt;Layout Name="Panel4" PanelControlName="WFinRepNGP_DocAttach1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
         &lt;Value&gt;
-                    &amp;lt;GEN:PANEL NAME="Fields4" /&amp;gt;
+                    &amp;lt;GEN:PANEL NAME="Fields4"/&amp;gt;
                   &lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
@@ -4321,7 +4256,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Fields4" Type="TableGridRegular" PanelControlName="WFinRepNGP_DocAttachTableControl"&gt;
+  &lt;Layout Name="Fields4" Type="TableGridRegular" PanelControlName="WFinRepNGP_DocAttach1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row Type="Header"&gt;
       &lt;Cell&gt;
@@ -4412,7 +4347,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="WFinRepNGP_AttachmentTableControl" Type="TablePanel" PanelControlName="WFinRepNGP_AttachmentTableControl"&gt;
+  &lt;Layout Name="WFinRepNGP_Attachment1TableControl" Type="TablePanel" PanelControlName="WFinRepNGP_Attachment1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -4578,7 +4513,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Header2" Type="PanelHeader" PanelControlName="WFinRepNGP_AttachmentTableControl"&gt;
+  &lt;Layout Name="Header2" Type="PanelHeader" PanelControlName="WFinRepNGP_Attachment1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -4612,7 +4547,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Panel2" PanelControlName="WFinRepNGP_AttachmentTableControl"&gt;
+  &lt;Layout Name="Panel2" PanelControlName="WFinRepNGP_Attachment1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -4652,7 +4587,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Fields2" Type="TableGridRegular" PanelControlName="WFinRepNGP_AttachmentTableControl"&gt;
+  &lt;Layout Name="Fields2" Type="TableGridRegular" PanelControlName="WFinRepNGP_Attachment1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row Type="Header"&gt;
       &lt;Cell&gt;
@@ -4725,7 +4660,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="WFinRepNGP_ActivityTableControl" Type="TablePanel" PanelControlName="WFinRepNGP_ActivityTableControl"&gt;
+  &lt;Layout Name="WFinRepNGP_Activity1TableControl" Type="TablePanel" PanelControlName="WFinRepNGP_Activity1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -4891,7 +4826,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Header1" Type="PanelHeader" PanelControlName="WFinRepNGP_ActivityTableControl"&gt;
+  &lt;Layout Name="Header1" Type="PanelHeader" PanelControlName="WFinRepNGP_Activity1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -4900,38 +4835,6 @@
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
             &lt;AttributeValue&gt;dhel&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;dhb&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;dhb&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;Value&gt;
-                          &amp;lt;div id="Filters1Div" runat="server" class="popupWrapper"&amp;gt;
-                          &amp;lt;/div&amp;gt;
-                        &lt;/Value&gt;
-        &lt;CellAttributes /&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;img src="../Images/space.gif" alt="" /&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;dher&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -4957,7 +4860,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Panel1" PanelControlName="WFinRepNGP_ActivityTableControl"&gt;
+  &lt;Layout Name="Panel1" PanelControlName="WFinRepNGP_Activity1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
@@ -4997,7 +4900,7 @@
       &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
-  &lt;Layout Name="Fields1" Type="TableGridRegular" PanelControlName="WFinRepNGP_ActivityTableControl"&gt;
+  &lt;Layout Name="Fields1" Type="TableGridRegular" PanelControlName="WFinRepNGP_Activity1TableControl"&gt;
     &lt;Prolog /&gt;
     &lt;Row Type="Header"&gt;
       &lt;Cell&gt;
