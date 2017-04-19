@@ -6490,114 +6490,114 @@ Public Class BaseWCAR_Doc1RecordControl
           
               AddHandler Me.imbRelated.Click, AddressOf imbRelated_Click
                         
-            AddHandler Me.btnPrint.Button.Click, AddressOf btnPrint_Click
-
-            AddHandler Me.btnVoid.Button.Click, AddressOf btnVoid_Click
-
-            AddHandler Me.OKButton1.Button.Click, AddressOf OKButton1_Click
-
-            AddHandler Me.WCD_C_ID.SelectedIndexChanged, AddressOf WCD_C_ID_SelectedIndexChanged
-
-            AddHandler Me.WCD_WCur_ID2.SelectedIndexChanged, AddressOf WCD_WCur_ID2_SelectedIndexChanged
-
-            AddHandler Me.WCD_WDT_ID.SelectedIndexChanged, AddressOf WCD_WDT_ID_SelectedIndexChanged
-
-            AddHandler Me.WCD_Submit.CheckedChanged, AddressOf WCD_Submit_CheckedChanged
-
-            AddHandler Me.WCD_Exp_Budget.TextChanged, AddressOf WCD_Exp_Budget_TextChanged
-
-            AddHandler Me.WCD_Exp_Cur_Yr.TextChanged, AddressOf WCD_Exp_Cur_Yr_TextChanged
-
-            AddHandler Me.WCD_Exp_Nxt_Yr.TextChanged, AddressOf WCD_Exp_Nxt_Yr_TextChanged
-
-            AddHandler Me.WCD_Exp_Prev_Total.TextChanged, AddressOf WCD_Exp_Prev_Total_TextChanged
-
-            AddHandler Me.WCD_Exp_Sub_Yr.TextChanged, AddressOf WCD_Exp_Sub_Yr_TextChanged
-
-            AddHandler Me.WCD_Exp_Total.TextChanged, AddressOf WCD_Exp_Total_TextChanged
-
-            AddHandler Me.WCD_Exp_Under_Over_Budget.TextChanged, AddressOf WCD_Exp_Under_Over_Budget_TextChanged
-
-            AddHandler Me.WCD_No.TextChanged, AddressOf WCD_No_TextChanged
-
-            AddHandler Me.WCD_Proj_Inc_ACB.TextChanged, AddressOf WCD_Proj_Inc_ACB_TextChanged
-
-            AddHandler Me.WCD_Project_No.TextChanged, AddressOf WCD_Project_No_TextChanged
-
-            AddHandler Me.WCD_Project_Title.TextChanged, AddressOf WCD_Project_Title_TextChanged
-
-            AddHandler Me.WCD_Remark.TextChanged, AddressOf WCD_Remark_TextChanged
-
-            AddHandler Me.WCD_Request_Date.TextChanged, AddressOf WCD_Request_Date_TextChanged
-
-            AddHandler Me.WCD_Status.TextChanged, AddressOf WCD_Status_TextChanged
-
-            AddHandler Me.WCD_Supplementary_WCD_ID.TextChanged, AddressOf WCD_Supplementary_WCD_ID_TextChanged
-
-            AddHandler Me.WCD_Unit_Location.TextChanged, AddressOf WCD_Unit_Location_TextChanged
-
-
+              AddHandler Me.btnPrint.Button.Click, AddressOf btnPrint_Click
+                        
+              AddHandler Me.btnVoid.Button.Click, AddressOf btnVoid_Click
+                        
+              AddHandler Me.OKButton1.Button.Click, AddressOf OKButton1_Click
+                        
+              AddHandler Me.WCD_C_ID.SelectedIndexChanged, AddressOf WCD_C_ID_SelectedIndexChanged
+            
+              AddHandler Me.WCD_WCur_ID2.SelectedIndexChanged, AddressOf WCD_WCur_ID2_SelectedIndexChanged
+            
+              AddHandler Me.WCD_WDT_ID.SelectedIndexChanged, AddressOf WCD_WDT_ID_SelectedIndexChanged
+            
+              AddHandler Me.WCD_Submit.CheckedChanged, AddressOf WCD_Submit_CheckedChanged
+            
+              AddHandler Me.WCD_Exp_Budget.TextChanged, AddressOf WCD_Exp_Budget_TextChanged
+            
+              AddHandler Me.WCD_Exp_Cur_Yr.TextChanged, AddressOf WCD_Exp_Cur_Yr_TextChanged
+            
+              AddHandler Me.WCD_Exp_Nxt_Yr.TextChanged, AddressOf WCD_Exp_Nxt_Yr_TextChanged
+            
+              AddHandler Me.WCD_Exp_Prev_Total.TextChanged, AddressOf WCD_Exp_Prev_Total_TextChanged
+            
+              AddHandler Me.WCD_Exp_Sub_Yr.TextChanged, AddressOf WCD_Exp_Sub_Yr_TextChanged
+            
+              AddHandler Me.WCD_Exp_Total.TextChanged, AddressOf WCD_Exp_Total_TextChanged
+            
+              AddHandler Me.WCD_Exp_Under_Over_Budget.TextChanged, AddressOf WCD_Exp_Under_Over_Budget_TextChanged
+            
+              AddHandler Me.WCD_No.TextChanged, AddressOf WCD_No_TextChanged
+            
+              AddHandler Me.WCD_Proj_Inc_ACB.TextChanged, AddressOf WCD_Proj_Inc_ACB_TextChanged
+            
+              AddHandler Me.WCD_Project_No.TextChanged, AddressOf WCD_Project_No_TextChanged
+            
+              AddHandler Me.WCD_Project_Title.TextChanged, AddressOf WCD_Project_Title_TextChanged
+            
+              AddHandler Me.WCD_Remark.TextChanged, AddressOf WCD_Remark_TextChanged
+            
+              AddHandler Me.WCD_Request_Date.TextChanged, AddressOf WCD_Request_Date_TextChanged
+            
+              AddHandler Me.WCD_Status.TextChanged, AddressOf WCD_Status_TextChanged
+            
+              AddHandler Me.WCD_Supplementary_WCD_ID.TextChanged, AddressOf WCD_Supplementary_WCD_ID_TextChanged
+            
+              AddHandler Me.WCD_Unit_Location.TextChanged, AddressOf WCD_Unit_Location_TextChanged
+            
+    
         End Sub
 
-
-        Public Overridable Sub LoadData()
-
+        
+        Public Overridable Sub LoadData()        
+                
             ' Load the data from the database into the DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc record.
             ' It is better to make changes to functions called by LoadData such as
             ' CreateWhereClause, rather than making changes here.
-
+    
             ' The RecordUniqueId is set the first time a record is loaded, and is
             ' used during a PostBack to load the record.
-
+          
             If Me.RecordUniqueId IsNot Nothing AndAlso Me.RecordUniqueId.Trim <> "" Then
                 Me.DataSource = WCAR_Doc1Table.GetRecord(Me.RecordUniqueId, True)
-
+          
                 Return
             End If
-
+        
             ' This is the first time a record is being retrieved from the database.
             ' So create a Where Clause based on the staic Where clause specified
             ' on the Query wizard and the dynamic part specified by the end user
             ' on the search and filter controls (if any).
-
+            
             Dim wc As WhereClause = Me.CreateWhereClause()
-
+          
             Dim Panel As System.Web.UI.WebControls.Panel = CType(MiscUtils.FindControlRecursively(Me, "WCAR_Doc1RecordControlPanel"), System.Web.UI.WebControls.Panel)
-            If Not Panel Is Nothing Then
+            If Not Panel is Nothing Then
                 Panel.visible = True
             End If
-
+            
             ' If there is no Where clause, then simply create a new, blank record.
-
+             
             If wc Is Nothing OrElse Not wc.RunQuery Then
                 Me.DataSource = New WCAR_Doc1Record()
-
-                If Not Panel Is Nothing Then
+            
+                If Not Panel is Nothing Then
                     Panel.visible = False
                 End If
-
+                
                 Return
             End If
-
+          
             ' Retrieve the record from the database.  It is possible
-
+            
             Dim recList() As WCAR_Doc1Record = WCAR_Doc1Table.GetRecords(wc, Nothing, 0, 2)
             If recList.Length = 0 Then
                 ' There is no data for this Where clause.
                 wc.RunQuery = False
-
-                If Not Panel Is Nothing Then
+                
+                If Not Panel is Nothing Then
                     Panel.visible = False
                 End If
-
+                
                 Return
             End If
-
+            
             ' Set DataSource based on record retrieved from the database.
             Me.DataSource = WCAR_Doc1Table.GetRecord(recList(0).GetID.ToXmlString(), True)
-
-
-
+                  
+    
+    
         End Sub
 
         ' Populate the UI controls using the DataSource.  To customize, override this method in WCAR_Doc1RecordControl.
@@ -6606,200 +6606,200 @@ Public Class BaseWCAR_Doc1RecordControl
             ' from the database record.  To do this, it calls the Set methods for 
             ' each of the field displayed on the webpage.  It is better to make 
             ' changes in the Set methods, rather than making changes here.
-
+            
             MyBase.DataBind()
             Me.ClearControlsFromSession()
 
             ' Make sure that the DataSource is initialized.
             If Me.DataSource Is Nothing Then
-
+              
                 Return
             End If
-
-
+             
+   
             'LoadData for DataSource for chart and report if they exist
-
+          
             ' Store the checksum. The checksum is used to
             ' ensure the record was not changed by another user.
-            If Not Me.DataSource.GetCheckSumValue() Is Nothing Then
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing
                 Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
             End If
-
-
-
+            
+      
+      
             ' Call the Set methods for each controls on the panel
-
-
-
-
-            SetlblTotal()
-            SetLiteral()
-            SetLiteral1()
-            SetLiteral10()
-            SetLiteral11()
-            SetLiteral12()
-            SetLiteral13()
-            SetLiteral14()
-            SetLiteral15()
-            SetLiteral16()
-            SetLiteral17()
-            SetLiteral18()
-            SetLiteral19()
-            SetLiteral2()
-            SetLiteral20()
-            SetLiteral21()
-            SetLiteral22()
-            SetLiteral23()
-            SetLiteral24()
-            SetLiteral25()
-            SetLiteral26()
-            SetLiteral27()
-            SetLiteral28()
-            SetLiteral29()
-            SetLiteral3()
-            SetLiteral30()
-            SetLiteral31()
-            SetLiteral32()
-            SetLiteral33()
-            SetLiteral35()
-            SetLiteral4()
-            SetLiteral5()
-            SetLiteral6()
-            SetLiteral7()
-            SetLiteral8()
-            SetLiteral9()
-
-
-
-
-            SetWCAR_DocRecordControlTabContainer()
-            SetWCD_C_ID()
-            SetWCD_C_IDLabel()
-            SetWCD_Exp_Budget()
-            SetWCD_Exp_BudgetLabel()
-            SetWCD_Exp_Cur_Yr()
-            SetWCD_Exp_Cur_YrLabel()
-            SetWCD_Exp_Nxt_Yr()
-            SetWCD_Exp_Nxt_YrLabel()
-            SetWCD_Exp_Prev_Total()
-            SetWCD_Exp_Prev_TotalLabel()
-            SetWCD_Exp_Sub_Yr()
-            SetWCD_Exp_Sub_YrLabel()
-            SetWCD_Exp_Total()
-            SetWCD_Exp_TotalLabel()
-            SetWCD_Exp_Under_Over_Budget()
-            SetWCD_Exp_Under_Over_BudgetLabel()
-            SetWCD_ID()
-            SetWCD_No()
-            SetWCD_NoLabel()
-            SetWCD_Proj_Inc_ACB()
-            SetWCD_Proj_Inc_ACBLabel()
-            SetWCD_Project_No()
-            SetWCD_Project_NoLabel()
-            SetWCD_Project_Title()
-            SetWCD_Project_TitleLabel()
-            SetWCD_Remark()
-            SetWCD_RemarkLabel()
-            SetWCD_Request_Date()
-            SetWCD_Request_DateLabel()
-            SetWCD_Status()
-            SetWCD_StatusLabel()
-            SetWCD_Submit()
-            SetWCD_SubmitLabel()
-            SetWCD_Supplementary_Manual()
-            SetWCD_Supplementary_WCD_ID()
-            SetWCD_SupplementaryLabel()
-            SetWCD_U_ID()
-            SetWCD_Unit_Location()
-            SetWCD_Unit_LocationLabel()
-            SetWCD_WCur_ID()
-
-            SetWCD_WCur_ID2()
-            SetWCD_WCur_IDLabel()
-            SetWCD_WDT_ID()
-            SetWCD_WDT_IDLabel()
-            SetimbRelated()
-
-            SetbtnPrint()
-
-            SetbtnVoid()
-
-            SetOKButton1()
-
-
-
+        
+                
+                
+                
+                SetlblTotal()
+                SetLiteral()
+                SetLiteral1()
+                SetLiteral10()
+                SetLiteral11()
+                SetLiteral12()
+                SetLiteral13()
+                SetLiteral14()
+                SetLiteral15()
+                SetLiteral16()
+                SetLiteral17()
+                SetLiteral18()
+                SetLiteral19()
+                SetLiteral2()
+                SetLiteral20()
+                SetLiteral21()
+                SetLiteral22()
+                SetLiteral23()
+                SetLiteral24()
+                SetLiteral25()
+                SetLiteral26()
+                SetLiteral27()
+                SetLiteral28()
+                SetLiteral29()
+                SetLiteral3()
+                SetLiteral30()
+                SetLiteral31()
+                SetLiteral32()
+                SetLiteral33()
+                SetLiteral35()
+                SetLiteral4()
+                SetLiteral5()
+                SetLiteral6()
+                SetLiteral7()
+                SetLiteral8()
+                SetLiteral9()
+                
+                
+                
+                
+                SetWCAR_DocRecordControlTabContainer()
+                SetWCD_C_ID()
+                SetWCD_C_IDLabel()
+                SetWCD_Exp_Budget()
+                SetWCD_Exp_BudgetLabel()
+                SetWCD_Exp_Cur_Yr()
+                SetWCD_Exp_Cur_YrLabel()
+                SetWCD_Exp_Nxt_Yr()
+                SetWCD_Exp_Nxt_YrLabel()
+                SetWCD_Exp_Prev_Total()
+                SetWCD_Exp_Prev_TotalLabel()
+                SetWCD_Exp_Sub_Yr()
+                SetWCD_Exp_Sub_YrLabel()
+                SetWCD_Exp_Total()
+                SetWCD_Exp_TotalLabel()
+                SetWCD_Exp_Under_Over_Budget()
+                SetWCD_Exp_Under_Over_BudgetLabel()
+                SetWCD_ID()
+                SetWCD_No()
+                SetWCD_NoLabel()
+                SetWCD_Proj_Inc_ACB()
+                SetWCD_Proj_Inc_ACBLabel()
+                SetWCD_Project_No()
+                SetWCD_Project_NoLabel()
+                SetWCD_Project_Title()
+                SetWCD_Project_TitleLabel()
+                SetWCD_Remark()
+                SetWCD_RemarkLabel()
+                SetWCD_Request_Date()
+                SetWCD_Request_DateLabel()
+                SetWCD_Status()
+                SetWCD_StatusLabel()
+                SetWCD_Submit()
+                SetWCD_SubmitLabel()
+                SetWCD_Supplementary_Manual()
+                SetWCD_Supplementary_WCD_ID()
+                SetWCD_SupplementaryLabel()
+                SetWCD_U_ID()
+                SetWCD_Unit_Location()
+                SetWCD_Unit_LocationLabel()
+                SetWCD_WCur_ID()
+                
+                SetWCD_WCur_ID2()
+                SetWCD_WCur_IDLabel()
+                SetWCD_WDT_ID()
+                SetWCD_WDT_IDLabel()
+                SetimbRelated()
+              
+                SetbtnPrint()
+              
+                SetbtnVoid()
+              
+                SetOKButton1()
+              
+      
+      
             Me.IsNewRecord = True
-
+            
             If Me.DataSource.IsCreated Then
                 Me.IsNewRecord = False
-
+                
                 If Me.DataSource.GetID IsNot Nothing Then
                     Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
                 End If
-
+                
             End If
-
+            
             ' Now load data for each record and table child UI controls.
             ' Ordering is important because child controls get 
             ' their parent ids from their parent UI controls.
             Dim shouldResetControl As Boolean = False
-
-            Dim recWCAR_Activity1TableControl As WCAR_Activity1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Activity1TableControl"), WCAR_Activity1TableControl)
-
-            If (shouldResetControl OrElse Me.Page.IsPageRefresh) Then
-                recWCAR_Activity1TableControl.ResetControl()
-            End If
-
-            Me.Page.SetControl("WCAR_Activity1TableControl")
-
-            Dim recWCAR_Doc_Attach1TableControl As WCAR_Doc_Attach1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Attach1TableControl"), WCAR_Doc_Attach1TableControl)
-
-            If (shouldResetControl OrElse Me.Page.IsPageRefresh) Then
-                recWCAR_Doc_Attach1TableControl.ResetControl()
-            End If
-
-            Me.Page.SetControl("WCAR_Doc_Attach1TableControl")
-
-            Dim recWCAR_Doc_Checker1TableControl As WCAR_Doc_Checker1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
-
-            If (shouldResetControl OrElse Me.Page.IsPageRefresh) Then
-                recWCAR_Doc_Checker1TableControl.ResetControl()
-            End If
-
-            Me.Page.SetControl("WCAR_Doc_Checker1TableControl")
-
+            
+        Dim recWCAR_Activity1TableControl as WCAR_Activity1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Activity1TableControl"), WCAR_Activity1TableControl)
+        
+            If (shouldResetControl OrElse Me.Page.IsPageRefresh)
+              recWCAR_Activity1TableControl.ResetControl()
+            End IF
+        
+        Me.Page.SetControl("WCAR_Activity1TableControl")
+        
+        Dim recWCAR_Doc_Attach1TableControl as WCAR_Doc_Attach1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Attach1TableControl"), WCAR_Doc_Attach1TableControl)
+        
+            If (shouldResetControl OrElse Me.Page.IsPageRefresh)
+              recWCAR_Doc_Attach1TableControl.ResetControl()
+            End IF
+        
+        Me.Page.SetControl("WCAR_Doc_Attach1TableControl")
+        
+        Dim recWCAR_Doc_Checker1TableControl as WCAR_Doc_Checker1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
+        
+            If (shouldResetControl OrElse Me.Page.IsPageRefresh)
+              recWCAR_Doc_Checker1TableControl.ResetControl()
+            End IF
+        
+        Me.Page.SetControl("WCAR_Doc_Checker1TableControl")
+        
         End Sub
-
-
+        
+        
         Public Overridable Sub SetWCD_C_ID()
 
-
-
+                  
+            
 
             Dim selectedValue As String = Nothing
-
+            
             ' figure out the selectedValue
-
-
-
+                  
+            
+        
             ' Set the WCD_C_ID DropDownList on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
-
+            
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_C_ID is the ASP:DropDownList on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_C_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
+            
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_C_IDSpecified Then
-
+                            
                 ' If the WCD_C_ID is non-NULL, then format the value.
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 selectedValue = Me.DataSource.WCD_C_ID.ToString()
             Else
-
+                
                 ' WCD_C_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
                 If Me.DataSource IsNot Nothing AndAlso Me.DataSource.IsCreated Then
@@ -6807,609 +6807,609 @@ Public Class BaseWCAR_Doc1RecordControl
                 Else
                     selectedValue = WCAR_Doc1Table.WCD_C_ID.DefaultValue
                 End If
-
-            End If
-
-
-
+                				
+            End If			
+                
+            
+                  
             ' Populate the item(s) to the control
-
-            Me.PopulateWCD_C_IDDropDownList(selectedValue, 100)
-
-
-
-
+            
+            Me.PopulateWCD_C_IDDropDownList(selectedValue, 100)              
+                
+                  
+           
+             
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Budget()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Budget TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Budget is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Budget()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_BudgetSpecified Then
-
+                				
                 ' If the WCD_Exp_Budget is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Exp_Budget)
-
+                              
                 Me.WCD_Exp_Budget.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Budget is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Budget.Text = WCAR_Doc1Table.WCD_Exp_Budget.Format(WCAR_Doc1Table.WCD_Exp_Budget.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Exp_Budget.TextChanged, AddressOf WCD_Exp_Budget_TextChanged
-
+        
+                 Me.WCD_Exp_Budget.Text = WCAR_Doc1Table.WCD_Exp_Budget.Format(WCAR_Doc1Table.WCD_Exp_Budget.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Budget.TextChanged, AddressOf WCD_Exp_Budget_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Cur_Yr()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Cur_Yr TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Cur_Yr is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Cur_Yr()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_Cur_YrSpecified Then
-
+                				
                 ' If the WCD_Exp_Cur_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Exp_Cur_Yr)
-
+                              
                 Me.WCD_Exp_Cur_Yr.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Cur_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Cur_Yr.Text = WCAR_Doc1Table.WCD_Exp_Cur_Yr.Format(WCAR_Doc1Table.WCD_Exp_Cur_Yr.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Exp_Cur_Yr.TextChanged, AddressOf WCD_Exp_Cur_Yr_TextChanged
-
+        
+                 Me.WCD_Exp_Cur_Yr.Text = WCAR_Doc1Table.WCD_Exp_Cur_Yr.Format(WCAR_Doc1Table.WCD_Exp_Cur_Yr.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Cur_Yr.TextChanged, AddressOf WCD_Exp_Cur_Yr_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Nxt_Yr()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Nxt_Yr TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Nxt_Yr is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Nxt_Yr()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_Nxt_YrSpecified Then
-
+                				
                 ' If the WCD_Exp_Nxt_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Exp_Nxt_Yr)
-
+                              
                 Me.WCD_Exp_Nxt_Yr.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Nxt_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Nxt_Yr.Text = WCAR_Doc1Table.WCD_Exp_Nxt_Yr.Format(WCAR_Doc1Table.WCD_Exp_Nxt_Yr.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Exp_Nxt_Yr.TextChanged, AddressOf WCD_Exp_Nxt_Yr_TextChanged
-
+        
+                 Me.WCD_Exp_Nxt_Yr.Text = WCAR_Doc1Table.WCD_Exp_Nxt_Yr.Format(WCAR_Doc1Table.WCD_Exp_Nxt_Yr.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Nxt_Yr.TextChanged, AddressOf WCD_Exp_Nxt_Yr_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Prev_Total()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Prev_Total TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Prev_Total is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Prev_Total()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_Prev_TotalSpecified Then
-
+                				
                 ' If the WCD_Exp_Prev_Total is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Exp_Prev_Total)
-
+                              
                 Me.WCD_Exp_Prev_Total.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Prev_Total is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Prev_Total.Text = WCAR_Doc1Table.WCD_Exp_Prev_Total.Format(WCAR_Doc1Table.WCD_Exp_Prev_Total.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Exp_Prev_Total.TextChanged, AddressOf WCD_Exp_Prev_Total_TextChanged
-
+        
+                 Me.WCD_Exp_Prev_Total.Text = WCAR_Doc1Table.WCD_Exp_Prev_Total.Format(WCAR_Doc1Table.WCD_Exp_Prev_Total.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Prev_Total.TextChanged, AddressOf WCD_Exp_Prev_Total_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Sub_Yr()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Sub_Yr TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Sub_Yr is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Sub_Yr()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_Sub_YrSpecified Then
-
+                				
                 ' If the WCD_Exp_Sub_Yr is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Exp_Sub_Yr)
-
+                              
                 Me.WCD_Exp_Sub_Yr.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Sub_Yr is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Sub_Yr.Text = WCAR_Doc1Table.WCD_Exp_Sub_Yr.Format(WCAR_Doc1Table.WCD_Exp_Sub_Yr.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Exp_Sub_Yr.TextChanged, AddressOf WCD_Exp_Sub_Yr_TextChanged
-
+        
+                 Me.WCD_Exp_Sub_Yr.Text = WCAR_Doc1Table.WCD_Exp_Sub_Yr.Format(WCAR_Doc1Table.WCD_Exp_Sub_Yr.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Sub_Yr.TextChanged, AddressOf WCD_Exp_Sub_Yr_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Total()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Total TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Total is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Total()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_TotalSpecified Then
-
+                				
                 ' If the WCD_Exp_Total is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Exp_Total)
-
+                              
                 Me.WCD_Exp_Total.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Total is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Total.Text = WCAR_Doc1Table.WCD_Exp_Total.Format(WCAR_Doc1Table.WCD_Exp_Total.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Exp_Total.TextChanged, AddressOf WCD_Exp_Total_TextChanged
-
+        
+                 Me.WCD_Exp_Total.Text = WCAR_Doc1Table.WCD_Exp_Total.Format(WCAR_Doc1Table.WCD_Exp_Total.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Total.TextChanged, AddressOf WCD_Exp_Total_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Exp_Under_Over_Budget()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Exp_Under_Over_Budget TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Exp_Under_Over_Budget is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Exp_Under_Over_Budget()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_Under_Over_BudgetSpecified Then
-
+                				
                 ' If the WCD_Exp_Under_Over_Budget is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Exp_Under_Over_Budget)
-
+                              
                 Me.WCD_Exp_Under_Over_Budget.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Exp_Under_Over_Budget is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Exp_Under_Over_Budget.Text = WCAR_Doc1Table.WCD_Exp_Under_Over_Budget.Format(WCAR_Doc1Table.WCD_Exp_Under_Over_Budget.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Exp_Under_Over_Budget.TextChanged, AddressOf WCD_Exp_Under_Over_Budget_TextChanged
-
+        
+                 Me.WCD_Exp_Under_Over_Budget.Text = WCAR_Doc1Table.WCD_Exp_Under_Over_Budget.Format(WCAR_Doc1Table.WCD_Exp_Under_Over_Budget.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Exp_Under_Over_Budget.TextChanged, AddressOf WCD_Exp_Under_Over_Budget_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_IDSpecified Then
-
+                				
                 ' If the WCD_ID is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_ID)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WCD_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_ID.Text = WCAR_Doc1Table.WCD_ID.Format(WCAR_Doc1Table.WCD_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WCD_ID.Text = WCAR_Doc1Table.WCD_ID.Format(WCAR_Doc1Table.WCD_ID.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWCD_No()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_No TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_No is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_No()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_NoSpecified Then
-
+                				
                 ' If the WCD_No is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_No)
-
+                              
                 Me.WCD_No.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_No is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_No.Text = WCAR_Doc1Table.WCD_No.Format(WCAR_Doc1Table.WCD_No.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_No.TextChanged, AddressOf WCD_No_TextChanged
-
+        
+                 Me.WCD_No.Text = WCAR_Doc1Table.WCD_No.Format(WCAR_Doc1Table.WCD_No.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_No.TextChanged, AddressOf WCD_No_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Proj_Inc_ACB()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Proj_Inc_ACB TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Proj_Inc_ACB is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Proj_Inc_ACB()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Proj_Inc_ACBSpecified Then
-
+                				
                 ' If the WCD_Proj_Inc_ACB is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Proj_Inc_ACB)
-
+                              
                 Me.WCD_Proj_Inc_ACB.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Proj_Inc_ACB is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Proj_Inc_ACB.Text = WCAR_Doc1Table.WCD_Proj_Inc_ACB.Format(WCAR_Doc1Table.WCD_Proj_Inc_ACB.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Proj_Inc_ACB.TextChanged, AddressOf WCD_Proj_Inc_ACB_TextChanged
-
+        
+                 Me.WCD_Proj_Inc_ACB.Text = WCAR_Doc1Table.WCD_Proj_Inc_ACB.Format(WCAR_Doc1Table.WCD_Proj_Inc_ACB.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Proj_Inc_ACB.TextChanged, AddressOf WCD_Proj_Inc_ACB_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Project_No()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Project_No TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Project_No is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Project_No()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Project_NoSpecified Then
-
+                				
                 ' If the WCD_Project_No is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Project_No)
-
+                              
                 Me.WCD_Project_No.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Project_No is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Project_No.Text = WCAR_Doc1Table.WCD_Project_No.Format(WCAR_Doc1Table.WCD_Project_No.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Project_No.TextChanged, AddressOf WCD_Project_No_TextChanged
-
+        
+                 Me.WCD_Project_No.Text = WCAR_Doc1Table.WCD_Project_No.Format(WCAR_Doc1Table.WCD_Project_No.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Project_No.TextChanged, AddressOf WCD_Project_No_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Project_Title()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Project_Title TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Project_Title is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Project_Title()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Project_TitleSpecified Then
-
+                				
                 ' If the WCD_Project_Title is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Project_Title)
-
+                              
                 Me.WCD_Project_Title.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Project_Title is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Project_Title.Text = WCAR_Doc1Table.WCD_Project_Title.Format(WCAR_Doc1Table.WCD_Project_Title.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Project_Title.TextChanged, AddressOf WCD_Project_Title_TextChanged
-
+        
+                 Me.WCD_Project_Title.Text = WCAR_Doc1Table.WCD_Project_Title.Format(WCAR_Doc1Table.WCD_Project_Title.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Project_Title.TextChanged, AddressOf WCD_Project_Title_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Remark()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Remark TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Remark is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Remark()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_RemarkSpecified Then
-
+                				
                 ' If the WCD_Remark is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Remark)
-
+                              
                 Me.WCD_Remark.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Remark is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Remark.Text = WCAR_Doc1Table.WCD_Remark.Format(WCAR_Doc1Table.WCD_Remark.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Remark.TextChanged, AddressOf WCD_Remark_TextChanged
-
+        
+                 Me.WCD_Remark.Text = WCAR_Doc1Table.WCD_Remark.Format(WCAR_Doc1Table.WCD_Remark.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Remark.TextChanged, AddressOf WCD_Remark_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Request_Date()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Request_Date TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Request_Date is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Request_Date()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Request_DateSpecified Then
-
+                				
                 ' If the WCD_Request_Date is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Request_Date, "g")
-
+                              
                 Me.WCD_Request_Date.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Request_Date is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Request_Date.Text = WCAR_Doc1Table.WCD_Request_Date.Format(WCAR_Doc1Table.WCD_Request_Date.DefaultValue, "g")
-
-            End If
-
-            AddHandler Me.WCD_Request_Date.TextChanged, AddressOf WCD_Request_Date_TextChanged
-
+        
+                 Me.WCD_Request_Date.Text = WCAR_Doc1Table.WCD_Request_Date.Format(WCAR_Doc1Table.WCD_Request_Date.DefaultValue, "g")
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Request_Date.TextChanged, AddressOf WCD_Request_Date_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Status()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Status TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Status is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Status()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_StatusSpecified Then
-
+                				
                 ' If the WCD_Status is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Status)
-
+                              
                 Me.WCD_Status.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Status is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Status.Text = WCAR_Doc1Table.WCD_Status.Format(WCAR_Doc1Table.WCD_Status.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Status.TextChanged, AddressOf WCD_Status_TextChanged
-
+        
+                 Me.WCD_Status.Text = WCAR_Doc1Table.WCD_Status.Format(WCAR_Doc1Table.WCD_Status.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Status.TextChanged, AddressOf WCD_Status_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_Submit()
 
-
-
-
+                      
+            
+        
             ' Set the WCD_Submit CheckBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
@@ -7420,148 +7420,148 @@ Public Class BaseWCAR_Doc1RecordControl
             ' MyBase.SetWCD_Submit()
             ' and add your own code before or after the call to the MyBase function.
 
-
+                    
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_SubmitSpecified Then
-
+                									
                 ' If the WCD_Submit is non-NULL, then format the value.
                 ' The Format method will use the Display Format
                 Me.WCD_Submit.Checked = Me.DataSource.WCD_Submit
             Else
-
+            
                 ' WCD_Submit is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
                 If Not Me.DataSource.IsCreated Then
                     Me.WCD_Submit.Checked = WCAR_Doc1Table.WCD_Submit.ParseValue(WCAR_Doc1Table.WCD_Submit.DefaultValue).ToBoolean()
                 End If
-
+                    				
             End If
-
+                
         End Sub
-
+                
         Public Overridable Sub SetWCD_Supplementary_Manual()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Supplementary_Manual Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Supplementary_Manual is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Supplementary_Manual()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Supplementary_ManualSpecified Then
-
+                				
                 ' If the WCD_Supplementary_Manual is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Supplementary_Manual)
-
+                              
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WCD_Supplementary_Manual.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Supplementary_Manual is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Supplementary_Manual.Text = WCAR_Doc1Table.WCD_Supplementary_Manual.Format(WCAR_Doc1Table.WCD_Supplementary_Manual.DefaultValue)
-
-            End If
-
+        
+                 Me.WCD_Supplementary_Manual.Text = WCAR_Doc1Table.WCD_Supplementary_Manual.Format(WCAR_Doc1Table.WCD_Supplementary_Manual.DefaultValue)
+                        		
+                End If
+                                      
         End Sub
-
+                
         Public Overridable Sub SetWCD_Supplementary_WCD_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Supplementary_WCD_ID TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Supplementary_WCD_ID is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Supplementary_WCD_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Supplementary_WCD_IDSpecified Then
-
+                				
                 ' If the WCD_Supplementary_WCD_ID is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Supplementary_WCD_ID)
-
+                              
                 Me.WCD_Supplementary_WCD_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Supplementary_WCD_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Supplementary_WCD_ID.Text = WCAR_Doc1Table.WCD_Supplementary_WCD_ID.Format(WCAR_Doc1Table.WCD_Supplementary_WCD_ID.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Supplementary_WCD_ID.TextChanged, AddressOf WCD_Supplementary_WCD_ID_TextChanged
-
+        
+                 Me.WCD_Supplementary_WCD_ID.Text = WCAR_Doc1Table.WCD_Supplementary_WCD_ID.Format(WCAR_Doc1Table.WCD_Supplementary_WCD_ID.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Supplementary_WCD_ID.TextChanged, AddressOf WCD_Supplementary_WCD_ID_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_U_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_U_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_U_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_U_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_U_IDSpecified Then
-
+                				
                 ' If the WCD_U_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_U_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_U_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WCAR_Doc1Table.GetDFKA(Me.DataSource.WCD_U_ID.ToString(), WCAR_Doc1Table.WCD_U_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WCAR_Doc1Table.WCD_U_ID)
-                    End If
+                                  
+                       formattedValue = WCAR_Doc1Table.GetDFKA(Me.DataSource.WCD_U_ID.ToString(),WCAR_Doc1Table.WCD_U_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WCAR_Doc1Table.WCD_U_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WCD_U_ID.ToString()
+                       formattedValue = Me.DataSource.WCD_U_ID.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WCD_U_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_U_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_U_ID.Text = WCAR_Doc1Table.WCD_U_ID.Format(WCAR_Doc1Table.WCD_U_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WCD_U_ID.Text = WCAR_Doc1Table.WCD_U_ID.Format(WCAR_Doc1Table.WCD_U_ID.DefaultValue)
+                        		
+                End If
+                 
             ' If the WCD_U_ID is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WCD_U_ID.Text Is Nothing _
@@ -7569,95 +7569,95 @@ Public Class BaseWCAR_Doc1RecordControl
                 ' Set the value specified on the Properties.
                 Me.WCD_U_ID.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWCD_Unit_Location()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_Unit_Location TextBox on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_Unit_Location is the ASP:TextBox on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_Unit_Location()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Unit_LocationSpecified Then
-
+                				
                 ' If the WCD_Unit_Location is non-NULL, then format the value.
 
                 ' The Format method will use the Display Format
                 Dim formattedValue As String = Me.DataSource.Format(WCAR_Doc1Table.WCD_Unit_Location)
-
+                              
                 Me.WCD_Unit_Location.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_Unit_Location is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_Unit_Location.Text = WCAR_Doc1Table.WCD_Unit_Location.Format(WCAR_Doc1Table.WCD_Unit_Location.DefaultValue)
-
-            End If
-
-            AddHandler Me.WCD_Unit_Location.TextChanged, AddressOf WCD_Unit_Location_TextChanged
-
+        
+                 Me.WCD_Unit_Location.Text = WCAR_Doc1Table.WCD_Unit_Location.Format(WCAR_Doc1Table.WCD_Unit_Location.DefaultValue)
+                        		
+                End If
+                 
+              AddHandler Me.WCD_Unit_Location.TextChanged, AddressOf WCD_Unit_Location_TextChanged
+                                 
         End Sub
-
+                
         Public Overridable Sub SetWCD_WCur_ID()
 
-
-
-
+                  
+            
+        
             ' Set the WCD_WCur_ID Literal on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
 
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_WCur_ID is the ASP:Literal on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_WCur_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
-
+            
+                  
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_WCur_IDSpecified Then
-
+                				
                 ' If the WCD_WCur_ID is non-NULL, then format the value.
 
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 Dim formattedValue As String = ""
                 Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WCur_ID)
                 If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WCur_ID.IsApplyDisplayAs Then
-
-                    formattedValue = WCAR_Doc1Table.GetDFKA(Me.DataSource.WCD_WCur_ID.ToString(), WCAR_Doc1Table.WCD_WCur_ID, Nothing)
-
-                    If (formattedValue Is Nothing) Then
-                        formattedValue = Me.DataSource.Format(WCAR_Doc1Table.WCD_WCur_ID)
-                    End If
+                                  
+                       formattedValue = WCAR_Doc1Table.GetDFKA(Me.DataSource.WCD_WCur_ID.ToString(),WCAR_Doc1Table.WCD_WCur_ID, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(WCAR_Doc1Table.WCD_WCur_ID)
+                       End If
                 Else
-                    formattedValue = Me.DataSource.WCD_WCur_ID.ToString()
+                       formattedValue = Me.DataSource.WCD_WCur_ID.ToString()
                 End If
-
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.WCD_WCur_ID.Text = formattedValue
-
-            Else
-
+                
+            Else 
+            
                 ' WCD_WCur_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
-
-                Me.WCD_WCur_ID.Text = WCAR_Doc1Table.WCD_WCur_ID.Format(WCAR_Doc1Table.WCD_WCur_ID.DefaultValue)
-
-            End If
-
+        
+                 Me.WCD_WCur_ID.Text = WCAR_Doc1Table.WCD_WCur_ID.Format(WCAR_Doc1Table.WCD_WCur_ID.DefaultValue)
+                        		
+                End If
+                 
             ' If the WCD_WCur_ID is NULL or blank, then use the value specified  
             ' on Properties.
             If Me.WCD_WCur_ID.Text Is Nothing _
@@ -7665,38 +7665,38 @@ Public Class BaseWCAR_Doc1RecordControl
                 ' Set the value specified on the Properties.
                 Me.WCD_WCur_ID.Text = "&nbsp;"
             End If
-
+                                       
         End Sub
-
+                
         Public Overridable Sub SetWCD_WCur_ID2()
 
-
-
+                  
+            
 
             Dim selectedValue As String = Nothing
-
+            
             ' figure out the selectedValue
-
-
-
+                  
+            
+        
             ' Set the WCD_WCur_ID DropDownList on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
-
+            
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_WCur_ID2 is the ASP:DropDownList on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_WCur_ID2()
             ' and add your own code before or after the call to the MyBase function.
 
-
+            
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_WCur_IDSpecified Then
-
+                            
                 ' If the WCD_WCur_ID is non-NULL, then format the value.
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 selectedValue = Me.DataSource.WCD_WCur_ID.ToString()
             Else
-
+                
                 ' WCD_WCur_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
                 If Me.DataSource IsNot Nothing AndAlso Me.DataSource.IsCreated Then
@@ -7704,49 +7704,49 @@ Public Class BaseWCAR_Doc1RecordControl
                 Else
                     selectedValue = WCAR_Doc1Table.WCD_WCur_ID.DefaultValue
                 End If
-
-            End If
-
-
-
+                				
+            End If			
+                
+            
+                  
             ' Populate the item(s) to the control
-
-            Me.PopulateWCD_WCur_ID2DropDownList(selectedValue, 100)
-
-
-
-
+            
+            Me.PopulateWCD_WCur_ID2DropDownList(selectedValue, 100)              
+                
+                  
+           
+             
         End Sub
-
+                
         Public Overridable Sub SetWCD_WDT_ID()
 
-
-
+                  
+            
 
             Dim selectedValue As String = Nothing
-
+            
             ' figure out the selectedValue
-
-
-
+                  
+            
+        
             ' Set the WCD_WDT_ID DropDownList on the webpage with value from the
             ' DatabaseANFLO-WFN%dbo.WCAR_Doc database record.
-
+            
             ' Me.DataSource is the DatabaseANFLO-WFN%dbo.WCAR_Doc record retrieved from the database.
             ' Me.WCD_WDT_ID is the ASP:DropDownList on the webpage.
-
+            
             ' You can modify this method directly, or replace it with a call to
             '     MyBase.SetWCD_WDT_ID()
             ' and add your own code before or after the call to the MyBase function.
 
-
+            
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_WDT_IDSpecified Then
-
+                            
                 ' If the WCD_WDT_ID is non-NULL, then format the value.
                 ' The Format method will return the Display Foreign Key As (DFKA) value
                 selectedValue = Me.DataSource.WCD_WDT_ID.ToString()
             Else
-
+                
                 ' WCD_WDT_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
                 If Me.DataSource IsNot Nothing AndAlso Me.DataSource.IsCreated Then
@@ -7754,590 +7754,590 @@ Public Class BaseWCAR_Doc1RecordControl
                 Else
                     selectedValue = WCAR_Doc1Table.WCD_WDT_ID.DefaultValue
                 End If
-
-            End If
-
-
-
+                				
+            End If			
+                
+            
+                  
             ' Populate the item(s) to the control
-
-            Me.PopulateWCD_WDT_IDDropDownList(selectedValue, 100)
-
-
-
-
+            
+            Me.PopulateWCD_WDT_IDDropDownList(selectedValue, 100)              
+                
+                  
+           
+             
         End Sub
-
+                
         Public Overridable Sub SetlblTotal()
 
-
-
-            Me.lblTotal.Text = EvaluateFormula("ParseDecimal(WCD_Exp_Cur_Yr) + ParseDecimal(WCD_Exp_Nxt_Yr) + ParseDecimal(WCD_Exp_Sub_Yr)")
-
-        End Sub
-
+                  
+                  
+                      Me.lblTotal.Text = EvaluateFormula("ParseDecimal(WCD_Exp_Cur_Yr) + ParseDecimal(WCD_Exp_Nxt_Yr) + ParseDecimal(WCD_Exp_Sub_Yr)")
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral1()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal1.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal1.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral10()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal10.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal10.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral11()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal11.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal11.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral12()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal12.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal12.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral13()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal13.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal13.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral14()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal14.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal14.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral15()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal15.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal15.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral16()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal16.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal16.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral17()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal17.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal17.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral18()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal18.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal18.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral19()
 
-
-
-        End Sub
-
+                  
+                  
+                  End Sub
+                
         Public Overridable Sub SetLiteral2()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal2.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal2.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral20()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal20.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal20.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral21()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal21.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal21.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral22()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal22.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal22.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral23()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal23.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal23.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral24()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal24.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal24.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral25()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal25.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal25.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral26()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal26.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal26.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral27()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal27.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal27.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral28()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal28.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal28.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral29()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal29.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal29.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral3()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal3.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal3.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral30()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal30.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal30.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral31()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal31.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal31.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral32()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal32.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal32.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral33()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal33.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal33.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral35()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal35.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal35.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral4()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal4.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal4.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral5()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal5.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal5.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral6()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal6.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal6.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral7()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal7.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal7.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral8()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal8.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal8.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetLiteral9()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.Literal9.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Literal9.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_C_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_C_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_C_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Exp_BudgetLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Exp_BudgetLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_BudgetLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Exp_Cur_YrLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Exp_Cur_YrLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_Cur_YrLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Exp_Nxt_YrLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Exp_Nxt_YrLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_Nxt_YrLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Exp_Prev_TotalLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Exp_Prev_TotalLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_Prev_TotalLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Exp_Sub_YrLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Exp_Sub_YrLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_Sub_YrLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Exp_TotalLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Exp_TotalLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_TotalLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Exp_Under_Over_BudgetLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Exp_Under_Over_BudgetLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Exp_Under_Over_BudgetLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_NoLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_NoLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_NoLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Proj_Inc_ACBLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Proj_Inc_ACBLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Proj_Inc_ACBLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Project_NoLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Project_NoLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Project_NoLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Project_TitleLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Project_TitleLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Project_TitleLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_RemarkLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_RemarkLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_RemarkLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Request_DateLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Request_DateLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Request_DateLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_StatusLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_StatusLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_StatusLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_SubmitLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_SubmitLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_SubmitLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_SupplementaryLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_SupplementaryLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_SupplementaryLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_Unit_LocationLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_Unit_LocationLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_Unit_LocationLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_WCur_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_WCur_IDLabel.Text = "Some value"
-
-        End Sub
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_WCur_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
         Public Overridable Sub SetWCD_WDT_IDLabel()
 
-
-
-            'Code for the text property is generated inside the .aspx file.
-            'To override this property you can uncomment the following property and add your own value.
-            'Me.WCD_WDT_IDLabel.Text = "Some value"
-
-        End Sub
-
-        Public Overridable Sub SetWCAR_DocRecordControlTabContainer()
-
-
+                  
+                  
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.WCD_WDT_IDLabel.Text = "Some value"
+                    
+                  End Sub
+                
+        Public Overridable Sub SetWCAR_DocRecordControlTabContainer()           
+                        
+                   
             If EvaluateFormula("URL(""TabVisible"")").ToLower() = "true" Then
                 MiscUtils.FindControlRecursively(Me, "WCAR_DocRecordControlTabContainer").Visible = True
             ElseIf EvaluateFormula("URL(""TabVisible"")").ToLower() = "false" Then
                 MiscUtils.FindControlRecursively(Me, "WCAR_DocRecordControlTabContainer").Visible = False
             End If
-
-
-        End Sub
-
+         
+  
+        End Sub        
+      
         Public Overridable Sub ResetControl()
-
+          
         End Sub
-
+        
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
@@ -8345,10 +8345,10 @@ Public Class BaseWCAR_Doc1RecordControl
             If e Is Nothing Then
                 e = New FormulaEvaluator()
             End If
-
+            
             e.Variables.Clear()
 
-
+            
             ' add variables for formula evaluation
             If variables IsNot Nothing Then
                 Dim enumerator As System.Collections.Generic.IEnumerator(Of System.Collections.Generic.KeyValuePair(Of String, Object)) = variables.GetEnumerator()
@@ -8357,11 +8357,11 @@ Public Class BaseWCAR_Doc1RecordControl
                 End While
             End If
 
-            If includeDS Then
-
-            End If
-
-
+            If includeDS
+                
+            End IF
+            
+            
             ' Other variables referred to in the formula are expected to be
             ' properties of the DataSource.  For example, referring to
             ' UnitPrice as a variable will refer to DataSource.UnitPrice
@@ -8387,22 +8387,22 @@ Public Class BaseWCAR_Doc1RecordControl
             Else
                 Return resultObj.ToString()
             End If
-        End Function
+        End Function      
+        
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format as String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format,variables ,includeDS, Nothing)        
+        End Function        
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS As Boolean) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, includeDS, Nothing)
-        End Function
-
-
+        
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object)) As String
-            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables, True, Nothing)
-        End Function
+            Return EvaluateFormula(formula, dataSourceForEvaluate, format, variables ,True, Nothing)        
+        End Function        
 
         Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal format As String) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, format, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e As FormulaEvaluator) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate As BaseClasses.Data.BaseRecord, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal e as FormulaEvaluator) As String
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, variables, True, e)
         End Function
 
@@ -8410,7 +8410,7 @@ Public Class BaseWCAR_Doc1RecordControl
             Return Me.EvaluateFormula(formula, dataSourceForEvaluate, Nothing, Nothing, True, Nothing)
         End Function
 
-        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS As Boolean) As String
+        Public Overridable Function EvaluateFormula(ByVal formula As String, ByVal includeDS as Boolean) As String
             Return Me.EvaluateFormula(formula, Nothing, Nothing, Nothing, includeDS, Nothing)
         End Function
 
@@ -8419,13 +8419,13 @@ Public Class BaseWCAR_Doc1RecordControl
         End Function
 
 
-        Public Overridable Sub RegisterPostback()
-
-
+        Public Overridable Sub RegisterPostback()       
+        
+        
         End Sub
 
-
-
+      
+        
         ' To customize, override this method in WCAR_Doc1RecordControl.
         Public Overridable Sub SaveData()
             ' Saves the associated record in the database.
@@ -8435,21 +8435,21 @@ Public Class BaseWCAR_Doc1RecordControl
             ' 1. Load the existing record from the database. Since we save the entire record, this ensures 
             ' that fields that are not displayed are also properly initialized.
             Me.LoadData()
-
+        
             ' The checksum is used to ensure the record was not changed by another user.
             If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
                 If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
                     Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "ePortalWFApproval"))
                 End If
             End If
+        
+          Dim Panel As System.Web.UI.WebControls.Panel = CType(MiscUtils.FindControlRecursively(Me, "WCAR_Doc1RecordControlPanel"), System.Web.UI.WebControls.Panel)
 
-            Dim Panel As System.Web.UI.WebControls.Panel = CType(MiscUtils.FindControlRecursively(Me, "WCAR_Doc1RecordControlPanel"), System.Web.UI.WebControls.Panel)
-
-            If ((Not IsNothing(Panel)) AndAlso (Not Panel.Visible)) OrElse IsNothing(Me.DataSource) Then
-                Return
-            End If
-
-
+          If ((Not IsNothing(Panel)) AndAlso (Not Panel.Visible)) OrElse IsNothing(Me.DataSource) Then
+              Return
+          End If
+          
+              
             ' 2. Perform any custom validation.
             Me.Validate()
 
@@ -8460,36 +8460,36 @@ Public Class BaseWCAR_Doc1RecordControl
             ' 4. Save in the database.
             ' We should not save the record if the data did not change. This
             ' will save a database hit and avoid triggering any database triggers.
-
+             
             If Me.DataSource.IsAnyValueChanged Then
                 ' Save record to database but do not commit yet.
                 ' Auto generated ids are available after saving for use by child (dependent) records.
                 Me.DataSource.Save()
-
+              
             End If
-
-
+            
+      
             ' update session or cookie by formula
-
-
+                                    
+      
             ' Setting the DataChanged to True results in the page being refreshed with
             ' the most recent data from the database.  This happens in PreRender event
             ' based on the current sort, search and filter criteria.
             Me.DataChanged = True
             Me.ResetData = True
-
+            
             Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
-
-            Dim recWCAR_Activity1TableControl As WCAR_Activity1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Activity1TableControl"), WCAR_Activity1TableControl)
-            recWCAR_Activity1TableControl.SaveData()
-
-            Dim recWCAR_Doc_Attach1TableControl As WCAR_Doc_Attach1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Attach1TableControl"), WCAR_Doc_Attach1TableControl)
-            recWCAR_Doc_Attach1TableControl.SaveData()
-
-            Dim recWCAR_Doc_Checker1TableControl As WCAR_Doc_Checker1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
-            recWCAR_Doc_Checker1TableControl.SaveData()
-
+                    
+        Dim recWCAR_Activity1TableControl as WCAR_Activity1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Activity1TableControl"), WCAR_Activity1TableControl)
+        recWCAR_Activity1TableControl.SaveData()
+                    
+        Dim recWCAR_Doc_Attach1TableControl as WCAR_Doc_Attach1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Attach1TableControl"), WCAR_Doc_Attach1TableControl)
+        recWCAR_Doc_Attach1TableControl.SaveData()
+                    
+        Dim recWCAR_Doc_Checker1TableControl as WCAR_Doc_Checker1TableControl = DirectCast(MiscUtils.FindControlRecursively(Me.Page, "WCAR_Doc_Checker1TableControl"), WCAR_Doc_Checker1TableControl)
+        recWCAR_Doc_Checker1TableControl.SaveData()
+          
         End Sub
 
         ' To customize, override this method in WCAR_Doc1RecordControl.
@@ -8499,9 +8499,9 @@ Public Class BaseWCAR_Doc1RecordControl
             ' To do this, it calls the Get methods for each of the field displayed on 
             ' the webpage.  It is better to make changes in the Get methods, rather 
             ' than making changes here.
-
+      
             ' Call the Get methods for each of the user interface controls.
-
+        
             GetWCD_C_ID()
             GetWCD_Exp_Budget()
             GetWCD_Exp_Cur_Yr()
@@ -8527,218 +8527,218 @@ Public Class BaseWCAR_Doc1RecordControl
             GetWCD_WCur_ID2()
             GetWCD_WDT_ID()
         End Sub
-
-
+        
+        
         Public Overridable Sub GetWCD_C_ID()
-
+         
         End Sub
-
+                
         Public Overridable Sub GetWCD_Exp_Budget()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Exp_Cur_Yr()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Exp_Nxt_Yr()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Exp_Prev_Total()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Exp_Sub_Yr()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Exp_Total()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Exp_Under_Over_Budget()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_No()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Proj_Inc_ACB()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Project_No()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Project_Title()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Remark()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Request_Date()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Status()
-
+            
             ' Retrieve the value entered by the user on the WCD_Status ASP:TextBox, and
             ' save it into the WCD_Status field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc record.
-
+            
             ' Custom validation should be performed in Validate, not here.
-
+            
             'Save the value to data source
-            Me.DataSource.Parse(Me.WCD_Status.Text, WCAR_Doc1Table.WCD_Status)
+            Me.DataSource.Parse(Me.WCD_Status.Text, WCAR_Doc1Table.WCD_Status)			
 
-
+                      
         End Sub
-
+                
         Public Overridable Sub GetWCD_Submit()
-
-
+        
+        
             ' Retrieve the value entered by the user on the WCD_Submit ASP:CheckBox, and
             ' save it into the WCD_Submit field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc record.
             ' Custom validation should be performed in Validate, not here.
-
-
+            
+            
             Me.DataSource.WCD_Submit = Me.WCD_Submit.Checked
-
+                    
         End Sub
-
+                
         Public Overridable Sub GetWCD_Supplementary_Manual()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Supplementary_WCD_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_U_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_Unit_Location()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_WCur_ID()
-
+            
         End Sub
-
+                
         Public Overridable Sub GetWCD_WCur_ID2()
-
+         
         End Sub
-
+                
         Public Overridable Sub GetWCD_WDT_ID()
-
+         
             ' Retrieve the value entered by the user on the WCD_WDT_ID ASP:DropDownList, and
             ' save it into the WCD_WDT_ID field in DataSource DatabaseANFLO-WFN%dbo.WCAR_Doc record.
-
+                        
             ' Custom validation should be performed in Validate, not here.
-
-            Me.DataSource.Parse(GetValueSelectedPageRequest(Me.WCD_WDT_ID), WCAR_Doc1Table.WCD_WDT_ID)
-
+            
+            Me.DataSource.Parse(GetValueSelectedPageRequest(Me.WCD_WDT_ID), WCAR_Doc1Table.WCD_WDT_ID)				
+            
         End Sub
-
-
+                
+      
         ' To customize, override this method in WCAR_Doc1RecordControl.
-
+        
         Public Overridable Function CreateWhereClause() As WhereClause
-
-            Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Doc_Attach1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Doc_Checker1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Doc1RecordControl As Boolean = False
-
+        
+        Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
+      
+        Dim hasFiltersWCAR_Doc_Attach1TableControl As Boolean = False
+      
+        Dim hasFiltersWCAR_Doc_Checker1TableControl As Boolean = False
+      
+        Dim hasFiltersWCAR_Doc1RecordControl As Boolean = False
+      
             Dim wc As WhereClause
             WCAR_Doc1Table.Instance.InnerFilter = Nothing
             wc = New WhereClause()
-
+            
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
             ' 2. User selected filter criteria.
             ' 3. User selected search criteria.
 
-
+            
             ' Retrieve the record id from the URL parameter.
-
-            Dim recId As String = DirectCast(Me.Page, BaseApplicationPage).Decrypt(Me.Page.Request.QueryString.Item("WCAR_Doc1"))
-
+              
+                  Dim recId As String = DirectCast(Me.Page, BaseApplicationPage).Decrypt(Me.Page.Request.QueryString.Item("WCAR_Doc1"))
+                
             If recId Is Nothing OrElse recId.Trim = "" Then
                 ' Get the error message from the application resource file.
                 Throw New Exception(Page.GetResourceValue("Err:UrlParamMissing", "ePortalWFApproval").Replace("{URL}", "WCAR_Doc1"))
             End If
             HttpContext.Current.Session("QueryString in Show-WCAR-Doc1") = recId
-
+              
             If KeyValue.IsXmlKey(recId) Then
                 ' Keys are typically passed as XML structures to handle composite keys.
                 ' If XML, then add a Where clause based on the Primary Key in the XML.
                 Dim pkValue As KeyValue = KeyValue.XmlToKey(recId)
-
+                
                 wc.iAND(WCAR_Doc1Table.WCD_ID, BaseFilter.ComparisonOperator.EqualsTo, pkValue.GetColumnValueString(WCAR_Doc1Table.WCD_ID))
-
+        
             Else
                 ' The URL parameter contains the actual value, not an XML structure.
-
+                
                 wc.iAND(WCAR_Doc1Table.WCD_ID, BaseFilter.ComparisonOperator.EqualsTo, recId)
-
+        
             End If
-
+              
             Return wc
-
+          
         End Function
-
+        
         ' This CreateWhereClause is used for loading list of suggestions for Auto Type-Ahead feature.
-
+        
         Public Overridable Function CreateWhereClause(ByVal searchText As String, ByVal fromSearchControl As String, ByVal AutoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String) As WhereClause
             WCAR_Doc1Table.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
-
-            Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Doc_Attach1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Doc_Checker1TableControl As Boolean = False
-
-            Dim hasFiltersWCAR_Doc1RecordControl As Boolean = False
-
+        
+                Dim hasFiltersWCAR_Activity1TableControl As Boolean = False
+              
+                Dim hasFiltersWCAR_Doc_Attach1TableControl As Boolean = False
+              
+                Dim hasFiltersWCAR_Doc_Checker1TableControl As Boolean = False
+              
+                Dim hasFiltersWCAR_Doc1RecordControl As Boolean = False
+              
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
             ' 2. User selected filter criteria.
             ' 3. User selected search criteria.
             Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
 
-
+            
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
-
-
-
+          
+       
+          
             Return wc
         End Function
 
-
-
-        Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
-                                        ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
-                                        ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
-                                        ByVal resultList As ArrayList) As Boolean
-            Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
-                                     autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
-                                     resultList, False)
-        End Function
-
+        
+         
+         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
+                                         ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
+                                         ByVal autoTypeAheadSearch As String, ByVal AutoTypeAheadWordSeparators As String, _
+                                         ByVal resultList As ArrayList) As Boolean
+              Return FormatSuggestions(prefixText, resultItem, columnLength, AutoTypeAheadDisplayFoundText, _
+                                       autoTypeAheadSearch, AutoTypeAheadWordSeparators, _
+                                       resultList, False)
+         End Function                                       
+         
         'Formats the resultItem and adds it to the list of suggestions.
         Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
                                                ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
@@ -8787,10 +8787,10 @@ Public Class BaseWCAR_Doc1RecordControl
                     If Len(resultItem) - index <= columnLength Then
                         If index = 0 Then
                             itemToAdd = resultItem
-                        Else
+                        Else                            
                             itemToAdd = resultItem.Substring(index)
                         End If
-                    Else
+                    Else                       
                         itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, index, index + columnLength, StringUtils.Direction.forward)
                     End If
                 ElseIf InvariantLCase(AutoTypeAheadDisplayFoundText).equals("inmiddleofmatchedstring") Then
@@ -8800,7 +8800,7 @@ Public Class BaseWCAR_Doc1RecordControl
                     Else
                         ' Sanity check at end of the string
                         If index + Len(prefixText) >= Len(resultItem) - 1 OrElse _
-                        Len(resultItem) - index < subStringBeginIndex Then
+                        Len(resultItem) - index < subStringBeginIndex Then                           
                             itemToAdd = StringUtils.GetSubstringWithWholeWords(resultItem, Len(resultItem) - 1 - columnLength, Len(resultItem) - 1, StringUtils.Direction.backward)
                         ElseIf index <= subStringBeginIndex Then
                             ' Sanity check at beginning of the string                          
@@ -8860,11 +8860,11 @@ Public Class BaseWCAR_Doc1RecordControl
             End If
             Return isAdded
         End Function
-
-
+        
+    
 
         ' To customize, override this method in WCAR_Doc1RecordControl.
-        Public Overridable Sub Validate()
+        Public Overridable Sub Validate() 
             ' Add custom validation for any control within this panel.
             ' Example.  If you have a State ASP:Textbox control
             ' If Me.State.Text <> "CA" Then
@@ -8874,19 +8874,19 @@ Public Class BaseWCAR_Doc1RecordControl
             ' The Validate method is common across all controls within
             ' this panel so you can validate multiple fields, but report
             ' one error message.
-
-
+            
+                
         End Sub
 
         Public Overridable Sub Delete()
-
+        
             If Me.IsNewRecord() Then
                 Return
             End If
 
             Dim pkValue As KeyValue = KeyValue.XmlToKey(Me.RecordUniqueId)
-            WCAR_Doc1Table.DeleteRecord(pkValue)
-
+          WCAR_Doc1Table.DeleteRecord(pkValue)
+          
         End Sub
 
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
@@ -8896,41 +8896,41 @@ Public Class BaseWCAR_Doc1RecordControl
                 Me.RegisterPostback()
 
                 If Not Me.Page.ErrorOnPage AndAlso (Me.Page.IsPageRefresh OrElse Me.DataChanged OrElse Me.ResetData) Then
-
-
+                  
+                
                     ' Re-load the data and update the web page if necessary.
                     ' This is typically done during a postback (filter, search button, sort, pagination button).
                     ' In each of the other click handlers, simply set DataChanged to True to reload the data.
                     Me.LoadData()
-                    Me.DataBind()
+                    Me.DataBind()			
                 End If
-
-
+                                
+                						
             Catch ex As Exception
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
             Finally
                 DbUtils.EndTransaction()
             End Try
         End Sub
-
-
+        
+            
         Protected Overrides Sub SaveControlsToSession()
             MyBase.SaveControlsToSession()
-
-
+        
+    
             'Save pagination state to session.
-
+          
         End Sub
-
-
-
+        
+        
+    
         Protected Overrides Sub ClearControlsFromSession()
             MyBase.ClearControlsFromSession()
 
-
+        
 
             ' Clear pagination state from session.
-
+        
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
@@ -8939,196 +8939,196 @@ Public Class BaseWCAR_Doc1RecordControl
             If Not isNewRecord Is Nothing AndAlso isNewRecord.Trim <> "" Then
                 Me.IsNewRecord = Boolean.Parse(isNewRecord)
             End If
-
+            
             Dim myCheckSum As String = CType(ViewState("CheckSum"), String)
             If Not myCheckSum Is Nothing AndAlso myCheckSum.Trim <> "" Then
                 Me.CheckSum = myCheckSum
             End If
-
-
+            
+    
             ' Load view state for pagination control.
-
+                 
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
             ViewState("IsNewRecord") = Me.IsNewRecord.ToString()
             ViewState("CheckSum") = Me.CheckSum
-
-
+            
+    
             ' Load view state for pagination control.
-
+                  
             Return MyBase.SaveViewState()
         End Function
-
-
+        
+        
         ' Generate the event handling functions for pagination events.
-
-
+            
+      
         ' Generate the event handling functions for filter and search events.
-
-
+            
+    
         ' Generate set method for buttons
-
-        Public Overridable Sub SetimbRelated()
-
-
+        
+        Public Overridable Sub SetimbRelated()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetbtnPrint()
-
-
+            
+        Public Overridable Sub SetbtnPrint()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetbtnVoid()
-
-
+            
+        Public Overridable Sub SetbtnVoid()                
+              
+   
         End Sub
-
-        Public Overridable Sub SetOKButton1()
-
-
+            
+        Public Overridable Sub SetOKButton1()                
+              
+   
         End Sub
-
-
+            
+                        
         Public Overridable Function CreateWhereClause_WCD_C_IDDropDownList() As WhereClause
             ' By default, we simply return a new WhereClause.
             ' Add additional where clauses to restrict the items shown in the dropdown list.
-
+            						
             ' This WhereClause is for the DatabaseANFLO-WFN%dbo.sel_WF_DYNAMICS_Company table.
             ' Examples:
             ' wc.iAND(Sel_WF_DYNAMICS_Company1View.Company_ID, BaseFilter.ComparisonOperator.EqualsTo, "XYZ")
             ' wc.iAND(Sel_WF_DYNAMICS_Company1View.Active, BaseFilter.ComparisonOperator.EqualsTo, "1")
-
+            
             Dim wc As WhereClause = New WhereClause()
             Return wc
-
+            				
         End Function
-
-
+                  
+                        
         Public Overridable Function CreateWhereClause_WCD_WCur_ID2DropDownList() As WhereClause
             ' By default, we simply return a new WhereClause.
             ' Add additional where clauses to restrict the items shown in the dropdown list.
-
+            						
             ' This WhereClause is for the DatabaseANFLO-WFN%dbo.WCurrency table.
             ' Examples:
             ' wc.iAND(WCurrency1Table.WCur_Desc, BaseFilter.ComparisonOperator.EqualsTo, "XYZ")
             ' wc.iAND(WCurrency1Table.Active, BaseFilter.ComparisonOperator.EqualsTo, "1")
-
+            
             Dim wc As WhereClause = New WhereClause()
             Return wc
-
+            				
         End Function
-
-
+                  
+                        
         Public Overridable Function CreateWhereClause_WCD_WDT_IDDropDownList() As WhereClause
             ' By default, we simply return a new WhereClause.
             ' Add additional where clauses to restrict the items shown in the dropdown list.
-
+            						
             ' This WhereClause is for the DatabaseANFLO-WFN%dbo.WDoc_Type table.
             ' Examples:
             ' wc.iAND(WDoc_Type1Table.WDT_Name, BaseFilter.ComparisonOperator.EqualsTo, "XYZ")
             ' wc.iAND(WDoc_Type1Table.Active, BaseFilter.ComparisonOperator.EqualsTo, "1")
-
+            
             Dim wc As WhereClause = New WhereClause()
             Return wc
-
+            				
         End Function
-
+                  
         ' Fill the WCD_C_ID list.
         Protected Overridable Sub PopulateWCD_C_IDDropDownList( _
                 ByVal selectedValue As String, _
                 ByVal maxItems As Integer)
-
+            		  					                
             Me.WCD_C_ID.Items.Clear()
-
-
+            
+                    
             ' 1. Setup the static list items        
-
+            
             ' Add the Please Select item.
-            Me.WCD_C_ID.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
-
+            Me.WCD_C_ID.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            		  			
             ' 2. Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCD_C_IDDropDownList function.
             ' It is better to customize the where clause there.
-
+            
             Dim wc As WhereClause = CreateWhereClause_WCD_C_IDDropDownList()
             ' Create the ORDER BY clause to sort based on the displayed value.			
+                
 
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(Sel_WF_DYNAMICS_Company1View.Company_Short_Name, OrderByItem.OrderDir.Asc)
 
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(Sel_WF_DYNAMICS_Company1View.Company_Short_Name, OrderByItem.OrderDir.Asc)
-
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-
+                      Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      
             ' 3. Read a total of maxItems from the database and insert them		
             Dim itemValues() As Sel_WF_DYNAMICS_Company1Record = Nothing
-            Dim evaluator As New FormulaEvaluator
-            If wc.RunQuery Then
+            Dim evaluator As New FormulaEvaluator                
+            If wc.RunQuery
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim listDuplicates As New ArrayList()
 
                 Do
                     itemValues = Sel_WF_DYNAMICS_Company1View.GetRecords(wc, orderBy, pageNum, maxItems)
-                    For Each itemValue As Sel_WF_DYNAMICS_Company1Record In itemValues
+                    For each itemValue As Sel_WF_DYNAMICS_Company1Record In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.Company_IDSpecified Then
-                            cvalue = itemValue.Company_ID.ToString()
-
+                            cvalue = itemValue.Company_ID.ToString() 
+                            
                             If counter < maxItems AndAlso Me.WCD_C_ID.Items.FindByValue(cvalue) Is Nothing Then
-
+                            
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_C_ID)
                                 If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_C_ID.IsApplyDisplayAs Then
-                                    fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_C_ID)
+                                fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_C_ID)
                                 End If
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                                    fvalue = itemValue.Format(Sel_WF_DYNAMICS_Company1View.Company_ID)
+                                fvalue = itemValue.Format(Sel_WF_DYNAMICS_Company1View.Company_ID)
                                 End If
-
+                              
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                    fvalue = ""
+                                   fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If (fvalue.Length > 50) Then
+                                If ( fvalue.Length > 50 ) Then
                                     fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.WCD_C_ID.Items.FindByText(fvalue)
-
+                          
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                                     End If
                                 End If
 
                                 Dim newItem As ListItem = New ListItem(fvalue, cvalue)
                                 Me.WCD_C_ID.Items.Add(newItem)
 
-                                If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                                 End If
 
-                                counter += 1
+                                counter += 1			  
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
             End If
-
-
+                            
+                    
             ' 4. Set the selected value (insert if not already present).
-
+              
             If Not selectedValue Is Nothing AndAlso _
                 selectedValue.Trim <> "" AndAlso _
                 Not SetSelectedValue(Me.WCD_C_ID, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.WCD_C_ID, selectedValue) Then
+                Not SetSelectedDisplayText(Me.WCD_C_ID, selectedValue)Then
 
                 ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.sel_WF_DYNAMICS_Company.Company_ID = selectedValue
                 Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
@@ -9139,131 +9139,131 @@ Public Class BaseWCAR_Doc1RecordControl
                 Try
                     ' Execute the query
                     Dim rc() As Sel_WF_DYNAMICS_Company1Record = Sel_WF_DYNAMICS_Company1View.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
-                    Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-                    ' if find a record, add it to the dropdown and set it as selected item
-                    If rc IsNot Nothing AndAlso rc.Length = 1 Then
-                        Dim itemValue As Sel_WF_DYNAMICS_Company1Record = DirectCast(rc(0), Sel_WF_DYNAMICS_Company1Record)
+                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      ' if find a record, add it to the dropdown and set it as selected item
+                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
+                      Dim itemValue As Sel_WF_DYNAMICS_Company1Record = DirectCast(rc(0), Sel_WF_DYNAMICS_Company1Record)
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.Company_IDSpecified Then
-                            cvalue = itemValue.Company_ID.ToString()
-                            Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_C_ID)
-                            If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_C_ID.IsApplyDisplayAs Then
-                                fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_C_ID)
+                            cvalue = itemValue.Company_ID.ToString() 
+                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_C_ID)
+                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_C_ID.IsApplyDisplayAs Then
+                          fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_C_ID)
+                          End If
+                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                          fvalue = itemValue.Format(Sel_WF_DYNAMICS_Company1View.Company_ID)
+                          End If
+                        
+                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+                              ResetSelectedItem(Me.WCD_C_ID, New ListItem(fvalue, cvalue))
                             End If
-                            If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                                fvalue = itemValue.Format(Sel_WF_DYNAMICS_Company1View.Company_ID)
-                            End If
-
-                            If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-                            ResetSelectedItem(Me.WCD_C_ID, New ListItem(fvalue, cvalue))
                         End If
-                    End If
                 Catch
                 End Try
 
-            End If
-
-
+            End If					
+                        
+                
         End Sub
-
-
+        
+              
         ' Fill the WCD_WCur_ID2 list.
         Protected Overridable Sub PopulateWCD_WCur_ID2DropDownList( _
                 ByVal selectedValue As String, _
                 ByVal maxItems As Integer)
-
+            		  					                
             Me.WCD_WCur_ID2.Items.Clear()
-
-
+            
+                    
             ' 1. Setup the static list items        
-
+            
             ' Add the Please Select item.
-            Me.WCD_WCur_ID2.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
-
+            Me.WCD_WCur_ID2.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            		  			
             ' 2. Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCD_WCur_ID2DropDownList function.
             ' It is better to customize the where clause there.
-
+            
             Dim wc As WhereClause = CreateWhereClause_WCD_WCur_ID2DropDownList()
             ' Create the ORDER BY clause to sort based on the displayed value.			
+                
 
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(WCurrency1Table.WCur_Desc, OrderByItem.OrderDir.Asc)
 
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(WCurrency1Table.WCur_Desc, OrderByItem.OrderDir.Asc)
-
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-
+                      Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      
             ' 3. Read a total of maxItems from the database and insert them		
             Dim itemValues() As WCurrency1Record = Nothing
-            Dim evaluator As New FormulaEvaluator
-            If wc.RunQuery Then
+            Dim evaluator As New FormulaEvaluator                
+            If wc.RunQuery
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim listDuplicates As New ArrayList()
 
                 Do
                     itemValues = WCurrency1Table.GetRecords(wc, orderBy, pageNum, maxItems)
-                    For Each itemValue As WCurrency1Record In itemValues
+                    For each itemValue As WCurrency1Record In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.WCur_IDSpecified Then
-                            cvalue = itemValue.WCur_ID.ToString()
-
+                            cvalue = itemValue.WCur_ID.ToString() 
+                            
                             If counter < maxItems AndAlso Me.WCD_WCur_ID2.Items.FindByValue(cvalue) Is Nothing Then
-
+                            
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WCur_ID)
                                 If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WCur_ID.IsApplyDisplayAs Then
-                                    fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WCur_ID)
+                                fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WCur_ID)
                                 End If
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                                    fvalue = itemValue.Format(WCurrency1Table.WCur_Desc)
+                                fvalue = itemValue.Format(WCurrency1Table.WCur_Desc)
                                 End If
-
+                              
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                    fvalue = ""
+                                   fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If (fvalue.Length > 50) Then
+                                If ( fvalue.Length > 50 ) Then
                                     fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.WCD_WCur_ID2.Items.FindByText(fvalue)
-
+                          
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                                     End If
                                 End If
 
                                 Dim newItem As ListItem = New ListItem(fvalue, cvalue)
                                 Me.WCD_WCur_ID2.Items.Add(newItem)
 
-                                If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                                 End If
 
-                                counter += 1
+                                counter += 1			  
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
             End If
-
-
+                            
+                    
             ' 4. Set the selected value (insert if not already present).
-
+              
             If Not selectedValue Is Nothing AndAlso _
                 selectedValue.Trim <> "" AndAlso _
                 Not SetSelectedValue(Me.WCD_WCur_ID2, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.WCD_WCur_ID2, selectedValue) Then
+                Not SetSelectedDisplayText(Me.WCD_WCur_ID2, selectedValue)Then
 
                 ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.WCurrency.WCur_ID = selectedValue
                 Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
@@ -9274,131 +9274,131 @@ Public Class BaseWCAR_Doc1RecordControl
                 Try
                     ' Execute the query
                     Dim rc() As WCurrency1Record = WCurrency1Table.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
-                    Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-                    ' if find a record, add it to the dropdown and set it as selected item
-                    If rc IsNot Nothing AndAlso rc.Length = 1 Then
-                        Dim itemValue As WCurrency1Record = DirectCast(rc(0), WCurrency1Record)
+                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      ' if find a record, add it to the dropdown and set it as selected item
+                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
+                      Dim itemValue As WCurrency1Record = DirectCast(rc(0), WCurrency1Record)
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.WCur_IDSpecified Then
-                            cvalue = itemValue.WCur_ID.ToString()
-                            Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WCur_ID)
-                            If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WCur_ID.IsApplyDisplayAs Then
-                                fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WCur_ID)
+                            cvalue = itemValue.WCur_ID.ToString() 
+                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WCur_ID)
+                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WCur_ID.IsApplyDisplayAs Then
+                          fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WCur_ID)
+                          End If
+                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                          fvalue = itemValue.Format(WCurrency1Table.WCur_Desc)
+                          End If
+                        
+                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+                              ResetSelectedItem(Me.WCD_WCur_ID2, New ListItem(fvalue, cvalue))
                             End If
-                            If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                                fvalue = itemValue.Format(WCurrency1Table.WCur_Desc)
-                            End If
-
-                            If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-                            ResetSelectedItem(Me.WCD_WCur_ID2, New ListItem(fvalue, cvalue))
                         End If
-                    End If
                 Catch
                 End Try
 
-            End If
-
-
+            End If					
+                        
+                
         End Sub
-
-
+        
+              
         ' Fill the WCD_WDT_ID list.
         Protected Overridable Sub PopulateWCD_WDT_IDDropDownList( _
                 ByVal selectedValue As String, _
                 ByVal maxItems As Integer)
-
+            		  					                
             Me.WCD_WDT_ID.Items.Clear()
-
-
+            
+                    
             ' 1. Setup the static list items        
-
+            
             ' Add the Please Select item.
-            Me.WCD_WDT_ID.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
-
+            Me.WCD_WDT_ID.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            		  			
             ' 2. Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WCD_WDT_IDDropDownList function.
             ' It is better to customize the where clause there.
-
+            
             Dim wc As WhereClause = CreateWhereClause_WCD_WDT_IDDropDownList()
             ' Create the ORDER BY clause to sort based on the displayed value.			
+                
 
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(WDoc_Type1Table.WDT_Name, OrderByItem.OrderDir.Asc)
 
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(WDoc_Type1Table.WDT_Name, OrderByItem.OrderDir.Asc)
-
-            Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-
+                      Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      
             ' 3. Read a total of maxItems from the database and insert them		
             Dim itemValues() As WDoc_Type1Record = Nothing
-            Dim evaluator As New FormulaEvaluator
-            If wc.RunQuery Then
+            Dim evaluator As New FormulaEvaluator                
+            If wc.RunQuery
                 Dim counter As Integer = 0
                 Dim pageNum As Integer = 0
                 Dim listDuplicates As New ArrayList()
 
                 Do
                     itemValues = WDoc_Type1Table.GetRecords(wc, orderBy, pageNum, maxItems)
-                    For Each itemValue As WDoc_Type1Record In itemValues
+                    For each itemValue As WDoc_Type1Record In itemValues
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.WDT_IDSpecified Then
-                            cvalue = itemValue.WDT_ID.ToString()
-
+                            cvalue = itemValue.WDT_ID.ToString() 
+                            
                             If counter < maxItems AndAlso Me.WCD_WDT_ID.Items.FindByValue(cvalue) Is Nothing Then
-
+                            
                                 Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WDT_ID)
                                 If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WDT_ID.IsApplyDisplayAs Then
-                                    fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WDT_ID)
+                                fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WDT_ID)
                                 End If
                                 If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                                    fvalue = itemValue.Format(WDoc_Type1Table.WDT_Name)
+                                fvalue = itemValue.Format(WDoc_Type1Table.WDT_Name)
                                 End If
-
+                              
                                 If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
 
                                 If (IsNothing(fvalue)) Then
-                                    fvalue = ""
+                                   fvalue = ""
                                 End If
 
                                 fvalue = fvalue.Trim()
 
-                                If (fvalue.Length > 50) Then
+                                If ( fvalue.Length > 50 ) Then
                                     fvalue = fvalue.Substring(0, 50) & "..."
                                 End If
 
                                 Dim dupItem As ListItem = Me.WCD_WDT_ID.Items.FindByText(fvalue)
-
+                          
                                 If Not IsNothing(dupItem) Then
                                     listDuplicates.Add(fvalue)
                                     If Not String.IsNullOrEmpty(dupItem.Value) Then
-                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length, 38)) & ")"
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
                                     End If
                                 End If
 
                                 Dim newItem As ListItem = New ListItem(fvalue, cvalue)
                                 Me.WCD_WDT_ID.Items.Add(newItem)
 
-                                If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(cvalue) Then
-                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length, 38)) & ")"
+                                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
                                 End If
 
-                                counter += 1
+                                counter += 1			  
                             End If
                         End If
                     Next
                     pageNum += 1
                 Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
             End If
-
-
+                            
+                    
             ' 4. Set the selected value (insert if not already present).
-
+              
             If Not selectedValue Is Nothing AndAlso _
                 selectedValue.Trim <> "" AndAlso _
                 Not SetSelectedValue(Me.WCD_WDT_ID, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.WCD_WDT_ID, selectedValue) Then
+                Not SetSelectedDisplayText(Me.WCD_WDT_ID, selectedValue)Then
 
                 ' construct a whereclause to query a record with DatabaseANFLO-WFN%dbo.WDoc_Type.WDT_ID = selectedValue
                 Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
@@ -9409,123 +9409,123 @@ Public Class BaseWCAR_Doc1RecordControl
                 Try
                     ' Execute the query
                     Dim rc() As WDoc_Type1Record = WDoc_Type1Table.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
-                    Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
-                    ' if find a record, add it to the dropdown and set it as selected item
-                    If rc IsNot Nothing AndAlso rc.Length = 1 Then
-                        Dim itemValue As WDoc_Type1Record = DirectCast(rc(0), WDoc_Type1Record)
+                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      ' if find a record, add it to the dropdown and set it as selected item
+                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
+                      Dim itemValue As WDoc_Type1Record = DirectCast(rc(0), WDoc_Type1Record)
                         ' Create the item and add to the list.
                         Dim cvalue As String = Nothing
                         Dim fvalue As String = Nothing
                         If itemValue.WDT_IDSpecified Then
-                            cvalue = itemValue.WDT_ID.ToString()
-                            Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WDT_ID)
-                            If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WDT_ID.IsApplyDisplayAs Then
-                                fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WDT_ID)
+                            cvalue = itemValue.WDT_ID.ToString() 
+                          Dim _isExpandableNonCompositeForeignKey As Boolean = WCAR_Doc1Table.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WCAR_Doc1Table.WCD_WDT_ID)
+                          If _isExpandableNonCompositeForeignKey AndAlso WCAR_Doc1Table.WCD_WDT_ID.IsApplyDisplayAs Then
+                          fvalue = WCAR_Doc1Table.GetDFKA(itemValue, WCAR_Doc1Table.WCD_WDT_ID)
+                          End If
+                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                          fvalue = itemValue.Format(WDoc_Type1Table.WDT_Name)
+                          End If
+                        
+                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+                              ResetSelectedItem(Me.WCD_WDT_ID, New ListItem(fvalue, cvalue))
                             End If
-                            If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
-                                fvalue = itemValue.Format(WDoc_Type1Table.WDT_Name)
-                            End If
-
-                            If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
-                            ResetSelectedItem(Me.WCD_WDT_ID, New ListItem(fvalue, cvalue))
                         End If
-                    End If
                 Catch
                 End Try
 
-            End If
-
-
+            End If					
+                        
+                
         End Sub
-
-
+        
+              
         ' event handler for ImageButton
         Public Overridable Sub imbRelated_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub btnPrint_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub btnVoid_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
+              
+    Try
+    
             Catch ex As Exception
-
+            
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
-
+    
         End Sub
-
+        
         ' event handler for Button
         Public Overridable Sub OKButton1_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Dim shouldRedirect As Boolean = True
-            Dim target As String = ""
-
-            Try
-
+              
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
 
                 ' if target is specified meaning that is opened on popup or new window
                 If Page.Request("target") <> "" Then
                     shouldRedirect = False
-                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "ClosePopup", "closePopupPage();", True)
+                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "ClosePopup", "closePopupPage();", True)                   
                 End If
-
+      
             Catch ex As Exception
-
+            
                 shouldRedirect = False
                 Me.Page.ErrorOnPage = True
-
+    
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
+    
             Finally
-
+    
             End Try
             If shouldRedirect Then
                 Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.RedirectBack()
-
+      Me.Page.RedirectBack()
+        
             End If
         End Sub
-
+        
         Protected Overridable Sub WCD_C_ID_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
 
             ' for the value inserted by quick add button or large list selector, 
@@ -9539,11 +9539,11 @@ Public Class BaseWCAR_Doc1RecordControl
                 Me.Page.Session.Remove(WCD_C_ID.ClientID & "_SelectedDisplayText")
             End If
 
-
-
-
+          									
+                
+                
         End Sub
-
+            
         Protected Overridable Sub WCD_WCur_ID2_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
 
             ' for the value inserted by quick add button or large list selector, 
@@ -9557,11 +9557,11 @@ Public Class BaseWCAR_Doc1RecordControl
                 Me.Page.Session.Remove(WCD_WCur_ID2.ClientID & "_SelectedDisplayText")
             End If
 
-
-
-
+          									
+                
+                
         End Sub
-
+            
         Protected Overridable Sub WCD_WDT_ID_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)
 
             ' for the value inserted by quick add button or large list selector, 
@@ -9575,81 +9575,81 @@ Public Class BaseWCAR_Doc1RecordControl
                 Me.Page.Session.Remove(WCD_WDT_ID.ClientID & "_SelectedDisplayText")
             End If
 
-
-
+          									
+                
+                
+        End Sub
+            
+        Protected Overridable Sub WCD_Submit_CheckedChanged(ByVal sender As Object, ByVal args As EventArgs)                
+             
 
         End Sub
-
-        Protected Overridable Sub WCD_Submit_CheckedChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-
-        End Sub
-
-        Protected Overridable Sub WCD_Exp_Budget_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Exp_Cur_Yr_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Exp_Nxt_Yr_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Exp_Prev_Total_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Exp_Sub_Yr_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Exp_Total_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Exp_Under_Over_Budget_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_No_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Proj_Inc_ACB_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Project_No_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Project_Title_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Remark_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Request_Date_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Status_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Supplementary_WCD_ID_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-        Protected Overridable Sub WCD_Unit_Location_TextChanged(ByVal sender As Object, ByVal args As EventArgs)
-
-        End Sub
-
-
+            
+        Protected Overridable Sub WCD_Exp_Budget_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Exp_Cur_Yr_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Exp_Nxt_Yr_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Exp_Prev_Total_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Exp_Sub_Yr_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Exp_Total_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Exp_Under_Over_Budget_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_No_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Proj_Inc_ACB_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Project_No_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Project_Title_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Remark_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Request_Date_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Status_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Supplementary_WCD_ID_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+        Protected Overridable Sub WCD_Unit_Location_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
+                    
+              End Sub
+            
+   
         Private _PreviousUIData As New Hashtable
         Public Overridable Property PreviousUIData() As Hashtable
             Get
@@ -9658,9 +9658,9 @@ Public Class BaseWCAR_Doc1RecordControl
             Set(ByVal value As Hashtable)
                 _PreviousUIData = value
             End Set
-        End Property
+        End Property   
 
-
+        
         Public Property RecordUniqueId() As String
             Get
                 Return CType(Me.ViewState("BaseWCAR_Doc1RecordControl_Rec"), String)
@@ -9669,7 +9669,7 @@ Public Class BaseWCAR_Doc1RecordControl
                 Me.ViewState("BaseWCAR_Doc1RecordControl_Rec") = value
             End Set
         End Property
-
+            
         Public Property DataSource() As WCAR_Doc1Record
             Get
                 Return DirectCast(MyBase._DataSource, WCAR_Doc1Record)
@@ -9679,7 +9679,7 @@ Public Class BaseWCAR_Doc1RecordControl
             End Set
         End Property
 
-
+        
         Private _checkSum As String
         Public Overridable Property CheckSum() As String
             Get
@@ -9689,7 +9689,7 @@ Public Class BaseWCAR_Doc1RecordControl
                 Me._checkSum = value
             End Set
         End Property
-
+        
         Private _TotalPages As Integer
         Public Property TotalPages() As Integer
             Get
@@ -9699,7 +9699,7 @@ Public Class BaseWCAR_Doc1RecordControl
                 Me._TotalPages = value
             End Set
         End Property
-
+        
         Private _PageIndex As Integer
         Public Property PageIndex() As Integer
             Get
@@ -9710,7 +9710,7 @@ Public Class BaseWCAR_Doc1RecordControl
                 Me._PageIndex = value
             End Set
         End Property
-
+    
         Private _PageSize As Integer
         Public Property PageSize() As Integer
             Get
@@ -9720,7 +9720,7 @@ Public Class BaseWCAR_Doc1RecordControl
                 Me._PageSize = value
             End Set
         End Property
-
+    
         Private _TotalRecords As Integer
         Public Property TotalRecords() As Integer
             Get
@@ -9734,7 +9734,7 @@ Public Class BaseWCAR_Doc1RecordControl
                 Me._TotalRecords = value
             End Set
         End Property
-
+        
         Private _DisplayLastPage As Boolean
         Public Property DisplayLastPage() As Boolean
             Get
@@ -9744,533 +9744,533 @@ Public Class BaseWCAR_Doc1RecordControl
                 Me._DisplayLastPage = value
             End Set
         End Property
-
-
+        
+        
 
 #Region "Helper Properties"
-
+        
         Public ReadOnly Property btnPrint() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnPrint"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property btnVoid() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "btnVoid"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property imbRelated() As System.Web.UI.WebControls.ImageButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "imbRelated"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
-
+        
         Public ReadOnly Property lblTotal() As System.Web.UI.WebControls.Label
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "lblTotal"), System.Web.UI.WebControls.Label)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal10() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal10"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal11() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal11"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal12() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal12"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal13() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal13"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal14() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal14"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal15() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal15"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal16() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal16"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal17() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal17"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal18() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal18"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal19() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal19"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal2() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal2"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal20() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal20"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal21() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal21"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal22() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal22"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal23() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal23"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal24() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal24"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal25() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal25"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal26() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal26"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal27() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal27"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal28() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal28"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal29() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal29"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal3() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal3"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal30() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal30"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal31() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal31"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal32() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal32"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal33() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal33"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal35() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal35"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal4() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal4"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal5() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal5"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal6() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal6"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal7() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal7"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal8() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal8"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property Literal9() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal9"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property OKButton1() As ePortalWFApproval.UI.IThemeButton
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "OKButton1"), ePortalWFApproval.UI.IThemeButton)
-            End Get
-        End Property
-
+          End Get
+          End Property
+        
         Public ReadOnly Property Title0() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Title0"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCAR_DocRecordControlTabContainer() As AjaxControlToolkit.TabContainer
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCAR_DocRecordControlTabContainer"), AjaxControlToolkit.TabContainer)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_C_ID() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_C_ID"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_C_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_C_IDLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Exp_Budget() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Budget"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Exp_BudgetLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_BudgetLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Exp_Cur_Yr() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Cur_Yr"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Exp_Cur_YrLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Cur_YrLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Exp_Nxt_Yr() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Nxt_Yr"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Exp_Nxt_YrLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Nxt_YrLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Exp_Prev_Total() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Prev_Total"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Exp_Prev_TotalLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Prev_TotalLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Exp_Sub_Yr() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Sub_Yr"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Exp_Sub_YrLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Sub_YrLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Exp_Total() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Total"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Exp_TotalLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_TotalLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Exp_Under_Over_Budget() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Under_Over_Budget"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Exp_Under_Over_BudgetLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Under_Over_BudgetLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_No() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_No"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_NoLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_NoLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Proj_Inc_ACB() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Proj_Inc_ACB"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Proj_Inc_ACBLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Proj_Inc_ACBLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Project_No() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Project_No"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Project_NoLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Project_NoLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Project_Title() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Project_Title"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Project_TitleLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Project_TitleLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Remark() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Remark"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_RemarkLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_RemarkLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Request_Date() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Request_Date"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Request_DateLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Request_DateLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Status() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Status"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_StatusLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_StatusLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Submit() As System.Web.UI.WebControls.CheckBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Submit"), System.Web.UI.WebControls.CheckBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_SubmitLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_SubmitLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_Supplementary_Manual() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Supplementary_Manual"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Supplementary_WCD_ID() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Supplementary_WCD_ID"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_SupplementaryLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_SupplementaryLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_U_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_U_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Unit_Location() As System.Web.UI.WebControls.TextBox
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Unit_Location"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_Unit_LocationLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Unit_LocationLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_WCur_ID() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_WCur_ID"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_WCur_ID1() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_WCur_ID1"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_WCur_ID2() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_WCur_ID2"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_WCur_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_WCur_IDLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
         Public ReadOnly Property WCD_WDT_ID() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_WDT_ID"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
-
+            
         Public ReadOnly Property WCD_WDT_IDLabel() As System.Web.UI.WebControls.Literal
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_WDT_IDLabel"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-
+        
 #End Region
 
 #Region "Helper Functions"

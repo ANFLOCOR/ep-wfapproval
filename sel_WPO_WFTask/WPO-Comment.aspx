@@ -28,9 +28,9 @@
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dhtr" valign="middle"><asp:Literal runat="server" id="Sel_WPO_POP10550Title" Text="Comment">	</asp:Literal></td></tr></table>
 </td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
 
-                </td></tr><tr><td>
+                </td></tr><tr><td style="width:500px;">
                   <asp:panel id="Sel_WPO_POP10550RecordControlCollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>
-                    <asp:panel id="Sel_WPO_POP10550RecordControlPanel" runat="server"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="fls" colspan="3"><asp:TextBox runat="server" id="COMMENTS" Columns="40" MaxLength="204" cssclass="field_input" htmlencodevalue="Default" readonly="True" rows="6" textformat="{0}" textmode="MultiLine" style="white-space: inherit;"></asp:TextBox>&nbsp;
+                    <asp:panel id="Sel_WPO_POP10550RecordControlPanel" runat="server"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="fls" colspan="3" style="text-align:left;width:500px;"><asp:TextBox runat="server" id="COMMENTS" MaxLength="204" columns="5" cssclass="field_input" htmlencodevalue="Default" readonly="False" rows="8" textformat="{0}" textmode="MultiLine" width="500px"></asp:TextBox>&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="COMMENTSTextBoxMaxLengthValidator" ControlToValidate="COMMENTS" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;Comments&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td></tr></table></asp:panel>
 
                   </td></tr></table>

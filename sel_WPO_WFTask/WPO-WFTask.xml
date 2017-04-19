@@ -54,7 +54,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>Submit Action</Value>
+          <Value>Approve</Value>
           <Type>ResourceReference</Type>
         </Attribute>
         <Attribute>
@@ -83,7 +83,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>Submit Action</Value>
+          <Value>Reject</Value>
           <Type>ResourceReference</Type>
         </Attribute>
         <Attribute>
@@ -93,7 +93,7 @@
         </Attribute>
         <Attribute>
           <Name>Visible</Name>
-          <Value>False</Value>
+          <Value>True</Value>
         </Attribute>
         <Attribute>
           <Name>Width</Name>
@@ -120,7 +120,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>Submit Action</Value>
+          <Value>Return</Value>
           <Type>ResourceReference</Type>
         </Attribute>
         <Attribute>
@@ -130,7 +130,7 @@
         </Attribute>
         <Attribute>
           <Name>Visible</Name>
-          <Value>False</Value>
+          <Value>True</Value>
         </Attribute>
         <Attribute>
           <Name>Width</Name>
@@ -2082,6 +2082,36 @@
       <ControlClass>System.Web.UI.WebControls.Literal</ControlClass>
     </ContainedComponent>
     <ContainedComponent>
+      <Name>litSpace</Name>
+      <Type>Literal</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Text</Name>
+          <Value>&amp;nbsp;&amp;nbsp;</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WPOP10100RecordControl</InsideControl>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>litSpace1</Name>
+      <Type>Literal</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Text</Name>
+          <Value>&amp;nbsp;&amp;nbsp;</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WPOP10100RecordControl</InsideControl>
+    </ContainedComponent>
+    <ContainedComponent>
       <Name>litStatus</Name>
       <Type>Aspx</Type>
       <PassthroughAttributes>
@@ -3393,30 +3423,6 @@
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_WPO_WFTaskRecordControl</InsideControl>
-    </ContainedComponent>
-    <ContainedComponent>
-      <Name>TextBox</Name>
-      <Type>TextBox</Type>
-      <PassthroughAttributes>
-        <Attribute>
-          <Name>BorderStyle</Name>
-          <Value>None</Value>
-        </Attribute>
-        <Attribute>
-          <Name>InternalUse:TreatAs</Name>
-          <Value>FieldValue</Value>
-        </Attribute>
-        <Attribute>
-          <Name>ReadOnly</Name>
-          <Value>True</Value>
-        </Attribute>
-        <Attribute>
-          <Name>Width</Name>
-          <Value>250px</Value>
-        </Attribute>
-      </PassthroughAttributes>
-      <InsideControl>Sel_WPO_InquireDetails_2TableControl</InsideControl>
-      <InsideItemTemplate>true</InsideItemTemplate>
     </ContainedComponent>
     <ContainedComponent>
       <Name>TOTAL</Name>
@@ -9257,7 +9263,7 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;text-align:right;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;display:none&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -9269,7 +9275,7 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;padding-left:3px;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;display:none&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -9288,7 +9294,7 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;color:Black;font-family:Tahoma;text-align:left;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;display:none&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -9462,7 +9468,9 @@
     &lt;Row&gt;
       &lt;Cell&gt;
         &lt;Value&gt;&amp;lt;GEN:PUSHBUTTON NAME="btnApprove" /&amp;gt; 
+&amp;lt;GEN:LITERAL Name="litSpace" /&amp;gt; 
 &amp;lt;GEN:PUSHBUTTON NAME="btnReturn" /&amp;gt; 
+&amp;lt;GEN:LITERAL Name="litSpace1" /&amp;gt; 
 &amp;lt;GEN:PUSHBUTTON NAME="btnReject" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
@@ -9920,6 +9928,19 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:FIELDLABEL NAME="UNITCOSTLabel1" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;thc&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;text-align:left;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
         &lt;Value&gt;&amp;lt;GEN:FIELDLABEL NAME="REQSTDBYLabel" /&amp;gt; 
 &lt;/Value&gt;
         &lt;CellAttributes&gt;
@@ -9988,7 +10009,6 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:FIELDLABEL NAME="UNITCOSTLabel1" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -10104,6 +10124,27 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:TABLE NAME="Sel_WPO_InquireDetails_2TableControl" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;text-align:left;width:170px;font-weight:bold;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;runat&lt;/Name&gt;
+            &lt;AttributeValue&gt;server&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;id&lt;/Name&gt;
+            &lt;AttributeValue&gt;selInqDet2Cell&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
         &lt;Value&gt;&amp;lt;GEN:FIELDVALUE NAME="REQSTDBY" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
@@ -10125,7 +10166,7 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;font-weight:bold;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;font-weight:bold;text-align:left;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -10169,7 +10210,6 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:TABLE NAME="Sel_WPO_InquireDetails_2TableControl" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -10182,10 +10222,6 @@
           &lt;Attribute&gt;
             &lt;Name&gt;runat&lt;/Name&gt;
             &lt;AttributeValue&gt;server&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;id&lt;/Name&gt;
-            &lt;AttributeValue&gt;selInqDet2Cell&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -10218,7 +10254,7 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;colspan&lt;/Name&gt;
-            &lt;AttributeValue&gt;10&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;11&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -10308,6 +10344,18 @@
       &lt;/Cell&gt;
       &lt;Cell&gt;
         &lt;Value&gt;&amp;lt;GEN:FIELDSTATISTIC Name="EXTDCOSTPageTotal" Scope="CurrentPage" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;text-align:right;border-width:0px 0px 1px 1px;border-style:solid;font-weight:bold;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -10544,54 +10592,6 @@
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;thc&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;display: none&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;thc&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;display: none&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;thc&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;display: none&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;Cell&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;thc&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;display: none&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
       &lt;RowAttributes&gt;
         &lt;Attribute&gt;
           &lt;Name&gt;class&lt;/Name&gt;
@@ -10611,20 +10611,16 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;text-align:right;font-size:8pt;border-width:0px 0px 0px 0px;border-style:solid;font-style:italic;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:right;border-width:0px 0px 0px 0px;border-style:solid;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;span style="font-size:8pt;color:#BE0307"&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="UNITCOST1" /&amp;gt;&amp;lt;/span&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;span&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="UNITCOST1" /&amp;gt;&amp;lt;/span&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;colspan&lt;/Name&gt;
-            &lt;AttributeValue&gt;5&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -10644,20 +10640,16 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;text-align:right;font-size:8pt;border-width:0px 0px 0px 0px;border-style:solid;font-style:italic;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:right;border-width:0px 0px 0px 0px;border-style:solid;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;span style="font-size:8pt;color:#BE0307"&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="VENDNAME1" /&amp;gt;&amp;lt;/span&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;span&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="VENDNAME1" /&amp;gt;&amp;lt;/span&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;colspan&lt;/Name&gt;
-            &lt;AttributeValue&gt;5&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -10677,32 +10669,12 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;text-align:right;font-size:8pt;border-width:0px 0px 0px 0px;border-style:solid;font-style:italic;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:right;border-width:0px 0px 0px 0px;border-style:solid;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;span style="font-size:8pt;color:#BE0307"&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="PONUMBER2" /&amp;gt;&amp;lt;/span&amp;gt;&lt;/Value&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableRowDivider&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;colspan&lt;/Name&gt;
-            &lt;AttributeValue&gt;5&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;text-align:right;&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;RowAttributes /&gt;
-    &lt;/Row&gt;
-    &lt;Row Type="Repeater"&gt;
-      &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:TEXTBOX Name="TextBox" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;span&amp;gt;&amp;lt;GEN:FIELDVALUE NAME="PONUMBER2" /&amp;gt;&amp;lt;/span&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -10710,11 +10682,7 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;text-align:right;font-size:8pt;border-width:0px 0px 0px 0px;border-style:solid;font-style:italic;&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;colspan&lt;/Name&gt;
-            &lt;AttributeValue&gt;6&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:right;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
