@@ -670,7 +670,7 @@
         </Attribute>
         <Attribute>
           <Name>Button-RedirectURL</Name>
-          <Value>Back</Value>
+          <Value>../sel_WCAR_Doc_Creator_Approver1/Show-Sel-WCAR-Doc-Creator-Approver-Table1.aspx</Value>
         </Attribute>
         <Attribute>
           <Name>Button-Text</Name>

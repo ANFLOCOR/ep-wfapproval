@@ -95,16 +95,9 @@
 	<asp:hiddenfield id="WCAR_Activity1TableControl_PostbackTracker" runat="server" />
 </ePortalWFApproval:WCAR_Activity1TableControl>
 
-  <table><tr><td></td></tr></table>
- 
  </ContentTemplate></BaseClasses:TabPanel> 
  <BaseClasses:TabPanel runat="server" id="WCAR_Doc_CheckerTabPanel" HeaderText="Co-Requester">	<ContentTemplate> 
-  <table><tr><td></td></tr></table>
- 
- </ContentTemplate></BaseClasses:TabPanel> 
-  
-</BaseClasses:TabContainer> 
-<ePortalWFApproval:WCAR_Doc_Checker1TableControl runat="server" id="WCAR_Doc_Checker1TableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td><asp:panel id="WCAR_Doc_Checker1CollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
+  <ePortalWFApproval:WCAR_Doc_Checker1TableControl runat="server" id="WCAR_Doc_Checker1TableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td><asp:panel id="WCAR_Doc_Checker1CollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
                     <table id="WCAR_Doc_Checker1TableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thcnb" style="text-align:center;"><b><asp:Literal runat="server" id="WCDC_U_IDLabel" Text="Co-Requester">	</asp:Literal></b></th><th class="thcnb" style="text-align:center;"><b><asp:Literal runat="server" id="WCDC_StatusLabel" Text="Status">	</asp:Literal></b></th><th class="thcnb" style="text-align:center;"><b><asp:Literal runat="server" id="WCDC_RemLabel" Text="Remark">	</asp:Literal></b></th></tr><asp:Repeater runat="server" id="WCAR_Doc_Checker1TableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WCAR_Doc_Checker1TableControlRow runat="server" id="WCAR_Doc_Checker1TableControlRow">
 <tr><td class="tableCellValue" scope="row" style="text-align:left;vertical-align:middle;"></td><td class="tableCellValue" scope="row" style="text-align:center;vertical-align:middle;"></td><td class="tableCellValue" scope="row" style="text-align:left;vertical-align:middle;"></td></tr></ePortalWFApproval:WCAR_Doc_Checker1TableControlRow>
 </ITEMTEMPLATE>
@@ -119,7 +112,9 @@
                   </td></tr></table>
 	<asp:hiddenfield id="WCAR_Doc_Checker1TableControl_PostbackTracker" runat="server" />
 </ePortalWFApproval:WCAR_Doc_Checker1TableControl>
-</td><td class="ttc"></td></tr><tr><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td></tr></ePortalWFApproval:Sel_WCAR_Doc_Creator_Approver1TableControlRow>
+
+ </ContentTemplate></BaseClasses:TabPanel>
+</BaseClasses:TabContainer></td><td class="ttc"></td></tr><tr><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td><td class="ticnb" scope="row"></td></tr></ePortalWFApproval:Sel_WCAR_Doc_Creator_Approver1TableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>

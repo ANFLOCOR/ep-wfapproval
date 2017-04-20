@@ -167,7 +167,7 @@ Public Class WCAR_Doc1RecordControl
   "</script>"
             Me.Page.ClientScript.RegisterStartupScript(GetType(Page), "RefreshThisRequestSum", script)
 
-            If Not Me.WCD_Exp_Cur_Yr.Text.Trim Is Nothing Or Not Me.WCD_Exp_Cur_Yr.Text.Trim = "" Then
+            If Not Me.WCD_Exp_Cur_Yr.Text.Trim Is Nothing And Not Me.WCD_Exp_Cur_Yr.Text.Trim = "" Then
                 Me.WCD_Exp_Cur_Yr.Text = Convert.ToDecimal(Me.WCD_Exp_Cur_Yr.Text).ToString("#,#.00")
                 Me.WCD_Exp_Cur_Yr.Style.Add("text-align", "right")
             End If

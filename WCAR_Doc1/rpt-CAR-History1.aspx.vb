@@ -54,6 +54,21 @@ Partial Public Class rpt_CAR_History1
           ' or replace the call to LoadData_Base().
             LoadData_Base()
 
+            '      Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServerN")
+            '      Dim sParam As String = System.Web.HttpContext.Current.Session("UserIDNorth").ToString()
+
+            '      Dim sUrl As String = ""
+
+            '      If sParam <> "" Or Not IsNothing(sParam) Then
+            '          sParam = sParam.Replace("*", "&")
+            '      End If
+
+            '      sUrl = "http://" & sWebServer & "/reportserver?%2fWORKFLOW%2fCAR+Approver+History&rs:Command=Render&UserID=" & _
+            'sParam & "&rc:Parameters=false"
+
+            '      frm.Attributes("src") = sUrl
+
+
             Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServerN")
             Dim sParam As String = System.Web.HttpContext.Current.Session("UserIDNorth").ToString()
 
@@ -63,7 +78,7 @@ Partial Public Class rpt_CAR_History1
                 sParam = sParam.Replace("*", "&")
             End If
 
-            sUrl = "http://" & sWebServer & "/reportserver?%2fWORKFLOW%2fCAR+Approver+History&rs:Command=Render&UserID=" & _
+            sUrl = "http://" & sWebServer & "/reportserver?%2fWORKFLOW%2fwf_car_approver_history&rs:Command=Render&UserID=" & _
       sParam & "&rc:Parameters=false"
 
             frm.Attributes("src") = sUrl

@@ -224,7 +224,7 @@ Public Class WCAR_Doc1RecordControl
         Protected Overrides Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
             AddHandler Me.imbRelated.Click, AddressOf imbRelated_Click
             AddHandler Me.btnPrint.Button.Click, AddressOf btnPrint_Click
-            'AddHandler Me.OKButton.Button.Click, AddressOf OKButton_Click
+            AddHandler Me.OKButton1.Button.Click, AddressOf OKButton1_Click
             AddHandler Me.btnVoid.Button.Click, AddressOf btnVoid_Click
             AddHandler Me.WCD_C_ID.SelectedIndexChanged, AddressOf WCD_C_ID_SelectedIndexChanged
             Me.imbRelated.Attributes.Add("onClick", "OpenRelatedCAR('" & Me.WCD_Supplementary_WCD_ID.ClientID & "','" & Me.WCD_C_ID.ClientID & "');return false;")
@@ -9496,20 +9496,32 @@ Public Class BaseWCAR_Doc1RecordControl
         ' event handler for Button
         Public Overridable Sub OKButton1_Click(ByVal sender As Object, ByVal args As EventArgs)
               
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
+                  Dim url As String = "../sel_WCAR_Doc_Creator_Approver1/Show-Sel-WCAR-Doc-Creator-Approver-Table1.aspx"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
         Dim shouldRedirect As Boolean = True
         Dim target As String = ""
       
     Try
     
-
-                ' if target is specified meaning that is opened on popup or new window
-                If Page.Request("target") <> "" Then
-                    shouldRedirect = False
-                    AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "ClosePopup", "closePopupPage();", True)                   
-                End If
-      
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
             
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
                 shouldRedirect = False
                 Me.Page.ErrorOnPage = True
     
@@ -9517,11 +9529,11 @@ Public Class BaseWCAR_Doc1RecordControl
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
     
             Finally
-    
+                DbUtils.EndTransaction
             End Try
             If shouldRedirect Then
                 Me.Page.ShouldSaveControlsToSession = True
-      Me.Page.RedirectBack()
+      Me.Page.Response.Redirect(url)
         
             End If
         End Sub
