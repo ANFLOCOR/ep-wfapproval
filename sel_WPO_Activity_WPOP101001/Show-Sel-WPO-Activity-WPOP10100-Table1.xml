@@ -614,19 +614,19 @@
         </Attribute>
         <Attribute>
           <Name>ImageUrl</Name>
-          <Value>../Images/icon-open.png</Value>
+          <Value>../Images/icon-view.png</Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOut</Name>
-          <Value>this.src='../Images/icon-open.png'</Value>
+          <Value>this.src='../Images/icon-view.png'</Value>
         </Attribute>
         <Attribute>
           <Name>OnMouseOver</Name>
-          <Value>this.src='../Images/icon-open-over.png'</Value>
+          <Value>this.src='../Images/icon-view-over.png'</Value>
         </Attribute>
         <Attribute>
           <Name>RedirectURL</Name>
-          <Value>../wf_car/ShowWCAR_Doc_WPO.aspx</Value>
+          <Value>../WCAR_Doc1/Show-WCAR-Doc1.aspx?WCAR_Doc1={WPO_CARNo_QWF1TableControlRow:FV:CARID}</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>

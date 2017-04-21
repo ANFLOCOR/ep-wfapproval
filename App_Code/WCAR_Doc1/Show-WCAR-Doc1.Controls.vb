@@ -233,10 +233,6 @@ Public Class WCAR_Doc1RecordControl
             Dim sSub As String = CStr(IIf(Not IsNumeric(WCD_Exp_Sub_Yr.Text), "0", WCD_Exp_Sub_Yr.Text))
             Dim sngTotal As Single = CSng(sCur) + CSng(sNxt) + CSng(sSub)
             Me.lblTotal.Text = sngTotal.ToString("#,#.00")
-            If Not Me.WCD_Exp_Cur_Yr.Text.Trim Is Nothing Or Not Me.WCD_Exp_Cur_Yr.Text.Trim = "" Then
-                Me.WCD_Exp_Cur_Yr.Text = Convert.ToDecimal(Me.WCD_Exp_Cur_Yr.Text).ToString("#,#.00")
-                Me.WCD_Exp_Cur_Yr.Style.Add("text-align", "right")
-            End If
             If Not Me.WCD_Exp_Nxt_Yr.Text.Trim Is Nothing And Not Me.WCD_Exp_Nxt_Yr.Text.Trim = "" Then
                 Me.WCD_Exp_Nxt_Yr.Text = Convert.ToDecimal(Me.WCD_Exp_Nxt_Yr.Text).ToString("#,#.00")
                 Me.WCD_Exp_Nxt_Yr.Style.Add("text-align", "right")
@@ -262,6 +258,15 @@ Public Class WCAR_Doc1RecordControl
                 Me.WCD_Exp_Under_Over_Budget.Text = Convert.ToDecimal(Me.WCD_Exp_Under_Over_Budget.Text).ToString("#,#.00")
                 Me.WCD_Exp_Under_Over_Budget.Style.Add("text-align", "right")
             End If
+            Try
+                If Not Me.WCD_Exp_Cur_Yr.Text.Trim Is Nothing Or Not Me.WCD_Exp_Cur_Yr.Text.Trim = "" Then
+                    Me.WCD_Exp_Cur_Yr.Text = Convert.ToDecimal(Me.WCD_Exp_Cur_Yr.Text).ToString("#,#.00")
+                    Me.WCD_Exp_Cur_Yr.Style.Add("text-align", "right")
+                End If
+            Catch ex As Exception
+
+            End Try
+          
         End Sub
 
 

@@ -1395,51 +1395,7 @@ End Class
 
         End Sub
 
-		Public Overrides Sub ImageButton1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
-
-            ' The redirect URL is set on the Properties, Bindings.
-            ' The ModifyRedirectURL call resolves the parameters before the
-            ' Response.Redirect redirects the page to the URL.  
-            ' Any code after the Response.Redirect call will not be executed, since the page is
-            ' redirected to the URL.
-            'Dim url As String = "../wf_car/ShowWCAR_Doc_WPO.aspx?WCAR_Doc=" & Me.CARID.Text ' & "}"
-            Dim url As String = "../WCAR_Doc1/Show-WCAR-Doc1.aspx?WCAR_Doc=" & Me.CARID.Text ' & "}"
-            'throw new Exception(url)
-            Dim shouldRedirect As Boolean = True
-            Dim TargetKey As String = Nothing
-            Dim DFKA As String = Nothing
-            Dim id As String = Nothing
-            Dim value As String = Nothing
-            Try
-                ' Enclose all database retrieval/update code within a Transaction boundary
-                DbUtils.StartTransaction()
-
-                url = Me.ModifyRedirectUrl(url, "", False)
-                url = Me.Page.ModifyRedirectUrl(url, "", False)
-                Me.Page.CommitTransaction(sender)
-
-            Catch ex As Exception
-                ' Upon error, rollback the transaction
-                Me.Page.RollBackTransaction(sender)
-                shouldRedirect = False
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-            Finally
-                DbUtils.EndTransaction()
-            End Try
-            If shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-            ElseIf Not TargetKey Is Nothing AndAlso _
-                        Not shouldRedirect Then
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.CloseWindow(True)
-
-            End If
-        End Sub
-
+		
 
     End Class
     Public Class View_WCPO_Canvass1TableControl
@@ -9636,9 +9592,9 @@ Public Class BaseWPO_CARNo_QDetailsTableControlRow
             ' redirected to the URL.
             
               
-                  Dim url As String = "../wf_car/ShowWCAR_Doc_WPO.aspx"
+                  Dim url As String = "../WCAR_Doc1/Show-WCAR-Doc1.aspx?WCAR_Doc1={WPO_CARNo_QDetailsTableControlRow:FV:CARID}"
                   
-                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
                   
         Dim shouldRedirect As Boolean = True
         Dim target As String = ""

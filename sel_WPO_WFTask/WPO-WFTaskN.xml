@@ -1507,11 +1507,19 @@
         </Attribute>
         <Attribute>
           <Name>ImageUrl</Name>
-          <Value>../Images/icon_view.gif</Value>
+          <Value>../Images/icon-view.png</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnMouseOut</Name>
+          <Value>this.src='../Images/icon-view.png'</Value>
+        </Attribute>
+        <Attribute>
+          <Name>OnMouseOver</Name>
+          <Value>this.src='../Images/icon-view-over.png'</Value>
         </Attribute>
         <Attribute>
           <Name>RedirectURL</Name>
-          <Value>../wf_car/ShowWCAR_Doc_WPO.aspx</Value>
+          <Value>../WCAR_Doc1/Show-WCAR-Doc1.aspx?WCAR_Doc1={WPO_CARNo_QDetailsTableControlRow:FV:CARID}</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
