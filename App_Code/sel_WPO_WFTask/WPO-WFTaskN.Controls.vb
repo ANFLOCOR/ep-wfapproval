@@ -1395,14 +1395,15 @@ End Class
 
         End Sub
 
-        Public Overrides Sub ImageButton1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+		Public Overrides Sub ImageButton1_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
 
             ' The redirect URL is set on the Properties, Bindings.
             ' The ModifyRedirectURL call resolves the parameters before the
             ' Response.Redirect redirects the page to the URL.  
             ' Any code after the Response.Redirect call will not be executed, since the page is
             ' redirected to the URL.
-            Dim url As String = "../wf_car/ShowWCAR_Doc_WPO.aspx?WCAR_Doc=" & Me.CARID.Text ' & "}"
+            'Dim url As String = "../wf_car/ShowWCAR_Doc_WPO.aspx?WCAR_Doc=" & Me.CARID.Text ' & "}"
+            Dim url As String = "../WCAR_Doc1/Show-WCAR-Doc1.aspx?WCAR_Doc=" & Me.CARID.Text ' & "}"
             'throw new Exception(url)
             Dim shouldRedirect As Boolean = True
             Dim TargetKey As String = Nothing

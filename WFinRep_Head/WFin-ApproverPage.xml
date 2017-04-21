@@ -485,6 +485,10 @@
           <Value>page</Value>
         </Attribute>
         <Attribute>
+          <Name>Button-RedirectURL</Name>
+          <Value>../WFinRep_Head/WFin-RepApproveGPView.aspx?Control1={WFinRep_HeadTableControlRow:FV:HFIN_Year}&amp;Control2={WFinRep_HeadTableControlRow:FV:HFIN_Month}&amp;Control3={WFinRep_HeadTableControlRow:FV:HFIN_Description}&amp;Control4={WFinRep_HeadTableControlRow:FV:HFIN_Description}&amp;compDB={WFinRep_HeadTableControlRow:FV:HFIN_C_ID}&amp;Control5={WFinRep_HeadTableControlRow:FV:HFIN_Status}&amp;Control6={WFinRep_HeadTableControlRow:FV:HFIN_ID}</Value>
+        </Attribute>
+        <Attribute>
           <Name>Button-Text</Name>
           <Value>Preview</Value>
         </Attribute>

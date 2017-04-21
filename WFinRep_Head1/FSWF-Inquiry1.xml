@@ -2547,7 +2547,7 @@
         </Attribute>
         <Attribute>
           <Name>RedirectURL</Name>
-          <Value>../Shared/ConfigureEditRecord.aspx</Value>
+          <Value>../WFinRep_Head1/WFin-ApproverPage1.aspx?WFinRep_Head={WFinRep_Head1TableControlRow:FV:HFIN_ID}</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>
@@ -2626,6 +2626,10 @@
         <Attribute>
           <Name>PostBack</Name>
           <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>RedirectURL</Name>
+          <Value>../WFinRep_Head1/WFin-RepInquiryView1.aspx?Control1={WFinRep_Head1TableControlRow:FV:HFIN_Year}&amp;Control2={WFinRep_Head1TableControlRow:FV:HFIN_Month}&amp;Control3={WFinRep_Head1TableControlRow:FV:HFIN_C_ID}&amp;Control4={WFinRep_Head1TableControlRow:FV:HFIN_Description}</Value>
         </Attribute>
         <Attribute>
           <Name>ToolTip</Name>

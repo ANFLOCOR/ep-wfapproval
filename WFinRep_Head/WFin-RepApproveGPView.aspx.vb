@@ -57,14 +57,17 @@ Partial Public Class WFin_RepApproveGPView
           LoadData_Base()
 
             Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServer")
-            Dim sParamYr As String = CStr(Me.Page.Request.QueryString("Control1"))
-            Dim sParamMo As String = CStr(Me.Page.Request.QueryString("Control2"))
-            Dim sParamPath As String = CStr(Me.Page.Request.QueryString("Control4"))
-            Dim sParamStatus As String = CStr(Me.Page.Request.QueryString("Control5"))
-            Dim sParamDB As String = CStr(Me.Page.Request.QueryString("compDB"))
-            Dim sParamHFIN As String = CStr(Me.Page.Request.QueryString("Control6"))
+            Dim sParamYr As String = Decrypt(CStr(Me.Page.Request.QueryString("Control1")))
+            Dim sParamMo As String = Decrypt(CStr(Me.Page.Request.QueryString("Control2")))
+            Dim sParamPath As String = Decrypt(CStr(Me.Page.Request.QueryString("Control4")))
+            Dim sParamStatus As String = Decrypt(CStr(Me.Page.Request.QueryString("Control5")))
+            Dim sParamDB As String = Decrypt(CStr(Me.Page.Request.QueryString("compDB")))
+            Dim sParamHFIN As String = Decrypt(CStr(Me.Page.Request.QueryString("Control6")))
             Dim dbNameStr As String = ""
             Dim database As String = Nothing
+
+            MsgBox(sParamYr & vbNewLine & sParamMo & vbNewLine & sParamPath & vbNewLine & sParamStatus & vbNewLine & sParamDB & vbNewLine & sParamHFIN)
+
             Select Case sParamDB
                 Case "ANFLOCOR"
                     dbNameStr = "AMIC_DW"

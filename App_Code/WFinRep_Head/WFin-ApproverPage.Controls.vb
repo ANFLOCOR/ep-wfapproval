@@ -136,7 +136,7 @@ Public Class WFinRep_HeadTableControlRow
 
 
             'Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewer('" & Me.FIN_Year.ClientID & "','" & Me.FIN_Month.ClientID & "', '" & Me.FIN_Type.ClientID & "', '" & Me.FIN_File1.ClientID & "');return false;")
-            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewerApp2('" & Me.HFIN_Year2.ClientID & "','" & Me.HFIN_Month2.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_C_ID3.ClientID & "', '" & Me.HFIN_Status2.ClientID & "', '" & Me.HFIN_ID1.ClientID & "');return false;")
+            Me.btnPreview.Button.Attributes.Add("onClick", "OpenRptViewerApp2('" & Me.HFIN_Year2.ClientID & "','" & Me.HFIN_Month1.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_Description1.ClientID & "', '" & Me.HFIN_C_ID3.ClientID & "', '" & Me.HFIN_Status2.ClientID & "', '" & Me.HFIN_ID1.ClientID & "');return false;")
 
 
         End Sub
@@ -160,6 +160,64 @@ Public Class WFinRep_HeadTableControlRow
                ' Me.HFIN_File.Visible = True
             Else
               '  Me.HFIN_File.Visible = False
+            End If
+        End Sub
+
+		Public Overrides Sub btnPreview_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+                DbUtils.StartTransaction
+            'JESSY
+
+            ''MsgBox(Me.HFIN_Year1.Text & vbNewLine & _
+            ''       Me.HFIN_Month1.Text & vbNewLine & _
+            ''       Me.HFIN_Description.Text & vbNewLine & _
+            ''       Me.HFIN_Description1.Text & vbNewLine & _
+            ''       Me.HFIN_C_ID2.Text & vbNewLine & _
+            ''       Me.HFIN_Status2.Text & vbNewLine & _
+            ''       Me.HFIN_ID1.Text)
+              
+            'Dim url As String = "../WFinRep_Head/WFin-RepApproveGPView.aspx?Control1={WFinRep_HeadTableControlRow:FV:HFIN_Year}&Control2={WFinRep_HeadTableControlRow:FV:HFIN_Month}&Control3={WFinRep_HeadTableControlRow:FV:HFIN_Description}&Control4={WFinRep_HeadTableControlRow:FV:HFIN_Description}&compDB={WFinRep_HeadTableControlRow:FV:HFIN_C_ID}&Control5={WFinRep_HeadTableControlRow:FV:HFIN_Status}&Control6={WFinRep_HeadTableControlRow:FV:HFIN_ID}"
+            Dim url As String = "../WFinRep_Head/WFin-RepApproveGPView.aspx?Control1=" & Me.HFIN_Year1.Text & _
+                "&Control2=" & Me.GetRecord.HFIN_Month.ToString & "&Control3=" & Me.HFIN_Description.Text & _
+                "&Control4=" & Me.HFIN_Description1.Text & "&compDB=" & Me.HFIN_C_ID2.Text & _
+                "&Control5=" & Me.HFIN_Status2.Text & "&Control6=" & Me.HFIN_ID1.Text
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
+            Catch ex As Exception
+            
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+                DbUtils.EndTransaction
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+                'Me.Page.Response.Redirect(url)
+                Dim script As String = "window.open('" + url + "','RunReport', 'width=1200, height=500,top=' +(screen.availHeight-500)/2 + ',left=' + (screen.availWidth-700)/2+ ', resizable=yes, scrollbars=yes,modal=yes');"
+                ScriptManager.RegisterStartupScript(Me.Page, Page.GetType(), "OpenPopup", script, True)
+        
             End If
         End Sub
 End Class
@@ -8705,19 +8763,46 @@ Public Class BaseWFinRep_HeadTableControlRow
         ' event handler for Button
         Public Overridable Sub btnPreview_Click(ByVal sender As Object, ByVal args As EventArgs)
               
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
+                  Dim url As String = "../WFinRep_Head/WFin-RepApproveGPView.aspx?Control1={WFinRep_HeadTableControlRow:FV:HFIN_Year}&Control2={WFinRep_HeadTableControlRow:FV:HFIN_Month}&Control3={WFinRep_HeadTableControlRow:FV:HFIN_Description}&Control4={WFinRep_HeadTableControlRow:FV:HFIN_Description}&compDB={WFinRep_HeadTableControlRow:FV:HFIN_C_ID}&Control5={WFinRep_HeadTableControlRow:FV:HFIN_Status}&Control6={WFinRep_HeadTableControlRow:FV:HFIN_ID}"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "&RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
     Try
     
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
             Catch ex As Exception
             
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
                 Me.Page.ErrorOnPage = True
     
                 ' Report the error message to the end user
                 Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
     
             Finally
-    
+                DbUtils.EndTransaction
             End Try
-    
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
         End Sub
         
         ' event handler for Button
