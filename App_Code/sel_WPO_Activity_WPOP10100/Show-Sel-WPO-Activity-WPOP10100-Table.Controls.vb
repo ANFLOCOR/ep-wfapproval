@@ -226,7 +226,7 @@ Public Class Sel_WPO_Activity_WPOP10100TableControl
         End Sub
 
 
-        Protected Overrides Sub PopulateWPO_StatusFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
+		Protected Overrides Sub PopulateWPO_StatusFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
 
             'Setup the WHERE clause.
             Dim wc As WhereClause = Me.CreateWhereClause_WPO_StatusFilter()
@@ -258,14 +258,14 @@ Public Class Sel_WPO_Activity_WPOP10100TableControl
             Next
 
             ' Add the All item.
-            Me.WPO_StatusFilter.Items.Insert(0, New ListItem(Page.GetResourceValue("All", "EPORTAL"), "--ANY--"))
+            'Me.WPO_StatusFilter.Items.Insert(0, New ListItem(Page.GetResourceValue("All", "EPORTAL"), "--ANY--"))
 
             ' Set the selected value.
             'SetSelectedValue(Me.WPO_StatusFilter, selectedValue)
             'me.WPO_StatusFilter.SelectedIndex = 2
 
             If selectedValue Is Nothing Or selectedValue = "" Then
-                Me.WPO_StatusFilter.SelectedIndex = 2
+               Me.WPO_StatusFilter.SelectedIndex = 1
             Else
                 SetSelectedValue(Me.WPO_StatusFilter, selectedValue)
             End If

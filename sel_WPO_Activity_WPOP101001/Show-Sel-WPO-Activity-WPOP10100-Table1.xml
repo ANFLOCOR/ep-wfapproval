@@ -1336,7 +1336,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>PO Workflow Tasks (North)</Value>
+          <Value>Purchase Order Workflow Tasks (North)</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_WPO_Activity_WPOP101001TableControl</InsideControl>

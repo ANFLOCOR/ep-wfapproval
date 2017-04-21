@@ -5227,7 +5227,7 @@ Public Class BaseSelWFReassignTableControl
 
               
             
-                Me.PopulateWPO_W_U_IDFilter(GetSelectedValue(Me.WPO_W_U_IDFilter,  GetFromSession(Me.WPO_W_U_IDFilter)), 500)					
+                Me.PopulateWPO_W_U_IDFilter(GetSelectedValue(Me.WPO_W_U_IDFilter,  GetFromSession(Me.WPO_W_U_IDFilter)), 5000)					
                                      
               End Sub	
             

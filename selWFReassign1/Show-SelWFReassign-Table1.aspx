@@ -26,7 +26,7 @@
                 <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td>
                         <ePortalWFApproval:SelWFReassignTableControl runat="server" id="SelWFReassignTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="dh">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle">
-                        <asp:Literal runat="server" id="SelWFReassignTitle" Text="PO WORKFLOW REASSIGN TASK (North)">	</asp:Literal></td></tr></table>
+                        <asp:Literal runat="server" id="SelWFReassignTitle" Text="PO Workflow Reassign Task (North)">	</asp:Literal></td></tr></table>
 </td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
 
                 </td></tr><tr><td>
@@ -56,7 +56,7 @@
 <asp:Literal runat="server" id="WPO_Date_Assign"></asp:Literal></span>
 </td><td class="ttc" style="text-align:left;"><asp:Literal runat="server" id="WPO_Remark"></asp:Literal></td><td class="ttc" style="text-align:right;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="TOTAL"></asp:Literal></span>
-</td><td class="ttc" style="text-align:right;"><span style="white-space:nowrap;">
+</td><td class="ttc" style="text-align:left;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="coID"></asp:Literal></span>
 </td></tr><tr id="SelWFReassignTableControlAltRow" runat="server"><td class="ttc" style="text-align:left;"></td><td class="ttc" style="text-align:left;" colspan="9"><BaseClasses:TabContainer runat="server" id="WFReassignContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
  <BaseClasses:TabPanel runat="server" id="WFReassignPanel" HeaderText="PO Details">	<ContentTemplate> 

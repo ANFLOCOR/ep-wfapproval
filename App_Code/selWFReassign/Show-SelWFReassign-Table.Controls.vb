@@ -201,7 +201,41 @@ End Class
 
 
         End Sub
-    End Class
+    
+        Protected Overrides Sub PopulateWPO_W_U_IDFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
+            Dim wc As WhereClause = New WhereClause
+            Dim orderBy As OrderBy = New OrderBy(False, True)
+            orderBy.Add(Sel_WASP_WF_Approver_POView.W_U_Full_Name, OrderByItem.OrderDir.Asc)
+
+            Me.WPO_W_U_IDFilter.Items.Clear()
+            Dim itemValue As Sel_WASP_WF_Approver_PORecord
+            For Each itemValue In Sel_WASP_WF_Approver_POView.GetRecords(wc, orderBy, 0, maxItems)
+                ' Create the item and add to the list.
+                Dim cvalue As String = Nothing
+                Dim fvalue As String = Nothing
+                If itemValue.W_U_IDSpecified Then
+                    cvalue = itemValue.W_U_ID.ToString()
+                    fvalue = itemValue.Format(Sel_WASP_WF_Approver_POView.W_U_Full_Name)
+                End If
+
+                Dim item As ListItem = New ListItem(fvalue, cvalue)
+                Me.WPO_W_U_IDFilter.Items.Add(item)
+            Next
+
+            ''If Not selectedValue Is Nothing AndAlso _
+            ''    selectedValue.Trim <> "" AndAlso _
+            ''    Not SetSelectedValue(Me.WPO_W_U_IDFilter, selectedValue) AndAlso _
+            ''    Not MiscUtils.SetSelectedValue(Me.WPO_W_U_IDFilter, WPO_Step_Detail1Table.WPO_SD_W_U_ID.Format(selectedValue)) Then
+            ''    Dim fvalue As String = WPO_Step_Detail1Table.WPO_SD_W_U_ID.Format(selectedValue)
+            ''    Dim item As ListItem = New ListItem(fvalue, selectedValue)
+            ''    item.Selected = True
+            ''    Me.WPO_W_U_IDFilter.Items.Insert(0, item)
+            ''End If
+
+            'Me.WCA_W_U_IDFilter.Items.Insert(0, New ListItem(Page.GetResourceValue("Txt:PleaseSelect", "EPORTAL"), "--PLEASE_SELECT--"))
+            Me.WPO_W_U_IDFilter.Items.Insert(0, New ListItem(Page.GetResourceValue("All", "EPORTAL"), "--ANY--"))
+        End Sub
+End Class
 
   
 
@@ -1723,21 +1757,9 @@ Public Class BaseSelWFReassignTableControl
               
                 If initialVal <> ""				
                         
-                        Dim WPO_W_U_IDFilteritemListFromSession() As String = initialVal.Split(","c)
-                        Dim index As Integer = 0
-                        For Each item As String In WPO_W_U_IDFilteritemListFromSession
-                            If index = 0 AndAlso _
-                               item.ToString.Equals("") Then
-                            Else
-                                Me.WPO_W_U_IDFilter.Items.Add(item)
-                                Me.WPO_W_U_IDFilter.Items.Item(index).Selected = True
-                                index += 1
-                            End If
-                        Next
-                        Dim listItem As ListItem
-                        For Each listItem In Me.WPO_W_U_IDFilter.Items
-                            listItem.Selected = True
-                        Next
+                        Me.WPO_W_U_IDFilter.Items.Add(New ListItem(initialVal, initialVal))
+                            
+                        Me.WPO_W_U_IDFilter.SelectedValue = initialVal
                             
                     End If
                 
@@ -1823,8 +1845,8 @@ Public Class BaseSelWFReassignTableControl
               AddHandler Me.SelWFReassignFilterButton.Button.Click, AddressOf SelWFReassignFilterButton_Click
                         
             AddHandler Me.ddlAssignTo.SelectedIndexChanged, AddressOf ddlAssignTo_SelectedIndexChanged
-              AddHandler Me.WPO_W_U_IDFilter.SelectedIndexChanged, AddressOf WPO_W_U_IDFilter_SelectedIndexChanged                  
-                        
+              AddHandler Me.WPO_W_U_IDFilter.SelectedIndexChanged, AddressOf WPO_W_U_IDFilter_SelectedIndexChanged
+                    
         
           ' Setup events for others
                 
@@ -2414,43 +2436,16 @@ Public Class BaseSelWFReassignTableControl
                   
                 
                        
-
-                  Dim totalSelectedItemCount as Integer = 0
-                  
             If IsValueSelected(Me.WPO_W_U_IDFilter) Then
     
               hasFiltersSelWFReassignTableControl = True            
     
-                Dim item As ListItem
-                Dim selectedItemCount As Integer = 0
-                For Each item In Me.WPO_W_U_IDFilter.Items
-                    If item.Selected Then
-                        selectedItemCount += 1
-                        
-                          totalSelectedItemCount += 1
-                        
-                    End If
-                Next
-                
-                Dim filter As WhereClause = New WhereClause
-                For Each item In Me.WPO_W_U_IDFilter.Items
-                    If item.Selected AndAlso (item.Value = "--ANY--" OrElse item.Value = "--PLEASE_SELECT--") AndAlso selectedItemCount > 1 Then
-                        item.Selected = False
-                    End If
-                    If item.Selected Then
-                        filter.iOR(SelWFReassignView.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, item.Value, False, False)
-                    End If
-                Next
-                wc.iAND(filter)
-                
+                wc.iAND(SelWFReassignView.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.WPO_W_U_IDFilter, Me.GetFromSession(Me.WPO_W_U_IDFilter)), False, False)
+            
             End If
                   
                 
-                       
-      If (totalSelectedItemCount > 50) Then
-          Throw new Exception(Page.GetResourceValue("Err:SelectedItemOverLimit", "ePortalWFApproval").Replace("{Limit}", "50").Replace("{SelectedCount}", totalSelectedItemCount.ToString()))
-      End If
-      
+                         
     
     Return wc
     End Function
@@ -2499,22 +2494,8 @@ Public Class BaseSelWFReassignTableControl
     
               hasFiltersSelWFReassignTableControl = True            
     
-            If Not isNothing(WPO_W_U_IDFilterSelectedValue) Then
-                Dim WPO_W_U_IDFilteritemListFromSession() As String = WPO_W_U_IDFilterSelectedValue.Split(","c)
-                Dim index As Integer = 0
-                  
-                Dim filter As WhereClause = New WhereClause
-                For Each item As String In WPO_W_U_IDFilteritemListFromSession
-                    If index = 0 AndAlso item.ToString.Equals("") Then
-                    Else
-                        filter.iOR(SelWFReassignView.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, item, False, False)
-                        index += 1
-                    End If
-                Next
-                wc.iAND(filter)
-                
-             End If
-                
+                 wc.iAND(SelWFReassignView.WPO_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, WPO_W_U_IDFilterSelectedValue, false, False)
+             
              End If
                       
       
@@ -2940,32 +2921,8 @@ Public Class BaseSelWFReassignTableControl
 
               
             
-            Dim WPO_W_U_IDFilterselectedFilterItemList As New ArrayList()
-            Dim WPO_W_U_IDFilteritemsString As String = Nothing
-            If (Me.InSession(Me.WPO_W_U_IDFilter)) Then
-                WPO_W_U_IDFilteritemsString = Me.GetFromSession(Me.WPO_W_U_IDFilter)
-            End If
-            
-            If (WPO_W_U_IDFilteritemsString IsNot Nothing) Then
-                Dim WPO_W_U_IDFilteritemListFromSession() As String = WPO_W_U_IDFilteritemsString.Split(","c)
-                For Each item as String In WPO_W_U_IDFilteritemListFromSession
-                    WPO_W_U_IDFilterselectedFilterItemList.Add(item)
-                Next
-            End If
-              
-            		
-            Me.PopulateWPO_W_U_IDFilter(GetSelectedValueList(Me.WPO_W_U_IDFilter, WPO_W_U_IDFilterselectedFilterItemList), 500)
-                    
-              Dim url as String = Me.ModifyRedirectUrl("../sel_WASP_User/Sel-WASP-User-QuickSelector.aspx", "", True)
-              
-              url = Me.Page.ModifyRedirectUrl(url, "", True)                                  
-              
-              url &= "?Target=" & Me.WPO_W_U_IDFilter.ClientID & "&Formula=" & CType(Me.Page, BaseApplicationPage).Encrypt("= Sel_WASP_User.W_U_Full_Name")& "&IndexField=" & CType(Me.Page, BaseApplicationPage).Encrypt("W_U_ID")& "&EmptyValue=" & CType(Me.Page, BaseApplicationPage).Encrypt("--ANY--") & "&EmptyDisplayText=" & CType(Me.Page, BaseApplicationPage).Encrypt(Me.Page.GetResourceValue("Txt:All")) & "&RedirectStyle=" & CType(Me.Page, BaseApplicationPage).Encrypt("Popup")
-              
-              
-              Me.WPO_W_U_IDFilter.Attributes.Item("onClick") = "initializePopupPage(this, '" & url & "', " & Convert.ToString(WPO_W_U_IDFilter.AutoPostBack).ToLower() & ", event); return false;"        
-                  
-                                 
+                Me.PopulateWPO_W_U_IDFilter(GetSelectedValue(Me.WPO_W_U_IDFilter,  GetFromSession(Me.WPO_W_U_IDFilter)), 5000)					
+                                     
               End Sub	
             
         ' Get the filters' data for ddlAssignTo
@@ -2993,19 +2950,25 @@ Public Class BaseSelWFReassignTableControl
               End Sub
             
         ' Get the filters' data for WPO_W_U_IDFilter
-        Protected Overridable Sub PopulateWPO_W_U_IDFilter(ByVal selectedValue As ArrayList, ByVal maxItems As Integer)
+        Protected Overridable Sub PopulateWPO_W_U_IDFilter(ByVal selectedValue As String, ByVal maxItems As Integer)
                     
             'Setup the WHERE clause.
             
-            Dim wc As WhereClause = Me.CreateWhereClause_WPO_W_U_IDFilter()
             Me.WPO_W_U_IDFilter.Items.Clear()
+            Dim wc As WhereClause = Me.CreateWhereClause_WPO_W_U_IDFilter()
             		  			
             ' Set up the WHERE and the ORDER BY clause by calling the CreateWhereClause_WPO_W_U_IDFilter function.
             ' It is better to customize the where clause there.
             
+            ' Setup the static list items        
+            
+            ' Add the All item.
+            Me.WPO_W_U_IDFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
+                              
 
             Dim orderBy As OrderBy = New OrderBy(false, false)			
-            
+                          orderBy.Add(Sel_WASP_UserView.W_U_Full_Name, OrderByItem.OrderDir.Asc)
+
             Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
 
             	
@@ -3086,23 +3049,17 @@ Public Class BaseSelWFReassignTableControl
 
             Try    
                 
+                ' Set the selected value.
+                SetSelectedValue(Me.WPO_W_U_IDFilter, selectedValue)
+                    
             Catch
             End Try
             
-            
-            Me.WPO_W_U_IDFilter.SetFieldMaxLength(50)
-                                 
-                  
-            ' Add the selected value.
-            If Me.WPO_W_U_IDFilter.Items.Count = 0 Then
-                Me.WPO_W_U_IDFilter.Items.Add(New ListItem(Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-            End If
-            
-            ' Mark all items to be selected.
-            For Each item As ListItem in Me.WPO_W_U_IDFilter.Items
-                item.Selected = True
-            Next
-                              
+                        
+            If Me.WPO_W_U_IDFilter.SelectedValue IsNot Nothing AndAlso Me.WPO_W_U_IDFilter.Items.FindByValue(Me.WPO_W_U_IDFilter.SelectedValue) Is Nothing
+                Me.WPO_W_U_IDFilter.SelectedValue = Nothing
+            End If            
+                          
         End Sub
             
         Public Overridable Function CreateWhereClause_ddlAssignTo() As WhereClause
@@ -3128,36 +3085,11 @@ Public Class BaseSelWFReassignTableControl
             
             ' Create a where clause for the filter WPO_W_U_IDFilter.
             ' This function is called by the Populate method to load the items 
-            ' in the WPO_W_U_IDFilterQuickSelector
+            ' in the WPO_W_U_IDFilterDropDownList
             
-            Dim WPO_W_U_IDFilterselectedFilterItemList As New ArrayList()
-            Dim WPO_W_U_IDFilteritemsString As String = Nothing
-            If (Me.InSession(Me.WPO_W_U_IDFilter)) Then
-                WPO_W_U_IDFilteritemsString = Me.GetFromSession(Me.WPO_W_U_IDFilter)
-            End If
-            
-            If (WPO_W_U_IDFilteritemsString IsNot Nothing) Then
-                Dim WPO_W_U_IDFilteritemListFromSession() As String = WPO_W_U_IDFilteritemsString.Split(","c)
-                For Each item as String In WPO_W_U_IDFilteritemListFromSession
-                    WPO_W_U_IDFilterselectedFilterItemList.Add(item)
-                Next
-            End If
-              
-            WPO_W_U_IDFilterselectedFilterItemList = GetSelectedValueList(Me.WPO_W_U_IDFilter, WPO_W_U_IDFilterselectedFilterItemList) 
-            Dim wc As New WhereClause
-            If WPO_W_U_IDFilterselectedFilterItemList Is Nothing OrElse WPO_W_U_IDFilterselectedFilterItemList.Count = 0 Then
-                wc.RunQuery = False
-            Else            
-                For Each item As String In WPO_W_U_IDFilterselectedFilterItemList
-              
-            	  
-                    wc.iOR(Sel_WASP_UserView.W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, item)                  
-                  
-                                 
-                Next
-            End If
+            Dim wc As WhereClause= New WhereClause()
             Return wc
-        
+            
         End Function			
             
 
@@ -3202,14 +3134,7 @@ Public Class BaseSelWFReassignTableControl
                   
             Me.SaveToSession(Me.TOTALToFilter, Me.TOTALToFilter.Text)
                   
-            Dim WPO_W_U_IDFilterselectedFilterItemList As ArrayList = GetSelectedValueList(Me.WPO_W_U_IDFilter, Nothing)
-            Dim WPO_W_U_IDFilterSessionString As String = ""
-            If Not WPO_W_U_IDFilterselectedFilterItemList is Nothing Then
-            For Each item As String In WPO_W_U_IDFilterselectedFilterItemList
-                WPO_W_U_IDFilterSessionstring = WPO_W_U_IDFilterSessionstring & "," & item
-            Next
-            End If
-            Me.SaveToSession(Me.WPO_W_U_IDFilter, WPO_W_U_IDFilterSessionstring)
+            Me.SaveToSession(Me.WPO_W_U_IDFilter, Me.WPO_W_U_IDFilter.SelectedValue)
                   
         
             'Save pagination state to session.
@@ -3238,15 +3163,8 @@ Public Class BaseSelWFReassignTableControl
               
       Me.SaveToSession("TOTALToFilter_Ajax", Me.TOTALToFilter.Text)
               
-            Dim WPO_W_U_IDFilterselectedFilterItemList As ArrayList = GetSelectedValueList(Me.WPO_W_U_IDFilter, Nothing)
-            Dim WPO_W_U_IDFilterSessionString As String = ""
-            If Not WPO_W_U_IDFilterselectedFilterItemList is Nothing Then
-            For Each item As String In WPO_W_U_IDFilterselectedFilterItemList
-                WPO_W_U_IDFilterSessionstring = WPO_W_U_IDFilterSessionstring & "," & item
-            Next
-            End If
-            Me.SaveToSession("WPO_W_U_IDFilter_Ajax", WPO_W_U_IDFilterSessionString)
-          
+      Me.SaveToSession("WPO_W_U_IDFilter_Ajax", Me.WPO_W_U_IDFilter.SelectedValue)
+              
             HttpContext.Current.Session("AppRelativeVirtualPath") = Me.Page.AppRelativeVirtualPath
          
         End Sub
@@ -4515,9 +4433,9 @@ Public Class BaseSelWFReassignTableControl
             End Get
         End Property
         
-        Public ReadOnly Property WPO_W_U_IDFilter() As BaseClasses.Web.UI.WebControls.QuickSelector
+        Public ReadOnly Property WPO_W_U_IDFilter() As System.Web.UI.WebControls.DropDownList
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_W_U_IDFilter"), BaseClasses.Web.UI.WebControls.QuickSelector)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WPO_W_U_IDFilter"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
         

@@ -588,7 +588,7 @@ Namespace ePortalWFApproval.UI.Controls.Homepage
                 Case "<font color=black>FS</font>", "FS"
                     pubUrl = "../WFinRep_Head1/WFin-ApproverPage1.aspx?WFinRep_Head=" & Me.Doc_No1.Text
                 Case "<font color=black>FS-NGP</font>", "FS-NGP"
-                    pubUrl = "../WFinRepNGP_Head1/WFinRepNGP-Approver1.aspx?WFinRepNGP_Head=" & Me.Doc_No1.Text
+                    pubUrl = "../WFinRepNGP_Head1/WFinRepNGP-Approver1.aspx?WFinRepNGP_Head1=" & Me.Doc_No1.Text
                 Case "<font color=black>CONSOLIDATED</font>", "CONSOLIDATED"
                     pubUrl = "../WFinRep_Head/Conso_ReportDoc_Approver.aspx?WFinRepCon_Head=" & Me.Doc_No1.Text
                 Case "<font color=black>PO CANCEL</font>", "PO CANCEL"

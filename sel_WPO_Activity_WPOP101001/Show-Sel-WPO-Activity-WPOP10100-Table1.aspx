@@ -26,7 +26,7 @@
                 <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td>
                         <ePortalWFApproval:Sel_WPO_Activity_WPOP101001TableControl runat="server" id="Sel_WPO_Activity_WPOP101001TableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelHeaderL"></td><td class="dh">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle">
-                        <asp:Literal runat="server" id="Sel_WPO_Activity_WPOP10100Title" Text="PO Workflow Tasks (North)">	</asp:Literal></td></tr></table>
+                        <asp:Literal runat="server" id="Sel_WPO_Activity_WPOP10100Title" Text="Purchase Order Workflow Tasks (North)">	</asp:Literal></td></tr></table>
 </td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
 
                 </td></tr><tr><td><asp:literal id="Literal2" runat="server" text="&nbsp" /></td><td>

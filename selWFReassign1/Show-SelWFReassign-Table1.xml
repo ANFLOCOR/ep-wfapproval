@@ -1080,7 +1080,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>PO WORKFLOW REASSIGN TASK (North)</Value>
+          <Value>PO Workflow Reassign Task (North)</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>SelWFReassignTableControl</InsideControl>
@@ -2371,6 +2371,10 @@
           <Value>DatabaseANFLO-WFN%dbo.selWFReassign</Value>
         </Attribute>
         <Attribute>
+          <Name>MaxGeneratedItems</Name>
+          <Value>5000</Value>
+        </Attribute>
+        <Attribute>
           <Name>onkeypress</Name>
           <Value>dropDownListTypeAhead(this,false)</Value>
         </Attribute>
@@ -3318,7 +3322,7 @@
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
-            &lt;AttributeValue&gt;text-align:right;&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;text-align:left;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;

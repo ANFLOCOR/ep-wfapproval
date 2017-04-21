@@ -4702,6 +4702,10 @@
             &lt;Name&gt;class&lt;/Name&gt;
             &lt;AttributeValue&gt;dhb&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;display:none;&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;

@@ -2650,11 +2650,11 @@
     <ContainedComponent>
       <Name>WPO_W_U_IDFilter</Name>
       <Type>FieldFilter</Type>
-      <FieldValueStyle>QuickSelector</FieldValueStyle>
+      <FieldValueStyle>DropDownList</FieldValueStyle>
       <PassthroughAttributes>
         <Attribute>
-          <Name>Consumers</Name>
-          <Value>SelWFReassignTableControl</Value>
+          <Name>CssClass</Name>
+          <Value>Filter_Input</Value>
         </Attribute>
         <Attribute>
           <Name>Field</Name>
@@ -2677,12 +2677,12 @@
           <Value>DatabaseANFLO-WF%dbo.selWFReassign</Value>
         </Attribute>
         <Attribute>
-          <Name>onkeypress</Name>
-          <Value>dropDownListTypeAhead(this,false)</Value>
+          <Name>MaxGeneratedItems</Name>
+          <Value>5000</Value>
         </Attribute>
         <Attribute>
-          <Name>RedirectURL</Name>
-          <Value />
+          <Name>onkeypress</Name>
+          <Value>dropDownListTypeAhead(this,false)</Value>
         </Attribute>
         <Attribute>
           <Name>SelectionMode</Name>
@@ -3156,6 +3156,10 @@
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
             &lt;AttributeValue&gt;dhb&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;display:none;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -3872,7 +3876,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;ticnb&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;scope&lt;/Name&gt;
@@ -3885,7 +3889,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellLabel&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -3898,7 +3902,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -3912,7 +3916,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -3925,7 +3929,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -3938,7 +3942,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -3951,7 +3955,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -3964,7 +3968,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -3977,7 +3981,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -3990,7 +3994,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -4003,7 +4007,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;style&lt;/Name&gt;
@@ -4018,7 +4022,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellLabel&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
@@ -4034,7 +4038,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellLabel&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;colspan&lt;/Name&gt;
@@ -4046,7 +4050,7 @@
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+            &lt;AttributeValue&gt;ttc&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
