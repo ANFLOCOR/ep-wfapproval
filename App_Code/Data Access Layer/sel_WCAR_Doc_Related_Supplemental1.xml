@@ -389,7 +389,6 @@
   <Owner>dbo</Owner>
   <TableAliasName>sel_WCAR_Doc_Related_Supplemental_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WFN</ConnectionName>
-  <InUse>N</InUse>
   <PagingMethod>RowNum</PagingMethod>
   <canCreateRecords Source="Database">N</canCreateRecords>
   <canEditRecords Source="Database">N</canEditRecords>
@@ -400,4 +399,5 @@
   <MenuName>WCAR Document Related Supplemental1</MenuName>
   <QSPath>../sel_WCAR_Doc_Related_Supplemental1/Sel-WCAR-Doc-Related-Supplemental-QuickSelector1.aspx</QSPath>
   <TableCodeName>Sel_WCAR_Doc_Related_Supplemental1</TableCodeName>
+  <TableStoredProcPrefix>pePortalWFApprovalSel_WCAR_Doc_Related_Supplemental1</TableStoredProcPrefix>
 </XMLDefinition>

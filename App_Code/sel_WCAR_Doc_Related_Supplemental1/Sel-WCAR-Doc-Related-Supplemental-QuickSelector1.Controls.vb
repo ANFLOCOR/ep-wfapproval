@@ -1,6 +1,6 @@
 ﻿
 ' This file implements the TableControl, TableControlRow, and RecordControl classes for the 
-' View_Related_CARs.aspx page.  The Row or RecordControl classes are the 
+' Sel_WCAR_Doc_Related_Supplemental_QuickSelector1.aspx page.  The Row or RecordControl classes are the 
 ' ideal place to add code customizations. For example, you can override the LoadData, 
 ' CreateWhereClause, DataBind, SaveData, GetUIData, and Validate methods.
 
@@ -32,16 +32,16 @@ Imports ePortalWFApproval.UI
 #End Region
 
   
-Namespace ePortalWFApproval.UI.Controls.View_Related_CARs
+Namespace ePortalWFApproval.UI.Controls.Sel_WCAR_Doc_Related_Supplemental_QuickSelector1
 
 #Region "Section 1: Place your customizations here."
 
     
-Public Class Sel_WCAR_Doc_Related_SupplementalTableControlRow
-        Inherits BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
-        ' The BaseSel_WCAR_Doc_Related_SupplementalTableControlRow implements code for a ROW within the
-        ' the Sel_WCAR_Doc_Related_SupplementalTableControl table.  The BaseSel_WCAR_Doc_Related_SupplementalTableControlRow implements the DataBind and SaveData methods.
-        ' The loading of data is actually performed by the LoadData method in the base class of Sel_WCAR_Doc_Related_SupplementalTableControl.
+Public Class SelectorTableControlRow
+        Inherits BaseSelectorTableControlRow
+        ' The BaseSelectorTableControlRow implements code for a ROW within the
+        ' the SelectorTableControl table.  The BaseSelectorTableControlRow implements the DataBind and SaveData methods.
+        ' The loading of data is actually performed by the LoadData method in the base class of SelectorTableControl.
 
         ' This is the ideal place to add your code customizations. For example, you can override the DataBind, 
         ' SaveData, GetUIData, and Validate methods.
@@ -51,30 +51,15 @@ End Class
 
   
 
-Public Class Sel_WCAR_Doc_Related_SupplementalTableControl
-        Inherits BaseSel_WCAR_Doc_Related_SupplementalTableControl
+Public Class SelectorTableControl
+        Inherits BaseSelectorTableControl
 
-    ' The BaseSel_WCAR_Doc_Related_SupplementalTableControl class implements the LoadData, DataBind, CreateWhereClause
+    ' The BaseSelectorTableControl class implements the LoadData, DataBind, CreateWhereClause
     ' and other methods to load and display the data in a table control.
 
     ' This is the ideal place to add your code customizations. You can override the LoadData and CreateWhereClause,
-    ' The Sel_WCAR_Doc_Related_SupplementalTableControlRow class offers another place where you can customize
-        ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
-
-
-        Public Overrides Function CreateWhereClause() As WhereClause
-            Sel_WCAR_Doc_Related_SupplementalView.Instance.InnerFilter = Nothing
-            Dim wc As WhereClause = New WhereClause()
-
-            Dim sParam1 As String = CStr(Me.Page.Request.QueryString("CAR"))
-            Dim sParam2 As String = CStr(Me.Page.Request.QueryString("Company"))
-
-            wc.iAND(Sel_WCAR_Doc_Related_SupplementalView.WCD_No, BaseFilter.ComparisonOperator.EqualsTo, sParam1)
-            wc.iAND(Sel_WCAR_Doc_Related_SupplementalView.WCD_C_ID, BaseFilter.ComparisonOperator.EqualsTo, sParam2)
-            Return wc
-        End Function
-
-
+    ' The SelectorTableControlRow class offers another place where you can customize
+    ' the DataBind, GetUIData, SaveData and Validate methods specific to each row displayed on the table.
 
 End Class
 
@@ -87,18 +72,18 @@ End Class
 #Region "Section 2: Do not modify this section."
     
     
-' Base class for the Sel_WCAR_Doc_Related_SupplementalTableControlRow control on the View_Related_CARs page.
-' Do not modify this class. Instead override any method in Sel_WCAR_Doc_Related_SupplementalTableControlRow.
-Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
+' Base class for the SelectorTableControlRow control on the Sel_WCAR_Doc_Related_Supplemental_QuickSelector1 page.
+' Do not modify this class. Instead override any method in SelectorTableControlRow.
+Public Class BaseSelectorTableControlRow
         Inherits ePortalWFApproval.UI.BaseApplicationRecordControl
 
-        '  To customize, override this method in Sel_WCAR_Doc_Related_SupplementalTableControlRow.
+        '  To customize, override this method in SelectorTableControlRow.
         Protected Overridable Sub Control_Init(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Init
 
           
         End Sub
 
-        '  To customize, override this method in Sel_WCAR_Doc_Related_SupplementalTableControlRow.
+        '  To customize, override this method in SelectorTableControlRow.
         Protected Overridable Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Load
                      
         
@@ -110,21 +95,21 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
         
         Public Overridable Sub LoadData()        
                 
-            ' Load the data from the database into the DataSource DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental record.
+            ' Load the data from the database into the DataSource DatabaseANFLO-WFN%dbo.sel_WCAR_Doc_Related_Supplemental record.
             ' It is better to make changes to functions called by LoadData such as
             ' CreateWhereClause, rather than making changes here.
     
             ' Since this is a row in the table, the data for this row is loaded by the 
-            ' LoadData method of the BaseSel_WCAR_Doc_Related_SupplementalTableControl when the data for the entire
+            ' LoadData method of the BaseSelectorTableControl when the data for the entire
             ' table is loaded.
             
-            Me.DataSource = New Sel_WCAR_Doc_Related_SupplementalRecord()
+            Me.DataSource = New Sel_WCAR_Doc_Related_Supplemental1Record()
           
     
     
         End Sub
 
-        ' Populate the UI controls using the DataSource.  To customize, override this method in Sel_WCAR_Doc_Related_SupplementalTableControlRow.
+        ' Populate the UI controls using the DataSource.  To customize, override this method in SelectorTableControlRow.
         Public Overrides Sub DataBind()
             ' The DataBind method binds the user interface controls to the values
             ' from the database record.  To do this, it calls the Set methods for 
@@ -147,14 +132,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
       
             ' Call the Set methods for each controls on the panel
         
-                SetRel_CAR()
-                SetRel_Proj()
-                SetRel_Req_Date()
-                SetRel_Total()
-                SetWCD_Exp_Total()
-                SetWCD_No()
-                SetWCD_Project_Title()
-                SetWCD_Request_Date()
+                SetQuickSelectorItem()
       
       
             Me.IsNewRecord = True
@@ -169,419 +147,102 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
             ' their parent ids from their parent UI controls.
             Dim shouldResetControl As Boolean = False
             
+              ' Register row click event to handle row selection
+              RegisterRowForSelection()              
+      
         End Sub
         
         
-        Public Overridable Sub SetRel_CAR()
+        Public Overridable Sub SetQuickSelectorItem()
 
                   
-            
-        
-            ' Set the Rel_CAR Literal on the webpage with value from the
-            ' DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental database record.
-
-            ' Me.DataSource is the DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental record retrieved from the database.
-            ' Me.Rel_CAR is the ASP:Literal on the webpage.
-            
-            ' You can modify this method directly, or replace it with a call to
-            '     MyBase.SetRel_CAR()
-            ' and add your own code before or after the call to the MyBase function.
-
-            
                   
-            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.Rel_CARSpecified Then
-                				
-                ' If the Rel_CAR is non-NULL, then format the value.
+                      Me.QuickSelectorItem.Text = EvaluateFormula("SelectorTableControl.GetQuickSelectorDisplayText(SelectorTableControlRow)")
+                    
+                  End Sub
+                    
+        ''' 
+        ''' Register row click event and set the row class name to be QStrSelected to highlight the row
+        ''' 
+        ''' 
+        Public Overridable Sub RegisterRowForSelection()
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Related_SupplementalView.Rel_CAR)
-                              
-                formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                Me.Rel_CAR.Text = formattedValue
-                
-            Else 
-            
-                ' Rel_CAR is NULL in the database, so use the Default Value.  
-                ' Default Value could also be NULL.
-        
-                 Me.Rel_CAR.Text = Sel_WCAR_Doc_Related_SupplementalView.Rel_CAR.Format(Sel_WCAR_Doc_Related_SupplementalView.Rel_CAR.DefaultValue)
-                        		
-                End If
-                 
-            ' If the Rel_CAR is NULL or blank, then use the value specified  
-            ' on Properties.
-            If Me.Rel_CAR.Text Is Nothing _
-                OrElse Me.Rel_CAR.Text.Trim() = "" Then
-                ' Set the value specified on the Properties.
-                Me.Rel_CAR.Text = "&nbsp;"
+            Dim target As String = ""
+            Dim field As String = ""
+            Dim formula As String = ""
+            Dim displayFieldName As String = ""
+            Dim multiSelection As Boolean = False
+
+            ' retrieve necessary URL parameters
+            If Not String.IsNullOrEmpty(Page.Request("Target")) Then
+                target = CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("Target")
             End If
-                                       
-        End Sub
-                
-        Public Overridable Sub SetRel_Proj()
+            If Not String.IsNullOrEmpty(Page.Request("IndexField")) Then
+                field = CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("IndexField")
+            End If
+            If Not String.IsNullOrEmpty(Page.Request("Formula")) Then
+                formula = CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("Formula")
+            End If
+            If Not String.IsNullOrEmpty(Page.Request("DFKA")) Then
+                displayFieldName = CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("DFKA")
+            End If
+            If Not String.IsNullOrEmpty(Page.Request("Mode")) Then
+                multiSelection =  CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("Mode") = "FieldFilterMultiSelection"
+            End If
+            If target = "" OrElse field = "" Then
+                Return
+            End If
 
-                  
-            
-        
-            ' Set the Rel_Proj Literal on the webpage with value from the
-            ' DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental database record.
+            Dim col As BaseColumn = Me.DataSource.TableAccess.TableDefinition.ColumnList.GetByAnyName(field)
+            Dim value As String = Me.DataSource.GetValue(col).ToString()
+            Dim text As String = ""
+            If formula <> "" Then
+                Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                variables.Add(Me.DataSource.TableAccess.TableDefinition.TableCodeName, Me.DataSource)
+                text = EvaluateFormula(formula, Me.DataSource, "", variables)
+            ElseIf displayFieldName <> "" Then
+                Dim col2 As BaseColumn = Me.DataSource.TableAccess.TableDefinition.ColumnList.GetByAnyName(displayFieldName)
+                text = Me.DataSource.GetValue(col2).ToString()
+            Else
+                text = value
+            End If
+            If value Is Nothing Then
+                value = ""
+            End If
+            If text Is Nothing Then
+                text = value
+            End If
 
-            ' Me.DataSource is the DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental record retrieved from the database.
-            ' Me.Rel_Proj is the ASP:Literal on the webpage.
-            
-            ' You can modify this method directly, or replace it with a call to
-            '     MyBase.SetRel_Proj()
-            ' and add your own code before or after the call to the MyBase function.
+            ' find a hidden quick selector control which can be found on the Page Directive dialog.  And store the selection
+            Dim qsSelection As QuickSelector = DirectCast(Me.Page.FindControlRecursively("QSSelection"), QuickSelector)
+            Dim selected As Boolean = False
+            Dim selectedItems As ListItemCollection = qsSelection.Items
+            If selectedItems.Contains(New ListItem(text, value)) Then
+                selected = True
+            End If
 
-            
-                  
-            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.Rel_ProjSpecified Then
-                				
-                ' If the Rel_Proj is non-NULL, then format the value.
+            For Each ctrl As Control In Me.Controls
+                If ctrl.GetType() Is GetType(System.Web.UI.HtmlControls.HtmlTableRow) Then
+                    Dim row As System.Web.UI.HtmlControls.HtmlTableRow = DirectCast(ctrl, System.Web.UI.HtmlControls.HtmlTableRow)
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Related_SupplementalView.Rel_Proj)
-                              
-                If Not formattedValue is Nothing Then
-                              
-                    Dim maxLength as Integer = Len(formattedValue)                   
-                    If (maxLength >= CType(300, Integer)) Then
-                        ' Truncate based on FieldMaxLength on Properties.
-                        maxLength = CType(300, Integer)
-                        'First strip of all html tags:
-                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)                       
-                        
-                        formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                          
-                    End If                    
-                    If maxLength = CType(300, Integer) Then
-                        formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,Math.Min(maxLength, Len(formattedValue))))
-                        formattedValue = formattedValue & "..."
-                            
-                    Else
-                        
-                        formattedValue = "<table border=""0"" cellpadding=""0"" cellspacing=""0""><tr><td>" & formattedValue & "</td></tr></table>"
+                    ' register onclick event which marks the row to be selected or deselected when the row is clicked
+                    row.Attributes.Item("onclick") = "selectorMultiSelectRowClick(this, '" & qsSelection.ClientID & "', '" & value.Replace("\", "\\").Replace(vbCr, "\r").Replace(vbLf, "\n").Replace("'", "\'") & "', '" & text.Replace("\", "\\").Replace(vbCr, " ").Replace(vbLf, " ").Replace("'", "\'") & "', '" & "');"
+                    If Not multiSelection Then
+                        ' for single selection, commit the selection and close the popup immediately
+                        row.Attributes.Item("onclick") &= "CommitSelection();"
                     End If
-                End If  
-                
-                Me.Rel_Proj.Text = formattedValue
-                
-            Else 
-            
-                ' Rel_Proj is NULL in the database, so use the Default Value.  
-                ' Default Value could also be NULL.
-        
-                 Me.Rel_Proj.Text = Sel_WCAR_Doc_Related_SupplementalView.Rel_Proj.Format(Sel_WCAR_Doc_Related_SupplementalView.Rel_Proj.DefaultValue)
-                        		
-                End If
-                 
-            ' If the Rel_Proj is NULL or blank, then use the value specified  
-            ' on Properties.
-            If Me.Rel_Proj.Text Is Nothing _
-                OrElse Me.Rel_Proj.Text.Trim() = "" Then
-                ' Set the value specified on the Properties.
-                Me.Rel_Proj.Text = "&nbsp;"
-            End If
-                                       
-        End Sub
-                
-        Public Overridable Sub SetRel_Req_Date()
-
-                  
-            
-        
-            ' Set the Rel_Req_Date Literal on the webpage with value from the
-            ' DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental database record.
-
-            ' Me.DataSource is the DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental record retrieved from the database.
-            ' Me.Rel_Req_Date is the ASP:Literal on the webpage.
-            
-            ' You can modify this method directly, or replace it with a call to
-            '     MyBase.SetRel_Req_Date()
-            ' and add your own code before or after the call to the MyBase function.
-
-            
-                  
-            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.Rel_Req_DateSpecified Then
-                				
-                ' If the Rel_Req_Date is non-NULL, then format the value.
-
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Related_SupplementalView.Rel_Req_Date, "g")
-                              
-                formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                Me.Rel_Req_Date.Text = formattedValue
-                
-            Else 
-            
-                ' Rel_Req_Date is NULL in the database, so use the Default Value.  
-                ' Default Value could also be NULL.
-        
-                 Me.Rel_Req_Date.Text = Sel_WCAR_Doc_Related_SupplementalView.Rel_Req_Date.Format(Sel_WCAR_Doc_Related_SupplementalView.Rel_Req_Date.DefaultValue, "g")
-                        		
-                End If
-                 
-            ' If the Rel_Req_Date is NULL or blank, then use the value specified  
-            ' on Properties.
-            If Me.Rel_Req_Date.Text Is Nothing _
-                OrElse Me.Rel_Req_Date.Text.Trim() = "" Then
-                ' Set the value specified on the Properties.
-                Me.Rel_Req_Date.Text = "&nbsp;"
-            End If
-                                       
-        End Sub
-                
-        Public Overridable Sub SetRel_Total()
-
-                  
-            
-        
-            ' Set the Rel_Total Literal on the webpage with value from the
-            ' DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental database record.
-
-            ' Me.DataSource is the DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental record retrieved from the database.
-            ' Me.Rel_Total is the ASP:Literal on the webpage.
-            
-            ' You can modify this method directly, or replace it with a call to
-            '     MyBase.SetRel_Total()
-            ' and add your own code before or after the call to the MyBase function.
-
-            
-                  
-            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.Rel_TotalSpecified Then
-                				
-                ' If the Rel_Total is non-NULL, then format the value.
-
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Related_SupplementalView.Rel_Total)
-                              
-                formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                Me.Rel_Total.Text = formattedValue
-                
-            Else 
-            
-                ' Rel_Total is NULL in the database, so use the Default Value.  
-                ' Default Value could also be NULL.
-        
-                 Me.Rel_Total.Text = Sel_WCAR_Doc_Related_SupplementalView.Rel_Total.Format(Sel_WCAR_Doc_Related_SupplementalView.Rel_Total.DefaultValue)
-                        		
-                End If
-                 
-            ' If the Rel_Total is NULL or blank, then use the value specified  
-            ' on Properties.
-            If Me.Rel_Total.Text Is Nothing _
-                OrElse Me.Rel_Total.Text.Trim() = "" Then
-                ' Set the value specified on the Properties.
-                Me.Rel_Total.Text = "&nbsp;"
-            End If
-                                       
-        End Sub
-                
-        Public Overridable Sub SetWCD_Exp_Total()
-
-                  
-            
-        
-            ' Set the WCD_Exp_Total Literal on the webpage with value from the
-            ' DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental database record.
-
-            ' Me.DataSource is the DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental record retrieved from the database.
-            ' Me.WCD_Exp_Total is the ASP:Literal on the webpage.
-            
-            ' You can modify this method directly, or replace it with a call to
-            '     MyBase.SetWCD_Exp_Total()
-            ' and add your own code before or after the call to the MyBase function.
-
-            
-                  
-            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Exp_TotalSpecified Then
-                				
-                ' If the WCD_Exp_Total is non-NULL, then format the value.
-
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Related_SupplementalView.WCD_Exp_Total)
-                              
-                formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                Me.WCD_Exp_Total.Text = formattedValue
-                
-            Else 
-            
-                ' WCD_Exp_Total is NULL in the database, so use the Default Value.  
-                ' Default Value could also be NULL.
-        
-                 Me.WCD_Exp_Total.Text = Sel_WCAR_Doc_Related_SupplementalView.WCD_Exp_Total.Format(Sel_WCAR_Doc_Related_SupplementalView.WCD_Exp_Total.DefaultValue)
-                        		
-                End If
-                 
-            ' If the WCD_Exp_Total is NULL or blank, then use the value specified  
-            ' on Properties.
-            If Me.WCD_Exp_Total.Text Is Nothing _
-                OrElse Me.WCD_Exp_Total.Text.Trim() = "" Then
-                ' Set the value specified on the Properties.
-                Me.WCD_Exp_Total.Text = "&nbsp;"
-            End If
-                                       
-        End Sub
-                
-        Public Overridable Sub SetWCD_No()
-
-                  
-            
-        
-            ' Set the WCD_No Literal on the webpage with value from the
-            ' DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental database record.
-
-            ' Me.DataSource is the DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental record retrieved from the database.
-            ' Me.WCD_No is the ASP:Literal on the webpage.
-            
-            ' You can modify this method directly, or replace it with a call to
-            '     MyBase.SetWCD_No()
-            ' and add your own code before or after the call to the MyBase function.
-
-            
-                  
-            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_NoSpecified Then
-                				
-                ' If the WCD_No is non-NULL, then format the value.
-
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Related_SupplementalView.WCD_No)
-                              
-                formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                Me.WCD_No.Text = formattedValue
-                
-            Else 
-            
-                ' WCD_No is NULL in the database, so use the Default Value.  
-                ' Default Value could also be NULL.
-        
-                 Me.WCD_No.Text = Sel_WCAR_Doc_Related_SupplementalView.WCD_No.Format(Sel_WCAR_Doc_Related_SupplementalView.WCD_No.DefaultValue)
-                        		
-                End If
-                 
-            ' If the WCD_No is NULL or blank, then use the value specified  
-            ' on Properties.
-            If Me.WCD_No.Text Is Nothing _
-                OrElse Me.WCD_No.Text.Trim() = "" Then
-                ' Set the value specified on the Properties.
-                Me.WCD_No.Text = "&nbsp;"
-            End If
-                                       
-        End Sub
-                
-        Public Overridable Sub SetWCD_Project_Title()
-
-                  
-            
-        
-            ' Set the WCD_Project_Title Literal on the webpage with value from the
-            ' DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental database record.
-
-            ' Me.DataSource is the DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental record retrieved from the database.
-            ' Me.WCD_Project_Title is the ASP:Literal on the webpage.
-            
-            ' You can modify this method directly, or replace it with a call to
-            '     MyBase.SetWCD_Project_Title()
-            ' and add your own code before or after the call to the MyBase function.
-
-            
-                  
-            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Project_TitleSpecified Then
-                				
-                ' If the WCD_Project_Title is non-NULL, then format the value.
-
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Related_SupplementalView.WCD_Project_Title)
-                              
-                If Not formattedValue is Nothing Then
-                              
-                    Dim maxLength as Integer = Len(formattedValue)                   
-                    If (maxLength >= CType(300, Integer)) Then
-                        ' Truncate based on FieldMaxLength on Properties.
-                        maxLength = CType(300, Integer)
-                        'First strip of all html tags:
-                        formattedValue = StringUtils.ConvertHTMLToPlainText(formattedValue)                       
-                        
-                        formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                          
-                    End If                    
-                    If maxLength = CType(300, Integer) Then
-                        formattedValue= NetUtils.EncodeStringForHtmlDisplay(formattedValue.SubString(0,Math.Min(maxLength, Len(formattedValue))))
-                        formattedValue = formattedValue & "..."
-                            
-                    Else
-                        
-                        formattedValue = "<table border=""0"" cellpadding=""0"" cellspacing=""0""><tr><td>" & formattedValue & "</td></tr></table>"
+                    If selected Then
+                        row.Attributes.Item("class") = "QStrSelected"
                     End If
-                End If  
-                
-                Me.WCD_Project_Title.Text = formattedValue
-                
-            Else 
-            
-                ' WCD_Project_Title is NULL in the database, so use the Default Value.  
-                ' Default Value could also be NULL.
-        
-                 Me.WCD_Project_Title.Text = Sel_WCAR_Doc_Related_SupplementalView.WCD_Project_Title.Format(Sel_WCAR_Doc_Related_SupplementalView.WCD_Project_Title.DefaultValue)
-                        		
                 End If
-                 
-            ' If the WCD_Project_Title is NULL or blank, then use the value specified  
-            ' on Properties.
-            If Me.WCD_Project_Title.Text Is Nothing _
-                OrElse Me.WCD_Project_Title.Text.Trim() = "" Then
-                ' Set the value specified on the Properties.
-                Me.WCD_Project_Title.Text = "&nbsp;"
-            End If
-                                       
+
+            Next
+
+
         End Sub
-                
-        Public Overridable Sub SetWCD_Request_Date()
 
-                  
-            
+
         
-            ' Set the WCD_Request_Date Literal on the webpage with value from the
-            ' DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental database record.
-
-            ' Me.DataSource is the DatabaseANFLO-WF%dbo.sel_WCAR_Doc_Related_Supplemental record retrieved from the database.
-            ' Me.WCD_Request_Date is the ASP:Literal on the webpage.
-            
-            ' You can modify this method directly, or replace it with a call to
-            '     MyBase.SetWCD_Request_Date()
-            ' and add your own code before or after the call to the MyBase function.
-
-            
-                  
-            If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCD_Request_DateSpecified Then
-                				
-                ' If the WCD_Request_Date is non-NULL, then format the value.
-
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(Sel_WCAR_Doc_Related_SupplementalView.WCD_Request_Date, "g")
-                              
-                formattedValue = HttpUtility.HtmlEncode(formattedValue)
-                Me.WCD_Request_Date.Text = formattedValue
-                
-            Else 
-            
-                ' WCD_Request_Date is NULL in the database, so use the Default Value.  
-                ' Default Value could also be NULL.
-        
-                 Me.WCD_Request_Date.Text = Sel_WCAR_Doc_Related_SupplementalView.WCD_Request_Date.Format(Sel_WCAR_Doc_Related_SupplementalView.WCD_Request_Date.DefaultValue, "g")
-                        		
-                End If
-                 
-            ' If the WCD_Request_Date is NULL or blank, then use the value specified  
-            ' on Properties.
-            If Me.WCD_Request_Date.Text Is Nothing _
-                OrElse Me.WCD_Request_Date.Text.Trim() = "" Then
-                ' Set the value specified on the Properties.
-                Me.WCD_Request_Date.Text = "&nbsp;"
-            End If
-                                       
-        End Sub
-                
 
         Public EvaluateFormulaDelegate As BaseClasses.Data.DataSource.EvaluateFormulaDelegate = New BaseClasses.Data.DataSource.EvaluateFormulaDelegate(AddressOf Me.EvaluateFormula)
 
@@ -670,7 +331,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
 
       
         
-        ' To customize, override this method in Sel_WCAR_Doc_Related_SupplementalTableControlRow.
+        ' To customize, override this method in SelectorTableControlRow.
         Public Overridable Sub SaveData()
             ' Saves the associated record in the database.
             ' SaveData calls Validate and Get methods - so it may be more appropriate to
@@ -697,8 +358,8 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
                 ' Auto generated ids are available after saving for use by child (dependent) records.
                 Me.DataSource.Save()
               
-                DirectCast(GetParentControlObject(Me, "Sel_WCAR_Doc_Related_SupplementalTableControl"), Sel_WCAR_Doc_Related_SupplementalTableControl).DataChanged = True
-                DirectCast(GetParentControlObject(Me, "Sel_WCAR_Doc_Related_SupplementalTableControl"), Sel_WCAR_Doc_Related_SupplementalTableControl).ResetData = True
+                DirectCast(GetParentControlObject(Me, "SelectorTableControl"), SelectorTableControl).DataChanged = True
+                DirectCast(GetParentControlObject(Me, "SelectorTableControl"), SelectorTableControl).ResetData = True
             End If
             
       
@@ -715,7 +376,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
           
         End Sub
 
-        ' To customize, override this method in Sel_WCAR_Doc_Related_SupplementalTableControlRow.
+        ' To customize, override this method in SelectorTableControlRow.
         Public Overridable Sub GetUIData()
             ' The GetUIData method retrieves the updated values from the user interface 
             ' controls into a database record in preparation for saving or updating.
@@ -725,55 +386,15 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
       
             ' Call the Get methods for each of the user interface controls.
         
-            GetRel_CAR()
-            GetRel_Proj()
-            GetRel_Req_Date()
-            GetRel_Total()
-            GetWCD_Exp_Total()
-            GetWCD_No()
-            GetWCD_Project_Title()
-            GetWCD_Request_Date()
         End Sub
         
         
-        Public Overridable Sub GetRel_CAR()
-            
-        End Sub
-                
-        Public Overridable Sub GetRel_Proj()
-            
-        End Sub
-                
-        Public Overridable Sub GetRel_Req_Date()
-            
-        End Sub
-                
-        Public Overridable Sub GetRel_Total()
-            
-        End Sub
-                
-        Public Overridable Sub GetWCD_Exp_Total()
-            
-        End Sub
-                
-        Public Overridable Sub GetWCD_No()
-            
-        End Sub
-                
-        Public Overridable Sub GetWCD_Project_Title()
-            
-        End Sub
-                
-        Public Overridable Sub GetWCD_Request_Date()
-            
-        End Sub
-                
       
-        ' To customize, override this method in Sel_WCAR_Doc_Related_SupplementalTableControlRow.
+        ' To customize, override this method in SelectorTableControlRow.
         
         Public Overridable Function CreateWhereClause() As WhereClause
         
-        Dim hasFiltersSel_WCAR_Doc_Related_SupplementalTableControl As Boolean = False
+        Dim hasFiltersSelectorTableControl As Boolean = False
       
             Return Nothing
             
@@ -781,7 +402,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
         
     
 
-        ' To customize, override this method in Sel_WCAR_Doc_Related_SupplementalTableControlRow.
+        ' To customize, override this method in SelectorTableControlRow.
         Public Overridable Sub Validate() 
             ' Add custom validation for any control within this panel.
             ' Example.  If you have a State ASP:Textbox control
@@ -887,11 +508,11 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
         End Property   
 
             
-        Public Property DataSource() As Sel_WCAR_Doc_Related_SupplementalRecord
+        Public Property DataSource() As Sel_WCAR_Doc_Related_Supplemental1Record
             Get
-                Return DirectCast(MyBase._DataSource, Sel_WCAR_Doc_Related_SupplementalRecord)
+                Return DirectCast(MyBase._DataSource, Sel_WCAR_Doc_Related_Supplemental1Record)
             End Get
-            Set(ByVal value As Sel_WCAR_Doc_Related_SupplementalRecord)
+            Set(ByVal value As Sel_WCAR_Doc_Related_Supplemental1Record)
                 Me._DataSource = value
             End Set
         End Property
@@ -942,54 +563,12 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
 
 #Region "Helper Properties"
         
-        Public ReadOnly Property Rel_CAR() As System.Web.UI.WebControls.Literal
+        Public ReadOnly Property QuickSelectorItem() As System.Web.UI.WebControls.Literal
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Rel_CAR"), System.Web.UI.WebControls.Literal)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "QuickSelectorItem"), System.Web.UI.WebControls.Literal)
             End Get
         End Property
-            
-        Public ReadOnly Property Rel_Proj() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Rel_Proj"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-            
-        Public ReadOnly Property Rel_Req_Date() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Rel_Req_Date"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-            
-        Public ReadOnly Property Rel_Total() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Rel_Total"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-            
-        Public ReadOnly Property WCD_Exp_Total() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_Total"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-            
-        Public ReadOnly Property WCD_No() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_No"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-            
-        Public ReadOnly Property WCD_Project_Title() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Project_Title"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-            
-        Public ReadOnly Property WCD_Request_Date() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Request_Date"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-            
+        
 #End Region
 
 #Region "Helper Functions"
@@ -1004,7 +583,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
 
         Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean) As String
             
-            Dim rec As Sel_WCAR_Doc_Related_SupplementalRecord = Nothing
+            Dim rec As Sel_WCAR_Doc_Related_Supplemental1Record = Nothing
              
         
             Try
@@ -1024,7 +603,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
 
         Public Overrides Overloads Function EvaluateExpressions(ByVal url As String, ByVal arg As String, ByVal bEncrypt As Boolean,ByVal includeSession as Boolean) As String
             
-            Dim rec As Sel_WCAR_Doc_Related_SupplementalRecord = Nothing
+            Dim rec As Sel_WCAR_Doc_Related_Supplemental1Record = Nothing
              
         
             Try
@@ -1047,7 +626,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControlRow
         End Function
 
          
-        Public Overridable Function GetRecord() As Sel_WCAR_Doc_Related_SupplementalRecord
+        Public Overridable Function GetRecord() As Sel_WCAR_Doc_Related_Supplemental1Record
             If Not Me.DataSource Is Nothing Then
                 Return Me.DataSource
             End If
@@ -1070,9 +649,9 @@ End Class
 
   
 
-' Base class for the Sel_WCAR_Doc_Related_SupplementalTableControl control on the View_Related_CARs page.
-' Do not modify this class. Instead override any method in Sel_WCAR_Doc_Related_SupplementalTableControl.
-Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
+' Base class for the SelectorTableControl control on the Sel_WCAR_Doc_Related_Supplemental_QuickSelector1 page.
+' Do not modify this class. Instead override any method in SelectorTableControl.
+Public Class BaseSelectorTableControl
         Inherits ePortalWFApproval.UI.BaseApplicationTableControl
 
         
@@ -1082,6 +661,24 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
     
            ' Setup the filter and search.
         
+            If Not Me.Page.IsPostBack Then
+                Dim initialVal As String = ""
+                If  Me.InSession(Me.Search) 				
+                    initialVal = Me.GetFromSession(Me.Search)
+                
+              End If
+              
+                If InvariantEquals(initialVal, "Search for", True) Or InvariantEquals(initialVal, BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing), True) Then
+                  initialVal = ""
+                End If
+              
+                If initialVal <> ""				
+                        
+                        Me.Search.Text = initialVal
+                            
+                    End If
+                
+            End If
 
       
       
@@ -1093,7 +690,19 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
             Else
                    
                 Me.CurrentSortOrder = New OrderBy(True, False)
-            
+                
+              If Me.CurrentSortOrder.Items.Length = 0 Then
+                  Dim columnsFromURL As ColumnList = GetColumnListFromURLParameters(False, True)
+                  If columnsFromURL.Count = 0 Then
+                      columnsFromURL = GetColumnListFromURLParameters(True, False)
+                  End If                   
+                  For Each col As BaseColumn In columnsFromURL
+                      If col.ColumnType.ToString() <> "Very_Large_String" AndAlso col.ColumnType.ToString() <> "Password" Then
+                          Me.CurrentSortOrder.Add(col, OrderByItem.OrderDir.Asc)
+                      End If
+                  Next
+              End If
+     
         End If
 
     
@@ -1112,15 +721,15 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         
             ' Setup the pagination events.
             
-              AddHandler Me.Sel_WCAR_Doc_Related_SupplementalPagination.FirstPage.Click, AddressOf Sel_WCAR_Doc_Related_SupplementalPagination_FirstPage_Click
+              AddHandler Me.Pagination.FirstPage.Click, AddressOf Pagination_FirstPage_Click
                         
-              AddHandler Me.Sel_WCAR_Doc_Related_SupplementalPagination.LastPage.Click, AddressOf Sel_WCAR_Doc_Related_SupplementalPagination_LastPage_Click
+              AddHandler Me.Pagination.LastPage.Click, AddressOf Pagination_LastPage_Click
                         
-              AddHandler Me.Sel_WCAR_Doc_Related_SupplementalPagination.NextPage.Click, AddressOf Sel_WCAR_Doc_Related_SupplementalPagination_NextPage_Click
+              AddHandler Me.Pagination.NextPage.Click, AddressOf Pagination_NextPage_Click
                         
-              AddHandler Me.Sel_WCAR_Doc_Related_SupplementalPagination.PageSizeButton.Click, AddressOf Sel_WCAR_Doc_Related_SupplementalPagination_PageSizeButton_Click
+              AddHandler Me.Pagination.PageSizeButton.Click, AddressOf Pagination_PageSizeButton_Click
                         
-              AddHandler Me.Sel_WCAR_Doc_Related_SupplementalPagination.PreviousPage.Click, AddressOf Sel_WCAR_Doc_Related_SupplementalPagination_PreviousPage_Click
+              AddHandler Me.Pagination.PreviousPage.Click, AddressOf Pagination_PreviousPage_Click
                                     
             Dim url As String = ""  'to avoid warning in VS 
             url = "" 'to avoid warning in VS 
@@ -1128,11 +737,18 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
           
             ' Setup the button events.
           
-              AddHandler Me.Sel_WCAR_Doc_Related_SupplementalRefreshButton.Click, AddressOf Sel_WCAR_Doc_Related_SupplementalRefreshButton_Click
+              AddHandler Me.SearchButton.Click, AddressOf SearchButton_Click
+                        
+              AddHandler Me.AddButton.Button.Click, AddressOf AddButton_Click
+                        
+              AddHandler Me.ClearButton.Button.Click, AddressOf ClearButton_Click
+                        
+              AddHandler Me.CommitButton.Button.Click, AddressOf CommitButton_Click
                                 
         
           ' Setup events for others
-                
+            AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "SearchSearchBoxText", "setSearchBoxText(""" & BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing) & """, """ & Search.ClientID & """);", True)                  
+            
         End Sub
         
         
@@ -1148,7 +764,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
                 If wc IsNot Nothing AndAlso Not wc.RunQuery Then
                     ' Initialize an empty array of records
                     Dim alist As New ArrayList(0)
-                    Me.DataSource = DirectCast(alist.ToArray(GetType(Sel_WCAR_Doc_Related_SupplementalRecord)), Sel_WCAR_Doc_Related_SupplementalRecord())
+                    Me.DataSource = DirectCast(alist.ToArray(GetType(Sel_WCAR_Doc_Related_Supplemental1Record)), Sel_WCAR_Doc_Related_Supplemental1Record())
                     ' Add records to the list if needed.
                     Me.AddNewRecords()
                     Me._TotalRecords = 0
@@ -1184,7 +800,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
                 If Me.AddNewRecord > 0 Then
                 ' Make sure to preserve the previously entered data on new rows.
                     Dim postdata As New ArrayList
-                    For Each rc As Sel_WCAR_Doc_Related_SupplementalTableControlRow In Me.GetRecordControls()
+                    For Each rc As SelectorTableControlRow In Me.GetRecordControls()
                         If Not rc.IsNewRecord Then
                             rc.DataSource = rc.GetRecord()
                             rc.GetUIData()
@@ -1192,7 +808,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
                             UIData.Add(rc.PreservedUIData())							
                         End If
                     Next
-                    Me.DataSource = DirectCast(postdata.ToArray(GetType(Sel_WCAR_Doc_Related_SupplementalRecord)), Sel_WCAR_Doc_Related_SupplementalRecord())
+                    Me.DataSource = DirectCast(postdata.ToArray(GetType(Sel_WCAR_Doc_Related_Supplemental1Record)), Sel_WCAR_Doc_Related_Supplemental1Record())
                 Else  ' Get the records from the database	
                       
                         Me.DataSource = GetRecords(joinFilter, wc, orderBy, Me.PageIndex, Me.PageSize)
@@ -1228,31 +844,33 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
             ByVal where As WhereClause, _
             ByVal orderBy As OrderBy, _
             ByVal pageIndex As Integer, _
-            ByVal pageSize As Integer) As Sel_WCAR_Doc_Related_SupplementalRecord()
+            ByVal pageSize As Integer) As Sel_WCAR_Doc_Related_Supplemental1Record()
             
             ' By default, Select * will be executed to get a list of records.  If you want to run Select Distinct with certain column only, add the column to selCols
             Dim selCols As New ColumnList     
-                        
+            
+            selCols = GetColumnListFromURLParameters(True, True)            
+                    
 
     
             ' If you want to specify certain columns to be in the select statement, you can write code similar to the following:
             ' However, if you don't specify PK, row button click might show an error message.
             ' And make sure you write similar code in GetRecordCount as well
-            ' selCols.Add(Sel_WCAR_Doc_Related_SupplementalView.Column1, True)         
-            ' selCols.Add(Sel_WCAR_Doc_Related_SupplementalView.Column2, True)          
-            ' selCols.Add(Sel_WCAR_Doc_Related_SupplementalView.Column3, True)    
+            ' selCols.Add(Sel_WCAR_Doc_Related_Supplemental1View.Column1, True)         
+            ' selCols.Add(Sel_WCAR_Doc_Related_Supplemental1View.Column2, True)          
+            ' selCols.Add(Sel_WCAR_Doc_Related_Supplemental1View.Column3, True)    
    
             
             
             ' If the parameters doesn't specify specific columns in the Select statement, then run Select *
             ' Alternatively, if the parameters specifies to include PK, also run Select *
-            
-            If selCols.Count = 0 Then                    
+                      
+            If selCols.Count = 0 OrElse selCols.HasPrimaryKey Then
               
-                Return Sel_WCAR_Doc_Related_SupplementalView.GetRecords(join, where, orderBy, Me.PageIndex, Me.PageSize)
+                Return Sel_WCAR_Doc_Related_Supplemental1View.GetRecords(join, where, orderBy, Me.PageIndex, Me.PageSize)
                  
             Else
-                Dim databaseTable As New Sel_WCAR_Doc_Related_SupplementalView
+                Dim databaseTable As New Sel_WCAR_Doc_Related_Supplemental1View
                 databaseTable.SelectedColumns.Clear()
                 databaseTable.SelectedColumns.AddRange(selCols)
                 
@@ -1264,7 +882,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
                 Dim recList As ArrayList
                 orderBy.ExpandForeignKeyColums = False
                 recList = databaseTable.GetRecordList(join, where.GetFilter(), Nothing, orderBy, pageIndex, pageSize)
-                Return CType(recList.ToArray(GetType(Sel_WCAR_Doc_Related_SupplementalRecord)), Sel_WCAR_Doc_Related_SupplementalRecord())
+                Return CType(recList.ToArray(GetType(Sel_WCAR_Doc_Related_Supplemental1Record)), Sel_WCAR_Doc_Related_Supplemental1Record())
             End If            
             
         End Function        
@@ -1275,25 +893,27 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
 
             ' By default, Select * will be executed to get a list of records.  If you want to run Select Distinct with certain column only, add the column to selCols
             Dim selCols As New ColumnList                 
-               
+            
+            selCols = GetColumnListFromURLParameters(True, True)            
+           
     
             ' If you want to specify certain columns to be in the select statement, you can write code similar to the following:
             ' However, if you don't specify PK, row button click might show an error message.
             ' And make sure you write similar code in GetRecordCount as well
-            ' selCols.Add(Sel_WCAR_Doc_Related_SupplementalView.Column1, True)         
-            ' selCols.Add(Sel_WCAR_Doc_Related_SupplementalView.Column2, True)          
-            ' selCols.Add(Sel_WCAR_Doc_Related_SupplementalView.Column3, True)          
+            ' selCols.Add(Sel_WCAR_Doc_Related_Supplemental1View.Column1, True)         
+            ' selCols.Add(Sel_WCAR_Doc_Related_Supplemental1View.Column2, True)          
+            ' selCols.Add(Sel_WCAR_Doc_Related_Supplemental1View.Column3, True)          
 
 
             ' If the parameters doesn't specify specific columns in the Select statement, then run Select *
             ' Alternatively, if the parameters specifies to include PK, also run Select *
-            
-            If selCols.Count = 0 Then                    
+                      
+            If selCols.Count = 0 OrElse selCols.HasPrimaryKey Then
                      
-                Return Sel_WCAR_Doc_Related_SupplementalView.GetRecordCount(join, where)
+                Return Sel_WCAR_Doc_Related_Supplemental1View.GetRecordCount(join, where)
 
             Else
-                Dim databaseTable As New Sel_WCAR_Doc_Related_SupplementalView
+                Dim databaseTable As New Sel_WCAR_Doc_Related_Supplemental1View
                 databaseTable.SelectedColumns.Clear()
                 databaseTable.SelectedColumns.AddRange(selCols)           
                 
@@ -1306,7 +926,42 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
 
         End Function        
         
-      
+                  
+        Public Overridable Function GetColumnListFromURLParameters(ByVal includeIndexFieldParameter As Boolean, ByVal includeFormulaAndDFKAParameter As Boolean) As ColumnList
+            
+            Dim field As String = ""
+            Dim formula As String = ""
+            Dim displayFieldName As String = ""
+            Dim columnList As New ColumnList
+            ' retrieve necessary URL parameters
+            If Not String.IsNullOrEmpty(Page.Request("IndexField")) Then
+                field = CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("IndexField")
+            End If
+            If Not String.IsNullOrEmpty(Page.Request("Formula")) Then
+                formula = CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("Formula")
+            End If
+            If Not String.IsNullOrEmpty(Page.Request("DFKA")) Then
+                displayFieldName = CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("DFKA")
+            End If
+            
+            If includeIndexFieldParameter AndAlso field <> "" Then
+                Dim col As BaseColumn = Sel_WCAR_Doc_Related_Supplemental1View.GetColumnByName(field)
+                If col IsNot Nothing  AndAlso Not columnList.Contains(col) Then columnList.Add(col)             
+            End If
+            If includeFormulaAndDFKAParameter Then
+                If formula <> "" Then
+                    For Each col As BaseColumn In MiscUtils.GetFormulaFieldList(formula, Sel_WCAR_Doc_Related_Supplemental1View.Instance.TableDefinition)
+                        If col IsNot Nothing AndAlso Not columnList.Contains(col) Then columnList.Add(col)             
+                    Next
+                
+                ElseIf displayFieldName <> ""
+                    Dim col As BaseColumn = Sel_WCAR_Doc_Related_Supplemental1View.GetColumnByName(displayFieldName)
+                    If col IsNot Nothing AndAlso Not columnList.Contains(col) Then columnList.Add(col)             
+                End If
+            End If
+            Return columnList            
+        End Function                
+       
     
         Public Overrides Sub DataBind()
             ' The DataBind method binds the user interface controls to the values
@@ -1337,7 +992,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         
           ' Bind the repeater with the list of records to expand the UI.
           
-          Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Sel_WCAR_Doc_Related_SupplementalTableControlRepeater"), System.Web.UI.WebControls.Repeater)
+          Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SelectorTableControlRepeater"), System.Web.UI.WebControls.Repeater)
           If rep Is Nothing Then Return
           rep.DataSource = DataSource()
           rep.DataBind()
@@ -1347,7 +1002,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
           For Each repItem As System.Web.UI.WebControls.RepeaterItem In rep.Items
           
             ' Loop through all rows in the table, set its DataSource and call DataBind().
-            Dim recControl As Sel_WCAR_Doc_Related_SupplementalTableControlRow = DirectCast(repItem.FindControl("Sel_WCAR_Doc_Related_SupplementalTableControlRow"), Sel_WCAR_Doc_Related_SupplementalTableControlRow)
+            Dim recControl As SelectorTableControlRow = DirectCast(repItem.FindControl("SelectorTableControlRow"), SelectorTableControlRow)
             recControl.DataSource = Me.DataSource(index)          
             If Me.UIData.Count > index Then
               recControl.PreviousUIData = Me.UIData(index)
@@ -1359,17 +1014,19 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
                  
             ' Call the Set methods for each controls on the panel
         
-                SetRel_CARLabel()
-                SetRel_ProjLabel()
-                SetRel_Req_DateLabel()
-                SetRel_TotalLabel()
                 
                 
-                SetWCD_Exp_TotalLabel()
-                SetWCD_NoLabel()
-                SetWCD_Project_TitleLabel()
-                SetWCD_Request_DateLabel()
-                SetSel_WCAR_Doc_Related_SupplementalRefreshButton()
+                
+                
+                SetSearch()
+                
+                SetSearchButton()
+              
+                SetAddButton()
+              
+                SetClearButton()
+              
+                SetCommitButton()
               
             ' setting the state of expand or collapse alternative rows
       
@@ -1382,7 +1039,20 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
             ' this method calls the set method for controls with special formula like running total, sum, rank, etc
             SetFormulaControls()
             
-                    
+     
+              ' Mark OK button to be invisible for single selection mode
+              
+            
+              If CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("Mode") <> "FieldFilterMultiSelection" Then Me.CommitButton.Visible = False
+            
+              If CType(Me.Page, BaseApplicationPage).GetDecryptedURLParameter("Mode") <> "FieldValueSingleSelection" Then Me.AddButton.Visible = False
+                          
+
+              ' Register row click event to handle row selection
+              RegisterJSClearSelection()
+              RegisterJSCommitSelection()
+       
+                     
             
       End Sub
       
@@ -1501,34 +1171,32 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         
             If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then                      
                     
-                Me.Sel_WCAR_Doc_Related_SupplementalPagination.CurrentPage.Text = (Me.PageIndex + 1).ToString()
+                Me.Pagination.CurrentPage.Text = (Me.PageIndex + 1).ToString()
             Else
-                Me.Sel_WCAR_Doc_Related_SupplementalPagination.CurrentPage.Text = "0"
+                Me.Pagination.CurrentPage.Text = "0"
             End If
-            Me.Sel_WCAR_Doc_Related_SupplementalPagination.PageSize.Text = Me.PageSize.ToString()
-            Me.Sel_WCAR_Doc_Related_SupplementalPagination.TotalItems.Text = Me.TotalRecords.ToString()
-            Me.Sel_WCAR_Doc_Related_SupplementalPagination.TotalPages.Text = Me.TotalPages.ToString()
+            Me.Pagination.PageSize.Text = Me.PageSize.ToString()
 
-            ' Bind the buttons for Sel_WCAR_Doc_Related_SupplementalTableControl pagination.
+            ' Bind the buttons for SelectorTableControl pagination.
         
-            Me.Sel_WCAR_Doc_Related_SupplementalPagination.FirstPage.Enabled = Not (Me.PageIndex = 0)
+            Me.Pagination.FirstPage.Enabled = Not (Me.PageIndex = 0)
             If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
-                Me.Sel_WCAR_Doc_Related_SupplementalPagination.LastPage.Enabled = True
+                Me.Pagination.LastPage.Enabled = True
             ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.Sel_WCAR_Doc_Related_SupplementalPagination.LastPage.Enabled = False            
+                Me.Pagination.LastPage.Enabled = False            
             Else                               ' if the total pages is the last page, disable last and next buttons
-                Me.Sel_WCAR_Doc_Related_SupplementalPagination.LastPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
+                Me.Pagination.LastPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
             End If
           
             If Me._TotalPages < 0 Then      ' if the total pages is not determined yet, enable last and next buttons
-                Me.Sel_WCAR_Doc_Related_SupplementalPagination.NextPage.Enabled = True
+                Me.Pagination.NextPage.Enabled = True
             ElseIf Me._TotalPages = 0          ' if the total pages is determined and it is 0, enable last and next buttons
-                Me.Sel_WCAR_Doc_Related_SupplementalPagination.NextPage.Enabled = False            
+                Me.Pagination.NextPage.Enabled = False            
             Else                               ' if the total pages is the last page, disable last and next buttons
-                Me.Sel_WCAR_Doc_Related_SupplementalPagination.NextPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
+                Me.Pagination.NextPage.Enabled = Not (Me.PageIndex = Me.TotalPages - 1)
             End If
           
-            Me.Sel_WCAR_Doc_Related_SupplementalPagination.PreviousPage.Enabled = Not (Me.PageIndex = 0)
+            Me.Pagination.PreviousPage.Enabled = Not (Me.PageIndex = 0)
 
 
         End Sub
@@ -1540,7 +1208,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
             ' to save their data.  This function is called by the Click handler of the
             ' Save button.  The button handler should Start/Commit/End a transaction.
             
-            Dim recCtl As Sel_WCAR_Doc_Related_SupplementalTableControlRow
+            Dim recCtl As SelectorTableControlRow
             For Each recCtl In Me.GetRecordControls()
         
                 If recCtl.Visible Then
@@ -1583,10 +1251,10 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
       
         Public Overridable Function CreateWhereClause() As WhereClause
             'This CreateWhereClause is used for loading the data.
-            Sel_WCAR_Doc_Related_SupplementalView.Instance.InnerFilter = Nothing
+            Sel_WCAR_Doc_Related_Supplemental1View.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
             
-        Dim hasFiltersSel_WCAR_Doc_Related_SupplementalTableControl As Boolean = False
+        Dim hasFiltersSelectorTableControl As Boolean = False
       
             ' Compose the WHERE clause consist of:
             ' 1. Static clause defined at design time.
@@ -1594,12 +1262,66 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
             ' 3. User selected filter criteria.
 
               
-            ' Get the static clause defined at design time on the Table Panel Wizard
-            Dim qc As WhereClause = Me.CreateQueryClause()
-            If Not(IsNothing(qc)) Then
-                wc.iAND(qc)
-            End If
+            If IsValueSelected(Me.Search) Then
+              If Me.Search.Text = BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing) Then
+                 Me.Search.Text = ""
+              Else
+              ' Strip "..." from begin and ending of the search text, otherwise the search will return 0 values as in database "..." is not stored.
               
+                If Me.Search.Text.StartsWith(BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing)) Then
+                Me.Search.Text = ""
+                Else
+              
+                    If Me.Search.Text.StartsWith("...") Then
+                        Me.Search.Text = Me.Search.Text.SubString(3,Me.Search.Text.Length-3)
+                    End If
+                    If Me.Search.Text.EndsWith("...") then
+                        Me.Search.Text = Me.Search.Text.SubString(0,Me.Search.Text.Length-3)
+                        ' Strip the last word as well as it is likely only a partial word
+                        Dim endindex As Integer = Search.Text.Length - 1
+                        While (Not Char.IsWhiteSpace(Search.Text(endindex)) AndAlso endindex > 0)
+                            endindex -= 1
+                        End While
+                        If endindex > 0 Then
+                            Search.Text = Search.Text.Substring(0, endindex)
+                        End If
+              End If
+            End If
+            
+              End If
+            
+              Dim formatedSearchText As String = MiscUtils.GetSelectedValue(Me.Search, Me.GetFromSession(Me.Search))
+                
+                ' After stripping "..." see if the search text is null or empty.
+                If IsValueSelected(Me.Search) Then 
+        ' These clauses are added depending on operator and fields selected in Control's property page, bindings tab.
+                    Dim search As WhereClause = New WhereClause()
+                    
+      Dim cols As ColumnList = GetColumnListFromURLParameters(False, True)
+      If cols.Count = 0 Then
+          cols = GetColumnListFromURLParameters(True, False)
+      End If      
+        
+      For Each col As BaseColumn in cols
+      
+                    search.iOR(col, BaseFilter.ComparisonOperator.Contains, MiscUtils.GetSelectedValue(Me.Search, Me.GetFromSession(Me.Search)), True, False)
+        
+      Next
+    
+                    wc.iAND(search)
+                End If
+            End If
+                              
+    
+		        If Not String.IsNullOrEmpty(Me.Page.Request("dependOnField")) AndAlso Me.Page.Request("dependOnVal") IsNot Nothing Then
+			          Dim dependOnCol as BaseColumn = Sel_WCAR_Doc_Related_Supplemental1View.GetColumnByName(Me.Page.GetDecryptedURLParameter("dependOnField"))
+                If dependOnCol IsNot Nothing Then                
+			              Dim dependOnWC as New WhereClause(dependOnCol, BaseFilter.ComparisonOperator.EqualsTo, Me.Page.GetDecryptedURLParameter("dependOnVal"))
+                    wc.iAND(dependOnWC)
+                End If
+		        End If
+
+         
     
     Return wc
     End Function
@@ -1607,10 +1329,10 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
     
         Public Overridable Function CreateWhereClause(ByVal searchText as String, ByVal fromSearchControl as String, ByVal AutoTypeAheadSearch as String, ByVal AutoTypeAheadWordSeparators as String) As WhereClause
             ' This CreateWhereClause is used for loading list of suggestions for Auto Type-Ahead feature.
-            Sel_WCAR_Doc_Related_SupplementalView.Instance.InnerFilter = Nothing
+            Sel_WCAR_Doc_Related_Supplemental1View.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
         
-          Dim hasFiltersSel_WCAR_Doc_Related_SupplementalTableControl As Boolean = False
+          Dim hasFiltersSelectorTableControl As Boolean = False
         
       ' Compose the WHERE clause consist of:
       ' 1. Static clause defined at design time.
@@ -1619,33 +1341,97 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
 
       Dim appRelativeVirtualPath As String = CType(HttpContext.Current.Session("AppRelativeVirtualPath"), String)
       
-            ' Get the static clause defined at design time on the Table Panel Wizard
-            Dim qc As WhereClause = Me.CreateQueryClause()
-            If Not(IsNothing(qc)) Then
-                wc.iAND(qc)
-            End If
-          
             ' Adds clauses if values are selected in Filter controls which are configured in the page.
           
+            If IsValueSelected(searchText) and fromSearchControl = "Search" Then
+                Dim formatedSearchText as String = searchText
+                ' Strip "..." from begin and ending of the search text, otherwise the search will return 0 values as in database "..." is not stored.
+                If searchText.StartsWith("...") Then
+                    formatedSearchText = searchText.SubString(3,searchText.Length-3)
+                End If
+                If searchText.EndsWith("...") Then
+                    formatedSearchText = searchText.SubString(0,searchText.Length-3)
+                    ' Strip the last word as well as it is likely only a partial word
+                    Dim endindex As Integer = searchText.Length - 1
+                    While (Not Char.IsWhiteSpace(searchText(endindex)) AndAlso endindex > 0)
+                        endindex -= 1
+                    End While
+                    If endindex > 0 Then
+                        searchText = searchText.Substring(0, endindex)
+                    End If
+                End If
+                'After stripping "...", trim any leading and trailing whitespaces 
+                formatedSearchText = formatedSearchText.Trim()
+                ' After stripping "..." see if the search text is null or empty.
+                If IsValueSelected(formatedSearchText) Then
+                      ' These clauses are added depending on operator and fields selected in Control's property page, bindings tab.
+                    Dim search As WhereClause = New WhereClause()
+                    
+                    If InvariantLCase(AutoTypeAheadSearch).equals("wordsstartingwithsearchstring") Then
+                
+      Dim cols As ColumnList = GetColumnListFromURLParameters(False, True)
+      If cols.Count = 0 Then
+          cols = GetColumnListFromURLParameters(True, False)
+      End If      
+        
+      For Each col As BaseColumn in cols
+      
+                        search.iOR(col, BaseFilter.ComparisonOperator.Starts_With, formatedSearchText, True, False)
+                        search.iOR(col, BaseFilter.ComparisonOperator.Contains, AutoTypeAheadWordSeparators & formatedSearchText, True, False)
+                
+      Next
+    
+                    Else
+                        
+      Dim cols As ColumnList = GetColumnListFromURLParameters(False, True)
+      If cols.Count = 0 Then
+          cols = GetColumnListFromURLParameters(True, False)
+      End If      
+        
+      For Each col As BaseColumn in cols
+      
+                        search.iOR(col, BaseFilter.ComparisonOperator.Contains, formatedSearchText, True, False)
+      Next
+    
+                    End If
+                    wc.iAND(search)
+                End If
+            End If
+                  
       
       
             Return wc
         End Function
 
       
-        Protected Overridable Function CreateQueryClause() As WhereClause
-            ' Create a where clause for the Static clause defined at design time.
-            Dim filter As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
-            Dim whereClause As WhereClause = New WhereClause()
+        Public Overridable Function GetAutoCompletionList_Search(ByVal prefixText As String, ByVal count As Integer) As String()
+            Dim resultList As ArrayList = New ArrayList
+            Dim wordList As ArrayList = New ArrayList
             
-            If EvaluateFormula("URL(""Company"")", false) <> "" Then filter.AddFilter(New BaseClasses.Data.ColumnValueFilter(BaseClasses.Data.BaseTable.CreateInstance("ePortalWFApproval.Business.Sel_WCAR_Doc_Related_SupplementalView, App_Code").TableDefinition.ColumnList.GetByUniqueName("sel_WCAR_Doc_Related_Supplemental_.WCD_C_ID"), EvaluateFormula("URL(""Company"")", false), BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
-         If (EvaluateFormula("URL(""Company"")", false) = "--PLEASE_SELECT--" OrElse EvaluateFormula("URL(""Company"")", false) = "--ANY--") Then whereClause.RunQuery = False
-
-            whereClause.AddFilter(filter, CompoundFilter.CompoundingOperators.And_Operator)
-    
-            Return whereClause
-        End Function
+            Dim filterJoin As CompoundFilter = CreateCompoundJoinFilter()
+            If count = 0 Then count = 10
+            Dim wc As WhereClause = CreateWhereClause(prefixText,"Search", "WordsStartingWithSearchString", "[^a-zA-Z0-9]")
+            Dim recordList () As ePortalWFApproval.Business.Sel_WCAR_Doc_Related_Supplemental1Record = Sel_WCAR_Doc_Related_Supplemental1View.GetRecords(filterJoin, wc, Nothing, 0, count,count)
+            Dim rec As Sel_WCAR_Doc_Related_Supplemental1Record = Nothing
+            Dim resultItem As String = ""
+            For Each rec In recordList 
+                ' Exit the loop if recordList count has reached AutoTypeAheadListSize.
+                If resultList.Count >= count then
+                    Exit For
+                End If
+                ' If the field is configured to Display as Foreign key, Format() method returns the 
+                ' Display as Forien Key value instead of original field value.
+                ' Since search had to be done in multiple fields (selected in Control's page property, binding tab) in a record,
+                ' We need to find relevent field to display which matches the prefixText and is not already present in the result list.
         
+            Next                
+             
+            resultList.Sort()
+            Dim result() As String = New String(resultList.Count - 1) {}
+            Array.Copy(resultList.ToArray, result, resultList.Count)
+            Return result
+        End Function
+          
 
          Public Overridable Function FormatSuggestions(ByVal prefixText As String, ByVal resultItem As String, _
                                          ByVal columnLength As Integer, ByVal AutoTypeAheadDisplayFoundText As String, _
@@ -1782,9 +1568,9 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
     
         Protected Overridable Sub GetPageSize()
         
-            If Me.Sel_WCAR_Doc_Related_SupplementalPagination.PageSize.Text.Trim <> "" Then
+            If Me.Pagination.PageSize.Text.Trim <> "" Then
                 Try
-                    'Me.PageSize = Integer.Parse(Me.Sel_WCAR_Doc_Related_SupplementalPagination.PageSize.Text)
+                    'Me.PageSize = Integer.Parse(Me.Pagination.PageSize.Text)
                 Catch ex As Exception
                 End Try
             End If
@@ -1800,7 +1586,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
     ' does not have a unique record id set, then create a record
     ' and add to the list.
     If Not Me.ResetData Then
-    Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Sel_WCAR_Doc_Related_SupplementalTableControlRepeater"), System.Web.UI.WebControls.Repeater)
+    Dim rep As System.Web.UI.WebControls.Repeater = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SelectorTableControlRepeater"), System.Web.UI.WebControls.Repeater)
     If rep Is Nothing Then Return
 
     
@@ -1809,36 +1595,12 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
       
     ' Loop through all rows in the table, set its DataSource and call DataBind().
     
-    Dim recControl As Sel_WCAR_Doc_Related_SupplementalTableControlRow = DirectCast(repItem.FindControl("Sel_WCAR_Doc_Related_SupplementalTableControlRow"), Sel_WCAR_Doc_Related_SupplementalTableControlRow)
+    Dim recControl As SelectorTableControlRow = DirectCast(repItem.FindControl("SelectorTableControlRow"), SelectorTableControlRow)
     
 
                     If recControl.Visible AndAlso recControl.IsNewRecord() Then
-                        Dim rec As Sel_WCAR_Doc_Related_SupplementalRecord = New Sel_WCAR_Doc_Related_SupplementalRecord()
+                        Dim rec As Sel_WCAR_Doc_Related_Supplemental1Record = New Sel_WCAR_Doc_Related_Supplemental1Record()
         
-                        If recControl.Rel_CAR.Text <> "" Then
-                            rec.Parse(recControl.Rel_CAR.Text, Sel_WCAR_Doc_Related_SupplementalView.Rel_CAR)
-                        End If
-                        If recControl.Rel_Proj.Text <> "" Then
-                            rec.Parse(recControl.Rel_Proj.Text, Sel_WCAR_Doc_Related_SupplementalView.Rel_Proj)
-                        End If
-                        If recControl.Rel_Req_Date.Text <> "" Then
-                            rec.Parse(recControl.Rel_Req_Date.Text, Sel_WCAR_Doc_Related_SupplementalView.Rel_Req_Date)
-                        End If
-                        If recControl.Rel_Total.Text <> "" Then
-                            rec.Parse(recControl.Rel_Total.Text, Sel_WCAR_Doc_Related_SupplementalView.Rel_Total)
-                        End If
-                        If recControl.WCD_Exp_Total.Text <> "" Then
-                            rec.Parse(recControl.WCD_Exp_Total.Text, Sel_WCAR_Doc_Related_SupplementalView.WCD_Exp_Total)
-                        End If
-                        If recControl.WCD_No.Text <> "" Then
-                            rec.Parse(recControl.WCD_No.Text, Sel_WCAR_Doc_Related_SupplementalView.WCD_No)
-                        End If
-                        If recControl.WCD_Project_Title.Text <> "" Then
-                            rec.Parse(recControl.WCD_Project_Title.Text, Sel_WCAR_Doc_Related_SupplementalView.WCD_Project_Title)
-                        End If
-                        If recControl.WCD_Request_Date.Text <> "" Then
-                            rec.Parse(recControl.WCD_Request_Date.Text, Sel_WCAR_Doc_Related_SupplementalView.WCD_Request_Date)
-                        End If
                         newUIDataList.Add(recControl.PreservedUIData())	  
                         newRecordList.Add(rec)
                     End If
@@ -1850,7 +1612,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
             Dim index As Integer = 0
             For index = 1 To Me.AddNewRecord
               
-                newRecordList.Insert(0, New Sel_WCAR_Doc_Related_SupplementalRecord())
+                newRecordList.Insert(0, New Sel_WCAR_Doc_Related_Supplemental1Record())
                 newUIDataList.Insert(0, New Hashtable())				
               
             Next
@@ -1862,7 +1624,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
                 Dim finalList As ArrayList = New ArrayList(Me.DataSource)
                 finalList.InsertRange(0, newRecordList)
 
-                Me.DataSource = DirectCast(finalList.ToArray(GetType(Sel_WCAR_Doc_Related_SupplementalRecord)), Sel_WCAR_Doc_Related_SupplementalRecord())
+                Me.DataSource = DirectCast(finalList.ToArray(GetType(Sel_WCAR_Doc_Related_Supplemental1Record)), Sel_WCAR_Doc_Related_Supplemental1Record())
               
             End If
             
@@ -1877,86 +1639,15 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
       
         ' Create Set, WhereClause, and Populate Methods
         
-        Public Overridable Sub SetRel_CARLabel()
+        Public Overridable Sub SetSearch()
 
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.Rel_CARLabel.Text = "Some value"
-                    
-                  End Sub
-                
-        Public Overridable Sub SetRel_ProjLabel()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.Rel_ProjLabel.Text = "Some value"
-                    
-                  End Sub
-                
-        Public Overridable Sub SetRel_Req_DateLabel()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.Rel_Req_DateLabel.Text = "Some value"
-                    
-                  End Sub
-                
-        Public Overridable Sub SetRel_TotalLabel()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.Rel_TotalLabel.Text = "Some value"
-                    
-                  End Sub
-                
-        Public Overridable Sub SetWCD_Exp_TotalLabel()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.WCD_Exp_TotalLabel.Text = "Some value"
-                    
-                  End Sub
-                
-        Public Overridable Sub SetWCD_NoLabel()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.WCD_NoLabel.Text = "Some value"
-                    
-                  End Sub
-                
-        Public Overridable Sub SetWCD_Project_TitleLabel()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.WCD_Project_TitleLabel.Text = "Some value"
-                    
-                  End Sub
-                
-        Public Overridable Sub SetWCD_Request_DateLabel()
-
-                  
-                  
-                      'Code for the text property is generated inside the .aspx file.
-                      'To override this property you can uncomment the following property and add your own value.
-                      'Me.WCD_Request_DateLabel.Text = "Some value"
-                    
-                  End Sub
-                
+              
+                                            
+          Me.Search.Attributes.Add("onfocus", "if(this.value=='" + BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing) + "') {this.value='';this.className='Search_Input';}")
+          Me.Search.Attributes.Add("onblur", "if(this.value=='') {this.value='" + BaseClasses.Resources.AppResources.GetResourceValue("Txt:SearchForEllipsis", Nothing) + "';this.className='Search_InputHint';}")
+                                   
+              End Sub	
+            
 
     
     
@@ -1993,6 +1684,8 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
 
             ' Save filter controls to values to session.
         
+            Me.SaveToSession(Me.Search, Me.Search.Text)
+                  
         
             'Save pagination state to session.
          
@@ -2012,6 +1705,8 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         Protected  Sub SaveControlsToSession_Ajax()
             ' Save filter controls to values to session.
           
+      Me.SaveToSession("Search_Ajax", Me.Search.Text)
+              
             HttpContext.Current.Session("AppRelativeVirtualPath") = Me.Page.AppRelativeVirtualPath
          
         End Sub
@@ -2021,6 +1716,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
 
             ' Clear filter controls values from the session.
         
+            Me.RemoveFromSession(Me.Search)
     
             ' Clear pagination state from session.
          
@@ -2035,7 +1731,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
             MyBase.LoadViewState(savedState)
 
-            Dim orderByStr As String = CType(ViewState("Sel_WCAR_Doc_Related_SupplementalTableControl_OrderBy"), String)
+            Dim orderByStr As String = CType(ViewState("SelectorTableControl_OrderBy"), String)
           
             If orderByStr IsNot Nothing AndAlso orderByStr.Trim <> "" Then
                 Me.CurrentSortOrder = BaseClasses.Data.OrderBy.FromXmlString(orderByStr)
@@ -2046,7 +1742,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
             End If
             
             
-            Dim Pagination As Control = Me.FindControl("")
+            Dim Pagination As Control = Me.FindControl("Pagination")
              Dim PaginationType As String = ""
              If Not (Pagination Is Nothing) Then
                 Dim Summary As Control = Pagination.FindControl("_Summary")
@@ -2084,7 +1780,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         Protected Overrides Function SaveViewState() As Object
           
             If Me.CurrentSortOrder IsNot Nothing Then
-                Me.ViewState("Sel_WCAR_Doc_Related_SupplementalTableControl_OrderBy") = Me.CurrentSortOrder.ToXmlString()
+                Me.ViewState("SelectorTableControl_OrderBy") = Me.CurrentSortOrder.ToXmlString()
             End If
                       
             Me.ViewState("Page_Index") = Me.PageIndex
@@ -2099,7 +1795,22 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         
         ' Generate set method for buttons
         
-        Public Overridable Sub SetSel_WCAR_Doc_Related_SupplementalRefreshButton()                
+        Public Overridable Sub SetSearchButton()                
+              
+   
+        End Sub
+            
+        Public Overridable Sub SetAddButton()                
+              
+   
+        End Sub
+            
+        Public Overridable Sub SetClearButton()                
+              
+   
+        End Sub
+            
+        Public Overridable Sub SetCommitButton()                
               
    
         End Sub
@@ -2108,7 +1819,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         ' Generate the event handling functions for pagination events.
         
         ' event handler for ImageButton
-        Public Overridable Sub Sel_WCAR_Doc_Related_SupplementalPagination_FirstPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+        Public Overridable Sub Pagination_FirstPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
               
     Try
     
@@ -2129,7 +1840,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         End Sub
         
         ' event handler for ImageButton
-        Public Overridable Sub Sel_WCAR_Doc_Related_SupplementalPagination_LastPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+        Public Overridable Sub Pagination_LastPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
               
     Try
     
@@ -2150,7 +1861,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         End Sub
         
         ' event handler for ImageButton
-        Public Overridable Sub Sel_WCAR_Doc_Related_SupplementalPagination_NextPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+        Public Overridable Sub Pagination_NextPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
               
     Try
     
@@ -2171,15 +1882,15 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         End Sub
         
         ' event handler for LinkButton
-        Public Overridable Sub Sel_WCAR_Doc_Related_SupplementalPagination_PageSizeButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+        Public Overridable Sub Pagination_PageSizeButton_Click(ByVal sender As Object, ByVal args As EventArgs)
               
     Try
     
             Me.DataChanged = True
       
-            Me.PageSize = Me.Sel_WCAR_Doc_Related_SupplementalPagination.GetCurrentPageSize()
+            Me.PageSize = Me.Pagination.GetCurrentPageSize()
       
-            Me.PageIndex = Integer.Parse(Me.Sel_WCAR_Doc_Related_SupplementalPagination.CurrentPage.Text) - 1
+            Me.PageIndex = Integer.Parse(Me.Pagination.CurrentPage.Text) - 1
           
             Catch ex As Exception
             
@@ -2195,7 +1906,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         End Sub
         
         ' event handler for ImageButton
-        Public Overridable Sub Sel_WCAR_Doc_Related_SupplementalPagination_PreviousPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+        Public Overridable Sub Pagination_PreviousPage_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
               
     Try
     
@@ -2224,14 +1935,109 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         ' Generate the event handling functions for button events.
         
         ' event handler for ImageButton
-        Public Overridable Sub Sel_WCAR_Doc_Related_SupplementalRefreshButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
+        Public Overridable Sub SearchButton_Click(ByVal sender As Object, ByVal args As ImageClickEventArgs)
               
     Try
     
-            Dim Sel_WCAR_Doc_Related_SupplementalTableControlObj as Sel_WCAR_Doc_Related_SupplementalTableControl = DirectCast(Me.Page.FindControlRecursively("Sel_WCAR_Doc_Related_SupplementalTableControl"), Sel_WCAR_Doc_Related_SupplementalTableControl)
-            Sel_WCAR_Doc_Related_SupplementalTableControlObj.ResetData = True
-                        
+          Me.DataChanged = True
+          
+            Catch ex As Exception
             
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+    
+        End Sub
+        
+        ' event handler for Button
+        Public Overridable Sub AddButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+            ' The redirect URL is set on the Properties, Custom Properties or Actions.
+            ' The ModifyRedirectURL call resolves the parameters before the
+            ' Response.Redirect redirects the page to the URL.  
+            ' Any code after the Response.Redirect call will not be executed, since the page is
+            ' redirected to the URL.
+            
+              
+                  Dim url As String = "../Shared/ConfigureAddRecord.aspx"
+                  
+                  If Me.Page.Request("RedirectStyle") <> "" Then url &= "?RedirectStyle=" & Me.Page.Request("RedirectStyle")
+                  
+        Dim shouldRedirect As Boolean = True
+        Dim target As String = ""
+      
+    Try
+    
+      ' Enclose all database retrieval/update code within a Transaction boundary
+                DbUtils.StartTransaction
+                
+            url = Me.ModifyRedirectUrl(url, "",True)
+            url = Me.Page.ModifyRedirectUrl(url, "",True)
+          
+            Dim params() As String = "Target,IndexField,Formula,DFKA".Split(","c)
+            Dim paramString As String = ""
+            If params.Length > 0 Then
+                For Each param As String In params
+                    If Page.Request(param) <> "" Then
+                        paramString &= "&" & param & "=" & Page.Request(param)
+                    End If
+                Next          
+                paramString = paramString.TrimStart("&"c)                        
+                If url.Contains("?"c) Then 
+                    url = url & "&" & paramString
+                Else
+                    url = url & "?" & paramString
+                End If
+            End If                    
+       
+            Catch ex As Exception
+            
+       ' Upon error, rollback the transaction
+                Me.Page.RollBackTransaction(sender)
+                shouldRedirect = False
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+                DbUtils.EndTransaction
+            End Try
+            If shouldRedirect Then
+                Me.Page.ShouldSaveControlsToSession = True
+      Me.Page.Response.Redirect(url)
+        
+            End If
+        End Sub
+        
+        ' event handler for Button
+        Public Overridable Sub ClearButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+    Try
+    
+            Catch ex As Exception
+            
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+    
+        End Sub
+        
+        ' event handler for Button
+        Public Overridable Sub CommitButton_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+    Try
+    
             Catch ex As Exception
             
                 Me.Page.ErrorOnPage = True
@@ -2259,7 +2065,7 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
         Public Property TotalRecords() As Integer
             Get
                 If _TotalRecords < 0 
-                    _TotalRecords = Sel_WCAR_Doc_Related_SupplementalView.GetRecordCount(CreateCompoundJoinFilter(), CreateWhereClause())
+                    _TotalRecords = Sel_WCAR_Doc_Related_Supplemental1View.GetRecordCount(CreateCompoundJoinFilter(), CreateWhereClause())
                 End If
                 Return Me._TotalRecords
             End Get
@@ -2312,74 +2118,50 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
             End Set
         End Property
         
-        Public Property DataSource() As Sel_WCAR_Doc_Related_SupplementalRecord ()
+        Public Property DataSource() As Sel_WCAR_Doc_Related_Supplemental1Record ()
             Get
-                Return DirectCast(MyBase._DataSource, Sel_WCAR_Doc_Related_SupplementalRecord())
+                Return DirectCast(MyBase._DataSource, Sel_WCAR_Doc_Related_Supplemental1Record())
             End Get
-            Set(ByVal value() As Sel_WCAR_Doc_Related_SupplementalRecord)
+            Set(ByVal value() As Sel_WCAR_Doc_Related_Supplemental1Record)
                 Me._DataSource = value
             End Set
         End Property
        
 #Region "Helper Properties"
         
-        Public ReadOnly Property Rel_CARLabel() As System.Web.UI.WebControls.Literal
+        Public ReadOnly Property AddButton() As ePortalWFApproval.UI.IThemeButton
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Rel_CARLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property Rel_ProjLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Rel_ProjLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property Rel_Req_DateLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Rel_Req_DateLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property Rel_TotalLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Rel_TotalLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property Sel_WCAR_Doc_Related_SupplementalPagination() As ePortalWFApproval.UI.IPagination
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Sel_WCAR_Doc_Related_SupplementalPagination"), ePortalWFApproval.UI.IPagination)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "AddButton"), ePortalWFApproval.UI.IThemeButton)
           End Get
           End Property
         
-        Public ReadOnly Property Sel_WCAR_Doc_Related_SupplementalRefreshButton() As System.Web.UI.WebControls.ImageButton
+        Public ReadOnly Property ClearButton() As ePortalWFApproval.UI.IThemeButton
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Sel_WCAR_Doc_Related_SupplementalRefreshButton"), System.Web.UI.WebControls.ImageButton)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ClearButton"), ePortalWFApproval.UI.IThemeButton)
+          End Get
+          End Property
+        
+        Public ReadOnly Property CommitButton() As ePortalWFApproval.UI.IThemeButton
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "CommitButton"), ePortalWFApproval.UI.IThemeButton)
+          End Get
+          End Property
+        
+        Public ReadOnly Property Pagination() As ePortalWFApproval.UI.IPaginationModern
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Pagination"), ePortalWFApproval.UI.IPaginationModern)
+          End Get
+          End Property
+        
+        Public ReadOnly Property Search() As System.Web.UI.WebControls.TextBox
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Search"), System.Web.UI.WebControls.TextBox)
             End Get
         End Property
         
-        Public ReadOnly Property WCD_Exp_TotalLabel() As System.Web.UI.WebControls.Literal
+        Public ReadOnly Property SearchButton() As System.Web.UI.WebControls.ImageButton
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Exp_TotalLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property WCD_NoLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_NoLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property WCD_Project_TitleLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Project_TitleLabel"), System.Web.UI.WebControls.Literal)
-            End Get
-        End Property
-        
-        Public ReadOnly Property WCD_Request_DateLabel() As System.Web.UI.WebControls.Literal
-            Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "WCD_Request_DateLabel"), System.Web.UI.WebControls.Literal)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "SearchButton"), System.Web.UI.WebControls.ImageButton)
             End Get
         End Property
         
@@ -2403,25 +2185,25 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
             Return EvaluateExpressions(url, arg, Nothing, bEncrypt, includeSession)
         End Function
           
-        Public Overridable Function GetSelectedRecordControl() As Sel_WCAR_Doc_Related_SupplementalTableControlRow
+        Public Overridable Function GetSelectedRecordControl() As SelectorTableControlRow
             Return Nothing
           
         End Function
 
-        Public Overridable Function GetSelectedRecordControls() As Sel_WCAR_Doc_Related_SupplementalTableControlRow()
+        Public Overridable Function GetSelectedRecordControls() As SelectorTableControlRow()
         
-            Return DirectCast((new ArrayList()).ToArray(GetType(Sel_WCAR_Doc_Related_SupplementalTableControlRow)), Sel_WCAR_Doc_Related_SupplementalTableControlRow())
+            Return DirectCast((new ArrayList()).ToArray(GetType(SelectorTableControlRow)), SelectorTableControlRow())
           
         End Function
 
         Public Overridable Sub DeleteSelectedRecords(ByVal deferDeletion As Boolean)
-            Dim recList() As Sel_WCAR_Doc_Related_SupplementalTableControlRow = Me.GetSelectedRecordControls()
+            Dim recList() As SelectorTableControlRow = Me.GetSelectedRecordControls()
             If recList.Length = 0 Then
                 ' Localization.
                 Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
             End If
             
-            Dim recCtl As Sel_WCAR_Doc_Related_SupplementalTableControlRow
+            Dim recCtl As SelectorTableControlRow
             For Each recCtl In recList
                 If deferDeletion Then
                     If Not recCtl.IsNewRecord Then
@@ -2441,10 +2223,10 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
             Next
         End Sub
 
-        Public Overridable Function GetRecordControls() As Sel_WCAR_Doc_Related_SupplementalTableControlRow()
-            Dim recCtrls() As Control = BaseClasses.Utils.MiscUtils.FindControlsRecursively(Me, "Sel_WCAR_Doc_Related_SupplementalTableControlRow")
-            Dim list As New List(Of Sel_WCAR_Doc_Related_SupplementalTableControlRow)
-            For Each recCtrl As Sel_WCAR_Doc_Related_SupplementalTableControlRow In recCtrls
+        Public Overridable Function GetRecordControls() As SelectorTableControlRow()
+            Dim recCtrls() As Control = BaseClasses.Utils.MiscUtils.FindControlsRecursively(Me, "SelectorTableControlRow")
+            Dim list As New List(Of SelectorTableControlRow)
+            For Each recCtrl As SelectorTableControlRow In recCtrls
                 list.Add(recCtrl)
             Next
             Return list.ToArray()
@@ -2455,6 +2237,76 @@ Public Class BaseSel_WCAR_Doc_Related_SupplementalTableControl
                 Return DirectCast(MyBase.Page, BaseApplicationPage)
             End Get
         End Property
+                
+        Private _QuickSelectorDisplayText As Generic.Dictionary(Of Integer, String)
+        ''' <summary>
+        ''' Get the quick selector display text in rows by passing the row object
+        ''' </summary>
+        ''' <param name="row">row object</param>
+        ''' <returns>text to display on quick selector row</returns>
+        ''' <remarks></remarks>
+        Public Function GetQuickSelectorDisplayText(ByVal row As SelectorTableControlRow) As String
+            If _QuickSelectorDisplayText Is Nothing Then
+                _QuickSelectorDisplayText = New Generic.Dictionary(Of Integer, String)
+                Dim displayText As String = ""
+                Dim displayTextInUsed As New List(Of String)
+                Dim displayTextWithID As New Generic.Dictionary(Of Integer, String)
+                
+                ' Go through all record object and figure the display text from URL parameters
+                For i As Integer = 0 To Me.DataSource.Length - 1
+                    Dim r As BaseRecord = DirectCast(Me.DataSource(i), BaseRecord)
+                    displayText = ""
+                    If Me.Page.Request("Formula") <> "" Then
+                        displayText = BaseFormulaUtils.EvaluateFormula(Me.Page.GetDecryptedURLParameter("Formula"), r)
+                    ElseIf Me.Page.Request("DFKA") <> "" Then
+                        Dim col As BaseColumn = r.TableAccess.TableDefinition.ColumnList.GetByAnyName(Me.Page.GetDecryptedURLParameter("DFKA"))
+                        displayText = r.GetValue(col).ToString()
+                    End If
+                    If displayText = "" AndAlso Me.Page.Request("IndexField") <> "" Then
+                        Dim col As BaseColumn = r.TableAccess.TableDefinition.ColumnList.GetByAnyName(Me.Page.GetDecryptedURLParameter("IndexField"))
+                        displayText = r.GetValue(col).ToString()
+                    End If
+                    _QuickSelectorDisplayText.Add(i, displayText)
+
+                    If Me.Page.Request("IndexField") <> "" Then
+
+                        ' if the display text is used for more than one time, get the display text that shows the ID
+                        If displayTextInUsed.Contains(displayText) Then
+                            Dim enumerator As Generic.Dictionary(Of Integer, String).Enumerator = _QuickSelectorDisplayText.GetEnumerator()
+                            While enumerator.MoveNext
+                                If enumerator.Current.Value = displayText Then
+                                    Dim col As BaseColumn = r.TableAccess.TableDefinition.ColumnList.GetByAnyName(Me.Page.GetDecryptedURLParameter("IndexField"))
+                                    Dim id As String = Me.DataSource(enumerator.Current.Key).GetValue(col).ToString()
+                                    If id <> "" Then
+                                        If displayTextWithID.ContainsKey(enumerator.Current.Key) Then
+                                            displayTextWithID(enumerator.Current.Key) = enumerator.Current.Value & " (" & id & ")"
+                                        Else
+                                            displayTextWithID.Add(enumerator.Current.Key, enumerator.Current.Value & " (" & id & ")")
+                                        End If
+                                    End If
+                                End If
+                            End While
+                        Else
+                            displayTextInUsed.Add(displayText)
+                        End If
+                    End If
+                Next
+                
+                ' merge the result
+                Dim enumerator2 As Generic.Dictionary(Of Integer, String).Enumerator = displayTextWithID.GetEnumerator()
+                While enumerator2.MoveNext
+                    _QuickSelectorDisplayText(enumerator2.Current.Key) = enumerator2.Current.Value
+                End While
+
+            End If
+            Dim index As Integer = 0
+            For i As Integer = 0 To Me.DataSource.Length - 1
+                If Me.DataSource(i) Is row.DataSource Then
+                    index = i
+                End If
+            Next
+            Return _QuickSelectorDisplayText(index)
+        End Function                  
                 
 
 

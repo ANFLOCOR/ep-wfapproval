@@ -303,7 +303,7 @@ Public Class WCAR_Doc1RecordControl
             AddHandler Me.WCD_ID.SelectedIndexChanged, AddressOf WCD_ID_SelectedIndexChanged
             AddHandler Me.WCD_WDT_ID.SelectedIndexChanged, AddressOf WCD_WDT_ID_SelectedIndexChanged
 
-            Me.imbRelated.Attributes.Add("onClick", "OpenRelatedCAR('" & Me.WCD_Supplementary_WCD_ID.ClientID & "','" & Me.WCD_C_ID.ClientID & "');return false;")
+            Me.imbRelated.Attributes.Add("onClick", "OpenRelatedCARNorth('" & Me.WCD_Supplementary_WCD_ID.ClientID & "','" & Me.WCD_C_ID.ClientID & "');return false;")
         End Sub
 
         '		Public Overrides Sub SetTextBox()

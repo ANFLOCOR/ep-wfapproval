@@ -1084,9 +1084,9 @@ Namespace ePortalWFApproval.UI.Controls.WFinRepNGP_Approver1
                 email.SetSubject(Subject)
                 email.SetContent(Content)
                 email.SetIsHtmlContent(True)
-                '#Ryan_Test
-                MsgBox("Send Email")
-                'email.SendMessage()
+                ''#Ryan_Test
+                'MsgBox("Send Email")
+                email.SendMessage()
 
             Catch ex As Exception
                 ' RegisterAlert(Me.Title, ex.Message, True)

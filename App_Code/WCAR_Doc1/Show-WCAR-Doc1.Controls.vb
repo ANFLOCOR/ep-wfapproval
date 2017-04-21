@@ -227,7 +227,7 @@ Public Class WCAR_Doc1RecordControl
             AddHandler Me.OKButton1.Button.Click, AddressOf OKButton1_Click
             AddHandler Me.btnVoid.Button.Click, AddressOf btnVoid_Click
             AddHandler Me.WCD_C_ID.SelectedIndexChanged, AddressOf WCD_C_ID_SelectedIndexChanged
-            Me.imbRelated.Attributes.Add("onClick", "OpenRelatedCAR('" & Me.WCD_Supplementary_WCD_ID.ClientID & "','" & Me.WCD_C_ID.ClientID & "');return false;")
+            Me.imbRelated.Attributes.Add("onClick", "OpenRelatedCARNorth('" & Me.WCD_Supplementary_WCD_ID.ClientID & "','" & Me.WCD_C_ID.ClientID & "');return false;")
             Dim sCur As String = CStr(IIf(Not IsNumeric(WCD_Exp_Cur_Yr.Text), "0", WCD_Exp_Cur_Yr.Text))
             Dim sNxt As String = CStr(IIf(Not IsNumeric(WCD_Exp_Nxt_Yr.Text), "0", WCD_Exp_Nxt_Yr.Text))
             Dim sSub As String = CStr(IIf(Not IsNumeric(WCD_Exp_Sub_Yr.Text), "0", WCD_Exp_Sub_Yr.Text))

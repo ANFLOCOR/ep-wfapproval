@@ -368,7 +368,7 @@ Public Class WCAR_Doc1RecordControl
             Me.WCD_Supplementary_Manual.Enabled = False
             'Me.imbFind.Enabled = False
             Me.imbFind.Attributes.Add("onClick", "OpenCARSelector('" & Me.WCD_Supplementary_WCD_ID.ClientID & "');return false;")
-            Me.imbRelated.Attributes.Add("onClick", "OpenRelatedCAR('" & Me.WCD_Supplementary_WCD_ID.ClientID & "','" & Me.WCD_C_ID.ClientID & "');return false;")
+            Me.imbRelated.Attributes.Add("onClick", "OpenRelatedCARNorth('" & Me.WCD_Supplementary_WCD_ID.ClientID & "','" & Me.WCD_C_ID.ClientID & "');return false;")
 
             If Me.WCD_Status.Text = "Return" Then
                 Me.WCD_C_ID.Enabled = False
