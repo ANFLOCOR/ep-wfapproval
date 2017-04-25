@@ -2518,36 +2518,60 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControl
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Company_DescLabel2.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetDate_AssignedLabel2()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Date_AssignedLabel2.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetDoc_NoLabel2()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Doc_NoLabel2.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetDoc_TitleLabel2()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Doc_TitleLabel2.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetDoc_TotalLabel2()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Doc_TotalLabel2.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetDoc_TypeLabel2()
 
                   
                   
+                      'Code for the text property is generated inside the .aspx file.
+                      'To override this property you can uncomment the following property and add your own value.
+                      'Me.Doc_TypeLabel2.Text = "Some value"
+                    
                   End Sub
                 
         Public Overridable Sub SetLiteral()

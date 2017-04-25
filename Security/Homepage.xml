@@ -315,7 +315,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>%ISD_DEFAULT%DatabaseANFLO-WFN%dbo.sel_Approver_Pending_Tasks%Company_Desc</Value>
+          <Value>Company</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_Approver_Pending_Tasks2TableControl</InsideControl>
@@ -491,7 +491,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>%ISD_DEFAULT%DatabaseANFLO-WFN%dbo.sel_Approver_Pending_Tasks%Date_Assigned</Value>
+          <Value>Date Assigned</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_Approver_Pending_Tasks2TableControl</InsideControl>
@@ -636,7 +636,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>Doc No.</Value>
+          <Value>Document Number</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_Approver_Pending_TasksTableControl</InsideControl>
@@ -659,7 +659,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>%ISD_DEFAULT%DatabaseANFLO-WFN%dbo.sel_Approver_Pending_Tasks%Doc_No</Value>
+          <Value>Document Number</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_Approver_Pending_Tasks2TableControl</InsideControl>
@@ -831,7 +831,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>%ISD_DEFAULT%DatabaseANFLO-WFN%dbo.sel_Approver_Pending_Tasks%Doc_Title</Value>
+          <Value>Title/Remarks</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_Approver_Pending_Tasks2TableControl</InsideControl>
@@ -1007,7 +1007,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>%ISD_DEFAULT%DatabaseANFLO-WFN%dbo.sel_Approver_Pending_Tasks%Doc_Total</Value>
+          <Value>Total</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_Approver_Pending_Tasks2TableControl</InsideControl>
@@ -1152,7 +1152,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>Doc Type</Value>
+          <Value>Document Type</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_Approver_Pending_TasksTableControl</InsideControl>
@@ -1175,7 +1175,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>%ISD_DEFAULT%DatabaseANFLO-WFN%dbo.sel_Approver_Pending_Tasks%Doc_Type</Value>
+          <Value>Document Type</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>Sel_Approver_Pending_Tasks2TableControl</InsideControl>
