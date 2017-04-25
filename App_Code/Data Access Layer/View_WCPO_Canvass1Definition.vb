@@ -254,7 +254,7 @@ Public Class View_WCPO_Canvass1Definition
          tbf.Append(    "</Column>")
          tbf.Append(    "<Column InternalName=""7"" Priority=""8"" ColumnNum=""7"">")
          tbf.Append(      "<columnName>Buyer</columnName>")
-         tbf.Append(      "<columnUIName>Buyer</columnUIName>")
+         tbf.Append(      "<columnUIName Source=""User"">Buyer</columnUIName>")
          tbf.Append(      "<columnType>Number</columnType>")
          tbf.Append(      "<columnDBType>int</columnDBType>")
          tbf.Append(      "<columnLengthSet>10.0</columnLengthSet>")

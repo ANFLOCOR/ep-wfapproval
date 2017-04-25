@@ -5346,9 +5346,20 @@ Public Class BaseView_WCPO_Canvass1TableControlRow
                 				
                 ' If the Buyer is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(View_WCPO_Canvass11View.Buyer)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = ""
+                Dim _isExpandableNonCompositeForeignKey As Boolean = View_WCPO_Canvass11View.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(View_WCPO_Canvass11View.Buyer)
+                If _isExpandableNonCompositeForeignKey AndAlso View_WCPO_Canvass11View.Buyer.IsApplyDisplayAs Then
+                                  
+                       formattedValue = View_WCPO_Canvass11View.GetDFKA(Me.DataSource.Buyer.ToString(),View_WCPO_Canvass11View.Buyer, Nothing)
+                                    
+                       If (formattedValue Is Nothing) Then
+                              formattedValue = Me.DataSource.Format(View_WCPO_Canvass11View.Buyer)
+                       End If
+                Else
+                       formattedValue = Me.DataSource.Buyer.ToString()
+                End If
+                                
                 formattedValue = HttpUtility.HtmlEncode(formattedValue)
                 Me.Buyer.Text = formattedValue
                 
@@ -6567,6 +6578,8 @@ Public Class BaseView_WCPO_Canvass1TableControl
           If (IsNothing(Me.DataSource))
             Return
           End If
+          
+            Me.Page.PregetDfkaRecords(View_WCPO_Canvass11View.Buyer, Me.DataSource)
           
             Me.Page.PregetDfkaRecords(View_WCPO_Canvass11View.Classification, Me.DataSource)
           

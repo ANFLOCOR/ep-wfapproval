@@ -3132,7 +3132,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>WPO S</Value>
+          <Value>Step Description</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WPO_Step_WPO_StepDetail_WASPTableControl</InsideControl>

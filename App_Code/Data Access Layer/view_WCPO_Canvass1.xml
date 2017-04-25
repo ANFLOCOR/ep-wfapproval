@@ -282,7 +282,7 @@
     </Column>
     <Column InternalName="7" Priority="8" ColumnNum="7">
       <columnName>Buyer</columnName>
-      <columnUIName>%ISD_DEFAULT%</columnUIName>
+      <columnUIName Source="User">%ISD_DEFAULT%</columnUIName>
       <columnType>Number</columnType>
       <columnDBType>int</columnDBType>
       <columnLengthSet>10.0</columnLengthSet>

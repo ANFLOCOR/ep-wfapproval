@@ -70,11 +70,11 @@
         </Attribute>
         <Attribute>
           <Name>Button-RedirectURL</Name>
-          <Value>Back</Value>
+          <Value>../Security/Homepage.aspx</Value>
         </Attribute>
         <Attribute>
           <Name>Button-Text</Name>
-          <Value>Back</Value>
+          <Value>Back to Tasks</Value>
         </Attribute>
         <Attribute>
           <Name>Visible</Name>
