@@ -180,7 +180,7 @@ Namespace ePortalWFApproval.UI.Controls.WFIN_Approver_Table1
                 Me.AFIN_StatusFilter1.Items.Insert(0, item)
             End If
 
-            Me.AFIN_StatusFilter1.SelectedValue = "4"
+            ''Me.AFIN_StatusFilter1.SelectedValue = "4"
 
         End Sub
     End Class

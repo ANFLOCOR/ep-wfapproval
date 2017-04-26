@@ -713,6 +713,10 @@
       <FieldValueStyle>DropDownList</FieldValueStyle>
       <PassthroughAttributes>
         <Attribute>
+          <Name>AutoPostBack</Name>
+          <Value>True</Value>
+        </Attribute>
+        <Attribute>
           <Name>CssClass</Name>
           <Value>Filter_Input</Value>
         </Attribute>
@@ -1418,6 +1422,10 @@
       <Type>FieldFilter</Type>
       <FieldValueStyle>DropDownList</FieldValueStyle>
       <PassthroughAttributes>
+        <Attribute>
+          <Name>AutoPostBack</Name>
+          <Value>True</Value>
+        </Attribute>
         <Attribute>
           <Name>CssClass</Name>
           <Value>Filter_Input</Value>

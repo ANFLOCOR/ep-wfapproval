@@ -221,7 +221,7 @@ Namespace ePortalWFApproval.UI.Controls.WFIN_Approver_Table
             'Me.AFIN_StatusFromFilter.Items.Insert(0, New ListItem(Me.Page.GetResourceValue("Txt:All", "WebFS"), "--ANY--"))
 
             Dim orderBy As OrderBy = New OrderBy(False, False)
-            orderBy.Add(WFin_ApprovalStatusTable.WPO_STAT_DESC, OrderByItem.OrderDir.Asc)
+            orderBy.Add(WFin_ApprovalStatusTable.WPO_STAT_DESC, OrderByItem.OrderDir.Desc)
 
             Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
 
@@ -298,21 +298,28 @@ Namespace ePortalWFApproval.UI.Controls.WFIN_Approver_Table
             End If
 
 
-
-
-
-            Try
-                selectedValue = "4"
-                ' Set the selected value.
-                SetSelectedValue(Me.AFIN_StatusFromFilter, selectedValue)
-
-            Catch
-            End Try
-
-
-            If Me.AFIN_StatusFromFilter.SelectedValue IsNot Nothing AndAlso Me.AFIN_StatusFromFilter.Items.FindByValue(Me.AFIN_StatusFromFilter.SelectedValue) Is Nothing Then
-                Me.AFIN_StatusFromFilter.SelectedValue = Nothing
+            If Not selectedValue Is Nothing AndAlso _
+           selectedValue.Trim <> "" AndAlso _
+            Not SetSelectedValue(Me.AFIN_StatusFromFilter, selectedValue) Then
+                Dim fvalue As String = WPO_ApprovalStatusTable.WPO_STAT_CD.Format(selectedValue)
+                Dim item As ListItem = New ListItem(fvalue, selectedValue)
+                item.Selected = True
+                Me.AFIN_StatusFromFilter.Items.Insert(0, item)
             End If
+
+
+            ''Try
+            ''    selectedValue = "4"
+            ''    ' Set the selected value.
+            ''    SetSelectedValue(Me.AFIN_StatusFromFilter, selectedValue)
+
+            ''Catch
+            ''End Try
+
+
+            ''If Me.AFIN_StatusFromFilter.SelectedValue IsNot Nothing AndAlso Me.AFIN_StatusFromFilter.Items.FindByValue(Me.AFIN_StatusFromFilter.SelectedValue) Is Nothing Then
+            ''    Me.AFIN_StatusFromFilter.SelectedValue = Nothing
+            ''End If
 
         End Sub
     End Class
