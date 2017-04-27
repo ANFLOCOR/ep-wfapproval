@@ -375,6 +375,15 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControlRow
             ' It is better to make changes to functions called by LoadData such as
             ' CreateWhereClause, rather than making changes here.
     
+            ' The RecordUniqueId is set the first time a record is loaded, and is
+            ' used during a PostBack to load the record.
+          
+            If Me.RecordUniqueId IsNot Nothing AndAlso Me.RecordUniqueId.Trim <> "" Then
+                Me.DataSource = Sel_WAttach_Type_WCAR_Doc_Attach1View.GetRecord(Me.RecordUniqueId, True)
+          
+                Return
+            End If
+        
             ' Since this is a row in the table, the data for this row is loaded by the 
             ' LoadData method of the BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControl when the data for the entire
             ' table is loaded.
@@ -404,6 +413,12 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControlRow
    
             'LoadData for DataSource for chart and report if they exist
           
+            ' Store the checksum. The checksum is used to
+            ' ensure the record was not changed by another user.
+            If Not Me.DataSource.GetCheckSumValue() Is Nothing
+                Me.CheckSum = Me.DataSource.GetCheckSumValue().Value
+            End If
+            
       
       
             ' Call the Set methods for each controls on the panel
@@ -417,6 +432,10 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControlRow
             
             If Me.DataSource.IsCreated Then
                 Me.IsNewRecord = False
+                
+                If Me.DataSource.GetID IsNot Nothing Then
+                    Me.RecordUniqueId = Me.DataSource.GetID.ToXmlString()
+                End If
                 
             End If
             
@@ -528,10 +547,12 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControlRow
                 
                 Me.WCDA_File.Text = Page.GetResourceValue("Txt:OpenFile", "ePortalWFApproval")
                         
-                Dim fileDownLoadAlert As String = Page.GetResourceValue("Err:FileDownLoadAlert", "ePortalWFApproval")
-                fileDownLoadAlert = fileDownLoadAlert.Replace("{TableName}", "DatabaseANFLO-WFN%dbo.sel_WAttach_Type_WCAR_Doc_Attach")
-                Me.WCDA_File.OnClientClick = "alert(""" & fileDownLoadAlert & """)"
-                            
+                Me.WCDA_File.OnClientClick = "window.open('../Shared/ExportFieldValue.aspx?Table=" & _
+                            Me.Page.Encrypt("Sel_WAttach_Type_WCAR_Doc_Attach1") & _
+                            "&Field=" & Me.Page.Encrypt("WCDA_File") & _
+                            "&Record=" & Me.Page.Encrypt(HttpUtility.UrlEncode(Me.DataSource.GetID().ToString())) & _
+                                "','','left=100,top=50,width=400,height=300,resizable,scrollbars=1');return false;"
+                   
                 Me.WCDA_File.Visible = True
             Else
                 Me.WCDA_File.Visible = False
@@ -636,6 +657,13 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControlRow
             ' that fields that are not displayed are also properly initialized.
             Me.LoadData()
         
+            ' The checksum is used to ensure the record was not changed by another user.
+            If (Not Me.DataSource Is Nothing) AndAlso (Not Me.DataSource.GetCheckSumValue Is Nothing) Then
+                If Not Me.CheckSum Is Nothing AndAlso Me.CheckSum <> Me.DataSource.GetCheckSumValue.Value Then
+                    Throw New Exception(Page.GetResourceValue("Err:RecChangedByOtherUser", "ePortalWFApproval"))
+                End If
+            End If
+        
               
             ' 2. Perform any custom validation.
             Me.Validate()
@@ -667,6 +695,7 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControlRow
             Me.DataChanged = True
             Me.ResetData = True
             
+            Me.CheckSum = ""
             ' For Master-Detail relationships, save data on the Detail table(s)
           
         End Sub
@@ -730,6 +759,15 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControlRow
 
         Public Overridable Sub Delete()
         
+            If Me.IsNewRecord() Then
+                Return
+            End If
+
+            Dim pkValue As KeyValue = KeyValue.XmlToKey(Me.RecordUniqueId)
+          Sel_WAttach_Type_WCAR_Doc_Attach1View.DeleteRecord(pkValue)
+          
+            DirectCast(GetParentControlObject(Me, "Sel_WAttach_Type_WCAR_Doc_Attach1TableControl"), Sel_WAttach_Type_WCAR_Doc_Attach1TableControl).DataChanged = True
+            DirectCast(GetParentControlObject(Me, "Sel_WAttach_Type_WCAR_Doc_Attach1TableControl"), Sel_WAttach_Type_WCAR_Doc_Attach1TableControl).ResetData = True
         End Sub
 
         Protected Overridable Sub Control_PreRender(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.PreRender
@@ -818,6 +856,15 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControlRow
             End Set
         End Property   
 
+        
+        Public Property RecordUniqueId() As String
+            Get
+                Return CType(Me.ViewState("BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControlRow_Rec"), String)
+            End Get
+            Set(ByVal value As String)
+                Me.ViewState("BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControlRow_Rec") = value
+            End Set
+        End Property
             
         Public Property DataSource() As Sel_WAttach_Type_WCAR_Doc_Attach1Record
             Get
@@ -952,6 +999,12 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControlRow
         Public Overridable Function GetRecord() As Sel_WAttach_Type_WCAR_Doc_Attach1Record
             If Not Me.DataSource Is Nothing Then
                 Return Me.DataSource
+            End If
+            
+            If Not Me.RecordUniqueId Is Nothing Then
+                
+                Return Sel_WAttach_Type_WCAR_Doc_Attach1View.GetRecord(Me.RecordUniqueId, True)
+                
             End If
             
             ' Localization.
@@ -1244,6 +1297,8 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControl
             End If
             recControl.DataBind()
           
+            recControl.Visible = Not Me.InDeletedRecordIds(recControl)
+          
             index += 1
           Next
                  
@@ -1398,8 +1453,13 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControl
             Dim recCtl As Sel_WAttach_Type_WCAR_Doc_Attach1TableControlRow
             For Each recCtl In Me.GetRecordControls()
         
-                If recCtl.Visible Then
-                    recCtl.SaveData()
+                If Me.InDeletedRecordIds(recCtl) Then
+                    ' Delete any pending deletes. 
+                    recCtl.Delete()
+                Else
+                    If recCtl.Visible Then
+                        recCtl.SaveData()
+                    End If
                 End If
           
             Next
@@ -1418,6 +1478,9 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControl
                 recCtl.IsNewRecord = False
             Next
     
+      
+            ' Set DeletedRecordsIds to Nothing since we have deleted all pending deletes.
+            Me.DeletedRecordIds = Nothing
       
         End Sub
 
@@ -1695,6 +1758,36 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControl
         End Sub
 
         
+        Public Sub AddToDeletedRecordIds(ByVal rec As Sel_WAttach_Type_WCAR_Doc_Attach1TableControlRow)
+            If rec.IsNewRecord() Then
+                Return
+            End If
+
+            If Not Me.DeletedRecordIds Is Nothing AndAlso Me.DeletedRecordIds.Trim <> "" Then
+                Me.DeletedRecordIds &= ","
+            End If
+
+            Me.DeletedRecordIds &= "[" & rec.RecordUniqueId & "]"
+        End Sub
+
+        Protected Overridable Function InDeletedRecordIds(ByVal rec As Sel_WAttach_Type_WCAR_Doc_Attach1TableControlRow) As Boolean
+            If Me.DeletedRecordIds Is Nothing OrElse Me.DeletedRecordIds.Trim = "" Then
+                Return False
+            End If
+
+            Return Me.DeletedRecordIds.IndexOf("[" & rec.RecordUniqueId & "]") >= 0
+        End Function
+
+        Private _DeletedRecordIds As String
+        Public Property DeletedRecordIds() As String
+            Get
+                Return Me._DeletedRecordIds
+            End Get
+            Set(ByVal value As String)
+                Me._DeletedRecordIds = value
+            End Set
+        End Property
+        
       
         ' Create Set, WhereClause, and Populate Methods
         
@@ -1778,6 +1871,8 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControl
             Me.SaveToSession(Me, "Page_Index", Me.PageIndex.ToString())
             Me.SaveToSession(Me, "Page_Size", Me.PageSize.ToString())
         
+            Me.SaveToSession(Me, "DeletedRecordIds", Me.DeletedRecordIds)  
+        
         End Sub
         
         Protected  Sub SaveControlsToSession_Ajax()
@@ -1801,6 +1896,8 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControl
     Me.RemoveFromSession(Me, "Page_Index")
     Me.RemoveFromSession(Me, "Page_Size")
     
+            Me.RemoveFromSession(Me, "DeletedRecordIds")  
+            
         End Sub
 
         Protected Overrides Sub LoadViewState(ByVal savedState As Object)
@@ -1850,6 +1947,8 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControl
     
             ' Load view state for pagination control.
         
+            Me.DeletedRecordIds = CType(Me.ViewState("DeletedRecordIds"), String)
+        
         End Sub
 
         Protected Overrides Function SaveViewState() As Object
@@ -1861,6 +1960,8 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControl
             Me.ViewState("Page_Index") = Me.PageIndex
             Me.ViewState("Page_Size") = Me.PageSize
             
+            Me.ViewState("DeletedRecordIds") = Me.DeletedRecordIds
+        
     
             ' Load view state for pagination control.
           
@@ -1986,20 +2087,52 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControl
 #Region "Helper Functions"
         
         Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, Nothing, bEncrypt)
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me)
         End Function
-    
+      
+      
         Public Overrides Overloads Function ModifyRedirectUrl(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
-            Return EvaluateExpressions(url, arg, Nothing, bEncrypt,includeSession)
+            Return Me.Page.EvaluateExpressions(url, arg, bEncrypt, Me,includeSession)
         End Function
         
         Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean) As String
-            Return Me.Page.EvaluateExpressions(url, arg, Nothing, bEncrypt)
+            Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
+            If (needToProcess) Then
+                Dim recCtl As Sel_WAttach_Type_WCAR_Doc_Attach1TableControlRow = Me.GetSelectedRecordControl()
+                If recCtl Is Nothing AndAlso url.IndexOf("{") >= 0 Then
+                    ' Localization.
+                    Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
+                End If
+                Dim rec As Sel_WAttach_Type_WCAR_Doc_Attach1Record = Nothing     
+                If recCtl IsNot Nothing Then
+                    rec = recCtl.GetRecord()
+                End If
+                Return EvaluateExpressions(url, arg, rec, bEncrypt)
+            End If
+            Return url
         End Function
         
-        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean,ByVal includeSession As Boolean) As String
-            Return EvaluateExpressions(url, arg, Nothing, bEncrypt, includeSession)
+        Public Overrides Overloads Function EvaluateExpressions(url As String, arg As String, ByVal bEncrypt As Boolean, ByVal includeSession As Boolean) As String
+            Dim needToProcess As Boolean = AreAnyUrlParametersForMe(url, arg)
+            If (needToProcess) Then
+                Dim recCtl As Sel_WAttach_Type_WCAR_Doc_Attach1TableControlRow = Me.GetSelectedRecordControl()
+                If recCtl Is Nothing AndAlso url.IndexOf("{") >= 0 Then
+                    ' Localization.
+                    Throw New Exception(Page.GetResourceValue("Err:NoRecSelected", "ePortalWFApproval"))
+                End If
+                Dim rec As Sel_WAttach_Type_WCAR_Doc_Attach1Record = Nothing     
+                If recCtl IsNot Nothing Then
+                    rec = recCtl.GetRecord()
+                End If
+                If includeSession then
+                    Return EvaluateExpressions(url, arg, rec, bEncrypt)
+                Else
+                    Return EvaluateExpressions(url, arg, rec, bEncrypt,False)
+                End If
+            End If
+            Return url
         End Function
+        
           
         Public Overridable Function GetSelectedRecordControl() As Sel_WAttach_Type_WCAR_Doc_Attach1TableControlRow
             Return Nothing
@@ -2024,16 +2157,20 @@ Public Class BaseSel_WAttach_Type_WCAR_Doc_Attach1TableControl
                 If deferDeletion Then
                     If Not recCtl.IsNewRecord Then
                 
-                        ' Localization.
-                        Throw New Exception(Page.GetResourceValue("Err:CannotDelRecs", "ePortalWFApproval"))
+                        Me.AddToDeletedRecordIds(recCtl)
                   
                     End If
                     recCtl.Visible = False
                 
                 Else
                 
-                    ' Localization.
-                    Throw New Exception(Page.GetResourceValue("Err:CannotDelRecs", "ePortalWFApproval"))
+                    recCtl.Delete()
+                    
+                    ' Setting the DataChanged to True results in the page being refreshed with
+                    ' the most recent data from the database.  This happens in PreRender event
+                    ' based on the current sort, search and filter criteria.
+                    Me.DataChanged = True
+                    Me.ResetData = True
                   
                 End If
             Next

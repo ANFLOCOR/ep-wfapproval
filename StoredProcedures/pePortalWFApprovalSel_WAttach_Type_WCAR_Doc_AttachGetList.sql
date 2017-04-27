@@ -81,7 +81,7 @@ BEGIN
         IF @p_sort_str IS NOT NULL
             SET @l_sort_str = 'ORDER BY ' + @p_sort_str
         ELSE
-            SET @l_sort_str = ' '
+            SET @l_sort_str = N'ORDER BY sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_ID] asc '
 
         -- Calculate the rows to be included in the list
         SET @l_end_gen_row_num = @p_page_number * @p_batch_size;
@@ -97,9 +97,9 @@ BEGIN
             sel_WAttach_Type_WCAR_Doc_Attach_.[WCDA_File],
             sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_ID],
             sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_Name],
-            sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_Order]'
-
-        SET @l_query_from = 'FROM ' + @l_from_str + ' ' + @l_join_str + + ' ' + @l_where_str + ') '
+            sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_Order],
+            CAST(BINARY_CHECKSUM(sel_WAttach_Type_WCAR_Doc_Attach_.[WCDA_ID],sel_WAttach_Type_WCAR_Doc_Attach_.[WCDA_WCD_ID],sel_WAttach_Type_WCAR_Doc_Attach_.[WCDA_Desc],sel_WAttach_Type_WCAR_Doc_Attach_.[WCDA_File],sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_ID],sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_Name],sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_Order]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
+        SET @l_query_from = ' FROM ' + @l_from_str + ' ' + @l_join_str + ' ' + @l_where_str + ') '
         SET @l_query_select2 = 'SELECT * FROM sel_WAttach_Type_WCAR_Doc_Attach_ '
         SET @l_query_where = 'WHERE IS_ROWNUM_COL BETWEEN ' + convert(varchar, @l_start_gen_row_num) + ' AND ' + convert(varchar, @l_end_gen_row_num) +  ';'
 
@@ -118,7 +118,8 @@ BEGIN
             sel_WAttach_Type_WCAR_Doc_Attach_.[WCDA_File],
             sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_ID],
             sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_Name],
-            sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_Order]'
+            sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_Order],
+            CAST(BINARY_CHECKSUM(sel_WAttach_Type_WCAR_Doc_Attach_.[WCDA_ID],sel_WAttach_Type_WCAR_Doc_Attach_.[WCDA_WCD_ID],sel_WAttach_Type_WCAR_Doc_Attach_.[WCDA_Desc],sel_WAttach_Type_WCAR_Doc_Attach_.[WCDA_File],sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_ID],sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_Name],sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_Order]) AS nvarchar(max)) AS IS_CHECKSUM_COLUMN_12345'
         SET @l_query_from = 
             ' FROM [dbo].[sel_WAttach_Type_WCAR_Doc_Attach] sel_WAttach_Type_WCAR_Doc_Attach_ ' + 
             'WHERE 1=2;'

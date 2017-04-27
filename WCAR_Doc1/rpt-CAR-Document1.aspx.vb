@@ -55,7 +55,28 @@ Partial Public Class rpt_CAR_Document1
             LoadData_Base()
 
 
-            Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServerN")
+           ' Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServerN")
+            'Dim sParam As String = CStr(Me.Page.Request.QueryString("CAR_ID"))
+
+            'Dim sUrl As String = ""
+
+            'If sParam <> "" Or Not IsNothing(sParam) Then
+            '  sParam = sParam.Replace("*", "&")
+            'End If
+            'Dim carId As Integer
+            'If (Integer.TryParse(sParam, carId)) Then
+            '    sParam = carId.ToString()
+            'Else
+            '    sParam = Decrypt(sParam)
+            'End If
+
+
+            'sUrl = "http://" & sWebServer & "/reportserver?%2fWORKFLOW%2fCAR+Document&rs:Command=Render&CAR_ID=" & _
+      		'sParam & "&rc:Parameters=false"
+
+            'frm.Attributes("src") = sUrl
+			
+			Dim sWebServer As String = System.Configuration.ConfigurationManager.AppSettings.Item("ReportServerN")
             Dim sParam As String = CStr(Me.Page.Request.QueryString("CAR_ID"))
 
             Dim sUrl As String = ""
@@ -63,16 +84,9 @@ Partial Public Class rpt_CAR_Document1
             If sParam <> "" Or Not IsNothing(sParam) Then
                 sParam = sParam.Replace("*", "&")
             End If
-            Dim carId As Integer
-            If (Integer.TryParse(sParam, carId)) Then
-                sParam = carId.ToString()
-            Else
-                sParam = Decrypt(sParam)
-            End If
 
-
-            sUrl = "http://" & sWebServer & "/reportserver?%2fWORKFLOW%2fCAR+Document&rs:Command=Render&CAR_ID=" & _
-      sParam & "&rc:Parameters=false"
+            sUrl = "http://" & sWebServer & "/reportserver?%2fWORKFLOW%2fCAR+Document2&rs:Command=Render&CAR_ID=" & _
+      		sParam & "&rc:Parameters=false"
 
             frm.Attributes("src") = sUrl
                   
@@ -341,7 +355,7 @@ Partial Public Class rpt_CAR_Document1
             End If
         
         
-            Page.Title = "Blank page"
+            Page.Title = "ePortal Workflow Approval - View CAR Document Report (North)"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If

@@ -193,7 +193,7 @@
       </columnFunction>
       <columnDBFormat>
       </columnDBFormat>
-      <columnPK>N</columnPK>
+      <columnPK>Y</columnPK>
       <columnPermanent>N</columnPermanent>
       <columnComputed Source="User">N</columnComputed>
       <columnIdentity Source="User">N</columnIdentity>
@@ -228,7 +228,7 @@
       </insertingFormula>
       <updatingFormula>
       </updatingFormula>
-      <columnVirtualPK Source="User">N</columnVirtualPK>
+      <columnVirtualPK Source="User">Y</columnVirtualPK>
     </Column>
     <Column InternalName="5" Priority="6" ColumnNum="5">
       <columnName>WAT_Name</columnName>
@@ -301,10 +301,10 @@
   <TableAliasName>sel_WAttach_Type_WCAR_Doc_Attach_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WF</ConnectionName>
   <PagingMethod>RowNum</PagingMethod>
-  <canCreateRecords Source="Database">N</canCreateRecords>
-  <canEditRecords Source="Database">N</canEditRecords>
-  <canDeleteRecords Source="Database">N</canDeleteRecords>
-  <canViewRecords Source="Database">N</canViewRecords>
+  <canCreateRecords Source="User">N</canCreateRecords>
+  <canEditRecords Source="User">N</canEditRecords>
+  <canDeleteRecords Source="User">N</canDeleteRecords>
+  <canViewRecords Source="Database">Y</canViewRecords>
   <AppShortName>ePortalWFApproval</AppShortName>
   <FolderName>sel_WAttach_Type_WCAR_Doc_Attach</FolderName>
   <MenuName>WAttach Type WCAR Document Attach</MenuName>

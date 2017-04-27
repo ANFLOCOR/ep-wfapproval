@@ -2692,13 +2692,19 @@ Public Class BaseWCAR_Doc_AttachTableControlRow
                 
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.WCDA_FileSpecified Then
                 
-                Me.WCDA_File.Text = Page.GetResourceValue("Txt:OpenFile", "ePortalWFApproval")
-                        
+                Me.WCDA_File.Text = Me.DataSource.WCDA_Desc
+                Me.WCDA_File.ToolTip = "Open " & Me.WCDA_File.Text
+				   If String.IsNullOrEmpty(Me.WCDA_File.Text) Then
+					      Me.WCDA_File.Text = Page.GetResourceValue("Txt:OpenFile", "ePortalWFApproval")
+                Me.WCDA_File.ToolTip = Me.WCDA_File.Text
+				   End If
+						
                 Me.WCDA_File.OnClientClick = "window.open('../Shared/ExportFieldValue.aspx?Table=" & _
                             Me.Page.Encrypt("WCAR_Doc_Attach") & _
                             "&Field=" & Me.Page.Encrypt("WCDA_File") & _
                             "&Record=" & Me.Page.Encrypt(HttpUtility.UrlEncode(Me.DataSource.GetID().ToString())) & _
-                                "','','left=100,top=50,width=400,height=300,resizable,scrollbars=1');return false;"
+                            "&Filename=" & Me.DataSource.WCDA_Desc & _
+                            "','','left=100,top=50,width=400,height=300,resizable, scrollbars=1');return false;"
                    
                 Me.WCDA_File.Visible = True
             Else

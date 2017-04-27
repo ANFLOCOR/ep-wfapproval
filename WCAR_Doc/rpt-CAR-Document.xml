@@ -75,7 +75,7 @@
       <PassthroughAttributes>
         <Attribute>
           <Name>Text</Name>
-          <Value>ePortal Workflow Approval -CAR Document Preview (South)</Value>
+          <Value>ePortal Workflow Approval - View CAR Document Report (South)</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>

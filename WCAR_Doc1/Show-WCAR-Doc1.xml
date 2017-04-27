@@ -3734,8 +3734,7 @@
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;
-                        &amp;lt;GEN:HTML NAME="Title0" /&amp;gt;&lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;span style="font-size:14pt"&amp;gt;&amp;lt;b&amp;gt;&amp;lt;GEN:HTML NAME="Title0" /&amp;gt;&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;

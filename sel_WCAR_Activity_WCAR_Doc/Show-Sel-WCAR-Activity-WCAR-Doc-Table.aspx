@@ -24,9 +24,7 @@
                 <table cellpadding="0" cellspacing="0" border="0" class="updatePanelContent"><tr><td>
                         
             <ePortalWFApproval:Sel_WCAR_Activity_WCAR_DocTableControl runat="server" id="Sel_WCAR_Activity_WCAR_DocTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
-                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle">
-                        <asp:Literal runat="server" id="Title0" Text="Approved CAR Documents (South)">	</asp:Literal>
-                      </td></tr></table>
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"><table cellpadding="0" cellspacing="0" border="0"><tr><td class="dht" valign="middle"><span style="font-size:14pt"><b><asp:Literal runat="server" id="Title0" Text="Approved CAR Documents (South)">	</asp:Literal></b></span></td></tr></table>
 </td><td class="dhb"></td><td class="dher"></td><td></td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
 
                 </td><td class="panelHeaderR"></td></tr><tr><td class="panelL"></td><td>

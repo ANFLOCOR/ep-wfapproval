@@ -197,27 +197,7 @@
 </td><td class="fls"><asp:Literal runat="server" id="Literal" Text="&amp;nbsp;">	</asp:Literal></td><td class="fls"></td><td class="fls"></td></tr><tr><td class="fls"></td><td class="fls"><asp:Literal runat="server" id="Literal1" Text="&amp;nbsp;">	</asp:Literal></td><td class="fls"></td><td class="fls"></td><td class="fls"></td></tr></table>
 
                   </td></tr><tr><td><BaseClasses:TabContainer runat="server" id="WCAR_DocTabContainer" panellayout="Tabbed">
- <BaseClasses:TabPanel runat="server" id="WCAR_Doc_AttachTabPanel" HeaderText="Supporting Documents">	<ContentTemplate>
-  <ePortalWFApproval:WCAR_Doc_AttachTableControl runat="server" id="WCAR_Doc_AttachTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
-                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"></td><td class="dhb"></td><td></td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
-
-                </td><td class="panelHeaderR"></td></tr><tr><td class="panelL"></td><td>
-                  <asp:panel id="CollapsibleRegion2" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
-                    <table id="WCAR_Doc_AttachTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thcnb" style="text-align:center;vertical-align:middle;"><b><asp:Literal runat="server" id="WCDA_FileLabel" Text="File Download">	</asp:Literal></b></th><th class="thcnb" style="text-align:center;vertical-align:middle;"><b><asp:Literal runat="server" id="WCDA_DescLabel" Text="Description">	</asp:Literal></b></th><th class="thcnb" style="text-align:center;vertical-align:middle;"><b><asp:Literal runat="server" id="WCDA_WAT_IDLabel" Text="Attach Type">	</asp:Literal></b></th></tr><asp:Repeater runat="server" id="WCAR_Doc_AttachTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WCAR_Doc_AttachTableControlRow runat="server" id="WCAR_Doc_AttachTableControlRow">
-<tr><td class="ticnb" scope="row" style="text-align:center;vertical-align:middle;"><asp:LinkButton runat="server" id="WCDA_File" CommandName="Redirect"></asp:LinkButton></td><td class="ticnb" scope="row" style="text-align:center;vertical-align:middle;"><asp:Literal runat="server" id="WCDA_Desc"></asp:Literal></td><td class="ticnb" scope="row" style="text-align:center;vertical-align:middle;"><asp:Literal runat="server" id="WCDA_WAT_ID"></asp:Literal></td></tr></ePortalWFApproval:WCAR_Doc_AttachTableControlRow>
-</ITEMTEMPLATE>
-
-</asp:Repeater>
-</table>
-
-                  </td></tr></table>
-</asp:panel>
-                </td><td class="panelR"></td></tr><tr><td class="panelL"></td><td class="panelPaginationC"></td><td class="panelR"></td></tr><tr><td class="panelBL"><img src="../Images/space.gif" class="panelBLSpace" alt="" /></td><td class="panelB"></td><td class="panelBR"><img src="../Images/space.gif" class="panelBRSpace" alt="" /></td></tr></table>
-	<asp:hiddenfield id="WCAR_Doc_AttachTableControl_PostbackTracker" runat="server" />
-</ePortalWFApproval:WCAR_Doc_AttachTableControl>
-
- </ContentTemplate></BaseClasses:TabPanel> 
-<BaseClasses:TabPanel runat="server" id="WCAR_ActivityTabPanel" HeaderText="Approval History">	<ContentTemplate>
+ <BaseClasses:TabPanel runat="server" id="WCAR_ActivityTabPanel" HeaderText="Approval History">	<ContentTemplate>
   <ePortalWFApproval:WCAR_ActivityTableControl runat="server" id="WCAR_ActivityTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"></td><td class="dhb"></td><td></td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
 
@@ -246,7 +226,26 @@
 </ePortalWFApproval:WCAR_ActivityTableControl>
 
  </ContentTemplate></BaseClasses:TabPanel>
- 
+ <BaseClasses:TabPanel runat="server" id="WCAR_Doc_AttachTabPanel" HeaderText="Supporting Documents">	<ContentTemplate>
+  <ePortalWFApproval:WCAR_Doc_AttachTableControl runat="server" id="WCAR_Doc_AttachTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
+                  <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"></td><td class="dhb"></td><td></td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>
+
+                </td><td class="panelHeaderR"></td></tr><tr><td class="panelL"></td><td>
+                  <asp:panel id="CollapsibleRegion2" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
+                    <table id="WCAR_Doc_AttachTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thcnb" style="text-align:center;vertical-align:middle;"><b><asp:Literal runat="server" id="WCDA_FileLabel" Text="File Download">	</asp:Literal></b></th><th class="thcnb" style="text-align:center;vertical-align:middle;"><b><asp:Literal runat="server" id="WCDA_DescLabel" Text="Description">	</asp:Literal></b></th><th class="thcnb" style="text-align:center;vertical-align:middle;"><b><asp:Literal runat="server" id="WCDA_WAT_IDLabel" Text="Attach Type">	</asp:Literal></b></th></tr><asp:Repeater runat="server" id="WCAR_Doc_AttachTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WCAR_Doc_AttachTableControlRow runat="server" id="WCAR_Doc_AttachTableControlRow">
+<tr><td class="ticnb" scope="row" style="text-align:center;vertical-align:middle;"><asp:LinkButton runat="server" id="WCDA_File" CommandName="Redirect"></asp:LinkButton></td><td class="ticnb" scope="row" style="text-align:center;vertical-align:middle;"><asp:Literal runat="server" id="WCDA_Desc"></asp:Literal></td><td class="ticnb" scope="row" style="text-align:center;vertical-align:middle;"><asp:Literal runat="server" id="WCDA_WAT_ID"></asp:Literal></td></tr></ePortalWFApproval:WCAR_Doc_AttachTableControlRow>
+</ITEMTEMPLATE>
+
+</asp:Repeater>
+</table>
+
+                  </td></tr></table>
+</asp:panel>
+                </td><td class="panelR"></td></tr><tr><td class="panelL"></td><td class="panelPaginationC"></td><td class="panelR"></td></tr><tr><td class="panelBL"><img src="../Images/space.gif" class="panelBLSpace" alt="" /></td><td class="panelB"></td><td class="panelBR"><img src="../Images/space.gif" class="panelBRSpace" alt="" /></td></tr></table>
+	<asp:hiddenfield id="WCAR_Doc_AttachTableControl_PostbackTracker" runat="server" />
+</ePortalWFApproval:WCAR_Doc_AttachTableControl>
+
+ </ContentTemplate></BaseClasses:TabPanel> 
  <BaseClasses:TabPanel runat="server" id="WCAR_Doc_CheckerTabPanel" HeaderText="Co-Requester">	<ContentTemplate>
   <ePortalWFApproval:WCAR_Doc_CheckerTableControl runat="server" id="WCAR_Doc_CheckerTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td><td class="dhb"></td><td class="dhb"></td><td></td><td class="dher"><img src="../Images/space.gif" alt="" /></td></tr></table>

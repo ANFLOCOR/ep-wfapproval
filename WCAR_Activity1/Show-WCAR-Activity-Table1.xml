@@ -312,7 +312,7 @@
         </Attribute>
         <Attribute>
           <Name>Text</Name>
-          <Value>Reassign CAR Document (North)</Value>
+          <Value>CAR Workflow Reassign Tasks (North) </Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WCAR_Activity1TableControl</InsideControl>
@@ -911,6 +911,14 @@
           <Value>=</Value>
         </Attribute>
         <Attribute>
+          <Name>Font-Size</Name>
+          <Value>9pt</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Height</Name>
+          <Value>20px</Value>
+        </Attribute>
+        <Attribute>
           <Name>InternalUse:ApplyInitializeFormula</Name>
           <Value>True</Value>
         </Attribute>
@@ -929,6 +937,10 @@
         <Attribute>
           <Name>SelectionMode</Name>
           <Value>Single</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Width</Name>
+          <Value>223px</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WCAR_Activity1TableControl</InsideControl>
@@ -2465,6 +2477,10 @@
         &lt;Name&gt;border&lt;/Name&gt;
         &lt;AttributeValue&gt;0&lt;/AttributeValue&gt;
       &lt;/Attribute&gt;
+      &lt;Attribute&gt;
+        &lt;Name&gt;style&lt;/Name&gt;
+        &lt;AttributeValue&gt;width:1100px;&lt;/AttributeValue&gt;
+      &lt;/Attribute&gt;
     &lt;/TableAttributes&gt;
   &lt;/Layout&gt;
   &lt;Layout Name="Header" Type="PanelHeader" PanelControlName="WCAR_Activity1TableControl"&gt;
@@ -2963,6 +2979,10 @@
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
             &lt;AttributeValue&gt;thcnb&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;style&lt;/Name&gt;
+            &lt;AttributeValue&gt;text-align:center;&lt;/AttributeValue&gt;
           &lt;/Attribute&gt;
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;

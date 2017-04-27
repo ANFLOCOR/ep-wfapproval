@@ -1645,6 +1645,12 @@
       <Name>WCD_C_IDFromFilter</Name>
       <Type>FieldFilter</Type>
       <FieldValueStyle>DropDownList</FieldValueStyle>
+      <SpecifiedItems>
+        <Item>
+          <Name>--ANY--</Name>
+          <Value>Please Select Company</Value>
+        </Item>
+      </SpecifiedItems>
       <PassthroughAttributes>
         <Attribute>
           <Name>AutoPostBack</Name>
@@ -1668,7 +1674,11 @@
         </Attribute>
         <Attribute>
           <Name>InternalUse:ApplyStaticList</Name>
-          <Value>false</Value>
+          <Value>true</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:GenerateSpecificItems</Name>
+          <Value>True</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:InitializeFormula</Name>
@@ -2838,9 +2848,7 @@
     &lt;Prolog /&gt;
     &lt;Row&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;
-                        &amp;lt;GEN:HTML NAME="Title0"/&amp;gt;
-                      &lt;/Value&gt;
+        &lt;Value&gt;&amp;lt;span style="font-size:14pt"&amp;gt;&amp;lt;b&amp;gt;&amp;lt;GEN:HTML NAME="Title0" /&amp;gt;&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;

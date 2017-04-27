@@ -340,7 +340,7 @@ Public Sub Button_Click(ByVal sender As Object, ByVal args As EventArgs)
             End If
         
         
-            Page.Title = "ePortal Workflow Approval -CAR Document Preview (South)"
+            Page.Title = "ePortal Workflow Approval - View CAR Document Report (South)"
         If Not IsPostBack Then
             AjaxControlToolkit.ToolkitScriptManager.RegisterStartupScript(Me, Me.GetType(), "PopupScript", "openPopupPage('QPageSize');", True)
         End If

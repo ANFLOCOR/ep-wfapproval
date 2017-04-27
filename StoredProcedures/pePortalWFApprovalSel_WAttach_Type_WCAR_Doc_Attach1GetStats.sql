@@ -92,7 +92,7 @@ CREATE PROCEDURE pePortalWFApprovalSel_WAttach_Type_WCAR_Doc_Attach1GetStats
             IF @p_sort_str IS NOT NULL
                 SET @l_sort_str = 'ORDER BY ' + @p_sort_str;
             ELSE
-                SET @l_sort_str = ' '
+                SET @l_sort_str = N'ORDER BY sel_WAttach_Type_WCAR_Doc_Attach_.[WAT_ID] asc '
 
             -- Calculate the rows to be included in the list
             SET @l_end_gen_row_num = @p_page_number * @p_batch_size

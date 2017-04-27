@@ -487,29 +487,8 @@ ISD_GeolocationInit();
 
   var tar = document.getElementById(CAR);
   var target = document.getElementById(Company);
-  var url = '../WCAR_Doc/View-Related-CARs.aspx?CAR=' + tar.value + '&Company=' + target.value;
+  var url = '../wf_car/View_Related_CARs.aspx?CAR=' + tar.value + '&Company=' + target.value;
   window.open(url, '', params);
-  }
-  function OpenRelatedCARNorth(CAR, Company) {
-      var width = 640;
-      var height = 480;
-      var left = (screen.width - width) / 2;
-      var top = (screen.height - height) / 2;
-      var params = 'width=' + width + ', height=' + height;
-      params += ', top=' + top + ', left=' + left;
-      params += ', directories=no';
-      params += ', location=no';
-      params += ', menubar=no';
-      params += ', resizable=yes';
-      params += ', scrollbars=yes';
-      params += ', status=no';
-      params += ', toolbar=no';
-      params += ', modal=yes';
-
-      var tar = document.getElementById(CAR);
-      var target = document.getElementById(Company);
-      var url = '../WCAR_Doc1/View-Related-CARs1.aspx?CAR=' + tar.value + '&Company=' + target.value;
-      window.open(url, '', params);
   }
   function OpenItemBinCardInquiry(Site, Item,CompID)
   {

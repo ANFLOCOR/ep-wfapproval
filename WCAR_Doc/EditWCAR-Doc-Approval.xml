@@ -2917,6 +2917,10 @@
       <Table>DatabaseANFLO-WF%dbo.WCAR_Doc_Attach</Table>
       <PassthroughAttributes>
         <Attribute>
+          <Name>FilenameField</Name>
+          <Value>WCDA_Desc</Value>
+        </Attribute>
+        <Attribute>
           <Name>InternalUse:ApplySaveToField</Name>
           <Value>False</Value>
         </Attribute>
