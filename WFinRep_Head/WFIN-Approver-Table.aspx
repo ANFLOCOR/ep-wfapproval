@@ -43,20 +43,20 @@
                                   
                                     <br /><br />
                                   </td><td class="ttc"><asp:ImageButton runat="server" id="imbWFEdit" causesvalidation="False" commandname="Redirect" imageurl="../Images/icon-open.png" onmouseout="this.src=&#39;../Images/icon-open.png&#39;" onmouseover="this.src=&#39;../Images/icon-open-over.png&#39;">		
-	</asp:ImageButton></td><td class="ttc"><span style="white-space:nowrap;">
+	</asp:ImageButton></td><td class="ttc" style="font-family:Tahoma;color:Black"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="AFIN_WDT_ID"></asp:Literal></span>
- </td><td class="ttc"><span style="white-space:nowrap;">
+ </td><td class="ttc" style="font-family:Tahoma;color:Black"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="AFIN_Date_Assign"></asp:Literal></span>
-</td><td class="ttc"><span style="white-space:nowrap;">
+</td><td class="ttc" style="font-family:Tahoma;color:Black"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="AFIN_Date_Action"></asp:Literal></span>
-</td><td class="ttc"><asp:Literal runat="server" id="FIn_Description"></asp:Literal></td><td class="ttc"><span style="white-space:nowrap;">
+</td><td class="ttc" style="font-family:Tahoma;color:Black"><asp:Literal runat="server" id="FIn_Description"></asp:Literal></td><td class="ttc" style="font-family:Tahoma;color:Black"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="FIN_Month"></asp:Literal></span>
-</td><td class="ttc"><span style="white-space:nowrap;">
+</td><td class="ttc" style="font-family:Tahoma;color:Black"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="FIN_Year"></asp:Literal></span>
  
 <span style="white-space:nowrap;">
 <asp:Literal runat="server" id="AFIN_HFIN_ID" visible="False"></asp:Literal></span>
-</td><td class="ttc"><span style="white-space:nowrap;">
+</td><td class="ttc" style="font-family:Tahoma;color:Black"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="AFIN_Status"></asp:Literal></span>
  
 <span style="white-space:nowrap;">
@@ -75,17 +75,17 @@
                 </td><td class="panelHeaderR"></td></tr><tr><td></td><td>
                   <asp:panel id="CollapsibleRegion1" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
                     <table id="WFinRep_ActivityTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc"><asp:Literal runat="server" id="AFIN_W_U_IDLabel" Text="User(Assigned)">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="AFIN_WSD_IDLabel" Text="Type">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="AFIN_StatusLabel2" Text="Status">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="AFIN_Date_AssignLabel1" Text="Date Assign">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="AFIN_Date_ActionLabel1" Text="Date Action">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="AFIN_RemarkLabel" Text="Remark(s)">	</asp:Literal></th></tr><asp:Repeater runat="server" id="WFinRep_ActivityTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:WFinRep_ActivityTableControlRow runat="server" id="WFinRep_ActivityTableControlRow">
-<tr><td class="ttc"><span style="white-space:nowrap;">
+<tr><td class="ttc" style="font-family:Tahoma;color:Black"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="AFIN_W_U_ID"></asp:Literal></span>
-</td><td class="ttc"><span style="white-space:nowrap;">
+</td><td class="ttc" style="font-family:Tahoma;color:Black"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="AFIN_WS_ID"></asp:Literal></span>
-</td><td class="ttc"><span style="white-space:nowrap;">
+</td><td class="ttc" style="font-family:Tahoma;color:Black"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="AFIN_Status1"></asp:Literal></span>
-</td><td class="ttc"><span style="white-space:nowrap;">
+</td><td class="ttc" style="font-family:Tahoma;color:Black"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="AFIN_Date_Assign1"></asp:Literal></span>
-</td><td class="ttc"><span style="white-space:nowrap;">
+</td><td class="ttc" style="font-family:Tahoma;color:Black"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="AFIN_Date_Action1"></asp:Literal></span>
-</td><td class="ttc"><asp:Literal runat="server" id="AFIN_Remark"></asp:Literal></td></tr></ePortalWFApproval:WFinRep_ActivityTableControlRow>
+</td><td class="ttc" style="font-family:Tahoma;color:Black"><asp:Literal runat="server" id="AFIN_Remark"></asp:Literal></td></tr></ePortalWFApproval:WFinRep_ActivityTableControlRow>
 </ITEMTEMPLATE>
 
 </asp:Repeater>

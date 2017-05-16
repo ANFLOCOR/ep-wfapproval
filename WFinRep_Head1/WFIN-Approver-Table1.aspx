@@ -1,11 +1,11 @@
-﻿<%@ Register Tagprefix="ePortalWFApproval" TagName="PaginationMedium" Src="../Shared/PaginationMedium.ascx" %>
+﻿<%@ Register Tagprefix="Selectors" Namespace="ePortalWFApproval" %>
 
-<%@ Register Tagprefix="Selectors" Namespace="ePortalWFApproval" %>
+<%@ Register Tagprefix="ePortalWFApproval" TagName="ThemeButton" Src="../Shared/ThemeButton.ascx" %>
 
 <%@ Register Tagprefix="ePortalWFApproval" Namespace="ePortalWFApproval.UI.Controls.WFIN_Approver_Table1" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
-<%@ Register Tagprefix="ePortalWFApproval" TagName="ThemeButton" Src="../Shared/ThemeButton.ascx" %>
+<%@ Register Tagprefix="ePortalWFApproval" TagName="Pagination" Src="../Shared/Pagination.ascx" %>
 
 <%@ Register Tagprefix="BaseClasses" Namespace="BaseClasses.Web.UI.WebControls" Assembly="BaseClasses" %>
 <%@ Page Language="vb" EnableEventValidation="false" AutoEventWireup="false" CodeFile="WFIN-Approver-Table1.aspx.vb" Culture="en-US" MasterPageFile="../Master Pages/VerticalMenu.master" Inherits="ePortalWFApproval.UI.WFIN_Approver_Table1" %><asp:Content id="PageSection" ContentPlaceHolderID="PageContent" Runat="server">
@@ -31,9 +31,7 @@
                 </td></tr><tr><td>
                   <asp:panel id="Sel_WFIN_ApproverPageTableControlCollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre"> 
 <table><tr><td style="text-align:left;"><asp:Literal runat="server" id="HFIN_C_IDLabel1" Text="Company">	</asp:Literal></td><td style="text-align:left;"><asp:DropDownList runat="server" id="HFIN_C_IDFilter1" autopostback="True" cssclass="Filter_Input" onkeypress="dropDownListTypeAhead(this,false)" selectionmode="Single" width="250px">	</asp:DropDownList></td><td></td></tr><tr><td style="text-align:left;"><asp:Literal runat="server" id="AFIN_StatusLabel1" Text="Status">	</asp:Literal></td><td style="text-align:left;"><asp:DropDownList runat="server" id="AFIN_StatusFilter1" autopostback="True" cssclass="Filter_Input" onkeypress="dropDownListTypeAhead(this,false)" selectionmode="Single" width="250px">	</asp:DropDownList> </td><td><ePortalWFApproval:ThemeButton runat="server" id="Sel_WFIN_ApproverPageSearchButton" button-causesvalidation="False" button-commandname="Search" button-text="&lt;%# GetResourceValue(&quot;Btn:SearchGoButtonText&quot;, &quot;ePortalWFApproval&quot;) %>" button-tooltip="&lt;%# GetResourceValue(&quot;Btn:SearchGoButtonText&quot;, &quot;ePortalWFApproval&quot;) %>" postback="False"></ePortalWFApproval:ThemeButton></td></tr></table>
-</td></tr><tr><td class="tre"><table><tr><td class="pra"><ePortalWFApproval:PaginationMedium runat="server" id="Sel_WFIN_ApproverPagePagination"></ePortalWFApproval:PaginationMedium>
-<!--To change the position of the pagination control, please search for "prspace" on the Online Help for instruction. -->
-                      </td></tr></table>
+</td></tr><tr><td class="tre"><table></table>
 </td></tr><tr><td class="tre"><table id="Sel_WFIN_ApproverPageTableControlGrid" cellpadding="0" cellspacing="0" border="0" width="100%" onkeydown="captureUpDownKey(this, event)"><tr class="tch"><th class="thc" colspan="1"></th><th class="thc"></th><th class="thc"><asp:Literal runat="server" id="AFIN_WDT_IDLabel" Text="Workflow">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="AFIN_Date_AssignLabel" Text="Date Assign">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="AFIN_Date_ActionLabel" Text="Date Action">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="FIn_DescriptionLabel" Text="Report Description">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="FIN_MonthLabel" Text="Month">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="FIN_YearLabel" Text="Year">	</asp:Literal></th><th class="thc"><asp:Literal runat="server" id="AFIN_StatusLabel" Text="Status">	</asp:Literal></th></tr><asp:Repeater runat="server" id="Sel_WFIN_ApproverPageTableControlRepeater">		<ITEMTEMPLATE>		<ePortalWFApproval:Sel_WFIN_ApproverPageTableControlRow runat="server" id="Sel_WFIN_ApproverPageTableControlRow">
 <tr><td class="ttc" style="text-align:left;font-size:12pt;"><asp:ImageButton runat="server" id="Sel_WFIN_ApproverPageRowExpandCollapseRowButton" causesvalidation="False" commandname="ExpandCollapseRow" cssclass="button_link" imageurl="../Images/icon_expandcollapserow.gif" tooltip="&lt;%# GetResourceValue(&quot;Txt:ExpandCollapseRow&quot;, &quot;ePortalWFApproval&quot;) %>">		
 	</asp:ImageButton></td><td class="ttc" style="text-align:left;font-size:12pt;"><asp:ImageButton runat="server" id="imbWFEdit" causesvalidation="False" commandname="Redirect" imageurl="../Images/icon-open.png" onmouseout="this.src=&#39;../Images/icon-open.png&#39;" onmouseover="this.src=&#39;../Images/icon-open-over.png&#39;">		
@@ -91,7 +89,9 @@
 </table>
 </td></tr></table>
 </asp:panel>
-                </td></tr></table>
+                </td></tr><tr><td class="pra"><ePortalWFApproval:Pagination runat="server" id="Sel_WFIN_ApproverPagePagination"></ePortalWFApproval:Pagination>
+<!--To change the position of the pagination control, please search for "prspace" on the Online Help for instruction. -->
+                      </td></tr></table>
 	<asp:hiddenfield id="Sel_WFIN_ApproverPageTableControl_PostbackTracker" runat="server" />
 </ePortalWFApproval:Sel_WFIN_ApproverPageTableControl>
 </td></tr></table>

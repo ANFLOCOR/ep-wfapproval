@@ -1727,6 +1727,10 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControl
                    
                 Me.CurrentSortOrder = New OrderBy(True, False)
             
+                Me.CurrentSortOrder.Add(Sel_Approver_Pending_Tasks2View.SortOrder, OrderByItem.OrderDir.Asc)
+              
+                Me.CurrentSortOrder.Add(Sel_Approver_Pending_Tasks2View.Date_Assigned, OrderByItem.OrderDir.Desc)
+              
         End If
 
     
@@ -2142,7 +2146,11 @@ Public Class BaseSel_Approver_Pending_Tasks2TableControl
             
             Else
                 Me.CurrentSortOrder = New OrderBy(True, False)
-                
+            
+                Me.CurrentSortOrder.Add(Sel_Approver_Pending_Tasks2View.SortOrder, OrderByItem.OrderDir.Asc)
+              
+                Me.CurrentSortOrder.Add(Sel_Approver_Pending_Tasks2View.Date_Assigned, OrderByItem.OrderDir.Desc)
+                  
             End If
                 
             Me.PageIndex = 0

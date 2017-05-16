@@ -641,7 +641,7 @@ Public Class WFinRep_HeadRecordControl
             parameterList(5) = sixthParameter
             Dim myStoredProcedure As BaseClasses.Data.StoredProcedure = Nothing
             ''original: upd_WFinRep_Head
-            myStoredProcedure = New BaseClasses.Data.StoredProcedure("DatabaseANFLO-WF", "sp_upd_WFinRep_Head_App_Upgrade", parameterList)
+            myStoredProcedure = New BaseClasses.Data.StoredProcedure("DatabaseANFLO-WF", "sp_upd_WFinRep_Head_App", parameterList)
 
             If (myStoredProcedure.RunNonQuery()) Then
 
@@ -1058,7 +1058,7 @@ Public Class WFinRep_HeadRecordControl
                                   "FS Information Needed (FS Document ID# " & sFinID & ")", CStr(sCo1), _
                                   sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
                                   System.Web.HttpContext.Current.Session("UserID").ToString(), "#f46f6f", "WFinRep_Head/WFin_ApproverTable.aspx", sFinID, _
-                                  "Returned By " & sUserRej, "FS Rejected", "FS Creator")
+                                  "Rejected By " & sUserRej, "FS Rejected", "FS Creator")
 
 
 

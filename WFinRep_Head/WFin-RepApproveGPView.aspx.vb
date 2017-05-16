@@ -66,11 +66,11 @@ Partial Public Class WFin_RepApproveGPView
             Dim dbNameStr As String = ""
             Dim database As String = Nothing
 
-            MsgBox(sParamYr & vbNewLine & sParamMo & vbNewLine & sParamPath & vbNewLine & sParamStatus & vbNewLine & sParamDB & vbNewLine & sParamHFIN)
+            ''MsgBox(sParamYr & vbNewLine & sParamMo & vbNewLine & sParamPath & vbNewLine & sParamStatus & vbNewLine & sParamDB & vbNewLine & sParamHFIN)
 
             Select Case sParamDB
-                Case "ANFLOCOR"
-                    dbNameStr = "AMIC_DW"
+                ' ''Case "ANFLOCOR"
+                ' ''    dbNameStr = "AMIC_DW"
                 Case "UNIFINANCE"
                     dbNameStr = "UNIFC_DW"
                 Case "DAVCO"
@@ -93,24 +93,24 @@ Partial Public Class WFin_RepApproveGPView
             End Select
             Dim sBSPath As String = ""
             Dim sDesc As String = ""
-            If sParamDB = "ANFLOCOR" Then
-                sDesc = "/Financial Reports/FS Viewer/"
-                sBSPath = sDesc + sParamDB + " " + sParamPath
-            Else
-                If IsNumeric(sParamDB) Then
-                    ''For Non GP Companies: Get the CompanyID from Company table (ANFLOGROUP_DW)
-                    ''pepanes 10.08.2015
-                    Dim obC As OrderBy = New OrderBy(False, False)
-                    Dim compRec As Vw_ANFLO_DW_CompanyNonGPRecord = Vw_ANFLO_DW_CompanyNonGPView.GetRecord("DynamicsCompanyID=" & sParamDB, obC)
-                    If Not (IsNothing(compRec)) Then
-                        sDesc = "/Financial Reports/FS Viewer/"
-                    End If
-                    sBSPath = sDesc + compRec.ShortName.ToString + " " + sParamPath.ToUpper()
-                Else
-                    sDesc = "/ANFLOCOR/REPORTS/FINANCE/FS PACKAGE II/" & dbNameStr & "/"
-                    sBSPath = sDesc + dbNameStr + " " + sParamPath.ToUpper()
+            ' ''If sParamDB = "ANFLOCOR" Then
+            ' ''    sDesc = "/Financial Reports/FS Viewer/"
+            ' ''    sBSPath = sDesc + sParamDB + " " + sParamPath
+            ' ''Else
+            If IsNumeric(sParamDB) Then
+                ''For Non GP Companies: Get the CompanyID from Company table (ANFLOGROUP_DW)
+                ''pepanes 10.08.2015
+                Dim obC As OrderBy = New OrderBy(False, False)
+                Dim compRec As Vw_ANFLO_DW_CompanyNonGPRecord = Vw_ANFLO_DW_CompanyNonGPView.GetRecord("DynamicsCompanyID=" & sParamDB, obC)
+                If Not (IsNothing(compRec)) Then
+                    sDesc = "/Financial Reports/FS Viewer/"
                 End If
+                sBSPath = sDesc + compRec.ShortName.ToString + " " + sParamPath.ToUpper()
+            Else
+                sDesc = "/ANFLOCOR/REPORTS/FINANCE/FS PACKAGE II/" & dbNameStr & "/"
+                sBSPath = sDesc + dbNameStr + " " + sParamPath
             End If
+            ' ''End If
             Dim sYr As String = sParamYr
 
             Dim cMo As String = ""
@@ -138,7 +138,7 @@ Partial Public Class WFin_RepApproveGPView
             frm.Attributes("src") = sUrl
 
 
-      End Sub
+        End Sub
       
       Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS as Boolean) As String
           Return EvaluateFormula_Base(formula, dataSourceForEvaluate, format, variables, includeDS)

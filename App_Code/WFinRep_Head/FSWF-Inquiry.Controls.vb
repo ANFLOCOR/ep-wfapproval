@@ -245,11 +245,11 @@ Public Class WFinRep_HeadTableControl
             WFinRep_HeadTable.Instance.InnerFilter = Nothing
             Dim wc As WhereClause = New WhereClause()
 
-            Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
+            ''Dim hasFiltersVw_FS_WFinRep_Attachment_PerReportTypeTableControl As Boolean = False
 
-            Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
+            ''Dim hasFiltersWFinRep_ActivityTableControl As Boolean = False
 
-            Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
+            ''Dim hasFiltersWFinRep_DocAttachTableControl As Boolean = False
 
             Dim hasFiltersWFinRep_HeadTableControl As Boolean = False
 
@@ -257,11 +257,11 @@ Public Class WFinRep_HeadTableControl
             ' 1. Static clause defined at design time.
             ' 2. User selected search criteria.
             ' 3. User selected filter criteria.
-
+			'JESS
 
             If IsValueSelected(Me.HFIN_C_IDFilter) Then
 
-                hasFiltersWFinRep_HeadTableControl = True
+                ''hasFiltersWFinRep_HeadTableControl = True
 
                 wc.iAND(WFinRep_HeadTable.HFIN_C_ID, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.HFIN_C_IDFilter, Me.GetFromSession(Me.HFIN_C_IDFilter)), False, False)
 
@@ -271,7 +271,7 @@ Public Class WFinRep_HeadTableControl
 
             If IsValueSelected(Me.HFIN_MonthFilter) Then
 
-                hasFiltersWFinRep_HeadTableControl = True
+                ''hasFiltersWFinRep_HeadTableControl = True
 
                 wc.iAND(WFinRep_HeadTable.HFIN_Month, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.HFIN_MonthFilter, Me.GetFromSession(Me.HFIN_MonthFilter)), False, False)
 
@@ -281,7 +281,7 @@ Public Class WFinRep_HeadTableControl
 
             If IsValueSelected(Me.HFIN_StatusFilter) Then
 
-                hasFiltersWFinRep_HeadTableControl = True
+                ''hasFiltersWFinRep_HeadTableControl = True
 
                 wc.iAND(WFinRep_HeadTable.HFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.HFIN_StatusFilter, Me.GetFromSession(Me.HFIN_StatusFilter)), False, False)
 
@@ -291,11 +291,33 @@ Public Class WFinRep_HeadTableControl
 
             If IsValueSelected(Me.HFIN_YearFromFilter) Then
 
-                hasFiltersWFinRep_HeadTableControl = True
+                ''hasFiltersWFinRep_HeadTableControl = True
 
                 wc.iAND(WFinRep_HeadTable.HFIN_Year, BaseFilter.ComparisonOperator.EqualsTo, MiscUtils.GetSelectedValue(Me.HFIN_YearFromFilter, Me.GetFromSession(Me.HFIN_YearFromFilter)), False, False)
 
             End If
+
+
+            If IsValueSelected(Me.HFIN_C_IDFilter) OrElse Me.InSession(Me.HFIN_C_IDFilter) Then
+                hasFiltersWFinRep_HeadTableControl = True
+            End If
+
+            If IsValueSelected(Me.HFIN_MonthFilter) OrElse Me.InSession(Me.HFIN_MonthFilter) Then
+                hasFiltersWFinRep_HeadTableControl = True
+            End If
+
+            If IsValueSelected(Me.HFIN_StatusFilter) OrElse Me.InSession(Me.HFIN_StatusFilter) Then
+                hasFiltersWFinRep_HeadTableControl = True
+            End If
+
+            If IsValueSelected(Me.HFIN_YearFromFilter) OrElse Me.InSession(Me.HFIN_YearFromFilter) Then
+                hasFiltersWFinRep_HeadTableControl = True
+            End If
+
+            If Not (hasFiltersWFinRep_HeadTableControl) Then
+                wc.RunQuery = False
+            End If
+            wc.iAND("HFIN_C_ID in (SELECT Company_ID FROM sel_W_User_DYNAMICS_Company_WASP where W_U_User_Name = '" & DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & "')")
 
 
             ' wc.iAND("HFIN_C_ID in (Select Company_ID From sel_W_User_DYNAMICS_Company_WASP where W_U_User_Name = '" & DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & "')")
@@ -9748,7 +9770,7 @@ Public Class BaseWFinRep_HeadTableControl
               
             ' setting the state of expand or collapse alternative rows
       
-            Dim expandFirstRow As Boolean= False   
+            Dim expandFirstRow As Boolean= True
         
             Dim recControls() As WFinRep_HeadTableControlRow = Me.GetRecordControls()
             For i As Integer = 0 to recControls.Length - 1
@@ -10082,7 +10104,29 @@ Public Class BaseWFinRep_HeadTableControl
             End If
                   
                 
-                         
+                       
+            Dim bAnyFiltersChanged As Boolean = False
+            
+            If IsValueSelected(Me.HFIN_C_IDFilter) OrElse Me.InSession(Me.HFIN_C_IDFilter) Then
+                bAnyFiltersChanged = True
+            End If
+            
+            If IsValueSelected(Me.HFIN_MonthFilter) OrElse Me.InSession(Me.HFIN_MonthFilter) Then
+                bAnyFiltersChanged = True
+            End If
+            
+            If IsValueSelected(Me.HFIN_StatusFilter) OrElse Me.InSession(Me.HFIN_StatusFilter) Then
+                bAnyFiltersChanged = True
+            End If
+            
+            If IsValueSelected(Me.HFIN_YearFromFilter) OrElse Me.InSession(Me.HFIN_YearFromFilter) Then
+                bAnyFiltersChanged = True
+            End If
+            
+            If Not(bAnyFiltersChanged) Then
+                wc.RunQuery = False
+            End If 
+          
     
     Return wc
     End Function
@@ -10579,9 +10623,9 @@ Public Class BaseWFinRep_HeadTableControl
             
             ' Setup the static list items        
             
-            ' Add the All item.
-            Me.HFIN_C_IDFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-                              
+            ' Add the Please Select item.
+            Me.HFIN_C_IDFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            
 
             Dim orderBy As OrderBy = New OrderBy(false, false)			
                           orderBy.Add(Sel_WF_DYNAMICS_CompanyView.Company_Short_Name, OrderByItem.OrderDir.Asc)
@@ -10692,9 +10736,9 @@ Public Class BaseWFinRep_HeadTableControl
             
             ' Setup the static list items        
             
-            ' Add the All item.
-            Me.HFIN_MonthFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-                              
+            ' Add the Please Select item.
+            Me.HFIN_MonthFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            
 
             Dim orderBy As OrderBy = New OrderBy(false, false)			
                           orderBy.Add(Vw_WFinRep_DocAttach_FIN_MonthView.Mo, OrderByItem.OrderDir.Asc)
@@ -10806,9 +10850,9 @@ Public Class BaseWFinRep_HeadTableControl
             
             ' Setup the static list items        
             
-            ' Add the All item.
-            Me.HFIN_StatusFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-                              
+            ' Add the Please Select item.
+            Me.HFIN_StatusFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            
 
             Dim orderBy As OrderBy = New OrderBy(false, false)			
                           orderBy.Add(WFin_ApprovalStatusTable.WPO_STAT_DESC, OrderByItem.OrderDir.Asc)
@@ -10919,9 +10963,9 @@ Public Class BaseWFinRep_HeadTableControl
             
             ' Setup the static list items        
             
-            ' Add the All item.
-            Me.HFIN_YearFromFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:All", "ePortalWFApproval"), "--ANY--"))
-                              
+            ' Add the Please Select item.
+            Me.HFIN_YearFromFilter.Items.Insert(0, new ListItem(Me.Page.GetResourceValue("Txt:PleaseSelect", "ePortalWFApproval"), "--PLEASE_SELECT--"))
+                            
             
             
             Dim orderBy As OrderBy = New OrderBy(False, False)

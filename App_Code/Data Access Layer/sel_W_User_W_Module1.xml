@@ -94,9 +94,9 @@
   <TableAliasName>sel_W_User_W_Module_</TableAliasName>
   <ConnectionName>DatabaseANFLO-WASPN</ConnectionName>
   <PagingMethod>RowNum</PagingMethod>
-  <canCreateRecords Source="User">Y</canCreateRecords>
-  <canEditRecords Source="User">Y</canEditRecords>
-  <canDeleteRecords Source="User">Y</canDeleteRecords>
+  <canCreateRecords Source="User">N</canCreateRecords>
+  <canEditRecords Source="User">N</canEditRecords>
+  <canDeleteRecords Source="User">N</canDeleteRecords>
   <canViewRecords Source="Database">Y</canViewRecords>
   <AppShortName>ePortalWFApproval</AppShortName>
   <FolderName>sel_W_User_W_Module1</FolderName>

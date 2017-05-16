@@ -1503,7 +1503,7 @@
     <ContainedComponent>
       <Name>Sel_WFIN_ApproverPagePagination</Name>
       <Type>Pagination</Type>
-      <Layout>..\Shared\PaginationMedium.ascx</Layout>
+      <Layout>..\Shared\Pagination.ascx</Layout>
       <PassthroughAttributes>
         <Attribute>
           <Name>FirstPage-Consumers</Name>
@@ -1635,19 +1635,19 @@
         </Attribute>
         <Attribute>
           <Name>PaginationCurrentPage</Name>
-          <Value>Pagination-CurrentPage,Sel_WFIN_ApproverPagePagination-CurrentPage</Value>
+          <Value>Pagination-CurrentPage,Sel_WFIN_ApproverPagePagination-CurrentPage,Sel_WFIN_ApproverPagePagination-CurrentPage</Value>
         </Attribute>
         <Attribute>
           <Name>PaginationPageSize</Name>
-          <Value>Pagination-PageSize,Sel_WFIN_ApproverPagePagination-PageSize</Value>
+          <Value>Pagination-PageSize,Sel_WFIN_ApproverPagePagination-PageSize,Sel_WFIN_ApproverPagePagination-PageSize</Value>
         </Attribute>
         <Attribute>
           <Name>PaginationTotalItems</Name>
-          <Value>Pagination-TotalItems,Sel_WFIN_ApproverPagePagination-TotalItems</Value>
+          <Value>Pagination-TotalItems,Sel_WFIN_ApproverPagePagination-TotalItems,Sel_WFIN_ApproverPagePagination-TotalItems</Value>
         </Attribute>
         <Attribute>
           <Name>PaginationTotalPages</Name>
-          <Value>Pagination-TotalPages,Sel_WFIN_ApproverPagePagination-TotalPages</Value>
+          <Value>Pagination-TotalPages,Sel_WFIN_ApproverPagePagination-TotalPages,Sel_WFIN_ApproverPagePagination-TotalPages</Value>
         </Attribute>
       </PassthroughAttributes>
     </ContainedComponent>
@@ -1812,6 +1812,20 @@
                   &amp;lt;asp:panel id="Sel_WFIN_ApproverPageTableControlCollapsibleRegion" runat="server"&amp;gt;&amp;lt;GEN:PANEL NAME="Sel_WFIN_ApproverPagePanel" /&amp;gt;&amp;lt;/asp:panel&amp;gt;
                 &lt;/Value&gt;
         &lt;CellAttributes /&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;GEN:PAGINATION NAME="Sel_WFIN_ApproverPagePagination"&amp;gt;&amp;lt;/GEN:PAGINATION&amp;gt;
+&amp;lt;!--To change the position of the pagination control, please search for "prspace" on the Online Help for instruction. --&amp;gt;
+                      &lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;pra&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;RowAttributes /&gt;
     &lt;/Row&gt;
@@ -2041,20 +2055,6 @@
   &lt;/Layout&gt;
   &lt;Layout Name="Sel_WFIN_ApproverPageButtons" Type="BlankPanel" PanelControlName="Sel_WFIN_ApproverPageTableControl"&gt;
     &lt;Prolog /&gt;
-    &lt;Row&gt;
-      &lt;Cell&gt;
-        &lt;Value&gt;&amp;lt;GEN:PAGINATION NAME="Sel_WFIN_ApproverPagePagination"&amp;gt;&amp;lt;/GEN:PAGINATION&amp;gt;
-&amp;lt;!--To change the position of the pagination control, please search for "prspace" on the Online Help for instruction. --&amp;gt;
-                      &lt;/Value&gt;
-        &lt;CellAttributes&gt;
-          &lt;Attribute&gt;
-            &lt;Name&gt;class&lt;/Name&gt;
-            &lt;AttributeValue&gt;pra&lt;/AttributeValue&gt;
-          &lt;/Attribute&gt;
-        &lt;/CellAttributes&gt;
-      &lt;/Cell&gt;
-      &lt;RowAttributes /&gt;
-    &lt;/Row&gt;
     &lt;Epilog /&gt;
     &lt;TableAttributes /&gt;
   &lt;/Layout&gt;

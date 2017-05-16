@@ -2105,7 +2105,17 @@ Public Class BaseSel_WFIN_ApproverPageTableControl
             Else
                 Me.Sel_WFIN_ApproverPagePagination.CurrentPage.Text = "0"
             End If
+            If DbUtils.GetCreatedRecords(Me.DataSource).Length > 0 Then                      
+                    
+                Me.Sel_WFIN_ApproverPagePagination.CurrentPage.Text = (Me.PageIndex + 1).ToString()
+            Else
+                Me.Sel_WFIN_ApproverPagePagination.CurrentPage.Text = "0"
+            End If
             Me.Sel_WFIN_ApproverPagePagination.PageSize.Text = Me.PageSize.ToString()
+            Me.Sel_WFIN_ApproverPagePagination.PageSize.Text = Me.PageSize.ToString()
+            Me.Sel_WFIN_ApproverPagePagination.TotalItems.Text = Me.TotalRecords.ToString()
+            Me.Sel_WFIN_ApproverPagePagination.TotalItems.Text = Me.TotalRecords.ToString()
+            Me.Sel_WFIN_ApproverPagePagination.TotalPages.Text = Me.TotalPages.ToString()
             Me.Sel_WFIN_ApproverPagePagination.TotalPages.Text = Me.TotalPages.ToString()
 
             ' Bind the buttons for Sel_WFIN_ApproverPageTableControl pagination.
@@ -2406,6 +2416,12 @@ Public Class BaseSel_WFIN_ApproverPageTableControl
     
         Protected Overridable Sub GetPageSize()
         
+            If Me.Sel_WFIN_ApproverPagePagination.PageSize.Text.Trim <> "" Then
+                Try
+                    'Me.PageSize = Integer.Parse(Me.Sel_WFIN_ApproverPagePagination.PageSize.Text)
+                Catch ex As Exception
+                End Try
+            End If
             If Me.Sel_WFIN_ApproverPagePagination.PageSize.Text.Trim <> "" Then
                 Try
                     'Me.PageSize = Integer.Parse(Me.Sel_WFIN_ApproverPagePagination.PageSize.Text)
@@ -3370,9 +3386,9 @@ Public Class BaseSel_WFIN_ApproverPageTableControl
             End Get
         End Property
         
-        Public ReadOnly Property Sel_WFIN_ApproverPagePagination() As ePortalWFApproval.UI.IPaginationMedium
+        Public ReadOnly Property Sel_WFIN_ApproverPagePagination() As ePortalWFApproval.UI.IPagination
             Get
-                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Sel_WFIN_ApproverPagePagination"), ePortalWFApproval.UI.IPaginationMedium)
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Sel_WFIN_ApproverPagePagination"), ePortalWFApproval.UI.IPagination)
           End Get
           End Property
         

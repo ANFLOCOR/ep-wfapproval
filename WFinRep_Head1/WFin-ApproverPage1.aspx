@@ -208,7 +208,7 @@
 </tr>
 </table>
 </span>
-</td><td class="tableCellValue"><table>
+</td><td class="tableCellValue" style="text-align:center;"><table>
 	<tr>
 		<td><ePortalWFApproval:ThemeButton runat="server" id="btnPreview" button-causesvalidation="False" button-commandname="Redirect" button-text="Preview" button-tooltip="Preview"></ePortalWFApproval:ThemeButton></td>
 		<td></td>
@@ -217,7 +217,7 @@
 </table>
  
 
-</td><td class="tableCellValue"><ePortalWFApproval:ThemeButton runat="server" id="btnPreview1" button-causesvalidation="False" button-commandname="Redirect" button-text="View As PDF" button-tooltip="
+</td><td class="tableCellValue" style="text-align:center;"><ePortalWFApproval:ThemeButton runat="server" id="btnPreview1" button-causesvalidation="False" button-commandname="Redirect" button-text="View As PDF" button-tooltip="
           "></ePortalWFApproval:ThemeButton> 
 <asp:LinkButton runat="server" id="HFIN_File" CommandName="Redirect" visible="False"></asp:LinkButton></td></tr><tr><td class="tableCellValue" colspan="8"><BaseClasses:TabContainer runat="server" id="Wfin_HeadTabContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
  <BaseClasses:TabPanel runat="server" id="DocAttachTabPanel" HeaderText="Reports Included">	<ContentTemplate> 

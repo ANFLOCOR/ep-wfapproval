@@ -1755,6 +1755,10 @@
       <Table>DatabaseANFLO-WFN%dbo.sel_Approver_Pending_Tasks</Table>
       <PassthroughAttributes>
         <Attribute>
+          <Name>DataReaderSortBy</Name>
+          <Value>SortOrder Asc</Value>
+        </Attribute>
+        <Attribute>
           <Name>HasScrolling</Name>
           <Value>False</Value>
         </Attribute>
@@ -1769,6 +1773,10 @@
         <Attribute>
           <Name>InternalUse:DataSource</Name>
           <Value>TableOrQuery</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:DataSourceArg</Name>
+          <Value />
         </Attribute>
         <Attribute>
           <Name>NumberOfColumns</Name>
@@ -1795,6 +1803,18 @@
           <Value>Pagination-TotalPages,WCAR_DocPagination-TotalPages</Value>
         </Attribute>
       </PassthroughAttributes>
+      <OrderBys>
+        <OrderBy>
+          <Position>0</Position>
+          <ColumnName>SortOrder</ColumnName>
+          <Direction>Asc</Direction>
+        </OrderBy>
+        <OrderBy>
+          <Position>1</Position>
+          <ColumnName>Date_Assigned</ColumnName>
+          <Direction>Desc</Direction>
+        </OrderBy>
+      </OrderBys>
     </ContainedComponent>
     <ContainedComponent>
       <Name>Sel_Approver_Pending_TasksRefreshButton</Name>

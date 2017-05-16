@@ -2667,11 +2667,11 @@
         </Attribute>
         <Attribute>
           <Name>HideDataUntilSearched</Name>
-          <Value>False</Value>
+          <Value>True</Value>
         </Attribute>
         <Attribute>
           <Name>InitialRowDisplayStyle</Name>
-          <Value>AllRowsCollapsed</Value>
+          <Value>FirstRowExpanded</Value>
         </Attribute>
         <Attribute>
           <Name>InternalUse:DataSource</Name>
