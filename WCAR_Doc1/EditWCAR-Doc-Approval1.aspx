@@ -84,10 +84,9 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td style="padding-right: 5px; vertical-align:top">
-<asp:TextBox runat="server" id="WCD_Request_Date" Columns="20" MaxLength="30" cssclass="field_input" dataformat="d" enabled="True" readonly="True" width="279px"></asp:TextBox></td>
+<asp:TextBox runat="server" id="WCD_Request_Date" Columns="20" MaxLength="30" cssclass="field_input" dataformat="d" enabled="False" readonly="True" width="279px"></asp:TextBox></td>
 <td>
-<Selectors:CalendarExtendarClass runat="server" ID="WCD_Request_DateCalendarExtender" TargetControlID="WCD_Request_Date" CssClass="MyCalendar" Format="d">
-</Selectors:CalendarExtendarClass>&nbsp;
+&nbsp;
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCD_Request_DateTextBoxMaxLengthValidator" ControlToValidate="WCD_Request_Date" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCD Request Date&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td>
 </tr>
 </table>
@@ -106,7 +105,7 @@
 <BaseClasses:TextBoxMaxLengthValidator runat="server" id="WCD_RemarkTextBoxMaxLengthValidator" ControlToValidate="WCD_Remark" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WCD Remark&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></b></td><td style="white-space:nowrap;text-align:left;" class="fls" rowspan="2"><BaseClasses:TabContainer runat="server" id="WCAR_DocRecordControlTabContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
  <BaseClasses:TabPanel runat="server" id="WCAR_DocTabPanel1" HeaderText="Total Expenditure - This Request">	<ContentTemplate> 
   <table><tr><td><asp:literal id="Literal14" runat="server" text="&nbsp;" /></td><td></td></tr><tr><td style="text-align:left;"><b><asp:Literal runat="server" id="WCD_WCur_IDLabel" Text="Currency:">	</asp:Literal></b></td><td style="text-align:left;"><span style="white-space:nowrap;">
-<asp:DropDownList runat="server" id="WCD_WCur_ID" cssclass="field_input" onkeypress="dropDownListTypeAhead(this,false)" width="271px"></asp:DropDownList></span>
+<asp:DropDownList runat="server" id="WCD_WCur_ID" cssclass="field_input" enabled="False" onkeypress="dropDownListTypeAhead(this,false)" visible="True" width="271px"></asp:DropDownList></span>
 </td></tr><tr><td><asp:literal id="Literal25" runat="server" text="&nbsp;" /></td><td></td></tr><tr><td style="text-align:left;"><b><asp:Literal runat="server" id="WCD_Exp_Cur_YrLabel" Text="This Year:">	</asp:Literal></b></td><td style="text-align:left;"><span style="white-space:nowrap;">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>

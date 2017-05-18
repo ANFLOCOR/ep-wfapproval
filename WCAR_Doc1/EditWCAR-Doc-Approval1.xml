@@ -2334,7 +2334,7 @@
         </Attribute>
         <Attribute>
           <Name>Enabled</Name>
-          <Value>True</Value>
+          <Value>False</Value>
         </Attribute>
         <Attribute>
           <Name>EnableIncrementDecrementButtons</Name>
@@ -2626,12 +2626,20 @@
           <Value>field_input</Value>
         </Attribute>
         <Attribute>
+          <Name>Enabled</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
           <Name>InternalUse:DataSource</Name>
           <Value>Parent</Value>
         </Attribute>
         <Attribute>
           <Name>onkeypress</Name>
           <Value>dropDownListTypeAhead(this,false)</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Visible</Name>
+          <Value>True</Value>
         </Attribute>
         <Attribute>
           <Name>Width</Name>

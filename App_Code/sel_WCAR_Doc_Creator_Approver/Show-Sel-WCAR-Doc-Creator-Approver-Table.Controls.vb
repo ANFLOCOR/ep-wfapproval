@@ -706,7 +706,7 @@ Public Class Sel_WCAR_Doc_Creator_ApproverTableControl
                 item.Selected = True
                 Me.WCD_C_IDFilter.Items.Insert(0, item)
             End If
-
+            Me.WCD_C_IDFilter.Items.Insert(0, New ListItem(Page.GetResourceValue("All", "EPORTAL"), "--PLEASE_SELECT--"))
 
 
 
