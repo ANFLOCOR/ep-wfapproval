@@ -109,6 +109,82 @@
       <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
     </ContainedComponent>
     <ContainedComponent>
+      <Name>ddlAction</Name>
+      <Type>Aspx</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:ApplyQuery</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:ApplyStaticList</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <ControlClass>System.Web.UI.WebControls.DropDownList</ControlClass>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>ddlMoveto</Name>
+      <Type>Aspx</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:ApplyQuery</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:ApplyStaticList</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <ControlClass>System.Web.UI.WebControls.DropDownList</ControlClass>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>Literal</Name>
+      <Type>Aspx</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <ControlClass>System.Web.UI.WebControls.Literal</ControlClass>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>Literal10</Name>
+      <Type>Aspx</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <ControlClass>System.Web.UI.WebControls.Literal</ControlClass>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>Literal7</Name>
+      <Type>Aspx</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>InternalUse:TreatAs</Name>
+          <Value>FieldValue</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+      <ControlClass>System.Web.UI.WebControls.Literal</ControlClass>
+    </ContainedComponent>
+    <ContainedComponent>
       <Name>PageTitle</Name>
       <Type>Literal</Type>
       <PassthroughAttributes>
@@ -202,6 +278,10 @@
           <Name>Text</Name>
           <Value>Approve</Value>
         </Attribute>
+        <Attribute>
+          <Name>Visible</Name>
+          <Value>False</Value>
+        </Attribute>
       </PassthroughAttributes>
       <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
     </ContainedComponent>
@@ -225,6 +305,10 @@
           <Name>Text</Name>
           <Value>Reject</Value>
         </Attribute>
+        <Attribute>
+          <Name>Visible</Name>
+          <Value>False</Value>
+        </Attribute>
       </PassthroughAttributes>
       <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
     </ContainedComponent>
@@ -247,6 +331,33 @@
         <Attribute>
           <Name>Text</Name>
           <Value>Return</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Visible</Name>
+          <Value>False</Value>
+        </Attribute>
+      </PassthroughAttributes>
+      <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
+    </ContainedComponent>
+    <ContainedComponent>
+      <Name>pSubmit</Name>
+      <Type>PushButton</Type>
+      <PassthroughAttributes>
+        <Attribute>
+          <Name>CausesValidation</Name>
+          <Value>False</Value>
+        </Attribute>
+        <Attribute>
+          <Name>CommandName</Name>
+          <Value>Redirect</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Consumers</Name>
+          <Value>page</Value>
+        </Attribute>
+        <Attribute>
+          <Name>Text</Name>
+          <Value>Submit</Value>
         </Attribute>
       </PassthroughAttributes>
       <InsideControl>WFinRepNGP_HeadRecordControl</InsideControl>
@@ -3567,6 +3678,80 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;asp:literal id="Literal" runat="server" text="Action:" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;asp:dropdownlist id="ddlAction" runat="server" class="fls" width="337px" Name="ddlAction" autopostback="True"&amp;gt;
+	&amp;lt;asp:listitem&amp;gt;Approve&amp;lt;/asp:listitem&amp;gt;
+	&amp;lt;asp:listitem&amp;gt;Reject&amp;lt;/asp:listitem&amp;gt;
+	&amp;lt;asp:listitem&amp;gt;Void&amp;lt;/asp:listitem&amp;gt;
+	&amp;lt;asp:listitem&amp;gt;Return&amp;lt;/asp:listitem&amp;gt;
+&amp;lt;/asp:dropdownlist&amp;gt; 
+&amp;lt;asp:literal id="Literal10" runat="server" text="&amp;amp;nbsp;" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;colspan&lt;/Name&gt;
+            &lt;AttributeValue&gt;3&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;tableCellLabel&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;asp:literal id="Literal7" runat="server" text="Return To:" /&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
+        &lt;Value&gt;&amp;lt;asp:dropdownlist id="ddlMoveto" runat="server" class="fls" width="337px" enabled="false" Name="ddlMoveTo"&amp;gt;
+	
+&amp;lt;/asp:dropdownlist&amp;gt;&lt;/Value&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;tableCellValue&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;colspan&lt;/Name&gt;
+            &lt;AttributeValue&gt;3&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;RowAttributes /&gt;
+    &lt;/Row&gt;
+    &lt;Row&gt;
+      &lt;Cell&gt;
+        &lt;CellAttributes&gt;
+          &lt;Attribute&gt;
+            &lt;Name&gt;class&lt;/Name&gt;
+            &lt;AttributeValue&gt;tableCellLabel&lt;/AttributeValue&gt;
+          &lt;/Attribute&gt;
+        &lt;/CellAttributes&gt;
+      &lt;/Cell&gt;
+      &lt;Cell&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -3577,7 +3762,7 @@
       &lt;Cell&gt;
         &lt;Value&gt;&amp;lt;GEN:PUSHBUTTON NAME="pApproved" /&amp;gt; 
 &amp;lt;GEN:PUSHBUTTON NAME="pReject" /&amp;gt; 
-&amp;lt;GEN:PUSHBUTTON NAME="pReturned" /&amp;gt;&lt;/Value&gt;
+&amp;lt;GEN:PUSHBUTTON NAME="pReturned" /&amp;gt;&amp;lt;GEN:PUSHBUTTON NAME="pSubmit" /&amp;gt;&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;
@@ -3610,7 +3795,9 @@
         &lt;/CellAttributes&gt;
       &lt;/Cell&gt;
       &lt;Cell&gt;
-        &lt;Value&gt;&amp;amp;nbsp;&lt;/Value&gt;
+        &lt;Value&gt;&amp;amp;nbsp; 
+ 
+&lt;/Value&gt;
         &lt;CellAttributes&gt;
           &lt;Attribute&gt;
             &lt;Name&gt;class&lt;/Name&gt;

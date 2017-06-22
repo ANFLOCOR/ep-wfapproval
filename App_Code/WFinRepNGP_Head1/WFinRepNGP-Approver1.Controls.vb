@@ -114,6 +114,8 @@ Namespace ePortalWFApproval.UI.Controls.WFinRepNGP_Approver1
 
             AddHandler Me.pReturned.Click, AddressOf pReturned_Click
 
+            AddHandler Me.pSubmit.Click, AddressOf pSubmit_Click
+
             AddHandler Me.CancelButton.Button.Click, AddressOf CancelButton_Click
 
             AddHandler Me.WFRCHNGP_U_ID.SelectedIndexChanged, AddressOf WFRCHNGP_U_ID_SelectedIndexChanged
@@ -132,18 +134,71 @@ Namespace ePortalWFApproval.UI.Controls.WFinRepNGP_Approver1
 
             AddHandler Me.WFRCHNGP_Year.TextChanged, AddressOf WFRCHNGP_Year_TextChanged
 
+            AddHandler Me.ddlAction.SelectedIndexChanged, AddressOf ddlAction_SelectedIndexChanged
+
+            AddHandler Me.ddlMoveto.SelectedIndexChanged, AddressOf ddlMoveto_SelectedIndexChanged
+
             AddHandler Me.txtRemarks.TextChanged, AddressOf txtRemarks_TextChanged
+
+            'If Me.WFRCHNGP_Status.Text = "Completed" Then
+            '    'Me.pReturned.Visible = True
+            '    'Me.pApproved.Visible = False
+            '    'Me.pReject.Visible = False
+            'Else
+            '    'Me.pReturned.Visible = False
+            '    'Me.pApproved.Visible = True
+            '    'Me.pReject.Visible = True
+            'End If
+
 
             If Me.WFRCHNGP_Status.Text = "Completed" Then
                 Me.pReturned.Visible = True
-                Me.pApproved.Visible = False
-                Me.pReject.Visible = False
+                'Me.pApproved.Visible = False
+                'Me.pReject.Visible = False
+                Me.Literal.Visible = False
+                Me.ddlAction.Visible = False
+                Me.Literal7.Visible = False
+                Me.pSubmit.Visible = False
+
             Else
                 Me.pReturned.Visible = False
-                Me.pApproved.Visible = True
-                Me.pReject.Visible = True
+                'Me.pApproved.Visible = True
+                'Me.pReject.Visible = True
+                Me.Literal.Visible = True
+                Me.ddlAction.Visible = True
+                Me.Literal7.Visible = True
+                Me.pSubmit.Visible = True
             End If
+
+
         End Sub
+
+
+        Public Overrides Sub pSubmit_Click(ByVal sender As Object, ByVal args As EventArgs)
+
+            Try
+                If Me.ddlAction.SelectedIndex = 0 Then
+                    pApproved_Click(Nothing, Nothing)
+                ElseIf ddlAction.SelectedIndex = 1 Then
+                    pReject_Click(Nothing, Nothing)
+                Else
+                    SelectReturn(Nothing, Nothing)
+                End If
+
+            Catch ex As Exception
+
+                Me.Page.ErrorOnPage = True
+
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+            Finally
+
+            End Try
+
+        End Sub
+
+
         Public Overrides Sub SetWFRCHNGP_Month()
 
 
@@ -416,84 +471,177 @@ Namespace ePortalWFApproval.UI.Controls.WFinRepNGP_Approver1
 
                             Next
                         Else
-                            'note: if # of approvers needed < multiple approvers then set other 'Pending' status to 'System Approved'
-                            'note: set current user status to 'Approved'
-                            'note: get user(s) for the next step & insert to Activity table
-                            Dim wc4 As WhereClause = New WhereClause
+                            If WFRCHNGP_Status.Text <> "Return for Revision" Then
+                                'note: if # of approvers needed < multiple approvers then set other 'Pending' status to 'System Approved'
+                                'note: set current user status to 'Approved'
+                                'note: get user(s) for the next step & insert to Activity table
+                                Dim wc4 As WhereClause = New WhereClause
 
-                            'wc4.iAND(WFinRepNGP_ActivityTable.WFRNGPA_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
-                            wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
-                            wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserIdNorth").ToString())
-                            wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
-                            wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
+                                'wc4.iAND(WFinRepNGP_ActivityTable.WFRNGPA_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                                wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                                wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserIdNorth").ToString())
+                                wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                                wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
 
-                            For Each itemValue4 As WFinRepNGP_Activity1Record In WFinRepNGP_Activity1Table.GetRecords(wc4, Nothing, 0, 100)
-                                'note: update Activity table (other user(s) if multiple approvers) -> 'System Approved'
-                                ''#Ryan_Test
-                                'MsgBox("System Approved: UpdateRecord")
-                                WFinRepNGP_Activity1Record.UpdateRecord(itemValue4.WFRNGPA_ID.ToString(), "11")
-                            Next
-
-                            Dim wc5 As WhereClause = New WhereClause
-                            'wc5.iAND(WFinRepNGP_ActivityTable.WFRNGPA_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
-                            wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
-                            wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIdNorth").ToString())
-                            wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
-                            wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
-
-                            If WFinRepNGP_ActivityTable.GetRecords(wc5, Nothing, 0, 100).Length > 0 Then
-                                For Each itemValue5 As WFinRepNGP_Activity1Record In WFinRepNGP_Activity1Table.GetRecords(wc5, Nothing, 0, 100)
-                                    'note: update Activity table (current user) -> 'Approved'
-                                    '#Ryan_Test
-                                    'MsgBox("Approved: UpdateRecord")
-                                    WFinRepNGP_Activity1Record.UpdateRecord(itemValue5.WFRNGPA_ID.ToString(), "5")
-                                    WFinRepNGP_Activity1Record.UpdateRecord_Final_Approved(itemValue5.WFRNGPA_ID.ToString()) ''additional: to make IsDone = True
+                                For Each itemValue4 As WFinRepNGP_Activity1Record In WFinRepNGP_Activity1Table.GetRecords(wc4, Nothing, 0, 100)
+                                    'note: update Activity table (other user(s) if multiple approvers) -> 'System Approved'
+                                    ''#Ryan_Test
+                                    'MsgBox("System Approved: UpdateRecord")
+                                    WFinRepNGP_Activity1Record.UpdateRecord(itemValue4.WFRNGPA_ID.ToString(), "11")
                                 Next
-                            End If
 
-                            Dim wc6 As WhereClause = New WhereClause
-                            wc6.iAND(WFinRep_Step_StepDetail1View.WFIN_S_ID, BaseFilter.ComparisonOperator.EqualsTo, sNextStep)
-                            For Each itemValue6 As WFinRep_Step_StepDetail1Record In WFinRep_Step_StepDetail1View.GetRecords(wc6, Nothing, 0, 100)
-                                'note: use returned items to insert to Activity table
-                                'note: do not insert(update) delegate until task expires
-                                '#Ryan_Test
-                                'MsgBox("insert to Activity : WFinRepNGP_ActivityRecord")
-                                WFinRepNGP_Activity1Record.AddRecord(itemValue6.WFIN_S_ID, itemValue6.WFIN_SD_ID, _
-                                CInt(Me.WFRCHNGP_DT_ID1.Text), _
-                                itemValue6.WFIN_SD_W_U_ID, 0, CInt(sFinID), _
-                               (DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
-                                ": " & Me.txtRemarks.Text))
+                                Dim wc5 As WhereClause = New WhereClause
+                                'wc5.iAND(WFinRepNGP_ActivityTable.WFRNGPA_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                                wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                                wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIdNorth").ToString())
+                                wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                                wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
 
-                                Dim nStep As String = itemValue6.W_U_Full_Name.ToString()
-                                sEmailContent &= vbCrLf & vbCrLf & "Next Approver: " & nStep
-                                sEmailContent &= vbCrLf & vbCrLf & "http://eportal.anflocor.com/"
+                                If WFinRepNGP_Activity1Table.GetRecords(wc5, Nothing, 0, 100).Length > 0 Then
+                                    For Each itemValue5 As WFinRepNGP_Activity1Record In WFinRepNGP_Activity1Table.GetRecords(wc5, Nothing, 0, 100)
+                                        'note: update Activity table (current user) -> 'Approved'
+                                        '#Ryan_Test
+                                        'MsgBox("Approved: UpdateRecord")
+                                        WFinRepNGP_Activity1Record.UpdateRecord(itemValue5.WFRNGPA_ID.ToString(), "5")
+                                        WFinRepNGP_Activity1Record.UpdateRecord_Final_Approved(itemValue5.WFRNGPA_ID.ToString()) ''additional: to make IsDone = True
+                                    Next
+                                End If
 
-                                '******control this notification for GGP*****
-                                Select Case itemValue6.WFIN_SD_W_U_ID.ToString
-                                    Case "8"
+                                Dim wc6 As WhereClause = New WhereClause
+                                wc6.iAND(WFinRep_Step_StepDetail1View.WFIN_S_ID, BaseFilter.ComparisonOperator.EqualsTo, sNextStep)
+                                For Each itemValue6 As WFinRep_Step_StepDetail1Record In WFinRep_Step_StepDetail1View.GetRecords(wc6, Nothing, 0, 100)
+                                    'note: use returned items to insert to Activity table
+                                    'note: do not insert(update) delegate until task expires
+                                    '#Ryan_Test
+                                    'MsgBox("insert to Activity : WFinRepNGP_ActivityRecord")
+                                    WFinRepNGP_Activity1Record.AddRecord(itemValue6.WFIN_S_ID, itemValue6.WFIN_SD_ID, _
+                                    CInt(Me.WFRCHNGP_DT_ID1.Text), _
+                                    itemValue6.WFIN_SD_W_U_ID, 0, CInt(sFinID), _
+                                   (DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                                    ": " & Me.txtRemarks.Text))
 
-                                    Case Else
-                                        '##################
-                                        '### EMAIL HERE ###
-                                        '##################
-                                        Dim sInfo As String = ""
-                                        'Dim sDelegate As String = FindDelegate(itemValue6.MRS_SD_W_U_ID.ToString(), sInfo)
-                                        Dim esUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
+                                    Dim nStep As String = itemValue6.W_U_Full_Name.ToString()
+                                    sEmailContent &= vbCrLf & vbCrLf & "Next Approver: " & nStep
+                                    sEmailContent &= vbCrLf & vbCrLf & "http://eportal.anflocor.com/"
 
-                                        sEmailContent = Content_Formatter(CStr(itemValue6.WFIN_SD_W_U_ID), _
-                                        "FS Report Approval Needed (FS Document ID# " & sFinID & ")", CStr(sCo1), _
-                                        sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
-                                        System.Web.HttpContext.Current.Session("UserIdNorth").ToString(), "#4682b4", "WFinRep_Head/WFin_ApproverTable1.aspx", sFinID, _
-                                        "Next Approver: " & nStep, "Pending Approval")
+                                    '******control this notification for GGP*****
+                                    Select Case itemValue6.WFIN_SD_W_U_ID.ToString
+                                        Case "8"
+
+                                        Case Else
+                                            '##################
+                                            '### EMAIL HERE ###
+                                            '##################
+                                            Dim sInfo As String = ""
+                                            'Dim sDelegate As String = FindDelegate(itemValue6.MRS_SD_W_U_ID.ToString(), sInfo)
+                                            Dim esUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
+
+                                            sEmailContent = Content_Formatter(CStr(itemValue6.WFIN_SD_W_U_ID), _
+                                            "FS Report Approval Needed (FS Document ID# " & sFinID & ")", CStr(sCo1), _
+                                            sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
+                                            System.Web.HttpContext.Current.Session("UserIdNorth").ToString(), "#4682b4", "WFinRep_Head/WFin_ApproverTable1.aspx", sFinID, _
+                                            "Next Approver: " & nStep, "Pending Approval")
 
 
 
-                                        Send_Email_Notification(CStr(itemValue6.WFIN_SD_W_U_ID), "FS Approval Needed (Report Name: " & Me.WFRCHNGP_Description.Text & _
+                                            Send_Email_Notification(CStr(itemValue6.WFIN_SD_W_U_ID), "FS Approval Needed (Report Name: " & Me.WFRCHNGP_Description.Text & _
+                                                                     ")", sEmailContent)
+
+                                    End Select
+
+                                Next
+                            Else
+                                '------------------------------------------ Approved Return (06/16/2017)
+                                ''06/16/2017 ryan for return functionality
+                                'note: if # of approvers needed < multiple approvers then set other 'Pending' status to 'System Approved'
+                                'note: set current user status to 'Approved'
+                                'note: get user(s) for the next step & insert to Activity table
+                                Dim wc4 As WhereClause = New WhereClause
+
+                                'wc4.iAND(WFinRepNGP_ActivityTable.WFRNGPA_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                                wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                                wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserIdNorth").ToString())
+                                wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                                wc4.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
+
+                                For Each itemValue4 As WFinRepNGP_Activity1Record In WFinRepNGP_Activity1Table.GetRecords(wc4, Nothing, 0, 100)
+                                    'note: update Activity table (other user(s) if multiple approvers) -> 'System Approved'
+                                    ''#Ryan_Test
+                                    'MsgBox("System Approved: UpdateRecord")
+                                    WFinRepNGP_Activity1Record.UpdateRecord(itemValue4.WFRNGPA_ID.ToString(), "11")
+                                Next
+
+                                Dim wc5 As WhereClause = New WhereClause
+                                'wc5.iAND(WFinRepNGP_ActivityTable.WFRNGPA_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                                wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                                wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIdNorth").ToString())
+                                wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                                wc5.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
+
+                                If WFinRepNGP_Activity1Table.GetRecords(wc5, Nothing, 0, 100).Length > 0 Then
+                                    For Each itemValue5 As WFinRepNGP_Activity1Record In WFinRepNGP_Activity1Table.GetRecords(wc5, Nothing, 0, 100)
+                                        'note: update Activity table (current user) -> 'Approved'
+                                        ''#Ryan_Test
+                                        'MsgBox("Approved: UpdateRecord")
+                                        WFinRepNGP_Activity1Record.UpdateRecord(itemValue5.WFRNGPA_ID.ToString(), "5")
+                                        WFinRepNGP_Activity1Record.UpdateRecord_Final_Approved(itemValue5.WFRNGPA_ID.ToString()) ''additional: to make IsDone = True
+                                    Next
+                                End If
+
+                                Dim wc6 As WhereClause = New WhereClause
+                                Dim orderBy As OrderBy = New OrderBy(False, True)
+                                orderBy.Add(WFinRepNGP_Activity1Table.WFRNGPA_ID, BaseClasses.Data.OrderByItem.OrderDir.Desc) 'get the latest return
+
+                                wc6.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.WFRCHNGP_ID.Text)
+                                'wc5.iAND(WCAR_ActivityTable.WCA_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, "")
+                                wc6.iAND(WFinRepNGP_Activity1Table.WFRNGPA_Status, BaseFilter.ComparisonOperator.EqualsTo, "9")
+                                'wc5.iAND(WCAR_ActivityTable.WCA_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
+
+                                If WFinRepNGP_Activity1Table.GetRecords(wc6, orderBy, 0, 100).Length > 0 Then
+                                    For Each itemValue5 As WFinRepNGP_Activity1Record In WFinRepNGP_Activity1Table.GetRecords(wc6, orderBy, 0, 100)
+                                        'note: update Activity table (current user) -> 'Approved'
+
+                                        'Dim sInfo As String = ""
+                                        'Dim sDelegate As String = FindDelegate(itemValue5.WCA_W_U_ID.ToString(), sInfo)
+
+                                        'sEmailContent = Content_Formatter(sDelegate, _
+                                        '"CAR Information Needed (CAR# " & Me.WCD_No.Text & ")", Me.WCD_C_ID.SelectedItem.ToString(), _
+                                        'Me.WCD_Project_Title.Text, Me.WCD_Request_Date.Text, Me.WCD_Remark.Text, Me.WCD_Exp_Cur_Yr.Text, _
+                                        'System.Web.HttpContext.Current.Session("UserID").ToString(), "#4682b4", "wf_car/ShowSel_WCAR_Activity_WCAR_DocTable.aspx", Me.WCD_No.Text, _
+                                        '"", "", "CAR")
+
+                                        'Send_Email_Notification(sDelegate, "CAR Approval Needed (CAR# " & _
+                                        'Me.WCD_No.Text & ")" & sInfo, sEmailContent)
+
+                                        Dim sRemark As String = txtRemarks.Text
+
+                                        'change return to pending
+                                        'WFinRepNGP_ActivityRecord.UpdateRecord_Status_Submit(Me.WCD_ID.Text, "Pending", "1", _
+                                        'DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                                        '": " & sRemark)
+                                        Update_WFinRepNGP_Head(CInt(Me.WFRCHNGP_C_ID.Text), 4, CInt(Me.WFRCHNGP_ID.Text), True)
+
+
+                                        WFinRepNGP_Activity1Record.AddRecord(itemValue5.WFRNGPA_WS_ID, itemValue5.WFRNGPA_WSD_ID, _
+                                        CInt(Me.WFRCHNGP_DT_ID1.Text), _
+                                        itemValue5.WFRNGPA_W_U_ID, 0, CInt(sFinID), _
+                                        (DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                                        ": " & Me.txtRemarks.Text))
+
+                                        sEmailContent &= vbCrLf & vbCrLf & "http://eportal.anflocor.com/"
+                                        sEmailContent = Content_Formatter(CStr(itemValue5.WFRNGPA_W_U_ID), _
+                                           "FS Report Approval Needed (FS Document ID# " & sFinID & ")", CStr(sCo1), _
+                                           sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
+                                           System.Web.HttpContext.Current.Session("UserIdNorth").ToString(), "#4682b4", "WFinRep_Head/WFin_ApproverTable1.aspx", sFinID, _
+                                           "", "Pending Approval")
+
+                                        Send_Email_Notification(CStr(itemValue5.WFRNGPA_W_U_ID), "FS Approval Needed (Report Name: " & Me.WFRCHNGP_Description.Text & _
                                                                  ")", sEmailContent)
 
-                                End Select
-
-                            Next
+                                        Exit For 'only once since only a single approver can return stuff
+                                    Next
+                                End If
+                            End If
                         End If
                     Else 'just set current user status to 'Approved'
                         'note: this routine: requires another user to approve for the WF to move, so just update user's status
@@ -703,6 +851,216 @@ Namespace ePortalWFApproval.UI.Controls.WFinRepNGP_Approver1
                 End Try
             End If
         End Sub
+
+
+        'Ryan062117
+
+        Public Sub SelectReturn(ByVal sender As Object, ByVal args As EventArgs)
+            If Me.txtRemarks.Text.Trim = "" Then
+                BaseClasses.Utils.MiscUtils.RegisterJScriptAlert(Me, "MyAlertName", "Remarks is required.")
+            Else
+
+                Dim sFinID As String = Me.WFRCHNGP_ID.Text
+                Dim sCo As String = Me.WFRCHNGP_C_ID1.Text
+                Dim sYr As String = Me.WFRCHNGP_Year.Text
+                Dim sMo As String = MonthName(CInt(Me.WFRCHNGP_Month.Text))
+                Dim sDesc As String = "FS PACKAGE"
+                Dim sType As String = ""
+                Dim sCo1 As String = Me.WFRCHNGP_C_ID.Text
+
+                Dim wc As WhereClause = New WhereClause
+
+                'wc.iAND(WFinRepNGP_ActivityTable.WFRNGPA_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                wc.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                wc.iAND(WFinRepNGP_Activity1Table.WFRNGPA_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIdNorth").ToString())
+                wc.iAND(WFinRepNGP_Activity1Table.WFRNGPA_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+
+                If WFinRepNGP_Activity1Table.GetRecords(wc, Nothing, 0, 100).Length > 0 Then
+                    Dim currentStep As String = Nothing
+                    For Each itemValue As WFinRepNGP_Activity1Record In WFinRepNGP_Activity1Table.GetRecords(wc, Nothing, 0, 100)
+                        currentStep = itemValue.WFRNGPA_WS_ID.ToString
+                    Next
+
+                    'update co-approvers of the return status
+
+                    Dim wc2 As WhereClause = New WhereClause
+
+                    'wc2.iAND(WFinRepNGP_ActivityTable.WFRNGPA_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc2.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc2.iAND(WFinRepNGP_Activity1Table.WFRNGPA_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserIdNorth").ToString())
+                    wc2.iAND(WFinRepNGP_Activity1Table.WFRNGPA_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                    wc2.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, currentStep)
+
+                    For Each itemValue2 As WFinRepNGP_Activity1Record In WFinRepNGP_Activity1Table.GetRecords(wc2, Nothing, 0, 100)
+                        'note: update Activity table (other user(s) if multiple approvers) -> 'System Rejected'
+                        ''#Ryan_Test
+                        'MsgBox("System Rejected: WFinRepNGP_ActivityRecord.UpdateRecord(itemValue2.WFRNGPA_ID.ToString(), 14)")
+                        WFinRepNGP_Activity1Record.UpdateRecord(itemValue2.WFRNGPA_ID.ToString(), "9")
+                    Next
+
+
+                    'Update CurrentStep as 'RETURNED' and other transaction tables.
+
+                    Dim wc3 As WhereClause = New WhereClause
+
+                    'wc3.iAND(WFinRepNGP_ActivityTable.WFRNGPA_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc3.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc3.iAND(WFinRepNGP_Activity1Table.WFRNGPA_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIdNorth").ToString())
+                    wc3.iAND(WFinRepNGP_Activity1Table.WFRNGPA_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                    wc3.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, currentStep)
+                    Dim WDT_ID As String = ""
+                    Dim WFRNGPA_WFRCHNGP_ID As Integer = 0
+                    Dim sRemark As String = txtRemarks.Text
+                    Dim sFSDetail As String = " "
+                    Dim sDeyt As String = sMo & vbCrLf & vbCrLf & sYr
+
+                    Dim sEmailContent As String = "Company: @C" & vbCrLf & vbCrLf & "Report Details:" & "@D" & vbCrLf & _
+                  vbCrLf & "Date: @RD" & vbCrLf & vbCrLf & "Comment(s): @Rem" & vbCrLf & "Type: @T"
+                    sEmailContent = Replace(sEmailContent, "@C", Me.WFRCHNGP_C_ID.Text) ''oRec.FIN_Company1.SelectedItem.ToString)
+                    sEmailContent = Replace(sEmailContent, "@D", sFSDetail)
+                    sEmailContent = Replace(sEmailContent, "@RD", sDeyt)
+                    sEmailContent = Replace(sEmailContent, "@Rem", "Report Name: " & sDesc & "</br>" & Me.txtRemarks.Text)
+                    sEmailContent = Replace(sEmailContent, "@T", sType)
+                    sEmailContent &= vbCrLf & "Requester: " & System.Web.HttpContext.Current.Session("UserIdNorth").ToString()
+                    sEmailContent &= vbCrLf & vbCrLf & "http://eportal.anflocor.com/"
+
+
+                    If WFinRepNGP_Activity1Table.GetRecords(wc3, Nothing, 0, 100).Length > 0 Then
+
+                        If ddlMoveto.SelectedValue.ToString() <> "0" Then 'not the creator
+
+                            For Each itemValue3 As WFinRepNGP_Activity1Record In WFinRepNGP_Activity1Table.GetRecords(wc3, Nothing, 0, 100)
+                                'note: update Activity table (current user) -> 'Rejected'
+                                ''#Ryan_Test
+                                'MsgBox(" Rejected: WFinRepNGP_ActivityRecord.UpdateRecord(itemValue3.WFRNGPA_ID.ToString, 9)")
+                                WDT_ID = itemValue3.WFRNGPA_WDT_ID.ToString
+                                WFRNGPA_WFRCHNGP_ID = itemValue3.WFRNGPA_WFRCHNGP_ID
+                                WFinRepNGP_Activity1Record.UpdateRecord(itemValue3.WFRNGPA_ID.ToString, "9")
+                                Update_WFinRepNGP_Head(CInt(sCo), CInt(9), CInt(sFinID), False)
+                                Update_WFinRepNGP_DocAttach(CInt(sCo), CInt(9), CStr(sFinID)) ' UPDATE DOC_ATTACH TO NOT SUBMITTED
+                                Update_WFinRepNGP_Activity(CInt(sCo), 9, itemValue3.WFRNGPA_ID.ToString, DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                                    ": " & Me.txtRemarks.Text)
+                            Next
+
+                            Dim wc6 As WhereClause = New WhereClause
+                            wc6.iAND(WFinRep_StepDetail1Table.WFIN_SD_S_ID, BaseFilter.ComparisonOperator.EqualsTo, ddlMoveto.SelectedValue.ToString())
+                            For Each itemValue6 As WFinRep_StepDetail1Record In WFinRep_StepDetail1Table.GetRecords(wc6, Nothing, 0, 100)
+                                'note: use returned items to insert to Activity table
+                                'note: do not insert(update) delegate until task expires
+
+                                'bahala na balik-balik
+                                'make the doc as 'return' for easier approving process
+
+                                WFinRepNGP_Activity1Record.AddRecord(CInt(itemValue6.WFIN_SD_S_ID.ToString()), CInt(itemValue6.WFIN_SD_ID.ToString()), _
+                                CInt(WDT_ID), _
+                                CInt(itemValue6.WFIN_SD_W_U_ID), 0, _
+                                CInt(WFRNGPA_WFRCHNGP_ID.ToString()), _
+                                DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                                ": " & sRemark)
+
+                                'email to Returned user								
+                                'Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
+                                'Dim sInfo As String = ""
+                                'Dim sDelegate As String = "0"
+
+                                'sEmailContent = Content_Formatter(sDelegate, _
+                                '"CAR Approval Needed (CAR# " & Me.WCD_No.Text & ")", Me.WCD_C_ID.SelectedItem.ToString(), _
+                                'Me.WCD_Project_Title.Text, Me.WCD_Request_Date.Text, Me.WCD_Remark.Text, Me.WCD_Exp_Cur_Yr.Text, _
+                                'sCreator_ID, "#f46f6f", "wf_car/ShowSel_WCAR_Activity_WCAR_DocTable.aspx", Me.WCD_No.Text, _
+                                'sRemark, "Returned By " & sUserRej, "CAR")
+
+                                'Send_Email_Notification(sDelegate, "CAR Approval Needed (CAR# " & _
+                                'Me.WCD_No.Text & ")" & sInfo, sEmailContent)
+                            Next
+                        Else
+                            For Each itemValue3 As WFinRepNGP_Activity1Record In WFinRepNGP_Activity1Table.GetRecords(wc3, Nothing, 0, 100)
+                                'note: update Activity table (current user) -> 'Rejected'
+                                ''#Ryan_Test
+                                'MsgBox(" Rejected: WFinRepNGP_ActivityRecord.UpdateRecord(itemValue3.WFRNGPA_ID.ToString, 9)")
+                                WDT_ID = itemValue3.WFRNGPA_WDT_ID.ToString
+                                WFRNGPA_WFRCHNGP_ID = itemValue3.WFRNGPA_WFRCHNGP_ID
+                                WFinRepNGP_Activity1Record.UpdateRecord(itemValue3.WFRNGPA_ID.ToString, "9")
+                                Update_WFinRepNGP_Head(CInt(sCo), CInt(9), CInt(sFinID), False)
+                                Update_WFinRepNGP_DocAttach(CInt(sCo), CInt(9), CStr(sFinID)) ' UPDATE DOC_ATTACH TO NOT SUBMITTED
+                                Update_WFinRepNGP_Activity(CInt(sCo), 9, itemValue3.WFRNGPA_ID.ToString, DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                                    ": " & Me.txtRemarks.Text)
+                            Next
+
+                            updTrx_SummaryNGP(CInt(sFinID), False)
+
+                            Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
+                            sEmailContent = Content_Formatter(Me.WFRCHNGP_U_ID.Text, _
+                                "FS RETURNED FOR REVISION INFORMATION (FS Document ID#  " & sFinID & ")", CStr(sCo1), _
+                                sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
+                                System.Web.HttpContext.Current.Session("UserId").ToString(), "#f46f6f", "WFinRep_Head/WFin_ApproverTable1.aspx", sFinID, _
+                                "Returned By " & sUserRej, "FS Returned for Revision", "FS Creator")
+
+                            Send_Email_Notification(CStr(Me.WFRCHNGP_U_ID.Text), "FS Returned for Revision Information (Report Name: " & Me.WFRCHNGP_Description.Text & _
+                                    ")", sEmailContent)
+
+
+
+                            For Each recDocAttach As WFinRepNGP_DocAttach1Record In WFinRepNGP_DocAttach1Table.GetRecords("WFRCDNGP_WFRCHNGP_ID =" & CInt(Me.WFRCHNGP_ID.Text))
+                                If Not IsNothing(recDocAttach) Then
+                                    ''#Ryan_Test
+                                    'MsgBox("WFinRepNGP_DocAttachRecord.UpdateFinPost(recDocAttach.WFRCDNGP_ID.ToString, 0)")
+                                    WFinRepNGP_DocAttach1Record.UpdateFinPost(recDocAttach.WFRCDNGP_ID.ToString, 0)
+                                End If
+                            Next
+                        End If
+
+
+                    End If
+
+                End If
+
+
+
+                Dim url As String = "../Security/HomePage.aspx"
+
+                Dim shouldRedirect As Boolean = True
+                Dim TargetKey As String = Nothing
+                Dim DFKA As String = TargetKey
+                Dim id As String = DFKA
+                Dim value As String = id
+
+                Try
+                    ' Enclose all database retrieval/update code within a Transaction boundary
+                    DbUtils.StartTransaction()
+
+                    url = Me.ModifyRedirectUrl(url, "", False)
+                    url = Me.Page.ModifyRedirectUrl(url, "", False)
+
+                Catch ex As Exception
+                    ' Upon error, rollback the transaction
+                    Me.Page.RollBackTransaction(sender)
+                    shouldRedirect = False
+                    Me.Page.ErrorOnPage = True
+
+                    ' Report the error message to the end user
+                    Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+                Finally
+                    DbUtils.EndTransaction()
+                End Try
+                If shouldRedirect Then
+                    Me.Page.ShouldSaveControlsToSession = True
+                    Me.Page.Response.Redirect(url)
+                ElseIf Not TargetKey Is Nothing AndAlso _
+                            Not shouldRedirect Then
+                    Me.Page.ShouldSaveControlsToSession = True
+                    Me.Page.CloseWindow(True)
+
+                End If
+            End If
+
+
+
+
+        End Sub
+
+
+
 
         Public Overrides Sub pReturned_Click(ByVal sender As Object, ByVal args As EventArgs)
             If Me.txtRemarks.Text.Trim = "" Then
@@ -10535,6 +10893,8 @@ Public Class BaseWFinRepNGP_Head1RecordControl
                         
               AddHandler Me.pReturned.Click, AddressOf pReturned_Click
                         
+              AddHandler Me.pSubmit.Click, AddressOf pSubmit_Click
+                        
               AddHandler Me.CancelButton.Button.Click, AddressOf CancelButton_Click
                         
               AddHandler Me.WFRCHNGP_U_ID.SelectedIndexChanged, AddressOf WFRCHNGP_U_ID_SelectedIndexChanged
@@ -10552,7 +10912,11 @@ Public Class BaseWFinRepNGP_Head1RecordControl
               AddHandler Me.WFRCHNGP_U_ID1.TextChanged, AddressOf WFRCHNGP_U_ID1_TextChanged
             
               AddHandler Me.WFRCHNGP_Year.TextChanged, AddressOf WFRCHNGP_Year_TextChanged
-            					
+            
+              AddHandler Me.ddlAction.SelectedIndexChanged, AddressOf ddlAction_SelectedIndexChanged
+                
+              AddHandler Me.ddlMoveto.SelectedIndexChanged, AddressOf ddlMoveto_SelectedIndexChanged
+                					
               AddHandler Me.txtRemarks.TextChanged, AddressOf txtRemarks_TextChanged
                     
     
@@ -10649,6 +11013,12 @@ Public Class BaseWFinRepNGP_Head1RecordControl
             ' Call the Set methods for each controls on the panel
         
                 
+                SetddlAction()
+                SetddlMoveto()
+                SetLiteral()
+                SetLiteral10()
+                SetLiteral7()
+                
                 
                 
                 
@@ -10683,6 +11053,8 @@ Public Class BaseWFinRepNGP_Head1RecordControl
                 SetpReject()
               
                 SetpReturned()
+              
+                SetpSubmit()
               
                 SetCancelButton()
               
@@ -11260,6 +11632,44 @@ Public Class BaseWFinRepNGP_Head1RecordControl
               AddHandler Me.WFRCHNGP_Year.TextChanged, AddressOf WFRCHNGP_Year_TextChanged
                                  
         End Sub
+                
+
+
+        Public Overridable Sub SetddlAction()
+
+                  
+            
+            Me.PopulateddlActionDropDownList(Nothing, 100)
+                
+        End Sub
+                
+
+
+        Public Overridable Sub SetddlMoveto()
+
+                  
+            
+            Me.PopulateddlMovetoDropDownList(Nothing, 100)
+                
+        End Sub
+                
+        Public Overridable Sub SetLiteral()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral10()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral7()
+
+                  
+                  
+                  End Sub
                 
         Public Overridable Sub SetTabPanel()
 
@@ -12002,6 +12412,11 @@ Public Class BaseWFinRepNGP_Head1RecordControl
    
         End Sub
             
+        Public Overridable Sub SetpSubmit()                
+              
+   
+        End Sub
+            
         Public Overridable Sub SetCancelButton()                
               
    
@@ -12157,6 +12572,80 @@ Public Class BaseWFinRepNGP_Head1RecordControl
         End Sub
         
               
+        Public Overridable Function CreateWhereClause_ddlActionDropDownList() As WhereClause
+            ' By default, we simply return a new WhereClause.
+            ' Add additional where clauses to restrict the items shown in the dropdown list.
+            
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+            				
+        End Function
+        
+        Public Overridable Function CreateWhereClause_ddlMovetoDropDownList() As WhereClause
+            ' By default, we simply return a new WhereClause.
+            ' Add additional where clauses to restrict the items shown in the dropdown list.
+            
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+            				
+        End Function
+        
+
+        ' Fill the ddlAction list.
+        Protected Overridable Sub PopulateddlActionDropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+                
+            Me.ddlAction.Items.Clear()
+
+                      
+                    
+            ' 1. Setup the static list items        
+            		  
+            ' Skip step 2 and 3 because no need to load data from database and insert data
+                    
+                    
+            ' 4. Set the selected value (insert if not already present).
+              
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.ddlAction, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.ddlAction, selectedValue)Then
+
+            
+            End If					
+                
+                
+        End Sub
+                
+
+        ' Fill the ddlMoveto list.
+        Protected Overridable Sub PopulateddlMovetoDropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+                
+            Me.ddlMoveto.Items.Clear()
+
+                      
+                    
+            ' 1. Setup the static list items        
+            		  
+            ' Skip step 2 and 3 because no need to load data from database and insert data
+                    
+                    
+            ' 4. Set the selected value (insert if not already present).
+              
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.ddlMoveto, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.ddlMoveto, selectedValue)Then
+
+            
+            End If					
+                
+                
+        End Sub
+                
         ' event handler for PushButton
         Public Overridable Sub pApproved_Click(ByVal sender As Object, ByVal args As EventArgs)
               
@@ -12195,6 +12684,24 @@ Public Class BaseWFinRepNGP_Head1RecordControl
         
         ' event handler for PushButton
         Public Overridable Sub pReturned_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+    Try
+    
+            Catch ex As Exception
+            
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+    
+        End Sub
+        
+        ' event handler for PushButton
+        Public Overridable Sub pSubmit_Click(ByVal sender As Object, ByVal args As EventArgs)
               
     Try
     
@@ -12302,7 +12809,17 @@ Public Class BaseWFinRepNGP_Head1RecordControl
         Protected Overridable Sub WFRCHNGP_Year_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
                     
               End Sub
-            		
+            
+        Protected Overridable Sub ddlAction_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)                
+             
+
+        End Sub
+                
+        Protected Overridable Sub ddlMoveto_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)                
+             
+
+        End Sub
+                		
         Protected Overridable Sub txtRemarks_TextChanged(ByVal sender As Object, ByVal args As EventArgs)                
              
         End Sub
@@ -12413,6 +12930,36 @@ Public Class BaseWFinRepNGP_Head1RecordControl
           End Get
           End Property
         
+        Public ReadOnly Property ddlAction() As System.Web.UI.WebControls.DropDownList
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlAction"), System.Web.UI.WebControls.DropDownList)
+            End Get
+        End Property
+        
+        Public ReadOnly Property ddlMoveto() As System.Web.UI.WebControls.DropDownList
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlMoveto"), System.Web.UI.WebControls.DropDownList)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal10() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal10"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal7() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal7"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
         Public ReadOnly Property pApproved() As System.Web.UI.WebControls.Button
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pApproved"), System.Web.UI.WebControls.Button)
@@ -12428,6 +12975,12 @@ Public Class BaseWFinRepNGP_Head1RecordControl
         Public ReadOnly Property pReturned() As System.Web.UI.WebControls.Button
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pReturned"), System.Web.UI.WebControls.Button)
+            End Get
+        End Property
+        
+        Public ReadOnly Property pSubmit() As System.Web.UI.WebControls.Button
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pSubmit"), System.Web.UI.WebControls.Button)
             End Get
         End Property
         

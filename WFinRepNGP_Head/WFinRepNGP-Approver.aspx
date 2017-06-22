@@ -104,13 +104,24 @@
 </tr>
 </table>
 </span>
-</td><td class="tableCellValue"><asp:Literal runat="server" id="WFRCHNGP_RemarkLabel" Text="Remarks">	</asp:Literal></td><td class="tableCellValue" colspan="3"><asp:TextBox runat="server" id="txtRemarks" columns="60" rows="6" textmode="MultiLine">	</asp:TextBox></td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue"></td><td class="tableCellValue" colspan="2"><asp:Button runat="server" id="pApproved" causesvalidation="False" commandname="Redirect" consumers="page" text="Approve">		
+</td><td class="tableCellValue"><asp:Literal runat="server" id="WFRCHNGP_RemarkLabel" Text="Remarks">	</asp:Literal></td><td class="tableCellValue" colspan="3"><asp:TextBox runat="server" id="txtRemarks" columns="60" rows="6" textmode="MultiLine">	</asp:TextBox></td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue"><asp:literal id="Literal" runat="server" text="Action:" /></td><td class="tableCellValue" colspan="3"><asp:dropdownlist id="ddlAction" runat="server" class="fls" width="337px" Name="ddlAction" autopostback="True">
+	<asp:listitem>Approve</asp:listitem>
+	<asp:listitem>Reject</asp:listitem>
+	<asp:listitem>Void</asp:listitem>
+	<asp:listitem>Return</asp:listitem>
+</asp:dropdownlist> 
+<asp:literal id="Literal10" runat="server" text="&nbsp;" /></td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue"><asp:literal id="Literal7" runat="server" text="Return To:" /></td><td class="tableCellValue" colspan="3"><asp:dropdownlist id="ddlMoveto" runat="server" class="fls" width="337px" enabled="false" Name="ddlMoveTo">
+	
+</asp:dropdownlist></td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue"></td><td class="tableCellValue" colspan="2"><asp:Button runat="server" id="pApproved" causesvalidation="False" commandname="Redirect" consumers="page" text="Approve" visible="False">		
 	</asp:Button> 
-<asp:Button runat="server" id="pReject" causesvalidation="False" commandname="Redirect" consumers="page" text="Reject">		
+<asp:Button runat="server" id="pReject" causesvalidation="False" commandname="Redirect" consumers="page" text="Reject" visible="False">		
 	</asp:Button> 
-<asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" text="Return">		
+<asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" text="Return" visible="False">		
+	</asp:Button><asp:Button runat="server" id="pSubmit" causesvalidation="False" commandname="Redirect" consumers="page" text="Submit">		
 	</asp:Button></td><td class="tableCellValue"><asp:TextBox runat="server" id="WFRCHNGP_Remark" MaxLength="1073741823" columns="5" cssclass="field_input" height="350" rows="2" textmode="MultiLine" visible="False" width="640"></asp:TextBox>&nbsp;
-<BaseClasses:TextBoxMaxLengthValidator runat="server" id="WFRCHNGP_RemarkTextBoxMaxLengthValidator" ControlToValidate="WFRCHNGP_Remark" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WFRCHNGP Remark&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue" colspan="4">&nbsp;</td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue" colspan="4"><BaseClasses:TabContainer runat="server" id="WFinRepNGP_HeadRecordControlTabContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
+<BaseClasses:TextBoxMaxLengthValidator runat="server" id="WFRCHNGP_RemarkTextBoxMaxLengthValidator" ControlToValidate="WFRCHNGP_Remark" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;WFRCHNGP Remark&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue" colspan="4">&nbsp; 
+ 
+</td></tr><tr><td class="tableCellLabel"></td><td class="tableCellValue" colspan="4"><BaseClasses:TabContainer runat="server" id="WFinRepNGP_HeadRecordControlTabContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
  <BaseClasses:TabPanel runat="server" id="TabPanel" HeaderText="Document">	<ContentTemplate> 
   <ePortalWFApproval:WFinRepNGP_HeadTableControl runat="server" id="WFinRepNGP_HeadTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelHeaderL"></td><td class="dh">
                   <table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="dhel"><img src="../Images/space.gif" alt="" /></td></tr></table>

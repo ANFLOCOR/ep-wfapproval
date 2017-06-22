@@ -52,9 +52,107 @@ Partial Public Class WFinRepNGP_Approver1
           ' LoadData reads database data and assigns it to UI controls.
           ' Customize by adding code before or after the call to LoadData_Base()
           ' or replace the call to LoadData_Base().
-          LoadData_Base()
-                  
-      End Sub
+            LoadData_Base()
+            ddlAction.Items.Add("Approve")
+            ddlAction.Items.Add("Reject")
+            ddlAction.Items.Add("Return")
+
+            ddlAction.AutoPostBack = True
+            If WFRCHNGP_Status.Text = "Completed" Then
+                ddlAction.Enabled = False
+            Else
+                ddlAction.Enabled = True
+            End If
+
+        End Sub
+
+
+        Protected Sub ddlAction_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlAction.SelectedIndexChanged
+            ''04.02.2014 pepanes **gftey
+            ''Enable Return To dropdown list if action selected is "Reject" or "Return"
+            If ddlAction.SelectedIndex = 2 Then
+                ddlMoveto.Enabled = True
+                txtRemarks.Enabled = True
+
+                Me.ddlMoveto.Items.Clear()
+                'note: this populates the Return To drop down
+                Dim wc1 As WhereClause = New WhereClause
+                wc1.iAND(WFinRepNGP_Activity1Table.WFRNGPA_WFRCHNGP_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.WFRCHNGP_ID.Text)
+                wc1.iAND(WFinRepNGP_Activity1Table.WFRNGPA_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("ActivityUserIDN").ToString())
+                wc1.iAND(WFinRepNGP_Activity1Table.WFRNGPA_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                'wc1.iOR(WCAR_ActivityTable.WCA_W_U_ID_Delegate, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserID").ToString())
+
+                Dim itemValue1 As WFinRepNGP_Activity1Record
+                Dim bNoParent As Boolean = False
+                Dim sStepID As String = ""
+                Dim sStepType As String = ""
+                For Each itemValue1 In WFinRepNGP_Activity1Table.GetRecords(wc1, Nothing, 0, 100)
+                    If (itemValue1.WFRNGPA_WS_IDSpecified) Then
+                        sStepID = itemValue1.WFRNGPA_WS_ID.ToString()
+
+                        Do While sStepType <> "Start"
+                            Dim wc2 As WhereClause = New WhereClause
+                            Dim itemValue2 As WFinRep_Step1Record
+                            wc2.iAND(WFinRep_Step1Table.WFIN_S_ID_Next, BaseFilter.ComparisonOperator.EqualsTo, sStepID)
+
+
+                            If WFinRep_Step1Table.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+                                For Each itemValue2 In WFinRep_Step1Table.GetRecords(wc2, Nothing, 0, 100)
+                                    If itemValue2.WFIN_S_IDSpecified Then
+                                        Dim cvalue As String = Nothing
+                                        Dim fvalue As String = Nothing
+
+                                        cvalue = itemValue2.WFIN_S_ID.ToString()
+                                        fvalue = itemValue2.WFIN_S_Desc.ToString()
+                                        sStepID = cvalue
+                                        sStepType = itemValue2.WFIN_S_Step_Type
+
+                                        Dim item As ListItem = New ListItem(fvalue, cvalue)
+                                        Me.ddlMoveto.Items.Add(item)
+                                    End If
+                                Next
+                            Else
+                                sStepType = "Start"
+                            End If
+                        Loop
+                    End If
+                Next
+
+                Dim cvalue1 As String = Nothing
+                Dim fvalue1 As String = Nothing
+
+                Dim wcCreator As WhereClause = New WhereClause
+                Dim itemValueCreator As Sel_WASP_User1Record
+                wcCreator.iAND(Sel_WASP_User1View.W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, WFRCHNGP_U_ID.Text)
+
+
+                If Sel_WASP_User1View.GetRecords(wcCreator, Nothing, 0, 100).Length > 0 Then
+                    For Each itemValueCreator In Sel_WASP_User1View.GetRecords(wcCreator, Nothing, 0, 100)
+                        fvalue1 = itemValueCreator.W_U_User_Name
+                    Next
+                Else
+                    fvalue1 = Me.WFRCHNGP_U_ID.Text
+                End If
+
+
+                cvalue1 = "0"
+                'fvalue1 = Me.WFRCHNGP_U_ID.Text '"Creator"
+
+                Dim item1 As ListItem = New ListItem(fvalue1, cvalue1)
+                Me.ddlMoveto.Items.Add(item1)
+
+                If Me.ddlMoveto.Items.Count > 0 Then
+                    'note: default to first step
+                    Me.ddlMoveto.SelectedIndex = Me.ddlMoveto.Items.Count - 1
+                End If
+            Else
+                ddlMoveto.Items.Clear()
+                ddlMoveto.Enabled = False
+                txtRemarks.Enabled = True
+            End If
+        End Sub
+
+
       
       Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS as Boolean) As String
           Return EvaluateFormula_Base(formula, dataSourceForEvaluate, format, variables, includeDS)
