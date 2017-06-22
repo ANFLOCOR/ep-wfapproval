@@ -139,6 +139,40 @@
     else {$('#dialog').dialog('open');}
     //$('#dialog').dialog('option', 'srcElement', e.srcElement).dialog('open');
     }
+    function ShowConfirmtest(e,titletext,message,note,dropdown){			
+			if (e) {e.returnValue = false;}			
+			titletext = titletext.replace(' ','&amp;amp;nbsp;');//&amp;amp;#32
+			var ddl = document.getElementById(dropdown);
+			var tag = "&amp;lt;div id='dialog' title=" + titletext + "&amp;gt;&amp;lt;span class='ui-icon ui-icon-help' style='float:left; margin:0 7px 20px 0;'&amp;gt;&amp;lt;/span&amp;gt;&amp;lt;p&amp;gt;" + message + "&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;i&amp;gt;&amp;lt;b&amp;gt;Note &amp;lt;/b&amp;gt;" + note + "&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;&amp;lt;i&amp;gt;&amp;lt;b&amp;gt;Reject To:  &amp;lt;/b&amp;gt;&amp;lt;i&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;select id='dropdwon2' style='padding:5px;font-size: 12px;line-height: 1; border: 0; border-radius: 0; height: 20px;background=transparent;' &amp;gt;&amp;lt;/select&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/p&amp;gt;&amp;lt;/i&amp;gt;&amp;lt;/div&amp;gt;";
+			$('#dialog').remove();
+			$(tag).appendTo(document.body);
+			$('#' + dropdown + ' option').clone().appendTo('#dropdwon2');
+			$(function(){						
+					$('#dialog').dialog({
+						autoOpen: false,
+						show: 'drop',
+						hide: 'drop',
+						width: 480,
+						height: 320,
+						modal: true,
+						buttons: {
+							"Ok": function() {	
+							var receiver = document.getElementById('dropdwon2');
+					
+							var recVal = receiver.options[receiver.selectedIndex].value;
+							ddl.value = recVal;
+							__doPostBack($(this).dialog('option', 'srcElement').name,'');
+								$(this).dialog("close");								
+							}, 
+							"Cancel": function() { 	
+								$(this).dialog("close");								
+							} 
+						}
+					})});
+			if (e) {$('#dialog').dialog('option', 'srcElement', e.srcElement).dialog('open');}
+			else {$('#dialog').dialog('open');}
+			//$('#dialog').dialog('option', 'srcElement', e.srcElement).dialog('open');
+		}
     function ShowConfirm2(e,titletext,message,note,SubmitFunc){
     if (e) {e.returnValue = false;}
     titletext = titletext.replace(' ','&amp;amp;nbsp;');

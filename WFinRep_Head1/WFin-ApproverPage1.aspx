@@ -36,15 +36,25 @@
 <table><tr><td><ePortalWFApproval:ThemeButton runat="server" id="CancelButton" button-causesvalidation="False" button-commandname="Redirect" button-text="Back to Tasks" button-tooltip="Back to Tasks"></ePortalWFApproval:ThemeButton></td></tr></table>
 </td></tr><tr><td>
                   <asp:panel id="WFinRep_HeadRecordControlCollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td>
-                    <asp:panel id="WFinRep_HeadRecordControlPanel" runat="server"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td><asp:Literal runat="server" id="Description" Text="Report Description">	</asp:Literal></td><td colspan="2" style="font-weight:bold;"><asp:Literal runat="server" id="Description_MY" Text="Report Description" visible="False">	</asp:Literal> 
-<asp:Literal runat="server" id="HFIN_Description1" visible="True"></asp:Literal></td></tr><tr><td></td><td colspan="3">&nbsp;</td></tr><tr><td></td><td><asp:Literal runat="server" id="HFIN_StatusLabel" Text="Status">	</asp:Literal></td><td style="font-weight:bold;"><span style="white-space:nowrap;">
+                    <asp:panel id="WFinRep_HeadRecordControlPanel" runat="server"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td></td><td></td><td>&nbsp;</td><td></td><td></td><td></td></tr><tr><td></td><td><asp:Literal runat="server" id="Description" Text="Report Description">	</asp:Literal></td><td style="font-weight:bold;"></td><td colspan="2" style="font-weight:bold;"><asp:Literal runat="server" id="Description_MY" Text="Report Description" visible="False">	</asp:Literal> 
+<asp:Literal runat="server" id="HFIN_Description1" visible="True"></asp:Literal></td><td style="font-weight:bold;"></td></tr><tr><td></td><td colspan="4">&nbsp;</td><td></td></tr><tr><td></td><td><asp:Literal runat="server" id="HFIN_StatusLabel" Text="Status">	</asp:Literal></td><td style="font-weight:bold;"></td><td style="font-weight:bold;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="HFIN_Status"></asp:Literal></span>
- </td><td></td></tr><tr><td></td><td colspan="3">&nbsp;</td></tr><tr><td></td><td><asp:Literal runat="server" id="HFIN_DT_IDLabel" Text="Workflow Name">	</asp:Literal></td><td style="font-weight:bold;"><span style="white-space:nowrap;">
+ </td><td></td><td></td></tr><tr><td></td><td colspan="4">&nbsp;</td><td></td></tr><tr><td></td><td><asp:Literal runat="server" id="HFIN_DT_IDLabel" Text="Workflow Name">	</asp:Literal></td><td style="font-weight:bold;"></td><td style="font-weight:bold;"><span style="white-space:nowrap;">
 <asp:Literal runat="server" id="HFIN_DT_ID"></asp:Literal></span>
 </td><td style="font-weight:bold;"><span style="white-space:nowrap;">
 <asp:DropDownList runat="server" id="HFIN_DT_ID1" cssclass="field_input" onkeypress="dropDownListTypeAhead(this,false)" visible="False"></asp:DropDownList></span>
-</td></tr><tr><td></td><td colspan="3">&nbsp;</td></tr><tr><td></td><td style="vertical-align:middle;"><asp:Literal runat="server" id="HFIN_RemarkLabel" Text="Remark(s)">	</asp:Literal></td><td style="font-weight:bold;"><asp:TextBox runat="server" id="txtRemarks" columns="30" rows="6" textmode="MultiLine">	</asp:TextBox></td><td style="font-weight:bold;"><asp:TextBox runat="server" id="HFIN_Remark" MaxLength="1073741823" columns="120" cssclass="field_input" height="350" rows="6" textmode="MultiLine" visible="False" width="640"></asp:TextBox>&nbsp;
-<BaseClasses:TextBoxMaxLengthValidator runat="server" id="HFIN_RemarkTextBoxMaxLengthValidator" ControlToValidate="HFIN_Remark" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;HFIN Remark&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td></tr><tr><td><span style="white-space:nowrap;">
+</td><td style="font-weight:bold;"></td></tr><tr><td></td><td colspan="5">&nbsp;</td></tr><tr><td></td><td style="text-align:left;"><asp:literal id="Literal12" runat="server" text="Action" /> 
+</td><td class="dfv" style="color:Black;font-family:Tahoma;text-align:left;"></td><td class="dfv" style="color:Black;font-family:Tahoma;text-align:left;"><asp:dropdownlist id="ddlAction" runat="server" class="fls" width="238px" Name="ddlAction">
+	<asp:listitem>Approve</asp:listitem>
+	<asp:listitem>Reject</asp:listitem>
+	<asp:listitem>Void</asp:listitem>
+	<asp:listitem>Return</asp:listitem>
+</asp:dropdownlist> 
+<asp:literal id="Literal13" runat="server" text="&nbsp;" /></td><td class="dfv" style="color:Black;font-family:Tahoma;text-align:left;"></td><td class="dfv" style="color:Black;font-family:Tahoma;text-align:left;"></td></tr><tr><td></td><td colspan="5" style="text-align:left;">&nbsp;</td></tr><tr><td></td><td style="text-align:left;"><asp:literal id="litMoveTo" runat="server" text="Return To" /><br /> 
+</td><td class="dfv" style="color:Black;font-family:Tahoma;text-align:left;"></td><td class="dfv" style="color:Black;font-family:Tahoma;text-align:left;"><asp:dropdownlist id="ddlMoveto1" runat="server" class="fls" width="238px" enabled="false" Name="ddlMoveTo">
+	
+</asp:dropdownlist></td><td class="dfv" style="color:Black;font-family:Tahoma;text-align:left;"></td><td class="dfv" style="color:Black;font-family:Tahoma;text-align:left;"></td></tr><tr><td></td><td colspan="4">&nbsp;</td><td></td></tr><tr><td></td><td style="vertical-align:middle;"><asp:Literal runat="server" id="HFIN_RemarkLabel" Text="Remark(s)">	</asp:Literal></td><td style="font-weight:bold;"></td><td style="font-weight:bold;"><asp:TextBox runat="server" id="txtRemarks" columns="30" rows="6" textmode="MultiLine">	</asp:TextBox></td><td style="font-weight:bold;"><asp:TextBox runat="server" id="HFIN_Remark" MaxLength="1073741823" columns="120" cssclass="field_input" height="350" rows="6" textmode="MultiLine" visible="False" width="640"></asp:TextBox>&nbsp;
+<BaseClasses:TextBoxMaxLengthValidator runat="server" id="HFIN_RemarkTextBoxMaxLengthValidator" ControlToValidate="HFIN_Remark" ErrorMessage="&lt;%# GetResourceValue(&quot;Val:ValueTooLong&quot;, &quot;ePortalWFApproval&quot;).Replace(&quot;{FieldName}&quot;, &quot;HFIN Remark&quot;) %>"></BaseClasses:TextBoxMaxLengthValidator></td><td style="font-weight:bold;"></td></tr><tr><td><span style="white-space:nowrap;">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td style="padding-right: 5px; vertical-align:top">
@@ -55,7 +65,7 @@
 </tr>
 </table>
 </span>
-</td><td colspan="3">&nbsp;</td></tr><tr><td></td><td><span style="white-space:nowrap;">
+</td><td colspan="4">&nbsp;</td><td></td></tr><tr><td></td><td><span style="white-space:nowrap;">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td style="padding-right: 5px; vertical-align:top">
@@ -81,12 +91,14 @@
 </tr>
 </table>
 </span>
-</td><td style="text-align:left;"><asp:Button runat="server" id="pApproved" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" onclientclick="return confirm(&quot;Continue submission of this document? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Approve" width="100px">		
+</td><td style="text-align:left;"></td><td style="text-align:left;"><asp:Button runat="server" id="pApproved" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" onclientclick="return confirm(&quot;Continue submission of this document? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Approve" width="100px">		
 	</asp:Button> 
-<asp:Button runat="server" id="pReject" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" onclientclick="return confirm(&quot;Continue submission of this document with Reject action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Reject" width="100px">		
+<asp:Button runat="server" id="pReject" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" text="Reject" visible="False" width="100px">		
+	</asp:Button> 
+<asp:Button runat="server" id="pReturnedSelect" causesvalidation="False" commandname="Redirect" consumers="page" onclientclick="return confirm(&quot;Continue submission of this document with Return action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Return" visible="False">		
 	</asp:Button> 
 <asp:Button runat="server" id="pReturned" causesvalidation="False" commandname="Redirect" consumers="page" font-name="Verdana" forecolor="Black" onclientclick="return confirm(&quot;Continue submission of this document with Return action? Press OK to confirm document submission or press Cancel to abort operation. Concerned approver or requester will be notified through email.&quot;);" text="Return for Revision" width="150px">		
-	</asp:Button></td><td style="text-align:left;"><asp:dropdownlist cssclass="Filter_Input" id="ddlMoveTo" runat="server" width="238px" /></td></tr><tr><td><span style="white-space:nowrap;">
+	</asp:Button></td><td style="text-align:left;"><asp:dropdownlist cssclass="Filter_Input" id="ddlMoveTo" runat="server" width="238px" /></td><td style="text-align:left;"></td></tr><tr><td><span style="white-space:nowrap;">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td style="padding-right: 5px; vertical-align:top">
@@ -120,7 +132,7 @@
 </tr>
 </table>
 </span>
-</td><td><span style="white-space:nowrap;">
+</td><td></td><td><span style="white-space:nowrap;">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td style="padding-right: 5px; vertical-align:top">
@@ -133,7 +145,7 @@
 </span>
 </td><td><span style="white-space:nowrap;">
 <asp:DropDownList runat="server" id="HFIN_U_ID1" cssclass="field_input" onkeypress="dropDownListTypeAhead(this,false)" visible="False"></asp:DropDownList></span>
-</td></tr><tr><td></td><td colspan="3"><BaseClasses:TabContainer runat="server" id="TabContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
+</td><td></td></tr><tr><td></td><td colspan="4"><BaseClasses:TabContainer runat="server" id="TabContainer" onclientactivetabchanged="fixedHeaderTab" panellayout="Tabbed"> 
  <BaseClasses:TabPanel runat="server" id="TabPanel" HeaderText="Report Details">	<ContentTemplate> 
   <ePortalWFApproval:WFinRep_HeadTableControl runat="server" id="WFinRep_HeadTableControl">	<table class="dv" cellpadding="0" cellspacing="0" border="0"><tr><td class="panelTL"><img src="../Images/space.gif" class="panelTLSpace" alt="" /></td><td class="panelT"></td><td class="panelTR"><img src="../Images/space.gif" class="panelTRSpace" alt="" /></td></tr><tr><td class="panelL"></td><td>
                   <asp:panel id="WFinRep_HeadTableControlCollapsibleRegion" runat="server"><table class="dBody" cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td class="tre">
@@ -297,7 +309,7 @@
 </ePortalWFApproval:WFinRep_Activity1TableControl>
  
  </ContentTemplate></BaseClasses:TabPanel> 
-</BaseClasses:TabContainer></td></tr></table></asp:panel>
+</BaseClasses:TabContainer></td><td></td></tr></table></asp:panel>
 
                   </td></tr></table>
 </asp:panel>

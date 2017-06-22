@@ -60,7 +60,7 @@ Public Class WFinRep_HeadRecordControl
             "  s = s.replace(/^\s*/, '').replace(/\s*$/, '');" & vbCrLf & _
             "  if (s == '') {" & vbCrLf & _
             "    alert('Please put remarks when rejecting.'); return false;}" & vbCrLf & _
-            "  else { ShowConfirm(event,'Submit Action','Continue submission of this document with (Reject) Action setting? Press OK to confirm document submission or press Cancel to abort operation.','Concerned approver or requester will be notified through email.');}" & vbCrLf & _
+            "  else { ShowConfirmtest(event,'Submit Action','Continue submission of this document with (Reject) Action setting? Press OK to confirm document submission or press Cancel to abort operation.','Concerned approver or requester will be notified through email.');}" & vbCrLf & _
             "}" & vbCrLf & _
             "" & vbCrLf & _
             "</script>" & vbCrLf
@@ -70,15 +70,14 @@ Public Class WFinRep_HeadRecordControl
 
         Protected Overrides Sub Control_Load(ByVal sender As Object, ByVal e As System.EventArgs)
             'Remove javascript confirm button action
-            'Me.pApproved.Attributes.Add("onclick", "ShowConfirm(event,'Submit Action','Continue submission of this document? Press OK to confirm document submission or press Cancel to abort operation.','Concerned approver or requester will be notified through email.');")
-            'Me.pReject.Attributes.Add("onclick", "ConfirmSubmission(event);")
-            'Me.pReturned.Attributes.Add("onclick", "ConfirmSubmission(event);")
+            
 
             AddHandler Me.CancelButton.Button.Click, AddressOf CancelButton_Click
             AddHandler Me.pApproved.Click, AddressOf pApproved_Click
 
             AddHandler Me.pReject.Click, AddressOf pReject_Click
             AddHandler Me.pReturned.Click, AddressOf pReturned_Click
+            AddHandler Me.pReturnedSelect.Click, AddressOf pReturnedSelect_Click
 
             'AddHandler Me.btnReject.Button.Click, AddressOf btnReject_Click
 
@@ -94,14 +93,20 @@ Public Class WFinRep_HeadRecordControl
 
             AddHandler Me.txtRemarks.TextChanged, AddressOf txtRemarks_TextChanged
 
+            Me.pApproved.Attributes.Add("onclick", "ShowConfirm(event,'Submit Action','Continue submission of this document? Press OK to confirm document submission or press Cancel to abort operation.','Concerned approver or requester will be notified through email.');")
+            Me.pReject.Attributes.Add("onclick", "ConfirmSubmission(event);")
+            Me.pReturned.Attributes.Add("onclick", "ConfirmSubmission(event);")
+
             If Me.HFIN_Status.Text = "Completed" Then
                 Me.pReturned.Visible = True
-                Me.pApproved.Visible = False
-                Me.pReject.Visible = False
+                ''Me.pReturnedSelect.Visible = False
+                ''Me.pApproved.Visible = False
+                ''Me.pReject.Visible = False
             Else
                 Me.pReturned.Visible = False
-                Me.pApproved.Visible = True
-                Me.pReject.Visible = True
+                ''Me.pReturnedSelect.Visible = True
+                ''Me.pApproved.Visible = True
+                ''Me.pReject.Visible = True
             End If
 
             Me.ddlMoveTo.Attributes.Add("style", "display:none")
@@ -517,197 +522,7 @@ Public Class WFinRep_HeadRecordControl
         End Sub
 
 
-        Public Overrides Sub pReject_Click(ByVal sender As Object, ByVal args As EventArgs)
-
-            Try
-
-                Dim sFinID As String = Me.HFIN_ID.Text ''oRec.FIN_ID.Text
-                Dim sCo1 As String = Me.HFIN_C_ID.Text ''oRec.FIN_Company1.SelectedItem.ToString
-                Dim sYr As String = Me.HFIN_Year.Text ''oRec.FIN_Year1.Text
-                Dim sMo As String = MonthName(CInt(Me.HFIN_Month2.Text)) ''MonthName(CInt(oRec.FIN_Month1.Text))
-                Dim sDesc As String = "FS PACKAGE"
-                Dim sType As String = ""
-                Dim sCo As String = Me.HFIN_C_ID1.Text
-
-                Dim drop As DropDownList = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlMoveTo"), System.Web.UI.WebControls.DropDownList)
-
-                Dim wc1 As WhereClause = New WhereClause
-                Dim sCurStep As String = ""
-                Dim sEmailContent As String = "Company: @C" & vbCrLf & vbCrLf & "Report Details:" & "@D" & vbCrLf & _
-                vbCrLf & "Date: @RD" & vbCrLf & vbCrLf & "Comment(s): @Rem" & vbCrLf & "Type: @T"
-
-
-                Dim sFSDetail As String = " "
-                Dim sDeyt As String = sMo & vbCrLf & vbCrLf & sYr
-
-                Dim sWhere1 As String = W_User1Table.W_U_ID.UniqueName & " = " & Me.HFIN_U_ID.Text
-                Dim sUser As String = ""
-                For Each oRec2 As W_User1Record In W_User1Table.GetRecords(sWhere1, Nothing, 0, 100)
-                    sUser = oRec2.W_U_Full_Name.ToString()
-                Next
-                sFSDetail = Me.HFIN_Description1.Text
-
-
-                Dim wc3 As WhereClause = New WhereClause
-
-
-                sEmailContent = Replace(sEmailContent, "@C", Me.HFIN_C_ID.Text)
-                sEmailContent = Replace(sEmailContent, "@D", sFSDetail)
-                sEmailContent = Replace(sEmailContent, "@RD", sDeyt)
-                sEmailContent = Replace(sEmailContent, "@Rem", "Report Name: " & sDesc & "</br>" & Me.txtRemarks.Text)
-                sEmailContent = Replace(sEmailContent, "@T", sType)
-                sEmailContent &= vbCrLf & "Requester: " & sUser
-                sEmailContent &= vbCrLf & vbCrLf & "https://eportal2.anflocor.com"
-
-
-                wc3.iAND(WFinRep_Activity1Table.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
-                wc3.iAND(WFinRep_Activity1Table.AFIN_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
-                wc3.iAND(WFinRep_Activity1Table.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
-                'note: check to see if record is still submitted, if not then do not save
-                If WFinRep_Activity1Table.GetRecords(wc3, Nothing, 0, 100).Length > 0 Then
-                    'note: get Current step to be used in wc2
-                    For Each itemValue3 As WFinRep_Activity1Record In WFinRep_Activity1Table.GetRecords(wc3, Nothing, 0, 100)
-                        sCurStep = itemValue3.AFIN_WS_ID.ToString
-                    Next
-
-                    Dim wc4 As WhereClause = New WhereClause
-
-                    wc4.iAND(WFinRep_Activity1Table.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
-                    wc4.iAND(WFinRep_Activity1Table.AFIN_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
-                    wc4.iAND(WFinRep_Activity1Table.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
-                    wc4.iAND(WFinRep_Activity1Table.AFIN_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
-
-                    For Each itemValue4 As WFinRep_Activity1Record In WFinRep_Activity1Table.GetRecords(wc4, Nothing, 0, 100)
-                        'note: update Activity table (other user(s) if multiple approvers) -> 'System Rejected'
-                        WFinRep_Activity1Record.UpdateRecord(itemValue4.AFIN_ID.ToString(), "12")
-                    Next
-                    'note: update current task status -> 'Rejected
-                    Dim wc5 As WhereClause = New WhereClause
-
-                    wc5.iAND(WFinRep_Activity1Table.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
-                    wc5.iAND(WFinRep_Activity1Table.AFIN_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
-                    wc5.iAND(WFinRep_Activity1Table.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
-                    wc5.iAND(WFinRep_Activity1Table.AFIN_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
-
-                    If WFinRep_Activity1Table.GetRecords(wc5, Nothing, 0, 100).Length > 0 Then
-                        For Each itemValue5 As WFinRep_Activity1Record In WFinRep_Activity1Table.GetRecords(wc5, Nothing, 0, 100)
-                            'note: update Activity table (current user) -> 'Rejected'
-                            'WFinRep_Activity1Record.UpdateRecord(itemValue5.AFIN_ID.ToString, "7")
-
-                            Update_WFinRep_Activity(CInt(sCo), 7, CInt(sFinID), itemValue5.AFIN_ID.ToString, (DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
-                                ": " & Me.txtRemarks.Text))
-                        Next
-                    End If
-
-                    'note: insert user(s) to Activity using the chosen Return To field
-                    Dim wc6 As WhereClause = New WhereClause
-                    Dim Remarks As String = Me.HFIN_Remark.Text
-
-                    If drop.SelectedValue.ToString() <> "0" Then 'not the creator
-                        wc6.iAND(WFinRep_Step_StepDetail1View.WFIN_S_ID, BaseFilter.ComparisonOperator.EqualsTo, drop.SelectedValue.ToString())
-
-                        For Each itemValue6 As WFinRep_Step_StepDetail1Record In WFinRep_Step_StepDetail1View.GetRecords(wc6, Nothing, 0, 100)
-                            'note: use returned items to insert to Activity table
-                            'note: do not insert(update) delegate until task expires
-                            WFinRep_Activity1Record.AddRecord(itemValue6.WFIN_S_ID, itemValue6.WFIN_SD_ID, _
-                                CInt(Me.HFIN_DT_ID1.SelectedValue), _
-                                itemValue6.WFIN_SD_W_U_ID, 4, CInt(sFinID), _
-                               (DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
-                                ": " & Me.txtRemarks.Text))
-
-                            '##################
-                            '### EMAIL HERE ###
-                            '##################
-                            'email to Returned user
-                            Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
-
-                            sEmailContent = Content_Formatter(itemValue6.WFIN_SD_W_U_ID.ToString(), _
-                                 "FS INFORMATION NEEDED (Report Description " & sDesc & ")", CStr(sCo1), _
-                                 sFSDetail, sDeyt, Me.txtRemarks.Text, sType, _
-                                 System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#f46f6f", "Security/HomePage.aspx", sFinID, _
-                                 "Rejected By " & sUserRej, "FS Rejected")
-
-                            Send_Email_Notification(CStr(itemValue6.WFIN_SD_W_U_ID), "FS Information Needed (FS Report: " & _
-                            sDesc & ")", sEmailContent)
-
-
-                        Next
-                    Else
-
-                        wc6.iAND(WFinRep_Head1Table.HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
-                        For Each itemValue6 As WFinRep_Head1Record In WFinRep_Head1Table.GetRecords(wc6, Nothing, 0, 100)
-
-                            Update_WF_Status_Submit(sCo, "7", "0", sFinID, _
-                            DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
-                            ": " & Me.txtRemarks.Text)
-                            Update_WFinRep_Head(CInt(sCo), CInt(7), CInt(sFinID))
-                            Update_WFinRep_DocAttach(CInt(sCo), CInt(7), CStr(sFinID), False)
-
-                            '##################
-                            '### EMAIL HERE ###
-                            '##################
-                            Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
-                            sEmailContent = Content_Formatter(itemValue6.HFIN_U_ID.ToString(), _
-                                  "FS Information Needed (Report Description " & sDesc & ")", CStr(sCo1), _
-                                  sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
-                                  System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#f46f6f", "Security/HomePage.aspx", sFinID, _
-                                  "Rejected By " & sUserRej, "FS Rejected")
-
-
-                            Send_Email_Notification(CStr(itemValue6.HFIN_U_ID), "FS Information Needed (Report Name: " & _
-                            sDesc & ")", sEmailContent)
-
-                            ' UPDATE GL_TRANSACTIONS_SUMMARY ISPOSTED FIELD
-                            Dim reportType As String = Nothing
-
-
-                            Dim result As String = Me.UpdatePostFlag(Me.HFIN_Year.Text, Me.HFIN_Month2.Text, Me.HFIN_C_ID1.Text, "0", "0")
-
-                            If result <> "OK" Then
-                                Throw New Exception(result.ToString)
-                            End If
-
-                            'WFinRep_DocAttachRecord.UpdateFinPost(Me.HFIN_ID.Text, 0)
-                        Next
-                    End If
-
-                End If
-
-
-
-                ' ''Select Case System.Web.HttpContext.Current.Session("UserIDNorth").ToString
-                ' ''    Case "8"
-                ' ''        Dim url As String = "../WFinRep_Head1/WFinRep-Head1Record"
-                ' ''        url = Me.ModifyRedirectUrl(url, "", False)
-                ' ''        url = Me.Page.ModifyRedirectUrl(url, "", False)
-                ' ''        Me.Page.ShouldSaveControlsToSession = True
-                ' ''        Me.Page.Response.Redirect(url)
-                ' ''    Case Else
-                ' ''        Dim url As String = "../WFinRep_Head1/WFIN-Approver-Table1.aspx"
-                ' ''        url = Me.ModifyRedirectUrl(url, "", False)
-                ' ''        url = Me.Page.ModifyRedirectUrl(url, "", False)
-                ' ''        Me.Page.ShouldSaveControlsToSession = True
-                ' ''        Me.Page.Response.Redirect(url)
-                ' ''End Select
-
-                Dim url As String = "../Security/HomePage.aspx"
-                url = Me.ModifyRedirectUrl(url, "", False)
-                url = Me.Page.ModifyRedirectUrl(url, "", False)
-                Me.Page.ShouldSaveControlsToSession = True
-                Me.Page.Response.Redirect(url)
-
-            Catch ex As Exception
-                Me.Page.ErrorOnPage = True
-
-                ' Report the error message to the end user
-                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
-
-            Finally
-
-            End Try
-
-        End Sub
-
+        
         Public Overrides Sub pReturned_Click(ByVal sender As Object, ByVal args As EventArgs)
 
             'Dim oRec As WFinRep_DocAttachRecordControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WFinRep_DocAttachRecordControl"), WFinRep_DocAttachRecordControl)
@@ -1209,6 +1024,400 @@ Public Class WFinRep_HeadRecordControl
                 Me.ddlMoveTo.SelectedIndex = Me.ddlMoveTo.Items.Count - 1
             End If
 
+        End Sub
+
+
+        Public Overrides Sub pReject_Click(ByVal sender As Object, ByVal args As EventArgs)
+
+            Try
+                'JESSY
+                Dim sFinID As String = Me.HFIN_ID.Text ''oRec.FIN_ID.Text
+                Dim sCo1 As String = Me.HFIN_C_ID.Text ''oRec.FIN_Company1.SelectedItem.ToString
+                Dim sYr As String = Me.HFIN_Year.Text ''oRec.FIN_Year1.Text
+                Dim sMo As String = MonthName(CInt(Me.HFIN_Month2.Text)) ''MonthName(CInt(oRec.FIN_Month1.Text))
+                Dim sDesc As String = "FS PACKAGE"
+                Dim sType As String = ""
+                Dim sCo As String = Me.HFIN_C_ID1.Text
+
+                Dim drop As DropDownList = CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlMoveTo"), System.Web.UI.WebControls.DropDownList)
+
+                Dim wc1 As WhereClause = New WhereClause
+                Dim sCurStep As String = ""
+                Dim sEmailContent As String = "Company: @C" & vbCrLf & vbCrLf & "Report Details:" & "@D" & vbCrLf & _
+                vbCrLf & "Date: @RD" & vbCrLf & vbCrLf & "Comment(s): @Rem" & vbCrLf & "Type: @T"
+
+
+                Dim sFSDetail As String = " "
+                Dim sDeyt As String = sMo & vbCrLf & vbCrLf & sYr
+
+                Dim sWhere1 As String = W_User1Table.W_U_ID.UniqueName & " = " & Me.HFIN_U_ID.Text
+                Dim sUser As String = ""
+                For Each oRec2 As W_User1Record In W_User1Table.GetRecords(sWhere1, Nothing, 0, 100)
+                    sUser = oRec2.W_U_Full_Name.ToString()
+                Next
+                sFSDetail = Me.HFIN_Description1.Text
+
+
+                Dim wc3 As WhereClause = New WhereClause
+
+
+                sEmailContent = Replace(sEmailContent, "@C", Me.HFIN_C_ID.Text)
+                sEmailContent = Replace(sEmailContent, "@D", sFSDetail)
+                sEmailContent = Replace(sEmailContent, "@RD", sDeyt)
+                sEmailContent = Replace(sEmailContent, "@Rem", "Report Name: " & sDesc & "</br>" & Me.txtRemarks.Text)
+                sEmailContent = Replace(sEmailContent, "@T", sType)
+                sEmailContent &= vbCrLf & "Requester: " & sUser
+                sEmailContent &= vbCrLf & vbCrLf & "https://eportal2.anflocor.com"
+
+
+                wc3.iAND(WFinRep_Activity1Table.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                wc3.iAND(WFinRep_Activity1Table.AFIN_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                wc3.iAND(WFinRep_Activity1Table.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                'note: check to see if record is still submitted, if not then do not save
+                If WFinRep_Activity1Table.GetRecords(wc3, Nothing, 0, 100).Length > 0 Then
+                    'note: get Current step to be used in wc2
+                    For Each itemValue3 As WFinRep_Activity1Record In WFinRep_Activity1Table.GetRecords(wc3, Nothing, 0, 100)
+                        sCurStep = itemValue3.AFIN_WS_ID.ToString
+                    Next
+
+                    Dim wc4 As WhereClause = New WhereClause
+
+                    wc4.iAND(WFinRep_Activity1Table.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc4.iAND(WFinRep_Activity1Table.AFIN_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                    wc4.iAND(WFinRep_Activity1Table.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                    wc4.iAND(WFinRep_Activity1Table.AFIN_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
+
+                    For Each itemValue4 As WFinRep_Activity1Record In WFinRep_Activity1Table.GetRecords(wc4, Nothing, 0, 100)
+                        'note: update Activity table (other user(s) if multiple approvers) -> 'System Rejected'
+                        WFinRep_Activity1Record.UpdateRecord(itemValue4.AFIN_ID.ToString(), "12")
+                    Next
+                    'note: update current task status -> 'Rejected
+                    Dim wc5 As WhereClause = New WhereClause
+
+                    wc5.iAND(WFinRep_Activity1Table.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc5.iAND(WFinRep_Activity1Table.AFIN_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                    wc5.iAND(WFinRep_Activity1Table.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                    wc5.iAND(WFinRep_Activity1Table.AFIN_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, sCurStep)
+
+                    If WFinRep_Activity1Table.GetRecords(wc5, Nothing, 0, 100).Length > 0 Then
+                        For Each itemValue5 As WFinRep_Activity1Record In WFinRep_Activity1Table.GetRecords(wc5, Nothing, 0, 100)
+                            'note: update Activity table (current user) -> 'Rejected'
+                            'WFinRep_Activity1Record.UpdateRecord(itemValue5.AFIN_ID.ToString, "7")
+
+                            Update_WFinRep_Activity(CInt(sCo), 7, CInt(sFinID), itemValue5.AFIN_ID.ToString, (DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                                ": " & Me.txtRemarks.Text))
+                        Next
+                    End If
+
+                    'note: insert user(s) to Activity using the chosen Return To field
+                    Dim wc6 As WhereClause = New WhereClause
+                    Dim Remarks As String = Me.HFIN_Remark.Text
+
+                    If drop.SelectedValue.ToString() <> "0" Then 'not the creator
+                        wc6.iAND(WFinRep_Step_StepDetail1View.WFIN_S_ID, BaseFilter.ComparisonOperator.EqualsTo, drop.SelectedValue.ToString())
+
+                        For Each itemValue6 As WFinRep_Step_StepDetail1Record In WFinRep_Step_StepDetail1View.GetRecords(wc6, Nothing, 0, 100)
+                            'note: use returned items to insert to Activity table
+                            'note: do not insert(update) delegate until task expires
+                            WFinRep_Activity1Record.AddRecord(itemValue6.WFIN_S_ID, itemValue6.WFIN_SD_ID, _
+                                CInt(Me.HFIN_DT_ID1.SelectedValue), _
+                                itemValue6.WFIN_SD_W_U_ID, 4, CInt(sFinID), _
+                               (DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                                ": " & Me.txtRemarks.Text))
+
+                            '##################
+                            '### EMAIL HERE ###
+                            '##################
+                            'email to Returned user
+                            Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
+
+                            sEmailContent = Content_Formatter(itemValue6.WFIN_SD_W_U_ID.ToString(), _
+                                 "FS INFORMATION NEEDED (Report Description " & sDesc & ")", CStr(sCo1), _
+                                 sFSDetail, sDeyt, Me.txtRemarks.Text, sType, _
+                                 System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#64d04b", "Security/HomePage.aspx", sFinID, _
+                                 "Returned By " & sUserRej, "FS Rejected")
+
+                            Send_Email_Notification(CStr(itemValue6.WFIN_SD_W_U_ID), "FS Information Needed (FS Report: " & _
+                            sDesc & ")", sEmailContent)
+
+
+                        Next
+                    Else
+
+                        wc6.iAND(WFinRep_Head1Table.HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                        For Each itemValue6 As WFinRep_Head1Record In WFinRep_Head1Table.GetRecords(wc6, Nothing, 0, 100)
+
+                            Update_WF_Status_Submit(sCo, "7", "0", sFinID, _
+                            DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                            ": " & Me.txtRemarks.Text)
+                            Update_WFinRep_Head(CInt(sCo), CInt(7), CInt(sFinID))
+                            Update_WFinRep_DocAttach(CInt(sCo), CInt(7), CStr(sFinID), False)
+
+                            '##################
+                            '### EMAIL HERE ###
+                            '##################
+                            Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
+                            sEmailContent = Content_Formatter(itemValue6.HFIN_U_ID.ToString(), _
+                                  "FS Information Needed (Report Description " & sDesc & ")", CStr(sCo1), _
+                                  sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
+                                  System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#64d04b", "Security/HomePage.aspx", sFinID, _
+                                  "Returned By " & sUserRej, "FS Rejected")
+
+
+                            Send_Email_Notification(CStr(itemValue6.HFIN_U_ID), "FS Information Needed (Report Name: " & _
+                            sDesc & ")", sEmailContent)
+
+                            ' UPDATE GL_TRANSACTIONS_SUMMARY ISPOSTED FIELD
+                            Dim reportType As String = Nothing
+
+
+                            Dim result As String = Me.UpdatePostFlag(Me.HFIN_Year.Text, Me.HFIN_Month2.Text, Me.HFIN_C_ID1.Text, "0", "0")
+
+                            If result <> "OK" Then
+                                Throw New Exception(result.ToString)
+                            End If
+
+                            'WFinRep_DocAttachRecord.UpdateFinPost(Me.HFIN_ID.Text, 0)
+                        Next
+                    End If
+
+                End If
+
+                Select Case System.Web.HttpContext.Current.Session("UserID").ToString
+                    Case "8"
+                        Dim url As String = "../WFinRep_Head/WFinRep_HeadRecord"
+                        url = Me.ModifyRedirectUrl(url, "", False)
+                        url = Me.Page.ModifyRedirectUrl(url, "", False)
+                        Me.Page.ShouldSaveControlsToSession = True
+                        Me.Page.Response.Redirect(url)
+                    Case Else
+                        Dim url As String = "../Security/Homepage.aspx"
+                        url = Me.ModifyRedirectUrl(url, "", False)
+                        url = Me.Page.ModifyRedirectUrl(url, "", False)
+                        Me.Page.ShouldSaveControlsToSession = True
+                        Me.Page.Response.Redirect(url)
+                End Select
+
+            Catch ex As Exception
+
+                Me.Page.ErrorOnPage = True
+
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+            Finally
+
+            End Try
+
+        End Sub
+
+		Public Overrides Sub pReturnedSelect_Click(ByVal sender As Object, ByVal args As EventArgs)
+'JESSY RETURN
+            If Me.txtRemarks.Text.Trim = "" Then
+                BaseClasses.Utils.MiscUtils.RegisterJScriptAlert(Me, "MyAlertName", "Remarks is required.")
+                ''Throw New Exception("Remarks is required.")
+            Else
+                '' Dim oRec As WFinRep_DocAttachRecordControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WFinRep_DocAttachRecordControl"), WFinRep_DocAttachRecordControl)
+
+                Dim sFinID As String = Me.HFIN_ID.Text ''oRec.FIN_ID.Text
+                Dim sCo As String = Me.HFIN_C_ID1.Text ''oRec.FIN_Company.Text
+                Dim sYr As String = Me.HFIN_Year.Text ''oRec.FIN_Year1.Text
+                Dim sMo As String = MonthName(CInt(Me.HFIN_Month2.Text)) ''MonthName(CInt(oRec.FIN_Month1.Text))
+                Dim sDesc As String = "FS PACKAGE" ''oRec.FIn_Description1.Text
+                '' Dim sType As String = oRec.Label2.Text
+                Dim sType As String = "" ''oRec.FIN_Type3.Text
+
+                Dim sCo1 As String = Me.HFIN_C_ID.Text ''oRec.FIN_Company1.SelectedItem.ToString
+
+                Dim wc As WhereClause = New WhereClause
+
+                'wc.iAND(WFinRep_Activity1Table.AFIN_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                wc.iAND(WFinRep_Activity1Table.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                wc.iAND(WFinRep_Activity1Table.AFIN_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                wc.iAND(WFinRep_Activity1Table.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+
+                ''MsgBox(sFinID & vbNewLine & System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                If WFinRep_Activity1Table.GetRecords(wc, Nothing, 0, 100).Length > 0 Then
+                    Dim currentStep As String = Nothing
+                    For Each itemValue As WFinRep_Activity1Record In WFinRep_Activity1Table.GetRecords(wc, Nothing, 0, 100)
+                        currentStep = itemValue.AFIN_WS_ID.ToString
+                    Next
+
+                    'update co-approvers of the return status
+
+                    Dim wc2 As WhereClause = New WhereClause
+
+                    'wc2.iAND(WFinRep_ActivityTable.AFIN_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc2.iAND(WFinRep_Activity1Table.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc2.iAND(WFinRep_Activity1Table.AFIN_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                    wc2.iAND(WFinRep_Activity1Table.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                    wc2.iAND(WFinRep_Activity1Table.AFIN_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, currentStep)
+
+                    For Each itemValue2 As WFinRep_Activity1Record In WFinRep_Activity1Table.GetRecords(wc2, Nothing, 0, 100)
+                        'note: update Activity table (other user(s) if multiple approvers) -> 'System Return'
+                        WFinRep_Activity1Record.UpdateRecord(itemValue2.AFIN_ID.ToString(), "14")
+                    Next
+
+
+                    'Update CurrentStep as 'RETURNED' and other transaction tables.
+
+                    Dim wc3 As WhereClause = New WhereClause
+
+                    'wc3.iAND(WFinRep_ActivityTable.AFIN_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc3.iAND(WFinRep_Activity1Table.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc3.iAND(WFinRep_Activity1Table.AFIN_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                    wc3.iAND(WFinRep_Activity1Table.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                    wc3.iAND(WFinRep_Activity1Table.AFIN_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, currentStep)
+
+                    If WFinRep_Activity1Table.GetRecords(wc3, Nothing, 0, 100).Length > 0 Then
+                        For Each itemValue3 As WFinRep_Activity1Record In WFinRep_Activity1Table.GetRecords(wc3, Nothing, 0, 100)
+                            'note: update Activity table (current user) -> 'Return'
+
+                            WFinRep_Activity1Record.UpdateRecord(itemValue3.AFIN_ID.ToString, "9")
+                            Update_WFinRep_Head(CInt(sCo), CInt(9), CInt(sFinID))
+                            Update_WFinRep_DocAttach(CInt(sCo), CInt(9), CStr(sFinID), False) ' UPDATE DOC_ATTACH TO NOT SUBMITTED
+                            Update_WFinRep_Activity(CInt(sCo), 9, CInt(sFinID), itemValue3.AFIN_ID.ToString, DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                                ": " & Me.txtRemarks.Text)
+                        Next
+                    End If
+
+                    'EMAIL HERE ALL APPROVERS of this DOCUMENT
+                    Dim whereClauseEmail As WhereClause = New WhereClause
+
+                    whereClauseEmail.iAND(WFinRep_Step_StepDetail1View.WFIN_S_WDT_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.HFIN_DT_ID1.SelectedValue)
+                    whereClauseEmail.iAND(WFinRep_Step_StepDetail1View.WFIN_SD_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                    Dim sFSDetail As String = " "
+                    Dim sDeyt As String = sMo & vbCrLf & vbCrLf & sYr
+
+                    Dim sEmailContent As String = "Company: @C" & vbCrLf & vbCrLf & "Report Details:" & "@D" & vbCrLf & _
+                    vbCrLf & "Date: @RD" & vbCrLf & vbCrLf & "Comment(s): @Rem" & vbCrLf & "Type: @T"
+                    sEmailContent = Replace(sEmailContent, "@C", Me.HFIN_C_ID.Text) ''oRec.FIN_Company1.SelectedItem.ToString)
+                    sEmailContent = Replace(sEmailContent, "@D", sFSDetail)
+                    sEmailContent = Replace(sEmailContent, "@RD", sDeyt)
+                    sEmailContent = Replace(sEmailContent, "@Rem", "Report Name: " & sDesc & "</br>" & Me.txtRemarks.Text)
+                    sEmailContent = Replace(sEmailContent, "@T", sType)
+                    sEmailContent &= vbCrLf & "Requester: " & System.Web.HttpContext.Current.Session("UserIDNorth").ToString()
+                    sEmailContent &= vbCrLf & vbCrLf & "http://aportal.anflocor.com/"
+
+                    sFSDetail = Me.Description_MY.Text
+                    Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
+
+
+
+                    'ADD ACTIVITY ================================================
+                    Dim wc6 As WhereClause = New WhereClause
+                    ''wc6.iAND(WPO_Step_WPO_StepDetail1View.WPO_S_ID, BaseFilter.ComparisonOperator.EqualsTo, ddlMoveto1.SelectedValue.ToString())
+                    wc6.iAND(WFinRep_Step_StepDetail1View.WFIN_S_ID, BaseFilter.ComparisonOperator.EqualsTo, ddlMoveto1.SelectedValue.ToString())
+
+                    Dim ordBy9 As New OrderBy(False, False)
+                    For Each itemValue6 As WFinRep_Step_StepDetail1Record In WFinRep_Step_StepDetail1View.GetRecords(wc6, ordBy9, 0, 100)
+                        'note: use returned items to insert to Activity table
+                        'note: do not insert(update) delegate until task expires
+
+                        WFinRep_Activity1Record.AddRecord(itemValue6.WFIN_S_ID, itemValue6.WFIN_SD_ID, _
+                        CInt(Me.HFIN_DT_ID1.SelectedValue), _
+                        itemValue6.WFIN_SD_W_U_ID, 0, CInt(sFinID), _
+                       (DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                        ": " & Me.txtRemarks.Text))
+
+                        Dim nStep As String = itemValue6.W_U_Full_Name.ToString()
+                        sEmailContent &= vbCrLf & vbCrLf & "Next Approver: " & nStep
+                        sEmailContent &= vbCrLf & vbCrLf & "http://aportal.anflocor.com/"
+
+                        '******control this notification for GGP*****
+                        Select Case itemValue6.WFIN_SD_W_U_ID.ToString
+                            Case "8"
+
+                            Case Else
+                                '##################
+                                '### EMAIL HERE ###
+                                '##################
+                                Dim sInfo As String = ""
+                                'Dim sDelegate As String = FindDelegate(itemValue6.MRS_SD_W_U_ID.ToString(), sInfo)
+                                Dim esUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
+
+                                sEmailContent = Content_Formatter(CStr(itemValue6.WFIN_SD_W_U_ID), _
+                                "FS Returned: Information Needed (FS Document ID# " & sFinID & ")", CStr(sCo1), _
+                                sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
+                                System.Web.HttpContext.Current.Session("UserIDNorth").ToString(), "#4682b4", "WFinRep_Head/WFin_ApproverTable1.aspx", sFinID, _
+                                "Next Approver: " & nStep, "Returned")
+
+
+
+                                Send_Email_Notification(CStr(itemValue6.WFIN_SD_W_U_ID), "FS Approval Needed (Report Name: " & Me.Description_MY.Text & _
+                                                         ")", sEmailContent)
+
+                        End Select
+
+                    Next
+                    'END ADD ACTIVITY ================================================
+
+
+                End If
+             
+                ' delete GP_Transactions_Summary
+                Dim reportID As String = Nothing
+             
+                Dim del_result As String = Me.delete_GLTransactions_Summary(Me.HFIN_Year.Text, Me.HFIN_Month2.Text, Me.HFIN_C_ID1.Text, "0")
+
+                If del_result <> "OK" Then
+                    Throw New Exception("ERROR: " & del_result & ".. Inform system administrator.")
+
+                End If
+
+                'Dim update_result As String = Me.UpdatePostFlag(oRec.FIN_Year1.Text, oRec.FIN_Month1.Text, oRec.FIN_Company.Text, reportID, "0")
+                Dim update_result As String = Me.UpdatePostFlag(Me.HFIN_Year.Text, Me.HFIN_Month2.Text, Me.HFIN_C_ID1.Text, "0", "0")
+
+                If update_result <> "OK" Then
+                    Throw New Exception("ERROR: " & update_result & ".. Inform system administrator.")
+
+                End If
+
+                'WFinRep_DocAttachRecord.UpdateFinPost(oRec.FIN_ID.Text, 0)
+
+                For Each recDocAttach As WFinRep_DocAttach1Record In WFinRep_DocAttach1Table.GetRecords("FIN_HFIN_ID =" & CInt(Me.HFIN_ID.Text))
+                    If Not IsNothing(recDocAttach) Then
+                        WFinRep_DocAttach1Record.UpdateFinPost(recDocAttach.FIN_ID.ToString, 0)
+                    End If
+                Next
+
+                Dim url As String = "../Security/HomePage.aspx"
+
+                Dim shouldRedirect As Boolean = True
+                Dim TargetKey As String = Nothing
+                Dim DFKA As String = TargetKey
+                Dim id As String = DFKA
+                Dim value As String = id
+
+                Try
+                    ' Enclose all database retrieval/update code within a Transaction boundary
+                    DbUtils.StartTransaction()
+
+                    url = Me.ModifyRedirectUrl(url, "", False)
+                    url = Me.Page.ModifyRedirectUrl(url, "", False)
+
+                Catch ex As Exception
+                    ' Upon error, rollback the transaction
+                    Me.Page.RollBackTransaction(sender)
+                    shouldRedirect = False
+                    Me.Page.ErrorOnPage = True
+
+                    ' Report the error message to the end user
+                    Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+                Finally
+                    DbUtils.EndTransaction()
+                End Try
+                If shouldRedirect Then
+                    Me.Page.ShouldSaveControlsToSession = True
+                    Me.Page.Response.Redirect(url)
+                ElseIf Not TargetKey Is Nothing AndAlso _
+                            Not shouldRedirect Then
+                    Me.Page.ShouldSaveControlsToSession = True
+                    Me.Page.CloseWindow(True)
+
+                End If
+            End If
         End Sub
 End Class
 
@@ -10380,6 +10589,8 @@ Public Class BaseWFinRep_HeadRecordControl
                         
               AddHandler Me.pReturned.Click, AddressOf pReturned_Click
                         
+              AddHandler Me.pReturnedSelect.Click, AddressOf pReturnedSelect_Click
+                        
               AddHandler Me.CancelButton.Button.Click, AddressOf CancelButton_Click
                         
               AddHandler Me.HFIN_DT_ID1.SelectedIndexChanged, AddressOf HFIN_DT_ID1_SelectedIndexChanged
@@ -10402,7 +10613,11 @@ Public Class BaseWFinRep_HeadRecordControl
             
               AddHandler Me.HFIN_Year.TextChanged, AddressOf HFIN_Year_TextChanged
             
+              AddHandler Me.ddlAction.SelectedIndexChanged, AddressOf ddlAction_SelectedIndexChanged
+                
               AddHandler Me.ddlMoveTo.SelectedIndexChanged, AddressOf ddlMoveTo_SelectedIndexChanged
+                
+              AddHandler Me.ddlMoveto1.SelectedIndexChanged, AddressOf ddlMoveto1_SelectedIndexChanged
                 					
               AddHandler Me.txtRemarks.TextChanged, AddressOf txtRemarks_TextChanged
                     
@@ -10500,7 +10715,9 @@ Public Class BaseWFinRep_HeadRecordControl
             ' Call the Set methods for each controls on the panel
         
                 
+                SetddlAction()
                 SetddlMoveTo()
+                SetddlMoveto1()
                 SetDescription()
                 SetDescription_MY()
                 SetHFIN_C_ID()
@@ -10520,6 +10737,10 @@ Public Class BaseWFinRep_HeadRecordControl
                 SetHFIN_U_ID()
                 SetHFIN_U_ID1()
                 SetHFIN_Year()
+                SetLiteral12()
+                SetLiteral13()
+                SetlitMoveTo()
+                
                 
                 
                 
@@ -10537,6 +10758,8 @@ Public Class BaseWFinRep_HeadRecordControl
                 SetpReject()
               
                 SetpReturned()
+              
+                SetpReturnedSelect()
               
                 SetCancelButton()
               
@@ -11177,11 +11400,31 @@ Public Class BaseWFinRep_HeadRecordControl
                 
 
 
+        Public Overridable Sub SetddlAction()
+
+                  
+            
+            Me.PopulateddlActionDropDownList(Nothing, 100)
+                
+        End Sub
+                
+
+
         Public Overridable Sub SetddlMoveTo()
 
                   
             
             Me.PopulateddlMoveToDropDownList(Nothing, 100)
+                
+        End Sub
+                
+
+
+        Public Overridable Sub SetddlMoveto1()
+
+                  
+            
+            Me.PopulateddlMoveto1DropDownList(Nothing, 100)
                 
         End Sub
                 
@@ -11233,6 +11476,24 @@ Public Class BaseWFinRep_HeadRecordControl
                       'To override this property you can uncomment the following property and add your own value.
                       'Me.HFIN_StatusLabel.Text = "Some value"
                     
+                  End Sub
+                
+        Public Overridable Sub SetLiteral12()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral13()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetlitMoveTo()
+
+                  
+                  
                   End Sub
                 
         Public Overridable Sub SettxtRemarks()
@@ -11939,6 +12200,11 @@ Public Class BaseWFinRep_HeadRecordControl
    
         End Sub
             
+        Public Overridable Sub SetpReturnedSelect()                
+              
+   
+        End Sub
+            
         Public Overridable Sub SetCancelButton()                
               
    
@@ -12244,6 +12510,15 @@ Public Class BaseWFinRep_HeadRecordControl
         End Sub
         
               
+        Public Overridable Function CreateWhereClause_ddlActionDropDownList() As WhereClause
+            ' By default, we simply return a new WhereClause.
+            ' Add additional where clauses to restrict the items shown in the dropdown list.
+            
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+            				
+        End Function
+        
         Public Overridable Function CreateWhereClause_ddlMoveToDropDownList() As WhereClause
             ' By default, we simply return a new WhereClause.
             ' Add additional where clauses to restrict the items shown in the dropdown list.
@@ -12253,6 +12528,43 @@ Public Class BaseWFinRep_HeadRecordControl
             				
         End Function
         
+        Public Overridable Function CreateWhereClause_ddlMoveto1DropDownList() As WhereClause
+            ' By default, we simply return a new WhereClause.
+            ' Add additional where clauses to restrict the items shown in the dropdown list.
+            
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+            				
+        End Function
+        
+
+        ' Fill the ddlAction list.
+        Protected Overridable Sub PopulateddlActionDropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+                
+            Me.ddlAction.Items.Clear()
+
+                      
+                    
+            ' 1. Setup the static list items        
+            		  
+            ' Skip step 2 and 3 because no need to load data from database and insert data
+                    
+                    
+            ' 4. Set the selected value (insert if not already present).
+              
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.ddlAction, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.ddlAction, selectedValue)Then
+
+            
+            End If					
+                
+                
+        End Sub
+                
 
         ' Fill the ddlMoveTo list.
         Protected Overridable Sub PopulateddlMoveToDropDownList( _
@@ -12274,6 +12586,34 @@ Public Class BaseWFinRep_HeadRecordControl
                 selectedValue.Trim <> "" AndAlso _
                 Not SetSelectedValue(Me.ddlMoveTo, selectedValue) AndAlso _
                 Not SetSelectedDisplayText(Me.ddlMoveTo, selectedValue)Then
+
+            
+            End If					
+                
+                
+        End Sub
+                
+
+        ' Fill the ddlMoveto1 list.
+        Protected Overridable Sub PopulateddlMoveto1DropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+                
+            Me.ddlMoveto1.Items.Clear()
+
+                      
+                    
+            ' 1. Setup the static list items        
+            		  
+            ' Skip step 2 and 3 because no need to load data from database and insert data
+                    
+                    
+            ' 4. Set the selected value (insert if not already present).
+              
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.ddlMoveto1, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.ddlMoveto1, selectedValue)Then
 
             
             End If					
@@ -12319,6 +12659,24 @@ Public Class BaseWFinRep_HeadRecordControl
         
         ' event handler for PushButton
         Public Overridable Sub pReturned_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+    Try
+    
+            Catch ex As Exception
+            
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+    
+        End Sub
+        
+        ' event handler for PushButton
+        Public Overridable Sub pReturnedSelect_Click(ByVal sender As Object, ByVal args As EventArgs)
               
     Try
     
@@ -12457,7 +12815,17 @@ Public Class BaseWFinRep_HeadRecordControl
                     
               End Sub
             
+        Protected Overridable Sub ddlAction_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)                
+             
+
+        End Sub
+                
         Protected Overridable Sub ddlMoveTo_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)                
+             
+
+        End Sub
+                
+        Protected Overridable Sub ddlMoveto1_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)                
              
 
         End Sub
@@ -12572,9 +12940,21 @@ Public Class BaseWFinRep_HeadRecordControl
           End Get
           End Property
         
+        Public ReadOnly Property ddlAction() As System.Web.UI.WebControls.DropDownList
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlAction"), System.Web.UI.WebControls.DropDownList)
+            End Get
+        End Property
+        
         Public ReadOnly Property ddlMoveTo() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlMoveTo"), System.Web.UI.WebControls.DropDownList)
+            End Get
+        End Property
+        
+        Public ReadOnly Property ddlMoveto1() As System.Web.UI.WebControls.DropDownList
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlMoveto1"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
         
@@ -12692,6 +13072,24 @@ Public Class BaseWFinRep_HeadRecordControl
             End Get
         End Property
             
+        Public ReadOnly Property Literal12() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal12"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal13() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal13"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property litMoveTo() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "litMoveTo"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
         Public ReadOnly Property pApproved() As System.Web.UI.WebControls.Button
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pApproved"), System.Web.UI.WebControls.Button)
@@ -12707,6 +13105,12 @@ Public Class BaseWFinRep_HeadRecordControl
         Public ReadOnly Property pReturned() As System.Web.UI.WebControls.Button
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pReturned"), System.Web.UI.WebControls.Button)
+            End Get
+        End Property
+        
+        Public ReadOnly Property pReturnedSelect() As System.Web.UI.WebControls.Button
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pReturnedSelect"), System.Web.UI.WebControls.Button)
             End Get
         End Property
         
