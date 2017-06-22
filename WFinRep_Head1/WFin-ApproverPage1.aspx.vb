@@ -53,9 +53,136 @@ Partial Public Class WFin_ApproverPage1
           ' Customize by adding code before or after the call to LoadData_Base()
           ' or replace the call to LoadData_Base().
           LoadData_Base()
-                  
-      End Sub
-      
+
+            DbUtils.StartTransaction()
+
+
+            '**jessy 07-15-2016
+            ddlAction.Items.Add("Approve")
+            ddlAction.Items.Add("Reject")
+            ddlAction.Items.Add("Return")
+            'ddlAction.Items.Add("Void")
+
+            litMoveTo.Visible = False
+            ddlMoveto1.Visible = False
+
+            ddlAction.AutoPostBack = True
+            If HFIN_Status.Text = "Completed" Then
+                ddlAction.Enabled = False
+            Else
+                ddlAction.Enabled = True
+            End If
+
+            DbUtils.EndTransaction()
+        End Sub
+
+
+        Protected Sub ddlAction_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ddlAction.SelectedIndexChanged
+            ''07.15.2016 jessy **
+            ''Enable Return To dropdown list if action selected is "Reject" or "Return"
+
+            Select Case ddlAction.SelectedIndex
+                Case 1 'Reject
+                    pApproved.Visible = False
+                    pReject.Visible = True
+                    pReturnedSelect.Visible = False
+                    litMoveTo.Visible = False
+                    ddlMoveto1.Visible = False
+
+                Case 2 'Return
+                    pApproved.Visible = False
+                    pReject.Visible = False
+                    pReturnedSelect.Visible = True
+                    litMoveTo.Visible = True
+                    ddlMoveto1.Visible = True
+                    ddlMoveto1.Enabled = True
+
+                Case Else
+                    pApproved.Visible = True
+                    pReject.Visible = False
+                    pReturnedSelect.Visible = False
+                    litMoveTo.Visible = False
+                    ddlMoveto1.Visible = False
+                    ddlMoveto1.Enabled = False
+            End Select
+
+            If ddlAction.SelectedIndex = 2 Or ddlAction.SelectedIndex = 1 Then 'RETURN
+                Try
+                    ddlMoveto1.Enabled = True
+                    'txtRemark.Enabled = True
+
+                    DbUtils.StartTransaction()
+
+                    Me.ddlMoveto1.Items.Clear()
+                    'note: this populates the Return To drop down
+                    Dim wc1 As WhereClause = New WhereClause
+                    wc1.iAND(WFinRep_Activity1Table.AFIN_WDT_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.HFIN_DT_ID1.Text)
+                    wc1.iAND(WFinRep_Activity1Table.AFIN_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                    wc1.iAND(WFinRep_Activity1Table.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                    ''MsgBox(Me.HFIN_DT_ID1.Text & vbNewLine & System.Web.HttpContext.Current.Session("UserIDNorth").ToString())
+                    Dim itemValue1 As WFinRep_Activity1Record
+                    Dim bNoParent As Boolean = False
+                    Dim sStepID As String = ""
+                    Dim sStepType As String = ""
+                    For Each itemValue1 In WFinRep_Activity1Table.GetRecords(wc1, Nothing, 0, 100)
+                        ''MsgBox(itemValue1.AFIN_WS_ID.ToString())
+                        If (itemValue1.AFIN_WS_IDSpecified) Then
+                            sStepID = itemValue1.AFIN_WS_ID.ToString()
+
+                            Do While sStepType <> "Start"
+                                Dim wc2 As WhereClause = New WhereClause
+                                Dim itemValue2 As WFinRep_Step1Record
+                                wc2.iAND(WFinRep_Step1Table.WFIN_S_ID_Next, BaseFilter.ComparisonOperator.EqualsTo, sStepID)
+
+                                If WFinRep_Step1Table.GetRecords(wc2, Nothing, 0, 100).Length > 0 Then
+
+                                    For Each itemValue2 In WFinRep_Step1Table.GetRecords(wc2, Nothing, 0, 100)
+                                        If itemValue2.WFIN_S_IDSpecified Then
+                                            Dim cvalue As String = Nothing
+                                            Dim fvalue As String = Nothing
+
+                                            cvalue = itemValue2.WFIN_S_ID.ToString()
+                                            fvalue = itemValue2.WFIN_S_Desc.ToString()
+                                            sStepID = cvalue
+                                            sStepType = itemValue2.WFIN_S_Step_Type
+                                            Dim item As ListItem = New ListItem(fvalue, cvalue)
+                                            Me.ddlMoveto1.Items.Add(item)
+                                        End If
+                                    Next
+                                Else
+                                    sStepType = "Start"
+                                End If
+                            Loop
+                        End If
+                    Next
+
+                    Dim cvalue1 As String = Nothing
+                    Dim fvalue1 As String = Nothing
+
+                    cvalue1 = "0"
+                    fvalue1 = Me.HFIN_U_ID1.SelectedItem.ToString 'Me.WPOP_U_ID.Text '"Creator"
+                    'MsgBox(Me.WPOP_U_ID.SelectedItem.ToString)
+
+                    Dim item1 As ListItem = New ListItem(fvalue1, cvalue1)
+                    Me.ddlMoveto1.Items.Add(item1)
+
+                    If Me.ddlMoveto1.Items.Count > 0 Then
+                        'note: default to first step
+                        Me.ddlMoveto1.SelectedIndex = Me.ddlMoveto1.Items.Count - 1
+                    End If
+                Catch ex As Exception
+                    MsgBox(ex.Message & " ; " & ex.StackTrace & vbNewLine)
+                End Try
+
+                DbUtils.EndTransaction()
+            Else
+                ddlMoveto1.Items.Clear()
+                ddlMoveto1.Enabled = False
+                'txtRemark.Enabled = True
+            End If
+        End Sub
+
+
       Private Function EvaluateFormula(ByVal formula As String, ByVal dataSourceForEvaluate as BaseClasses.Data.BaseRecord, ByVal format As String, ByVal variables As System.Collections.Generic.IDictionary(Of String, Object), ByVal includeDS as Boolean) As String
           Return EvaluateFormula_Base(formula, dataSourceForEvaluate, format, variables, includeDS)
       End Function
@@ -93,8 +220,7 @@ Partial Public Class WFin_ApproverPage1
       Public Overrides Sub SaveData()
           Me.SaveData_Base()
       End Sub
-               
-               
+
 
       Public Overrides Sub SetControl(ByVal control As String)
           Me.SetControl_Base(control)

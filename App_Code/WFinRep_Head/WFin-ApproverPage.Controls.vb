@@ -308,6 +308,8 @@ Public Class WFinRep_HeadRecordControl
 
             AddHandler Me.pReturned.Click, AddressOf pReturned_Click
 
+            AddHandler Me.pReturnedSelect.Click, AddressOf pReturnedSelect_Click
+
             AddHandler Me.HFIN_U_ID1.SelectedIndexChanged, AddressOf HFIN_U_ID1_SelectedIndexChanged
 
             AddHandler Me.HFIN_C_ID1.TextChanged, AddressOf HFIN_C_ID1_TextChanged
@@ -333,12 +335,14 @@ Public Class WFinRep_HeadRecordControl
             AddHandler Me.txtRemarks.TextChanged, AddressOf txtRemarks_TextChanged
             If Me.HFIN_Status.Text = "Completed" Then
                 Me.pReturned.Visible = True
-                Me.pApproved.Visible = False
-                Me.pReject.Visible = False
+                ''Me.pReturnedSelect.Visible = False
+                ''Me.pApproved.Visible = False
+                ''Me.pReject.Visible = False
             Else
                 Me.pReturned.Visible = False
-                Me.pApproved.Visible = True
-                Me.pReject.Visible = True
+                ''Me.pReturnedSelect.Visible = True
+                ''Me.pApproved.Visible = True
+                ''Me.pReject.Visible = True
             End If
 
             Me.ddlMoveTo.Attributes.Add("style", "display:none")
@@ -1516,6 +1520,257 @@ Public Class WFinRep_HeadRecordControl
 
         End Sub
 
+
+		Public Overrides Sub pReturnedSelect_Click(ByVal sender As Object, ByVal args As EventArgs)
+      'JESSY RETURN        
+            If Me.txtRemarks.Text.Trim = "" Then
+                BaseClasses.Utils.MiscUtils.RegisterJScriptAlert(Me, "MyAlertName", "Remarks is required.")
+                ''Throw New Exception("Remarks is required.")
+            Else
+                '' Dim oRec As WFinRep_DocAttachRecordControl = DirectCast(MiscUtils.GetParentControlObject(Me, "WFinRep_DocAttachRecordControl"), WFinRep_DocAttachRecordControl)
+
+                Dim sFinID As String = Me.HFIN_ID.Text ''oRec.FIN_ID.Text
+                Dim sCo As String = Me.HFIN_C_ID1.Text ''oRec.FIN_Company.Text
+                Dim sYr As String = Me.HFIN_Year.Text ''oRec.FIN_Year1.Text
+                Dim sMo As String = MonthName(CInt(Me.HFIN_Month.Text)) ''MonthName(CInt(oRec.FIN_Month1.Text))
+                Dim sDesc As String = "FS PACKAGE" ''oRec.FIn_Description1.Text
+                '' Dim sType As String = oRec.Label2.Text
+                Dim sType As String = "" ''oRec.FIN_Type3.Text
+
+                Dim sCo1 As String = Me.HFIN_C_ID.Text ''oRec.FIN_Company1.SelectedItem.ToString
+
+                Dim wc As WhereClause = New WhereClause
+
+                'wc.iAND(WFinRep_ActivityTable.AFIN_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                wc.iAND(WFinRep_ActivityTable.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                wc.iAND(WFinRep_ActivityTable.AFIN_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserID").ToString())
+                wc.iAND(WFinRep_ActivityTable.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+
+                If WFinRep_ActivityTable.GetRecords(wc, Nothing, 0, 100).Length > 0 Then
+                    Dim currentStep As String = Nothing
+                    For Each itemValue As WFinRep_ActivityRecord In WFinRep_ActivityTable.GetRecords(wc, Nothing, 0, 100)
+                        currentStep = itemValue.AFIN_WS_ID.ToString
+                    Next
+
+                    'update co-approvers of the return status
+
+                    Dim wc2 As WhereClause = New WhereClause
+
+                    'wc2.iAND(WFinRep_ActivityTable.AFIN_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc2.iAND(WFinRep_ActivityTable.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc2.iAND(WFinRep_ActivityTable.AFIN_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserID").ToString())
+                    wc2.iAND(WFinRep_ActivityTable.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                    wc2.iAND(WFinRep_ActivityTable.AFIN_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, currentStep)
+
+                    For Each itemValue2 As WFinRep_ActivityRecord In WFinRep_ActivityTable.GetRecords(wc2, Nothing, 0, 100)
+                        'note: update Activity table (other user(s) if multiple approvers) -> 'System Return'
+                        WFinRep_ActivityRecord.UpdateRecord(itemValue2.AFIN_ID.ToString(), 14)
+                    Next
+
+
+                    'Update CurrentStep as 'RETURNED' and other transaction tables.
+
+                    Dim wc3 As WhereClause = New WhereClause
+
+                    'wc3.iAND(WFinRep_ActivityTable.AFIN_FinID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc3.iAND(WFinRep_ActivityTable.AFIN_HFIN_ID, BaseFilter.ComparisonOperator.EqualsTo, sFinID)
+                    wc3.iAND(WFinRep_ActivityTable.AFIN_W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, System.Web.HttpContext.Current.Session("UserID").ToString())
+                    wc3.iAND(WFinRep_ActivityTable.AFIN_Status, BaseFilter.ComparisonOperator.EqualsTo, "4")
+                    wc3.iAND(WFinRep_ActivityTable.AFIN_WS_ID, BaseFilter.ComparisonOperator.EqualsTo, currentStep)
+
+                    If WFinRep_ActivityTable.GetRecords(wc3, Nothing, 0, 100).Length > 0 Then
+                        For Each itemValue3 As WFinRep_ActivityRecord In WFinRep_ActivityTable.GetRecords(wc3, Nothing, 0, 100)
+                            'note: update Activity table (current user) -> 'Return'
+
+                            WFinRep_ActivityRecord.UpdateRecord(itemValue3.AFIN_ID.ToString, 9)
+                            Update_WFinRep_Head(CInt(sCo), CInt(9), CInt(sFinID), False)
+                            Update_WFinRep_DocAttach(CInt(sCo), CInt(9), CStr(sFinID)) ' UPDATE DOC_ATTACH TO NOT SUBMITTED
+                            Update_WFinRep_Activity(CInt(sCo), 9, itemValue3.AFIN_ID.ToString, DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                                ": " & Me.txtRemarks.Text)
+                        Next
+                    End If
+
+                    'EMAIL HERE ALL APPROVERS of this DOCUMENT
+                    Dim whereClauseEmail As WhereClause = New WhereClause
+
+                    whereClauseEmail.iAND(WFinRep_Step_StepDetailView.WFIN_S_WDT_ID, BaseFilter.ComparisonOperator.EqualsTo, Me.HFIN_DT_ID1.SelectedValue)
+                    whereClauseEmail.iAND(WFinRep_Step_StepDetailView.WFIN_SD_W_U_ID, BaseFilter.ComparisonOperator.Not_Equals, System.Web.HttpContext.Current.Session("UserID").ToString())
+                    Dim sFSDetail As String = " "
+                    Dim sDeyt As String = sMo & vbCrLf & vbCrLf & sYr
+
+                    Dim sEmailContent As String = "Company: @C" & vbCrLf & vbCrLf & "Report Details:" & "@D" & vbCrLf & _
+                    vbCrLf & "Date: @RD" & vbCrLf & vbCrLf & "Comment(s): @Rem" & vbCrLf & "Type: @T"
+                    sEmailContent = Replace(sEmailContent, "@C", Me.HFIN_C_ID.Text) ''oRec.FIN_Company1.SelectedItem.ToString)
+                    sEmailContent = Replace(sEmailContent, "@D", sFSDetail)
+                    sEmailContent = Replace(sEmailContent, "@RD", sDeyt)
+                    sEmailContent = Replace(sEmailContent, "@Rem", "Report Name: " & sDesc & "</br>" & Me.txtRemarks.Text)
+                    sEmailContent = Replace(sEmailContent, "@T", sType)
+                    sEmailContent &= vbCrLf & "Requester: " & System.Web.HttpContext.Current.Session("UserID").ToString()
+                    sEmailContent &= vbCrLf & vbCrLf & "http://eportal.anflocor.com/"
+
+                    sFSDetail = Me.Description_MY.Text
+                    Dim sUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
+
+                    ' ''If WFinRep_Step_StepDetailView.GetRecords(whereClauseEmail, Nothing, 0, 100).Length > 0 Then
+                    ' ''    For Each itemValue4 As WFinRep_Step_StepDetailRecord In WFinRep_Step_StepDetailView.GetRecords(whereClauseEmail, Nothing, 0, 100)
+                    ' ''        If Not IsNothing(itemValue4.WFIN_SD_W_U_ID.ToString) Then
+
+                    ' ''            WFinRep_ActivityRecord.AddRecord(itemValue4.WFIN_S_ID, itemValue4.WFIN_SD_ID, _
+                    ' '' CInt(Me.HFIN_DT_ID1.SelectedValue), _
+                    ' '' itemValue4.WFIN_SD_W_U_ID, 0, CInt(sFinID), _
+                    ' ''(DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                    ' '' ": " & Me.txtRemarks.Text))
+
+                    ' ''            sEmailContent = Content_Formatter(itemValue4.WFIN_SD_W_U_ID.ToString, _
+                    ' ''             "FS RETURNED FOR REVISION INFORMATION (FS Document ID#  " & sFinID & ")", CStr(sCo1), _
+                    ' ''             sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
+                    ' ''             System.Web.HttpContext.Current.Session("UserID").ToString(), "#f46f6f", "WFinRep_Head/WFin-Approver-Table.aspx", sFinID, _
+                    ' ''             "Returned By " & sUserRej, "FS Returned for Revision", "FS Creator")
+
+                    ' ''            Send_Email_Notification(CStr(itemValue4.WFIN_SD_W_U_ID.ToString), "FS Returned for Revision Information (Report Name: " & Me.Description_MY.Text & _
+                    ' ''            ")", sEmailContent)
+                    ' ''        End If
+                    ' ''    Next
+                    ' ''End If
+
+
+                    'ADD ACTIVITY ================================================
+                    Dim wc6 As WhereClause = New WhereClause
+                    ''wc6.iAND(WPO_Step_WPO_StepDetailView.WPO_S_ID, BaseFilter.ComparisonOperator.EqualsTo, ddlMoveto1.SelectedValue.ToString())
+                    wc6.iAND(WFinRep_Step_StepDetailView.WFIN_S_ID, BaseFilter.ComparisonOperator.EqualsTo, ddlMoveto1.SelectedValue.ToString())
+
+                    Dim ordBy9 As New OrderBy(False, False)
+                    For Each itemValue6 As WFinRep_Step_StepDetailRecord In WFinRep_Step_StepDetailView.GetRecords(wc6, ordBy9, 0, 100)
+                        'note: use returned items to insert to Activity table
+                        'note: do not insert(update) delegate until task expires
+
+                        WFinRep_ActivityRecord.AddRecord(itemValue6.WFIN_S_ID, itemValue6.WFIN_SD_ID, _
+                        CInt(Me.HFIN_DT_ID1.SelectedValue), _
+                        itemValue6.WFIN_SD_W_U_ID, 0, CInt(sFinID), _
+                       (DirectCast(Me.Page, BaseApplicationPage).CurrentSecurity.GetUserStatus().ToString() & _
+                        ": " & Me.txtRemarks.Text))
+
+                        Dim nStep As String = itemValue6.W_U_Full_Name.ToString()
+                        sEmailContent &= vbCrLf & vbCrLf & "Next Approver: " & nStep
+                        sEmailContent &= vbCrLf & vbCrLf & "http://aportal.anflocor.com/"
+
+                        '******control this notification for GGP*****
+                        Select Case itemValue6.WFIN_SD_W_U_ID.ToString
+                            Case "8"
+
+                            Case Else
+                                '##################
+                                '### EMAIL HERE ###
+                                '##################
+                                Dim sInfo As String = ""
+                                'Dim sDelegate As String = FindDelegate(itemValue6.MRS_SD_W_U_ID.ToString(), sInfo)
+                                Dim esUserRej As String = System.Web.HttpContext.Current.Session("UserFullName").ToString()
+
+                                sEmailContent = Content_Formatter(CStr(itemValue6.WFIN_SD_W_U_ID), _
+                                "FS Returned: Information Needed (FS Document ID# " & sFinID & ")", CStr(sCo1), _
+                                sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
+                                System.Web.HttpContext.Current.Session("UserID").ToString(), "#4682b4", "WFinRep_Head/WFin_ApproverTable1.aspx", sFinID, _
+                                "Next Approver: " & nStep, "Pending Approval")
+
+
+
+                                Send_Email_Notification(CStr(itemValue6.WFIN_SD_W_U_ID), "FS Approval Needed (Report Name: " & Me.Description_MY.Text & _
+                                                         ")", sEmailContent)
+
+                        End Select
+
+                    Next
+                    'END ADD ACTIVITY ================================================
+
+
+                    '' ''EMAIL HERE CREATOR
+                    ' ''sEmailContent = Content_Formatter(Me.ddlMoveto1.SelectedValue.ToString, _
+                    ' ''             "FS RETURNED FOR REVISION INFORMATION (FS Document ID#  " & sFinID & ")", CStr(sCo1), _
+                    ' ''             sFSDetail, sDeyt.ToString, Me.txtRemarks.Text, sType, _
+                    ' ''             System.Web.HttpContext.Current.Session("UserID").ToString(), "#f46f6f", "WFinRep_Head/WFin-Approver-Table.aspx", sFinID, _
+                    ' ''             "Returned By " & sUserRej, "FS Returned for Revision", "FS Creator")
+
+                    ' ''Send_Email_Notification(CStr(Me.ddlMoveto1.SelectedValue.ToString), "FS Returned for Revision Information (Report Name: " & Me.Description_MY.Text & _
+                    ' ''        ")", sEmailContent)
+
+                End If
+                'If oRec.FIN_Type1.SelectedValue.ToString <> "BS" Or oRec.FIN_Type1.SelectedValue.ToString <> "IS" Then
+
+                'End If
+                ' delete GP_Transactions_Summary
+                Dim reportID As String = Nothing
+                'If oRec.FIN_Type1.SelectedValue.ToString = "BS" Then
+                '    reportID = "1"
+                'ElseIf oRec.FIN_Type1.SelectedValue.ToString = "IS" Then
+                '    reportID = "2"
+                'ElseIf oRec.FIN_Type1.SelectedValue.ToString = "CF" Then
+                '    reportID = "3"
+                'Else
+                '    reportID = "0"
+                'End If
+                'Dim del_result As String = Me.delete_GLTransactions_Summary(oRec.FIN_Year1.Text, oRec.FIN_Month1.Text, oRec.FIN_Company.Text, reportID)
+                Dim del_result As String = Me.delete_GLTransactions_Summary(Me.HFIN_Year.Text, Me.HFIN_Month.Text, Me.HFIN_C_ID1.Text, "0")
+
+                If del_result <> "OK" Then
+                    Throw New Exception("ERROR: " & del_result & ".. Inform system administrator.")
+
+                End If
+
+                'Dim update_result As String = Me.UpdatePostFlag(oRec.FIN_Year1.Text, oRec.FIN_Month1.Text, oRec.FIN_Company.Text, reportID, "0")
+                Dim update_result As String = Me.UpdatePostFlag(Me.HFIN_Year.Text, Me.HFIN_Month.Text, Me.HFIN_C_ID1.Text, "0", "0")
+
+                If update_result <> "OK" Then
+                    Throw New Exception("ERROR: " & update_result & ".. Inform system administrator.")
+
+                End If
+
+                'WFinRep_DocAttachRecord.UpdateFinPost(oRec.FIN_ID.Text, 0)
+
+                For Each recDocAttach As WFinRep_DocAttachRecord In WFinRep_DocAttachTable.GetRecords("FIN_HFIN_ID =" & CInt(Me.HFIN_ID.Text))
+                    If Not IsNothing(recDocAttach) Then
+                        WFinRep_DocAttachRecord.UpdateFinPost(recDocAttach.FIN_ID.ToString, 0)
+                    End If
+                Next
+
+                Dim url As String = "../Security/HomePage.aspx"
+
+                Dim shouldRedirect As Boolean = True
+                Dim TargetKey As String = Nothing
+                Dim DFKA As String = TargetKey
+                Dim id As String = DFKA
+                Dim value As String = id
+
+                Try
+                    ' Enclose all database retrieval/update code within a Transaction boundary
+                    DbUtils.StartTransaction()
+
+                    url = Me.ModifyRedirectUrl(url, "", False)
+                    url = Me.Page.ModifyRedirectUrl(url, "", False)
+
+                Catch ex As Exception
+                    ' Upon error, rollback the transaction
+                    Me.Page.RollBackTransaction(sender)
+                    shouldRedirect = False
+                    Me.Page.ErrorOnPage = True
+
+                    ' Report the error message to the end user
+                    Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+
+                Finally
+                    DbUtils.EndTransaction()
+                End Try
+                If shouldRedirect Then
+                    Me.Page.ShouldSaveControlsToSession = True
+                    Me.Page.Response.Redirect(url)
+                ElseIf Not TargetKey Is Nothing AndAlso _
+                            Not shouldRedirect Then
+                    Me.Page.ShouldSaveControlsToSession = True
+                    Me.Page.CloseWindow(True)
+
+                End If
+            End If
+    
+        End Sub
 End Class
 
   
@@ -10450,6 +10705,8 @@ Public Class BaseWFinRep_HeadRecordControl
                         
               AddHandler Me.pReturned.Click, AddressOf pReturned_Click
                         
+              AddHandler Me.pReturnedSelect.Click, AddressOf pReturnedSelect_Click
+                        
               AddHandler Me.btnBack.Button.Click, AddressOf btnBack_Click
                         
               AddHandler Me.HFIN_DT_ID1.SelectedIndexChanged, AddressOf HFIN_DT_ID1_SelectedIndexChanged
@@ -10472,7 +10729,11 @@ Public Class BaseWFinRep_HeadRecordControl
             
               AddHandler Me.HFIN_Year.TextChanged, AddressOf HFIN_Year_TextChanged
             
+              AddHandler Me.ddlAction.SelectedIndexChanged, AddressOf ddlAction_SelectedIndexChanged
+                
               AddHandler Me.ddlMoveTo.SelectedIndexChanged, AddressOf ddlMoveTo_SelectedIndexChanged
+                
+              AddHandler Me.ddlMoveto1.SelectedIndexChanged, AddressOf ddlMoveto1_SelectedIndexChanged
                 					
               AddHandler Me.txtRemarks.TextChanged, AddressOf txtRemarks_TextChanged
                     
@@ -10570,7 +10831,9 @@ Public Class BaseWFinRep_HeadRecordControl
             ' Call the Set methods for each controls on the panel
         
                 
+                SetddlAction()
                 SetddlMoveTo()
+                SetddlMoveto1()
                 SetDescription_MY()
                 SetHFIN_C_ID()
                 SetHFIN_C_ID1()
@@ -10589,6 +10852,10 @@ Public Class BaseWFinRep_HeadRecordControl
                 SetHFIN_U_ID()
                 SetHFIN_U_ID1()
                 SetHFIN_Year()
+                SetLiteral12()
+                SetLiteral13()
+                SetlitMoveTo()
+                
                 
                 
                 
@@ -10606,6 +10873,8 @@ Public Class BaseWFinRep_HeadRecordControl
                 SetpReject()
               
                 SetpReturned()
+              
+                SetpReturnedSelect()
               
                 SetbtnBack()
               
@@ -11145,9 +11414,10 @@ Public Class BaseWFinRep_HeadRecordControl
                 				
                 ' If the HFIN_U_ID is non-NULL, then format the value.
 
-                ' The Format method will use the Display Format
-                Dim formattedValue As String = Me.DataSource.Format(WFinRep_HeadTable.HFIN_U_ID)
-                              
+                ' The Format method will return the Display Foreign Key As (DFKA) value
+                Dim formattedValue As String = Me.DataSource.HFIN_U_ID.ToString()
+                                
+                            
                 Me.HFIN_U_ID.Text = formattedValue
                 
             Else 
@@ -11155,8 +11425,7 @@ Public Class BaseWFinRep_HeadRecordControl
                 ' HFIN_U_ID is NULL in the database, so use the Default Value.  
                 ' Default Value could also be NULL.
         
-                 Me.HFIN_U_ID.Text = WFinRep_HeadTable.HFIN_U_ID.Format(WFinRep_HeadTable.HFIN_U_ID.DefaultValue)
-                        		
+                 Me.HFIN_U_ID.Text = WFinRep_HeadTable.HFIN_U_ID.DefaultValue		
                 End If
                  
               AddHandler Me.HFIN_U_ID.TextChanged, AddressOf HFIN_U_ID_TextChanged
@@ -11188,7 +11457,7 @@ Public Class BaseWFinRep_HeadRecordControl
             If Me.DataSource IsNot Nothing AndAlso Me.DataSource.HFIN_U_IDSpecified Then
                             
                 ' If the HFIN_U_ID is non-NULL, then format the value.
-                ' The Format method will use the Display Format
+                ' The Format method will return the Display Foreign Key As (DFKA) value
                 selectedValue = Me.DataSource.HFIN_U_ID.ToString()
             Else
                 
@@ -11254,11 +11523,31 @@ Public Class BaseWFinRep_HeadRecordControl
                 
 
 
+        Public Overridable Sub SetddlAction()
+
+                  
+            
+            Me.PopulateddlActionDropDownList(Nothing, 100)
+                
+        End Sub
+                
+
+
         Public Overridable Sub SetddlMoveTo()
 
                   
             
             Me.PopulateddlMoveToDropDownList(Nothing, 100)
+                
+        End Sub
+                
+
+
+        Public Overridable Sub SetddlMoveto1()
+
+                  
+            
+            Me.PopulateddlMoveto1DropDownList(Nothing, 100)
                 
         End Sub
                 
@@ -11300,6 +11589,24 @@ Public Class BaseWFinRep_HeadRecordControl
                       'To override this property you can uncomment the following property and add your own value.
                       'Me.HFIN_StatusLabel.Text = "Some value"
                     
+                  End Sub
+                
+        Public Overridable Sub SetLiteral12()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetLiteral13()
+
+                  
+                  
+                  End Sub
+                
+        Public Overridable Sub SetlitMoveTo()
+
+                  
+                  
                   End Sub
                 
         Public Overridable Sub SettxtRemarks()
@@ -12004,6 +12311,11 @@ Public Class BaseWFinRep_HeadRecordControl
    
         End Sub
             
+        Public Overridable Sub SetpReturnedSelect()                
+              
+   
+        End Sub
+            
         Public Overridable Sub SetbtnBack()                
               
    
@@ -12028,6 +12340,11 @@ Public Class BaseWFinRep_HeadRecordControl
         Public Overridable Function CreateWhereClause_HFIN_U_ID1DropDownList() As WhereClause
             ' By default, we simply return a new WhereClause.
             ' Add additional where clauses to restrict the items shown in the dropdown list.
+            						
+            ' This WhereClause is for the DatabaseANFLO-WF%dbo.sel_WASP_User table.
+            ' Examples:
+            ' wc.iAND(Sel_WASP_UserView.W_U_ID, BaseFilter.ComparisonOperator.EqualsTo, "XYZ")
+            ' wc.iAND(Sel_WASP_UserView.Active, BaseFilter.ComparisonOperator.EqualsTo, "1")
             
             Dim wc As WhereClause = New WhereClause()
             Return wc
@@ -12188,35 +12505,73 @@ Public Class BaseWFinRep_HeadRecordControl
             Dim wc As WhereClause = CreateWhereClause_HFIN_U_ID1DropDownList()
             ' Create the ORDER BY clause to sort based on the displayed value.			
                 
-                
-            ' 3. Read a total of maxItems from the database and insert them								
-            Dim orderBy As OrderBy = New OrderBy(False, False)
-             orderBy.Add(WFinRep_HeadTable.HFIN_U_ID, OrderByItem.OrderDir.Asc)
-            
-            Dim itemValue As String
-            Dim listDuplicates As New ArrayList()
 
+            Dim orderBy As OrderBy = New OrderBy(false, false)			
+                          orderBy.Add(Sel_WASP_UserView.W_U_Full_Name, OrderByItem.OrderDir.Asc)
+
+                      Dim variables As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      
+            ' 3. Read a total of maxItems from the database and insert them		
+            Dim itemValues() As Sel_WASP_UserRecord = Nothing
+            Dim evaluator As New FormulaEvaluator                
             If wc.RunQuery
-                For Each itemValue In WFinRep_HeadTable.GetValues(WFinRep_HeadTable.HFIN_U_ID, wc, orderBy, maxItems)
-                    ' Create the dropdown list item and add it to the list.
-                    Dim fvalue As String = WFinRep_HeadTable.HFIN_U_ID.Format(itemValue)
-                    If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = itemValue
-                    Dim dupItem As ListItem = Me.HFIN_U_ID1.Items.FindByText(fvalue)
-          
-                    If Not IsNothing(dupItem) Then
-                        listDuplicates.Add(fvalue)
-                        If Not String.IsNullOrEmpty(dupItem.Value) Then
-                            dupItem.Text = fvalue & " (ID " & dupItem.Value & ")"
+                Dim counter As Integer = 0
+                Dim pageNum As Integer = 0
+                Dim listDuplicates As New ArrayList()
+
+                Do
+                    itemValues = Sel_WASP_UserView.GetRecords(wc, orderBy, pageNum, maxItems)
+                    For each itemValue As Sel_WASP_UserRecord In itemValues
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.W_U_IDSpecified Then
+                            cvalue = itemValue.W_U_ID.ToString() 
+                            
+                            If counter < maxItems AndAlso Me.HFIN_U_ID1.Items.FindByValue(cvalue) Is Nothing Then
+                            
+                                Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_HeadTable.HFIN_U_ID)
+                                If _isExpandableNonCompositeForeignKey AndAlso WFinRep_HeadTable.HFIN_U_ID.IsApplyDisplayAs Then
+                                fvalue = WFinRep_HeadTable.GetDFKA(itemValue, WFinRep_HeadTable.HFIN_U_ID)
+                                End If
+                                If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                                fvalue = itemValue.Format(Sel_WASP_UserView.W_U_ID)
+                                End If
+                              
+                                If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+
+                                If (IsNothing(fvalue)) Then
+                                   fvalue = ""
+                                End If
+
+                                fvalue = fvalue.Trim()
+
+                                If ( fvalue.Length > 50 ) Then
+                                    fvalue = fvalue.Substring(0, 50) & "..."
+                                End If
+
+                                Dim dupItem As ListItem = Me.HFIN_U_ID1.Items.FindByText(fvalue)
+                          
+                                If Not IsNothing(dupItem) Then
+                                    listDuplicates.Add(fvalue)
+                                    If Not String.IsNullOrEmpty(dupItem.Value) Then
+                                        dupItem.Text = fvalue & " (ID " & dupItem.Value.Substring(0, Math.Min(dupItem.Value.Length,38)) & ")"
+                                    End If
+                                End If
+
+                                Dim newItem As ListItem = New ListItem(fvalue, cvalue)
+                                Me.HFIN_U_ID1.Items.Add(newItem)
+
+                                If listDuplicates.Contains(fvalue)  AndAlso Not String.IsNullOrEmpty(cvalue) Then
+                                    newItem.Text = fvalue & " (ID " & cvalue.Substring(0, Math.Min(cvalue.Length,38)) & ")"
+                                End If
+
+                                counter += 1			  
+                            End If
                         End If
-                    End If
-
-                    Dim newItem As ListItem = New ListItem(fvalue, itemValue)
-                    Me.HFIN_U_ID1.Items.Add(newItem)
-
-                    If listDuplicates.Contains(fvalue) AndAlso Not String.IsNullOrEmpty(itemValue) Then
-                        newItem.Text = fvalue & " (ID " & itemValue & ")"
-                    End If
-                Next
+                    Next
+                    pageNum += 1
+                Loop While (itemValues.Length = maxItems AndAlso counter < maxItems)
             End If
                             
                     
@@ -12225,17 +12580,56 @@ Public Class BaseWFinRep_HeadRecordControl
             If Not selectedValue Is Nothing AndAlso _
                 selectedValue.Trim <> "" AndAlso _
                 Not SetSelectedValue(Me.HFIN_U_ID1, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.HFIN_U_ID1, selectedValue) AndAlso _
-                Not SetSelectedDisplayText(Me.HFIN_U_ID1, WFinRep_HeadTable.HFIN_U_ID.Format(selectedValue))Then
-                Dim fvalue As String = WFinRep_HeadTable.HFIN_U_ID.Format(selectedValue)
-                If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = selectedValue
-                ResetSelectedItem(Me.HFIN_U_ID1, New ListItem(fvalue, selectedValue))
+                Not SetSelectedDisplayText(Me.HFIN_U_ID1, selectedValue)Then
+
+                ' construct a whereclause to query a record with DatabaseANFLO-WF%dbo.sel_WASP_User.W_U_ID = selectedValue
+                Dim filter2 As CompoundFilter = New CompoundFilter(CompoundFilter.CompoundingOperators.And_Operator, Nothing)
+                Dim whereClause2 As WhereClause = New WhereClause()
+                filter2.AddFilter(New BaseClasses.Data.ColumnValueFilter(Sel_WASP_UserView.W_U_ID, selectedValue, BaseClasses.Data.BaseFilter.ComparisonOperator.EqualsTo, False))
+                whereClause2.AddFilter(filter2, CompoundFilter.CompoundingOperators.And_Operator)
+
+                Try
+                    ' Execute the query
+                    Dim rc() As Sel_WASP_UserRecord = Sel_WASP_UserView.GetRecords(whereClause2, New OrderBy(False, False), 0, 1)
+                      Dim vars As System.Collections.Generic.IDictionary(Of String, Object) = New System.Collections.Generic.Dictionary(Of String, Object)
+                      ' if find a record, add it to the dropdown and set it as selected item
+                      If rc IsNot Nothing AndAlso rc.Length = 1 Then
+                      Dim itemValue As Sel_WASP_UserRecord = DirectCast(rc(0), Sel_WASP_UserRecord)
+                        ' Create the item and add to the list.
+                        Dim cvalue As String = Nothing
+                        Dim fvalue As String = Nothing
+                        If itemValue.W_U_IDSpecified Then
+                            cvalue = itemValue.W_U_ID.ToString() 
+                          Dim _isExpandableNonCompositeForeignKey As Boolean = WFinRep_HeadTable.Instance.TableDefinition.IsExpandableNonCompositeForeignKey(WFinRep_HeadTable.HFIN_U_ID)
+                          If _isExpandableNonCompositeForeignKey AndAlso WFinRep_HeadTable.HFIN_U_ID.IsApplyDisplayAs Then
+                          fvalue = WFinRep_HeadTable.GetDFKA(itemValue, WFinRep_HeadTable.HFIN_U_ID)
+                          End If
+                          If (Not _isExpandableNonCompositeForeignKey) Or (String.IsNullOrEmpty(fvalue)) Then
+                          fvalue = itemValue.Format(Sel_WASP_UserView.W_U_ID)
+                          End If
+                        
+                              If fvalue Is Nothing OrElse fvalue.Trim() = "" Then fvalue = cvalue
+                              ResetSelectedItem(Me.HFIN_U_ID1, New ListItem(fvalue, cvalue))
+                            End If
+                        End If
+                Catch
+                End Try
+
             End If					
-            
+                        
                 
         End Sub
         
               
+        Public Overridable Function CreateWhereClause_ddlActionDropDownList() As WhereClause
+            ' By default, we simply return a new WhereClause.
+            ' Add additional where clauses to restrict the items shown in the dropdown list.
+            
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+            				
+        End Function
+        
         Public Overridable Function CreateWhereClause_ddlMoveToDropDownList() As WhereClause
             ' By default, we simply return a new WhereClause.
             ' Add additional where clauses to restrict the items shown in the dropdown list.
@@ -12245,6 +12639,43 @@ Public Class BaseWFinRep_HeadRecordControl
             				
         End Function
         
+        Public Overridable Function CreateWhereClause_ddlMoveto1DropDownList() As WhereClause
+            ' By default, we simply return a new WhereClause.
+            ' Add additional where clauses to restrict the items shown in the dropdown list.
+            
+            Dim wc As WhereClause = New WhereClause()
+            Return wc
+            				
+        End Function
+        
+
+        ' Fill the ddlAction list.
+        Protected Overridable Sub PopulateddlActionDropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+                
+            Me.ddlAction.Items.Clear()
+
+                      
+                    
+            ' 1. Setup the static list items        
+            		  
+            ' Skip step 2 and 3 because no need to load data from database and insert data
+                    
+                    
+            ' 4. Set the selected value (insert if not already present).
+              
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.ddlAction, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.ddlAction, selectedValue)Then
+
+            
+            End If					
+                
+                
+        End Sub
+                
 
         ' Fill the ddlMoveTo list.
         Protected Overridable Sub PopulateddlMoveToDropDownList( _
@@ -12266,6 +12697,34 @@ Public Class BaseWFinRep_HeadRecordControl
                 selectedValue.Trim <> "" AndAlso _
                 Not SetSelectedValue(Me.ddlMoveTo, selectedValue) AndAlso _
                 Not SetSelectedDisplayText(Me.ddlMoveTo, selectedValue)Then
+
+            
+            End If					
+                
+                
+        End Sub
+                
+
+        ' Fill the ddlMoveto1 list.
+        Protected Overridable Sub PopulateddlMoveto1DropDownList( _
+                ByVal selectedValue As String, _
+                ByVal maxItems As Integer)
+                
+            Me.ddlMoveto1.Items.Clear()
+
+                      
+                    
+            ' 1. Setup the static list items        
+            		  
+            ' Skip step 2 and 3 because no need to load data from database and insert data
+                    
+                    
+            ' 4. Set the selected value (insert if not already present).
+              
+            If Not selectedValue Is Nothing AndAlso _
+                selectedValue.Trim <> "" AndAlso _
+                Not SetSelectedValue(Me.ddlMoveto1, selectedValue) AndAlso _
+                Not SetSelectedDisplayText(Me.ddlMoveto1, selectedValue)Then
 
             
             End If					
@@ -12311,6 +12770,24 @@ Public Class BaseWFinRep_HeadRecordControl
         
         ' event handler for PushButton
         Public Overridable Sub pReturned_Click(ByVal sender As Object, ByVal args As EventArgs)
+              
+    Try
+    
+            Catch ex As Exception
+            
+                Me.Page.ErrorOnPage = True
+    
+                ' Report the error message to the end user
+                Utils.MiscUtils.RegisterJScriptAlert(Me, "BUTTON_CLICK_MESSAGE", ex.Message)
+    
+            Finally
+    
+            End Try
+    
+        End Sub
+        
+        ' event handler for PushButton
+        Public Overridable Sub pReturnedSelect_Click(ByVal sender As Object, ByVal args As EventArgs)
               
     Try
     
@@ -12428,7 +12905,17 @@ Public Class BaseWFinRep_HeadRecordControl
                     
               End Sub
             
+        Protected Overridable Sub ddlAction_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)                
+             
+
+        End Sub
+                
         Protected Overridable Sub ddlMoveTo_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)                
+             
+
+        End Sub
+                
+        Protected Overridable Sub ddlMoveto1_SelectedIndexChanged(ByVal sender As Object, ByVal args As EventArgs)                
              
 
         End Sub
@@ -12543,9 +13030,21 @@ Public Class BaseWFinRep_HeadRecordControl
           End Get
           End Property
         
+        Public ReadOnly Property ddlAction() As System.Web.UI.WebControls.DropDownList
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlAction"), System.Web.UI.WebControls.DropDownList)
+            End Get
+        End Property
+        
         Public ReadOnly Property ddlMoveTo() As System.Web.UI.WebControls.DropDownList
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlMoveTo"), System.Web.UI.WebControls.DropDownList)
+            End Get
+        End Property
+        
+        Public ReadOnly Property ddlMoveto1() As System.Web.UI.WebControls.DropDownList
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "ddlMoveto1"), System.Web.UI.WebControls.DropDownList)
             End Get
         End Property
         
@@ -12657,6 +13156,24 @@ Public Class BaseWFinRep_HeadRecordControl
             End Get
         End Property
             
+        Public ReadOnly Property Literal12() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal12"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property Literal13() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "Literal13"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
+        Public ReadOnly Property litMoveTo() As System.Web.UI.WebControls.Literal
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "litMoveTo"), System.Web.UI.WebControls.Literal)
+            End Get
+        End Property
+        
         Public ReadOnly Property pApproved() As System.Web.UI.WebControls.Button
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pApproved"), System.Web.UI.WebControls.Button)
@@ -12672,6 +13189,12 @@ Public Class BaseWFinRep_HeadRecordControl
         Public ReadOnly Property pReturned() As System.Web.UI.WebControls.Button
             Get
                 Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pReturned"), System.Web.UI.WebControls.Button)
+            End Get
+        End Property
+        
+        Public ReadOnly Property pReturnedSelect() As System.Web.UI.WebControls.Button
+            Get
+                Return CType(BaseClasses.Utils.MiscUtils.FindControlRecursively(Me, "pReturnedSelect"), System.Web.UI.WebControls.Button)
             End Get
         End Property
         

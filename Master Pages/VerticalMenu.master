@@ -107,6 +107,40 @@
     else {$('#dialog').dialog('open');}
     //$('#dialog').dialog('option', 'srcElement', e.srcElement).dialog('open');
     }
+    function ShowConfirmtest(e,titletext,message,note,dropdown){			
+			if (e) {e.returnValue = false;}			
+			titletext = titletext.replace(' ','&nbsp;');//&#32
+			var ddl = document.getElementById(dropdown);
+			var tag = "<div id='dialog' title=" + titletext + "><span class='ui-icon ui-icon-help' style='float:left; margin:0 7px 20px 0;'></span><p>" + message + "</p><p><i><b>Note </b>" + note + "</p><p><i><b>Reject To:  </b><i></i><select id='dropdwon2' style='padding:5px;font-size: 12px;line-height: 1; border: 0; border-radius: 0; height: 20px;background=transparent;' ></select></i></p></i></div>";
+			$('#dialog').remove();
+			$(tag).appendTo(document.body);
+			$('#' + dropdown + ' option').clone().appendTo('#dropdwon2');
+			$(function(){						
+					$('#dialog').dialog({
+						autoOpen: false,
+						show: 'drop',
+						hide: 'drop',
+						width: 480,
+						height: 320,
+						modal: true,
+						buttons: {
+							"Ok": function() {	
+							var receiver = document.getElementById('dropdwon2');
+					
+							var recVal = receiver.options[receiver.selectedIndex].value;
+							ddl.value = recVal;
+							__doPostBack($(this).dialog('option', 'srcElement').name,'');
+								$(this).dialog("close");								
+							}, 
+							"Cancel": function() { 	
+								$(this).dialog("close");								
+							} 
+						}
+					})});
+			if (e) {$('#dialog').dialog('option', 'srcElement', e.srcElement).dialog('open');}
+			else {$('#dialog').dialog('open');}
+			//$('#dialog').dialog('option', 'srcElement', e.srcElement).dialog('open');
+		}
     function ShowConfirm2(e,titletext,message,note,SubmitFunc){
     if (e) {e.returnValue = false;}
     titletext = titletext.replace(' ','&nbsp;');
